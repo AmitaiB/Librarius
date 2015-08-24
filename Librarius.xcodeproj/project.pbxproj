@@ -15,7 +15,6 @@
 		380375401B8AC9A8004C4ECE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3803753F1B8AC9A8004C4ECE /* Images.xcassets */; };
 		380375431B8AC9A8004C4ECE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 380375411B8AC9A8004C4ECE /* LaunchScreen.xib */; };
 		3803754F1B8AC9A8004C4ECE /* LibrariusTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3803754E1B8AC9A8004C4ECE /* LibrariusTests.m */; };
-		8CC9BEB843CED8ECFC626754 /* libPods-Librarius.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EBADCB9C83FA635A577697F9 /* libPods-Librarius.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,7 +53,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CC9BEB843CED8ECFC626754 /* libPods-Librarius.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
