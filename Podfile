@@ -2,7 +2,8 @@
 # platform :ios, '6.0'
 
 target 'Librarius' do
-
+pod 'AFNetworking'
+pod 'AFOAuth2Manager'
 end
 
 target 'LibrariusTests' do
