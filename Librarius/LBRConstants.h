@@ -13,4 +13,9 @@
 extern NSString * const GOODREADS_KEY;
 extern NSString * const GOODREADS_SECRET;
 
+extern NSString * const GOOGLE_APP_KEY;
+extern NSString * const GOOGLE_CLIENT_ID;
+extern NSString * const GOOGLE_CLIENT_SECRET;
+
+
 @end

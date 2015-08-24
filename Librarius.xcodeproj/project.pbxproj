@@ -18,6 +18,8 @@
 		3803754F1B8AC9A8004C4ECE /* LibrariusTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3803754E1B8AC9A8004C4ECE /* LibrariusTests.m */; };
 		3803755B1B8B9F5E004C4ECE /* LBRConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 3803755A1B8B9F5E004C4ECE /* LBRConstants.m */; };
 		380375621B8BB707004C4ECE /* LBRGoodReadsAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375611B8BB707004C4ECE /* LBRGoodReadsAPIClient.m */; };
+		380375671B8BC758004C4ECE /* LBRGoogleAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375661B8BC758004C4ECE /* LBRGoogleAPIClient.m */; };
+		3803756A1B8BC89D004C4ECE /* LBRGoogleSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375691B8BC89D004C4ECE /* LBRGoogleSignInViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,10 @@
 		3803755A1B8B9F5E004C4ECE /* LBRConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRConstants.m; sourceTree = "<group>"; };
 		380375601B8BB707004C4ECE /* LBRGoodReadsAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRGoodReadsAPIClient.h; sourceTree = "<group>"; };
 		380375611B8BB707004C4ECE /* LBRGoodReadsAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRGoodReadsAPIClient.m; sourceTree = "<group>"; };
+		380375651B8BC758004C4ECE /* LBRGoogleAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRGoogleAPIClient.h; sourceTree = "<group>"; };
+		380375661B8BC758004C4ECE /* LBRGoogleAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRGoogleAPIClient.m; sourceTree = "<group>"; };
+		380375681B8BC89D004C4ECE /* LBRGoogleSignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRGoogleSignInViewController.h; sourceTree = "<group>"; };
+		380375691B8BC89D004C4ECE /* LBRGoogleSignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRGoogleSignInViewController.m; sourceTree = "<group>"; };
 		8D3D33401D5A34E1C9A90BE0 /* Pods-Librarius.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Librarius.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Librarius/Pods-Librarius.debug.xcconfig"; sourceTree = "<group>"; };
 		9B10AB83782954202B2FDC18 /* Pods-Librarius.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Librarius.release.xcconfig"; path = "Pods/Target Support Files/Pods-Librarius/Pods-Librarius.release.xcconfig"; sourceTree = "<group>"; };
 		EBADCB9C83FA635A577697F9 /* libPods-Librarius.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Librarius.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -157,6 +163,8 @@
 			children = (
 				380375601B8BB707004C4ECE /* LBRGoodReadsAPIClient.h */,
 				380375611B8BB707004C4ECE /* LBRGoodReadsAPIClient.m */,
+				380375651B8BC758004C4ECE /* LBRGoogleAPIClient.h */,
+				380375661B8BC758004C4ECE /* LBRGoogleAPIClient.m */,
 			);
 			name = DataPortation;
 			sourceTree = "<group>";
@@ -178,6 +186,8 @@
 				380375391B8AC9A8004C4ECE /* SecondViewController.h */,
 				3803753A1B8AC9A8004C4ECE /* SecondViewController.m */,
 				3803753C1B8AC9A8004C4ECE /* Main.storyboard */,
+				380375681B8BC89D004C4ECE /* LBRGoogleSignInViewController.h */,
+				380375691B8BC89D004C4ECE /* LBRGoogleSignInViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -326,10 +336,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				3803753B1B8AC9A8004C4ECE /* SecondViewController.m in Sources */,
+				380375671B8BC758004C4ECE /* LBRGoogleAPIClient.m in Sources */,
 				380375351B8AC9A8004C4ECE /* AppDelegate.m in Sources */,
 				380375381B8AC9A8004C4ECE /* FirstViewController.m in Sources */,
 				380375621B8BB707004C4ECE /* LBRGoodReadsAPIClient.m in Sources */,
 				380375321B8AC9A8004C4ECE /* main.m in Sources */,
+				3803756A1B8BC89D004C4ECE /* LBRGoogleSignInViewController.m in Sources */,
 				3803755B1B8B9F5E004C4ECE /* LBRConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

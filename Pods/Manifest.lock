@@ -22,17 +22,20 @@ PODS:
     - AFNetworking/NSURLSession
   - AFOAuth2Manager (2.2.0):
     - AFNetworking/NSURLConnection (~> 2.2)
+  - googleplus-ios-sdk (1.7.1)
   - XNGOAuth1Client (2.0.1):
     - AFNetworking (~> 2.0)
 
 DEPENDENCIES:
   - AFNetworking
   - AFOAuth2Manager
+  - googleplus-ios-sdk (~> 1.7.1)
   - XNGOAuth1Client (~> 2.0)
 
 SPEC CHECKSUMS:
   AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
   AFOAuth2Manager: 952eb62e8fd8022971e64c6e8fe28b9e999224af
+  googleplus-ios-sdk: 065d9135061a5f84c07656a68ced48336408fe35
   XNGOAuth1Client: 31e9b13bc313c7045503d06e89901798257a817b
 
 COCOAPODS: 0.38.2
