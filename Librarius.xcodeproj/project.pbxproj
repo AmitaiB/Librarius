@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E6DA4DCEDA6FC0E68557D16 /* libPods-Librarius.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EBADCB9C83FA635A577697F9 /* libPods-Librarius.a */; };
 		380375321B8AC9A8004C4ECE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375311B8AC9A8004C4ECE /* main.m */; };
 		380375351B8AC9A8004C4ECE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375341B8AC9A8004C4ECE /* AppDelegate.m */; };
 		380375381B8AC9A8004C4ECE /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375371B8AC9A8004C4ECE /* FirstViewController.m */; };
@@ -16,6 +17,7 @@
 		380375431B8AC9A8004C4ECE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 380375411B8AC9A8004C4ECE /* LaunchScreen.xib */; };
 		3803754F1B8AC9A8004C4ECE /* LibrariusTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3803754E1B8AC9A8004C4ECE /* LibrariusTests.m */; };
 		3803755B1B8B9F5E004C4ECE /* LBRConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 3803755A1B8B9F5E004C4ECE /* LBRConstants.m */; };
+		380375621B8BB707004C4ECE /* LBRGoodReadsAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375611B8BB707004C4ECE /* LBRGoodReadsAPIClient.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +48,8 @@
 		3803754E1B8AC9A8004C4ECE /* LibrariusTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LibrariusTests.m; sourceTree = "<group>"; };
 		380375591B8B9F5E004C4ECE /* LBRConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRConstants.h; sourceTree = "<group>"; };
 		3803755A1B8B9F5E004C4ECE /* LBRConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRConstants.m; sourceTree = "<group>"; };
+		380375601B8BB707004C4ECE /* LBRGoodReadsAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRGoodReadsAPIClient.h; sourceTree = "<group>"; };
+		380375611B8BB707004C4ECE /* LBRGoodReadsAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRGoodReadsAPIClient.m; sourceTree = "<group>"; };
 		8D3D33401D5A34E1C9A90BE0 /* Pods-Librarius.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Librarius.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Librarius/Pods-Librarius.debug.xcconfig"; sourceTree = "<group>"; };
 		9B10AB83782954202B2FDC18 /* Pods-Librarius.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Librarius.release.xcconfig"; path = "Pods/Target Support Files/Pods-Librarius/Pods-Librarius.release.xcconfig"; sourceTree = "<group>"; };
 		EBADCB9C83FA635A577697F9 /* libPods-Librarius.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Librarius.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -56,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E6DA4DCEDA6FC0E68557D16 /* libPods-Librarius.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,14 +106,10 @@
 		3803752E1B8AC9A8004C4ECE /* Librarius */ = {
 			isa = PBXGroup;
 			children = (
+				3803755F1B8BB6C3004C4ECE /* DataPortation */,
 				380375581B8B9F11004C4ECE /* Models */,
-				380375361B8AC9A8004C4ECE /* FirstViewController.h */,
-				380375371B8AC9A8004C4ECE /* FirstViewController.m */,
-				380375391B8AC9A8004C4ECE /* SecondViewController.h */,
-				3803753A1B8AC9A8004C4ECE /* SecondViewController.m */,
-				3803753C1B8AC9A8004C4ECE /* Main.storyboard */,
-				3803753F1B8AC9A8004C4ECE /* Images.xcassets */,
-				380375411B8AC9A8004C4ECE /* LaunchScreen.xib */,
+				380375641B8BB71D004C4ECE /* Controllers */,
+				380375631B8BB711004C4ECE /* Views */,
 				3803752F1B8AC9A8004C4ECE /* Supporting Files */,
 			);
 			path = Librarius;
@@ -149,6 +150,36 @@
 			children = (
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		3803755F1B8BB6C3004C4ECE /* DataPortation */ = {
+			isa = PBXGroup;
+			children = (
+				380375601B8BB707004C4ECE /* LBRGoodReadsAPIClient.h */,
+				380375611B8BB707004C4ECE /* LBRGoodReadsAPIClient.m */,
+			);
+			name = DataPortation;
+			sourceTree = "<group>";
+		};
+		380375631B8BB711004C4ECE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3803753F1B8AC9A8004C4ECE /* Images.xcassets */,
+				380375411B8AC9A8004C4ECE /* LaunchScreen.xib */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		380375641B8BB71D004C4ECE /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				380375361B8AC9A8004C4ECE /* FirstViewController.h */,
+				380375371B8AC9A8004C4ECE /* FirstViewController.m */,
+				380375391B8AC9A8004C4ECE /* SecondViewController.h */,
+				3803753A1B8AC9A8004C4ECE /* SecondViewController.m */,
+				3803753C1B8AC9A8004C4ECE /* Main.storyboard */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		8D3D60166B48602A9D5DE1B9 /* Frameworks */ = {
@@ -297,6 +328,7 @@
 				3803753B1B8AC9A8004C4ECE /* SecondViewController.m in Sources */,
 				380375351B8AC9A8004C4ECE /* AppDelegate.m in Sources */,
 				380375381B8AC9A8004C4ECE /* FirstViewController.m in Sources */,
+				380375621B8BB707004C4ECE /* LBRGoodReadsAPIClient.m in Sources */,
 				380375321B8AC9A8004C4ECE /* main.m in Sources */,
 				3803755B1B8B9F5E004C4ECE /* LBRConstants.m in Sources */,
 			);
