@@ -15,6 +15,7 @@
 		380375401B8AC9A8004C4ECE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3803753F1B8AC9A8004C4ECE /* Images.xcassets */; };
 		380375431B8AC9A8004C4ECE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 380375411B8AC9A8004C4ECE /* LaunchScreen.xib */; };
 		3803754F1B8AC9A8004C4ECE /* LibrariusTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3803754E1B8AC9A8004C4ECE /* LibrariusTests.m */; };
+		3803755B1B8B9F5E004C4ECE /* LBRConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 3803755A1B8B9F5E004C4ECE /* LBRConstants.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,8 @@
 		380375481B8AC9A8004C4ECE /* LibrariusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LibrariusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3803754D1B8AC9A8004C4ECE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3803754E1B8AC9A8004C4ECE /* LibrariusTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LibrariusTests.m; sourceTree = "<group>"; };
+		380375591B8B9F5E004C4ECE /* LBRConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRConstants.h; sourceTree = "<group>"; };
+		3803755A1B8B9F5E004C4ECE /* LBRConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRConstants.m; sourceTree = "<group>"; };
 		8D3D33401D5A34E1C9A90BE0 /* Pods-Librarius.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Librarius.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Librarius/Pods-Librarius.debug.xcconfig"; sourceTree = "<group>"; };
 		9B10AB83782954202B2FDC18 /* Pods-Librarius.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Librarius.release.xcconfig"; path = "Pods/Target Support Files/Pods-Librarius/Pods-Librarius.release.xcconfig"; sourceTree = "<group>"; };
 		EBADCB9C83FA635A577697F9 /* libPods-Librarius.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Librarius.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,8 +101,7 @@
 		3803752E1B8AC9A8004C4ECE /* Librarius */ = {
 			isa = PBXGroup;
 			children = (
-				380375331B8AC9A8004C4ECE /* AppDelegate.h */,
-				380375341B8AC9A8004C4ECE /* AppDelegate.m */,
+				380375581B8B9F11004C4ECE /* Models */,
 				380375361B8AC9A8004C4ECE /* FirstViewController.h */,
 				380375371B8AC9A8004C4ECE /* FirstViewController.m */,
 				380375391B8AC9A8004C4ECE /* SecondViewController.h */,
@@ -115,8 +117,12 @@
 		3803752F1B8AC9A8004C4ECE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				380375331B8AC9A8004C4ECE /* AppDelegate.h */,
+				380375341B8AC9A8004C4ECE /* AppDelegate.m */,
 				380375301B8AC9A8004C4ECE /* Info.plist */,
 				380375311B8AC9A8004C4ECE /* main.m */,
+				380375591B8B9F5E004C4ECE /* LBRConstants.h */,
+				3803755A1B8B9F5E004C4ECE /* LBRConstants.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -136,6 +142,13 @@
 				3803754D1B8AC9A8004C4ECE /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		380375581B8B9F11004C4ECE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		8D3D60166B48602A9D5DE1B9 /* Frameworks */ = {
@@ -285,6 +298,7 @@
 				380375351B8AC9A8004C4ECE /* AppDelegate.m in Sources */,
 				380375381B8AC9A8004C4ECE /* FirstViewController.m in Sources */,
 				380375321B8AC9A8004C4ECE /* main.m in Sources */,
+				3803755B1B8B9F5E004C4ECE /* LBRConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

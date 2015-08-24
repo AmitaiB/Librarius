@@ -1,0 +1,16 @@
+//
+//  LBRConstants.h
+//  Librarius
+//
+//  Created by Amitai Blickstein on 8/24/15.
+//  Copyright (c) 2015 Amitai Blickstein, LLC. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@interface LBRConstants : NSObject
+
+extern NSString * const GOODREADS_KEY;
+extern NSString * const GOODREADS_SECRET;
+
+@end
