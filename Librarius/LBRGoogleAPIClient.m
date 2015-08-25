@@ -40,9 +40,9 @@
     NSString *fullQueryURL = [NSString stringWithFormat:@"%@%@", self.gBooksBaseURL, @"volumes/"];
     NSDictionary *params = @{@"q" : queryString};
     [self.sessionManager GET:fullQueryURL parameters:params
-                     success:^(NSURLSessionDataTask * task, NSArray *responseObject) {
+                     success:^(NSURLSessionDataTask * task, NSDictionary *responseObject) {
                          completionBlock(responseObject);
-                         NSLog(@"retrieveVolumesWithQuery → responseObject: %@", [responseObject description]? @"There is a description" : @"No description" );
+                         NSLog(@"retrieveVolumesWithQuery → responseObject: %@", [responseObject description]/*? @"There is a description" : @"No description"*/ );
     } failure:^(NSURLSessionDataTask * task, NSError * error) {
             //failure :(
         NSLog(@"Error in retrieveVolumesWithQuery: %@", error.localizedDescription);
