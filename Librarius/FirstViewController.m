@@ -18,19 +18,26 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    [self testVolumesQuery];
+    
+}
+
+-(void)testVolumeRequest {
     LBRVolume *sherlockHolmes = [LBRVolume new];
     LBRGoogleAPIClient *googleApiClient = [LBRGoogleAPIClient new];
     [googleApiClient retrieveVolumeWithID:@"buc0AAAAMAAJ" withCompletion:^(NSDictionary * responseObject) {
         sherlockHolmes.volumeData = responseObject;
         NSLog([sherlockHolmes.volumeData description]);
     }];
-    
-    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)testVolumesQuery {
+    LBRVolume *dune = [LBRVolume new];
+    LBRGoogleAPIClient *googleApiClient = [LBRGoogleAPIClient new];
+    [googleApiClient retrieveVolumesWithQuery:@"dune herbert" withCompletion:^(NSArray * responseObject) {
+//        dune.volumeData = [responseObject firstObject];
+        NSLog(@"responseObject Array: %@", [responseObject description]);
+    }];
 }
 
 @end

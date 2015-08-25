@@ -36,9 +36,17 @@
     }];
 }
 
--(void)retrieveVolumesWithQuery:(NSString*)queryString {
-#warning This is also not configured.
-    
+-(void)retrieveVolumesWithQuery:(NSString *)queryString withCompletion:(void(^)(NSArray * ))completionBlock {
+    NSString *fullQueryURL = [NSString stringWithFormat:@"%@%@", self.gBooksBaseURL, @"volumes/"];
+    NSDictionary *params = @{@"q" : queryString};
+    [self.sessionManager GET:fullQueryURL parameters:params
+                     success:^(NSURLSessionDataTask * task, NSArray *responseObject) {
+                         completionBlock(responseObject);
+                         NSLog(@"retrieveVolumesWithQuery --> responseObject: %@", [responseObject description] );
+    } failure:^(NSURLSessionDataTask * task, NSError * error) {
+            //failure :(
+        NSLog(@"Error in retrieveVolumesWithQuery: %@", error.localizedDescription);
+    }];
 }
 
 
