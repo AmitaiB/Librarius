@@ -7,6 +7,7 @@
 //
 
 #import "FirstViewController.h"
+#import "LBRVolume.h"
 
 @interface FirstViewController ()
 
@@ -17,6 +18,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    LBRVolume *sherlockHolmes = [LBRVolume new];
+    LBRGoogleAPIClient *googleApiClient = [LBRGoogleAPIClient new];
+    [googleApiClient retrieveVolumeWithID:@"buc0AAAAMAAJ" withCompletion:^(NSDictionary * responseObject) {
+        sherlockHolmes.volumeData = responseObject;
+        NSLog([sherlockHolmes.volumeData description]);
+    }];
+    
     
 }
 

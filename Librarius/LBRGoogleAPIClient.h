@@ -13,7 +13,7 @@
 
 //+(LBRGoogleAPIClient *)sharedInstance;
 
--(void)retrieveVolumeWithID:(NSString     * )volumeIDString;
+-(void)retrieveVolumeWithID:(NSString*)volumeIDString withCompletion:(void(^)(NSDictionary *))completionBlock;
 -(void)retrieveVolumesWithQuery:(NSString * )queryString;
 
 @property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
