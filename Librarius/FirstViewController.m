@@ -34,9 +34,10 @@
 -(void)testVolumesQuery {
     LBRVolume *dune = [LBRVolume new];
     LBRGoogleAPIClient *googleApiClient = [LBRGoogleAPIClient new];
-    [googleApiClient retrieveVolumesWithQuery:@"dune herbert" withCompletion:^(NSArray * responseObject) {
-//        dune.volumeData = [responseObject firstObject];
-        NSLog(@"responseObject Array: %@", [responseObject description]);
+    [googleApiClient retrieveVolumesWithQuery:@"dune herbert" withCompletion:^(NSDictionary * responseObject) {
+        NSArray *responseArray = responseObject[@"items"];
+        dune.volumeData = [responseArray firstObject];
+        NSLog(@"dune: %@", dune.title);
     }];
 }
 
