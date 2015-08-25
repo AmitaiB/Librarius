@@ -10,14 +10,14 @@
 
 typedef void (^LBRVolumesQueryCompletionBlock)(NSArray *volumes, NSError * error);
 
-@class AFHTTPSessionManager;
 @interface LBRGoogleAPIClient : NSObject
 
-+(AFHTTPSessionManager *)sharedSessionManager;
++(LBRGoogleAPIClient *)sharedInstance;
 
 +(NSDictionary*)retrieveVolumeWithID:(NSString*)volumeIDString;
++(NSArray*)retrieveVolumesWithQuery:(NSString*)queryString;
 
-@property (nonatomic, strong) <#type#> *<#value#>;
+@property (nonatomic, strong) NSDictionary *googleVolume;
 
 
 @end

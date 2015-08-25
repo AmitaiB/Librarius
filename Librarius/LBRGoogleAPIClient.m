@@ -12,7 +12,7 @@
 @implementation LBRGoogleAPIClient
 
 //static NSURL * const GBooksBaseURLString = [NSURL URLWithString:@"https://www.googleapis.com/books/v1/"];
-+ (instancetype)sharedInstance {
++ (LBRGoogleAPIClient*)sharedInstance {
     
     static id _sharedInstance = nil;
     static dispatch_once_t onceToken;
@@ -26,9 +26,14 @@
 
 
 +(NSDictionary*)retrieveVolumeWithID:(NSString*)volumeIDString {
+#warning This is not configured.
     return [NSDictionary new];
 }
 
++(NSArray*)retrieveVolumesWithQuery:(NSString*)queryString {
+#warning This is also not configured.
+    return [NSArray new];
+}
 
 
 

@@ -23,6 +23,7 @@
 		3803757A1B8C08E0004C4ECE /* LBRSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375791B8C08E0004C4ECE /* LBRSettingsTableViewController.m */; };
 		3803757E1B8C16B3004C4ECE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3803757D1B8C16B3004C4ECE /* GoogleService-Info.plist */; };
 		3803757F1B8C17EB004C4ECE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 380375411B8AC9A8004C4ECE /* LaunchScreen.xib */; };
+		380375841B8CD49C004C4ECE /* LBRVolume.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375831B8CD49C004C4ECE /* LBRVolume.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,8 @@
 		380375781B8C08E0004C4ECE /* LBRSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRSettingsTableViewController.h; sourceTree = "<group>"; };
 		380375791B8C08E0004C4ECE /* LBRSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRSettingsTableViewController.m; sourceTree = "<group>"; };
 		3803757D1B8C16B3004C4ECE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		380375821B8CD49C004C4ECE /* LBRVolume.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRVolume.h; sourceTree = "<group>"; };
+		380375831B8CD49C004C4ECE /* LBRVolume.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRVolume.m; sourceTree = "<group>"; };
 		8D3D33401D5A34E1C9A90BE0 /* Pods-Librarius.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Librarius.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Librarius/Pods-Librarius.debug.xcconfig"; sourceTree = "<group>"; };
 		9B10AB83782954202B2FDC18 /* Pods-Librarius.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Librarius.release.xcconfig"; path = "Pods/Target Support Files/Pods-Librarius/Pods-Librarius.release.xcconfig"; sourceTree = "<group>"; };
 		EBADCB9C83FA635A577697F9 /* libPods-Librarius.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Librarius.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -165,6 +168,8 @@
 		380375581B8B9F11004C4ECE /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				380375821B8CD49C004C4ECE /* LBRVolume.h */,
+				380375831B8CD49C004C4ECE /* LBRVolume.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -355,6 +360,7 @@
 				380375351B8AC9A8004C4ECE /* AppDelegate.m in Sources */,
 				380375381B8AC9A8004C4ECE /* FirstViewController.m in Sources */,
 				3803757A1B8C08E0004C4ECE /* LBRSettingsTableViewController.m in Sources */,
+				380375841B8CD49C004C4ECE /* LBRVolume.m in Sources */,
 				380375621B8BB707004C4ECE /* LBRGoodReadsAPIClient.m in Sources */,
 				380375321B8AC9A8004C4ECE /* main.m in Sources */,
 				380375721B8BF058004C4ECE /* UIImage+FromURL.m in Sources */,
