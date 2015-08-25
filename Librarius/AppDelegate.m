@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import <GooglePlus.h>
+#import <GoogleSignIn.h>
 
 @interface AppDelegate ()
 
@@ -17,7 +17,13 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    NSError* configureError;
+    [[GGLContext sharedInstance] configureWithError:&configureError];
+    NSAssert(!configureError, @"Error configuring Google services: %@", configureError.localizedDescription);
+    
+    [GIDSignIn sharedInstance].delegate = self;
+    
     return YES;
 }
 
@@ -26,11 +32,24 @@
  sourceApplication:(NSString *)sourceApplication
         annotation:(id)annotation {
     
-    return [GPPURLHandler handleURL:url
-                  sourceApplication:sourceApplication
-                         annotation:annotation];
+    return [[GIDSignIn sharedInstance] handleURL:url
+                               sourceApplication:sourceApplication
+                                      annotation:annotation];
 }
 
+-(void)signIn:(GIDSignIn *)signIn didSignInForUser:(GIDGoogleUser *)user withError:(NSError *)error {
+        //Perform any operations on signed in user here.
+    NSString *userId = user.userID; // For client-side use only!
+    NSString *idToken = user.authentication.idToken; // Safe to send to the server
+    NSString *name = user.profile.name;
+    NSString *email = user.profile.email;
+        // ...
+}
+
+-(void)signIn:(GIDSignIn *)signIn didDisconnectWithUser:(GIDGoogleUser *)user withError:(NSError *)error {
+        // Perform any operations when the user disconnects from app, here.
+        // ...
+}
 
 
 

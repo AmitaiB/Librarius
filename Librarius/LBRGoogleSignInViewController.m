@@ -10,9 +10,9 @@
 
 
 #import "LBRGoogleSignInViewController.h"
-#import <GoogleOpenSource.h>
-#import <GooglePlus.h>
+#import <GoogleSignIn.h>
 #import "LBRConstants.h"
+
 //#import <UIButton+AFNetworking.h>
 
 @interface LBRGoogleSignInViewController ()
@@ -26,60 +26,11 @@ static NSString * const signInToTabBarSegueID = @"signInToTabBarSegueID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    GPPSignIn *signIn = [GPPSignIn sharedInstance];
-    signIn.shouldFetchGooglePlusUser = YES;
-        //signIn.shouldFetchGoogleUserEmail = YES;  // Uncomment to get the user's email
+        //TODO(developer) Configure the sign-in button look/feel
+    [GIDSignIn sharedInstance].uiDelegate = self;
     
-    signIn.clientID = GOOGLE_CLIENT_ID;
-    
-        // Uncomment one of these two statements for the scope you chose in the previous step
-    signIn.scopes = @[ kGTLAuthScopePlusLogin ];  // ← "https://www.googleapis.com/auth/plus.login" scope
-        //signIn.scopes = @[ @"profile" ];            // "profile" scope
-    
-        // Optional: declare signIn.actions, see "app activities"
-    signIn.delegate = self;
-    
-    
-    /**
-     *  Attempts to automatically sign in the user. This call succeeds if:
-     i. the user has authorized your application in the past, 
-     ii. they haven't revoked access to your application, and
-     iii. the app isn't requesting new scopes since they last signed in.
-     *
-     *  @return If this call succeeds, it calls your finishedWithAuth:error: method when sign in is complete.
-     */
-    [signIn trySilentAuthentication];
-    
-    
-    [self.signOutButton setImage:[UIImage imageNamed:@"signOutG+"] forState:UIControlStateSelected];
-    [self.signOutButton setNeedsDisplay];
-    [self.signOutButton setNeedsLayout];
-    
-}
-
-#pragma mark - GPPSignInDelegate method(s)
-
--(void)finishedWithAuth:(GTMOAuth2Authentication *)auth error:(NSError *)error {
-    NSLog(@"Received error %@ and auth object %@", error.localizedDescription, auth);
-    if (error) {
-            // Do some error handling here.
-    } else {
-        [self refreshInterfaceBasedOnSignIn];
-    }
-}
-
--(void)refreshInterfaceBasedOnSignIn {
-    if ([[GPPSignIn sharedInstance] authentication]) {
-            //The user is signed in.
-        self.signInButton.hidden = YES;
-            //Perform other actions here, such as showing a sign-out button.
-        [self performSegueWithIdentifier:signInToTabBarSegueID sender:nil];
-        
-        
-    } else {
-        self.signInButton.hidden = NO;
-            //Perform other actions here.
-    }
+        // Uncomment to automatically sign in the user.
+        [[GIDSignIn sharedInstance] signInSilently];
 }
 
 
@@ -98,8 +49,4 @@ static NSString * const signInToTabBarSegueID = @"signInToTabBarSegueID";
 }
 */
 
-- (IBAction)signOutButtonTapped:(id)sender {
-    [[GPPSignIn sharedInstance] signOut];
-    DBLG
-}
 @end

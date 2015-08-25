@@ -68,6 +68,62 @@ THE SOFTWARE.
 		</dict>
 		<dict>
 			<key>FooterText</key>
+			<string>Copyright 2015 Google Inc.</string>
+			<key>Title</key>
+			<string>Google</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>Copyright 2015 Google Inc.</string>
+			<key>Title</key>
+			<string>GoogleAppUtilities</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>Copyright 2015 Google Inc.</string>
+			<key>Title</key>
+			<string>GoogleAuthUtilities</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>Copyright 2015 Google Inc.</string>
+			<key>Title</key>
+			<string>GoogleNetworkingUtilities</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>Copyright 2015 Google Inc. All Rights Reserved.</string>
+			<key>Title</key>
+			<string>GoogleSignIn</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>Copyright 2015 Google Inc.</string>
+			<key>Title</key>
+			<string>GoogleSymbolUtilities</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>Copyright 2015 Google Inc.</string>
+			<key>Title</key>
+			<string>GoogleUtilities</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
 			<string>Copyright (c) 2014 Mike Buss &lt;michaeltbuss@gmail.com&gt;
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -105,14 +161,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 </string>
 			<key>Title</key>
 			<string>XNGOAuth1Client</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-		</dict>
-		<dict>
-			<key>FooterText</key>
-			<string>Copyright 2013 Google Inc.</string>
-			<key>Title</key>
-			<string>googleplus-ios-sdk</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>

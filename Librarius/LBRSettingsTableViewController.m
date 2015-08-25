@@ -9,7 +9,7 @@
 
 
 #import "LBRSettingsTableViewController.h"
-#import <GPPSignIn.h>
+#import <Google/SignIn.h>
 
 @interface LBRSettingsTableViewController ()
 
@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.settingsGroups addObject:@"Disconnect Librarius from Google+"];
+    [self.settingsGroups addObject:@"GoogleSignout from Librarius"];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -67,7 +67,7 @@
 }
 
 - (void)disconnect {
-    [[GPPSignIn sharedInstance] disconnect];
+    [[GIDSignIn sharedInstance] signOut];
     DBLG
 }
 
