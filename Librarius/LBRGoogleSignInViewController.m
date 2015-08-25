@@ -21,6 +21,8 @@
 
 @implementation LBRGoogleSignInViewController
 
+static NSString * const signInToTabBarSegueID = @"signInToTabBarSegueID";
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -55,11 +57,6 @@
     
 }
 
--(void)viewWillAppear:(BOOL)animated {
-    
-    NSLog(@"Image: %@", [[UIImage imageNamed:@"person"] description]);
-}
-
 #pragma mark - GPPSignInDelegate method(s)
 
 -(void)finishedWithAuth:(GTMOAuth2Authentication *)auth error:(NSError *)error {
@@ -76,6 +73,9 @@
             //The user is signed in.
         self.signInButton.hidden = YES;
             //Perform other actions here, such as showing a sign-out button.
+        [self performSegueWithIdentifier:signInToTabBarSegueID sender:nil];
+        
+        
     } else {
         self.signInButton.hidden = NO;
             //Perform other actions here.
@@ -99,6 +99,7 @@
 */
 
 - (IBAction)signOutButtonTapped:(id)sender {
+    [[GPPSignIn sharedInstance] signOut];
     DBLG
 }
 @end

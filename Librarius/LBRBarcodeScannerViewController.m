@@ -6,17 +6,17 @@
 //  Copyright (c) 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 
-#import "BarcodeScannerViewController.h"
+#import "LBRBarcodeScannerViewController.h"
 #import <MTBBarcodeScanner.h>
 
-@interface BarcodeScannerViewController ()
+@interface LBRBarcodeScannerViewController ()
 - (IBAction)scanOneButtonTapped:(id)sender;
 - (IBAction)scanContinuouslyButtonTapped:(id)sender;
 - (IBAction)cameraButtonTapped:(id)sender;
 
 @end
 
-@implementation BarcodeScannerViewController {
+@implementation LBRBarcodeScannerViewController {
     MTBBarcodeScanner *scanner;
 }
 
