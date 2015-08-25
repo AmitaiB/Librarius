@@ -10,6 +10,7 @@
 #import <GoogleOpenSource.h>
 #import <GooglePlus.h>
 #import "LBRConstants.h"
+//#import <UIButton+AFNetworking.h>
 
 @interface LBRGoogleSignInViewController ()
 
@@ -32,12 +33,46 @@
     
         // Optional: declare signIn.actions, see "app activities"
     signIn.delegate = self;
+    
+    
+    /**
+     *  Attempts to automatically sign in the user. This call succeeds if:
+     i. the user has authorized your application in the past, 
+     ii. they haven't revoked access to your application, and
+     iii. the app isn't requesting new scopes since they last signed in.
+     *
+     *  @return If this call succeeds, it calls your finishedWithAuth:error: method when sign in is complete.
+     */
+    [signIn trySilentAuthentication];
+    
+    [self.signOutButton setImage:[UIImage imageNamed:@"signOutG+"] forState:UIControlStateNormal];
+    self.signOutButton;
+    
+    
+    UIButton *yaSignOutButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [self.view addSubview:yaSignOutButton];
 }
 
 #pragma mark - GPPSignInDelegate method(s)
 
 -(void)finishedWithAuth:(GTMOAuth2Authentication *)auth error:(NSError *)error {
     NSLog(@"Received error %@ and auth object %@", error.localizedDescription, auth);
+    if (error) {
+            // Do some error handling here.
+    } else {
+        [self refreshInterfaceBasedOnSignIn];
+    }
+}
+
+-(void)refreshInterfaceBasedOnSignIn {
+    if ([[GPPSignIn sharedInstance] authentication]) {
+            //The user is signed in.
+        self.signInButton.hidden = YES;
+            //Perform other actions here, such as showing a sign-out button.
+    } else {
+        self.signInButton.hidden = NO;
+            //Perform other actions here.
+    }
 }
 
 
@@ -56,4 +91,6 @@
 }
 */
 
+- (IBAction)signOutButtonTapped:(id)sender {
+}
 @end

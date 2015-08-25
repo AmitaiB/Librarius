@@ -5,8 +5,9 @@ target 'Librarius' do
 pod 'AFNetworking'
 pod 'AFOAuth2Manager'
 pod 'XNGOAuth1Client', '~> 2.0'
-
 pod 'googleplus-ios-sdk', '~> 1.7.1'
+
+pod 'MTBBarcodeScanner'
 end
 
 target 'LibrariusTests' do

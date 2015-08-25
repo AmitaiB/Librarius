@@ -6,13 +6,13 @@
 //  Copyright (c) 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 
-#import "SecondViewController.h"
+#import "BarcodeScannerViewController.h"
 
-@interface SecondViewController ()
+@interface BarcodeScannerViewController ()
 
 @end
 
-@implementation SecondViewController
+@implementation BarcodeScannerViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

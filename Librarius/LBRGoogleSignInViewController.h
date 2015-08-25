@@ -13,5 +13,7 @@
 @interface LBRGoogleSignInViewController : UIViewController <GPPSignInDelegate>
 
 @property (retain, nonatomic) IBOutlet GPPSignInButton *signInButton;
+@property (weak, nonatomic) IBOutlet UIButton *signOutButton;
+- (IBAction)signOutButtonTapped:(id)sender;
 
 @end
