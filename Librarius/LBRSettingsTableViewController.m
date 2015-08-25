@@ -5,8 +5,11 @@
 //  Created by Amitai Blickstein on 8/24/15.
 //  Copyright (c) 2015 Amitai Blickstein, LLC. All rights reserved.
 //
+#define DBLG NSLog(@"%@ reporting!", NSStringFromSelector(_cmd));
+
 
 #import "LBRSettingsTableViewController.h"
+#import <GPPSignIn.h>
 
 @interface LBRSettingsTableViewController ()
 
@@ -16,6 +19,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.settingsGroups addObject:@"Disconnect Librarius from Google+"];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -34,24 +39,46 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 #warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return self.settingsGroups.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return 1;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
     // Configure the cell...
     
+    cell.textLabel.text = @"CONFIGURE CELLS";
+    
     return cell;
 }
-*/
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        [self disconnect];
+        DBLG
+    }
+}
+
+- (void)disconnect {
+    [[GPPSignIn sharedInstance] disconnect];
+    DBLG
+}
+
+- (void)didDisconnectWithError:(NSError *)error {
+    if (error) {
+        NSLog(@"Received error %@", error);
+    } else {
+            // The user is signed out and disconnected.
+            // Clean up user data as specified by the Google+ terms.
+    }
+}
 
 /*
 // Override to support conditional editing of the table view.
