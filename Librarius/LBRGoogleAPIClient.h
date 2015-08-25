@@ -8,6 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void (^LBRVolumesQueryCompletionBlock)(NSArray *volumes, NSError * error);
+
+@class AFHTTPSessionManager;
 @interface LBRGoogleAPIClient : NSObject
+
++(AFHTTPSessionManager *)sharedSessionManager;
+
++(NSDictionary*)retrieveVolumeWithID:(NSString*)volumeIDString;
+
+@property (nonatomic, strong) <#type#> *<#value#>;
+
 
 @end

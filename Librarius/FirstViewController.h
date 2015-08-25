@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LBRGoogleAPIClient.h"
+#import <AFNetworking.h>
 
 @interface FirstViewController : UIViewController
 
