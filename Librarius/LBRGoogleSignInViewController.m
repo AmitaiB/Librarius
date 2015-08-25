@@ -6,6 +6,9 @@
 //  Copyright (c) 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 
+#define DBLG NSLog(@"%@ reporting!", NSStringFromSelector(_cmd));
+
+
 #import "LBRGoogleSignInViewController.h"
 #import <GoogleOpenSource.h>
 #import <GooglePlus.h>
@@ -45,12 +48,16 @@
      */
     [signIn trySilentAuthentication];
     
-    [self.signOutButton setImage:[UIImage imageNamed:@"signOutG+"] forState:UIControlStateNormal];
-    self.signOutButton;
     
+    [self.signOutButton setImage:[UIImage imageNamed:@"signOutG+"] forState:UIControlStateSelected];
+    [self.signOutButton setNeedsDisplay];
+    [self.signOutButton setNeedsLayout];
     
-    UIButton *yaSignOutButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [self.view addSubview:yaSignOutButton];
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    
+    NSLog(@"Image: %@", [[UIImage imageNamed:@"person"] description]);
 }
 
 #pragma mark - GPPSignInDelegate method(s)
@@ -92,5 +99,6 @@
 */
 
 - (IBAction)signOutButtonTapped:(id)sender {
+    DBLG
 }
 @end

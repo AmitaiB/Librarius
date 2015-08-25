@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LWv-rj-2Zu">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--First-->
@@ -119,17 +120,14 @@
                                     </mask>
                                 </variation>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IrP-aK-oWv">
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IrP-aK-oWv" userLabel="Google+ signout">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" none="YES" button="YES" image="YES"/>
                                 </accessibility>
-                                <state key="normal" title="Button">
+                                <state key="normal" backgroundImage="signOutG+">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="177" y="414" width="46" height="30"/>
-                                </variation>
                                 <connections>
                                     <action selector="signOutButtonTapped:" destination="qLk-hE-jBF" eventType="touchUpInside" id="nOT-op-xcG"/>
                                 </connections>
@@ -137,17 +135,24 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="IrP-aK-oWv" secondAttribute="trailing" constant="78" id="P8G-sC-jPy"/>
+                            <constraint firstItem="IrP-aK-oWv" firstAttribute="top" secondItem="uYj-iL-Xtc" secondAttribute="bottom" constant="77" id="X1F-EF-vQA"/>
+                            <constraint firstItem="IrP-aK-oWv" firstAttribute="leading" secondItem="6Kj-Sv-toF" secondAttribute="leadingMargin" constant="90" id="eI7-ki-bbG"/>
+                            <constraint firstItem="eNy-fh-TXF" firstAttribute="top" secondItem="IrP-aK-oWv" secondAttribute="bottom" constant="113" id="lk3-Ek-SA6"/>
                             <constraint firstItem="uYj-iL-Xtc" firstAttribute="centerY" secondItem="6Kj-Sv-toF" secondAttribute="centerY" id="nc4-Ap-h0p"/>
                             <constraint firstItem="uYj-iL-Xtc" firstAttribute="centerX" secondItem="6Kj-Sv-toF" secondAttribute="centerX" id="ufG-w7-bef"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="uYj-iL-Xtc"/>
-                                <exclude reference="IrP-aK-oWv"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="nc4-Ap-h0p"/>
                                 <exclude reference="ufG-w7-bef"/>
+                                <exclude reference="P8G-sC-jPy"/>
+                                <exclude reference="X1F-EF-vQA"/>
+                                <exclude reference="eI7-ki-bbG"/>
+                                <exclude reference="lk3-Ek-SA6"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -158,6 +163,10 @@
                             <mask key="constraints">
                                 <include reference="nc4-Ap-h0p"/>
                                 <include reference="ufG-w7-bef"/>
+                                <include reference="P8G-sC-jPy"/>
+                                <include reference="X1F-EF-vQA"/>
+                                <include reference="eI7-ki-bbG"/>
+                                <include reference="lk3-Ek-SA6"/>
                             </mask>
                         </variation>
                     </view>
@@ -214,5 +223,6 @@
     <resources>
         <image name="first" width="30" height="30"/>
         <image name="second" width="30" height="30"/>
+        <image name="signOutG+" width="157" height="73"/>
     </resources>
 </document>

@@ -20,7 +20,6 @@
 		380375621B8BB707004C4ECE /* LBRGoodReadsAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375611B8BB707004C4ECE /* LBRGoodReadsAPIClient.m */; };
 		380375671B8BC758004C4ECE /* LBRGoogleAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375661B8BC758004C4ECE /* LBRGoogleAPIClient.m */; };
 		3803756A1B8BC89D004C4ECE /* LBRGoogleSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375691B8BC89D004C4ECE /* LBRGoogleSignInViewController.m */; };
-		3803756F1B8BEF08004C4ECE /* SignOutButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3803756E1B8BEF08004C4ECE /* SignOutButton.xib */; };
 		380375721B8BF058004C4ECE /* UIImage+FromURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375711B8BF058004C4ECE /* UIImage+FromURL.m */; };
 /* End PBXBuildFile section */
 
@@ -58,7 +57,6 @@
 		380375661B8BC758004C4ECE /* LBRGoogleAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRGoogleAPIClient.m; sourceTree = "<group>"; };
 		380375681B8BC89D004C4ECE /* LBRGoogleSignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRGoogleSignInViewController.h; sourceTree = "<group>"; };
 		380375691B8BC89D004C4ECE /* LBRGoogleSignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRGoogleSignInViewController.m; sourceTree = "<group>"; };
-		3803756E1B8BEF08004C4ECE /* SignOutButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignOutButton.xib; sourceTree = "<group>"; };
 		380375701B8BF058004C4ECE /* UIImage+FromURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FromURL.h"; sourceTree = "<group>"; };
 		380375711B8BF058004C4ECE /* UIImage+FromURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FromURL.m"; sourceTree = "<group>"; };
 		8D3D33401D5A34E1C9A90BE0 /* Pods-Librarius.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Librarius.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Librarius/Pods-Librarius.debug.xcconfig"; sourceTree = "<group>"; };
@@ -181,7 +179,6 @@
 			children = (
 				3803753F1B8AC9A8004C4ECE /* Images.xcassets */,
 				380375411B8AC9A8004C4ECE /* LaunchScreen.xib */,
-				3803756E1B8BEF08004C4ECE /* SignOutButton.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -293,7 +290,6 @@
 				3803753E1B8AC9A8004C4ECE /* Main.storyboard in Resources */,
 				380375431B8AC9A8004C4ECE /* LaunchScreen.xib in Resources */,
 				380375401B8AC9A8004C4ECE /* Images.xcassets in Resources */,
-				3803756F1B8BEF08004C4ECE /* SignOutButton.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
