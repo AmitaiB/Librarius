@@ -7,17 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
-
-typedef void (^LBRVolumesQueryCompletionBlock)(NSArray *volumes, NSError * error);
+#import <AFNetworking.h>
 
 @interface LBRGoogleAPIClient : NSObject
 
-+(LBRGoogleAPIClient *)sharedInstance;
+//+(LBRGoogleAPIClient *)sharedInstance;
 
-+(NSDictionary*)retrieveVolumeWithID:(NSString*)volumeIDString;
-+(NSArray*)retrieveVolumesWithQuery:(NSString*)queryString;
+-(void)retrieveVolumeWithID:(NSString     * )volumeIDString;
+-(void)retrieveVolumesWithQuery:(NSString * )queryString;
 
+@property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
 @property (nonatomic, strong) NSDictionary *googleVolume;
-
+@property (nonatomic, strong) NSString *gBooksBaseURL;
 
 @end

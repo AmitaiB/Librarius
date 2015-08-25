@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LWv-rj-2Zu">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -81,6 +82,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Xv9-St-nnt"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="1g0-ie-Ddd">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -151,14 +153,14 @@
                                 <exclude reference="dcH-IU-Ezd"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="0wb-d3-IFZ"/>
-                                <exclude reference="XxS-EY-JMI"/>
-                                <exclude reference="vdS-hb-fbT"/>
+                                <exclude reference="8Sl-ez-wcu"/>
+                                <exclude reference="m8y-6X-JQA"/>
                                 <exclude reference="69O-qr-XXg"/>
                                 <exclude reference="dT4-fO-ot4"/>
                                 <exclude reference="z8O-n0-4CO"/>
-                                <exclude reference="8Sl-ez-wcu"/>
-                                <exclude reference="m8y-6X-JQA"/>
+                                <exclude reference="0wb-d3-IFZ"/>
+                                <exclude reference="XxS-EY-JMI"/>
+                                <exclude reference="vdS-hb-fbT"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -168,14 +170,14 @@
                                 <include reference="dcH-IU-Ezd"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="0wb-d3-IFZ"/>
-                                <include reference="XxS-EY-JMI"/>
-                                <include reference="vdS-hb-fbT"/>
+                                <include reference="8Sl-ez-wcu"/>
+                                <include reference="m8y-6X-JQA"/>
                                 <include reference="69O-qr-XXg"/>
                                 <include reference="dT4-fO-ot4"/>
                                 <include reference="z8O-n0-4CO"/>
-                                <include reference="8Sl-ez-wcu"/>
-                                <include reference="m8y-6X-JQA"/>
+                                <include reference="0wb-d3-IFZ"/>
+                                <include reference="XxS-EY-JMI"/>
+                                <include reference="vdS-hb-fbT"/>
                             </mask>
                         </variation>
                     </view>
