@@ -10,7 +10,7 @@
 		2E6DA4DCEDA6FC0E68557D16 /* libPods-Librarius.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EBADCB9C83FA635A577697F9 /* libPods-Librarius.a */; };
 		380375321B8AC9A8004C4ECE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375311B8AC9A8004C4ECE /* main.m */; };
 		380375351B8AC9A8004C4ECE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375341B8AC9A8004C4ECE /* AppDelegate.m */; };
-		380375381B8AC9A8004C4ECE /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375371B8AC9A8004C4ECE /* FirstViewController.m */; };
+		380375381B8AC9A8004C4ECE /* API_TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375371B8AC9A8004C4ECE /* API_TestViewController.m */; };
 		3803753B1B8AC9A8004C4ECE /* LBRBarcodeScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3803753A1B8AC9A8004C4ECE /* LBRBarcodeScannerViewController.m */; };
 		3803753E1B8AC9A8004C4ECE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3803753C1B8AC9A8004C4ECE /* Main.storyboard */; };
 		380375401B8AC9A8004C4ECE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3803753F1B8AC9A8004C4ECE /* Images.xcassets */; };
@@ -45,8 +45,8 @@
 		380375311B8AC9A8004C4ECE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		380375331B8AC9A8004C4ECE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		380375341B8AC9A8004C4ECE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		380375361B8AC9A8004C4ECE /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		380375371B8AC9A8004C4ECE /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		380375361B8AC9A8004C4ECE /* API_TestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = API_TestViewController.h; sourceTree = "<group>"; };
+		380375371B8AC9A8004C4ECE /* API_TestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = API_TestViewController.m; sourceTree = "<group>"; };
 		380375391B8AC9A8004C4ECE /* LBRBarcodeScannerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LBRBarcodeScannerViewController.h; sourceTree = "<group>"; };
 		3803753A1B8AC9A8004C4ECE /* LBRBarcodeScannerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LBRBarcodeScannerViewController.m; sourceTree = "<group>"; };
 		3803753D1B8AC9A8004C4ECE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -206,8 +206,8 @@
 		380375641B8BB71D004C4ECE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				380375361B8AC9A8004C4ECE /* FirstViewController.h */,
-				380375371B8AC9A8004C4ECE /* FirstViewController.m */,
+				380375361B8AC9A8004C4ECE /* API_TestViewController.h */,
+				380375371B8AC9A8004C4ECE /* API_TestViewController.m */,
 				380375391B8AC9A8004C4ECE /* LBRBarcodeScannerViewController.h */,
 				3803753A1B8AC9A8004C4ECE /* LBRBarcodeScannerViewController.m */,
 				380375781B8C08E0004C4ECE /* LBRSettingsTableViewController.h */,
@@ -379,7 +379,7 @@
 				3803753B1B8AC9A8004C4ECE /* LBRBarcodeScannerViewController.m in Sources */,
 				380375671B8BC758004C4ECE /* LBRGoogleAPIClient.m in Sources */,
 				380375351B8AC9A8004C4ECE /* AppDelegate.m in Sources */,
-				380375381B8AC9A8004C4ECE /* FirstViewController.m in Sources */,
+				380375381B8AC9A8004C4ECE /* API_TestViewController.m in Sources */,
 				380375F71B8D4E90004C4ECE /* MasterViewController.m in Sources */,
 				3803757A1B8C08E0004C4ECE /* LBRSettingsTableViewController.m in Sources */,
 				380375FA1B8D4EBB004C4ECE /* HisMovies.xcdatamodel in Sources */,

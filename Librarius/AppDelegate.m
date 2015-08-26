@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import <GoogleSignIn.h>
+#import "DetailViewController.h"
+#import "MasterViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +19,13 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+        // Override point for customization after application launch.
+#pragma mark - Core Data loc
+    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
+    MasterViewController *controller = (MasterViewController *)navigationController.topViewController;
+    controller.managedObjectContext = self.managedObjectContext;
+        //END CORE DATA ADDITIONS FOR THIS METHOD
+    
     
     NSError* configureError;
     [[GGLContext sharedInstance] configureWithError:&configureError];
@@ -75,5 +84,18 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+#pragma mark - Core Data stack
+
+@synthesize managedObjectContext       = _managedObjectContext;
+@synthesize managedObjectModel         = _managedObjectModel;
+@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+
+-(NSURL *)applicationDocumentsDirectory {
+        // The directory the application uses to store the Core Data store file. This code uses a directory named "com.objective-v.HisMovies"(???) in the application's documents directory.
+    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+
 
 @end
