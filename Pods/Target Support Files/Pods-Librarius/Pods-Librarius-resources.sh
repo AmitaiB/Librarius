@@ -58,9 +58,13 @@ install_resource()
   esac
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_resource "AMRatingControl/star.png"
+  install_resource "AMRatingControl/dot.png"
   install_resource "GoogleSignIn/Resources/GoogleSignIn.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_resource "AMRatingControl/star.png"
+  install_resource "AMRatingControl/dot.png"
   install_resource "GoogleSignIn/Resources/GoogleSignIn.bundle"
 fi
 

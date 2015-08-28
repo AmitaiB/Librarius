@@ -8,6 +8,8 @@ pod 'Google/SignIn'
 pod 'MTBBarcodeScanner'
 
 pod 'MagicalRecord', '~> 2.3'
+pod 'AMRatingControl'
+
 
 
 pod 'XNGOAuth1Client', '~> 2.0'
