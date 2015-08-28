@@ -30,7 +30,8 @@ static NSString * const signInToTabBarSegueID = @"signInToTabBarSegueID";
     [GIDSignIn sharedInstance].uiDelegate = self;
     
         // Uncomment to automatically sign in the user.
-        [[GIDSignIn sharedInstance] signInSilently];
+//    TODO: Uncomment for actual app
+//        [[GIDSignIn sharedInstance] signInSilently];
 }
 
 

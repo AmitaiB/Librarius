@@ -95,14 +95,18 @@
         // The directory the application uses to store the Core Data store file. This code uses a directory named "com.objective-v.HisMovies"(???) in the application's documents directory.
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
-
+/**
+ *  Overridden getter for the managed object model for the application. It is a fatal error for the application not to be able to find and load its model, so if _managedObjectModel is nil, a new one is created.ß
+ *
+ *  @return _managedObjectModel
+ */
 -(NSManagedObjectModel *)managedObjectModel {
-        // The managed object model for the application. It is a fatal error for the application not to be able to find and load its model.
     if (_managedObjectModel != nil) {
         return _managedObjectModel;
     }
     NSURL *modeURL = [[NSBundle mainBundle] URLForResource:@"HisMovies" withExtension:@"momd"]; //???HisMovies
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modeURL];
+
     return _managedObjectModel;
 }
 
@@ -112,7 +116,7 @@
         return _persistentStoreCoordinator;
     }
     
-        // Create the coordinator and store
+        // Create the coordinator and store (if there was none before)
     
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"HisMovies.sqlite"];

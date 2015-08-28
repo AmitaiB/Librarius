@@ -27,6 +27,7 @@
 		380375F71B8D4E90004C4ECE /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375F41B8D4E90004C4ECE /* MasterViewController.m */; };
 		380375F81B8D4E90004C4ECE /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375F61B8D4E90004C4ECE /* DetailViewController.m */; };
 		380375FA1B8D4EBB004C4ECE /* HisMovies.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 380375F91B8D4EBB004C4ECE /* HisMovies.xcdatamodel */; };
+		3851DBFD1B8E2E5A00E90B9F /* LBRDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3851DBFC1B8E2E5A00E90B9F /* LBRDataManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,8 @@
 		380375F51B8D4E90004C4ECE /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		380375F61B8D4E90004C4ECE /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		380375F91B8D4EBB004C4ECE /* HisMovies.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HisMovies.xcdatamodel; sourceTree = "<group>"; };
+		3851DBFB1B8E2E5A00E90B9F /* LBRDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRDataManager.h; sourceTree = "<group>"; };
+		3851DBFC1B8E2E5A00E90B9F /* LBRDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRDataManager.m; sourceTree = "<group>"; };
 		8D3D33401D5A34E1C9A90BE0 /* Pods-Librarius.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Librarius.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Librarius/Pods-Librarius.debug.xcconfig"; sourceTree = "<group>"; };
 		9B10AB83782954202B2FDC18 /* Pods-Librarius.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Librarius.release.xcconfig"; path = "Pods/Target Support Files/Pods-Librarius/Pods-Librarius.release.xcconfig"; sourceTree = "<group>"; };
 		EBADCB9C83FA635A577697F9 /* libPods-Librarius.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Librarius.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -186,10 +189,13 @@
 		3803755F1B8BB6C3004C4ECE /* DataPortation */ = {
 			isa = PBXGroup;
 			children = (
+				380375F91B8D4EBB004C4ECE /* HisMovies.xcdatamodel */,
 				380375601B8BB707004C4ECE /* LBRGoodReadsAPIClient.h */,
 				380375611B8BB707004C4ECE /* LBRGoodReadsAPIClient.m */,
 				380375651B8BC758004C4ECE /* LBRGoogleAPIClient.h */,
 				380375661B8BC758004C4ECE /* LBRGoogleAPIClient.m */,
+				3851DBFB1B8E2E5A00E90B9F /* LBRDataManager.h */,
+				3851DBFC1B8E2E5A00E90B9F /* LBRDataManager.m */,
 			);
 			name = DataPortation;
 			sourceTree = "<group>";
@@ -226,7 +232,6 @@
 				380375F41B8D4E90004C4ECE /* MasterViewController.m */,
 				380375F51B8D4E90004C4ECE /* DetailViewController.h */,
 				380375F61B8D4E90004C4ECE /* DetailViewController.m */,
-				380375F91B8D4EBB004C4ECE /* HisMovies.xcdatamodel */,
 			);
 			name = "Core Data Controllers";
 			sourceTree = "<group>";
@@ -383,6 +388,7 @@
 				380375F71B8D4E90004C4ECE /* MasterViewController.m in Sources */,
 				3803757A1B8C08E0004C4ECE /* LBRSettingsTableViewController.m in Sources */,
 				380375FA1B8D4EBB004C4ECE /* HisMovies.xcdatamodel in Sources */,
+				3851DBFD1B8E2E5A00E90B9F /* LBRDataManager.m in Sources */,
 				380375841B8CD49C004C4ECE /* LBRVolume.m in Sources */,
 				380375621B8BB707004C4ECE /* LBRGoodReadsAPIClient.m in Sources */,
 				380375321B8AC9A8004C4ECE /* main.m in Sources */,
