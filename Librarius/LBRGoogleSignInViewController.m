@@ -46,9 +46,9 @@ static NSString * const signInToTabBarSegueID = @"signInToTabBarSegueID";
 //  ================
 //  GIDSignInButton
 //  ================
-//    self.signInButton.style = kGIDSignInButtonStyleWide;
-//    self.signInButton.delegate = self;
-//    [self.view addSubview:self.signInButton];
+    self.signInButton.style = kGIDSignInButtonStyleWide;
+    self.signInButton.delegate = self;
+    [self.view addSubview:self.signInButton];
     
     
 NSLog(@"BEFORE signInSilently, does%@ have Authentication stored in Keychain.", [[GIDSignIn sharedInstance] hasAuthInKeychain]? @"" : @" NOT");
@@ -72,6 +72,8 @@ NSLog(@"AFTER signInSilently, does%@ have Authentication stored in Keychain.", [
         NSString *email   = user.profile.email;
         // ...
         [self performSegueWithIdentifier:signInToTabBarSegueID sender:nil];
+    } else {
+        NSLog(@"Error in signIn: %@", error.localizedDescription);
     }
 }
 
