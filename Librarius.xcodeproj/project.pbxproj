@@ -26,8 +26,12 @@
 		380375841B8CD49C004C4ECE /* LBRVolume.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375831B8CD49C004C4ECE /* LBRVolume.m */; };
 		380375F71B8D4E90004C4ECE /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375F41B8D4E90004C4ECE /* MasterViewController.m */; };
 		380375F81B8D4E90004C4ECE /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375F61B8D4E90004C4ECE /* DetailViewController.m */; };
-		380375FA1B8D4EBB004C4ECE /* HisMovies.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 380375F91B8D4EBB004C4ECE /* HisMovies.xcdatamodel */; };
 		3851DBFD1B8E2E5A00E90B9F /* LBRDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3851DBFC1B8E2E5A00E90B9F /* LBRDataManager.m */; };
+		38AAD6EA1B90107F003062C1 /* libMagicalRecord.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38AAD6E91B90107F003062C1 /* libMagicalRecord.a */; };
+		38AAD6F01B901175003062C1 /* Librarius.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 38AAD6EE1B901175003062C1 /* Librarius.xcdatamodeld */; };
+		38AAD71D1B901D35003062C1 /* Volume.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAD71C1B901D35003062C1 /* Volume.m */; };
+		38AAD7201B901D36003062C1 /* Library.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAD71F1B901D36003062C1 /* Library.m */; };
+		38AAD7231B901D36003062C1 /* Bookcase.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAD7221B901D36003062C1 /* Bookcase.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,9 +79,16 @@
 		380375F41B8D4E90004C4ECE /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 		380375F51B8D4E90004C4ECE /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		380375F61B8D4E90004C4ECE /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
-		380375F91B8D4EBB004C4ECE /* HisMovies.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HisMovies.xcdatamodel; sourceTree = "<group>"; };
 		3851DBFB1B8E2E5A00E90B9F /* LBRDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRDataManager.h; sourceTree = "<group>"; };
 		3851DBFC1B8E2E5A00E90B9F /* LBRDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRDataManager.m; sourceTree = "<group>"; };
+		38AAD6E91B90107F003062C1 /* libMagicalRecord.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMagicalRecord.a; path = "Pods/../build/Debug-iphoneos/libMagicalRecord.a"; sourceTree = "<group>"; };
+		38AAD6EF1B901175003062C1 /* Librarius.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Librarius.xcdatamodel; sourceTree = "<group>"; };
+		38AAD71B1B901D35003062C1 /* Volume.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Volume.h; sourceTree = "<group>"; };
+		38AAD71C1B901D35003062C1 /* Volume.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Volume.m; sourceTree = "<group>"; };
+		38AAD71E1B901D36003062C1 /* Library.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Library.h; sourceTree = "<group>"; };
+		38AAD71F1B901D36003062C1 /* Library.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Library.m; sourceTree = "<group>"; };
+		38AAD7211B901D36003062C1 /* Bookcase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bookcase.h; sourceTree = "<group>"; };
+		38AAD7221B901D36003062C1 /* Bookcase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bookcase.m; sourceTree = "<group>"; };
 		8D3D33401D5A34E1C9A90BE0 /* Pods-Librarius.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Librarius.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Librarius/Pods-Librarius.debug.xcconfig"; sourceTree = "<group>"; };
 		9B10AB83782954202B2FDC18 /* Pods-Librarius.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Librarius.release.xcconfig"; path = "Pods/Target Support Files/Pods-Librarius/Pods-Librarius.release.xcconfig"; sourceTree = "<group>"; };
 		EBADCB9C83FA635A577697F9 /* libPods-Librarius.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Librarius.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38AAD6EA1B90107F003062C1 /* libMagicalRecord.a in Frameworks */,
 				2E6DA4DCEDA6FC0E68557D16 /* libPods-Librarius.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -180,6 +192,12 @@
 		380375581B8B9F11004C4ECE /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				38AAD7211B901D36003062C1 /* Bookcase.h */,
+				38AAD7221B901D36003062C1 /* Bookcase.m */,
+				38AAD71E1B901D36003062C1 /* Library.h */,
+				38AAD71F1B901D36003062C1 /* Library.m */,
+				38AAD71B1B901D35003062C1 /* Volume.h */,
+				38AAD71C1B901D35003062C1 /* Volume.m */,
 				380375821B8CD49C004C4ECE /* LBRVolume.h */,
 				380375831B8CD49C004C4ECE /* LBRVolume.m */,
 			);
@@ -189,13 +207,13 @@
 		3803755F1B8BB6C3004C4ECE /* DataPortation */ = {
 			isa = PBXGroup;
 			children = (
-				380375F91B8D4EBB004C4ECE /* HisMovies.xcdatamodel */,
 				380375601B8BB707004C4ECE /* LBRGoodReadsAPIClient.h */,
 				380375611B8BB707004C4ECE /* LBRGoodReadsAPIClient.m */,
 				380375651B8BC758004C4ECE /* LBRGoogleAPIClient.h */,
 				380375661B8BC758004C4ECE /* LBRGoogleAPIClient.m */,
 				3851DBFB1B8E2E5A00E90B9F /* LBRDataManager.h */,
 				3851DBFC1B8E2E5A00E90B9F /* LBRDataManager.m */,
+				38AAD6EE1B901175003062C1 /* Librarius.xcdatamodeld */,
 			);
 			name = DataPortation;
 			sourceTree = "<group>";
@@ -239,6 +257,7 @@
 		8D3D60166B48602A9D5DE1B9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				38AAD6E91B90107F003062C1 /* libMagicalRecord.a */,
 				EBADCB9C83FA635A577697F9 /* libPods-Librarius.a */,
 			);
 			name = Frameworks;
@@ -387,15 +406,18 @@
 				380375381B8AC9A8004C4ECE /* API_TestViewController.m in Sources */,
 				380375F71B8D4E90004C4ECE /* MasterViewController.m in Sources */,
 				3803757A1B8C08E0004C4ECE /* LBRSettingsTableViewController.m in Sources */,
-				380375FA1B8D4EBB004C4ECE /* HisMovies.xcdatamodel in Sources */,
 				3851DBFD1B8E2E5A00E90B9F /* LBRDataManager.m in Sources */,
 				380375841B8CD49C004C4ECE /* LBRVolume.m in Sources */,
+				38AAD6F01B901175003062C1 /* Librarius.xcdatamodeld in Sources */,
 				380375621B8BB707004C4ECE /* LBRGoodReadsAPIClient.m in Sources */,
 				380375321B8AC9A8004C4ECE /* main.m in Sources */,
+				38AAD71D1B901D35003062C1 /* Volume.m in Sources */,
+				38AAD7231B901D36003062C1 /* Bookcase.m in Sources */,
 				380375F81B8D4E90004C4ECE /* DetailViewController.m in Sources */,
 				380375721B8BF058004C4ECE /* UIImage+FromURL.m in Sources */,
 				3803756A1B8BC89D004C4ECE /* LBRGoogleSignInViewController.m in Sources */,
 				3803755B1B8B9F5E004C4ECE /* LBRConstants.m in Sources */,
+				38AAD7201B901D36003062C1 /* Library.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,8 +544,15 @@
 			baseConfigurationReference = 8D3D33401D5A34E1C9A90BE0 /* Pods-Librarius.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Librarius/Librarius-Prefix.pch";
 				INFOPLIST_FILE = Librarius/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -533,8 +562,15 @@
 			baseConfigurationReference = 9B10AB83782954202B2FDC18 /* Pods-Librarius.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_INCREASE_PRECOMPILED_HEADER_SHARING = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Librarius/Librarius-Prefix.pch";
 				INFOPLIST_FILE = Librarius/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -604,6 +640,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		38AAD6EE1B901175003062C1 /* Librarius.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				38AAD6EF1B901175003062C1 /* Librarius.xcdatamodel */,
+			);
+			currentVersion = 38AAD6EF1B901175003062C1 /* Librarius.xcdatamodel */;
+			path = Librarius.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 380375241B8AC9A8004C4ECE /* Project object */;
 }
