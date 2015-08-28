@@ -20,12 +20,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
         // Override point for customization after application launch.
 #pragma mark - CoreData
-        //What is this? ↓ Why do I need those references...?
+        //What is this? ↓ Why did I need those references...?
 //    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
 //    MasterViewController *controller = (MasterViewController *)navigationController.topViewController;
 //    controller.managedObjectContext = self.managedObjectContext;
     
-        //UPDATE: Taken out
+        //UPDATE: Taken out: Magical Record...
         //Love Magical Record! Thank you Ray W. http://www.raywenderlich.com/56879/magicalrecord-tutorial-ios
         //    [MagicalRecord setupCoreDataStack];
     
@@ -41,6 +41,24 @@
 
 #pragma mark GoogleSignIn methods
 
+-(void)signIn:(GIDSignIn *)signIn didSignInForUser:(GIDGoogleUser *)user withError:(NSError *)error {
+        //Perform any operations on signed in user here.
+        //???Probably not needed...
+    NSString *userId  = user.userID;// For client-side use only!
+    NSString *idToken = user.authentication.idToken;// Safe to send to the server
+    NSString *name    = user.profile.name;
+    NSString *email   = user.profile.email;
+        // ...
+}
+
+-(void)signIn:(GIDSignIn *)signIn didDisconnectWithUser:(GIDGoogleUser *)user withError:(NSError *)error {
+        // Perform any operations when the user disconnects from app, here.
+        // ...
+}
+
+#pragma mark - UIApplicationDelegate methods
+
+    //Added at GoogleSignIn's behest...
 -(BOOL)application:(UIApplication *)application
            openURL:(NSURL *)url
  sourceApplication:(NSString *)sourceApplication
@@ -49,21 +67,6 @@
     return [[GIDSignIn sharedInstance] handleURL:url
                                sourceApplication:sourceApplication
                                       annotation:annotation];
-}
-
--(void)signIn:(GIDSignIn *)signIn didSignInForUser:(GIDGoogleUser *)user withError:(NSError *)error {
-        //Perform any operations on signed in user here.
-        //???Probably not needed...
-    NSString *userId = user.userID; // For client-side use only!
-    NSString *idToken = user.authentication.idToken; // Safe to send to the server
-    NSString *name = user.profile.name;
-    NSString *email = user.profile.email;
-        // ...
-}
-
--(void)signIn:(GIDSignIn *)signIn didDisconnectWithUser:(GIDGoogleUser *)user withError:(NSError *)error {
-        // Perform any operations when the user disconnects from app, here.
-        // ...
 }
 
 

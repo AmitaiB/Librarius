@@ -28,12 +28,18 @@ static NSString * const signInToTabBarSegueID = @"signInToTabBarSegueID";
     GIDSignIn *signInManager = [GIDSignIn sharedInstance];
         //TODO(developer) Configure the sign-in button look/feel
     signInManager.uiDelegate = self;
+NSLog(@"manager's clientID = %@", signInManager.clientID);
+    signInManager.clientID = GOOGLE_CLIENT_ID;
     
+NSLog(@"BEFORE signInSilently, does%@ have Authentication stored in Keychain.", [[GIDSignIn sharedInstance] hasAuthInKeychain]? @"" : @" NOT");
         // Uncomment to automatically sign in the user.
 //    !!!: Uncomment before shipping
-//        [[GIDSignIn sharedInstance] signInSilently];
+        [signInManager signInSilently];
+NSLog(@"AFTER signInSilently, does%@ have Authentication stored in Keychain.", [[GIDSignIn sharedInstance] hasAuthInKeychain]? @"" : @" NOT");
+    
     
 }
+
 
 
 - (void)didReceiveMemoryWarning {
