@@ -25,13 +25,14 @@ static NSString * const signInToTabBarSegueID = @"signInToTabBarSegueID";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    GIDSignIn *signInManager = [GIDSignIn sharedInstance];
         //TODO(developer) Configure the sign-in button look/feel
-    [GIDSignIn sharedInstance].uiDelegate = self;
+    signInManager.uiDelegate = self;
     
         // Uncomment to automatically sign in the user.
-//    TODO: Uncomment for actual app
+//    !!!: Uncomment before shipping
 //        [[GIDSignIn sharedInstance] signInSilently];
+    
 }
 
 
