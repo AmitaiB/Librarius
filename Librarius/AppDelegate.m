@@ -20,14 +20,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
         // Override point for customization after application launch.
-#pragma mark - Core Data loc
+#pragma mark - CoreData
     UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
     MasterViewController *controller = (MasterViewController *)navigationController.topViewController;
     controller.managedObjectContext = self.managedObjectContext;
-        //END CORE DATA ADDITIONS FOR THIS METHOD
     
     
-    NSError* configureError;
+#pragma mark - GoogleSignIn
+    NSError* configureError = nil;
     [[GGLContext sharedInstance] configureWithError:&configureError];
     NSAssert(!configureError, @"Error configuring Google services: %@", configureError.localizedDescription);
     
@@ -35,6 +35,8 @@
     
     return YES;
 }
+
+#pragma mark GoogleSignIn methods
 
 -(BOOL)application:(UIApplication *)application
            openURL:(NSURL *)url
@@ -48,6 +50,7 @@
 
 -(void)signIn:(GIDSignIn *)signIn didSignInForUser:(GIDGoogleUser *)user withError:(NSError *)error {
         //Perform any operations on signed in user here.
+        //???Probably not needed...
     NSString *userId = user.userID; // For client-side use only!
     NSString *idToken = user.authentication.idToken; // Safe to send to the server
     NSString *name = user.profile.name;
@@ -96,7 +99,7 @@
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 /**
- *  Overridden getter for the managed object model for the application. It is a fatal error for the application not to be able to find and load its model, so if _managedObjectModel is nil, a new one is created.ß
+ *  This overridden getter for the managed object model for the application is standard boilerplate. It is a fatal error for the application not to be able to find and load its model, so if _managedObjectModel is nil, a new one is created.
  *
  *  @return _managedObjectModel
  */
@@ -104,9 +107,9 @@
     if (_managedObjectModel != nil) {
         return _managedObjectModel;
     }
-    NSURL *modeURL = [[NSBundle mainBundle] URLForResource:@"HisMovies" withExtension:@"momd"]; //???HisMovies
-    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modeURL];
-
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"HisMovies" withExtension:@"momd"]; //???HisMovies
+//    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+    _managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
     return _managedObjectModel;
 }
 
