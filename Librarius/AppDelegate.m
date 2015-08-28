@@ -17,14 +17,13 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
         // Override point for customization after application launch.
 #pragma mark - CoreData
         //What is this? ↓ Why do I need those references...?
-    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-    MasterViewController *controller = (MasterViewController *)navigationController.topViewController;
-    controller.managedObjectContext = self.managedObjectContext;
+//    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
+//    MasterViewController *controller = (MasterViewController *)navigationController.topViewController;
+//    controller.managedObjectContext = self.managedObjectContext;
     
         //UPDATE: Taken out
         //Love Magical Record! Thank you Ray W. http://www.raywenderlich.com/56879/magicalrecord-tutorial-ios
@@ -111,10 +110,8 @@
     if (_managedObjectModel != nil) {
         return _managedObjectModel;
     }
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"HisMovies" withExtension:@"momd"]; //???HisMovies
-//    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+    NSURL *modelURL     = [[NSBundle mainBundle] URLForResource:@"Librarius" withExtension:@"momd"];
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
-//    _managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
     return _managedObjectModel;
 }
 
@@ -127,16 +124,16 @@
         // Create the coordinator and store (if there was none before)
     
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"HisMovies.sqlite"];
-    NSError *error = nil;
-    NSString *failureReason = @"There was an error creating or loading the application's saved data.";
+    NSURL *storeURL             = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Librarius.sqlite"];
+    NSError *error              = nil;
+    NSString *failureReason     = @"There was an error creating or loading the application's saved data.";
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
             // Report any error we got.
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        dict[NSLocalizedDescriptionKey] = @"Failed to initialize the application's saved data";
+        NSMutableDictionary *dict              = [NSMutableDictionary dictionary];
+        dict[NSLocalizedDescriptionKey]        = @"Failed to initialize the application's saved data";
         dict[NSLocalizedFailureReasonErrorKey] = failureReason;
-        dict[NSUnderlyingErrorKey] = error;
-        error = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:9999 userInfo:dict];
+        dict[NSUnderlyingErrorKey]             = error;
+        error                                  = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:9999 userInfo:dict];
             //Replace this with code to handle the error appropriately.
             //abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
