@@ -12,6 +12,7 @@
 #import "LBRGoogleSignInViewController.h"
 #import <GoogleSignIn.h>
 #import "LBRConstants.h"
+#import <GIDSignInButton.h>
 
 //#import <UIButton+AFNetworking.h>
 
@@ -25,11 +26,30 @@ static NSString * const signInToTabBarSegueID = @"signInToTabBarSegueID";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+#pragma mark - GoogleSignIn
+    NSError* configureError = nil;
+    [[GGLContext sharedInstance] configureWithError:&configureError];
+    NSAssert(!configureError, @"Error configuring Google services: %@", configureError.localizedDescription);
+
+//    ================
+//    GIDSignIn
+//    ================
     GIDSignIn *signInManager = [GIDSignIn sharedInstance];
-        //TODO(developer) Configure the sign-in button look/feel
+    
+    signInManager.scopes = @[@"https://accounts.google.com/o/oauth2/auth"];
+    signInManager.shouldFetchBasicProfile = YES;
+    signInManager.delegate = self;
     signInManager.uiDelegate = self;
-NSLog(@"manager's clientID = %@", signInManager.clientID);
     signInManager.clientID = GOOGLE_CLIENT_ID;
+    
+//  ================
+//  GIDSignInButton
+//  ================
+//    self.signInButton.style = kGIDSignInButtonStyleWide;
+//    self.signInButton.delegate = self;
+//    [self.view addSubview:self.signInButton];
+    
     
 NSLog(@"BEFORE signInSilently, does%@ have Authentication stored in Keychain.", [[GIDSignIn sharedInstance] hasAuthInKeychain]? @"" : @" NOT");
         // Uncomment to automatically sign in the user.
@@ -39,6 +59,27 @@ NSLog(@"AFTER signInSilently, does%@ have Authentication stored in Keychain.", [
     
     
 }
+
+#pragma mark GoogleSignIn methods
+
+-(void)signIn:(GIDSignIn *)signIn didSignInForUser:(GIDGoogleUser *)user withError:(NSError *)error {
+        //Perform any operations on signed in user here.
+        //???Probably not needed...
+    if (error == nil) {
+        NSString *userId  = user.userID;// For client-side use only!
+        NSString *idToken = user.authentication.idToken;// Safe to send to the server
+        NSString *name    = user.profile.name;
+        NSString *email   = user.profile.email;
+        // ...
+        [self performSegueWithIdentifier:signInToTabBarSegueID sender:nil];
+    }
+}
+
+-(void)signIn:(GIDSignIn *)signIn didDisconnectWithUser:(GIDGoogleUser *)user withError:(NSError *)error {
+        // Perform any operations when the user disconnects from app, here.
+        // ...
+}
+
 
 
 

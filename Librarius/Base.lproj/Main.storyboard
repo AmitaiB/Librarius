@@ -229,57 +229,44 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uYj-iL-Xtc" userLabel="Google+ signin auth">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="aqT-Jg-gxh"/>
-                                    <constraint firstAttribute="height" constant="50" id="geF-F8-Cxt"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <state key="normal" title="Google+ SignIn">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="aqT-Jg-gxh"/>
-                                        <exclude reference="geF-F8-Cxt"/>
-                                    </mask>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ddv-fa-rO1" customClass="GIDSignInButton">
+                                <rect key="frame" x="40" y="129" width="261" height="49"/>
+                                <color key="backgroundColor" red="0.57647058819999997" green="0.18039215689999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="60" y="199" width="261" height="49"/>
                                 </variation>
-                                <variation key="widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="aqT-Jg-gxh"/>
-                                        <include reference="geF-F8-Cxt"/>
-                                    </mask>
-                                </variation>
-                            </button>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <accessibility key="accessibilityConfiguration">
+                            <accessibilityTraits key="traits" none="YES" button="YES"/>
+                        </accessibility>
                         <constraints>
-                            <constraint firstItem="uYj-iL-Xtc" firstAttribute="centerY" secondItem="6Kj-Sv-toF" secondAttribute="centerY" id="nc4-Ap-h0p"/>
-                            <constraint firstItem="uYj-iL-Xtc" firstAttribute="centerX" secondItem="6Kj-Sv-toF" secondAttribute="centerX" id="ufG-w7-bef"/>
+                            <constraint firstAttribute="centerX" secondItem="ddv-fa-rO1" secondAttribute="centerX" constant="9.5" id="0rG-pP-aXQ"/>
+                            <constraint firstAttribute="centerY" secondItem="ddv-fa-rO1" secondAttribute="centerY" constant="76.5" id="OVz-ey-9HG"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="uYj-iL-Xtc"/>
+                                <exclude reference="ddv-fa-rO1"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="nc4-Ap-h0p"/>
-                                <exclude reference="ufG-w7-bef"/>
+                                <exclude reference="0rG-pP-aXQ"/>
+                                <exclude reference="OVz-ey-9HG"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
-                                <include reference="uYj-iL-Xtc"/>
+                                <include reference="ddv-fa-rO1"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="nc4-Ap-h0p"/>
-                                <include reference="ufG-w7-bef"/>
+                                <include reference="0rG-pP-aXQ"/>
+                                <include reference="OVz-ey-9HG"/>
                             </mask>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="Jb3-eR-eEt"/>
                     <connections>
-                        <outlet property="signInButton" destination="uYj-iL-Xtc" id="Flc-3U-WWE"/>
+                        <outlet property="signInButton" destination="ddv-fa-rO1" id="a9S-bN-juS"/>
                         <segue destination="49e-Tb-3d3" kind="show" identifier="signInToTabBarSegueID" id="tNZ-Pq-Hhc"/>
                     </connections>
                 </viewController>
