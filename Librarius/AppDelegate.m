@@ -23,9 +23,13 @@
 #pragma mark - CoreData
         //Love Magical Record! Thank you Ray W. http://www.raywenderlich.com/56879/magicalrecord-tutorial-ios
     [MagicalRecord setupCoreDataStack];
-        //What is this? ↓
-    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-    MasterViewController *controller = (MasterViewController *)navigationController.topViewController;
+    
+
+    
+        //What is this? ↓ Why did I need those references...?
+
+//    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
+//    MasterViewController *controller = (MasterViewController *)navigationController.topViewController;
 //    controller.managedObjectContext = self.managedObjectContext;
     
     
