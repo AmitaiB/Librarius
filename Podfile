@@ -7,6 +7,9 @@ pod 'AFOAuth2Manager'
 pod 'Google/SignIn'
 pod 'MTBBarcodeScanner'
 
+pod 'MagicalRecord', '~> 2.3'
+
+
 pod 'XNGOAuth1Client', '~> 2.0'
 end
 
