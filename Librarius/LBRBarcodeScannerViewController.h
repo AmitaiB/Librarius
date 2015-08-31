@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LBRBarcodeScannerViewController : UIViewController
+@interface LBRBarcodeScannerViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 
 @end

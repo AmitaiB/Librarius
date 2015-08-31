@@ -158,29 +158,13 @@
                                 <state key="normal" title="Start Scanning">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="16" y="513" width="368" height="30"/>
+                                </variation>
                                 <connections>
-                                    <action selector="startScanningButtonTapped:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="qFv-3L-9kw"/>
+                                    <action selector="toggleScanningButtonTapped:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="5gb-wa-5cA"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Barcode Display" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3nS-F8-mtm">
-                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="255" id="cpG-dr-Rwz"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="cpG-dr-Rwz"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="cpG-dr-Rwz"/>
-                                    </mask>
-                                </variation>
-                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="whR-df-RYp" userLabel="Scanner View">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
@@ -248,7 +232,8 @@
                                         <exclude reference="uSC-3H-Zf8"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact">
+                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="16" y="72" width="368" height="386"/>
                                     <mask key="subviews">
                                         <include reference="dw9-VQ-cBw"/>
                                         <include reference="GDB-vK-ZBH"/>
@@ -262,47 +247,43 @@
                                     </mask>
                                 </variation>
                             </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Vb7-tn-LvT">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="separatorColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="16" y="462" width="368" height="43"/>
+                                </variation>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="IOe-eD-XQW" firstAttribute="top" secondItem="3nS-F8-mtm" secondAttribute="bottom" constant="8" symbolic="YES" id="16E-TE-CkT"/>
-                            <constraint firstItem="3nS-F8-mtm" firstAttribute="top" secondItem="whR-df-RYp" secondAttribute="bottom" constant="27" id="1Ng-Uh-P0p"/>
                             <constraint firstItem="dcH-IU-Ezd" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="353" id="6W9-eD-NWO"/>
                             <constraint firstAttribute="trailing" secondItem="gMM-L9-IT3" secondAttribute="trailing" id="CTM-gH-BfC"/>
                             <constraint firstItem="gMM-L9-IT3" firstAttribute="centerX" secondItem="whR-df-RYp" secondAttribute="centerX" id="M5w-7e-CcL"/>
                             <constraint firstItem="gMM-L9-IT3" firstAttribute="bottom" secondItem="L7p-HK-0SC" secondAttribute="bottom" id="MMU-i1-9We"/>
-                            <constraint firstItem="whR-df-RYp" firstAttribute="leading" secondItem="3nS-F8-mtm" secondAttribute="leading" id="PPe-z0-GV7"/>
                             <constraint firstItem="IOe-eD-XQW" firstAttribute="trailing" secondItem="dcH-IU-Ezd" secondAttribute="trailing" id="UPQ-l8-cJZ"/>
                             <constraint firstItem="whR-df-RYp" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" id="WoS-r8-LDf"/>
                             <constraint firstItem="dcH-IU-Ezd" firstAttribute="trailing" secondItem="whR-df-RYp" secondAttribute="trailing" id="ba4-yw-cKa"/>
                             <constraint firstItem="whR-df-RYp" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="8" symbolic="YES" id="bmB-oR-yR6"/>
-                            <constraint firstItem="Djb-ko-YwX" firstAttribute="top" secondItem="3nS-F8-mtm" secondAttribute="bottom" constant="46" id="h3L-Wm-FR5"/>
-                            <constraint firstItem="3nS-F8-mtm" firstAttribute="top" secondItem="dcH-IU-Ezd" secondAttribute="bottom" constant="2" id="jHR-6P-duQ"/>
                             <constraint firstItem="gMM-L9-IT3" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leading" id="k3E-1F-jfl"/>
-                            <constraint firstItem="IOe-eD-XQW" firstAttribute="leading" secondItem="3nS-F8-mtm" secondAttribute="leading" id="ncv-tb-ggq"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="dcH-IU-Ezd"/>
                                 <exclude reference="gMM-L9-IT3"/>
                                 <exclude reference="IOe-eD-XQW"/>
-                                <exclude reference="3nS-F8-mtm"/>
                                 <exclude reference="whR-df-RYp"/>
+                                <exclude reference="Vb7-tn-LvT"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="1Ng-Uh-P0p"/>
-                                <exclude reference="jHR-6P-duQ"/>
-                                <exclude reference="h3L-Wm-FR5"/>
-                                <exclude reference="16E-TE-CkT"/>
                                 <exclude reference="UPQ-l8-cJZ"/>
-                                <exclude reference="ncv-tb-ggq"/>
                                 <exclude reference="6W9-eD-NWO"/>
                                 <exclude reference="ba4-yw-cKa"/>
                                 <exclude reference="CTM-gH-BfC"/>
                                 <exclude reference="M5w-7e-CcL"/>
                                 <exclude reference="MMU-i1-9We"/>
                                 <exclude reference="k3E-1F-jfl"/>
-                                <exclude reference="PPe-z0-GV7"/>
                                 <exclude reference="WoS-r8-LDf"/>
                                 <exclude reference="bmB-oR-yR6"/>
                             </mask>
@@ -312,23 +293,17 @@
                                 <include reference="dcH-IU-Ezd"/>
                                 <include reference="gMM-L9-IT3"/>
                                 <include reference="IOe-eD-XQW"/>
-                                <include reference="3nS-F8-mtm"/>
                                 <include reference="whR-df-RYp"/>
+                                <include reference="Vb7-tn-LvT"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="1Ng-Uh-P0p"/>
-                                <include reference="jHR-6P-duQ"/>
-                                <include reference="h3L-Wm-FR5"/>
-                                <include reference="16E-TE-CkT"/>
                                 <include reference="UPQ-l8-cJZ"/>
-                                <include reference="ncv-tb-ggq"/>
                                 <include reference="6W9-eD-NWO"/>
                                 <include reference="ba4-yw-cKa"/>
                                 <include reference="CTM-gH-BfC"/>
                                 <include reference="M5w-7e-CcL"/>
                                 <include reference="MMU-i1-9We"/>
                                 <include reference="k3E-1F-jfl"/>
-                                <include reference="PPe-z0-GV7"/>
                                 <include reference="WoS-r8-LDf"/>
                                 <include reference="bmB-oR-yR6"/>
                             </mask>
@@ -336,9 +311,9 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Scan" image="scanTarget" id="cPa-gy-q4n"/>
                     <connections>
-                        <outlet property="barcodeDisplayLabel" destination="3nS-F8-mtm" id="zFm-yd-1XI"/>
                         <outlet property="scannerView" destination="whR-df-RYp" id="dtk-XK-fJV"/>
                         <outlet property="startScanningButton" destination="IOe-eD-XQW" id="gPW-tl-JCK"/>
+                        <outlet property="uniqueBarcodesTableView" destination="Vb7-tn-LvT" id="AyA-3j-6qy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
