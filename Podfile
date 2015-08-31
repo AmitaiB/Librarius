@@ -9,7 +9,7 @@ pod 'MTBBarcodeScanner'
 
 #pod 'MagicalRecord', '~> 2.3'
 pod 'AMRatingControl'
-
+pod 'Google-API-Client'
 
 
 pod 'XNGOAuth1Client', '~> 2.0'
