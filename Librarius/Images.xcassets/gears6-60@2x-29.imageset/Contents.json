@@ -2,18 +2,16 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "gears6-40.png"
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "gears6-60@2x.png"
+      "filename" : "gears6-60@2x-29@2x.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "gears6.png"
+      "scale" : "3x"
     }
   ],
   "info" : {

@@ -97,11 +97,11 @@
                             <outlet property="delegate" destination="oJK-od-ZUi" id="moH-2E-Fah"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Settings" image="gears6" id="UR5-ty-ind"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="gears6-60@2x-29" id="UR5-ty-ind"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LFc-2g-zxb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="918" y="749"/>
+            <point key="canvasLocation" x="949.5" y="703"/>
         </scene>
         <!--Shelve-->
         <scene sceneID="gtg-I3-sQB">
@@ -154,18 +154,12 @@
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="20" width="400" height="44"/>
-                                </variation>
                             </navigationBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcH-IU-Ezd">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <state key="normal" title="Scan One n'Done">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="263" y="417" width="121" height="59"/>
-                                </variation>
                                 <connections>
                                     <action selector="scanOneButtonTapped:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="JRE-9f-5aP"/>
                                 </connections>
@@ -300,7 +294,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="918" y="0.0"/>
+            <point key="canvasLocation" x="949.5" y="0.0"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6CS-T3-RTh">
@@ -323,7 +317,7 @@
     </scenes>
     <resources>
         <image name="books49" width="32" height="32"/>
-        <image name="gears6" width="40" height="40"/>
+        <image name="gears6-60@2x-29" width="29" height="29"/>
         <image name="scanTarget" width="32" height="32"/>
         <image name="search1" width="32" height="32"/>
     </resources>
