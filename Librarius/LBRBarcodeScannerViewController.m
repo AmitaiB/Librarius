@@ -5,13 +5,15 @@
 //  Created by Amitai Blickstein on 8/23/15.
 //  Copyright (c) 2015 Amitai Blickstein, LLC. All rights reserved.
 //
+#define DBLG NSLog(@"%@ reporting!", NSStringFromSelector(_cmd));
 
 #import "LBRBarcodeScannerViewController.h"
 #import <MTBBarcodeScanner.h>
 
 @interface LBRBarcodeScannerViewController ()
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 - (IBAction)scanOneButtonTapped:(id)sender;
-- (IBAction)scanContinuouslyButtonTapped:(id)sender;
+- (IBAction)startScanningButtonTapped:(id)sender;
 - (IBAction)cameraButtonTapped:(id)sender;
 
 @end
@@ -50,7 +52,7 @@
     
 }
 
-- (IBAction)scanContinuouslyButtonTapped:(id)sender {
+- (IBAction)startScanningButtonTapped:(id)sender {
     NSMutableArray *uniqueCodes = [NSMutableArray new];
     [scanner startScanningWithResultBlock:^(NSArray *codes) {
         for (AVMetadataMachineReadableCodeObject *code in codes) {

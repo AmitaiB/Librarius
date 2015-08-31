@@ -10,4 +10,14 @@
 
 @implementation LBRDataManager
 
++ (instancetype)sharedDataManager {
+    static LBRDataManager *_sharedDataManager = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _sharedDataManager = [self new];
+    });
+    
+    return _sharedDataManager;
+}
+
 @end

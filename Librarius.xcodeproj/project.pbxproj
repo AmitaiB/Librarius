@@ -26,6 +26,7 @@
 		380375841B8CD49C004C4ECE /* LBRVolume.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375831B8CD49C004C4ECE /* LBRVolume.m */; };
 		380375F71B8D4E90004C4ECE /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375F41B8D4E90004C4ECE /* MasterViewController.m */; };
 		380375F81B8D4E90004C4ECE /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375F61B8D4E90004C4ECE /* DetailViewController.m */; };
+		38466D281B94F24400DD252E /* LBRGoogleGTLClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 38466D271B94F24400DD252E /* LBRGoogleGTLClient.m */; };
 		3851DBFD1B8E2E5A00E90B9F /* LBRDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3851DBFC1B8E2E5A00E90B9F /* LBRDataManager.m */; };
 		38AAD6EA1B90107F003062C1 /* libMagicalRecord.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38AAD6E91B90107F003062C1 /* libMagicalRecord.a */; };
 		38AAD6F01B901175003062C1 /* Librarius.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 38AAD6EE1B901175003062C1 /* Librarius.xcdatamodeld */; };
@@ -80,6 +81,8 @@
 		380375F41B8D4E90004C4ECE /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 		380375F51B8D4E90004C4ECE /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		380375F61B8D4E90004C4ECE /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		38466D261B94F24400DD252E /* LBRGoogleGTLClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRGoogleGTLClient.h; sourceTree = "<group>"; };
+		38466D271B94F24400DD252E /* LBRGoogleGTLClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRGoogleGTLClient.m; sourceTree = "<group>"; };
 		3851DBFB1B8E2E5A00E90B9F /* LBRDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRDataManager.h; sourceTree = "<group>"; };
 		3851DBFC1B8E2E5A00E90B9F /* LBRDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRDataManager.m; sourceTree = "<group>"; };
 		38AAD6E91B90107F003062C1 /* libMagicalRecord.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMagicalRecord.a; path = "Pods/../build/Debug-iphoneos/libMagicalRecord.a"; sourceTree = "<group>"; };
@@ -150,14 +153,16 @@
 		3803752E1B8AC9A8004C4ECE /* Librarius */ = {
 			isa = PBXGroup;
 			children = (
+				38466D5C1B94FDDF00DD252E /* Cutting Floor */,
+				38466D5B1B94FDD400DD252E /* Not Yet Implemented */,
 				38AAD7241B90A1AC003062C1 /* Librarius.entitlements */,
 				380375331B8AC9A8004C4ECE /* AppDelegate.h */,
 				380375341B8AC9A8004C4ECE /* AppDelegate.m */,
 				3803753C1B8AC9A8004C4ECE /* Main.storyboard */,
 				3803755F1B8BB6C3004C4ECE /* DataPortation */,
 				380375581B8B9F11004C4ECE /* Models */,
-				380375641B8BB71D004C4ECE /* Controllers */,
-				380375631B8BB711004C4ECE /* Views */,
+				380375641B8BB71D004C4ECE /* (View)Controllers */,
+				380375631B8BB711004C4ECE /* Views/Images/nibs */,
 				3803752F1B8AC9A8004C4ECE /* Supporting Files */,
 			);
 			path = Librarius;
@@ -212,10 +217,10 @@
 		3803755F1B8BB6C3004C4ECE /* DataPortation */ = {
 			isa = PBXGroup;
 			children = (
-				380375601B8BB707004C4ECE /* LBRGoodReadsAPIClient.h */,
-				380375611B8BB707004C4ECE /* LBRGoodReadsAPIClient.m */,
 				380375651B8BC758004C4ECE /* LBRGoogleAPIClient.h */,
 				380375661B8BC758004C4ECE /* LBRGoogleAPIClient.m */,
+				38466D261B94F24400DD252E /* LBRGoogleGTLClient.h */,
+				38466D271B94F24400DD252E /* LBRGoogleGTLClient.m */,
 				3851DBFB1B8E2E5A00E90B9F /* LBRDataManager.h */,
 				3851DBFC1B8E2E5A00E90B9F /* LBRDataManager.m */,
 				38AAD6EE1B901175003062C1 /* Librarius.xcdatamodeld */,
@@ -223,16 +228,16 @@
 			name = DataPortation;
 			sourceTree = "<group>";
 		};
-		380375631B8BB711004C4ECE /* Views */ = {
+		380375631B8BB711004C4ECE /* Views/Images/nibs */ = {
 			isa = PBXGroup;
 			children = (
 				3803753F1B8AC9A8004C4ECE /* Images.xcassets */,
 				380375411B8AC9A8004C4ECE /* LaunchScreen.xib */,
 			);
-			name = Views;
+			name = Views/Images/nibs;
 			sourceTree = "<group>";
 		};
-		380375641B8BB71D004C4ECE /* Controllers */ = {
+		380375641B8BB71D004C4ECE /* (View)Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				380375361B8AC9A8004C4ECE /* API_TestViewController.h */,
@@ -243,20 +248,28 @@
 				380375791B8C08E0004C4ECE /* LBRSettingsTableViewController.m */,
 				380375681B8BC89D004C4ECE /* LBRGoogleSignInViewController.h */,
 				380375691B8BC89D004C4ECE /* LBRGoogleSignInViewController.m */,
-				380375F21B8D4E76004C4ECE /* Core Data Controllers */,
-			);
-			name = Controllers;
-			sourceTree = "<group>";
-		};
-		380375F21B8D4E76004C4ECE /* Core Data Controllers */ = {
-			isa = PBXGroup;
-			children = (
 				380375F31B8D4E90004C4ECE /* MasterViewController.h */,
 				380375F41B8D4E90004C4ECE /* MasterViewController.m */,
 				380375F51B8D4E90004C4ECE /* DetailViewController.h */,
 				380375F61B8D4E90004C4ECE /* DetailViewController.m */,
 			);
-			name = "Core Data Controllers";
+			name = "(View)Controllers";
+			sourceTree = "<group>";
+		};
+		38466D5B1B94FDD400DD252E /* Not Yet Implemented */ = {
+			isa = PBXGroup;
+			children = (
+				380375601B8BB707004C4ECE /* LBRGoodReadsAPIClient.h */,
+				380375611B8BB707004C4ECE /* LBRGoodReadsAPIClient.m */,
+			);
+			name = "Not Yet Implemented";
+			sourceTree = "<group>";
+		};
+		38466D5C1B94FDDF00DD252E /* Cutting Floor */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Cutting Floor";
 			sourceTree = "<group>";
 		};
 		8D3D60166B48602A9D5DE1B9 /* Frameworks */ = {
@@ -421,6 +434,7 @@
 				3851DBFD1B8E2E5A00E90B9F /* LBRDataManager.m in Sources */,
 				380375841B8CD49C004C4ECE /* LBRVolume.m in Sources */,
 				38AAD6F01B901175003062C1 /* Librarius.xcdatamodeld in Sources */,
+				38466D281B94F24400DD252E /* LBRGoogleGTLClient.m in Sources */,
 				380375621B8BB707004C4ECE /* LBRGoodReadsAPIClient.m in Sources */,
 				380375321B8AC9A8004C4ECE /* main.m in Sources */,
 				38AAD71D1B901D35003062C1 /* Volume.m in Sources */,

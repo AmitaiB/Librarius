@@ -11,6 +11,6 @@
 
 @interface LBRDataManager : NSObject
 
-+(instancetype)sharedManager;
++(instancetype)sharedDataManager;
 
 @end
