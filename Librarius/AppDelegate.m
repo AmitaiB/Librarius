@@ -10,6 +10,7 @@
 #import <GoogleSignIn.h>
 #import "DetailViewController.h"
 #import "MasterViewController.h"
+#import "LBRDataStore.h"
 
 @interface AppDelegate ()
 
@@ -19,15 +20,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
         // Override point for customization after application launch.
-#pragma mark - CoreData
+
         //What is this? ↓ Why did I need those references...?
 //    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
 //    MasterViewController *controller = (MasterViewController *)navigationController.topViewController;
 //    controller.managedObjectContext = self.managedObjectContext;
     
-        //UPDATE: Taken out: Magical Record...
-        //Love Magical Record! Thank you Ray W. http://www.raywenderlich.com/56879/magicalrecord-tutorial-ios
-        //    [MagicalRecord setupCoreDataStack];
     
 //#pragma mark - GoogleSignIn
 //    NSError* configureError = nil;
@@ -75,92 +73,8 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 //    [MagicalRecord cleanUp];
-    [self saveContext];
+    LBRDataStore *dataStore = [LBRDataStore sharedDataStore];
+    [dataStore saveContext];
 }
-
-#pragma mark - Core Data stack
-
-@synthesize managedObjectContext       = _managedObjectContext;
-@synthesize managedObjectModel         = _managedObjectModel;
-@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
-
--(NSURL *)applicationDocumentsDirectory {
-        // The directory the application uses to store the Core Data store file. This code uses a directory named "com.objective-v.HisMovies"(???) in the application's documents directory.
-    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-}
-/**
- *  This overridden getter for the managed object model for the application is standard boilerplate. It is a fatal error for the application not to be able to find and load its model, so if _managedObjectModel is nil, a new one is created.
- *
- *  @return _managedObjectModel
- */
--(NSManagedObjectModel *)managedObjectModel {
-    if (_managedObjectModel != nil) {
-        return _managedObjectModel;
-    }
-    NSURL *modelURL     = [[NSBundle mainBundle] URLForResource:@"Librarius" withExtension:@"momd"];
-    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
-    return _managedObjectModel;
-}
-
--(NSPersistentStoreCoordinator *)persistentStoreCoordinator {
-        // The persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it.
-    if (_persistentStoreCoordinator != nil) {
-        return _persistentStoreCoordinator;
-    }
-    
-        // Create the coordinator and store (if there was none before)
-    
-    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    NSURL *storeURL             = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Librarius.sqlite"];
-    NSError *error              = nil;
-    NSString *failureReason     = @"There was an error creating or loading the application's saved data.";
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
-            // Report any error we got.
-        NSMutableDictionary *dict              = [NSMutableDictionary dictionary];
-        dict[NSLocalizedDescriptionKey]        = @"Failed to initialize the application's saved data";
-        dict[NSLocalizedFailureReasonErrorKey] = failureReason;
-        dict[NSUnderlyingErrorKey]             = error;
-        error                                  = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:9999 userInfo:dict];
-            //Replace this with code to handle the error appropriately.
-            //abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
-    return _persistentStoreCoordinator;
-}
-
--(NSManagedObjectContext *)managedObjectContext {
-        //Returns the managed object context for the application (which is already bound to the persisstent store coordinator for the application.)
-    if (_managedObjectContext != nil) {
-        return _managedObjectContext;
-    }
-    
-    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    if (!coordinator) {
-        return nil;
-    }
-    /**
-     Changed the template's `init` → `initWi..Co..Type` since this app is basic with relatively small data requirements. ("Everything on the main queue" == "Must be performed in blocks".) May want to change if performance becomes an issue.
-     */
-    _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    [_managedObjectContext setPersistentStoreCoordinator:coordinator];
-    return  _managedObjectContext;
-}
-
-#pragma mark - Core Data Saving Support
-
--(void)saveContext {
-    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
-    if (managedObjectContext != nil) {
-        NSError *error = nil;
-        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-                // Replace this impl with code to handle the error appropriately.
-                // abort() causes the application to general a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
-        }
-    }
-}
-
 
 @end

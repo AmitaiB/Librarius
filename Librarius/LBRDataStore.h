@@ -11,6 +11,8 @@
 @interface LBRDataStore : NSObject
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong) NSManagedObjectModel *managedObjectModel;
+@property (nonatomic, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
     //Other properties to store and fetch, e.g., NSArray *messages...
 
 + (instancetype) sharedDataStore;
