@@ -150,7 +150,8 @@ static NSString * const volumeNib = @"volumePresentationView";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:barcodeCellReuseID forIndexPath:indexPath];
-    cell.textLabel.text = [NSString stringWithFormat:@"#%lu⎞ %@", indexPath.row + 1, self.dataManager.uniqueCodes[indexPath.row]];
+    cell.textLabel.text = self.dataManager.uniqueCodes[indexPath.row];
+        //a pair with line 193:    cell.textLabel.text = [NSString stringWithFormat:@"#%lu⎞ %@", indexPath.row + 1, self.dataManager.uniqueCodes[indexPath.row]];
     return cell;
 }
 
@@ -182,14 +183,16 @@ static NSString * const volumeNib = @"volumePresentationView";
 
 -(void)getVolumesFromBarcodeData {
     
-    /**
+    /**TODO: loop for all barcodes on the list. Loop, just increment the indexPath.row.
      *  First, we test one barcode...
      */
+    GTLQueryBooks *barcodeQuery = [GTLQueryBooks queryForVolumesListWithQ:@""];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     UITableViewCell *cell  = [self.uniqueBarcodesTableView cellForRowAtIndexPath:indexPath];
-    NSString *scannedISBN  = [cell.textLabel.text stringByReplacingCharactersInRange:NSMakeRange(0, 4) withString:@""];
+    NSString *ISBNforCell  = cell.textLabel.text;
+        //a pair with line 154:    NSString *ISBNforCell  = [cell.textLabel.text stringByReplacingCharactersInRange:NSMakeRange(0, 4) withString:@""];
+    barcodeQuery.q = ISBNforCell;
     
-    GTLQueryBooks *barcodeQuery      = [GTLQueryBooks queryForVolumesListWithQ:scannedISBN];
         // The Books API currently requires that search queries not have an
         // authorization header (b/4445456)
     barcodeQuery.shouldSkipAuthorization = YES;
