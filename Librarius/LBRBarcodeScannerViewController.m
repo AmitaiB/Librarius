@@ -11,6 +11,8 @@
 #import <MTBBarcodeScanner.h>
 #import "LBRDataManager.h"
 #import "LBRGoogleGTLClient.h"
+#import <SCLAlertView.h>
+
 
 @interface LBRBarcodeScannerViewController ()
 //- (IBAction)scanOneButtonTapped:(id)sender;
@@ -36,6 +38,7 @@
 #pragma mark - Constant Strings
 
 static NSString * const barcodeCellReuseID = @"barcodeCellReuseID";
+static NSString * const volumeNib = @"volumePresentationView";
 
 
 #pragma mark - Lifecycle
@@ -158,6 +161,7 @@ static NSString * const barcodeCellReuseID = @"barcodeCellReuseID";
         // The Books API currently requires that search queries not have an
         // authorization header (b/4445456)
     barcodeQuery.shouldSkipAuthorization = YES;
+    
         //Experimental - the format was taken from the web docs: https://developers.google.com/books/docs/v1/reference/volumes/list?hl=en
         // BTW, this limits the response to the information we desire, saving on system resources.
     barcodeQuery.fields = @"items(id, volumeInfo)";
@@ -182,7 +186,16 @@ static NSString * const barcodeCellReuseID = @"barcodeCellReuseID";
  */
 -(void)confirmBookSelection:(GTLBooksVolumes*)volumesMatchingQuery {
     DBLG
+
+    /**
+     *  !!!Experimental
+     */
+    UINib *displayVolumesNib = [UINib nibWithNibName:volumeNib bundle:nil];
+    NSArray *topLevelObjects = [displayVolumesNib instantiateWithOwner:nil options:nil];
     
+    for (UIView *view in topLevelObjects) {
+        [self.view addSubview:view];
+    }
 }
 
 
