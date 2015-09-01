@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#import "LBRDataStore.h"
 
-@interface MasterViewController : UITableViewController <NSFetchedResultsControllerDelegate>
+
+@interface MasterViewController : UITableViewController <NSFetchedResultsControllerDelegate, NSFetchedResultsSectionInfo>
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-
+@property (nonatomic, strong) LBRDataStore *dataStore;
 
 @end
 
