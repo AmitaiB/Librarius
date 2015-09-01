@@ -181,7 +181,7 @@
                                             <action selector="cameraButtonTapped:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="z8V-a9-0jQ"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcH-IU-Ezd">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcH-IU-Ezd" userLabel="confirm barcode Button">
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                         <color key="backgroundColor" red="0.12156862745098039" green="0.69411764705882351" blue="0.54117647058823526" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal">
@@ -192,7 +192,6 @@
                                         </variation>
                                         <connections>
                                             <action selector="confirmChoicesButtonTapped:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="wlQ-L2-aGS"/>
-                                            <action selector="scanOneButtonTapped:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="JRE-9f-5aP"/>
                                         </connections>
                                     </button>
                                 </subviews>

@@ -29,6 +29,7 @@
             // Initialize a service
         self.service = [GTLServiceBooks new];
         self.service.APIKey = GOOGLE_APP_KEY;
+        self.service.retryEnabled = YES;
     }
     return self;
 }

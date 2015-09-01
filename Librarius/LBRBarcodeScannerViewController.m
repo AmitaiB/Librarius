@@ -151,20 +151,40 @@ static NSString * const barcodeCellReuseID = @"barcodeCellReuseID";
      *  First, we test one barcode...
      */
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    UITableViewCell *cell = [self.uniqueBarcodesTableView cellForRowAtIndexPath:indexPath];
-    NSString *scannedISBN = cell.textLabel.text;
+    UITableViewCell *cell  = [self.uniqueBarcodesTableView cellForRowAtIndexPath:indexPath];
+    NSString *scannedISBN  = [cell.textLabel.text stringByReplacingCharactersInRange:NSMakeRange(0, 4) withString:@""];
     
+    GTLQueryBooks *barcodeQuery      = [GTLQueryBooks queryForVolumesListWithQ:scannedISBN];
+        // The Books API currently requires that search queries not have an
+        // authorization header (b/4445456)
+    barcodeQuery.shouldSkipAuthorization = YES;
+        //Experimental - the format was taken from the web docs: https://developers.google.com/books/docs/v1/reference/volumes/list?hl=en
+        // BTW, this limits the response to the information we desire, saving on system resources.
+    barcodeQuery.fields = @"items(id, volumeInfo)";
     LBRGoogleGTLClient *googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
-    GTLQueryBooks *barcodeQuery = [GTLQueryBooks queryForVolumesListWithQ:scannedISBN];
-    GTLServiceTicket *ticket = [googleClient.service executeQuery:barcodeQuery completionHandler:^(GTLServiceTicket *ticket, id object, NSError *error) {
+    GTLServiceTicket *ticket         = [googleClient.service executeQuery:barcodeQuery
+                                                        completionHandler:^(GTLServiceTicket *ticket, id object, NSError *error) {
         if (error) {
             NSLog(@"Error in barcodeQuery execution: %@", error.localizedDescription);
         } else {
-                //success!
+            [self confirmBookSelection:object];
         }
     }];
     
 }
+
+/**
+ * Given a collection of possible matches, which one matches the user's
+ * desired volume?
+ *
+ *  @param volumesMatchingQuery GTLBooksVolumes collection object, such
+ * as the one returned by a GTLQueryBooks fetch request.
+ */
+-(void)confirmBookSelection:(GTLBooksVolumes*)volumesMatchingQuery {
+    DBLG
+    
+}
+
 
 
 /*
