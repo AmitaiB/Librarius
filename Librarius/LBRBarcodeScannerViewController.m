@@ -16,6 +16,7 @@
 - (IBAction)toggleScanningButtonTapped:(id)sender;
 - (IBAction)cameraButtonTapped:(id)sender;
 @property (nonatomic) BOOL isScanning;
+@property (nonatomic) BOOL isNotScanning;
 @property (weak, nonatomic) IBOutlet UIView *scannerView;
 @property (weak, nonatomic) IBOutlet UIButton *startScanningButton;
 @property (weak, nonatomic) IBOutlet UITableView *uniqueBarcodesTableView;
@@ -64,29 +65,14 @@ static NSString * const barcodeCellReuseID = @"barcodeCellReuseID";
     [super viewWillDisappear:animated];
 }
 
-/*
-- (IBAction)scanOneButtonTapped:(id)sender {
-    [MTBBarcodeScanner requestCameraPermissionWithSuccess:^(BOOL success) {
-        if (success) {
-            [scanner startScanningWithResultBlock:^(NSArray *codes) {
-                AVMetadataMachineReadableCodeObject *code = [codes firstObject];
-                NSLog(@"Found barcode: %@", code.stringValue);
-                [self displayBarcode:code.stringValue];
-                [scanner stopScanning];
-            }];
-        } else {
-                //The user denied access to the camera
-            NSLog(@"The user denied access to the camera...?");
-        }
-    }];
-    
-    
-}
- */
-
 - (IBAction)toggleScanningButtonTapped:(id)sender {
-    if (self.isScanning) {[self stopScanning];}
-    else                {[self startScanning];}
+        // I like how it reads, don't you?
+    self.isNotScanning = !self.isScanning;
+    
+    if (self.isScanning) {
+        [self stopScanning];}
+    if (self.isNotScanning) {
+        [self startScanning];}
 }
 
 - (IBAction)cameraButtonTapped:(id)sender {
@@ -138,6 +124,7 @@ static NSString * const barcodeCellReuseID = @"barcodeCellReuseID";
     return cell;
 }
 
+#pragma mark
 
 -(void)scrollToBottomCell {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.dataManager.uniqueCodes.count - 1 inSection:0];
@@ -145,5 +132,25 @@ static NSString * const barcodeCellReuseID = @"barcodeCellReuseID";
                                         atScrollPosition:UITableViewScrollPositionTop
                                                 animated:YES];
 }
+
+/*
+ * This snippet will scan once, then stop.
+ 
+ - (IBAction)scanOneButtonTapped:(id)sender {
+ [MTBBarcodeScanner requestCameraPermissionWithSuccess:^(BOOL success) {
+ if (success) {
+ [scanner startScanningWithResultBlock:^(NSArray *codes) {
+ AVMetadataMachineReadableCodeObject *code = [codes firstObject];
+ NSLog(@"Found barcode: %@", code.stringValue);
+ [self displayBarcode:code.stringValue];
+ [scanner stopScanning];
+ }];
+ } else {
+ //The user denied access to the camera
+ NSLog(@"The user denied access to the camera...?");
+ }
+ }];
+ }
+ */
 
 @end
