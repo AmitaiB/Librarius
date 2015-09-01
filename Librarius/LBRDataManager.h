@@ -11,6 +11,9 @@
 
 @interface LBRDataManager : NSObject
 
+    // ScannerVC → GoogleAPI
+@property (nonatomic, strong) NSMutableArray *uniqueCodes;
+
 +(instancetype)sharedDataManager;
 
 @end

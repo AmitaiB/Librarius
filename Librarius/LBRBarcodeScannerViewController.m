@@ -9,17 +9,18 @@
 
 #import "LBRBarcodeScannerViewController.h"
 #import <MTBBarcodeScanner.h>
+#import "LBRDataManager.h"
 
 @interface LBRBarcodeScannerViewController ()
-- (IBAction)scanOneButtonTapped:(id)sender;
+//- (IBAction)scanOneButtonTapped:(id)sender;
 - (IBAction)toggleScanningButtonTapped:(id)sender;
 - (IBAction)cameraButtonTapped:(id)sender;
 @property (nonatomic) BOOL isScanning;
 @property (weak, nonatomic) IBOutlet UIView *scannerView;
 @property (weak, nonatomic) IBOutlet UIButton *startScanningButton;
 @property (weak, nonatomic) IBOutlet UITableView *uniqueBarcodesTableView;
-@property (nonatomic, strong) NSMutableArray *uniqueCodes;
 @property (nonatomic, strong) MTBBarcodeScanner *scanner;
+@property (nonatomic, strong) LBRDataManager *dataManager;
 
 
 @end
@@ -40,12 +41,13 @@ static NSString * const barcodeCellReuseID = @"barcodeCellReuseID";
 }
 
 -(void)initializeProgrammaticProperties {
+    self.dataManager = [LBRDataManager sharedDataManager];
     self.isScanning = NO;
     if (!self.scanner) {
         self.scanner = [[MTBBarcodeScanner alloc] initWithPreviewView:self.scannerView];
     }
-    if (!self.uniqueCodes) {
-        self.uniqueCodes = [NSMutableArray new];
+    if (!self.dataManager.uniqueCodes) {
+        self.dataManager.uniqueCodes = [NSMutableArray new];
     }
     
 }
@@ -112,7 +114,7 @@ static NSString * const barcodeCellReuseID = @"barcodeCellReuseID";
             if ([uniqueCodes indexOfObject:code.stringValue] == NSNotFound) {
                 [uniqueCodes addObject:code.stringValue];
                 NSLog(@"Found unique code: %@", code.stringValue);
-                [self.uniqueCodes addObject:code.stringValue];
+                [self.dataManager.uniqueCodes addObject:code.stringValue];
                 
 //                Update the tableview
                 [self.uniqueBarcodesTableView reloadData];
@@ -126,19 +128,19 @@ static NSString * const barcodeCellReuseID = @"barcodeCellReuseID";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.uniqueCodes.count;
+    return self.dataManager.uniqueCodes.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:barcodeCellReuseID forIndexPath:indexPath];
-    cell.textLabel.text = [NSString stringWithFormat:@"#%lu⎞ %@", indexPath.row + 1, self.uniqueCodes[indexPath.row]];
+    cell.textLabel.text = [NSString stringWithFormat:@"#%lu⎞ %@", indexPath.row + 1, self.dataManager.uniqueCodes[indexPath.row]];
     return cell;
 }
 
 
 -(void)scrollToBottomCell {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.uniqueCodes.count - 1 inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.dataManager.uniqueCodes.count - 1 inSection:0];
     [self.uniqueBarcodesTableView scrollToRowAtIndexPath:indexPath
                                         atScrollPosition:UITableViewScrollPositionTop
                                                 animated:YES];
