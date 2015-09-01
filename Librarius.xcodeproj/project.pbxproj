@@ -28,6 +28,7 @@
 		380375F81B8D4E90004C4ECE /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375F61B8D4E90004C4ECE /* DetailViewController.m */; };
 		38466D281B94F24400DD252E /* LBRGoogleGTLClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 38466D271B94F24400DD252E /* LBRGoogleGTLClient.m */; };
 		3851DBFD1B8E2E5A00E90B9F /* LBRDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3851DBFC1B8E2E5A00E90B9F /* LBRDataManager.m */; };
+		389C1F131B95E1150009C721 /* LBRDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 389C1F121B95E1150009C721 /* LBRDataStore.m */; };
 		38AAD6EA1B90107F003062C1 /* libMagicalRecord.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38AAD6E91B90107F003062C1 /* libMagicalRecord.a */; };
 		38AAD6F01B901175003062C1 /* Librarius.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 38AAD6EE1B901175003062C1 /* Librarius.xcdatamodeld */; };
 		38AAD71D1B901D35003062C1 /* Volume.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAD71C1B901D35003062C1 /* Volume.m */; };
@@ -85,6 +86,8 @@
 		38466D271B94F24400DD252E /* LBRGoogleGTLClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRGoogleGTLClient.m; sourceTree = "<group>"; };
 		3851DBFB1B8E2E5A00E90B9F /* LBRDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRDataManager.h; sourceTree = "<group>"; };
 		3851DBFC1B8E2E5A00E90B9F /* LBRDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRDataManager.m; sourceTree = "<group>"; };
+		389C1F111B95E1150009C721 /* LBRDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRDataStore.h; sourceTree = "<group>"; };
+		389C1F121B95E1150009C721 /* LBRDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRDataStore.m; sourceTree = "<group>"; };
 		38AAD6E91B90107F003062C1 /* libMagicalRecord.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMagicalRecord.a; path = "Pods/../build/Debug-iphoneos/libMagicalRecord.a"; sourceTree = "<group>"; };
 		38AAD6EF1B901175003062C1 /* Librarius.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Librarius.xcdatamodel; sourceTree = "<group>"; };
 		38AAD71B1B901D35003062C1 /* Volume.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Volume.h; sourceTree = "<group>"; };
@@ -153,17 +156,17 @@
 		3803752E1B8AC9A8004C4ECE /* Librarius */ = {
 			isa = PBXGroup;
 			children = (
-				38466D5C1B94FDDF00DD252E /* Cutting Floor */,
-				38466D5B1B94FDD400DD252E /* Not Yet Implemented */,
 				38AAD7241B90A1AC003062C1 /* Librarius.entitlements */,
 				380375331B8AC9A8004C4ECE /* AppDelegate.h */,
 				380375341B8AC9A8004C4ECE /* AppDelegate.m */,
 				3803753C1B8AC9A8004C4ECE /* Main.storyboard */,
-				3803755F1B8BB6C3004C4ECE /* DataPortation */,
+				3803755F1B8BB6C3004C4ECE /* Data */,
 				380375581B8B9F11004C4ECE /* Models */,
 				380375641B8BB71D004C4ECE /* (View)Controllers */,
 				380375631B8BB711004C4ECE /* Views/Images/nibs */,
 				3803752F1B8AC9A8004C4ECE /* Supporting Files */,
+				38466D5C1B94FDDF00DD252E /* Cutting Floor */,
+				38466D5B1B94FDD400DD252E /* Not Yet Implemented */,
 			);
 			path = Librarius;
 			sourceTree = "<group>";
@@ -214,7 +217,7 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
-		3803755F1B8BB6C3004C4ECE /* DataPortation */ = {
+		3803755F1B8BB6C3004C4ECE /* Data */ = {
 			isa = PBXGroup;
 			children = (
 				380375651B8BC758004C4ECE /* LBRGoogleAPIClient.h */,
@@ -224,8 +227,10 @@
 				3851DBFB1B8E2E5A00E90B9F /* LBRDataManager.h */,
 				3851DBFC1B8E2E5A00E90B9F /* LBRDataManager.m */,
 				38AAD6EE1B901175003062C1 /* Librarius.xcdatamodeld */,
+				389C1F111B95E1150009C721 /* LBRDataStore.h */,
+				389C1F121B95E1150009C721 /* LBRDataStore.m */,
 			);
-			name = DataPortation;
+			name = Data;
 			sourceTree = "<group>";
 		};
 		380375631B8BB711004C4ECE /* Views/Images/nibs */ = {
@@ -441,6 +446,7 @@
 				38AAD7231B901D36003062C1 /* Bookcase.m in Sources */,
 				380375F81B8D4E90004C4ECE /* DetailViewController.m in Sources */,
 				380375721B8BF058004C4ECE /* UIImage+FromURL.m in Sources */,
+				389C1F131B95E1150009C721 /* LBRDataStore.m in Sources */,
 				3803756A1B8BC89D004C4ECE /* LBRGoogleSignInViewController.m in Sources */,
 				3803755B1B8B9F5E004C4ECE /* LBRConstants.m in Sources */,
 				38AAD7201B901D36003062C1 /* Library.m in Sources */,
