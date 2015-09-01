@@ -13,6 +13,7 @@
 @interface LBRDataManager : NSObject
 
     // ScannerVC:GoogleBooksClient → VolumePresentationTVC
+@property (nonatomic, strong) NSMutableArray *uniqueCodes;
 @property (nonatomic, strong) GTLBooksVolumes *volumesToDisplay;
 @property (nonatomic, strong) GTLBooksVolume *volumeToPresent;
 

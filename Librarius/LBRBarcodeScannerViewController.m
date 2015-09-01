@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 #define DBLG NSLog(@"%@ reporting!", NSStringFromSelector(_cmd));
+#define set() [NSSet setWithArray:@[__VA_ARGS__]]
+
 
 #import "LBRBarcodeScannerViewController.h"
 #import <MTBBarcodeScanner.h>
@@ -114,7 +116,8 @@ static NSString * const volumeNib = @"volumePresentationView";
                 [uniqueCodes addObject:code.stringValue];
                 NSLog(@"Found unique code: %@", code.stringValue);
                 [self.dataManager.uniqueCodes addObject:code.stringValue];
-                
+                NSArray *trulyUniqueCodes = [self uniquifiedArrayFromArrays:@[self.dataManager.uniqueCodes,@[code.stringValue]]];
+                self.dataManager.uniqueCodes = [trulyUniqueCodes mutableCopy];
 //                Update the tableview
                 [self.uniqueBarcodesTableView reloadData];
                 [self scrollToBottomCell];
@@ -144,6 +147,15 @@ static NSString * const volumeNib = @"volumePresentationView";
     [self.uniqueBarcodesTableView scrollToRowAtIndexPath:indexPath
                                         atScrollPosition:UITableViewScrollPositionTop
                                                 animated:YES];
+}
+
+-(NSArray*)uniquifiedArrayFromArrays:(NSArray*)arrayOfArrays {
+    NSArray *accumulatorArray = @[]; //[NSMutableArray new];
+    for (NSArray *array in arrayOfArrays) {
+        accumulatorArray = [accumulatorArray arrayByAddingObjectsFromArray:array];
+    }
+    NSSet *filterSet = [NSSet setWithArray:accumulatorArray]; //uniquifies, see docs
+    return [filterSet allObjects];
 }
 
 #pragma mark - GoogleClient
@@ -177,6 +189,8 @@ static NSString * const volumeNib = @"volumePresentationView";
     
 }
 
+
+
 /**
  * Given a collection of possible matches, which one matches the user's
  * desired volume?
@@ -187,9 +201,7 @@ static NSString * const volumeNib = @"volumePresentationView";
 -(void)confirmBookSelection:(GTLBooksVolumes*)volumesMatchingQuery {
     DBLG
 
-    /**
-     *  !!!Experimental
-     */
+        ///??? !!!
     UINib *displayVolumesNib = [UINib nibWithNibName:volumeNib bundle:nil];
     NSArray *topLevelObjects = [displayVolumesNib instantiateWithOwner:nil options:nil];
     
