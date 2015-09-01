@@ -13,6 +13,7 @@
 #import <MTBBarcodeScanner.h>
 #import "LBRDataManager.h"
 #import "LBRGoogleGTLClient.h"
+#import "LBRPresentVolumesTableViewController.h"
 #import <SCLAlertView.h>
 
 
@@ -127,7 +128,11 @@ static NSString * const volumeNib = @"volumePresentationView";
 }
 
 #pragma mark - UITableViewDataSource methods
-
+/**
+ *  This view controller is the DATASOURCE for its tableView,
+ but this VC is NOT the DELEGATE for self.tableView; this VC
+ IS the delegate for the popover confirmTableViewController (below).
+*/
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.dataManager.uniqueCodes.count;
@@ -139,6 +144,13 @@ static NSString * const volumeNib = @"volumePresentationView";
     cell.textLabel.text = [NSString stringWithFormat:@"#%lu⎞ %@", indexPath.row + 1, self.dataManager.uniqueCodes[indexPath.row]];
     return cell;
 }
+
+#pragma mark - UITableViewDelegate methods
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+}
+
 
 #pragma mark - Helper methods
 
@@ -183,7 +195,8 @@ static NSString * const volumeNib = @"volumePresentationView";
         if (error) {
             NSLog(@"Error in barcodeQuery execution: %@", error.localizedDescription);
         } else {
-            [self confirmBookSelection:object];
+            GTLBooksVolumes *collectionOfPossibleVolumes = object;
+            [self confirmBookSelectionFrom:collectionOfPossibleVolumes];
         }
     }];
     
@@ -198,16 +211,19 @@ static NSString * const volumeNib = @"volumePresentationView";
  *  @param volumesMatchingQuery GTLBooksVolumes collection object, such
  * as the one returned by a GTLQueryBooks fetch request.
  */
--(void)confirmBookSelection:(GTLBooksVolumes*)volumesMatchingQuery {
+-(void)confirmBookSelectionFrom:(GTLBooksVolumes*)volumesMatchingQuery {
     DBLG
-
-        ///??? !!!
-    UINib *displayVolumesNib = [UINib nibWithNibName:volumeNib bundle:nil];
-    NSArray *topLevelObjects = [displayVolumesNib instantiateWithOwner:nil options:nil];
+    LBRPresentVolumesTableViewController *confirmVolumeTVC = [LBRPresentVolumesTableViewController new];
+    confirmVolumeTVC.volumes = volumesMatchingQuery;
+    confirmVolumeTVC.tableView.delegate = self;
     
-    for (UIView *view in topLevelObjects) {
-        [self.view addSubview:view];
-    }
+        ///??? !!!
+//    UINib *displayVolumesNib = [UINib nibWithNibName:volumeNib bundle:nil];
+//    NSArray *topLevelObjects = [displayVolumesNib instantiateWithOwner:nil options:nil];
+//    
+//    for (UIView *view in topLevelObjects) {
+//        [self.view addSubview:view];
+//    }
 }
 
 

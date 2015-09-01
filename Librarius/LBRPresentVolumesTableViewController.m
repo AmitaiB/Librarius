@@ -8,6 +8,7 @@
 
 #import "LBRPresentVolumesTableViewController.h"
 #import "UIImage+FromURL.h"
+#import "LBRDataStore.h"
 
 @interface LBRPresentVolumesTableViewController ()
 
@@ -63,6 +64,24 @@
     return cell;
 }
 
+#pragma mark - Table view delegate
+/**
+ *  This is the method to modify when copying this VC code to use for other presentations of GTLBooksVolume objects.
+ *
+ *  @param tableView GTLVolumes collection of GTLVolume objects
+ *  @param indexPath The currently selected indexPath
+ */
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    GTLBooksVolume *selectedVolume = self.volumes[indexPath.row];
+    
+        //Add the selected volume to your library.
+    [self saveGoogleVolumeToLibrary:selectedVolume];
+    
+}
+
+-(void)saveGoogleVolumeToLibrary:(GTLBooksVolume*)volumeToSave {
+    
+}
 
 /*
 // Override to support conditional editing of the table view.
