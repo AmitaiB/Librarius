@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -255,6 +256,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="8rJ-Kc-sve" id="7PV-Fz-Tss"/>
+                                    <outlet property="delegate" destination="8rJ-Kc-sve" id="ne5-u8-J8A"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -285,22 +290,22 @@
                                 <exclude reference="Vb7-tn-LvT"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="JKq-FI-CnH"/>
+                                <exclude reference="8C0-VY-tE1"/>
+                                <exclude reference="baY-cB-Gai"/>
+                                <exclude reference="Jv1-W5-ANu"/>
+                                <exclude reference="j0W-hs-ftZ"/>
                                 <exclude reference="82L-Fx-rQG"/>
                                 <exclude reference="9Pc-jQ-pHw"/>
                                 <exclude reference="gsm-9R-ebI"/>
-                                <exclude reference="LGv-KM-e8j"/>
-                                <exclude reference="W8J-mO-7Vg"/>
-                                <exclude reference="aQm-hM-dIk"/>
                                 <exclude reference="7xa-Pc-ufF"/>
                                 <exclude reference="GLX-c5-502"/>
                                 <exclude reference="cVl-Ag-gSJ"/>
                                 <exclude reference="cvX-I0-2VH"/>
                                 <exclude reference="fNJ-Ef-tdz"/>
-                                <exclude reference="Jv1-W5-ANu"/>
-                                <exclude reference="j0W-hs-ftZ"/>
-                                <exclude reference="8C0-VY-tE1"/>
-                                <exclude reference="baY-cB-Gai"/>
-                                <exclude reference="JKq-FI-CnH"/>
+                                <exclude reference="LGv-KM-e8j"/>
+                                <exclude reference="W8J-mO-7Vg"/>
+                                <exclude reference="aQm-hM-dIk"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -312,22 +317,22 @@
                                 <include reference="Vb7-tn-LvT"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="JKq-FI-CnH"/>
+                                <include reference="8C0-VY-tE1"/>
+                                <include reference="baY-cB-Gai"/>
+                                <include reference="Jv1-W5-ANu"/>
+                                <include reference="j0W-hs-ftZ"/>
                                 <include reference="82L-Fx-rQG"/>
                                 <include reference="9Pc-jQ-pHw"/>
                                 <include reference="gsm-9R-ebI"/>
-                                <include reference="LGv-KM-e8j"/>
-                                <include reference="W8J-mO-7Vg"/>
-                                <include reference="aQm-hM-dIk"/>
                                 <include reference="7xa-Pc-ufF"/>
                                 <include reference="GLX-c5-502"/>
                                 <include reference="cVl-Ag-gSJ"/>
                                 <include reference="cvX-I0-2VH"/>
                                 <include reference="fNJ-Ef-tdz"/>
-                                <include reference="Jv1-W5-ANu"/>
-                                <include reference="j0W-hs-ftZ"/>
-                                <include reference="8C0-VY-tE1"/>
-                                <include reference="baY-cB-Gai"/>
-                                <include reference="JKq-FI-CnH"/>
+                                <include reference="LGv-KM-e8j"/>
+                                <include reference="W8J-mO-7Vg"/>
+                                <include reference="aQm-hM-dIk"/>
                             </mask>
                         </variation>
                     </view>

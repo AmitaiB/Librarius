@@ -19,13 +19,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *startScanningButton;
 @property (weak, nonatomic) IBOutlet UITableView *uniqueBarcodesTableView;
 @property (nonatomic, strong) NSMutableArray *uniqueCodes;
+@property (nonatomic, strong) MTBBarcodeScanner *scanner;
 
 
 @end
 
-@implementation LBRBarcodeScannerViewController {
-    MTBBarcodeScanner *scanner;
-}
+@implementation LBRBarcodeScannerViewController
 
 #pragma mark - Constant Strings
 
@@ -36,10 +35,14 @@ static NSString * const barcodeCellReuseID = @"barcodeCellReuseID";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self initializeProgrammaticProperties];
+    
+}
+
+-(void)initializeProgrammaticProperties {
     self.isScanning = NO;
-    // Do any additional setup after loading the view, typically from a nib.
-    if (!scanner) {
-        scanner = [[MTBBarcodeScanner alloc] initWithPreviewView:self.scannerView];
+    if (!self.scanner) {
+        self.scanner = [[MTBBarcodeScanner alloc] initWithPreviewView:self.scannerView];
     }
     if (!self.uniqueCodes) {
         self.uniqueCodes = [NSMutableArray new];
@@ -47,14 +50,15 @@ static NSString * const barcodeCellReuseID = @"barcodeCellReuseID";
     
 }
 
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    [scanner stopScanning];
+    [self.scanner stopScanning];
     // Dispose of any resources that can be recreated.
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
-    [scanner stopScanning];
+    [self.scanner stopScanning];
     [super viewWillDisappear:animated];
 }
 
@@ -84,13 +88,13 @@ static NSString * const barcodeCellReuseID = @"barcodeCellReuseID";
 }
 
 - (IBAction)cameraButtonTapped:(id)sender {
-    [scanner flipCamera];
+    [self.scanner flipCamera];
 }
     
 #pragma mark - Scanning
 
 -(void)stopScanning {
-    [scanner stopScanning];
+    [self.scanner stopScanning];
     self.isScanning = NO;
     [self.startScanningButton setTitle:@"Start Scanning" forState:UIControlStateNormal];
     [self.startScanningButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
@@ -103,7 +107,7 @@ static NSString * const barcodeCellReuseID = @"barcodeCellReuseID";
     [self.startScanningButton setTitleColor:[UIColor orangeColor] forState:UIControlStateSelected];
     self.startScanningButton.backgroundColor = [UIColor redColor];
     NSMutableArray *uniqueCodes = [NSMutableArray new];
-    [scanner startScanningWithResultBlock:^(NSArray *codes) {
+    [self.scanner startScanningWithResultBlock:^(NSArray *codes) {
         for (AVMetadataMachineReadableCodeObject *code in codes) {
             if ([uniqueCodes indexOfObject:code.stringValue] == NSNotFound) {
                 [uniqueCodes addObject:code.stringValue];
@@ -128,7 +132,7 @@ static NSString * const barcodeCellReuseID = @"barcodeCellReuseID";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:barcodeCellReuseID forIndexPath:indexPath];
-    cell.textLabel.text = [NSString stringWithFormat:@"%lu༕ %@", indexPath.row, self.uniqueCodes[indexPath.row]];
+    cell.textLabel.text = [NSString stringWithFormat:@"#%lu⎞ %@", indexPath.row + 1, self.uniqueCodes[indexPath.row]];
     return cell;
 }
 
