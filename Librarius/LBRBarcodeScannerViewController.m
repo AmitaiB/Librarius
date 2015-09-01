@@ -58,10 +58,6 @@ static NSString * const volumeNib = @"volumePresentationView";
     if (!self.scanner) {
         self.scanner = [[MTBBarcodeScanner alloc] initWithPreviewView:self.scannerView];
     }
-    if (!self.dataManager.uniqueCodes) {
-        self.dataManager.uniqueCodes = [NSMutableArray new];
-    }
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -97,31 +93,44 @@ static NSString * const volumeNib = @"volumePresentationView";
     
 #pragma mark - Scanning
 
+/**
+ *  Stop scanning, flip the button.
+ */
 -(void)stopScanning {
-    [self.scanner stopScanning];
     self.isScanning = NO;
     [self.startScanningButton setTitle:@"Start Scanning" forState:UIControlStateNormal];
     [self.startScanningButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     self.startScanningButton.backgroundColor = [UIColor cyanColor];
+    
+    [self.scanner stopScanning];
 }
 
+/**
+ *  Flip the button, start scanning, handle the completion.
+ */
 -(void)startScanning {
     self.isScanning = YES;
     [self.startScanningButton setTitle:@"Stop Scanning" forState:UIControlStateSelected];
     [self.startScanningButton setTitleColor:[UIColor orangeColor] forState:UIControlStateSelected];
     self.startScanningButton.backgroundColor = [UIColor redColor];
-    NSMutableArray *uniqueCodes = [NSMutableArray new];
+    
+    if (!self.dataManager.uniqueCodes) {
+        self.dataManager.uniqueCodes = [NSMutableArray new];
+    }
+    
     [self.scanner startScanningWithResultBlock:^(NSArray *codes) {
         for (AVMetadataMachineReadableCodeObject *code in codes) {
-            if ([uniqueCodes indexOfObject:code.stringValue] == NSNotFound) {
-                [uniqueCodes addObject:code.stringValue];
-                NSLog(@"Found unique code: %@", code.stringValue);
+            if ([self.dataManager.uniqueCodes indexOfObject:code.stringValue] == NSNotFound) {
                 [self.dataManager.uniqueCodes addObject:code.stringValue];
-                NSArray *trulyUniqueCodes = [self uniquifiedArrayFromArrays:@[self.dataManager.uniqueCodes,@[code.stringValue]]];
-                self.dataManager.uniqueCodes = [trulyUniqueCodes mutableCopy];
+                NSLog(@"Found unique code: %@", code.stringValue);
+                
 //                Update the tableview
                 [self.uniqueBarcodesTableView reloadData];
                 [self scrollToBottomCell];
+            } else {
+                    //Scroll to the ISBN already on the list.
+                [self scrollToTargetISBNCell:[self.dataManager.uniqueCodes indexOfObject:code.stringValue]];
+                NSLog(@"Barcode already in list/table.");
             }
         }
     }];
@@ -148,9 +157,8 @@ static NSString * const volumeNib = @"volumePresentationView";
 #pragma mark - UITableViewDelegate methods
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+        //Selected a book on the confirmTVC popover...
 }
-
 
 #pragma mark - Helper methods
 
@@ -161,14 +169,14 @@ static NSString * const volumeNib = @"volumePresentationView";
                                                 animated:YES];
 }
 
--(NSArray*)uniquifiedArrayFromArrays:(NSArray*)arrayOfArrays {
-    NSArray *accumulatorArray = @[]; //[NSMutableArray new];
-    for (NSArray *array in arrayOfArrays) {
-        accumulatorArray = [accumulatorArray arrayByAddingObjectsFromArray:array];
-    }
-    NSSet *filterSet = [NSSet setWithArray:accumulatorArray]; //uniquifies, see docs
-    return [filterSet allObjects];
+-(void)scrollToTargetISBNCell:(NSUInteger)idxOfTarget {
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.dataManager.uniqueCodes.count - 1 inSection:0];
+    [self.uniqueBarcodesTableView scrollToRowAtIndexPath:indexPath
+                                        atScrollPosition:UITableViewScrollPositionTop
+                                                animated:YES];
 }
+
 
 #pragma mark - GoogleClient
 

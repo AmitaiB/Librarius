@@ -264,7 +264,6 @@
                                 </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="8rJ-Kc-sve" id="7PV-Fz-Tss"/>
-                                    <outlet property="delegate" destination="8rJ-Kc-sve" id="ne5-u8-J8A"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -339,9 +338,6 @@
                         <outlet property="scannerView" destination="whR-df-RYp" id="dtk-XK-fJV"/>
                         <outlet property="startScanningButton" destination="IOe-eD-XQW" id="gPW-tl-JCK"/>
                         <outlet property="uniqueBarcodesTableView" destination="Vb7-tn-LvT" id="AyA-3j-6qy"/>
-                        <segue destination="85O-u6-z3g" kind="popoverPresentation" id="IfS-LA-zrB">
-                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                        </segue>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
@@ -385,7 +381,6 @@
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="85O-u6-z3g" id="t8T-Ih-pEP"/>
-                            <outlet property="delegate" destination="85O-u6-z3g" id="5aX-bZ-u9m"/>
                         </connections>
                     </tableView>
                 </tableViewController>
@@ -464,8 +459,8 @@
                     <connections>
                         <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
                         <segue destination="r89-FC-I3u" kind="relationship" relationship="viewControllers" id="Mwk-mP-Vk3"/>
-                        <segue destination="oJK-od-ZUi" kind="relationship" relationship="viewControllers" id="Tgy-fA-5Hz"/>
                         <segue destination="bTL-zk-y1V" kind="relationship" relationship="viewControllers" id="9MK-7n-nPt"/>
+                        <segue destination="oJK-od-ZUi" kind="relationship" relationship="viewControllers" id="kRc-jj-rCf"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
