@@ -8,11 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "LBRGoogleGTLClient.h"
 
 @interface LBRDataManager : NSObject
 
-    // ScannerVC → GoogleAPI
-@property (nonatomic, strong) NSMutableArray *uniqueCodes;
+    // ScannerVC:GoogleBooksClient → VolumePresentationTVC
+@property (nonatomic, strong) GTLBooksVolumes *volumesToDisplay;
+@property (nonatomic, strong) GTLBooksVolume *volumeToPresent;
 
 +(instancetype)sharedDataManager;
 

@@ -36,6 +36,7 @@
 		38AAD7231B901D36003062C1 /* Bookcase.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAD7221B901D36003062C1 /* Bookcase.m */; };
 		38AAD7261B90A25B003062C1 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38AAD7251B90A25B003062C1 /* CloudKit.framework */; };
 		38BE31E21B961F7000C46001 /* volumePresentationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38BE31E11B961F7000C46001 /* volumePresentationView.xib */; };
+		38BE31E51B962BA900C46001 /* LBRPresentVolumesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BE31E41B962BA900C46001 /* LBRPresentVolumesTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +101,8 @@
 		38AAD7241B90A1AC003062C1 /* Librarius.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Librarius.entitlements; sourceTree = "<group>"; };
 		38AAD7251B90A25B003062C1 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		38BE31E11B961F7000C46001 /* volumePresentationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = volumePresentationView.xib; sourceTree = "<group>"; };
+		38BE31E31B962BA900C46001 /* LBRPresentVolumesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRPresentVolumesTableViewController.h; sourceTree = "<group>"; };
+		38BE31E41B962BA900C46001 /* LBRPresentVolumesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRPresentVolumesTableViewController.m; sourceTree = "<group>"; };
 		8D3D33401D5A34E1C9A90BE0 /* Pods-Librarius.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Librarius.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Librarius/Pods-Librarius.debug.xcconfig"; sourceTree = "<group>"; };
 		9B10AB83782954202B2FDC18 /* Pods-Librarius.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Librarius.release.xcconfig"; path = "Pods/Target Support Files/Pods-Librarius/Pods-Librarius.release.xcconfig"; sourceTree = "<group>"; };
 		EBADCB9C83FA635A577697F9 /* libPods-Librarius.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Librarius.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -248,6 +251,8 @@
 			children = (
 				380375391B8AC9A8004C4ECE /* LBRBarcodeScannerViewController.h */,
 				3803753A1B8AC9A8004C4ECE /* LBRBarcodeScannerViewController.m */,
+				38BE31E31B962BA900C46001 /* LBRPresentVolumesTableViewController.h */,
+				38BE31E41B962BA900C46001 /* LBRPresentVolumesTableViewController.m */,
 				380375781B8C08E0004C4ECE /* LBRSettingsTableViewController.h */,
 				380375791B8C08E0004C4ECE /* LBRSettingsTableViewController.m */,
 				380375681B8BC89D004C4ECE /* LBRGoogleSignInViewController.h */,
@@ -437,6 +442,7 @@
 				3803753B1B8AC9A8004C4ECE /* LBRBarcodeScannerViewController.m in Sources */,
 				380375671B8BC758004C4ECE /* LBRGoogleAPIClient.m in Sources */,
 				380375351B8AC9A8004C4ECE /* AppDelegate.m in Sources */,
+				38BE31E51B962BA900C46001 /* LBRPresentVolumesTableViewController.m in Sources */,
 				380375381B8AC9A8004C4ECE /* API_TestViewController.m in Sources */,
 				380375F71B8D4E90004C4ECE /* MasterViewController.m in Sources */,
 				3803757A1B8C08E0004C4ECE /* LBRSettingsTableViewController.m in Sources */,
