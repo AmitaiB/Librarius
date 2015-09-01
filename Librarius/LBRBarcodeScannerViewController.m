@@ -10,18 +10,23 @@
 #import "LBRBarcodeScannerViewController.h"
 #import <MTBBarcodeScanner.h>
 #import "LBRDataManager.h"
+#import "LBRGoogleGTLClient.h"
 
 @interface LBRBarcodeScannerViewController ()
 //- (IBAction)scanOneButtonTapped:(id)sender;
 - (IBAction)toggleScanningButtonTapped:(id)sender;
 - (IBAction)cameraButtonTapped:(id)sender;
-@property (nonatomic) BOOL isScanning;
-@property (nonatomic) BOOL isNotScanning;
+- (IBAction)confirmChoicesButtonTapped:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIButton *confirmChoicesButton;
 @property (weak, nonatomic) IBOutlet UIView *scannerView;
 @property (weak, nonatomic) IBOutlet UIButton *startScanningButton;
 @property (weak, nonatomic) IBOutlet UITableView *uniqueBarcodesTableView;
 @property (nonatomic, strong) MTBBarcodeScanner *scanner;
 @property (nonatomic, strong) LBRDataManager *dataManager;
+
+@property (nonatomic) BOOL isScanning;
+@property (nonatomic) BOOL isNotScanning;
 
 
 @end
@@ -53,7 +58,6 @@ static NSString * const barcodeCellReuseID = @"barcodeCellReuseID";
     
 }
 
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     [self.scanner stopScanning];
@@ -64,6 +68,8 @@ static NSString * const barcodeCellReuseID = @"barcodeCellReuseID";
     [self.scanner stopScanning];
     [super viewWillDisappear:animated];
 }
+
+#pragma mark - buttons
 
 - (IBAction)toggleScanningButtonTapped:(id)sender {
         // I like how it reads, don't you?
@@ -77,6 +83,10 @@ static NSString * const barcodeCellReuseID = @"barcodeCellReuseID";
 
 - (IBAction)cameraButtonTapped:(id)sender {
     [self.scanner flipCamera];
+}
+
+- (IBAction)confirmChoicesButtonTapped:(id)sender {
+    [self getVolumesFromBarcodeData];
 }
     
 #pragma mark - Scanning
@@ -124,7 +134,7 @@ static NSString * const barcodeCellReuseID = @"barcodeCellReuseID";
     return cell;
 }
 
-#pragma mark
+#pragma mark - Helper methods
 
 -(void)scrollToBottomCell {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.dataManager.uniqueCodes.count - 1 inSection:0];
@@ -132,6 +142,30 @@ static NSString * const barcodeCellReuseID = @"barcodeCellReuseID";
                                         atScrollPosition:UITableViewScrollPositionTop
                                                 animated:YES];
 }
+
+#pragma mark - GoogleClient
+
+-(void)getVolumesFromBarcodeData {
+    
+    /**
+     *  First, we test one barcode...
+     */
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    UITableViewCell *cell = [self.uniqueBarcodesTableView cellForRowAtIndexPath:indexPath];
+    NSString *scannedISBN = cell.textLabel.text;
+    
+    LBRGoogleGTLClient *googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
+    GTLQueryBooks *barcodeQuery = [GTLQueryBooks queryForVolumesListWithQ:scannedISBN];
+    GTLServiceTicket *ticket = [googleClient.service executeQuery:barcodeQuery completionHandler:^(GTLServiceTicket *ticket, id object, NSError *error) {
+        if (error) {
+            NSLog(@"Error in barcodeQuery execution: %@", error.localizedDescription);
+        } else {
+                //success!
+        }
+    }];
+    
+}
+
 
 /*
  * This snippet will scan once, then stop.
