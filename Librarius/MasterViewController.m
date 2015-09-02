@@ -15,23 +15,26 @@
 @end
 
 @implementation MasterViewController
+
 //✅
 - (void)awakeFromNib {
     [super awakeFromNib];
 }
 
+//✅
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
-
 /**
- *  TODO: Change this method to "Manual Volume Entry" and fill in all the fields for the/a Volume.
+ *  TODO: Change the method called here to "Manual Volume Entry", details below.
  */
 //    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
 //    self.navigationItem.rightBarButtonItem = addButton;
 }
 
+
+//✅
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -60,7 +63,7 @@
 //}
 
 #pragma mark - Segues
-
+//✅
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
@@ -69,6 +72,7 @@
     }
 }
 
+//✅ALL
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -110,6 +114,7 @@
     NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = [[object valueForKey:@"timeStamp"] description];
 }
+
 
 #pragma mark - Fetched results controller
 
