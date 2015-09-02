@@ -201,7 +201,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
             self.dataManager.responseCollectionOfPotentialVolumeMatches = object;
 //            UIPopoverController
             self.confirmVolumeTVC = [LBRSelectVolumeTableViewController new];
-            [self presentVolumesSemiModally];
+                [self presentVolumesSemiModally];
 //            [self presentViewController:self.confirmVolumeTVC animated:YES completion:nil];
         }
     }];
