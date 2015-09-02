@@ -46,7 +46,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return MIN([self.volumesToDisplay.totalItems integerValue], 5);
+    return MIN(self.volumesToDisplay.items.count, 5);
 }
 
 
