@@ -22,8 +22,7 @@
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSData *volumeCoverImageData;
 
-    //TODO finish populating with necessary features, including thickness and thickness estimator from page count in absence of hard numbers.
-
+    
 -(instancetype)initWithGoogleVolume:(NSDictionary*)JSONcontentDictionary;
 
 

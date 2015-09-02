@@ -51,7 +51,17 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"volumeCellID" forIndexPath:indexPath];
+    static NSString *volumeCellID = @"volumeCellID";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:volumeCellID];
+    
+    if(!cell)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:volumeCellID];
+    }
+    
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"volumeCellID" forIndexPath:indexPath];
+    
+    
     
     // Configure the cell...
     /**
@@ -60,6 +70,7 @@
      Each element is a GTLVolume.
      someGTLVolume.volumeInfo.title
      */
+        //!!! Stuck here!
     GTLBooksVolume *thisRowsVolume = self.volumesToDisplay[indexPath.row];
     cell.textLabel.text = thisRowsVolume.volumeInfo.title;
     cell.detailTextLabel.text = [NSString stringWithFormat:@"by %@", thisRowsVolume.volumeInfo.authors[0]];

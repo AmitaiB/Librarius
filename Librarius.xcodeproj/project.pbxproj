@@ -216,8 +216,6 @@
 				38AAD71F1B901D36003062C1 /* Library.m */,
 				38AAD71B1B901D35003062C1 /* Volume.h */,
 				38AAD71C1B901D35003062C1 /* Volume.m */,
-				380375821B8CD49C004C4ECE /* LBRVolume.h */,
-				380375831B8CD49C004C4ECE /* LBRVolume.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -277,6 +275,8 @@
 		38466D5C1B94FDDF00DD252E /* Cutting Floor */ = {
 			isa = PBXGroup;
 			children = (
+				380375821B8CD49C004C4ECE /* LBRVolume.h */,
+				380375831B8CD49C004C4ECE /* LBRVolume.m */,
 				380375651B8BC758004C4ECE /* LBRGoogleAPIClient.h */,
 				380375661B8BC758004C4ECE /* LBRGoogleAPIClient.m */,
 				380375361B8AC9A8004C4ECE /* API_TestViewController.h */,

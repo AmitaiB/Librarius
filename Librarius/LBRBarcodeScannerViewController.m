@@ -9,13 +9,14 @@
 #define set() [NSSet setWithArray:@[__VA_ARGS__]]
 
 
-#import "LBRBarcodeScannerViewController.h"
+#import <LGSemiModalNavViewController.h>
 #import <MTBBarcodeScanner.h>
+#import <SCLAlertView.h>
+
+#import "LBRBarcodeScannerViewController.h"
+#import "LBRSelectVolumeTableViewController.h"
 #import "LBRDataManager.h"
 #import "LBRGoogleGTLClient.h"
-#import "LBRSelectVolumeTableViewController.h"
-#import <SCLAlertView.h>
-#import <LGSemiModalNavViewController.h>
 
 @interface LBRBarcodeScannerViewController ()
 //- (IBAction)scanOneButtonTapped:(id)sender;
@@ -43,7 +44,7 @@
 #pragma mark - Constant Strings
 
 static NSString * const barcodeCellReuseID = @"barcodeCellReuseID";
-static NSString * const volumeNib = @"volumePresentationView";
+static NSString * const volumeNib          = @"volumePresentationView";
 
 
 #pragma mark - Lifecycle
@@ -208,20 +209,13 @@ static NSString * const volumeNib = @"volumePresentationView";
     ticket = nil;
     
 }
-        ///??? !!!
-//    UINib *displayVolumesNib = [UINib nibWithNibName:volumeNib bundle:nil];
-//    NSArray *topLevelObjects = [displayVolumesNib instantiateWithOwner:nil options:nil];
-//    
-//    for (UIView *view in topLevelObjects) {
-//        [self.view addSubview:view];
-//    }
 
 -(void)presentVolumesSemiModally {
     if (self.confirmVolumeTVC) {
             //This is the nav controller
         LGSemiModalNavViewController *semiModal = [[LGSemiModalNavViewController alloc]initWithRootViewController:self.confirmVolumeTVC];
             //Make sure to set a height on the view controller here.
-        semiModal.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height * 0.65);
+        semiModal.view.frame = CGRectMake(0, 0, self.view.frame.size.width * 0.95, self.view.frame.size.height * 0.65);
         
             //Selected customization properties, see more in the header of the LGSemiModalNavViewController
         semiModal.backgroundShadeColor = [UIColor blackColor];
@@ -235,7 +229,7 @@ static NSString * const volumeNib = @"volumePresentationView";
 }
 
 
-/*
+/* CLEAN
  * This snippet will scan once, then stop.
  
  - (IBAction)scanOneButtonTapped:(id)sender {

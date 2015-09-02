@@ -64,17 +64,19 @@ NSLog(@"AFTER signInSilently, does%@ have Authentication stored in Keychain.", [
 
 -(void)signIn:(GIDSignIn *)signIn didSignInForUser:(GIDGoogleUser *)user withError:(NSError *)error {
         //Perform any operations on signed in user here.
-        //???Probably not needed...
-    if (error == nil) {
-        NSString *userId  = user.userID;// For client-side use only!
-        NSString *idToken = user.authentication.idToken;// Safe to send to the server
-        NSString *name    = user.profile.name;
-        NSString *email   = user.profile.email;
-        // ...
-        [self performSegueWithIdentifier:signInToTabBarSegueID sender:nil];
-    } else {
-        NSLog(@"Error in signIn: %@", error.localizedDescription);
-    }
+    /**
+     Uncomment and more to: Get user info, tokens/authentication, etc.
+     */
+//    if (error == nil) {
+//        NSString *userId  = user.userID;// For client-side use only!
+//        NSString *idToken = user.authentication.idToken;// Safe to send to the server
+//        NSString *name    = user.profile.name;
+//        NSString *email   = user.profile.email;
+//        // ...
+//        [self performSegueWithIdentifier:signInToTabBarSegueID sender:nil];
+//    } else {
+//        NSLog(@"Error in signIn: %@", error.localizedDescription);
+//    }
 }
 
 -(void)signIn:(GIDSignIn *)signIn didDisconnectWithUser:(GIDGoogleUser *)user withError:(NSError *)error {
