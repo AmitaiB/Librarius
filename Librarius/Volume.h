@@ -21,6 +21,7 @@
 @property (nonatomic, retain) NSNumber * pages;
 @property (nonatomic, retain) NSString * cover_art;
 @property (nonatomic, retain) NSString * author;
+@property (nonatomic, retain) NSString * category;
 @property (nonatomic, retain) NSDate * published;
 @property (nonatomic, retain) NSNumber * rating;
 @property (nonatomic, retain) NSString * google_id;

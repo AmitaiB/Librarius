@@ -21,6 +21,7 @@
 @dynamic pages;
 @dynamic cover_art;
 @dynamic author;
+@dynamic category;
 @dynamic published;
 @dynamic rating;
 @dynamic google_id;

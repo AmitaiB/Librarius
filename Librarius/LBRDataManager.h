@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "LBRGoogleGTLClient.h"
 
+
 @interface LBRDataManager : NSObject
 
     // ScannerVC:GoogleBooksClient → VolumePresentationTVC

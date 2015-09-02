@@ -14,6 +14,7 @@
     </entity>
     <entity name="Volume" representedClassName="Volume" syncable="YES">
         <attribute name="author" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="category" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="cover_art" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="google_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="height" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -28,8 +29,8 @@
         <relationship name="library" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Library" inverseName="volumes" inverseEntity="Library" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Bookcase" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Library" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Volume" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Bookcase" positionX="0" positionY="0" width="128" height="120"/>
+        <element name="Library" positionX="0" positionY="0" width="128" height="90"/>
+        <element name="Volume" positionX="0" positionY="0" width="128" height="255"/>
     </elements>
 </model>
