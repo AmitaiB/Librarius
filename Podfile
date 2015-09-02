@@ -2,17 +2,24 @@
 # platform :ios, '6.0'
 
 target 'Librarius' do
-pod 'AFNetworking'
-pod 'AFOAuth2Manager'
+# Implemented
 pod 'Google/SignIn'
+pod 'Google-API-Client'
 pod 'MTBBarcodeScanner'
 
-#pod 'MagicalRecord', '~> 2.3'
-pod 'AMRatingControl'
-pod 'Google-API-Client'
-pod 'SCLAlertView-Objective-C'
 
+#Not Yet Implemented
+pod 'AMRatingControl'
+pod 'SCLAlertView-Objective-C'
+pod "JVMenuPopover", :path => "../"
+pod 'LGSemiModalNavController', '~> 0.2.0'
+pod 'AFNetworking'
+pod 'AFOAuth2Manager'
 pod 'XNGOAuth1Client', '~> 2.0'
+
+#Cut
+#pod 'MagicalRecord', '~> 2.3'
+
 end
 
 target 'LibrariusTests' do
