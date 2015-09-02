@@ -7,6 +7,8 @@
 //
 
 #import "LBRDataManager.h"
+#import "LBRDataStore.h"
+
 
 @implementation LBRDataManager
 
@@ -20,5 +22,8 @@
     return _sharedDataManager;
 }
 
+-(void)addVolumeToCollectionAndSave:(GTLBooksVolume*)volumeToAdd {
+    
+}
 
 @end

@@ -29,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *uniqueBarcodesTableView;
 @property (nonatomic, strong) MTBBarcodeScanner *scanner;
 @property (nonatomic, strong) LBRDataManager *dataManager;
+@property (nonatomic, strong) GTLBooksVolumes *responseCollectionOfPotentialVolumeMatches;
 
 @property (nonatomic) BOOL isScanning;
 @property (nonatomic) BOOL isNotScanning;
@@ -55,9 +56,8 @@ static NSString * const volumeNib = @"volumePresentationView";
 -(void)initializeProgrammaticProperties {
     self.dataManager = [LBRDataManager sharedDataManager];
     self.isScanning = NO;
-    if (!self.scanner) {
-        self.scanner = [[MTBBarcodeScanner alloc] initWithPreviewView:self.scannerView];
-    }
+    self.scanner = [[MTBBarcodeScanner alloc] initWithPreviewView:self.scannerView];
+    self.responseCollectionOfPotentialVolumeMatches = [GTLBooksVolumes new];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -87,6 +87,7 @@ static NSString * const volumeNib = @"volumePresentationView";
     [self.scanner flipCamera];
 }
 
+    //And then, Magic!
 - (IBAction)confirmChoicesButtonTapped:(id)sender {
     [self getVolumesFromBarcodeData];
 }
@@ -128,7 +129,7 @@ static NSString * const volumeNib = @"volumePresentationView";
                 [self.uniqueBarcodesTableView reloadData];
                 [self scrollToBottomCell];
             } else {
-                    //Scroll to the ISBN already on the list.
+                    //If code is not unique/already in the tableView, then scroll the tableView to it.
                 [self scrollToTargetISBNCell:[self.dataManager.uniqueCodes indexOfObject:code.stringValue]];
                 NSLog(@"Barcode already in list/table.");
             }
@@ -159,6 +160,8 @@ static NSString * const volumeNib = @"volumePresentationView";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
         //Selected a book on the confirmTVC popover...
+    GTLBooksVolume *selectedVolume = self.responseCollectionOfPotentialVolumeMatches[indexPath.row];
+    [self.dataManager addVolumeToCollectionAndSave:selectedVolume];
 }
 
 #pragma mark - Helper methods
@@ -192,12 +195,11 @@ static NSString * const volumeNib = @"volumePresentationView";
     NSString *ISBNforCell  = cell.textLabel.text;
         //a pair with line 154:    NSString *ISBNforCell  = [cell.textLabel.text stringByReplacingCharactersInRange:NSMakeRange(0, 4) withString:@""];
     barcodeQuery.q = ISBNforCell;
-    
         // The Books API currently requires that search queries not have an
         // authorization header (b/4445456)
     barcodeQuery.shouldSkipAuthorization = YES;
     
-        //Experimental - the format was taken from the web docs: https://developers.google.com/books/docs/v1/reference/volumes/list?hl=en
+        //"Fields" is Experimental - the format was taken from the web docs: https://developers.google.com/books/docs/v1/reference/volumes/list?hl=en
         // BTW, this limits the response to the information we desire, saving on system resources.
     barcodeQuery.fields = @"items(id, volumeInfo)";
     LBRGoogleGTLClient *googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
@@ -206,14 +208,12 @@ static NSString * const volumeNib = @"volumePresentationView";
         if (error) {
             NSLog(@"Error in barcodeQuery execution: %@", error.localizedDescription);
         } else {
-            GTLBooksVolumes *collectionOfPossibleVolumes = object;
-            [self confirmBookSelectionFrom:collectionOfPossibleVolumes];
+            self.responseCollectionOfPotentialVolumeMatches = object;
+            [self confirmBookSelectionFromCurrentList];
         }
     }];
     
 }
-
-
 
 /**
  * Given a collection of possible matches, which one matches the user's
@@ -222,10 +222,10 @@ static NSString * const volumeNib = @"volumePresentationView";
  *  @param volumesMatchingQuery GTLBooksVolumes collection object, such
  * as the one returned by a GTLQueryBooks fetch request.
  */
--(void)confirmBookSelectionFrom:(GTLBooksVolumes*)volumesMatchingQuery {
+-(void)confirmBookSelectionFromCurrentList {
     DBLG
     LBRPresentVolumesTableViewController *confirmVolumeTVC = [LBRPresentVolumesTableViewController new];
-    confirmVolumeTVC.volumes = volumesMatchingQuery;
+    confirmVolumeTVC.volumes = self.responseCollectionOfPotentialVolumeMatches;
     confirmVolumeTVC.tableView.delegate = self;
     
         ///??? !!!
