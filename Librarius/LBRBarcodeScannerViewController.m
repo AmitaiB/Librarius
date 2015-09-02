@@ -13,7 +13,7 @@
 #import <MTBBarcodeScanner.h>
 #import "LBRDataManager.h"
 #import "LBRGoogleGTLClient.h"
-#import "LBRPresentVolumesTableViewController.h"
+#import "LBRSelectVolumeTableViewController.h"
 #import <SCLAlertView.h>
 
 
@@ -30,6 +30,7 @@
 @property (nonatomic, strong) MTBBarcodeScanner *scanner;
 @property (nonatomic, strong) LBRDataManager *dataManager;
 @property (nonatomic, strong) GTLBooksVolumes *responseCollectionOfPotentialVolumeMatches;
+@property (nonatomic, strong) LBRSelectVolumeTableViewController *confirmVolumeTVC;
 
 @property (nonatomic) BOOL isScanning;
 @property (nonatomic) BOOL isNotScanning;
@@ -209,25 +210,14 @@ static NSString * const volumeNib = @"volumePresentationView";
             NSLog(@"Error in barcodeQuery execution: %@", error.localizedDescription);
         } else {
             self.responseCollectionOfPotentialVolumeMatches = object;
-            [self confirmBookSelectionFromCurrentList];
+//            UIPopoverController
+            self.confirmVolumeTVC = [LBRSelectVolumeTableViewController new];
+            self.confirmVolumeTVC.volumes = object;
+            [self presentViewController:self.confirmVolumeTVC animated:YES completion:nil];
         }
     }];
     
 }
-
-/**
- * Given a collection of possible matches, which one matches the user's
- * desired volume?
- *
- *  @param volumesMatchingQuery GTLBooksVolumes collection object, such
- * as the one returned by a GTLQueryBooks fetch request.
- */
--(void)confirmBookSelectionFromCurrentList {
-    DBLG
-    LBRPresentVolumesTableViewController *confirmVolumeTVC = [LBRPresentVolumesTableViewController new];
-    confirmVolumeTVC.volumes = self.responseCollectionOfPotentialVolumeMatches;
-    confirmVolumeTVC.tableView.delegate = self;
-    
         ///??? !!!
 //    UINib *displayVolumesNib = [UINib nibWithNibName:volumeNib bundle:nil];
 //    NSArray *topLevelObjects = [displayVolumesNib instantiateWithOwner:nil options:nil];
@@ -235,7 +225,7 @@ static NSString * const volumeNib = @"volumePresentationView";
 //    for (UIView *view in topLevelObjects) {
 //        [self.view addSubview:view];
 //    }
-}
+
 
 
 
