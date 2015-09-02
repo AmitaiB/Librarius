@@ -19,6 +19,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+        //Should have been populated in BarcodeScannerVC:
+    self.dataManager = [LBRDataManager sharedDataManager];
+    self.volumesToDisplay = self.dataManager.responseCollectionOfPotentialVolumeMatches;
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -40,7 +44,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return MIN([self.volumes.totalItems integerValue], 5);
+    return MIN([self.volumesToDisplay.totalItems integerValue], 5);
 }
 
 
@@ -54,7 +58,7 @@
      Each element is a GTLVolume.
      someGTLVolume.volumeInfo.title
      */
-    GTLBooksVolume *thisRowsVolume = self.volumes[indexPath.row];
+    GTLBooksVolume *thisRowsVolume = self.volumesToDisplay[indexPath.row];
     cell.textLabel.text = thisRowsVolume.volumeInfo.title;
     cell.detailTextLabel.text = [NSString stringWithFormat:@"by %@", thisRowsVolume.volumeInfo.authors[0]];
     
@@ -63,6 +67,16 @@
     
     return cell;
 }
+
+#pragma mark - UITableViewDelegate methods
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+        //Selected a book on the confirmTVC popover...
+    
+    GTLBooksVolume *selectedVolume = self.volumesToDisplay[indexPath.row];
+    [self.dataManager addVolumeToCollectionAndSave:selectedVolume];
+}
+
 
 //#pragma mark - Table view delegate
 ///**

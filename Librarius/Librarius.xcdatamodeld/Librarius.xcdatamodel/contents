@@ -28,8 +28,8 @@
         <relationship name="library" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Library" inverseName="volumes" inverseEntity="Library" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Volume" positionX="-45" positionY="0" width="128" height="240"/>
-        <element name="Library" positionX="-18" positionY="81" width="128" height="90"/>
-        <element name="Bookcase" positionX="9" positionY="90" width="128" height="120"/>
+        <element name="Bookcase" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Library" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Volume" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

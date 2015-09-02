@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "LBRGoogleGTLClient.h"
+#import "LBRDataManager.h"
 
 
 /**
@@ -15,7 +16,7 @@
  */
 @interface LBRSelectVolumeTableViewController : UITableViewController
 
-@property (nonatomic, strong) GTLBooksVolumes *volumes;
-
+@property (nonatomic, strong) GTLBooksVolumes *volumesToDisplay;
+@property (nonatomic, strong) LBRDataManager *dataManager;
 
 @end

@@ -139,11 +139,7 @@ static NSString * const volumeNib = @"volumePresentationView";
 }
 
 #pragma mark - UITableViewDataSource methods
-/**
- *  This view controller is the DATASOURCE for its tableView,
- but this VC is NOT the DELEGATE for self.tableView; this VC
- IS the delegate for the popover confirmTableViewController (below).
-*/
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.dataManager.uniqueCodes.count;
@@ -155,14 +151,6 @@ static NSString * const volumeNib = @"volumePresentationView";
     cell.textLabel.text = self.dataManager.uniqueCodes[indexPath.row];
         //a pair with line 193:    cell.textLabel.text = [NSString stringWithFormat:@"#%lu⎞ %@", indexPath.row + 1, self.dataManager.uniqueCodes[indexPath.row]];
     return cell;
-}
-
-#pragma mark - UITableViewDelegate methods
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-        //Selected a book on the confirmTVC popover...
-    GTLBooksVolume *selectedVolume = self.responseCollectionOfPotentialVolumeMatches[indexPath.row];
-    [self.dataManager addVolumeToCollectionAndSave:selectedVolume];
 }
 
 #pragma mark - Helper methods
@@ -209,10 +197,9 @@ static NSString * const volumeNib = @"volumePresentationView";
         if (error) {
             NSLog(@"Error in barcodeQuery execution: %@", error.localizedDescription);
         } else {
-            self.responseCollectionOfPotentialVolumeMatches = object;
+            self.dataManager.responseCollectionOfPotentialVolumeMatches = object;
 //            UIPopoverController
             self.confirmVolumeTVC = [LBRSelectVolumeTableViewController new];
-            self.confirmVolumeTVC.volumes = object;
             [self presentVolumesSemiModally];
 //            [self presentViewController:self.confirmVolumeTVC animated:YES completion:nil];
         }
