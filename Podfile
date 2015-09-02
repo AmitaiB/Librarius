@@ -11,7 +11,6 @@ pod 'MTBBarcodeScanner'
 #Not Yet Implemented
 pod 'AMRatingControl'
 pod 'SCLAlertView-Objective-C'
-pod "JVMenuPopover", :path => "../"
 pod 'LGSemiModalNavController', '~> 0.2.0'
 pod 'AFNetworking'
 pod 'AFOAuth2Manager'

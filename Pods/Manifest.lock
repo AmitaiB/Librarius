@@ -200,6 +200,7 @@ PODS:
   - gtm-http-fetcher (1.0.141)
   - gtm-oauth2 (1.0.126):
     - gtm-http-fetcher (~> 1.0.141)
+  - LGSemiModalNavController (0.2.0)
   - MTBBarcodeScanner (1.6.1)
   - SCLAlertView-Objective-C (0.7.4)
   - XNGOAuth1Client (2.0.1):
@@ -211,6 +212,7 @@ DEPENDENCIES:
   - AMRatingControl
   - Google-API-Client
   - Google/SignIn
+  - LGSemiModalNavController (~> 0.2.0)
   - MTBBarcodeScanner
   - SCLAlertView-Objective-C
   - XNGOAuth1Client (~> 2.0)
@@ -229,6 +231,7 @@ SPEC CHECKSUMS:
   GoogleUtilities: e3475cd4d45134221d2f3f3626095a1c49b62041
   gtm-http-fetcher: 6d4617e7d343b6e4c082b777541c334eb6f5d81e
   gtm-oauth2: 2a18b824e4f8a02df6cfe987beb59ae9d9697f9d
+  LGSemiModalNavController: ba49f8cbc24638be981cbca8a526f66b5dd90414
   MTBBarcodeScanner: beda75d4c1e2750405f62ee53f7a7ee40bf6825b
   SCLAlertView-Objective-C: 15ebfdac06ca289ba1f29fe34b5a03da6bd3fe37
   XNGOAuth1Client: 31e9b13bc313c7045503d06e89901798257a817b

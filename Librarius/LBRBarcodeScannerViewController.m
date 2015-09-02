@@ -15,7 +15,7 @@
 #import "LBRGoogleGTLClient.h"
 #import "LBRSelectVolumeTableViewController.h"
 #import <SCLAlertView.h>
-
+#import <LGSemiModalNavViewController.h>
 
 @interface LBRBarcodeScannerViewController ()
 //- (IBAction)scanOneButtonTapped:(id)sender;
@@ -213,9 +213,12 @@ static NSString * const volumeNib = @"volumePresentationView";
 //            UIPopoverController
             self.confirmVolumeTVC = [LBRSelectVolumeTableViewController new];
             self.confirmVolumeTVC.volumes = object;
-            [self presentViewController:self.confirmVolumeTVC animated:YES completion:nil];
+            [self presentVolumesSemiModally];
+//            [self presentViewController:self.confirmVolumeTVC animated:YES completion:nil];
         }
     }];
+        //Google's example code had this line, not sure why...yet.
+    ticket = nil;
     
 }
         ///??? !!!
@@ -226,7 +229,23 @@ static NSString * const volumeNib = @"volumePresentationView";
 //        [self.view addSubview:view];
 //    }
 
-
+-(void)presentVolumesSemiModally {
+    if (self.confirmVolumeTVC) {
+            //This is the nav controller
+        LGSemiModalNavViewController *semiModal = [[LGSemiModalNavViewController alloc]initWithRootViewController:self.confirmVolumeTVC];
+            //Make sure to set a height on the view controller here.
+        semiModal.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height * 0.65);
+        
+            //Selected customization properties, see more in the header of the LGSemiModalNavViewController
+        semiModal.backgroundShadeColor = [UIColor blackColor];
+        semiModal.animationSpeed = 0.35f;
+        semiModal.tapDismissEnabled = YES;
+        semiModal.backgroundShadeAlpha = 0.4;
+        semiModal.scaleTransform = CGAffineTransformMakeScale(.94, .94);
+        
+        [self presentViewController:semiModal animated:YES completion:nil];
+    }
+}
 
 
 /*
