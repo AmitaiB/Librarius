@@ -5,6 +5,8 @@
 //  Created by Amitai Blickstein on 9/1/15.
 //  Copyright (c) 2015 Amitai Blickstein, LLC. All rights reserved.
 //
+#define DBLG NSLog(@"%@ reporting!", NSStringFromSelector(_cmd));
+
 
 #import "LBRSelectVolumeTableViewController.h"
 #import "UIImage+FromURL.h"
@@ -72,9 +74,11 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
         //Selected a book on the confirmTVC popover...
-    
     GTLBooksVolume *selectedVolume = self.volumesToDisplay[indexPath.row];
     [self.dataManager addVolumeToCollectionAndSave:selectedVolume];
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+      DBLG
+    }];
 }
 
 
