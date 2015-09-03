@@ -16,6 +16,6 @@
 +(instancetype)sharedGoogleGTLClient;
 -(instancetype)init;
 
--(id)queryForVolumeWithISBN:(NSString*)ISBN;
+-(id)queryForVolumeWithISBN:(NSString*)ISBN returnTicket:(BOOL)returnTicketInstead;
 
 @end

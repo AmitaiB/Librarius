@@ -86,7 +86,8 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
         //Selected a book on the confirmTVC popover...
     GTLBooksVolume *selectedVolume = self.volumesToDisplay[indexPath.row];
-    [self.dataManager addVolumeToCollectionAndSave:selectedVolume];
+    [self.dataManager addGTLVolumeToCurrentLibrary:selectedVolume];
+    [self.dataManager saveContext];
     [self.navigationController dismissViewControllerAnimated:YES completion:^{
       DBLG
     }];

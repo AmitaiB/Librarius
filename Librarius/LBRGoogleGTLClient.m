@@ -35,8 +35,9 @@
 }
 
 
--(id)queryForVolumeWithISBN:(NSString*)ISBN {
+-(id)queryForVolumeWithISBN:(NSString*)ISBN returnTicket:(BOOL)returnTicketInstead {
     __block GTLServiceTicket *tempTicket = [GTLServiceTicket new];
+    __block id responseObject;
     
     GTLQueryBooks *booksQuery = [GTLQueryBooks queryForVolumesListWithQ:ISBN];
         // The Books API currently requires that search queries not have an
@@ -48,21 +49,23 @@
 
     
     [self.service executeQuery:booksQuery completionHandler:^(GTLServiceTicket *ticket, id object, NSError *error) {
+        NSLog(@"KNOW THIS: ticket.fetchedObject %@ equal to id object!", [ticket.fetchedObject isEqual:object]? @"IS" : @"IS NOT");
+        NSLog(@"KNOW ALSO THIS: ticket.fetchedObject is of CLASS: %@. id object is of CLASS: %@!", NSStringFromClass([ticket.fetchedObject class]), NSStringFromClass([object class]));
+        
         if (error) {
             NSLog(@"Error in booksQueryWithISBN: %@", error.localizedDescription);
         } else {
             tempTicket = ticket;
+            responseObject = object;
             NSLog(@"id object's class is: %@", NSStringFromClass([object class]));
         }
     }];
     
-//    does a Ticket contain "object"?
+    if (returnTicketInstead) {
+        return tempTicket;
+    }
     
-    
-    return tempTicket;
-    /**
-     *  TODO: Consider returning only the first Volume from an ISBN request (it's pretty specific already).
-     */
+    return responseObject;
 }
 
 

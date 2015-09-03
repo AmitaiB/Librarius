@@ -18,7 +18,7 @@
 
 +(instancetype)sharedDataManager;
 
--(void)addVolumeToCollectionAndSave:(GTLBooksVolume*)volumeToAdd;
+-(void)addGTLVolumeToCurrentLibrary:(GTLBooksVolume*)volumeToAdd;
 
 //============== adding CoreData functions here
 

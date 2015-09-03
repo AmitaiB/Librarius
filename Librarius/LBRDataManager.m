@@ -40,12 +40,13 @@ static NSString * const kUnknown = @"kUnknown";
 /**
  *  This will translate a GoogleBooks volume object into our NSManagedObject.
  */
--(void)addVolumeToCollectionAndSave:(GTLBooksVolume*)volumeToAdd {
+-(void)addGTLVolumeToCurrentLibrary:(GTLBooksVolume*)volumeToAdd {
     DBLG
     
     Volume *newLBRVolume = [NSEntityDescription insertNewObjectForEntityForName:@"Volume" inManagedObjectContext:self.managedObjectContext];
     [self generateDefaultLibraryIfNeeded];
-    newLBRVolume.library = self.currentLibrary;
+    
+    [self.currentLibrary addVolumesObject:newLBRVolume];
     
     /**
      *  Default Values
@@ -278,7 +279,6 @@ static NSString * const kUnknown = @"kUnknown";
 //    If the library is empty, generate testData.
     
     [self generateDefaultLibraryIfNeeded];
-    LBRGoogleGTLClient *googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
     
     Volume *the120Days        = [NSEntityDescription insertNewObjectForEntityForName:@"Volume" inManagedObjectContext:self.managedObjectContext];
 
@@ -288,7 +288,8 @@ static NSString * const kUnknown = @"kUnknown";
 
     Volume *anyEmpire         = [NSEntityDescription insertNewObjectForEntityForName:@"Volume" inManagedObjectContext:self.managedObjectContext];
     
-    
+    LBRGoogleGTLClient *googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
+    [googleClient queryForVolumeWithISBN:@"978-1-60309-050-6" returnTicket:NO];
     
     
     [self saveContext];
