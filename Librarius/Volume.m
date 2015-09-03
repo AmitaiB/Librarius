@@ -18,7 +18,7 @@
 @dynamic title;
 @dynamic width;
 @dynamic height;
-@dynamic pages;
+@dynamic pageCount;
 @dynamic cover_art;
 @dynamic author;
 @dynamic category;
