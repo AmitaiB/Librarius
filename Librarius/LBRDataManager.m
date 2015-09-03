@@ -299,13 +299,17 @@ static NSString * const kUnknown = @"kUnknown";
     [self fetchData];
 }
 
+/**
+ *  If there's a library, do nothing. If there's no library, make one. And log any errors, of course.
+ */
 -(void)generateDefaultLibraryIfNeeded {
     NSFetchRequest *libraryRequest = [NSFetchRequest fetchRequestWithEntityName:@"Library"];
     NSError *error = nil;
+    
     if ([self.managedObjectContext countForFetchRequest:libraryRequest error:&error]) {
-            //It goes without saying:
-        if (error) {DBLG NSLog(@"Error: %@", error.localizedDescription);}
-            // Back to the condition: If there's a library, Do nothing.
+            if (error) {DBLG
+                NSLog(@"Error: %@", error.localizedDescription);
+            }
     } else {
         Library *newDefaultLibrary = [NSEntityDescription insertNewObjectForEntityForName:@"Library" inManagedObjectContext:self.managedObjectContext];
         [self saveContext];
