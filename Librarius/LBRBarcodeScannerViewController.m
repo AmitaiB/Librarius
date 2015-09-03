@@ -34,6 +34,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *uniqueBarcodesTableView;
 @property (nonatomic, strong) MTBBarcodeScanner *scanner;
 @property (nonatomic, strong) LBRDataManager *dataManager;
+@property (nonatomic, strong) LBRGoogleGTLClient *googleClient;
 @property (nonatomic, strong) GTLBooksVolumes *responseCollectionOfPotentialVolumeMatches;
 @property (nonatomic, strong) LBRSelectVolumeTableViewController *confirmVolumeTVC;
 
@@ -57,14 +58,17 @@ static NSString * const volumeNib          = @"volumePresentationView";
     [super viewDidLoad];
     [self initializeProgrammaticProperties];
     
-    LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
-    [dataManager generateTestData];
-    NSLog(@"%@",[dataManager.currentLibrary.volumes description]);
+    [self.dataManager generateTestData];
+    NSLog(@"%@",[self.dataManager.currentLibrary.volumes description]);
     
 }
 
 -(void)initializeProgrammaticProperties {
     self.dataManager = [LBRDataManager sharedDataManager];
+    self.googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
+    /**
+     *  CLEAN: May be implicitly NO
+     */
     self.isScanning = NO;
     self.scanner = [[MTBBarcodeScanner alloc] initWithPreviewView:self.scannerView];
     self.responseCollectionOfPotentialVolumeMatches = [GTLBooksVolumes new];
@@ -200,19 +204,19 @@ static NSString * const volumeNib          = @"volumePresentationView";
      *  CLEAN: Possibly refactor to not need the ticket...
      */
         // For the request for the googleClient:
-    LBRGoogleGTLClient *googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
-    GTLServiceTicket *responseTicket = [googleClient queryForVolumeWithISBN:ISBNforCell returnTicket:YES];
+    [self.googleClient queryForVolumeWithISBN:ISBNforCell returnTicket:YES];
+//    GTLServiceTicket *responseTicket = self.googleClient.mostRecentTicket;
 
     /**
      *  Weak Point: will id-casting work? Only if it actually returns the right thing.
      */
-    self.dataManager.responseCollectionOfPotentialVolumeMatches = (id)responseTicket.fetchedObject;
+    self.dataManager.responseCollectionOfPotentialVolumeMatches = self.googleClient.responseObject;
             //            UIPopoverController
         self.confirmVolumeTVC = [LBRSelectVolumeTableViewController new];
         [self presentVolumesSemiModally];
     
         //Google's example code had this line, not sure why...yet.
-    responseTicket = nil;
+//    responseTicket = nil;
 }
 
 -(void)presentVolumesSemiModally {

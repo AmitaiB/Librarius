@@ -9,6 +9,7 @@
 #import "LBRGoogleGTLClient.h"
 #import "LBRConstants.h"
 
+
 @implementation LBRGoogleGTLClient
 
 +(instancetype)sharedGoogleGTLClient
@@ -27,16 +28,16 @@
     self = [super init];
     if(self) {
             // Initialize a service
-        self.service = [GTLServiceBooks new];
-        self.service.APIKey = GOOGLE_APP_KEY;
-        self.service.retryEnabled = YES;
+        _service              = [GTLServiceBooks new];
+        _mostRecentTicket     = [[GTLServiceTicket alloc] initWithService:_service];
+        _service.APIKey       = GOOGLE_APP_KEY;
+        _service.retryEnabled = YES;
     }
     return self;
 }
 
 
--(id)queryForVolumeWithISBN:(NSString*)ISBN returnTicket:(BOOL)returnTicketInstead {
-    __block GTLServiceTicket *responseTicket = [GTLServiceTicket new];
+-(void)queryForVolumeWithISBN:(NSString*)ISBN returnTicket:(BOOL)returnTicketInstead {
     
     GTLQueryBooks *booksQuery = [GTLQueryBooks queryForVolumesListWithQ:ISBN];
         // The Books API currently requires that search queries not have an
@@ -48,21 +49,12 @@
 
     
     [self.service executeQuery:booksQuery completionHandler:^(GTLServiceTicket *ticket, id object, NSError *error) {
-        if (error) {
-            NSLog(@"Error in booksQueryWithISBN: %@", error.localizedDescription);
-        } else {
-            responseTicket = ticket;
-        }
+            // callback
+        NSLog(@"Error in booksQueryWithISBN: %@", error.localizedDescription);
+        self.blockError       = error;
+        self.mostRecentTicket = ticket;
+        self.responseObject   = object;
     }];
-    
-    if (returnTicketInstead) {
-        return responseTicket;
-    }
-    
-    if (responseTicket.fetchedObject) {
-        return responseTicket.fetchedObject;
-    }
-    return nil;
 }
 
 

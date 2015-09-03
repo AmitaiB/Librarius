@@ -12,6 +12,7 @@
 #import "Volume.h"
 #import "NSString+dateValue.h"
 
+
 #define DBLG NSLog(@"%@ reporting!", NSStringFromSelector(_cmd));
 
 #define CALIPER [@"436" floatValue] //In pages per inch, ppi.
@@ -291,7 +292,8 @@ static NSString * const kUnknown = @"kUnknown";
                              @"978-1-60309-042-1"];
     
     for (NSString *ISBN in listOfISBNs) {
-        GTLBooksVolume *tempVolume = [googleClient queryForVolumeWithISBN:ISBN returnTicket:NO];
+        [self.googleClient queryForVolumeWithISBN:ISBN returnTicket:NO];
+        GTLBooksVolume *tempVolume = self.googleClient.responseObject.items[0];
         [self addGTLVolumeToCurrentLibrary:tempVolume];
     }
     

@@ -12,10 +12,13 @@
 @interface LBRGoogleGTLClient : NSObject
 
 @property (nonatomic, strong) GTLServiceBooks *service;
+@property (nonatomic, strong) GTLServiceTicket *mostRecentTicket;
+@property (nonatomic, strong) GTLBooksVolumes *responseObject;
+@property (nonatomic, strong) NSError *blockError;
 
 +(instancetype)sharedGoogleGTLClient;
 -(instancetype)init;
 
--(id)queryForVolumeWithISBN:(NSString*)ISBN returnTicket:(BOOL)returnTicketInstead;
+-(void)queryForVolumeWithISBN:(NSString*)ISBN returnTicket:(BOOL)returnTicketInstead;
 
 @end
