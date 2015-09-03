@@ -10,7 +10,7 @@
 #import <GoogleSignIn.h>
 #import "DetailViewController.h"
 #import "MasterViewController.h"
-#import "LBRDataStore.h"
+#import "LBRDataManager.h"
 
 @interface AppDelegate ()
 
@@ -73,8 +73,8 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 //    [MagicalRecord cleanUp];
-    LBRDataStore *dataStore = [LBRDataStore sharedDataStore];
-    [dataStore saveContext];
+    LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
+    [dataManager saveContext];
 }
 
 @end

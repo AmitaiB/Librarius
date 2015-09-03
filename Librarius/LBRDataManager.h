@@ -20,4 +20,17 @@
 
 -(void)addVolumeToCollectionAndSave:(GTLBooksVolume*)volumeToAdd;
 
+//============== adding CoreData functions here
+
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong) NSManagedObjectModel *managedObjectModel;
+@property (nonatomic, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+    //Other properties to store and fetch, e.g., NSArray *messages...
+
+-(void) saveContext;
+-(void) generateTestData;
+-(void) fetchData;
+
+
+
 @end
