@@ -273,16 +273,20 @@ static NSString * const kUnknown = @"kUnknown";
 
 - (void)generateTestData
 {
-    if ([self.currentLibrary.volumes ]) {
-        <#statements#>
-    }
+    if (self.currentLibrary.volumes.count) {
+        return;}
+//    If the library is empty, generate testData.
     
-    static NSString *volume = @"volume";
     [self generateDefaultLibraryIfNeeded];
     LBRGoogleGTLClient *googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
     
-    
-    Volume *the120Days = [NSEntityDescription insertNewObjectForEntityForName:volume inManagedObjectContext:self.managedObjectContext];
+    Volume *the120Days        = [NSEntityDescription insertNewObjectForEntityForName:@"Volume" inManagedObjectContext:self.managedObjectContext];
+
+    Volume *aMatterOfLife     = [NSEntityDescription insertNewObjectForEntityForName:@"Volume" inManagedObjectContext:self.managedObjectContext];
+
+    Volume *theYearsHavePants = [NSEntityDescription insertNewObjectForEntityForName:@"Volume" inManagedObjectContext:self.managedObjectContext];
+
+    Volume *anyEmpire         = [NSEntityDescription insertNewObjectForEntityForName:@"Volume" inManagedObjectContext:self.managedObjectContext];
     
     
     

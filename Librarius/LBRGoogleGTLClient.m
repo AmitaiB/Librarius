@@ -39,6 +39,14 @@
     __block GTLServiceTicket *tempTicket = [GTLServiceTicket new];
     
     GTLQueryBooks *booksQuery = [GTLQueryBooks queryForVolumesListWithQ:ISBN];
+        // The Books API currently requires that search queries not have an
+        // authorization header (b/4445456)
+    booksQuery.shouldSkipAuthorization = YES;
+    
+        //"Fields" limits the response to the desired information, saving system resources - the syntax is in the *web* docs: https://developers.google.com/books/docs/v1/reference/volumes/list?hl=en
+    booksQuery.fields = @"items(id, volumeInfo)";
+
+    
     [self.service executeQuery:booksQuery completionHandler:^(GTLServiceTicket *ticket, id object, NSError *error) {
         if (error) {
             NSLog(@"Error in booksQueryWithISBN: %@", error.localizedDescription);
@@ -47,7 +55,14 @@
             NSLog(@"id object's class is: %@", NSStringFromClass([object class]));
         }
     }];
+    
+//    does a Ticket contain "object"?
+    
+    
     return tempTicket;
+    /**
+     *  TODO: Consider returning only the first Volume from an ISBN request (it's pretty specific already).
+     */
 }
 
 

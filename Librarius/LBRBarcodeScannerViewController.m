@@ -150,7 +150,6 @@ static NSString * const volumeNib          = @"volumePresentationView";
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:barcodeCellReuseID forIndexPath:indexPath];
     cell.textLabel.text = self.dataManager.uniqueCodes[indexPath.row];
-        //a pair with line 193:    cell.textLabel.text = [NSString stringWithFormat:@"#%lu⎞ %@", indexPath.row + 1, self.dataManager.uniqueCodes[indexPath.row]];
     return cell;
 }
 
@@ -179,35 +178,30 @@ static NSString * const volumeNib          = @"volumePresentationView";
     /**TODO: loop for all barcodes on the list. Loop, just increment the indexPath.row.
      *  First, we test one barcode...
      */
-    GTLQueryBooks *barcodeQuery = [GTLQueryBooks queryForVolumesListWithQ:@""];
+    
+    /**
+     *  TODO: This all needs to be in the GoogleGTLClient!!!
+     */
+        // Capture the ISBN for the [first] cell
+        // TODO: any given cell.
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     UITableViewCell *cell  = [self.uniqueBarcodesTableView cellForRowAtIndexPath:indexPath];
     NSString *ISBNforCell  = cell.textLabel.text;
-        //a pair with line 154:    NSString *ISBNforCell  = [cell.textLabel.text stringByReplacingCharactersInRange:NSMakeRange(0, 4) withString:@""];
-    barcodeQuery.q = ISBNforCell;
-        // The Books API currently requires that search queries not have an
-        // authorization header (b/4445456)
-    barcodeQuery.shouldSkipAuthorization = YES;
-    
-        //"Fields" is Experimental - the format was taken from the web docs: https://developers.google.com/books/docs/v1/reference/volumes/list?hl=en
-        // BTW, this limits the response to the information we desire, saving on system resources.
-    barcodeQuery.fields = @"items(id, volumeInfo)";
+
+        // For the request for the googleClient:
     LBRGoogleGTLClient *googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
-    GTLServiceTicket *ticket         = [googleClient.service executeQuery:barcodeQuery
-                                                        completionHandler:^(GTLServiceTicket *ticket, id object, NSError *error) {
-        if (error) {
-            NSLog(@"Error in barcodeQuery execution: %@", error.localizedDescription);
-        } else {
-            self.dataManager.responseCollectionOfPotentialVolumeMatches = object;
-//            UIPopoverController
-            self.confirmVolumeTVC = [LBRSelectVolumeTableViewController new];
-                [self presentVolumesSemiModally];
-//            [self presentViewController:self.confirmVolumeTVC animated:YES completion:nil];
-        }
-    }];
-        //Google's example code had this line, not sure why...yet.
-    ticket = nil;
+    GTLServiceTicket *responseTicket = [googleClient queryForVolumeWithISBN:ISBNforCell];
+
+    /**
+     *  Weak Point: will id-casting work? Only if it actually returns the right thing.
+     */
+    self.dataManager.responseCollectionOfPotentialVolumeMatches = (id)responseTicket.fetchedObject;
+            //            UIPopoverController
+        self.confirmVolumeTVC = [LBRSelectVolumeTableViewController new];
+        [self presentVolumesSemiModally];
     
+        //Google's example code had this line, not sure why...yet.
+    responseTicket = nil;
 }
 
 -(void)presentVolumesSemiModally {
