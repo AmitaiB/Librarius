@@ -279,17 +279,21 @@ static NSString * const kUnknown = @"kUnknown";
 //    If the library is empty, generate testData.
     
     [self generateDefaultLibraryIfNeeded];
-    
-    Volume *the120Days        = [NSEntityDescription insertNewObjectForEntityForName:@"Volume" inManagedObjectContext:self.managedObjectContext];
+    LBRGoogleGTLClient *googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
 
+    GTLBooksVolume *the120DaysGTL = [googleClient queryForVolumeWithISBN:@"978-1-60309-050-6" returnTicket:NO];
+    
+    [self addGTLVolumeToCurrentLibrary:the120DaysGTL];
+    Volume *the120Days = [NSEntityDescription insertNewObjectForEntityForName:@"Volume" inManagedObjectContext:self.managedObjectContext];
+    
+    
     Volume *aMatterOfLife     = [NSEntityDescription insertNewObjectForEntityForName:@"Volume" inManagedObjectContext:self.managedObjectContext];
 
     Volume *theYearsHavePants = [NSEntityDescription insertNewObjectForEntityForName:@"Volume" inManagedObjectContext:self.managedObjectContext];
 
     Volume *anyEmpire         = [NSEntityDescription insertNewObjectForEntityForName:@"Volume" inManagedObjectContext:self.managedObjectContext];
     
-    LBRGoogleGTLClient *googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
-    [googleClient queryForVolumeWithISBN:@"978-1-60309-050-6" returnTicket:NO];
+    
     
     
     [self saveContext];

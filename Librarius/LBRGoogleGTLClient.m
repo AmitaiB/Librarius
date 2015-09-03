@@ -65,7 +65,11 @@
         return tempTicket;
     }
     
-    return responseObject;
+    GTLBooksVolumes *spelunkMe = responseObject;
+    if (spelunkMe.items[0]) {
+        return spelunkMe.items[0];
+    }
+    return nil;
 }
 
 
