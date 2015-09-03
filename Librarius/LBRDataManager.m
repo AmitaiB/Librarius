@@ -294,12 +294,6 @@ static NSString * const kUnknown = @"kUnknown";
         GTLBooksVolume *tempVolume = [googleClient queryForVolumeWithISBN:ISBN returnTicket:NO];
         [self addGTLVolumeToCurrentLibrary:tempVolume];
     }
-//
-//    GTLBooksVolume *the120DaysGTL = [googleClient queryForVolumeWithISBN:@"978-1-60309-050-6" returnTicket:NO];
-//    
-//    [self addGTLVolumeToCurrentLibrary:the120DaysGTL];
-//
-//    Volume *the120Days = [NSEntityDescription insertNewObjectForEntityForName:@"Volume" inManagedObjectContext:self.managedObjectContext];
     
     [self saveContext];
     [self fetchData];
