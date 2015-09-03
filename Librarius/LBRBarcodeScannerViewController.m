@@ -15,8 +15,12 @@
 
 #import "LBRBarcodeScannerViewController.h"
 #import "LBRSelectVolumeTableViewController.h"
-#import "LBRDataManager.h"
 #import "LBRGoogleGTLClient.h"
+
+#import "LBRDataManager.h"
+#import "Library.h"
+#import "Volume.h"
+
 
 @interface LBRBarcodeScannerViewController ()
 //- (IBAction)scanOneButtonTapped:(id)sender;
@@ -52,6 +56,10 @@ static NSString * const volumeNib          = @"volumePresentationView";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initializeProgrammaticProperties];
+    
+    LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
+    [dataManager generateTestData];
+    NSLog(@"%@",[dataManager.currentLibrary.volumes description]);
     
 }
 
