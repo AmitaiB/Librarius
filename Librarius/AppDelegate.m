@@ -11,6 +11,7 @@
 #import "DetailViewController.h"
 #import "MasterViewController.h"
 #import "LBRDataManager.h"
+#import "Library.h"
 
 @interface AppDelegate ()
 
@@ -33,6 +34,10 @@
 //    NSAssert(!configureError, @"Error configuring Google services: %@", configureError.localizedDescription);
 //    
 //    [GIDSignIn sharedInstance].delegate = self;
+    
+    LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
+    [dataManager generateTestData];
+    NSLog(@"%@",[dataManager.currentLibrary.volumes description]);
     
     return YES;
 }

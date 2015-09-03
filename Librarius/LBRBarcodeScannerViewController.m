@@ -188,9 +188,12 @@ static NSString * const volumeNib          = @"volumePresentationView";
     UITableViewCell *cell  = [self.uniqueBarcodesTableView cellForRowAtIndexPath:indexPath];
     NSString *ISBNforCell  = cell.textLabel.text;
 
+    /**
+     *  CLEAN: Possibly refactor to not need the ticket...
+     */
         // For the request for the googleClient:
     LBRGoogleGTLClient *googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
-    GTLServiceTicket *responseTicket = [googleClient queryForVolumeWithISBN:ISBNforCell];
+    GTLServiceTicket *responseTicket = [googleClient queryForVolumeWithISBN:ISBNforCell returnTicket:YES];
 
     /**
      *  Weak Point: will id-casting work? Only if it actually returns the right thing.
