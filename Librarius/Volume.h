@@ -16,7 +16,7 @@
 @property (nonatomic, retain) NSString * isbn10;
 @property (nonatomic, retain) NSString * isbn13;
 @property (nonatomic, retain) NSString * title;
-@property (nonatomic, retain) NSNumber * width;
+@property (nonatomic, retain) NSNumber * thickness;
 @property (nonatomic, retain) NSNumber * height;
 @property (nonatomic, retain) NSNumber * pageCount;
 @property (nonatomic, retain) NSString * cover_art;

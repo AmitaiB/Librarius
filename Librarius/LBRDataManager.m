@@ -50,7 +50,7 @@ static NSString * const kUnknown = @"kUnknown";
     newLBRVolume.isbn10    = [NSString new];
     newLBRVolume.title     = [NSString new];
     newLBRVolume.pageCount = nil;
-    newLBRVolume.width     = nil;
+    newLBRVolume.thickness     = nil;
     newLBRVolume.height    = nil;
     newLBRVolume.cover_art = @"https://www.google.com";
     newLBRVolume.author    = @"John Doe";
@@ -89,22 +89,22 @@ static NSString * const kUnknown = @"kUnknown";
     
     
     /**
-     *  Height, in inches, if the information is present.
+     *  Height, in inches (from cm), if the information is present.
      */
-    NSNumber *height = [self exportImperialLengthFromString:volumeToAdd.volumeInfo.dimensions.height];
+    NSNumber *height = @([volumeToAdd.volumeInfo.dimensions.height floatValue] / 2.54);
     if ([height floatValue] > 0.0) {
         newLBRVolume.height = height;
     }
     /**
-     *  Width, in inches. If not given, it will be estimated from the pagecount, if it is defined.
+     *  Thickness of the book's spine, in inches (from cm). If not given, it will be estimated from the pagecount, if it is defined.
      */
-    NSNumber *width = [self exportImperialLengthFromString:volumeToAdd.volumeInfo.dimensions.width];
+    NSNumber *thickness = @([volumeToAdd.volumeInfo.dimensions.thickness floatValue] / 2.54);
     
-    if ([width floatValue] > 0.0) {
-        newLBRVolume.width = width;
+    if ([thickness floatValue] > 0.0) {
+        newLBRVolume.thickness = thickness;
     }
     else if (newLBRVolume.pageCount) {
-        newLBRVolume.width = @([newLBRVolume.pageCount floatValue] / CALIPER);
+        newLBRVolume.thickness = @([newLBRVolume.pageCount floatValue] / CALIPER);
     }
     
     /**
@@ -129,28 +129,29 @@ static NSString * const kUnknown = @"kUnknown";
         newLBRVolume.author = [volumeToAdd.volumeInfo.authors componentsJoinedByString:@" & "];
     }
     
+    /**
+     *  Date of publication.
+     */
     if (volumeToAdd.volumeInfo.publishedDate) {
         newLBRVolume.published = [volumeToAdd.volumeInfo.publishedDate dateValue];
     }
     
-            newLBRVolume.rating;
-            newLBRVolume.google_id;
-            newLBRVolume.library;
-            newLBRVolume.bookcase;
-
-}
-#pragma mark - helper methods
-
--(NSNumber*)exportImperialLengthFromString:(NSString*)lengthString {
-    CGFloat temp = [[self stringWithOnlyNumbersFrom:lengthString] floatValue];
-    
-    BOOL isMetric = ([lengthString containsString:@"cm"])? YES : NO;
-    if (isMetric) {
-        temp = temp / 2.54;
+    /**
+     *  Average rating. TODO: ../ratingsCount?
+     */
+    if (volumeToAdd.volumeInfo.averageRating) {
+        newLBRVolume.rating = volumeToAdd.volumeInfo.averageRating;
     }
-    return @(temp);
+    
+    /**
+     *  Google ID for the volume. Vital!
+     */
+    
+    newLBRVolume.google_id = volumeToAdd.identifier;
 }
 
+
+#pragma mark - helper methods
 
 -(NSString*)stringWithOnlyNumbersFrom:(NSString*)string {
     return [[string componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet]invertedSet]]componentsJoinedByString:@""];

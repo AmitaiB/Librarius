@@ -16,7 +16,7 @@
 @dynamic isbn10;
 @dynamic isbn13;
 @dynamic title;
-@dynamic width;
+@dynamic thickness;
 @dynamic height;
 @dynamic pageCount;
 @dynamic cover_art;

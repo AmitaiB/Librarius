@@ -23,14 +23,14 @@
         <attribute name="pageCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="published" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="rating" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="thickness" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="width" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="bookcase" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bookcase" inverseName="volumes" inverseEntity="Bookcase" syncable="YES"/>
         <relationship name="library" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Library" inverseName="volumes" inverseEntity="Library" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Bookcase" positionX="0" positionY="0" width="128" height="120"/>
-        <element name="Library" positionX="0" positionY="0" width="128" height="90"/>
-        <element name="Volume" positionX="0" positionY="0" width="128" height="255"/>
+        <element name="Bookcase" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Library" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Volume" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>
