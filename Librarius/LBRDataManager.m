@@ -40,8 +40,8 @@ static NSString * const kUnknown = @"kUnknown";
 -(void)addVolumeToCollectionAndSave:(GTLBooksVolume*)volumeToAdd {
     LBRDataStore *store = [LBRDataStore sharedDataStore];
     
-//    Volume *newLBRVolume = [[Volume alloc] initWithEntity:@"Volume" insertIntoManagedObjectContext:store.managedObjectContext];
-    Volume *newLBRVolume = [Volume new];
+    Volume *newLBRVolume = [[Volume alloc] initWithEntity:@"Volume" insertIntoManagedObjectContext:store.managedObjectContext];
+//    Volume *newLBRVolume = [Volume new];
     
     /**
      *  Default Values
@@ -148,6 +148,8 @@ static NSString * const kUnknown = @"kUnknown";
      */
     
     newLBRVolume.google_id = volumeToAdd.identifier;
+    
+    
 }
 
 

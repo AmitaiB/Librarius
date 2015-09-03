@@ -22,6 +22,8 @@
         _sharedDataStore = [LBRDataStore new];
     });
     
+        //If there is no library, create and add a default library.
+    
     return _sharedDataStore;
 }
 
@@ -120,6 +122,22 @@
     [self saveContext];
     [self fetchData];
 }
+
+-(void)generateDefaultLibrary {
+    NSFetchRequest *libraryRequest = [NSFetchRequest fetchRequestWithEntityName:@"Library"];
+    
+    NSError *error = nil;
+    
+    NSArray *libraries = [self.managedObjectContext executeFetchRequest:libraryRequest error:&error];
+    if (libraries != nil) {
+        
+    }
+    
+    
+    Library *defaultLibrary = [[Library alloc] initWithEntity:@"Library" insertIntoManagedObjectContext:self.managedObjectContext];
+    
+}
+
 
 - (void)fetchData
 {
