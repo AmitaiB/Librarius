@@ -312,8 +312,10 @@ static NSString * const kUnknown = @"kUnknown";
             }
     } else {
         Library *newDefaultLibrary = [NSEntityDescription insertNewObjectForEntityForName:@"Library" inManagedObjectContext:self.managedObjectContext];
-        [self saveContext];
+        newDefaultLibrary.name = @"Home Library";
+        newDefaultLibrary.orderWhenListed = @1;
         self.currentLibrary = newDefaultLibrary;
+        [self saveContext];
     }
 }
 
