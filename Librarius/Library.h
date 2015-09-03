@@ -16,5 +16,7 @@
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) Bookcase *bookcases;
 @property (nonatomic, retain) Volume *volumes;
+@property (nonatomic) NSUInteger orderWhenListed;
+
 
 @end

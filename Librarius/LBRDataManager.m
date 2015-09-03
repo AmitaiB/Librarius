@@ -171,6 +171,21 @@ static NSString * const kUnknown = @"kUnknown";
 // ===================== CoreData additions here
 
 #pragma mark - CoreData
+#pragma mark Fetch Data
+
+- (void)fetchData
+{
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Library"];
+    |X|
+    NSSortDescriptor *createdAtSorter = [NSSortDescriptor sortDescriptorWithKey:@"" ascending:YES];
+    fetchRequest.sortDescriptors = @[createdAtSorter];
+    
+        //    self.messages = [self.managedObjectContext executeFetchRequest:messagesRequest error:nil];
+    
+        //    if ([self.messages count]==0) {
+        //        [self generateTestData];
+        //    }
+}
 
 - (void)saveContext
 {
@@ -282,19 +297,5 @@ static NSString * const kUnknown = @"kUnknown";
     }
 }
 
-
-- (void)fetchData
-{
-    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@""];
-    
-    NSSortDescriptor *createdAtSorter = [NSSortDescriptor sortDescriptorWithKey:@"" ascending:YES];
-    fetchRequest.sortDescriptors = @[createdAtSorter];
-    
-        //    self.messages = [self.managedObjectContext executeFetchRequest:messagesRequest error:nil];
-    
-        //    if ([self.messages count]==0) {
-        //        [self generateTestData];
-        //    }
-}
 
 @end
