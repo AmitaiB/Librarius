@@ -1,9 +1,9 @@
 //
 //  Library.h
-//  Librarius
+//  
 //
-//  Created by Amitai Blickstein on 8/28/15.
-//  Copyright (c) 2015 Amitai Blickstein, LLC. All rights reserved.
+//  Created by Amitai Blickstein on 9/3/15.
+//
 //
 
 #import <Foundation/Foundation.h>
@@ -14,9 +14,16 @@
 @interface Library : NSManagedObject
 
 @property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSNumber * orderWhenListed;
 @property (nonatomic, retain) Bookcase *bookcases;
-@property (nonatomic, retain) Volume *volumes;
-@property (nonatomic) NSUInteger orderWhenListed;
+@property (nonatomic, retain) NSSet *volumes;
+@end
 
+@interface Library (CoreDataGeneratedAccessors)
+
+- (void)addVolumesObject:(Volume *)value;
+- (void)removeVolumesObject:(Volume *)value;
+- (void)addVolumes:(NSSet *)values;
+- (void)removeVolumes:(NSSet *)values;
 
 @end

@@ -11,7 +11,7 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="orderWhenListed" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="bookcases" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bookcase" inverseName="library" inverseEntity="Bookcase" syncable="YES"/>
-        <relationship name="volumes" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Volume" inverseName="library" inverseEntity="Volume" syncable="YES"/>
+        <relationship name="volumes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Volume" inverseName="library" inverseEntity="Volume" syncable="YES"/>
     </entity>
     <entity name="Volume" representedClassName="Volume" syncable="YES">
         <attribute name="author" optional="YES" attributeType="String" syncable="YES"/>

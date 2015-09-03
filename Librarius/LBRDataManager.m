@@ -54,13 +54,13 @@ static NSString * const kUnknown = @"kUnknown";
     newLBRVolume.isbn10    = [NSString new];
     newLBRVolume.title     = [NSString new];
     newLBRVolume.pageCount = nil;
-    newLBRVolume.thickness     = nil;
+    newLBRVolume.thickness = nil;
     newLBRVolume.height    = nil;
     newLBRVolume.cover_art = @"https://www.google.com";
     newLBRVolume.author    = @"John Doe";
     newLBRVolume.category  = @"General Literature";
     newLBRVolume.published = [NSDate distantPast];
-    newLBRVolume.rating    = @1;
+    newLBRVolume.rating    = nil;
     newLBRVolume.google_id = [NSString new];
     
     /**
@@ -175,16 +175,13 @@ static NSString * const kUnknown = @"kUnknown";
 
 - (void)fetchData
 {
-    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Library"];
-    |X|
-    NSSortDescriptor *createdAtSorter = [NSSortDescriptor sortDescriptorWithKey:@"" ascending:YES];
-    fetchRequest.sortDescriptors = @[createdAtSorter];
-    
-        //    self.messages = [self.managedObjectContext executeFetchRequest:messagesRequest error:nil];
-    
-        //    if ([self.messages count]==0) {
-        //        [self generateTestData];
-        //    }
+    [self generateDefaultLibraryIfNeeded];
+    NSFetchRequest *librariesFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Library"];
+    NSSortDescriptor *orderSorter = [NSSortDescriptor sortDescriptorWithKey:@"orderWhenListed" ascending:YES];
+    librariesFetchRequest.sortDescriptors = @[orderSorter];
+    NSError *error = nil;
+    self.libraries = [self.managedObjectContext executeFetchRequest:librariesFetchRequest error:&error];
+    self.currentLibrary = self.libraries[0];
 }
 
 - (void)saveContext
@@ -272,13 +269,23 @@ static NSString * const kUnknown = @"kUnknown";
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
-#pragma mark
+#pragma mark - Generate Data
 
-/**
- *  May not be necessary.
- */
 - (void)generateTestData
 {
+    if ([self.currentLibrary.volumes ]) {
+        <#statements#>
+    }
+    
+    static NSString *volume = @"volume";
+    [self generateDefaultLibraryIfNeeded];
+    LBRGoogleGTLClient *googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
+    
+    
+    Volume *the120Days = [NSEntityDescription insertNewObjectForEntityForName:volume inManagedObjectContext:self.managedObjectContext];
+    
+    
+    
     
     [self saveContext];
     [self fetchData];
@@ -287,9 +294,10 @@ static NSString * const kUnknown = @"kUnknown";
 -(void)generateDefaultLibraryIfNeeded {
     NSFetchRequest *libraryRequest = [NSFetchRequest fetchRequestWithEntityName:@"Library"];
     NSError *error = nil;
-    self.libraries = [self.managedObjectContext executeFetchRequest:libraryRequest error:&error];
-    if (self.libraries.count > 0) {
-            // Do nothing.
+    if ([self.managedObjectContext countForFetchRequest:libraryRequest error:&error]) {
+            //It goes without saying:
+        if (error) {DBLG NSLog(@"Error: %@", error.localizedDescription);}
+            // Back to the condition: If there's a library, Do nothing.
     } else {
         Library *newDefaultLibrary = [NSEntityDescription insertNewObjectForEntityForName:@"Library" inManagedObjectContext:self.managedObjectContext];
         [self saveContext];

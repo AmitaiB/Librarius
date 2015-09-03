@@ -1,9 +1,9 @@
 //
 //  Library.m
-//  Librarius
+//  
 //
-//  Created by Amitai Blickstein on 8/28/15.
-//  Copyright (c) 2015 Amitai Blickstein, LLC. All rights reserved.
+//  Created by Amitai Blickstein on 9/3/15.
+//
 //
 
 #import "Library.h"
@@ -14,9 +14,8 @@
 @implementation Library
 
 @dynamic name;
+@dynamic orderWhenListed;
 @dynamic bookcases;
 @dynamic volumes;
-@dynamic orderWhenListed;
-
 
 @end
