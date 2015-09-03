@@ -274,27 +274,32 @@ static NSString * const kUnknown = @"kUnknown";
 
 - (void)generateTestData
 {
+    LBRGoogleGTLClient *googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
+    [self generateDefaultLibraryIfNeeded];
     if (self.currentLibrary.volumes.count) {
         return;}
-//    If the library is empty, generate testData.
+//    Only if the library is empty, generate testData.
     
-    [self generateDefaultLibraryIfNeeded];
-    LBRGoogleGTLClient *googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
+    /**
+     *  Given an array of ISBNs, populate the DB
+     */
 
-    GTLBooksVolume *the120DaysGTL = [googleClient queryForVolumeWithISBN:@"978-1-60309-050-6" returnTicket:NO];
+    NSArray *listOfISBNs = @[@"978-1-60309-050-6",
+                             @"978-1-60309-266-1",
+                             @"978-1-60309-025-4",
+                             @"978-1-60309-239-5",
+                             @"978-1-60309-042-1"];
     
-    [self addGTLVolumeToCurrentLibrary:the120DaysGTL];
-    Volume *the120Days = [NSEntityDescription insertNewObjectForEntityForName:@"Volume" inManagedObjectContext:self.managedObjectContext];
-    
-    
-    Volume *aMatterOfLife     = [NSEntityDescription insertNewObjectForEntityForName:@"Volume" inManagedObjectContext:self.managedObjectContext];
-
-    Volume *theYearsHavePants = [NSEntityDescription insertNewObjectForEntityForName:@"Volume" inManagedObjectContext:self.managedObjectContext];
-
-    Volume *anyEmpire         = [NSEntityDescription insertNewObjectForEntityForName:@"Volume" inManagedObjectContext:self.managedObjectContext];
-    
-    
-    
+    for (NSString *ISBN in listOfISBNs) {
+        GTLBooksVolume *tempVolume = [googleClient queryForVolumeWithISBN:ISBN returnTicket:NO];
+        [self addGTLVolumeToCurrentLibrary:tempVolume];
+    }
+//    
+//    GTLBooksVolume *the120DaysGTL = [googleClient queryForVolumeWithISBN:@"978-1-60309-050-6" returnTicket:NO];
+//    
+//    [self addGTLVolumeToCurrentLibrary:the120DaysGTL];
+//
+//    Volume *the120Days = [NSEntityDescription insertNewObjectForEntityForName:@"Volume" inManagedObjectContext:self.managedObjectContext];
     
     [self saveContext];
     [self fetchData];
