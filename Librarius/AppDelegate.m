@@ -10,7 +10,7 @@
 #import <GoogleSignIn.h>
 #import "DetailViewController.h"
 #import "MasterViewController.h"
-//#import "LBRDataManager.h"
+#import "LBRDataManager.h"
 //#import "Library.h"
 
 @interface AppDelegate ()
