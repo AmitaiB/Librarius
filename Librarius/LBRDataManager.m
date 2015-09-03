@@ -12,7 +12,9 @@
 #import "Volume.h"
 #import "NSString+dateValue.h"
 
-#define CALIPER [@"436" floatValue] //In papes per inch, ppi.
+#define DBLG NSLog(@"%@ reporting!", NSStringFromSelector(_cmd));
+
+#define CALIPER [@"436" floatValue] //In pages per inch, ppi.
 /**
 Typical uncoated digital book paper calipers:
 
@@ -39,9 +41,11 @@ static NSString * const kUnknown = @"kUnknown";
  *  This will translate a GoogleBooks volume object into our NSManagedObject.
  */
 -(void)addVolumeToCollectionAndSave:(GTLBooksVolume*)volumeToAdd {
+    DBLG
     
-    Volume *newLBRVolume = [[Volume alloc] initWithEntity:@"Volume" insertIntoManagedObjectContext:self.managedObjectContext];
-//    Volume *newLBRVolume = [Volume new];
+    Volume *newLBRVolume = [NSEntityDescription insertNewObjectForEntityForName:@"Volume" inManagedObjectContext:self.managedObjectContext];
+    [self generateDefaultLibraryIfNeeded];
+    newLBRVolume.library = self.currentLibrary;
     
     /**
      *  Default Values
@@ -265,19 +269,17 @@ static NSString * const kUnknown = @"kUnknown";
     [self fetchData];
 }
 
--(void)generateDefaultLibrary {
+-(void)generateDefaultLibraryIfNeeded {
     NSFetchRequest *libraryRequest = [NSFetchRequest fetchRequestWithEntityName:@"Library"];
-    
     NSError *error = nil;
-    
-    NSArray *libraries = [self.managedObjectContext executeFetchRequest:libraryRequest error:&error];
-    if (libraries != nil) {
-        
+    self.libraries = [self.managedObjectContext executeFetchRequest:libraryRequest error:&error];
+    if (self.libraries.count > 0) {
+            // Do nothing.
+    } else {
+        Library *newDefaultLibrary = [NSEntityDescription insertNewObjectForEntityForName:@"Library" inManagedObjectContext:self.managedObjectContext];
+        [self saveContext];
+        self.currentLibrary = newDefaultLibrary;
     }
-    
-    
-    Library *defaultLibrary = [[Library alloc] initWithEntity:@"Library" insertIntoManagedObjectContext:self.managedObjectContext];
-    
 }
 
 

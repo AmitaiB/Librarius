@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "LBRGoogleGTLClient.h"
 
-
+@class Library;
 @interface LBRDataManager : NSObject
 
     // ScannerVC:GoogleBooksClient → VolumePresentationTVC
@@ -26,6 +26,10 @@
 @property (nonatomic, strong) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
     //Other properties to store and fetch, e.g., NSArray *messages...
+
+@property (nonatomic, strong) NSArray *libraries;
+@property (nonatomic, strong) Library *currentLibrary;
+
 
 -(void) saveContext;
 -(void) generateTestData;
