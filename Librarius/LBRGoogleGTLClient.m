@@ -37,6 +37,7 @@
         _service.APIKey       = GOOGLE_APP_KEY;
         _service.retryEnabled = YES;
         
+        _dataManager = [LBRDataManager sharedDataManager];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveBarcodeAddedNotification) name:barcodeAddedNotification object:nil];
     }
@@ -61,18 +62,26 @@
     [self.service executeQuery:booksQuery completionHandler:^(GTLServiceTicket *ticket, id object, NSError *error) {
             // callback
         /**
-         *  HERE!!!!
+         *  Turf the GTLVolume to dataManager, while googleClient can grab a beer.
          */
-        NSLog(@"Error in booksQueryWithISBN: %@", error.localizedDescription);
-        self.blockError       = error;
-        self.mostRecentTicket = ticket;
-        self.responseObject   = object;
+        if (!error) {
+            self.dataManager.responseCollectionOfPotentialVolumeMatches = object;
+            /**
+             *  CLEAN: probably not needed anymore.
+             */
+            self.mostRecentTicket = ticket;
+            self.responseObject   = object;
+        } else {
+            NSLog(@"Error in booksQueryWithISBN: %@", error.localizedDescription);
+            self.blockError       = error;
+            
+            
+        }
     }];
 }
 
 -(void)receiveBarcodeAddedNotification {
-    LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
-    [self queryForVolumeWithISBN:[dataManager.uniqueCodes lastObject] returnTicket:NO];
+    [self queryForVolumeWithISBN:[self.dataManager.uniqueCodes lastObject] returnTicket:NO];
 }
 
 

@@ -19,7 +19,7 @@
 
 +(instancetype)sharedDataManager;
 
--(void)addGTLVolumeToCurrentLibrary:(GTLBooksVolume*)volumeToAdd;
+-(void)addGTLVolumeToCurrentLibrary:(GTLBooksVolume*)volumeToAdd andSaveContext:(BOOL)saveContext;
 
 //============== adding CoreData functions here
 
@@ -35,7 +35,6 @@
 -(void) saveContext;
 -(void) generateTestDataIfNeeded;
 -(void) fetchData;
-
 
 
 @end

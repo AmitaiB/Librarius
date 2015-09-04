@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import <GTLBooks.h>
+#import "LBRDataManager.h"
 
 @interface LBRGoogleGTLClient : NSObject
 
+@property (nonatomic, strong) LBRDataManager *dataManager;
 @property (nonatomic, strong) GTLServiceBooks *service;
 @property (nonatomic, strong) GTLServiceTicket *mostRecentTicket;
 @property (nonatomic, strong) GTLBooksVolumes *responseObject;

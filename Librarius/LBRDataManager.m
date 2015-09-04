@@ -25,6 +25,8 @@ Typical uncoated digital book paper calipers:
  */
 
 @implementation LBRDataManager
+@synthesize responseCollectionOfPotentialVolumeMatches = _responseCollectionOfPotentialVolumeMatches;
+
 
 static NSString * const kUnknown = @"kUnknown";
 
@@ -38,10 +40,16 @@ static NSString * const kUnknown = @"kUnknown";
     return _sharedDataManager;
 }
 
+    //Setter
+-(void)setResponseCollectionOfPotentialVolumeMatches:(GTLBooksVolumes *)responseCollectionOfPotentialVolumeMatches {
+    _responseCollectionOfPotentialVolumeMatches = responseCollectionOfPotentialVolumeMatches;
+    [self addGTLVolumeToCurrentLibrary:responseCollectionOfPotentialVolumeMatches.items[0] andSaveContext:NO];
+    
+}
 /**
  *  This will translate a GoogleBooks volume object into our NSManagedObject.
  */
--(void)addGTLVolumeToCurrentLibrary:(GTLBooksVolume*)volumeToAdd {
+-(void)addGTLVolumeToCurrentLibrary:(GTLBooksVolume*)volumeToAdd andSaveContext:(BOOL)saveContext {
     DBLG
     
     Volume *newLBRVolume = [NSEntityDescription insertNewObjectForEntityForName:@"Volume" inManagedObjectContext:self.managedObjectContext];
@@ -155,7 +163,9 @@ static NSString * const kUnknown = @"kUnknown";
     
     newLBRVolume.google_id = volumeToAdd.identifier;
     
-    
+    if (saveContext) {
+        [self saveContext];
+    }
 }
 
 
@@ -297,7 +307,7 @@ static NSString * const kUnknown = @"kUnknown";
     for (NSString *ISBN in listOfISBNs) {
         [self.googleClient queryForVolumeWithISBN:ISBN returnTicket:NO];
         GTLBooksVolume *tempVolume = self.googleClient.responseObject.items[0];
-        [self addGTLVolumeToCurrentLibrary:tempVolume];
+        [self addGTLVolumeToCurrentLibrary:tempVolume andSaveContext:NO];
     }
     
     [self saveContext];
