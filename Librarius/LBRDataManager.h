@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+|X|
 @class GTLBooksVolumes;
 @class LBRParsedVolume;
 @class LBRGoogleGTLClient;
@@ -17,7 +17,7 @@
     // ScannerVC:GoogleBooksClient → VolumePresentationTVC
 @property (nonatomic, strong) NSMutableArray *uniqueCodes;
 @property (nonatomic, strong) LBRGoogleGTLClient *googleClient;
-@property (nonatomic, strong) LBRParsedVolume *mostRecentParsedVolume;
+@property (nonatomic, strong) LBRParsedVolume *parsedVolumeFromLastBarcode; //<-- Use this to confirm user's purchases
 
 @property (nonatomic, strong) GTLBooksVolumes *responseCollectionOfPotentialVolumeMatches;
 

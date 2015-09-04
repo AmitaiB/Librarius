@@ -6,9 +6,8 @@
 //  Copyright (c) 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 #define DBLG NSLog(@"%@ reporting!", NSStringFromSelector(_cmd));
-#define set() [NSSet setWithArray:@[__VA_ARGS__]]
+//#define set() [NSSet setWithArray:@[__VA_ARGS__]]
 #define kSpinnerFrameRect CGRectMake(0, 0, 40, 40)
-
 
 #import <LGSemiModalNavViewController.h>
 #import <MTBBarcodeScanner.h>
@@ -79,6 +78,9 @@ static NSString * const volumeNib          = @"volumePresentationView";
     self.scanner = [[MTBBarcodeScanner alloc] initWithPreviewView:self.scannerView];
     self.responseCollectionOfPotentialVolumeMatches = [GTLBooksVolumes new];
     
+    if (!self.dataManager.uniqueCodes) {
+        self.dataManager.uniqueCodes = [NSMutableArray new];
+    }
     
     /**
      The Material Design Spinnerview inits
@@ -145,15 +147,11 @@ static NSString * const volumeNib          = @"volumePresentationView";
     [self.startScanningButton setTitleColor:[UIColor orangeColor] forState:UIControlStateSelected];
     self.startScanningButton.backgroundColor = [UIColor redColor];
 
-//    [MTBBarcodeScanner requestCameraPermissionWithSuccess:^(BOOL success)
+//Put everything in this, maybe?  [MTBBarcodeScanner requestCameraPermissionWithSuccess:^(BOOL success)...?
    
     [self.scanner startScanningWithResultBlock:^(NSArray *codes) {
         for (AVMetadataMachineReadableCodeObject *code in codes) {
                 // If it's a new barcode, add it to the array.
-            if (!self.dataManager.uniqueCodes) {
-                self.dataManager.uniqueCodes = [NSMutableArray new];
-            }
-            
             if ([self.dataManager.uniqueCodes indexOfObject:code.stringValue] == NSNotFound) {
                 [self.dataManager.uniqueCodes addObject:code.stringValue];
                 [[NSNotificationCenter defaultCenter] postNotificationName:barcodeAddedNotification object:self.dataManager.uniqueCodes];
@@ -209,6 +207,16 @@ static NSString * const volumeNib          = @"volumePresentationView";
 
 #pragma mark - GoogleClient
 
+-(void)feedBarcodeToAPIClient {
+    /**
+     *  CLEAN: Even this shouldn't be needed.
+     *
+     */
+}
+
+/**
+ *  CLEAN: This should be DEPRECATED - Google Client gets the barcode from NSNotification!
+ */
 -(void)getVolumesFromBarcodeData {
     
     /**TODO: loop for all barcodes on the list. Loop, just increment the indexPath.row.

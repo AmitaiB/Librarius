@@ -11,6 +11,7 @@
 #import "Bookcase.h"
 #import "Volume.h"
 #import "LBRParsedVolume.h"
+#import <GTLBooksVolume.h>
 
 #define DBLG NSLog(@"%@ reporting!", NSStringFromSelector(_cmd));
 
@@ -49,20 +50,20 @@ static NSString * const kUnknown = @"kUnknown";
     
     [self.currentLibrary addVolumesObject:newLBRVolume];
     
-    self.mostRecentParsedVolume = [[LBRParsedVolume alloc] initWithGoogleVolume:volumeToAdd];
+    self.parsedVolumeFromLastBarcode = [[LBRParsedVolume alloc] initWithGoogleVolume:volumeToAdd];
     
-    newLBRVolume.isbn13    = self.mostRecentParsedVolume.isbn13;
-    newLBRVolume.isbn10    = self.mostRecentParsedVolume.isbn10;
-    newLBRVolume.title     = self.mostRecentParsedVolume.title;
-    newLBRVolume.pageCount = self.mostRecentParsedVolume.pageCount;
-    newLBRVolume.thickness = self.mostRecentParsedVolume.thickness;
-    newLBRVolume.height    = self.mostRecentParsedVolume.height;
-    newLBRVolume.cover_art = self.mostRecentParsedVolume.cover_art;
-    newLBRVolume.author    = self.mostRecentParsedVolume.author;
-    newLBRVolume.category  = self.mostRecentParsedVolume.category;
-    newLBRVolume.published = self.mostRecentParsedVolume.published;
-    newLBRVolume.rating    = self.mostRecentParsedVolume.rating;
-    newLBRVolume.google_id = self.mostRecentParsedVolume.google_id;
+    newLBRVolume.isbn13    = self.parsedVolumeFromLastBarcode.isbn13;
+    newLBRVolume.isbn10    = self.parsedVolumeFromLastBarcode.isbn10;
+    newLBRVolume.title     = self.parsedVolumeFromLastBarcode.title;
+    newLBRVolume.pageCount = self.parsedVolumeFromLastBarcode.pageCount;
+    newLBRVolume.thickness = self.parsedVolumeFromLastBarcode.thickness;
+    newLBRVolume.height    = self.parsedVolumeFromLastBarcode.height;
+    newLBRVolume.cover_art = self.parsedVolumeFromLastBarcode.cover_art;
+    newLBRVolume.author    = self.parsedVolumeFromLastBarcode.author;
+    newLBRVolume.category  = self.parsedVolumeFromLastBarcode.category;
+    newLBRVolume.published = self.parsedVolumeFromLastBarcode.published;
+    newLBRVolume.rating    = self.parsedVolumeFromLastBarcode.rating;
+    newLBRVolume.google_id = self.parsedVolumeFromLastBarcode.google_id;
     
    
     if (saveContext) {

@@ -10,6 +10,7 @@
 #import "LBRConstants.h"
 #import "LBRBarcodeScannerViewController.h"
 #import "LBRDataManager.h"
+#import "LBRParsedVolume.h"
 
 
 @implementation LBRGoogleGTLClient
@@ -39,7 +40,7 @@
         
         _dataManager = [LBRDataManager sharedDataManager];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveBarcodeAddedNotification) name:barcodeAddedNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveBarcodeAddedNotification:) name:barcodeAddedNotification object:nil];
     }
     return self;
 }
@@ -48,6 +49,9 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+/**
+ *  CLEAN:We don't need the ticket!
+*/
 -(void)queryForVolumeWithISBN:(NSString*)ISBN returnTicket:(BOOL)returnTicketInstead {
     
     GTLQueryBooks *booksQuery = [GTLQueryBooks queryForVolumesListWithQ:ISBN];
@@ -62,29 +66,28 @@
     [self.service executeQuery:booksQuery completionHandler:^(GTLServiceTicket *ticket, id object, NSError *error) {
             // callback
         if (!error) {
+                // id-to-GTLBooksVolume dance:
             GTLBooksVolumes *responceObject = object;
             GTLBooksVolume *mostLikelyObject = [responceObject.items firstObject];
-            self.dataManager.mostRecentParsedVolume = [LBRParsedVolume alloc] ;
-                                                    
+            self.dataManager.parsedVolumeFromLastBarcode = [[LBRParsedVolume alloc] initWithGoogleVolume:mostLikelyObject];
+            NSLog(@"Job's done, because now the dataManager has the ParsedVolume.");
             
-            
-//            self.dataManager.responseCollectionOfPotentialVolumeMatches = object;
             /**
              *  CLEAN: probably not needed anymore.
              */
+                //            self.dataManager.responseCollectionOfPotentialVolumeMatches = object;
             self.mostRecentTicket = ticket;
             self.responseObject   = object;
         } else {
             NSLog(@"Error in booksQueryWithISBN: %@", error.localizedDescription);
             self.blockError       = error;
-            
-            
         }
     }];
 }
 
--(void)receiveBarcodeAddedNotification {
-    [self queryForVolumeWithISBN:[self.dataManager.uniqueCodes lastObject] returnTicket:NO];
+-(void)receiveBarcodeAddedNotification:(NSNotification*)notification {
+    NSLog(@"%@ received notification: '%@'", NSStringFromClass([self class]), notification.name);
+    [self queryForVolumeWithISBN:[notification.object lastObject] returnTicket:NO];
 }
 
 
