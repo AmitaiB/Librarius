@@ -10,19 +10,10 @@
 #import "Library.h"
 #import "Bookcase.h"
 #import "Volume.h"
-#import "NSString+dateValue.h"
-
+#import "LBRParsedVolume.h"
 
 #define DBLG NSLog(@"%@ reporting!", NSStringFromSelector(_cmd));
 
-#define CALIPER [@"436" floatValue] //In pages per inch, ppi.
-/**
-Typical uncoated digital book paper calipers:
-
-50-lb. natural high bulk, 456 PPI.
-60-lb. natural trade book, 436 PPI.
-80-lb. white opaque smooth, 382 PPI.
- */
 
 @implementation LBRDataManager
 @synthesize responseCollectionOfPotentialVolumeMatches = _responseCollectionOfPotentialVolumeMatches;
@@ -49,6 +40,7 @@ static NSString * const kUnknown = @"kUnknown";
 /**
  *  This will translate a GoogleBooks volume object into our NSManagedObject.
  */
+    //OLD NAME: addGTLVolumeToCurrentLibrary
 -(void)addGTLVolumeToCurrentLibrary:(GTLBooksVolume*)volumeToAdd andSaveContext:(BOOL)saveContext {
     DBLG
     
@@ -57,112 +49,22 @@ static NSString * const kUnknown = @"kUnknown";
     
     [self.currentLibrary addVolumesObject:newLBRVolume];
     
-    /**
-     *  Default Values
-     */
-    newLBRVolume.isbn13    = [NSString new];
-    newLBRVolume.isbn10    = [NSString new];
-    newLBRVolume.title     = [NSString new];
-    newLBRVolume.pageCount = nil;
-    newLBRVolume.thickness = nil;
-    newLBRVolume.height    = nil;
-    newLBRVolume.cover_art = @"https://www.google.com";
-    newLBRVolume.author    = @"John Doe";
-    newLBRVolume.category  = @"General Literature";
-    newLBRVolume.published = [NSDate distantPast];
-    newLBRVolume.rating    = nil;
-    newLBRVolume.google_id = [NSString new];
+    self.mostRecentParsedVolume = [[LBRParsedVolume alloc] initWithGoogleVolume:volumeToAdd];
     
-    /**
-     *  ISBN
-     */
-    for (NSDictionary *industryIDer in volumeToAdd.volumeInfo.industryIdentifiers) {
-        if ([industryIDer[@"type"] isEqualToString:@"ISBN_13"]) {
-            newLBRVolume.isbn13 = industryIDer[@"identifier"];
-        }
-        if ([industryIDer[@"type"] isEqualToString:@"ISBN_10"]) {
-            newLBRVolume.isbn10 = industryIDer[@"identifier"];
-        }
-    }
+    newLBRVolume.isbn13    = self.mostRecentParsedVolume.isbn13;
+    newLBRVolume.isbn10    = self.mostRecentParsedVolume.isbn10;
+    newLBRVolume.title     = self.mostRecentParsedVolume.title;
+    newLBRVolume.pageCount = self.mostRecentParsedVolume.pageCount;
+    newLBRVolume.thickness = self.mostRecentParsedVolume.thickness;
+    newLBRVolume.height    = self.mostRecentParsedVolume.height;
+    newLBRVolume.cover_art = self.mostRecentParsedVolume.cover_art;
+    newLBRVolume.author    = self.mostRecentParsedVolume.author;
+    newLBRVolume.category  = self.mostRecentParsedVolume.category;
+    newLBRVolume.published = self.mostRecentParsedVolume.published;
+    newLBRVolume.rating    = self.mostRecentParsedVolume.rating;
+    newLBRVolume.google_id = self.mostRecentParsedVolume.google_id;
     
-    /**
-     *  Title
-     */
-    if (volumeToAdd.volumeInfo.title.length > 0) {
-        newLBRVolume.title = volumeToAdd.volumeInfo.title;
-    }
-    
-    /**
-     *  PageCount
-     */
-    if ([volumeToAdd.volumeInfo.pageCount integerValue] > 0) {
-        newLBRVolume.pageCount = volumeToAdd.volumeInfo.pageCount;
-    } else if ([volumeToAdd.volumeInfo.printedPageCount integerValue] > 0) {
-        newLBRVolume.pageCount = volumeToAdd.volumeInfo.printedPageCount;
-    }
-    
-    
-    /**
-     *  Height, in inches (from cm), if the information is present.
-     */
-    NSNumber *height = @([volumeToAdd.volumeInfo.dimensions.height floatValue] / 2.54);
-    if ([height floatValue] > 0.0) {
-        newLBRVolume.height = height;
-    }
-    /**
-     *  Thickness of the book's spine, in inches (from cm). If not given, it will be estimated from the pagecount, if it is defined.
-     */
-    NSNumber *thickness = @([volumeToAdd.volumeInfo.dimensions.thickness floatValue] / 2.54);
-    
-    if ([thickness floatValue] > 0.0) {
-        newLBRVolume.thickness = thickness;
-    }
-    else if (newLBRVolume.pageCount) {
-        newLBRVolume.thickness = @([newLBRVolume.pageCount floatValue] / CALIPER);
-    }
-    
-    /**
-     *  Cover Art URL
-     */
-    if (volumeToAdd.volumeInfo.imageLinks.thumbnail) {
-        newLBRVolume.cover_art = volumeToAdd.volumeInfo.imageLinks.thumbnail;
-    }
-    else if (volumeToAdd.volumeInfo.imageLinks.smallThumbnail) {
-        newLBRVolume.cover_art = volumeToAdd.volumeInfo.imageLinks.smallThumbnail;
-    }
-    
-    /**
-     *  Author(s).
-     */
-    NSUInteger numberOfAuthors = volumeToAdd.volumeInfo.authors.count;
-    if (!numberOfAuthors) {
-            //Do nothing
-    } else if (numberOfAuthors == 1) {
-            newLBRVolume.author = volumeToAdd.volumeInfo.authors[0];
-    } else if (numberOfAuthors >=2) {
-        newLBRVolume.author = [volumeToAdd.volumeInfo.authors componentsJoinedByString:@" & "];
-    }
-    
-    /**
-     *  Date of publication.
-     */
-    if (volumeToAdd.volumeInfo.publishedDate) {
-        newLBRVolume.published = [volumeToAdd.volumeInfo.publishedDate dateValue];
-    }
-    
-    /**
-     *  Average rating. TODO: ../ratingsCount?
-     */
-    if (volumeToAdd.volumeInfo.averageRating) {
-        newLBRVolume.rating = volumeToAdd.volumeInfo.averageRating;
-    }
-    
-    /**
-     *  Google ID for the volume. Vital!
-     */
-    
-    newLBRVolume.google_id = volumeToAdd.identifier;
-    
+   
     if (saveContext) {
         [self saveContext];
     }

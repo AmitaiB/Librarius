@@ -8,14 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
+@class GTLBooksVolumes;
+@class LBRParsedVolume;
 @class LBRGoogleGTLClient;
 @class Library;
 @interface LBRDataManager : NSObject
 
     // ScannerVC:GoogleBooksClient → VolumePresentationTVC
 @property (nonatomic, strong) NSMutableArray *uniqueCodes;
-@property (nonatomic, strong) GTLBooksVolumes *responseCollectionOfPotentialVolumeMatches;
 @property (nonatomic, strong) LBRGoogleGTLClient *googleClient;
+@property (nonatomic, strong) LBRParsedVolume *mostRecentParsedVolume;
+
+@property (nonatomic, strong) GTLBooksVolumes *responseCollectionOfPotentialVolumeMatches;
 
 +(instancetype)sharedDataManager;
 

@@ -61,11 +61,14 @@
     
     [self.service executeQuery:booksQuery completionHandler:^(GTLServiceTicket *ticket, id object, NSError *error) {
             // callback
-        /**
-         *  Turf the GTLVolume to dataManager, while googleClient can grab a beer.
-         */
         if (!error) {
-            self.dataManager.responseCollectionOfPotentialVolumeMatches = object;
+            GTLBooksVolumes *responceObject = object;
+            GTLBooksVolume *mostLikelyObject = [responceObject.items firstObject];
+            self.dataManager.mostRecentParsedVolume = [LBRParsedVolume alloc] ;
+                                                    
+            
+            
+//            self.dataManager.responseCollectionOfPotentialVolumeMatches = object;
             /**
              *  CLEAN: probably not needed anymore.
              */
