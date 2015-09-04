@@ -6,6 +6,21 @@
 //  Copyright (c) 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 
+/* CLEAN: c&p from Apple's sample app. get rid of, when not needed.
+ Abstract: Controller for the select table view.
+ This table view controller works off the AppDelege's data model.
+ produce a three-stage lazy load:
+ 1. No data (i.e. an empty table)
+ 2. Text-only data from the model's RSS feed
+ 3. Images loaded over the network asynchronously
+ 
+ This process allows for asynchronous loading of the table to keep the UI responsive.
+ Stage 3 is managed by the AppRecord corresponding to each row/cell.
+ 
+ Images are scaled to the desired height.
+ If rapid scrolling is in progress, downloads do not begin until scrolling has ended.
+*/
+
 #import <UIKit/UIKit.h>
 #import "LBRGoogleGTLClient.h"
 #import "LBRDataManager.h"

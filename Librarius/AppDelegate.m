@@ -11,7 +11,13 @@
 #import "DetailViewController.h"
 #import "MasterViewController.h"
 #import "LBRDataManager.h"
-//#import "Library.h"
+//#import <UIKit+AFNetworking.h>
+//#import <AFNetworking.h>
+#import <AFNetworking/AFNetworkActivityIndicatorManager.h>
+    //#import "Library.h"
+
+#import <AVFoundation/AVFoundation.h>
+
 
 @interface AppDelegate ()
 
@@ -19,9 +25,23 @@
 
 @implementation AppDelegate
 
+#pragma mark - Developer Lazy methods
+/**
+ *  Delete before shipping! Alerts the Dev that Xcode has finished compiling! 😃
+ */
+-(void)awakeFromNap {
+    AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
+}
+
+#pragma mark
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
         // Override point for customization after application launch.
+    [self awakeFromNap];
+    
+    [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
 
+    
         //What is this? ↓ Why did I need those references...?
 //    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
 //    MasterViewController *controller = (MasterViewController *)navigationController.topViewController;
@@ -38,7 +58,6 @@
     
     return YES;
 }
-
 
 #pragma mark - UIApplicationDelegate methods
 

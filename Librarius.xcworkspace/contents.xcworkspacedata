@@ -2,12 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Librarius/Library.h">
-   </FileRef>
-   <FileRef
-      location = "group:Librarius/Library.m">
-   </FileRef>
-   <FileRef
       location = "group:Librarius.xcodeproj">
    </FileRef>
    <FileRef

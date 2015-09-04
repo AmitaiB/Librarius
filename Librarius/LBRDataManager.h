@@ -33,7 +33,7 @@
 
 
 -(void) saveContext;
--(void) generateTestData;
+-(void) generateTestDataIfNeeded;
 -(void) fetchData;
 
 

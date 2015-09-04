@@ -58,7 +58,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
     [super viewDidLoad];
     [self initializeProgrammaticProperties];
     
-    [self.dataManager generateTestData];
+    [self.dataManager generateTestDataIfNeeded];
     NSLog(@"%@",[self.dataManager.currentLibrary.volumes description]);
     
 }
@@ -67,11 +67,15 @@ static NSString * const volumeNib          = @"volumePresentationView";
     self.dataManager = [LBRDataManager sharedDataManager];
     self.googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
     /**
-     *  CLEAN: May be implicitly NO
+     *  CLEAN: May be implicitly NO, and can remove this line.
      */
     self.isScanning = NO;
     self.scanner = [[MTBBarcodeScanner alloc] initWithPreviewView:self.scannerView];
     self.responseCollectionOfPotentialVolumeMatches = [GTLBooksVolumes new];
+    
+    if (!self.dataManager.uniqueCodes) {
+        self.dataManager.uniqueCodes = [NSMutableArray new];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -128,20 +132,25 @@ static NSString * const volumeNib          = @"volumePresentationView";
     [self.startScanningButton setTitle:@"Stop Scanning" forState:UIControlStateSelected];
     [self.startScanningButton setTitleColor:[UIColor orangeColor] forState:UIControlStateSelected];
     self.startScanningButton.backgroundColor = [UIColor redColor];
-    
-    if (!self.dataManager.uniqueCodes) {
-        self.dataManager.uniqueCodes = [NSMutableArray new];
-    }
-    
+
+//    [MTBBarcodeScanner requestCameraPermissionWithSuccess:^(BOOL success)
+   
     [self.scanner startScanningWithResultBlock:^(NSArray *codes) {
         for (AVMetadataMachineReadableCodeObject *code in codes) {
+                // If it's a new barcode, add it to the array.
             if ([self.dataManager.uniqueCodes indexOfObject:code.stringValue] == NSNotFound) {
                 [self.dataManager.uniqueCodes addObject:code.stringValue];
                 NSLog(@"Found unique code: %@", code.stringValue);
-                
+//                [self.scanner stopScanning];
 //                Update the tableview
                 [self.uniqueBarcodesTableView reloadData];
                 [self scrollToBottomCell];
+                /**
+                 *  Start the spinner and pass the barcode string out and be done.
+                 *
+                 *  Pop-up: Add this book [thumbnail, title, author, date] to the batch? Yes: add it to the tableview, No: don't.
+                 *  Then add the whole batch to CoreData.
+                 */
             } else {
                     //If code is not unique/already in the tableView, then scroll the tableView to it.
                 [self scrollToTargetISBNCell:[self.dataManager.uniqueCodes indexOfObject:code.stringValue]];

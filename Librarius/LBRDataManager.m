@@ -4,7 +4,7 @@
 //
 //  Created by Amitai Blickstein on 8/26/15.
 //  Copyright (c) 2015 Amitai Blickstein, LLC. All rights reserved.
-//
+////
 
 #import "LBRDataManager.h"
 #import "Library.h"
@@ -272,10 +272,13 @@ static NSString * const kUnknown = @"kUnknown";
 }
 
 #pragma mark - Generate Data
-
-- (void)generateTestData
+//The completion block needs //to be tailored for each request.
+//    Either /*that, or have*/ lots of repeating code.
+- (void)generateTestDataIfNeeded
 {
     LBRGoogleGTLClient *googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
+    
+        //Books need a library for a home!
     [self generateDefaultLibraryIfNeeded];
     if (self.currentLibrary.volumes.count) {
         return;}

@@ -10,6 +10,7 @@ pod 'MTBBarcodeScanner'
 
 #Not Yet Implemented
 pod 'AMRatingControl'
+pod "MMMaterialDesignSpinner"
 pod 'SCLAlertView-Objective-C'
 pod 'LGSemiModalNavController', '~> 0.2.0'
 pod 'AFNetworking'
