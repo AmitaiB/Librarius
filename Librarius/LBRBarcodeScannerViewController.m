@@ -7,11 +7,13 @@
 //
 #define DBLG NSLog(@"%@ reporting!", NSStringFromSelector(_cmd));
 #define set() [NSSet setWithArray:@[__VA_ARGS__]]
+#define kSpinnerFrameRect CGRectMake(0, 0, 40, 40)
 
 
 #import <LGSemiModalNavViewController.h>
 #import <MTBBarcodeScanner.h>
 #import <SCLAlertView.h>
+#import <MMMaterialDesignSpinner.h>
 
 #import "LBRBarcodeScannerViewController.h"
 #import "LBRSelectVolumeTableViewController.h"
@@ -37,6 +39,8 @@
 @property (nonatomic, strong) LBRGoogleGTLClient *googleClient;
 @property (nonatomic, strong) GTLBooksVolumes *responseCollectionOfPotentialVolumeMatches;
 @property (nonatomic, strong) LBRSelectVolumeTableViewController *confirmVolumeTVC;
+@property (nonatomic, strong) MMMaterialDesignSpinner *spinnerView;
+
 
 @property (nonatomic) BOOL isScanning;
 @property (nonatomic) BOOL isNotScanning;
@@ -45,6 +49,8 @@
 @end
 
 @implementation LBRBarcodeScannerViewController
+
+NSString * const barcodeAddedNotification = @"barcodeAddedNotification";
 
 #pragma mark - Constant Strings
 
@@ -73,9 +79,15 @@ static NSString * const volumeNib          = @"volumePresentationView";
     self.scanner = [[MTBBarcodeScanner alloc] initWithPreviewView:self.scannerView];
     self.responseCollectionOfPotentialVolumeMatches = [GTLBooksVolumes new];
     
-    if (!self.dataManager.uniqueCodes) {
-        self.dataManager.uniqueCodes = [NSMutableArray new];
-    }
+    
+    /**
+     The Material Design Spinnerview inits
+    */
+    self.spinnerView = [[MMMaterialDesignSpinner alloc] initWithFrame:kSpinnerFrameRect];
+    self.spinnerView.lineWidth = 1.5f;
+    self.spinnerView.tintColor = [UIColor cyanColor];
+//    self.spinnerView.hidesWhenStopped = YES; ???Uncomment if this isn't the default.
+    [self.view addSubview:self.spinnerView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -138,19 +150,22 @@ static NSString * const volumeNib          = @"volumePresentationView";
     [self.scanner startScanningWithResultBlock:^(NSArray *codes) {
         for (AVMetadataMachineReadableCodeObject *code in codes) {
                 // If it's a new barcode, add it to the array.
+            if (!self.dataManager.uniqueCodes) {
+                self.dataManager.uniqueCodes = [NSMutableArray new];
+            }
+            
             if ([self.dataManager.uniqueCodes indexOfObject:code.stringValue] == NSNotFound) {
                 [self.dataManager.uniqueCodes addObject:code.stringValue];
+                [[NSNotificationCenter defaultCenter] postNotificationName:barcodeAddedNotification object:self.dataManager.uniqueCodes];
                 NSLog(@"Found unique code: %@", code.stringValue);
 //                [self.scanner stopScanning];
-//                Update the tableview
-                [self.uniqueBarcodesTableView reloadData];
-                [self scrollToBottomCell];
                 /**
-                 *  Start the spinner and pass the barcode string out and be done.
-                 *
-                 *  Pop-up: Add this book [thumbnail, title, author, date] to the batch? Yes: add it to the tableview, No: don't.
-                 *  Then add the whole batch to CoreData.
+                 *  These next lines were for when the TableView had barcodes. No longer.
                  */
+//                Update the tableview
+//                [self.uniqueBarcodesTableView reloadData];
+//                [self scrollToBottomCell];
+               
             } else {
                     //If code is not unique/already in the tableView, then scroll the tableView to it.
                 [self scrollToTargetISBNCell:[self.dataManager.uniqueCodes indexOfObject:code.stringValue]];

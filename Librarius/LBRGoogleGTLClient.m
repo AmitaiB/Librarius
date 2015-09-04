@@ -8,9 +8,13 @@
 
 #import "LBRGoogleGTLClient.h"
 #import "LBRConstants.h"
+#import "LBRBarcodeScannerViewController.h"
+#import "LBRDataManager.h"
 
 
 @implementation LBRGoogleGTLClient
+
+#pragma mark - Lifecycle
 
 +(instancetype)sharedGoogleGTLClient
 {
@@ -32,10 +36,16 @@
         _mostRecentTicket     = [[GTLServiceTicket alloc] initWithService:_service];
         _service.APIKey       = GOOGLE_APP_KEY;
         _service.retryEnabled = YES;
+        
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveBarcodeAddedNotification) name:barcodeAddedNotification object:nil];
     }
     return self;
 }
 
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 -(void)queryForVolumeWithISBN:(NSString*)ISBN returnTicket:(BOOL)returnTicketInstead {
     
@@ -50,12 +60,21 @@
     
     [self.service executeQuery:booksQuery completionHandler:^(GTLServiceTicket *ticket, id object, NSError *error) {
             // callback
+        /**
+         *  HERE!!!!
+         */
         NSLog(@"Error in booksQueryWithISBN: %@", error.localizedDescription);
         self.blockError       = error;
         self.mostRecentTicket = ticket;
         self.responseObject   = object;
     }];
 }
+
+-(void)receiveBarcodeAddedNotification {
+    LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
+    [self queryForVolumeWithISBN:[dataManager.uniqueCodes lastObject] returnTicket:NO];
+}
+
 
 
 
