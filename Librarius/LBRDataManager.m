@@ -40,12 +40,12 @@ static NSString * const kUnknown = @"kUnknown";
     return _sharedDataManager;
 }
 
-    //Setter
--(void)setResponseCollectionOfPotentialVolumeMatches:(GTLBooksVolumes *)responseCollectionOfPotentialVolumeMatches {
-    _responseCollectionOfPotentialVolumeMatches = responseCollectionOfPotentialVolumeMatches;
-    [self addGTLVolumeToCurrentLibrary:responseCollectionOfPotentialVolumeMatches.items[0] andSaveContext:NO];
-    
-}
+//    //Setter
+//-(void)setResponseCollectionOfPotentialVolumeMatches:(GTLBooksVolumes *)responseCollectionOfPotentialVolumeMatches {
+//    _responseCollectionOfPotentialVolumeMatches = responseCollectionOfPotentialVolumeMatches;
+//    [self addGTLVolumeToCurrentLibrary:responseCollectionOfPotentialVolumeMatches.items[0] andSaveContext:NO];
+//    
+//}
 /**
  *  This will translate a GoogleBooks volume object into our NSManagedObject.
  */

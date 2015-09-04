@@ -29,6 +29,7 @@
 		38466D281B94F24400DD252E /* LBRGoogleGTLClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 38466D271B94F24400DD252E /* LBRGoogleGTLClient.m */; };
 		384E0CC01B97D24B007E7290 /* NSString+dateValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 384E0CBF1B97D24B007E7290 /* NSString+dateValue.m */; };
 		3851DBFD1B8E2E5A00E90B9F /* LBRDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3851DBFC1B8E2E5A00E90B9F /* LBRDataManager.m */; };
+		38565D701B9A20B800349498 /* LBRParsedVolume.m in Sources */ = {isa = PBXBuildFile; fileRef = 38565D6F1B9A20B800349498 /* LBRParsedVolume.m */; };
 		389C1F131B95E1150009C721 /* LBRDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 389C1F121B95E1150009C721 /* LBRDataStore.m */; };
 		38AAD6EA1B90107F003062C1 /* libMagicalRecord.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38AAD6E91B90107F003062C1 /* libMagicalRecord.a */; };
 		38AAD6F01B901175003062C1 /* Librarius.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 38AAD6EE1B901175003062C1 /* Librarius.xcdatamodeld */; };
@@ -91,6 +92,8 @@
 		384E0CBF1B97D24B007E7290 /* NSString+dateValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+dateValue.m"; sourceTree = "<group>"; };
 		3851DBFB1B8E2E5A00E90B9F /* LBRDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRDataManager.h; sourceTree = "<group>"; };
 		3851DBFC1B8E2E5A00E90B9F /* LBRDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRDataManager.m; sourceTree = "<group>"; };
+		38565D6E1B9A20B800349498 /* LBRParsedVolume.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRParsedVolume.h; sourceTree = "<group>"; };
+		38565D6F1B9A20B800349498 /* LBRParsedVolume.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRParsedVolume.m; sourceTree = "<group>"; };
 		389C1F111B95E1150009C721 /* LBRDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRDataStore.h; sourceTree = "<group>"; };
 		389C1F121B95E1150009C721 /* LBRDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRDataStore.m; sourceTree = "<group>"; };
 		38AAD6E91B90107F003062C1 /* libMagicalRecord.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMagicalRecord.a; path = "Pods/../build/Debug-iphoneos/libMagicalRecord.a"; sourceTree = "<group>"; };
@@ -212,6 +215,8 @@
 		380375581B8B9F11004C4ECE /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				38565D6E1B9A20B800349498 /* LBRParsedVolume.h */,
+				38565D6F1B9A20B800349498 /* LBRParsedVolume.m */,
 				38AAD7211B901D36003062C1 /* Bookcase.h */,
 				38AAD7221B901D36003062C1 /* Bookcase.m */,
 				38AAD71E1B901D36003062C1 /* Library.h */,
@@ -469,6 +474,7 @@
 				38AAD71D1B901D35003062C1 /* Volume.m in Sources */,
 				38AAD7231B901D36003062C1 /* Bookcase.m in Sources */,
 				380375F81B8D4E90004C4ECE /* DetailViewController.m in Sources */,
+				38565D701B9A20B800349498 /* LBRParsedVolume.m in Sources */,
 				380375721B8BF058004C4ECE /* UIImage+FromURL.m in Sources */,
 				389C1F131B95E1150009C721 /* LBRDataStore.m in Sources */,
 				3803756A1B8BC89D004C4ECE /* LBRGoogleSignInViewController.m in Sources */,
