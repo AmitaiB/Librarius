@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LBRGoogleGTLClient.h"
 
+@class LBRGoogleGTLClient;
 @class Library;
 @interface LBRDataManager : NSObject
 
