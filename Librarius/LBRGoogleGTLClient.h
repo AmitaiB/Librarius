@@ -17,7 +17,6 @@
 @property (nonatomic, strong) GTLServiceBooks *service;
 @property (nonatomic, strong) GTLServiceTicket *mostRecentTicket;
 @property (nonatomic, strong) GTLBooksVolumes *responseObject;
-@property (nonatomic, strong) NSError *blockError;
 
 +(instancetype)sharedGoogleGTLClient;
 -(instancetype)init;
