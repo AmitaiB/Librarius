@@ -213,8 +213,39 @@ static NSString * const volumeNib          = @"volumePresentationView";
 }
 
 -(NYAlertViewController*)confirmSelectionViewController {
+    
     NYAlertViewController *alertViewController = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
     
+    [alertViewController addAction:[NYAlertAction actionWithTitle:NSLocalizedString(@"Delete", nil)
+                                                            style:UIAlertActionStyleDestructive
+                                                          handler:^(NYAlertAction *action) {
+                                                              [self dismissViewControllerAnimated:YES completion:nil];
+                                                          }]];
+    
+    [alertViewController addAction:[NYAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil)
+                                                            style:UIAlertActionStyleCancel
+                                                          handler:^(NYAlertAction *action) {
+                                                              [self dismissViewControllerAnimated:YES completion:nil];
+                                                          }]];
+    
+    alertViewController.title = NSLocalizedString(@"Content View", nil);
+    alertViewController.message = NSLocalizedString(@"Set the alertViewContentView property to add custom views to the alert view", nil);
+    
+    UIView *contentView = [[UIView alloc] initWithFrame:CGRectZero];
+    UITableView *singleCellTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    [contentView addSubview:singleCellTableView];
+    
+    [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[singleCellTableView(160)]|"
+                                                                        options:0
+                                                                        metrics:nil
+                                                                          views:NSDictionaryOfVariableBindings(singleCellTableView)]];
+    
+    [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[singleCellTableView]-|"
+                                                                        options:0
+                                                                        metrics:nil
+                                                                          views:NSDictionaryOfVariableBindings(singleCellTableView)]];
+    
+
         // Set a title and message
     alertViewController.title = NSLocalizedString(@"Custom UI", nil);
     alertViewController.message = NSLocalizedString(@"Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Donec id elit non mi porta gravida at eget metus.", nil);
