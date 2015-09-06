@@ -131,19 +131,6 @@ static NSString * const volumeNib          = @"volumePresentationView";
     
 #pragma mark - Scanning
 
--(void)flipScanButtonAppearance {
-    if (self.isNotScanning) {
-        [self.startScanningButton setTitle:@"Start Scanning" forState:UIControlStateNormal];
-        [self.startScanningButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-        self.startScanningButton.backgroundColor = [UIColor cyanColor];
-    }
-    if (self.isScanning) {
-        [self.startScanningButton setTitle:@"Stop Scanning" forState:UIControlStateNormal];
-        [self.startScanningButton setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
-        self.startScanningButton.backgroundColor = [UIColor redColor];
-    }
-}
-
 /**
  *  Stop scanning, flip the button.
  */
@@ -184,6 +171,19 @@ static NSString * const volumeNib          = @"volumePresentationView";
             }
         }
     }];
+}
+
+-(void)flipScanButtonAppearance {
+    if (self.isNotScanning) {
+        [self.startScanningButton setTitle:@"Start Scanning" forState:UIControlStateNormal];
+        [self.startScanningButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        self.startScanningButton.backgroundColor = [UIColor cyanColor];
+    }
+    if (self.isScanning) {
+        [self.startScanningButton setTitle:@"Stop Scanning" forState:UIControlStateNormal];
+        [self.startScanningButton setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+        self.startScanningButton.backgroundColor = [UIColor redColor];
+    }
 }
 
 #pragma mark - UITableViewDataSource methods
@@ -284,11 +284,16 @@ static NSString * const volumeNib          = @"volumePresentationView";
     [dataManager generateTestDataIfNeeded];
 }
 
+/**
+ *  Updates dataManager's copy of the barcodes, then posts notification (for googleClient, basically).
+ */
 -(void)updateDataManagerWithNewBarcode {
     LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
     if (!dataManager.uniqueCodes) {
         dataManager.uniqueCodes = [NSMutableArray new];
     }
+    
+    [dataManager.uniqueCodes addObject:[self.uniqueCodes lastObject]];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:barcodeAddedNotification object:dataManager.uniqueCodes];
 }
