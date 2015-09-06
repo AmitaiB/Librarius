@@ -76,13 +76,15 @@ static NSString * const volumeNib          = @"volumePresentationView";
     self.responseCollectionOfPotentialVolumeMatches = [GTLBooksVolumes new];
     self.uniqueCodes = [NSMutableArray new];
     
-    /**
-     The Material Design Spinnerview inits
-    */
+    [self initializeSpinner];
+    
+}
+
+-(void)initializeSpinner {
     self.spinnerView = [[MMMaterialDesignSpinner alloc] initWithFrame:kSpinnerFrameRect];
     self.spinnerView.lineWidth = 1.5f;
     self.spinnerView.tintColor = [UIColor cyanColor];
-//    self.spinnerView.hidesWhenStopped = YES; ???Uncomment if this isn't the default.
+        //    self.spinnerView.hidesWhenStopped = YES; ???Uncomment if this isn't the default.
     [self.view addSubview:self.spinnerView];
 }
 
@@ -104,9 +106,9 @@ static NSString * const volumeNib          = @"volumePresentationView";
     self.isNotScanning = !self.isScanning;
     
     if (self.isScanning) {
-        [self stopScanning];}
+        [self stopScanningOps];}
     if (self.isNotScanning) {
-        [self startScanning];}
+        [self startScanningOps];}
 }
 
 - (IBAction)cameraButtonTapped:(id)sender {
@@ -129,29 +131,36 @@ static NSString * const volumeNib          = @"volumePresentationView";
     
 #pragma mark - Scanning
 
+-(void)flipScanButtonAppearance {
+    if (self.isNotScanning) {
+        [self.startScanningButton setTitle:@"Start Scanning" forState:UIControlStateNormal];
+        [self.startScanningButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        self.startScanningButton.backgroundColor = [UIColor cyanColor];
+    }
+    if (self.isScanning) {
+        [self.startScanningButton setTitle:@"Stop Scanning" forState:UIControlStateNormal];
+        [self.startScanningButton setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+        self.startScanningButton.backgroundColor = [UIColor redColor];
+    }
+}
+
 /**
  *  Stop scanning, flip the button.
  */
--(void)stopScanning {
+-(void)stopScanningOps {
     self.isScanning = NO;
-    [self.startScanningButton setTitle:@"Start Scanning" forState:UIControlStateNormal];
-    [self.startScanningButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    self.startScanningButton.backgroundColor = [UIColor cyanColor];
-    
+    [self flipScanButtonAppearance];
     [self.scanner stopScanning];
 }
 
 /**
  *  Flip the button, start scanning, handle the completion.
  */
--(void)startScanning {
+-(void)startScanningOps {
     LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
     self.isScanning = YES;
-    [self.startScanningButton setTitle:@"Stop Scanning" forState:UIControlStateSelected];
-    [self.startScanningButton setTitleColor:[UIColor orangeColor] forState:UIControlStateSelected];
-    self.startScanningButton.backgroundColor = [UIColor redColor];
-
-//Put everything in this, maybe?  [MTBBarcodeScanner requestCameraPermissionWithSuccess:^(BOOL success)...?
+    [self flipScanButtonAppearance];
+// ???: Consider embedding the scanning in this: [MTBBarcodeScanner requestCameraPermissionWithSuccess:^(BOOL success)...?
    
     [self.scanner startScanningWithResultBlock:^(NSArray *codes) {
         for (AVMetadataMachineReadableCodeObject *code in codes) {
