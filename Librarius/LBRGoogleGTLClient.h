@@ -15,7 +15,7 @@
 
 @property (nonatomic, strong) LBRDataManager *dataManager;
 @property (nonatomic, strong) GTLServiceBooks *service;
-@property (nonatomic, strong) GTLServiceTicket *mostRecentTicket;
+//@property (nonatomic, strong) GTLServiceTicket *mostRecentTicket;
 @property (nonatomic, strong) GTLBooksVolumes *responseObject;
 
 +(instancetype)sharedGoogleGTLClient;

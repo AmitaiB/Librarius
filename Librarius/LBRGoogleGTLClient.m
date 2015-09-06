@@ -6,11 +6,10 @@
 //  Copyright (c) 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 
-#import "LBRGoogleGTLClient.h"
-#import "LBRConstants.h"
 #import "LBRBarcodeScannerViewController.h"
-#import "LBRDataManager.h"
+#import "LBRGoogleGTLClient.h"
 #import "LBRParsedVolume.h"
+#import "LBRDataManager.h"
 #import "LBRConstants.h"
 
 @implementation LBRGoogleGTLClient
@@ -43,7 +42,7 @@
         /**
          CLEAN: shouldn't be needed...
          */
-        _mostRecentTicket     = [[GTLServiceTicket alloc] initWithService:_service];
+//        _mostRecentTicket     = [[GTLServiceTicket alloc] initWithService:_service];
     }
     return self;
 }
@@ -75,6 +74,7 @@
             NSLog(@"Job's done, because now the caller has the GTLVolume callback.");
         }
     }];
+}
 
 
 ///**
@@ -130,11 +130,11 @@
  *
  *  @param newLocalData Send in any data, but make sure there is an 'if' statement to catch it.
  */
--(void)updateAndNotifyDataManagerWithLocalData:(id)newLocalData {
-    if ([newLocalData isMemberOfClass:[LBRParsedVolume class]]) {
-        self.dataManager.parsedVolumeFromLastBarcode = newLocalData;
-        [[NSNotificationCenter defaultCenter] postNotificationName:newParsedVolumeNotification object:newLocalData];
-    }
-}
+//-(void)updateAndNotifyDataManagerWithLocalData:(id)newLocalData {
+//    if ([newLocalData isMemberOfClass:[LBRParsedVolume class]]) {
+//        self.dataManager.parsedVolumeFromLastBarcode = newLocalData;
+//        [[NSNotificationCenter defaultCenter] postNotificationName:newParsedVolumeNotification object:newLocalData];
+//    }
+//}
 
 @end
