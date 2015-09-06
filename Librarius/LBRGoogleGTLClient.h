@@ -22,6 +22,9 @@
 +(instancetype)sharedGoogleGTLClient;
 -(instancetype)init;
 
--(void)queryForVolumeWithISBN:(NSString*)ISBN returnTicket:(BOOL)returnTicketInstead;
+//-(void)queryForVolumeWithISBN:(NSString*)ISBN returnTicket:(BOOL)returnTicketInstead;
+
+- (void)queryForVolumeWithString:(NSString *)queryString withCallback:(void (^)(GTLBooksVolume* responseVolume))block;
+
 
 @end

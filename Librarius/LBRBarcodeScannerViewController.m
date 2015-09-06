@@ -5,7 +5,7 @@
 //  Created by Amitai Blickstein on 8/23/15.
 //  Copyright (c) 2015 Amitai Blickstein, LLC. All rights reserved.
 //
-#define DBLG NSLog(@"%@ reporting!", NSStringFromSelector(_cmd));
+#define DBLG NSLog(@"<%@:%@:line %d, reporting!>", NSStringFromClass([self class]), NSStringFromSelector(_cmd), __LINE__);
 #define kSpinnerFrameRect CGRectMake(0, 0, 40, 40)
 
 #import <LGSemiModalNavViewController.h>
@@ -20,6 +20,7 @@
 #import "LBRDataManager.h"
 #import "Library.h"
 #import "Volume.h"
+#import "LBRParsedVolume.h"
 
 
 @interface LBRBarcodeScannerViewController ()
@@ -144,18 +145,37 @@ static NSString * const volumeNib          = @"volumePresentationView";
  *  Flip the button, start scanning, handle the completion.
  */
 -(void)startScanningOps {
+    
     LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
     self.isScanning = YES;
     [self flipScanButtonAppearance];
 // ???: Consider embedding the scanning in this: [MTBBarcodeScanner requestCameraPermissionWithSuccess:^(BOOL success)...?
    
+    
     [self.scanner startScanningWithResultBlock:^(NSArray *codes) {
         for (AVMetadataMachineReadableCodeObject *code in codes) {
                 // If it's a new barcode, add it to the array.
             if ([self.uniqueCodes indexOfObject:code.stringValue] == NSNotFound) {
                 [self.uniqueCodes addObject:code.stringValue];
-                [self updateDataManagerWithNewBarcode];
                 NSLog(@"Found unique code: %@", code.stringValue);
+                
+                [self.spinnerView startAnimating];
+                /**
+                 *  TODO: pop-up confirmation with lazy loading part 1 (Empty cell)
+                 */
+                [self.googleClient queryForVolumeWithString:code.stringValue withCallback:^(GTLBooksVolume *responseVolume) {
+                    [self.spinnerView stopAnimating];
+                    LBRParsedVolume *volumeToConfirm = [[LBRParsedVolume alloc] initWithGoogleVolume:responseVolume];
+                    /**
+                     9/6 2:55pm
+                     *  TODO: pop-up confirmation with text (part 2) and finally, lazy loading image (part 3). Text we have, lazy image loading is AFNetworking.
+                     
+                     ++If confirmed, interface with DataManager. No notifications are needed!
+                     */
+                }];
+                
+                
+                [self updateDataManagerWithNewBarcode];
 //                [self.scanner stopScanning];
                 /**
                  *  These next lines were for when the TableView had barcodes. No longer.

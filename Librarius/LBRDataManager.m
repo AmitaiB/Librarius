@@ -17,8 +17,7 @@
 #import <GTLBooksVolume.h>
 #import "LBRGoogleGTLClient.h"
 
-#define DBLG NSLog(@"%@ reporting!", NSStringFromSelector(_cmd));
-
+#define DBLG NSLog(@"<%@:%@:line %d, reporting!>", NSStringFromClass([self class]), NSStringFromSelector(_cmd), __LINE__);
 
 @implementation LBRDataManager
 @synthesize responseCollectionOfPotentialVolumeMatches = _responseCollectionOfPotentialVolumeMatches;

@@ -5,7 +5,7 @@
 //  Created by Amitai Blickstein on 9/1/15.
 //  Copyright (c) 2015 Amitai Blickstein, LLC. All rights reserved.
 //
-#define DBLG NSLog(@"%@ reporting!", NSStringFromSelector(_cmd));
+#define DBLG NSLog(@"<%@:%@:line %d, reporting!>", NSStringFromClass([self class]), NSStringFromSelector(_cmd), __LINE__);
 #define kCustomRowCount 5
 
 #import "LBRSelectVolumeTableViewController.h"
