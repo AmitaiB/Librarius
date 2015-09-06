@@ -55,29 +55,30 @@ static NSString * const volumeNib          = @"volumePresentationView";
 
 
 #pragma mark - Lifecycle
+-(void)loadView {
+    DBLG
+}
+
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    [self initializeProgrammaticProperties];
-    
+    [super viewDidLoad]; DBLG
+    [self initializeProgrammaticProperties];DBLG
     [self generateTestDataIfNeeded];
     LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
     NSLog(@"%@",[dataManager.currentLibrary.volumes description]);
-    
-    
 }
 
 -(void)initializeProgrammaticProperties {
-    self.googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
+    self.googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient]; DBLG
     /**
      *  CLEAN: May be implicitly NO, and can remove this line.
      */
-    self.isScanning = NO;
-    self.scanner = [[MTBBarcodeScanner alloc] initWithPreviewView:self.scannerView];
-    self.responseCollectionOfPotentialVolumeMatches = [GTLBooksVolumes new];
-    self.uniqueCodes = [NSMutableArray new];
+    self.isScanning = NO; DBLG
+    self.scanner = [[MTBBarcodeScanner alloc] initWithPreviewView:self.scannerView]; DBLG
+    self.responseCollectionOfPotentialVolumeMatches = [GTLBooksVolumes new]; DBLG
+    self.uniqueCodes = [NSMutableArray new]; DBLG
     
-    [self initializeSpinner];
+    [self initializeSpinner]; DBLG
     
 }
 

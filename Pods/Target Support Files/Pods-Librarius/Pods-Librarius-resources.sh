@@ -58,16 +58,12 @@ install_resource()
   esac
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_resource "AMRatingControl/star.png"
-  install_resource "AMRatingControl/dot.png"
   install_resource "GoogleSignIn/Resources/GoogleSignIn.bundle"
   install_resource "gtm-oauth2/Source/Touch/GTMOAuth2ViewTouch.xib"
   install_resource "${BUILT_PRODUCTS_DIR}/LGSemiModalNavController.bundle"
   install_resource "${BUILT_PRODUCTS_DIR}/MaterialDesignSpinner.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_resource "AMRatingControl/star.png"
-  install_resource "AMRatingControl/dot.png"
   install_resource "GoogleSignIn/Resources/GoogleSignIn.bundle"
   install_resource "gtm-oauth2/Source/Touch/GTMOAuth2ViewTouch.xib"
   install_resource "${BUILT_PRODUCTS_DIR}/LGSemiModalNavController.bundle"

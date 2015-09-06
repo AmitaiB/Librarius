@@ -6,15 +6,15 @@ target 'Librarius' do
 pod 'Google/SignIn'
 pod 'Google-API-Client'
 pod 'MTBBarcodeScanner'
-
+pod 'LGSemiModalNavController', '~> 0.2.0'
 pod "MMMaterialDesignSpinner"
 pod 'AFNetworking'
 
+pod 'NYAlertViewController'
 
 #Not Yet Implemented
-pod 'AMRatingControl'
+#pod 'AMRatingControl'
 #pod 'SCLAlertView-Objective-C'
-pod 'LGSemiModalNavController', '~> 0.2.0'
 #pod 'AFOAuth2Manager'
 #pod 'XNGOAuth1Client', '~> 2.0'
 

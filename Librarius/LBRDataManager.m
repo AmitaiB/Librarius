@@ -76,35 +76,35 @@ static NSString * const kUnknown = @"kUnknown";
     
 }
 
--(void)addParsedVolumeToCurrentLibrary:(LBRParsedVolume*)volumeToAdd andSaveContext:(BOOL)saveContext {
-    DBLG
-    
-    [self generateDefaultLibraryIfNeeded];
-    
-    Volume *managedVolumeToAdd = [NSE]
-    
-    [self.currentLibrary addVolumesObject:];
-    
-    self.parsedVolumeFromLastBarcode = [[LBRParsedVolume alloc] initWithGoogleVolume:volumeToAdd];
-    
-    newLBRVolume.isbn13    = self.parsedVolumeFromLastBarcode.isbn13;
-    newLBRVolume.isbn10    = self.parsedVolumeFromLastBarcode.isbn10;
-    newLBRVolume.title     = self.parsedVolumeFromLastBarcode.title;
-    newLBRVolume.pageCount = self.parsedVolumeFromLastBarcode.pageCount;
-    newLBRVolume.thickness = self.parsedVolumeFromLastBarcode.thickness;
-    newLBRVolume.height    = self.parsedVolumeFromLastBarcode.height;
-    newLBRVolume.cover_art = self.parsedVolumeFromLastBarcode.cover_art;
-    newLBRVolume.author    = self.parsedVolumeFromLastBarcode.author;
-    newLBRVolume.category  = self.parsedVolumeFromLastBarcode.category;
-    newLBRVolume.published = self.parsedVolumeFromLastBarcode.published;
-    newLBRVolume.rating    = self.parsedVolumeFromLastBarcode.rating;
-    newLBRVolume.google_id = self.parsedVolumeFromLastBarcode.google_id;
-    
-    
-    if (saveContext) {
-        [self saveContext];
-    }
-}
+//-(void)addParsedVolumeToCurrentLibrary:(LBRParsedVolume*)volumeToAdd andSaveContext:(BOOL)saveContext {
+//    DBLG
+//    
+//    [self generateDefaultLibraryIfNeeded];
+//    
+//    Volume *managedVolumeToAdd;
+//    
+//    [self.currentLibrary addVolumesObject:];
+//    
+//    self.parsedVolumeFromLastBarcode = [[LBRParsedVolume alloc] initWithGoogleVolume:volumeToAdd];
+//    
+//    newLBRVolume.isbn13    = self.parsedVolumeFromLastBarcode.isbn13;
+//    newLBRVolume.isbn10    = self.parsedVolumeFromLastBarcode.isbn10;
+//    newLBRVolume.title     = self.parsedVolumeFromLastBarcode.title;
+//    newLBRVolume.pageCount = self.parsedVolumeFromLastBarcode.pageCount;
+//    newLBRVolume.thickness = self.parsedVolumeFromLastBarcode.thickness;
+//    newLBRVolume.height    = self.parsedVolumeFromLastBarcode.height;
+//    newLBRVolume.cover_art = self.parsedVolumeFromLastBarcode.cover_art;
+//    newLBRVolume.author    = self.parsedVolumeFromLastBarcode.author;
+//    newLBRVolume.category  = self.parsedVolumeFromLastBarcode.category;
+//    newLBRVolume.published = self.parsedVolumeFromLastBarcode.published;
+//    newLBRVolume.rating    = self.parsedVolumeFromLastBarcode.rating;
+//    newLBRVolume.google_id = self.parsedVolumeFromLastBarcode.google_id;
+//    
+//    
+//    if (saveContext) {
+//        [self saveContext];
+//    }
+//}
 
 
 /**
@@ -279,9 +279,9 @@ static NSString * const kUnknown = @"kUnknown";
                              @"978-1-60309-042-1"];
     
     for (NSString *ISBN in listOfISBNs) {
-        [self.googleClient queryForVolumeWithISBN:ISBN returnTicket:NO];
-        GTLBooksVolume *tempVolume = self.googleClient.responseObject.items[0];
-        [self addGTLVolumeToCurrentLibrary:tempVolume andSaveContext:NO];
+        [self.googleClient queryForVolumeWithString:ISBN withCallback:^(GTLBooksVolume *responseVolume) {
+            [self addGTLVolumeToCurrentLibrary:responseVolume andSaveContext:NO];
+        }];
     }
     
     [self saveContext];
