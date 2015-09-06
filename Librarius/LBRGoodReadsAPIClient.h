@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <XNGOAuth1Client.h>
+    //#import <XNGOAuth1Client.h>
 #import "LBRConstants.h"
 
 @interface LBRGoodReadsAPIClient : NSObject

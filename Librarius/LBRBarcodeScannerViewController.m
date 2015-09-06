@@ -11,7 +11,6 @@
 
 #import <LGSemiModalNavViewController.h>
 #import <MTBBarcodeScanner.h>
-#import <SCLAlertView.h>
 #import <MMMaterialDesignSpinner.h>
 
 #import "LBRBarcodeScannerViewController.h"
@@ -34,7 +33,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *startScanningButton;
 @property (weak, nonatomic) IBOutlet UITableView *uniqueBarcodesTableView;
 @property (nonatomic, strong) MTBBarcodeScanner *scanner;
-@property (nonatomic, strong) LBRDataManager *dataManager;
 @property (nonatomic, strong) LBRGoogleGTLClient *googleClient;
 @property (nonatomic, strong) GTLBooksVolumes *responseCollectionOfPotentialVolumeMatches;
 @property (nonatomic, strong) LBRSelectVolumeTableViewController *confirmVolumeTVC;
@@ -63,13 +61,13 @@ static NSString * const volumeNib          = @"volumePresentationView";
     [super viewDidLoad];
     [self initializeProgrammaticProperties];
     
-    [self.dataManager generateTestDataIfNeeded];
-    NSLog(@"%@",[self.dataManager.currentLibrary.volumes description]);
+    [self generateTestDataIfNeeded];
+    LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
+    NSLog(@"%@",[dataManager.currentLibrary.volumes description]);
     
 }
 
 -(void)initializeProgrammaticProperties {
-    self.dataManager = [LBRDataManager sharedDataManager];
     self.googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
     /**
      *  CLEAN: May be implicitly NO, and can remove this line.
@@ -77,10 +75,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
     self.isScanning = NO;
     self.scanner = [[MTBBarcodeScanner alloc] initWithPreviewView:self.scannerView];
     self.responseCollectionOfPotentialVolumeMatches = [GTLBooksVolumes new];
-    
-    if (!self.dataManager.uniqueCodes) {
-        self.dataManager.uniqueCodes = [NSMutableArray new];
-    }
+    self.uniqueCodes = [NSMutableArray new];
     
     /**
      The Material Design Spinnerview inits
@@ -142,6 +137,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
  *  Flip the button, start scanning, handle the completion.
  */
 -(void)startScanning {
+    LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
     self.isScanning = YES;
     [self.startScanningButton setTitle:@"Stop Scanning" forState:UIControlStateSelected];
     [self.startScanningButton setTitleColor:[UIColor orangeColor] forState:UIControlStateSelected];
@@ -152,9 +148,9 @@ static NSString * const volumeNib          = @"volumePresentationView";
     [self.scanner startScanningWithResultBlock:^(NSArray *codes) {
         for (AVMetadataMachineReadableCodeObject *code in codes) {
                 // If it's a new barcode, add it to the array.
-            if ([self.dataManager.uniqueCodes indexOfObject:code.stringValue] == NSNotFound) {
-                [self.dataManager.uniqueCodes addObject:code.stringValue];
-                [[NSNotificationCenter defaultCenter] postNotificationName:barcodeAddedNotification object:self.dataManager.uniqueCodes];
+            if ([self.uniqueCodes indexOfObject:code.stringValue] == NSNotFound) {
+                [self.uniqueCodes addObject:code.stringValue];
+                [self updateDataManagerWithNewBarcode];
                 NSLog(@"Found unique code: %@", code.stringValue);
 //                [self.scanner stopScanning];
                 /**
@@ -166,7 +162,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
                
             } else {
                     //If code is not unique/already in the tableView, then scroll the tableView to it.
-                [self scrollToTargetISBNCell:[self.dataManager.uniqueCodes indexOfObject:code.stringValue]];
+                [self scrollToTargetISBNCell:[self.uniqueCodes indexOfObject:code.stringValue]];
                 NSLog(@"Barcode already in list/table.");
             }
         }
@@ -177,20 +173,20 @@ static NSString * const volumeNib          = @"volumePresentationView";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.dataManager.uniqueCodes.count;
+    return self.uniqueCodes.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:barcodeCellReuseID forIndexPath:indexPath];
-    cell.textLabel.text = self.dataManager.uniqueCodes[indexPath.row];
+    cell.textLabel.text = self.uniqueCodes[indexPath.row];
     return cell;
 }
 
 #pragma mark - Helper methods
 
 -(void)scrollToBottomCell {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.dataManager.uniqueCodes.count - 1 inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.uniqueCodes.count - 1 inSection:0];
     [self.uniqueBarcodesTableView scrollToRowAtIndexPath:indexPath
                                         atScrollPosition:UITableViewScrollPositionTop
                                                 animated:YES];
@@ -198,7 +194,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
 
 -(void)scrollToTargetISBNCell:(NSUInteger)idxOfTarget {
     
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.dataManager.uniqueCodes.count - 1 inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.uniqueCodes.count - 1 inSection:0];
     [self.uniqueBarcodesTableView scrollToRowAtIndexPath:indexPath
                                         atScrollPosition:UITableViewScrollPositionTop
                                                 animated:YES];
@@ -207,12 +203,6 @@ static NSString * const volumeNib          = @"volumePresentationView";
 
 #pragma mark - GoogleClient
 
--(void)feedBarcodeToAPIClient {
-    /**
-     *  CLEAN: Even this shouldn't be needed.
-     *
-     */
-}
 
 /**
  *  CLEAN: This should be DEPRECATED - Google Client gets the barcode from NSNotification!
@@ -242,7 +232,8 @@ static NSString * const volumeNib          = @"volumePresentationView";
     /**
      *  Weak Point: will id-casting work? Only if it actually returns the right thing.
      */
-    self.dataManager.responseCollectionOfPotentialVolumeMatches = self.googleClient.responseObject;
+    LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
+    dataManager.responseCollectionOfPotentialVolumeMatches = self.googleClient.responseObject;
             //            UIPopoverController
         self.confirmVolumeTVC = [LBRSelectVolumeTableViewController new];
         [self presentVolumesSemiModally];
@@ -269,6 +260,21 @@ static NSString * const volumeNib          = @"volumePresentationView";
     }
 }
 
+#pragma mark - Data Manager interface
+
+-(void)generateTestDataIfNeeded {
+    LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
+    [dataManager generateTestDataIfNeeded];
+}
+
+-(void)updateDataManagerWithNewBarcode {
+    LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
+    if (!dataManager.uniqueCodes) {
+        dataManager.uniqueCodes = [NSMutableArray new];
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:barcodeAddedNotification object:dataManager.uniqueCodes];
+}
 
 /* CLEAN
  * This snippet will scan once, then stop.

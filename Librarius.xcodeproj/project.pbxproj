@@ -10,7 +10,6 @@
 		2E6DA4DCEDA6FC0E68557D16 /* libPods-Librarius.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EBADCB9C83FA635A577697F9 /* libPods-Librarius.a */; };
 		380375321B8AC9A8004C4ECE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375311B8AC9A8004C4ECE /* main.m */; };
 		380375351B8AC9A8004C4ECE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375341B8AC9A8004C4ECE /* AppDelegate.m */; };
-		380375381B8AC9A8004C4ECE /* API_TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375371B8AC9A8004C4ECE /* API_TestViewController.m */; };
 		3803753B1B8AC9A8004C4ECE /* LBRBarcodeScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3803753A1B8AC9A8004C4ECE /* LBRBarcodeScannerViewController.m */; };
 		3803753E1B8AC9A8004C4ECE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3803753C1B8AC9A8004C4ECE /* Main.storyboard */; };
 		380375401B8AC9A8004C4ECE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3803753F1B8AC9A8004C4ECE /* Images.xcassets */; };
@@ -57,8 +56,6 @@
 		380375311B8AC9A8004C4ECE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		380375331B8AC9A8004C4ECE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		380375341B8AC9A8004C4ECE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		380375361B8AC9A8004C4ECE /* API_TestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = API_TestViewController.h; sourceTree = "<group>"; };
-		380375371B8AC9A8004C4ECE /* API_TestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = API_TestViewController.m; sourceTree = "<group>"; };
 		380375391B8AC9A8004C4ECE /* LBRBarcodeScannerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LBRBarcodeScannerViewController.h; sourceTree = "<group>"; };
 		3803753A1B8AC9A8004C4ECE /* LBRBarcodeScannerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LBRBarcodeScannerViewController.m; sourceTree = "<group>"; };
 		3803753D1B8AC9A8004C4ECE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -286,8 +283,6 @@
 				380375831B8CD49C004C4ECE /* LBRVolume.m */,
 				380375651B8BC758004C4ECE /* LBRGoogleAPIClient.h */,
 				380375661B8BC758004C4ECE /* LBRGoogleAPIClient.m */,
-				380375361B8AC9A8004C4ECE /* API_TestViewController.h */,
-				380375371B8AC9A8004C4ECE /* API_TestViewController.m */,
 			);
 			name = "Cutting Floor";
 			sourceTree = "<group>";
@@ -457,29 +452,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3803753B1B8AC9A8004C4ECE /* LBRBarcodeScannerViewController.m in Sources */,
-				380375671B8BC758004C4ECE /* LBRGoogleAPIClient.m in Sources */,
 				380375351B8AC9A8004C4ECE /* AppDelegate.m in Sources */,
-				38BE31E51B962BA900C46001 /* LBRSelectVolumeTableViewController.m in Sources */,
-				380375381B8AC9A8004C4ECE /* API_TestViewController.m in Sources */,
-				380375F71B8D4E90004C4ECE /* MasterViewController.m in Sources */,
-				3803757A1B8C08E0004C4ECE /* LBRSettingsTableViewController.m in Sources */,
-				3851DBFD1B8E2E5A00E90B9F /* LBRDataManager.m in Sources */,
-				380375841B8CD49C004C4ECE /* LBRVolume.m in Sources */,
-				384E0CC01B97D24B007E7290 /* NSString+dateValue.m in Sources */,
-				38AAD6F01B901175003062C1 /* Librarius.xcdatamodeld in Sources */,
-				38466D281B94F24400DD252E /* LBRGoogleGTLClient.m in Sources */,
-				380375621B8BB707004C4ECE /* LBRGoodReadsAPIClient.m in Sources */,
-				380375321B8AC9A8004C4ECE /* main.m in Sources */,
-				38AAD71D1B901D35003062C1 /* Volume.m in Sources */,
 				38AAD7231B901D36003062C1 /* Bookcase.m in Sources */,
 				380375F81B8D4E90004C4ECE /* DetailViewController.m in Sources */,
-				38565D701B9A20B800349498 /* LBRParsedVolume.m in Sources */,
-				380375721B8BF058004C4ECE /* UIImage+FromURL.m in Sources */,
-				389C1F131B95E1150009C721 /* LBRDataStore.m in Sources */,
-				3803756A1B8BC89D004C4ECE /* LBRGoogleSignInViewController.m in Sources */,
-				3803755B1B8B9F5E004C4ECE /* LBRConstants.m in Sources */,
+				38AAD6F01B901175003062C1 /* Librarius.xcdatamodeld in Sources */,
 				38AAD7201B901D36003062C1 /* Library.m in Sources */,
+				380375F71B8D4E90004C4ECE /* MasterViewController.m in Sources */,
+				380375321B8AC9A8004C4ECE /* main.m in Sources */,
+				384E0CC01B97D24B007E7290 /* NSString+dateValue.m in Sources */,
+				380375721B8BF058004C4ECE /* UIImage+FromURL.m in Sources */,
+				38AAD71D1B901D35003062C1 /* Volume.m in Sources */,
+				3803753B1B8AC9A8004C4ECE /* LBRBarcodeScannerViewController.m in Sources */,
+				3803755B1B8B9F5E004C4ECE /* LBRConstants.m in Sources */,
+				3851DBFD1B8E2E5A00E90B9F /* LBRDataManager.m in Sources */,
+				389C1F131B95E1150009C721 /* LBRDataStore.m in Sources */,
+				380375621B8BB707004C4ECE /* LBRGoodReadsAPIClient.m in Sources */,
+				380375671B8BC758004C4ECE /* LBRGoogleAPIClient.m in Sources */,
+				38466D281B94F24400DD252E /* LBRGoogleGTLClient.m in Sources */,
+				3803756A1B8BC89D004C4ECE /* LBRGoogleSignInViewController.m in Sources */,
+				38BE31E51B962BA900C46001 /* LBRSelectVolumeTableViewController.m in Sources */,
+				3803757A1B8C08E0004C4ECE /* LBRSettingsTableViewController.m in Sources */,
+				38565D701B9A20B800349498 /* LBRParsedVolume.m in Sources */,
+				380375841B8CD49C004C4ECE /* LBRVolume.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -605,6 +599,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8D3D33401D5A34E1C9A90BE0 /* Pods-Librarius.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Librarius/Librarius.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -627,6 +622,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9B10AB83782954202B2FDC18 /* Pods-Librarius.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Librarius/Librarius.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

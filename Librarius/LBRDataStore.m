@@ -134,7 +134,7 @@
     }
     
     
-    Library *defaultLibrary = [[Library alloc] initWithEntity:@"Library" insertIntoManagedObjectContext:self.managedObjectContext];
+    Library *defaultLibrary = [NSEntityDescription insertNewObjectForEntityForName:@"Library" inManagedObjectContext:self.managedObjectContext];
     
 }
 

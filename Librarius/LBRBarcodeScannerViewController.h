@@ -10,6 +10,8 @@
 
 @interface LBRBarcodeScannerViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
+@property (nonatomic, strong) NSMutableArray *uniqueCodes;
+
 extern NSString * const barcodeAddedNotification;
 
 
