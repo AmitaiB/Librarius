@@ -55,15 +55,11 @@ static NSString * const volumeNib          = @"volumePresentationView";
 
 
 #pragma mark - Lifecycle
--(void)loadView {
-    DBLG
-}
-
 
 - (void)viewDidLoad {
     [super viewDidLoad]; DBLG
-    [self initializeProgrammaticProperties];DBLG
     [self generateTestDataIfNeeded];
+    [self initializeProgrammaticProperties];DBLG
     LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
     NSLog(@"%@",[dataManager.currentLibrary.volumes description]);
 }

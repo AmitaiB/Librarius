@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <GTLBooks.h>
-#import "LBRDataManager.h"
 
+
+@class LBRDataManager;
 @class LBRParsedVolume;
 @interface LBRGoogleGTLClient : NSObject
 

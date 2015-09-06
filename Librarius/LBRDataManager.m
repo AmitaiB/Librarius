@@ -31,7 +31,6 @@ static NSString * const kUnknown = @"kUnknown";
     dispatch_once(&onceToken, ^{
         _sharedDataManager = [self new];
     });
-    
     return _sharedDataManager;
 }
 
@@ -41,15 +40,14 @@ static NSString * const kUnknown = @"kUnknown";
         return nil;
     }
     _uniqueCodes = [NSMutableArray new];
-    _googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
+//FIXME:    _googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
     _parsedVolumes = [NSMutableArray new];
     _parsedVolumeFromLastBarcode = [LBRParsedVolume new];
     _responseCollectionOfPotentialVolumeMatches = [GTLBooksVolumes new];
-    
-    _libraries = @[];
-    _currentLibrary = [Library new];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedNewParsedVolumeNotification:) name:@"newParsedVolumeNotification" object:nil];
+     DBLG
+    _libraries = @[]; DBLG
+    _currentLibrary = [Library new]; DBLG
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedNewParsedVolumeNotification:) name:@"newParsedVolumeNotification" object:nil]; DBLG
     
     return self;
 }

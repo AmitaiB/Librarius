@@ -38,6 +38,7 @@
     //Other properties to store and fetch, e.g., NSArray *messages...
 
 @property (nonatomic, strong) NSArray *libraries;
+//FIXME:
 @property (nonatomic, strong) Library *currentLibrary;
 
 
