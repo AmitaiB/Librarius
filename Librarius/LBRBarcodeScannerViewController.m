@@ -112,7 +112,16 @@ static NSString * const volumeNib          = @"volumePresentationView";
 - (IBAction)cameraButtonTapped:(id)sender {
     [self.scanner flipCamera];
 }
-
+/**
+ *  CLEAN: TODO: LOW. Once this happens automatically (that is,
+ *  scanning hits the API, pushes a confirm button, and adds
+ *  a volume to the local library, then continues scanning)
+ *  then this whole flow will be obsolete.
+ *
+ *  @param IBAction <#IBAction description#>
+ *
+ *  @return <#return value description#>
+ */
     //And then, Magic!
 - (IBAction)confirmChoicesButtonTapped:(id)sender {
     [self getVolumesFromBarcodeData];
@@ -203,42 +212,42 @@ static NSString * const volumeNib          = @"volumePresentationView";
 #pragma mark - GoogleClient
 
 
-/**
- *  CLEAN: This should be DEPRECATED - Google Client gets the barcode from NSNotification!
- */
+///**
+// *  CLEAN: This should be DEPRECATED - Google Client gets the barcode from NSNotification!
+// */
 -(void)getVolumesFromBarcodeData {
-    
-    /**TODO: loop for all barcodes on the list. Loop, just increment the indexPath.row.
-     *  First, we test one barcode...
-     */
-    
-    /**
-     *  TODO: This all needs to be in the GoogleGTLClient!!!
-     */
-        // Capture the ISBN for the [first] cell
-        // TODO: any given cell.
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    UITableViewCell *cell  = [self.uniqueBarcodesTableView cellForRowAtIndexPath:indexPath];
-    NSString *ISBNforCell  = cell.textLabel.text;
-
-    /**
-     *  CLEAN: Possibly refactor to not need the ticket...
-     */
-        // For the request for the googleClient:
-    [self.googleClient queryForVolumeWithISBN:ISBNforCell returnTicket:YES];
-//    GTLServiceTicket *responseTicket = self.googleClient.mostRecentTicket;
-
-    /**
-     *  Weak Point: will id-casting work? Only if it actually returns the right thing.
-     */
-    LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
-    dataManager.responseCollectionOfPotentialVolumeMatches = self.googleClient.responseObject;
-            //            UIPopoverController
-        self.confirmVolumeTVC = [LBRSelectVolumeTableViewController new];
-        [self presentVolumesSemiModally];
-    
-        //Google's example code had this line, not sure why...yet.
-//    responseTicket = nil;
+    DBLG
+//
+//    /**CLEAN:
+//     todo: loop for all barcodes on the list. Loop, just increment the indexPath.row.
+//     *  First, we test one barcode...
+//     */
+//    
+//    /**
+//     *  CLEAN: obsolete
+//     todo: This all needs to be in the GoogleGTLClient!!!
+//     */
+//        // Capture the ISBN for the [first] cell
+//        // todo: any given cell.
+//    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+//    UITableViewCell *cell  = [self.uniqueBarcodesTableView cellForRowAtIndexPath:indexPath];
+//    NSString *ISBNforCell  = cell.textLabel.text;
+//
+//        // For the request for the googleClient:
+////    [self.googleClient queryForVolumeWithISBN:ISBNforCell returnTicket:YES];
+////    GTLServiceTicket *responseTicket = self.googleClient.mostRecentTicket;
+//
+//    /**
+//     *  Weak Point: will id-casting work? Only if it actually returns the right thing.
+//     */
+//    LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
+//    dataManager.responseCollectionOfPotentialVolumeMatches = self.googleClient.responseObject;
+//            //            UIPopoverController
+//        self.confirmVolumeTVC = [LBRSelectVolumeTableViewController new];
+//        [self presentVolumesSemiModally];
+//    
+//        //Google's example code had this line, not sure why...yet.
+////    responseTicket = nil;
 }
 
 -(void)presentVolumesSemiModally {
