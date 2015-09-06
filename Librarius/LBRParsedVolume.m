@@ -33,14 +33,24 @@
     /**
      *  ISBN
      */
-    for (NSDictionary *industryIDer in volumeToParse.volumeInfo.industryIdentifiers) {
-        if ([industryIDer[@"type"] isEqualToString:@"ISBN_13"]) {
-            self.isbn13 = industryIDer[@"identifier"];
+    for (GTLBooksVolumeVolumeInfoIndustryIdentifiersItem *item in volumeToParse.volumeInfo.industryIdentifiers) {
+        if ([item.type isEqualToString:@"ISBN_10"]) {
+            self.isbn10 = item.identifierProperty;
         }
-        if ([industryIDer[@"type"] isEqualToString:@"ISBN_10"]) {
-            self.isbn10 = industryIDer[@"identifier"];
+        if ([item.type isEqualToString:@"ISBN_13"]) {
+            self.isbn13 = item.identifierProperty;
         }
     }
+    
+    
+//    for (NSDictionary *industryIDer in volumeToParse.volumeInfo.industryIdentifiers) {
+//        if ([industryIDer[@"type"] isEqualToString:@"ISBN_13"]) {
+//            self.isbn13 = industryIDer[@"identifier"];
+//        }
+//        if ([industryIDer[@"type"] isEqualToString:@"ISBN_10"]) {
+//            self.isbn10 = industryIDer[@"identifier"];
+//        }
+//    }
     
     /**
      *  Title

@@ -11,13 +11,13 @@
 @class GTLBooksVolume;
 @class GTLBooksVolumes;
 @class LBRParsedVolume;
-@class LBRGoogleGTLClient;
+//@class LBRGoogleGTLClient;
 @class Library;
 @interface LBRDataManager : NSObject
 
     // ScannerVC:GoogleBooksClient → VolumePresentationTVC
 @property (nonatomic, strong) NSMutableArray *uniqueCodes;
-@property (nonatomic, strong) LBRGoogleGTLClient *googleClient;
+//@property (nonatomic, strong) LBRGoogleGTLClient *googleClient;
 /**
  *  CLEAN: consider changing "parsed_X" to "transient_X"
  */
@@ -38,9 +38,9 @@
     //Other properties to store and fetch, e.g., NSArray *messages...
 
 @property (nonatomic, strong) NSArray *libraries;
-//FIXME:
+//FIXME: CoreData: error: Failed to call designated initializer on NSManagedObject class 'Library'
 @property (nonatomic, strong) Library *currentLibrary;
-
+    //http://stackoverflow.com/questions/14671478/coredata-error-failed-to-call-designated-initializer-on-nsmanagedobject-class
 
 -(void) saveContext;
 -(void) generateTestDataIfNeeded;

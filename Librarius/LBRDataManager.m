@@ -44,9 +44,7 @@ static NSString * const kUnknown = @"kUnknown";
     _parsedVolumes = [NSMutableArray new];
     _parsedVolumeFromLastBarcode = [LBRParsedVolume new];
     _responseCollectionOfPotentialVolumeMatches = [GTLBooksVolumes new];
-     DBLG
-    _libraries = @[]; DBLG
-    _currentLibrary = [Library new]; DBLG
+    _libraries = @[];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedNewParsedVolumeNotification:) name:@"newParsedVolumeNotification" object:nil]; DBLG
     
     return self;
@@ -113,7 +111,9 @@ static NSString * const kUnknown = @"kUnknown";
  */
 -(void)addGTLVolumeToCurrentLibrary:(GTLBooksVolume*)volumeToAdd andSaveContext:(BOOL)saveContext {
     DBLG
-    
+    if (!self.currentLibrary) {
+        self.currentLibrary = [NSEntityDescription insertNewObjectForEntityForName:@"Library" inManagedObjectContext:self.managedObjectContext];
+    }
     Volume *newLBRVolume = [NSEntityDescription insertNewObjectForEntityForName:@"Volume" inManagedObjectContext:self.managedObjectContext];
     [self generateDefaultLibraryIfNeeded];
     
@@ -277,7 +277,7 @@ static NSString * const kUnknown = @"kUnknown";
                              @"978-1-60309-042-1"];
     
     for (NSString *ISBN in listOfISBNs) {
-        [self.googleClient queryForVolumeWithString:ISBN withCallback:^(GTLBooksVolume *responseVolume) {
+        [googleClient queryForVolumeWithString:ISBN withCallback:^(GTLBooksVolume *responseVolume) {
             [self addGTLVolumeToCurrentLibrary:responseVolume andSaveContext:NO];
         }];
     }
@@ -293,10 +293,10 @@ static NSString * const kUnknown = @"kUnknown";
     NSFetchRequest *libraryRequest = [NSFetchRequest fetchRequestWithEntityName:@"Library"];
     NSError *error = nil;
     
-    if ([self.managedObjectContext countForFetchRequest:libraryRequest error:&error]) {
-            if (error) {DBLG
-                NSLog(@"Error: %@", error.localizedDescription);
-            }
+    BOOL datastoreHasAtLeastOneLibrary = [self.managedObjectContext countForFetchRequest:libraryRequest error:&error] >= 1;
+    
+    if (datastoreHasAtLeastOneLibrary) {
+        self.currentLibrary = [[self.managedObjectContext executeFetchRequest:libraryRequest error:nil] firstObject];
     } else {
         Library *newDefaultLibrary = [NSEntityDescription insertNewObjectForEntityForName:@"Library" inManagedObjectContext:self.managedObjectContext];
         newDefaultLibrary.name = @"Home Library";

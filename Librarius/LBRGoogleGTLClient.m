@@ -5,6 +5,7 @@
 //  Created by Amitai Blickstein on 8/31/15.
 //  Copyright (c) 2015 Amitai Blickstein, LLC. All rights reserved.
 //
+#define DBLG NSLog(@"<%@:%@:line %d, reporting!>", NSStringFromClass([self class]), NSStringFromSelector(_cmd), __LINE__);
 
 #import "LBRBarcodeScannerViewController.h"
 #import "LBRGoogleGTLClient.h"
@@ -39,6 +40,8 @@
         _dataManager = [LBRDataManager sharedDataManager];
 //        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedNewBarcodeStringNotification:) name:barcodeAddedNotification object:nil];
         
+        _debugCounter = 0;
+        
         /**
          CLEAN: shouldn't be needed...
          */
@@ -52,7 +55,7 @@
 //}
 
 - (void)queryForVolumeWithString:(NSString *)queryString withCallback:(void (^)(GTLBooksVolume* responseVolume))block {
-    
+    NSLog(@"%lu", (unsigned long)self.debugCounter++);
     GTLQueryBooks *booksQuery = [GTLQueryBooks queryForVolumesListWithQ:queryString];
 
         // The Books API currently requires that search queries not have an

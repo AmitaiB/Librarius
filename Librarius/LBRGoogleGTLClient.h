@@ -19,6 +19,9 @@
 //@property (nonatomic, strong) GTLServiceTicket *mostRecentTicket;
 @property (nonatomic, strong) GTLBooksVolumes *responseObject;
 
+@property (nonatomic) NSUInteger debugCounter;
+
+
 +(instancetype)sharedGoogleGTLClient;
 -(instancetype)init;
 
