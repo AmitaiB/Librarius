@@ -11,7 +11,7 @@
 #import "LBRBarcodeScannerViewController.h"
 #import "LBRDataManager.h"
 #import "LBRParsedVolume.h"
-
+#import "LBRConstants.h"
 
 @implementation LBRGoogleGTLClient
 
@@ -34,13 +34,16 @@
     if(self) {
             // Initialize a service
         _service              = [GTLServiceBooks new];
-        _mostRecentTicket     = [[GTLServiceTicket alloc] initWithService:_service];
         _service.APIKey       = GOOGLE_APP_KEY;
         _service.retryEnabled = YES;
         
         _dataManager = [LBRDataManager sharedDataManager];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedNewBarcodeStringNotification:) name:barcodeAddedNotification object:nil];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveBarcodeAddedNotification:) name:barcodeAddedNotification object:nil];
+        /**
+         CLEAN: shouldn't be needed...
+         */
+        _mostRecentTicket     = [[GTLServiceTicket alloc] initWithService:_service];
     }
     return self;
 }
@@ -52,6 +55,12 @@
 /**
  *  CLEAN:We don't need the ticket!
 */
+/**
+ *  The workhorse of the GoogleClient. Hits the API, and receives the requested volume, as well as a collection of similar volumes.
+ *
+ *  @param ISBN                An NSString of the ISBN (other string values will probably work as well [e.g., author, title, etc.]).
+ *  @param returnTicketInstead If YES, will return a GTL Service Ticket object instead, which carries more information. ticket.fetchedObject is returned if NO (default).
+ */
 -(void)queryForVolumeWithISBN:(NSString*)ISBN returnTicket:(BOOL)returnTicketInstead {
     
     GTLQueryBooks *booksQuery = [GTLQueryBooks queryForVolumesListWithQ:ISBN];
@@ -66,22 +75,23 @@
     [self.service executeQuery:booksQuery completionHandler:^(GTLServiceTicket *ticket, id object, NSError *error) {
             // callback
         if (!error) {
-                // id-to-GTLBooksVolume dance:
+                // id  GTLBooksVolume dance:
             GTLBooksVolumes *responceObject = object;
             GTLBooksVolume *mostLikelyObject = [responceObject.items firstObject];
+            LBRParsedVolume *parsedVolume_local = [[LBRParsedVolume alloc] initWithGoogleVolume:mostLikelyObject];
             
                 // Store reference in data manager, via interface.
-            LBRParsedVolume *parsedVolume_local = [[LBRParsedVolume alloc] initWithGoogleVolume:mostLikelyObject];
-            LBRParsedVolume *parsedVolume_dataManager = self.dataManager.parsedVolumeFromLastBarcode;
-            [self updateDataManagerObject:parsedVolume_dataManager withLocalData:parsedVolume_local];
+            [self updateAndNotifyDataManagerWithLocalData:parsedVolume_local];
             NSLog(@"Job's done, because now the dataManager has the ParsedVolume.");
             
             /**
-             *  CLEAN: probably not needed anymore.
-             */
-                //            self.dataManager.responseCollectionOfPotentialVolumeMatches = object;
+             *  CLEAN: shouldn't need these local variables anymore.
+             self.dataManager.responseCollectionOfPotentialVolumeMatches = object;
             self.mostRecentTicket = ticket;
             self.responseObject   = object;
+             */
+            
+                // Error handling.
         } else {
             NSLog(@"Error in booksQueryWithISBN: %@", error.localizedDescription);
             self.blockError       = error;
@@ -89,16 +99,23 @@
     }];
 }
 
--(void)receiveBarcodeAddedNotification:(NSNotification*)notification {
+-(void)receivedNewBarcodeStringNotification:(NSNotification*)notification {
     NSLog(@"%@ received notification: '%@'", NSStringFromClass([self class]), notification.name);
     [self queryForVolumeWithISBN:[notification.object lastObject] returnTicket:NO];
 }
 
 #pragma mark - DataManager Interface
 
--(void)updateDataManagerObject:(id)dataToBeUpdated withLocalData:(id)newLocalData {
-    dataToBeUpdated = newLocalData;
+/**
+ *  Switchboard for updating the dataManager.
+ *
+ *  @param newLocalData Send in any data, but make sure there is an 'if' statement to catch it.
+ */
+-(void)updateAndNotifyDataManagerWithLocalData:(id)newLocalData {
+    if ([newLocalData isMemberOfClass:[LBRParsedVolume class]]) {
+        self.dataManager.parsedVolumeFromLastBarcode = newLocalData;
+        [[NSNotificationCenter defaultCenter] postNotificationName:newParsedVolumeNotification object:newLocalData];
+    }
 }
-
 
 @end

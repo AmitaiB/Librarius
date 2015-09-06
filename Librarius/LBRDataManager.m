@@ -1,4 +1,7 @@
-//
+// |X| TODO: #1 Priority! The datamanger now has a new Parsed Volume. Consider making the DataManger the DataSource for all non-persistent tables and other data displays (makes sense, right?). Implement that, and then take stock. (FRC, then UI, then collection manipulation, then UI prettify...)
+
+
+    //
 //  LBRDataManager.m
 //  Librarius
 //
@@ -33,16 +36,84 @@ static NSString * const kUnknown = @"kUnknown";
     return _sharedDataManager;
 }
 
+-(instancetype)init {
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+    _uniqueCodes = [NSMutableArray new];
+    _googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
+    _parsedVolumes = [NSMutableArray new];
+    _parsedVolumeFromLastBarcode = [LBRParsedVolume new];
+    _responseCollectionOfPotentialVolumeMatches = [GTLBooksVolumes new];
+    
+    _libraries = @[];
+    _currentLibrary = [Library new];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedNewParsedVolumeNotification:) name:@"newParsedVolumeNotification" object:nil];
+    
+    return self;
+}
+
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 //    //Setter
 //-(void)setResponseCollectionOfPotentialVolumeMatches:(GTLBooksVolumes *)responseCollectionOfPotentialVolumeMatches {
 //    _responseCollectionOfPotentialVolumeMatches = responseCollectionOfPotentialVolumeMatches;
 //    [self addGTLVolumeToCurrentLibrary:responseCollectionOfPotentialVolumeMatches.items[0] andSaveContext:NO];
 //    
 //}
+
 /**
- *  This will translate a GoogleBooks volume object into our NSManagedObject.
+ *  Upon receiving a new parsedVolume, the dataManager is notified, 
+ *
+ *  @param volumeToAdd <#volumeToAdd description#>
+ *  @param saveContext <#saveContext description#>
  */
-    //OLD NAME: addGTLVolumeToCurrentLibrary
+
+-(void)receivedNewParsedVolumeNotification:(NSNotification*)notification {
+    
+}
+
+-(void)addParsedVolumeToCurrentLibrary:(LBRParsedVolume*)volumeToAdd andSaveContext:(BOOL)saveContext {
+    DBLG
+    
+    [self generateDefaultLibraryIfNeeded];
+    
+    Volume *managedVolumeToAdd = [NSE]
+    
+    [self.currentLibrary addVolumesObject:];
+    
+    self.parsedVolumeFromLastBarcode = [[LBRParsedVolume alloc] initWithGoogleVolume:volumeToAdd];
+    
+    newLBRVolume.isbn13    = self.parsedVolumeFromLastBarcode.isbn13;
+    newLBRVolume.isbn10    = self.parsedVolumeFromLastBarcode.isbn10;
+    newLBRVolume.title     = self.parsedVolumeFromLastBarcode.title;
+    newLBRVolume.pageCount = self.parsedVolumeFromLastBarcode.pageCount;
+    newLBRVolume.thickness = self.parsedVolumeFromLastBarcode.thickness;
+    newLBRVolume.height    = self.parsedVolumeFromLastBarcode.height;
+    newLBRVolume.cover_art = self.parsedVolumeFromLastBarcode.cover_art;
+    newLBRVolume.author    = self.parsedVolumeFromLastBarcode.author;
+    newLBRVolume.category  = self.parsedVolumeFromLastBarcode.category;
+    newLBRVolume.published = self.parsedVolumeFromLastBarcode.published;
+    newLBRVolume.rating    = self.parsedVolumeFromLastBarcode.rating;
+    newLBRVolume.google_id = self.parsedVolumeFromLastBarcode.google_id;
+    
+    
+    if (saveContext) {
+        [self saveContext];
+    }
+}
+
+
+/**
+ *  CLEAN: was made obselete by addParsedVolumeToCurrentLibrary
+ *
+ *  @param volumeToAdd <#volumeToAdd description#>
+ *  @param saveContext <#saveContext description#>
+ */
 -(void)addGTLVolumeToCurrentLibrary:(GTLBooksVolume*)volumeToAdd andSaveContext:(BOOL)saveContext {
     DBLG
     

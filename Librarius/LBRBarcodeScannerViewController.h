@@ -1,5 +1,5 @@
 //
-//  SecondViewController.h
+//  LBRBarcodeScannerViewController.h
 //  Librarius
 //
 //  Created by Amitai Blickstein on 8/23/15.
@@ -11,8 +11,6 @@
 @interface LBRBarcodeScannerViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) NSMutableArray *uniqueCodes;
-
-extern NSString * const barcodeAddedNotification;
 
 
 @end

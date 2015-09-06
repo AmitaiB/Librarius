@@ -17,5 +17,7 @@ extern NSString * const GOOGLE_APP_KEY;
 extern NSString * const GOOGLE_CLIENT_ID;
 extern NSString * const GOOGLE_CLIENT_SECRET;
 
+extern NSString * const barcodeAddedNotification;
+extern NSString * const newParsedVolumeNotification;
 
 @end

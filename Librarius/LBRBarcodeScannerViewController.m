@@ -1,5 +1,5 @@
 //
-//  SecondViewController.m
+//  LBRBarcodeScannerViewController.m
 //  Librarius
 //
 //  Created by Amitai Blickstein on 8/23/15.
@@ -15,6 +15,7 @@
 #import "LBRBarcodeScannerViewController.h"
 #import "LBRSelectVolumeTableViewController.h"
 #import "LBRGoogleGTLClient.h"
+#import "LBRConstants.h"
 
 #import "LBRDataManager.h"
 #import "Library.h"
@@ -46,8 +47,6 @@
 
 @implementation LBRBarcodeScannerViewController
 
-NSString * const barcodeAddedNotification = @"barcodeAddedNotification";
-
 #pragma mark - Constant Strings
 
 static NSString * const barcodeCellReuseID = @"barcodeCellReuseID";
@@ -63,6 +62,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
     [self generateTestDataIfNeeded];
     LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
     NSLog(@"%@",[dataManager.currentLibrary.volumes description]);
+    
     
 }
 
@@ -184,6 +184,13 @@ static NSString * const volumeNib          = @"volumePresentationView";
         [self.startScanningButton setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
         self.startScanningButton.backgroundColor = [UIColor redColor];
     }
+}
+
+/**
+ *  Presents an alert asking the user to confirm her choice.
+ */
+-(void)confirmSVolumeSelection {
+        //"Add <#book title#> to 'CoffeeTable'?
 }
 
 #pragma mark - UITableViewDataSource methods

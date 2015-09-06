@@ -18,7 +18,11 @@
     // ScannerVC:GoogleBooksClient → VolumePresentationTVC
 @property (nonatomic, strong) NSMutableArray *uniqueCodes;
 @property (nonatomic, strong) LBRGoogleGTLClient *googleClient;
-@property (nonatomic, strong) LBRParsedVolume *parsedVolumeFromLastBarcode; //<-- Use this to confirm user's purchases
+/**
+ *  CLEAN: consider changing "parsed_X" to "transient_X"
+ */
+@property (nonatomic, strong) NSArray *parsedVolumes;
+@property (nonatomic, strong) LBRParsedVolume *parsedVolumeFromLastBarcode; //<-- Use this to confirm user's selection, then enter it into Persistent Data.
 
 @property (nonatomic, strong) GTLBooksVolumes *responseCollectionOfPotentialVolumeMatches;
 
