@@ -17,6 +17,8 @@
 #import "LBRGoogleGTLClient.h"
 #import "LBRConstants.h"
 
+#import <NYAlertViewController.h>
+
 #import "LBRDataManager.h"
 #import "Library.h"
 #import "Volume.h"
@@ -57,24 +59,24 @@ static NSString * const volumeNib          = @"volumePresentationView";
 #pragma mark - Lifecycle
 
 - (void)viewDidLoad {
-    [super viewDidLoad]; DBLG
+    [super viewDidLoad];
     [self generateTestDataIfNeeded];
-    [self initializeProgrammaticProperties];DBLG
+    [self initializeProgrammaticProperties];
     LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
     NSLog(@"%@",[dataManager.currentLibrary.volumes description]);
 }
 
 -(void)initializeProgrammaticProperties {
-    self.googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient]; DBLG
+    self.googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
     /**
      *  CLEAN: May be implicitly NO, and can remove this line.
      */
-    self.isScanning = NO; DBLG
-    self.scanner = [[MTBBarcodeScanner alloc] initWithPreviewView:self.scannerView]; DBLG
-    self.responseCollectionOfPotentialVolumeMatches = [GTLBooksVolumes new]; DBLG
-    self.uniqueCodes = [NSMutableArray new]; DBLG
+    self.isScanning = NO;
+    self.scanner = [[MTBBarcodeScanner alloc] initWithPreviewView:self.scannerView];
+    self.responseCollectionOfPotentialVolumeMatches = [GTLBooksVolumes new];
+    self.uniqueCodes = [NSMutableArray new];
     
-    [self initializeSpinner]; DBLG
+    [self initializeSpinner];
     
 }
 
@@ -124,7 +126,8 @@ static NSString * const volumeNib          = @"volumePresentationView";
  */
     //And then, Magic!
 - (IBAction)confirmChoicesButtonTapped:(id)sender {
-    [self getVolumesFromBarcodeData];
+//    [self getVolumesFromBarcodeData];
+    DBLG
 }
     
 #pragma mark - Scanning
@@ -160,6 +163,12 @@ static NSString * const volumeNib          = @"volumePresentationView";
                 /**
                  *  TODO: pop-up confirmation with lazy loading part 1 (Empty cell)
                  */
+                NYAlertViewController *confirmSelectionViewController = [self confirmSelectionViewController];
+                    // Present the alert view controller
+                [self presentViewController:confirmSelectionViewController animated:YES completion:^{
+                    DBLG
+                }];
+
                 [self.googleClient queryForVolumeWithString:code.stringValue withCallback:^(GTLBooksVolume *responseVolume) {
                     [self.spinnerView stopAnimating];
                     LBRParsedVolume *volumeToConfirm = [[LBRParsedVolume alloc] initWithGoogleVolume:responseVolume];
@@ -203,6 +212,34 @@ static NSString * const volumeNib          = @"volumePresentationView";
     }
 }
 
+-(NYAlertViewController*)confirmSelectionViewController {
+    NYAlertViewController *alertViewController = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
+    
+        // Set a title and message
+    alertViewController.title = NSLocalizedString(@"Custom UI", nil);
+    alertViewController.message = NSLocalizedString(@"Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Donec id elit non mi porta gravida at eget metus.", nil);
+    
+        // Customize appearance as desired
+    alertViewController.buttonCornerRadius = 20.0f;
+    alertViewController.view.tintColor = self.view.tintColor;
+    
+    alertViewController.titleFont = [UIFont fontWithName:@"AvenirNext-Bold" size:19.0f];
+    alertViewController.messageFont = [UIFont fontWithName:@"AvenirNext-Medium" size:16.0f];
+    alertViewController.buttonTitleFont = [UIFont fontWithName:@"AvenirNext-Regular" size:alertViewController.buttonTitleFont.pointSize];
+    alertViewController.cancelButtonTitleFont = [UIFont fontWithName:@"AvenirNext-Medium" size:alertViewController.cancelButtonTitleFont.pointSize];
+    
+    alertViewController.swipeDismissalGestureEnabled = YES;
+    alertViewController.backgroundTapDismissalGestureEnabled = YES;
+    
+        // Add alert actions
+    [alertViewController addAction:[NYAlertAction actionWithTitle:NSLocalizedString(@"Done", nil)
+                                                            style:UIAlertActionStyleCancel
+                                                          handler:^(NYAlertAction *action) {
+                                                              [self dismissViewControllerAnimated:YES completion:nil];
+                                                          }]];
+    return alertViewController;
+}
+
 /**
  *  Presents an alert asking the user to confirm her choice.
  */
@@ -236,52 +273,15 @@ static NSString * const volumeNib          = @"volumePresentationView";
 -(void)scrollToTargetISBNCell:(NSUInteger)idxOfTarget {
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.uniqueCodes.count - 1 inSection:0];
-    [self.uniqueBarcodesTableView scrollToRowAtIndexPath:indexPath
-                                        atScrollPosition:UITableViewScrollPositionTop
-                                                animated:YES];
+//    [self.uniqueBarcodesTableView scrollToRowAtIndexPath:indexPath
+//                                        atScrollPosition:UITableViewScrollPositionTop
+//                                                animated:YES];
 }
 
-
+    //???
 #pragma mark - GoogleClient
 
 
-///**
-// *  CLEAN: This should be DEPRECATED - Google Client gets the barcode from NSNotification!
-// */
--(void)getVolumesFromBarcodeData {
-    DBLG
-//
-//    /**CLEAN:
-//     todo: loop for all barcodes on the list. Loop, just increment the indexPath.row.
-//     *  First, we test one barcode...
-//     */
-//    
-//    /**
-//     *  CLEAN: obsolete
-//     todo: This all needs to be in the GoogleGTLClient!!!
-//     */
-//        // Capture the ISBN for the [first] cell
-//        // todo: any given cell.
-//    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-//    UITableViewCell *cell  = [self.uniqueBarcodesTableView cellForRowAtIndexPath:indexPath];
-//    NSString *ISBNforCell  = cell.textLabel.text;
-//
-//        // For the request for the googleClient:
-////    [self.googleClient queryForVolumeWithISBN:ISBNforCell returnTicket:YES];
-////    GTLServiceTicket *responseTicket = self.googleClient.mostRecentTicket;
-//
-//    /**
-//     *  Weak Point: will id-casting work? Only if it actually returns the right thing.
-//     */
-//    LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
-//    dataManager.responseCollectionOfPotentialVolumeMatches = self.googleClient.responseObject;
-//            //            UIPopoverController
-//        self.confirmVolumeTVC = [LBRSelectVolumeTableViewController new];
-//        [self presentVolumesSemiModally];
-//    
-//        //Google's example code had this line, not sure why...yet.
-////    responseTicket = nil;
-}
 
 -(void)presentVolumesSemiModally {
     if (self.confirmVolumeTVC) {

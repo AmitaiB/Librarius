@@ -56,7 +56,6 @@
 //    
 //    [GIDSignIn sharedInstance].delegate = self;
 
-    DBLG
     return YES;
 }
 

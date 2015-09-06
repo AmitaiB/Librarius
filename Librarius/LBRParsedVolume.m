@@ -42,16 +42,6 @@
         }
     }
     
-    
-//    for (NSDictionary *industryIDer in volumeToParse.volumeInfo.industryIdentifiers) {
-//        if ([industryIDer[@"type"] isEqualToString:@"ISBN_13"]) {
-//            self.isbn13 = industryIDer[@"identifier"];
-//        }
-//        if ([industryIDer[@"type"] isEqualToString:@"ISBN_10"]) {
-//            self.isbn10 = industryIDer[@"identifier"];
-//        }
-//    }
-    
     /**
      *  Title
      */

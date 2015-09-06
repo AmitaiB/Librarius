@@ -41,7 +41,7 @@ static NSString * const kUnknown = @"kUnknown";
     }
     _uniqueCodes = [NSMutableArray new];
 //FIXME:    _googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
-    _parsedVolumes = [NSMutableArray new];
+    _parsedVolumesToEitherSaveOrDiscard = [NSMutableArray new];
     _parsedVolumeFromLastBarcode = [LBRParsedVolume new];
     _responseCollectionOfPotentialVolumeMatches = [GTLBooksVolumes new];
     _libraries = @[];
