@@ -10,6 +10,7 @@
 #import <GTLBooks.h>
 #import "LBRDataManager.h"
 
+@class LBRParsedVolume;
 @interface LBRGoogleGTLClient : NSObject
 
 @property (nonatomic, strong) LBRDataManager *dataManager;

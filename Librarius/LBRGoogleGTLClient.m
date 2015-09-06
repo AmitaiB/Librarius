@@ -69,7 +69,11 @@
                 // id-to-GTLBooksVolume dance:
             GTLBooksVolumes *responceObject = object;
             GTLBooksVolume *mostLikelyObject = [responceObject.items firstObject];
-            self.dataManager.parsedVolumeFromLastBarcode = [[LBRParsedVolume alloc] initWithGoogleVolume:mostLikelyObject];
+            
+                // Store reference in data manager, via interface.
+            LBRParsedVolume *parsedVolume_local = [[LBRParsedVolume alloc] initWithGoogleVolume:mostLikelyObject];
+            LBRParsedVolume *parsedVolume_dataManager = self.dataManager.parsedVolumeFromLastBarcode;
+            [self updateDataManagerObject:parsedVolume_dataManager withLocalData:parsedVolume_local];
             NSLog(@"Job's done, because now the dataManager has the ParsedVolume.");
             
             /**
@@ -90,7 +94,11 @@
     [self queryForVolumeWithISBN:[notification.object lastObject] returnTicket:NO];
 }
 
+#pragma mark - DataManager Interface
 
+-(void)updateDataManagerObject:(id)dataToBeUpdated withLocalData:(id)newLocalData {
+    dataToBeUpdated = newLocalData;
+}
 
 
 @end

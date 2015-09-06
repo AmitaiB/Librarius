@@ -12,6 +12,7 @@
 #import "Volume.h"
 #import "LBRParsedVolume.h"
 #import <GTLBooksVolume.h>
+#import "LBRGoogleGTLClient.h"
 
 #define DBLG NSLog(@"%@ reporting!", NSStringFromSelector(_cmd));
 

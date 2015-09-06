@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-|X|
+
+@class GTLBooksVolume;
 @class GTLBooksVolumes;
 @class LBRParsedVolume;
 @class LBRGoogleGTLClient;
