@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 #define DBLG NSLog(@"%@ reporting!", NSStringFromSelector(_cmd));
-//#define set() [NSSet setWithArray:@[__VA_ARGS__]]
 #define kSpinnerFrameRect CGRectMake(0, 0, 40, 40)
 
 #import <LGSemiModalNavViewController.h>

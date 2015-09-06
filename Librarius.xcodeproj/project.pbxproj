@@ -30,12 +30,11 @@
 		3851DBFD1B8E2E5A00E90B9F /* LBRDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3851DBFC1B8E2E5A00E90B9F /* LBRDataManager.m */; };
 		38565D701B9A20B800349498 /* LBRParsedVolume.m in Sources */ = {isa = PBXBuildFile; fileRef = 38565D6F1B9A20B800349498 /* LBRParsedVolume.m */; };
 		389C1F131B95E1150009C721 /* LBRDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 389C1F121B95E1150009C721 /* LBRDataStore.m */; };
-		38AAD6EA1B90107F003062C1 /* libMagicalRecord.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38AAD6E91B90107F003062C1 /* libMagicalRecord.a */; };
 		38AAD6F01B901175003062C1 /* Librarius.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 38AAD6EE1B901175003062C1 /* Librarius.xcdatamodeld */; };
 		38AAD71D1B901D35003062C1 /* Volume.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAD71C1B901D35003062C1 /* Volume.m */; };
 		38AAD7201B901D36003062C1 /* Library.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAD71F1B901D36003062C1 /* Library.m */; };
 		38AAD7231B901D36003062C1 /* Bookcase.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAD7221B901D36003062C1 /* Bookcase.m */; };
-		38AAD7261B90A25B003062C1 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38AAD7251B90A25B003062C1 /* CloudKit.framework */; };
+		38BA3CA51B9BDA1500B3B42F /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38BA3CA41B9BDA1500B3B42F /* CloudKit.framework */; };
 		38BE31E21B961F7000C46001 /* volumePresentationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38BE31E11B961F7000C46001 /* volumePresentationView.xib */; };
 		38BE31E51B962BA900C46001 /* LBRSelectVolumeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BE31E41B962BA900C46001 /* LBRSelectVolumeTableViewController.m */; };
 /* End PBXBuildFile section */
@@ -102,7 +101,7 @@
 		38AAD7211B901D36003062C1 /* Bookcase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bookcase.h; sourceTree = "<group>"; };
 		38AAD7221B901D36003062C1 /* Bookcase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bookcase.m; sourceTree = "<group>"; };
 		38AAD7241B90A1AC003062C1 /* Librarius.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Librarius.entitlements; sourceTree = "<group>"; };
-		38AAD7251B90A25B003062C1 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		38BA3CA41B9BDA1500B3B42F /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		38BE31E11B961F7000C46001 /* volumePresentationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = volumePresentationView.xib; sourceTree = "<group>"; };
 		38BE31E31B962BA900C46001 /* LBRSelectVolumeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRSelectVolumeTableViewController.h; sourceTree = "<group>"; };
 		38BE31E41B962BA900C46001 /* LBRSelectVolumeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRSelectVolumeTableViewController.m; sourceTree = "<group>"; };
@@ -116,8 +115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38AAD7261B90A25B003062C1 /* CloudKit.framework in Frameworks */,
-				38AAD6EA1B90107F003062C1 /* libMagicalRecord.a in Frameworks */,
+				38BA3CA51B9BDA1500B3B42F /* CloudKit.framework in Frameworks */,
 				2E6DA4DCEDA6FC0E68557D16 /* libPods-Librarius.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -301,7 +299,7 @@
 		8D3D60166B48602A9D5DE1B9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				38AAD7251B90A25B003062C1 /* CloudKit.framework */,
+				38BA3CA41B9BDA1500B3B42F /* CloudKit.framework */,
 				38AAD6E91B90107F003062C1 /* libMagicalRecord.a */,
 				EBADCB9C83FA635A577697F9 /* libPods-Librarius.a */,
 			);
