@@ -225,6 +225,11 @@ static NSString * const volumeNib          = @"volumePresentationView";
     }
 }
 
+/**
+ *  4th APPROACH: Just use an action sheet.
+ *
+ *  @param volume <#volume description#>
+ */
 -(void)confirmViaAlertControllerThisVolume:(LBRParsedVolume*)volume {
     UIAlertController *confirmationAlert = [UIAlertController alertControllerWithTitle:@"Add this book to the pile on your coffee table?" message:[NSString stringWithFormat:@"%@\nby %@ (%@)", volume.title, volume.author, [self yearFromDate:volume.published]] preferredStyle:UIAlertControllerStyleActionSheet];
     
@@ -277,11 +282,12 @@ static NSString * const volumeNib          = @"volumePresentationView";
     alertViewController.message = NSLocalizedString(@"Set the alertViewContentView property to add custom views to the alert view", nil);
     
     UIView *contentView = [[UIView alloc] initWithFrame:CGRectZero];
-    UITableView *singleCellTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    UITableView *singleCellTableView = [[UITableView alloc] initWithFrame:contentView.frame style:UITableViewStyleGrouped];
+    singleCellTableView.backgroundColor = [UIColor redColor];
     [self prepareViewForAutolayout:singleCellTableView];
     [contentView addSubview:singleCellTableView];
     
-    [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[singleCellTableView(>=60)]|"
+    [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[singleCellTableView]-|"
                                                                         options:0
                                                                         metrics:nil
                                                                           views:NSDictionaryOfVariableBindings(singleCellTableView)]];
