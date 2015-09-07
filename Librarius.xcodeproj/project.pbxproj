@@ -29,6 +29,7 @@
 		384E0CC01B97D24B007E7290 /* NSString+dateValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 384E0CBF1B97D24B007E7290 /* NSString+dateValue.m */; };
 		3851DBFD1B8E2E5A00E90B9F /* LBRDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3851DBFC1B8E2E5A00E90B9F /* LBRDataManager.m */; };
 		38565D701B9A20B800349498 /* LBRParsedVolume.m in Sources */ = {isa = PBXBuildFile; fileRef = 38565D6F1B9A20B800349498 /* LBRParsedVolume.m */; };
+		387039B61B9D0FD300381007 /* LBRSingleCellConfirmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 387039B51B9D0FD300381007 /* LBRSingleCellConfirmViewController.m */; };
 		389C1F131B95E1150009C721 /* LBRDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 389C1F121B95E1150009C721 /* LBRDataStore.m */; };
 		38AAD6F01B901175003062C1 /* Librarius.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 38AAD6EE1B901175003062C1 /* Librarius.xcdatamodeld */; };
 		38AAD71D1B901D35003062C1 /* Volume.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAD71C1B901D35003062C1 /* Volume.m */; };
@@ -90,6 +91,8 @@
 		3851DBFC1B8E2E5A00E90B9F /* LBRDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRDataManager.m; sourceTree = "<group>"; };
 		38565D6E1B9A20B800349498 /* LBRParsedVolume.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRParsedVolume.h; sourceTree = "<group>"; };
 		38565D6F1B9A20B800349498 /* LBRParsedVolume.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRParsedVolume.m; sourceTree = "<group>"; };
+		387039B41B9D0FD300381007 /* LBRSingleCellConfirmViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRSingleCellConfirmViewController.h; sourceTree = "<group>"; };
+		387039B51B9D0FD300381007 /* LBRSingleCellConfirmViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRSingleCellConfirmViewController.m; sourceTree = "<group>"; };
 		389C1F111B95E1150009C721 /* LBRDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRDataStore.h; sourceTree = "<group>"; };
 		389C1F121B95E1150009C721 /* LBRDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRDataStore.m; sourceTree = "<group>"; };
 		38AAD6E91B90107F003062C1 /* libMagicalRecord.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMagicalRecord.a; path = "Pods/../build/Debug-iphoneos/libMagicalRecord.a"; sourceTree = "<group>"; };
@@ -249,6 +252,8 @@
 			children = (
 				380375391B8AC9A8004C4ECE /* LBRBarcodeScannerViewController.h */,
 				3803753A1B8AC9A8004C4ECE /* LBRBarcodeScannerViewController.m */,
+				387039B41B9D0FD300381007 /* LBRSingleCellConfirmViewController.h */,
+				387039B51B9D0FD300381007 /* LBRSingleCellConfirmViewController.m */,
 				38BE31E31B962BA900C46001 /* LBRSelectVolumeTableViewController.h */,
 				38BE31E41B962BA900C46001 /* LBRSelectVolumeTableViewController.m */,
 				380375781B8C08E0004C4ECE /* LBRSettingsTableViewController.h */,
@@ -457,6 +462,7 @@
 				38AAD7201B901D36003062C1 /* Library.m in Sources */,
 				380375F71B8D4E90004C4ECE /* MasterViewController.m in Sources */,
 				380375321B8AC9A8004C4ECE /* main.m in Sources */,
+				387039B61B9D0FD300381007 /* LBRSingleCellConfirmViewController.m in Sources */,
 				384E0CC01B97D24B007E7290 /* NSString+dateValue.m in Sources */,
 				380375721B8BF058004C4ECE /* UIImage+FromURL.m in Sources */,
 				38AAD71D1B901D35003062C1 /* Volume.m in Sources */,

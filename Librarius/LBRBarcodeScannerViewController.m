@@ -216,10 +216,16 @@ static NSString * const volumeNib          = @"volumePresentationView";
     
     NYAlertViewController *alertViewController = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
     
-    [alertViewController addAction:[NYAlertAction actionWithTitle:NSLocalizedString(@"Delete", nil)
+        // Set a title and message
+    alertViewController.title = NSLocalizedString(@"Put this book on your coffee table?", nil);
+    alertViewController.message = NSLocalizedString(@"Chuck Norris ipsum. Word out.", nil);
+    
+    [alertViewController addAction:[NYAlertAction actionWithTitle:NSLocalizedString(@"Confirm", nil)
                                                             style:UIAlertActionStyleDestructive
                                                           handler:^(NYAlertAction *action) {
-                                                              [self dismissViewControllerAnimated:YES completion:nil];
+                                                              [self dismissViewControllerAnimated:YES completion:^{
+                                                                      //Add to TableView and its datasource.
+                                                              }];
                                                           }]];
     
     [alertViewController addAction:[NYAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil)
@@ -246,9 +252,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
                                                                           views:NSDictionaryOfVariableBindings(singleCellTableView)]];
     
 
-        // Set a title and message
-    alertViewController.title = NSLocalizedString(@"Custom UI", nil);
-    alertViewController.message = NSLocalizedString(@"Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Donec id elit non mi porta gravida at eget metus.", nil);
+    
     
         // Customize appearance as desired
     alertViewController.buttonCornerRadius = 20.0f;
