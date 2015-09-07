@@ -40,6 +40,7 @@
 		38BA3CA51B9BDA1500B3B42F /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38BA3CA41B9BDA1500B3B42F /* CloudKit.framework */; };
 		38BE31E21B961F7000C46001 /* volumePresentationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38BE31E11B961F7000C46001 /* volumePresentationView.xib */; };
 		38BE31E51B962BA900C46001 /* LBRSelectVolumeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38BE31E41B962BA900C46001 /* LBRSelectVolumeTableViewController.m */; };
+		38CD5FD11B9DE78400963D2F /* VolumeDetailsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38CD5FD01B9DE78400963D2F /* VolumeDetailsCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +114,7 @@
 		38BE31E11B961F7000C46001 /* volumePresentationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = volumePresentationView.xib; sourceTree = "<group>"; };
 		38BE31E31B962BA900C46001 /* LBRSelectVolumeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRSelectVolumeTableViewController.h; sourceTree = "<group>"; };
 		38BE31E41B962BA900C46001 /* LBRSelectVolumeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRSelectVolumeTableViewController.m; sourceTree = "<group>"; };
+		38CD5FD01B9DE78400963D2F /* VolumeDetailsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VolumeDetailsCell.xib; sourceTree = "<group>"; };
 		8D3D33401D5A34E1C9A90BE0 /* Pods-Librarius.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Librarius.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Librarius/Pods-Librarius.debug.xcconfig"; sourceTree = "<group>"; };
 		9B10AB83782954202B2FDC18 /* Pods-Librarius.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Librarius.release.xcconfig"; path = "Pods/Target Support Files/Pods-Librarius/Pods-Librarius.release.xcconfig"; sourceTree = "<group>"; };
 		EBADCB9C83FA635A577697F9 /* libPods-Librarius.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Librarius.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -249,6 +251,7 @@
 				380375411B8AC9A8004C4ECE /* LaunchScreen.xib */,
 				38BE31E11B961F7000C46001 /* volumePresentationView.xib */,
 				387039B71B9D23C900381007 /* SelectionView.xib */,
+				38CD5FD01B9DE78400963D2F /* VolumeDetailsCell.xib */,
 			);
 			name = Views/Images/nibs;
 			sourceTree = "<group>";
@@ -412,6 +415,7 @@
 				3803757E1B8C16B3004C4ECE /* GoogleService-Info.plist in Resources */,
 				3803757F1B8C17EB004C4ECE /* LaunchScreen.xib in Resources */,
 				380375401B8AC9A8004C4ECE /* Images.xcassets in Resources */,
+				38CD5FD11B9DE78400963D2F /* VolumeDetailsCell.xib in Resources */,
 				387039B81B9D23C900381007 /* SelectionView.xib in Resources */,
 				38BE31E21B961F7000C46001 /* volumePresentationView.xib in Resources */,
 			);

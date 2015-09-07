@@ -37,6 +37,7 @@
 @property (weak, nonatomic) IBOutlet UIView *scannerView;
 @property (weak, nonatomic) IBOutlet UIButton *startScanningButton;
 @property (weak, nonatomic) IBOutlet UITableView *uniqueBarcodesTableView;
+@property (nonatomic, strong) UITableView *volumeDetailsTableView;
 @property (nonatomic, strong) MTBBarcodeScanner *scanner;
 @property (nonatomic, strong) LBRGoogleGTLClient *googleClient;
 @property (nonatomic, strong) GTLBooksVolumes *responseCollectionOfPotentialVolumeMatches;
@@ -46,6 +47,9 @@
 
 @property (nonatomic) BOOL isScanning;
 @property (nonatomic) BOOL isNotScanning;
+
+
+
 
 
 @end
@@ -86,7 +90,8 @@ static NSString * const volumeNib          = @"volumePresentationView";
     self.spinnerView = [[MMMaterialDesignSpinner alloc] initWithFrame:kSpinnerFrameRect];
     self.spinnerView.lineWidth = 1.5f;
     self.spinnerView.tintColor = [UIColor cyanColor];
-        //    self.spinnerView.hidesWhenStopped = YES; ???Uncomment if this isn't the default.
+    self.spinnerView.hidesWhenStopped = YES;
+//    ???Uncomment if this isn't the default.
     [self.view addSubview:self.spinnerView];
 }
 
@@ -255,6 +260,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
     return [@(yearComponent) stringValue];
 }
 
+#pragma mark -
 
 -(NYAlertViewController*)confirmSelectionViewController {
     
@@ -281,13 +287,29 @@ static NSString * const volumeNib          = @"volumePresentationView";
     alertViewController.title = NSLocalizedString(@"Content View", nil);
     alertViewController.message = NSLocalizedString(@"Set the alertViewContentView property to add custom views to the alert view", nil);
     
+        // The content view that will contain our custom view.
     UIView *contentView = [[UIView alloc] initWithFrame:CGRectZero];
+    alertViewController.alertViewContentView = contentView;
+    
+        // The TableView that really should be simple!
     UITableView *singleCellTableView = [[UITableView alloc] initWithFrame:contentView.frame style:UITableViewStyleGrouped];
+    self.volumeDetailsTableView = singleCellTableView; //gives the VController a reference to this tableview...
+    singleCellTableView.dataSource = self;
+    singleCellTableView.delegate = self;
     singleCellTableView.backgroundColor = [UIColor redColor];
+    singleCellTableView.estimatedRowHeight = 48.0;
+    singleCellTableView.rowHeight = UITableViewAutomaticDimension;
+    
     [self prepareViewForAutolayout:singleCellTableView];
+    
+    UINib *volumeDetailsNib = [UINib nibWithNibName:@"volumeDetailsCell" bundle:nil];
+    [singleCellTableView registerNib:volumeDetailsNib forCellReuseIdentifier:@"volumeDetailsCellID"];
+    
+    
+    
     [contentView addSubview:singleCellTableView];
     
-    [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[singleCellTableView]-|"
+    [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[singleCellTableView(>=50)]-|"
                                                                         options:0
                                                                         metrics:nil
                                                                           views:NSDictionaryOfVariableBindings(singleCellTableView)]];
@@ -297,7 +319,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
                                                                         metrics:nil
                                                                           views:NSDictionaryOfVariableBindings(singleCellTableView)]];
 
-    alertViewController.alertViewContentView = contentView;
+    
     
     
         // Customize appearance as desired
@@ -334,7 +356,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
 /**
  *  Presents an alert asking the user to confirm her choice.
  */
--(void)confirmSVolumeSelection {
+-(void)confirmVolumeSelection {
         //"Add <#book title#> to 'CoffeeTable'?
 }
 
@@ -342,13 +364,29 @@ static NSString * const volumeNib          = @"volumePresentationView";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.uniqueCodes.count;
+    if (tableView == self.uniqueBarcodesTableView)
+        return self.uniqueCodes.count;
+    else if (tableView == self.volumeDetailsTableView) {
+        return 1;
+    }
+        return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:barcodeCellReuseID forIndexPath:indexPath];
-    cell.textLabel.text = self.uniqueCodes[indexPath.row];
+    UITableViewCell *cell;
+    
+    if (tableView == self.uniqueBarcodesTableView) {
+        cell = [tableView dequeueReusableCellWithIdentifier:barcodeCellReuseID forIndexPath:indexPath];
+        cell.textLabel.text = self.uniqueCodes[indexPath.row];
+    }
+    else if (tableView == self.volumeDetailsTableView) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"volumeCellID"];
+        [cell.imageView setImage:[UIImage imageNamed:@"placeholder"]];
+        cell.textLabel.text = @"Book Title goes here.";
+        cell.detailTextLabel.text = @"author and year go here.";
+    }
+    
     return cell;
 }
 
