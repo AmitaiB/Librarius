@@ -412,25 +412,29 @@ static NSString * const volumeNib          = @"volumePresentationView";
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:volumeCellID];
         }
-        
-            // Large image if available
+
+// -------------------------------------------------------------------------------
+//	Lazy-Loading the thumbnail image here.
+// -------------------------------------------------------------------------------
+            // Weak pointer to our cell, for use inside the block, to prevent retain cycles.
+        __weak UITableViewCell *blockCell = cell;
+
+            // We prefer a higher quality image.
         NSURL *coverArtURL = [NSURL URLWithString:(self.volumeToConfirm.cover_art_large)?
                               self.volumeToConfirm.cover_art_large : self.volumeToConfirm.cover_art];
-        
-            //FIXME: endless loop? Retain cycle?
-        __weak UITableViewCell *blockCell = cell;
-        __weak UITableView *blockTableView = self.volumeDetailsTableView;
         NSURLRequest *request = [NSURLRequest requestWithURL:coverArtURL];
+        
+            // Thank you, UIImageView+AFNetworking!
         [cell.imageView setImageWithURLRequest:request placeholderImage:[UIImage imageNamed:@"placeholder"] success:^(NSURLRequest *request, NSHTTPURLResponse *responseObj, UIImage *coverArtImage) {
-                // set image. reload data.
+            
+                // As per the docs, setImage: needs to be called by the success block.
              [blockCell.imageView setImage:coverArtImage];
-            [blockTableView reloadData];
-            DBLG
         } failure:^(NSURLRequest * request, NSHTTPURLResponse * responseObj, NSError * error) {
-//            report failure
+            NSLog(@"Failed to load thumbnail with error: %@", error.localizedDescription);
         }];
-        cell.textLabel.text = @"Book Title goes here.";
-        cell.detailTextLabel.text = @"author and year go here.";
+        
+        cell.textLabel.text = self.volumeToConfirm.title;
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ (%@)", self.volumeToConfirm.author, [self yearFromDate:self.volumeToConfirm.published]];
     }
     
     return cell;
