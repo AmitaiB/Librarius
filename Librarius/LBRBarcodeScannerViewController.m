@@ -18,6 +18,7 @@
 #import "LBRConstants.h"
 
 #import "LBRSingleCellConfirmViewController.h"
+#import "LBRSingleCellTVC.h"
 #import <NYAlertViewController.h>
 
 #import "LBRDataManager.h"
@@ -164,18 +165,24 @@ static NSString * const volumeNib          = @"volumePresentationView";
                 /**
                  *  TODO: pop-up confirmation with lazy loading part 1 (Empty cell)
                  */
-                __block LBRSingleCellConfirmViewController *confirmSelectionViewController = [LBRSingleCellConfirmViewController new];
-//                NYAlertViewController *confirmSelectionViewController = [self confirmSelectionViewController];
-                    // Present the alert view controller
-                [self presentViewController:confirmSelectionViewController animated:YES completion:^{
-                    DBLG
-                }];
+                    //1st APPROACH: Single-Cell TableView
+//                __block LBRSingleCellConfirmViewController *confirmSelectionViewController = [LBRSingleCellConfirmViewController new];
+                
+                    //2nd APPROACH: NYAlertViewController
+                NYAlertViewController *confirmSelectionViewController = [self confirmSelectionViewController];
+                [self presentViewController:confirmSelectionViewController animated:YES completion:^{ DBLG }];
+                
+                    // 3rd APPROACH: Like #1, but with a TableViewController.
+//                Present the alert view controller
+//[self presentViewController:[LBRSingleCellTVC new] animated:YES completion:^{ DBLG }];
 
                 [self.googleClient queryForVolumeWithString:code.stringValue withCallback:^(GTLBooksVolume *responseVolume) {
                     [self.spinnerView stopAnimating];
                     LBRParsedVolume *volumeToConfirm = [[LBRParsedVolume alloc] initWithGoogleVolume:responseVolume];
-                    confirmSelectionViewController.sourceVolume = volumeToConfirm;
-                    [confirmSelectionViewController.singleCellTableView reloadData];
+
+                    
+//                    confirmSelectionViewController.sourceVolume = volumeToConfirm;
+//                    [confirmSelectionViewController.singleCellTableView reloadData];
                     
                     /**
                      9/6 2:55pm
@@ -185,7 +192,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
                      */
                 }];
                 
-                
+                    //REVIEW:
 //                [self updateDataManagerWithNewBarcode];
 //                [self.scanner stopScanning];
                 /**
@@ -216,6 +223,32 @@ static NSString * const volumeNib          = @"volumePresentationView";
         self.startScanningButton.backgroundColor = [UIColor redColor];
     }
 }
+
+-(void)confirmViaAlertControllerThisVolume:(LBRParsedVolume*)volume {
+    UIAlertController *confirmationAlert = [UIAlertController alertControllerWithTitle:@"Add this book to the pile on your coffee table?" message:[NSString stringWithFormat:@"%@\nby %@ (%@)", volume.title, volume.author, [self yearFromDate:volume.published]] preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"Confirmed!" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        NSLog(@"add this volume to the dataManager ('coffee table') for non-persistent storage.");
+    }];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        
+    }];
+    
+    [confirmationAlert addAction:confirmAction];
+    [confirmationAlert addAction:cancelAction];
+    
+    [self presentViewController:confirmationAlert animated:YES completion:^{
+        DBLG
+    }];
+}
+
+-(NSString*)yearFromDate:(NSDate*)date {
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSInteger yearComponent = [calendar component:NSCalendarUnitYear fromDate:date];
+    return [@(yearComponent) stringValue];
+}
+
 
 -(NYAlertViewController*)confirmSelectionViewController {
     

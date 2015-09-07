@@ -59,8 +59,10 @@ static NSString *placeholderCellID = @"placeholderCellID";
     alertViewController.message = NSLocalizedString(@"Set the alertViewContentView property to add custom views to the alert view", nil);
     
     UIView *contentView = [[UIView alloc] initWithFrame:CGRectZero];
+    [self.view addSubview:contentView];
     self.singleCellTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     [self.singleCellTableView registerClass:[VolumeDisplayCell class] forCellReuseIdentifier:cellReuseID];
+    [self.singleCellTableView registerClass:[VolumeDisplayCell class] forCellReuseIdentifier:placeholderCellID];
     [contentView addSubview:self.singleCellTableView];
     self.singleCellTableView.dataSource = self;
     NSDictionary *viewsDictionary = @{@"singleCellTableView" : self.singleCellTableView};
