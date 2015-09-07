@@ -7,6 +7,8 @@
 //
 #define DBLG NSLog(@"<%@:%@:line %d, reporting!>", NSStringFromClass([self class]), NSStringFromSelector(_cmd), __LINE__);
 #define kSpinnerFrameRect CGRectMake(0, 0, 40, 40)
+#define kAppIconSize 48
+
 
 #import <LGSemiModalNavViewController.h>
 #import <MTBBarcodeScanner.h>
@@ -20,6 +22,7 @@
 #import "LBRSingleCellConfirmViewController.h"
 #import "LBRSingleCellTVC.h"
 #import <NYAlertViewController.h>
+#import <UIImageView+AFNetworking.h>
 
 #import "LBRDataManager.h"
 #import "Library.h"
@@ -186,7 +189,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
 
                 [self.googleClient queryForVolumeWithString:code.stringValue withCallback:^(GTLBooksVolume *responseVolume) {
                     [self.spinnerView stopAnimating];
-                    LBRParsedVolume *volumeToConfirm = [[LBRParsedVolume alloc] initWithGoogleVolume:responseVolume];
+                    self.volumeToConfirm = [[LBRParsedVolume alloc] initWithGoogleVolume:responseVolume];
 
                     
 //                    confirmSelectionViewController.sourceVolume = volumeToConfirm;
@@ -310,9 +313,9 @@ static NSString * const volumeNib          = @"volumePresentationView";
     
     [contentView addSubview:singleCellTableView];
     
-        //!!!: About to comment this out and do masonry:
+        //!!!: Replaced this with Masonry. Let's try it one last time.
     [self prepareViewForAutolayout:singleCellTableView];
-    [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[singleCellTableView(>=50)]-|"
+    [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[singleCellTableView(>=160)]|"
                                                                         options:0
                                                                         metrics:nil
                                                                           views:NSDictionaryOfVariableBindings(singleCellTableView)]];
@@ -322,7 +325,9 @@ static NSString * const volumeNib          = @"volumePresentationView";
                                                                         metrics:nil
                                                                           views:NSDictionaryOfVariableBindings(singleCellTableView)]];
 
-    
+//    [singleCellTableView makeConstraints:^(MASConstraintMaker *make) {
+//        make.edges.equalTo(singleCellTableView.superview).with.insets(UIEdgeInsetsMake(28, 0, 28, 0));
+//    }];
     
     
         // Customize appearance as desired
@@ -377,15 +382,25 @@ static NSString * const volumeNib          = @"volumePresentationView";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    static NSString *volumeCellID = @"volumeCellID";
+    
     UITableViewCell *cell;
     
     if (tableView == self.uniqueBarcodesTableView) {
         cell = [tableView dequeueReusableCellWithIdentifier:barcodeCellReuseID forIndexPath:indexPath];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:barcodeCellReuseID];
+        }
         cell.textLabel.text = self.uniqueCodes[indexPath.row];
     }
     else if (tableView == self.volumeDetailsTableView) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"volumeCellID"];
-        [cell.imageView setImage:[UIImage imageNamed:@"placeholder"]];
+        cell = [tableView dequeueReusableCellWithIdentifier:volumeCellID];
+        if (!cell) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:volumeCellID];
+        }
+        
+        NSURL *coverArtURL = [NSURL URLWithString:self.volumeToConfirm.cover_art];
+        [cell.imageView setImageWithURL:coverArtURL placeholderImage:[UIImage imageNamed:@"placeholder"] ];
         cell.textLabel.text = @"Book Title goes here.";
         cell.detailTextLabel.text = @"author and year go here.";
     }

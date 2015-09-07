@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class LBRParsedVolume;
 @interface LBRBarcodeScannerViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) NSMutableArray *uniqueCodes;
-
+@property (nonatomic, strong) LBRParsedVolume *volumeToConfirm;
 
 @end
 
