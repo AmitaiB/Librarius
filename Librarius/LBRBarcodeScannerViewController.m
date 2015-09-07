@@ -17,6 +17,7 @@
 #import "LBRGoogleGTLClient.h"
 #import "LBRConstants.h"
 
+#import "LBRSingleCellConfirmViewController.h"
 #import <NYAlertViewController.h>
 
 #import "LBRDataManager.h"
@@ -163,7 +164,8 @@ static NSString * const volumeNib          = @"volumePresentationView";
                 /**
                  *  TODO: pop-up confirmation with lazy loading part 1 (Empty cell)
                  */
-                NYAlertViewController *confirmSelectionViewController = [self confirmSelectionViewController];
+                __block LBRSingleCellConfirmViewController *confirmSelectionViewController = [LBRSingleCellConfirmViewController new];
+//                NYAlertViewController *confirmSelectionViewController = [self confirmSelectionViewController];
                     // Present the alert view controller
                 [self presentViewController:confirmSelectionViewController animated:YES completion:^{
                     DBLG
@@ -172,6 +174,9 @@ static NSString * const volumeNib          = @"volumePresentationView";
                 [self.googleClient queryForVolumeWithString:code.stringValue withCallback:^(GTLBooksVolume *responseVolume) {
                     [self.spinnerView stopAnimating];
                     LBRParsedVolume *volumeToConfirm = [[LBRParsedVolume alloc] initWithGoogleVolume:responseVolume];
+                    confirmSelectionViewController.sourceVolume = volumeToConfirm;
+                    [confirmSelectionViewController.singleCellTableView reloadData];
+                    
                     /**
                      9/6 2:55pm
                      *  TODO: pop-up confirmation with text (part 2) and finally, lazy loading image (part 3). Text we have, lazy image loading is AFNetworking.

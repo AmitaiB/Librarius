@@ -7,8 +7,11 @@
 //
 
 #import "LBRSingleCellConfirmViewController.h"
+#import "LBRParsedVolume.h"
+#import <UIImageView+AFNetworking.h>
 
 static NSString *cellReuseID = @"cellReuseID";
+static NSString *placeholderCellID = @"placeholderCellID";
 
 @interface VolumeDisplayCell : UITableViewCell
 @end
@@ -29,7 +32,7 @@ static NSString *cellReuseID = @"cellReuseID";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
     
     NYAlertViewController *alertViewController = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
     
@@ -55,21 +58,21 @@ static NSString *cellReuseID = @"cellReuseID";
     alertViewController.message = NSLocalizedString(@"Set the alertViewContentView property to add custom views to the alert view", nil);
     
     UIView *contentView = [[UIView alloc] initWithFrame:CGRectZero];
-    UITableView *singleCellTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-    [contentView addSubview:singleCellTableView];
+    self.singleCellTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    [self.singleCellTableView registerClass:[VolumeDisplayCell class] forCellReuseIdentifier:cellReuseID];
+    [contentView addSubview:self.singleCellTableView];
+    self.singleCellTableView.dataSource = self;
+    NSDictionary *viewsDictionary = @{@"singleCellTableView" : self.singleCellTableView};
     
     [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[singleCellTableView(160)]|"
                                                                         options:0
                                                                         metrics:nil
-                                                                          views:NSDictionaryOfVariableBindings(singleCellTableView)]];
+                                                                          views:viewsDictionary]];
     
     [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[singleCellTableView]-|"
                                                                         options:0
                                                                         metrics:nil
-                                                                          views:NSDictionaryOfVariableBindings(singleCellTableView)]];
-    
-    
-    
+                                                                          views:viewsDictionary]];
     
         // Customize appearance as desired
     alertViewController.buttonCornerRadius = 20.0f;
@@ -81,14 +84,7 @@ static NSString *cellReuseID = @"cellReuseID";
     alertViewController.cancelButtonTitleFont = [UIFont fontWithName:@"AvenirNext-Medium" size:alertViewController.cancelButtonTitleFont.pointSize];
     
     alertViewController.swipeDismissalGestureEnabled = YES;
-    alertViewController.backgroundTapDismissalGestureEnabled = YES;
-    
-        // Add alert actions
-    [alertViewController addAction:[NYAlertAction actionWithTitle:NSLocalizedString(@"Done", nil)
-                                                            style:UIAlertActionStyleCancel
-                                                          handler:^(NYAlertAction *action) {
-                                                              [self dismissViewControllerAnimated:YES completion:nil];
-                                                          }]];
+    alertViewController.backgroundTapDismissalGestureEnabled = NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -96,16 +92,39 @@ static NSString *cellReuseID = @"cellReuseID";
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - UITableView Datasource methods
 
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
 }
-*/
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    VolumeDisplayCell *cell = nil;
+    
+    if (self.sourceVolume) {
+        cell = [tableView dequeueReusableCellWithIdentifier:cellReuseID forIndexPath:indexPath];
+        cell.textLabel.text = self.sourceVolume.title;
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"by %@ (%@)", self.sourceVolume.author, [self yearFromDate:self.sourceVolume.published]];
+        NSURL *coverArtURL = [NSURL URLWithString:self.sourceVolume.cover_art];
+        [cell.imageView setImageWithURL:coverArtURL placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    }
+    
+    if (!self.sourceVolume) {
+            // add a placeholder cell while waiting on the data.
+        cell = [tableView dequeueReusableCellWithIdentifier:placeholderCellID forIndexPath:indexPath];
+        
+        cell.detailTextLabel.text = @"Loading…...";
+    }
+    return cell;
+}
+
+#pragma mark - Helper methods
+
+-(NSString*)yearFromDate:(NSDate*)date {
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSInteger yearComponent = [calendar component:NSCalendarUnitYear fromDate:date];
+    return [@(yearComponent) stringValue];
+}
+
 
 @end

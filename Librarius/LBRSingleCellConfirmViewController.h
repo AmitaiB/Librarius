@@ -8,6 +8,11 @@
 
 #import "NYAlertViewController.h"
 
-@interface LBRSingleCellConfirmViewController : UIViewController
+@class LBRParsedVolume;
+@interface LBRSingleCellConfirmViewController : UIViewController <UITableViewDataSource>
+
+@property (nonatomic, strong) LBRParsedVolume *sourceVolume;
+@property (nonatomic, strong) UITableView *singleCellTableView;
+
 
 @end
