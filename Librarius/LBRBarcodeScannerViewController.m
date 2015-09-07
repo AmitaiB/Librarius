@@ -162,8 +162,9 @@ static NSString * const volumeNib          = @"volumePresentationView";
                 NSLog(@"Found unique code: %@", code.stringValue);
                 
                 [self.spinnerView startAnimating];
-                /**
-                 *  TODO: pop-up confirmation with lazy loading part 1 (Empty cell)
+                /** ✅
+                 *  todo; pop-up confirmation with lazy loading part 1 (Empty cell)
+                 CLEAN:
                  */
                     //1st APPROACH: Single-Cell TableView
 //                __block LBRSingleCellConfirmViewController *confirmSelectionViewController = [LBRSingleCellConfirmViewController new];
@@ -277,9 +278,10 @@ static NSString * const volumeNib          = @"volumePresentationView";
     
     UIView *contentView = [[UIView alloc] initWithFrame:CGRectZero];
     UITableView *singleCellTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    [self prepareViewForAutolayout:singleCellTableView];
     [contentView addSubview:singleCellTableView];
     
-    [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[singleCellTableView(160)]|"
+    [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[singleCellTableView(>=60)]|"
                                                                         options:0
                                                                         metrics:nil
                                                                           views:NSDictionaryOfVariableBindings(singleCellTableView)]];
@@ -288,8 +290,8 @@ static NSString * const volumeNib          = @"volumePresentationView";
                                                                         options:0
                                                                         metrics:nil
                                                                           views:NSDictionaryOfVariableBindings(singleCellTableView)]];
-    
 
+    alertViewController.alertViewContentView = contentView;
     
     
         // Customize appearance as desired
@@ -311,6 +313,16 @@ static NSString * const volumeNib          = @"volumePresentationView";
                                                               [self dismissViewControllerAnimated:YES completion:nil];
                                                           }]];
     return alertViewController;
+    
+    
+    
+}
+
+
+-(void)prepareViewForAutolayout:(UIView *)view
+{
+    view.translatesAutoresizingMaskIntoConstraints = NO;
+    [view removeConstraints:self.view.constraints];
 }
 
 /**

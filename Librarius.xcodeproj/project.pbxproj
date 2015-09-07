@@ -258,10 +258,6 @@
 			children = (
 				380375391B8AC9A8004C4ECE /* LBRBarcodeScannerViewController.h */,
 				3803753A1B8AC9A8004C4ECE /* LBRBarcodeScannerViewController.m */,
-				387039B41B9D0FD300381007 /* LBRSingleCellConfirmViewController.h */,
-				387039B51B9D0FD300381007 /* LBRSingleCellConfirmViewController.m */,
-				38BE31E31B962BA900C46001 /* LBRSelectVolumeTableViewController.h */,
-				38BE31E41B962BA900C46001 /* LBRSelectVolumeTableViewController.m */,
 				380375781B8C08E0004C4ECE /* LBRSettingsTableViewController.h */,
 				380375791B8C08E0004C4ECE /* LBRSettingsTableViewController.m */,
 				380375681B8BC89D004C4ECE /* LBRGoogleSignInViewController.h */,
@@ -286,6 +282,10 @@
 		38466D5C1B94FDDF00DD252E /* Cutting Floor */ = {
 			isa = PBXGroup;
 			children = (
+				387039B41B9D0FD300381007 /* LBRSingleCellConfirmViewController.h */,
+				387039B51B9D0FD300381007 /* LBRSingleCellConfirmViewController.m */,
+				38BE31E31B962BA900C46001 /* LBRSelectVolumeTableViewController.h */,
+				38BE31E41B962BA900C46001 /* LBRSelectVolumeTableViewController.m */,
 				387039B91B9D67F400381007 /* LBRSingleCellTVC.h */,
 				387039BA1B9D67F400381007 /* LBRSingleCellTVC.m */,
 				389C1F111B95E1150009C721 /* LBRDataStore.h */,
