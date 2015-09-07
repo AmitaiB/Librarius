@@ -198,6 +198,7 @@ PODS:
   - gtm-oauth2 (1.0.126):
     - gtm-http-fetcher (~> 1.0.141)
   - LGSemiModalNavController (0.2.0)
+  - Masonry (0.6.2)
   - MMMaterialDesignSpinner (0.2.0)
   - MTBBarcodeScanner (1.6.1)
   - NYAlertViewController (1.2.0)
@@ -207,6 +208,7 @@ DEPENDENCIES:
   - Google-API-Client
   - Google/SignIn
   - LGSemiModalNavController (~> 0.2.0)
+  - Masonry
   - MMMaterialDesignSpinner
   - MTBBarcodeScanner
   - NYAlertViewController
@@ -224,6 +226,7 @@ SPEC CHECKSUMS:
   gtm-http-fetcher: 6d4617e7d343b6e4c082b777541c334eb6f5d81e
   gtm-oauth2: 2a18b824e4f8a02df6cfe987beb59ae9d9697f9d
   LGSemiModalNavController: ba49f8cbc24638be981cbca8a526f66b5dd90414
+  Masonry: 362e8a1cc0beada4a4c4832d5e863da2a51533be
   MMMaterialDesignSpinner: 8f1a50270b789c76ec500957e518fc3e05e55b9d
   MTBBarcodeScanner: beda75d4c1e2750405f62ee53f7a7ee40bf6825b
   NYAlertViewController: 9198f367c2726184e20ace87f7b6dd2655d42d79

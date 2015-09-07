@@ -9,8 +9,9 @@ pod 'MTBBarcodeScanner'
 pod 'LGSemiModalNavController', '~> 0.2.0'
 pod "MMMaterialDesignSpinner"
 pod 'AFNetworking'
-
 pod 'NYAlertViewController'
+
+pod 'Masonry'
 
 #Not Yet Implemented
 #pod 'AMRatingControl'

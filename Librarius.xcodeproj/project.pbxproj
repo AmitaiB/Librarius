@@ -86,6 +86,7 @@
 		380375F41B8D4E90004C4ECE /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 		380375F51B8D4E90004C4ECE /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		380375F61B8D4E90004C4ECE /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		382CE7FB1B9E09ED000A9701 /* Librarius-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Librarius-Prefix.pch"; sourceTree = "<group>"; };
 		38466D261B94F24400DD252E /* LBRGoogleGTLClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRGoogleGTLClient.h; sourceTree = "<group>"; };
 		38466D271B94F24400DD252E /* LBRGoogleGTLClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRGoogleGTLClient.m; sourceTree = "<group>"; };
 		384E0CBE1B97D24B007E7290 /* NSString+dateValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+dateValue.h"; sourceTree = "<group>"; };
@@ -190,6 +191,7 @@
 		3803752F1B8AC9A8004C4ECE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				382CE7FB1B9E09ED000A9701 /* Librarius-Prefix.pch */,
 				384E0CBD1B97D231007E7290 /* Categories */,
 				3803757D1B8C16B3004C4ECE /* GoogleService-Info.plist */,
 				380375301B8AC9A8004C4ECE /* Info.plist */,

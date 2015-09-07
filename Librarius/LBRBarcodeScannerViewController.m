@@ -26,6 +26,8 @@
 #import "Volume.h"
 #import "LBRParsedVolume.h"
 
+#import <Masonry.h>
+
 
 @interface LBRBarcodeScannerViewController ()
 //- (IBAction)scanOneButtonTapped:(id)sender;
@@ -300,7 +302,6 @@ static NSString * const volumeNib          = @"volumePresentationView";
     singleCellTableView.estimatedRowHeight = 48.0;
     singleCellTableView.rowHeight = UITableViewAutomaticDimension;
     
-    [self prepareViewForAutolayout:singleCellTableView];
     
     UINib *volumeDetailsNib = [UINib nibWithNibName:@"volumeDetailsCell" bundle:nil];
     [singleCellTableView registerNib:volumeDetailsNib forCellReuseIdentifier:@"volumeDetailsCellID"];
@@ -309,6 +310,8 @@ static NSString * const volumeNib          = @"volumePresentationView";
     
     [contentView addSubview:singleCellTableView];
     
+        //!!!: About to comment this out and do masonry:
+    [self prepareViewForAutolayout:singleCellTableView];
     [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[singleCellTableView(>=50)]-|"
                                                                         options:0
                                                                         metrics:nil
