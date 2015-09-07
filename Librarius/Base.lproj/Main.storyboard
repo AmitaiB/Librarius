@@ -122,10 +122,10 @@
             </objects>
             <point key="canvasLocation" x="1729.5" y="566"/>
         </scene>
-        <!--Alert View Controller-->
+        <!--Single Cell Confirm View Controller-->
         <scene sceneID="Tci-bF-iR5">
             <objects>
-                <viewController id="uf5-UL-cLK" customClass="NYAlertViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="alertControllerID" id="uf5-UL-cLK" customClass="LBRSingleCellConfirmViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Mor-am-24J">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

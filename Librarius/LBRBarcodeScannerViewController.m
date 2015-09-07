@@ -186,7 +186,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
                 }];
                 
                 
-                [self updateDataManagerWithNewBarcode];
+//                [self updateDataManagerWithNewBarcode];
 //                [self.scanner stopScanning];
                 /**
                  *  These next lines were for when the TableView had barcodes. No longer.

@@ -5,6 +5,7 @@
 //  Created by Amitai Blickstein on 9/6/15.
 //  Copyright (c) 2015 Amitai Blickstein, LLC. All rights reserved.
 //
+#define DBLG NSLog(@"<%@:%@:line %d, reporting!>", NSStringFromClass([self class]), NSStringFromSelector(_cmd), __LINE__);
 
 #import "LBRSingleCellConfirmViewController.h"
 #import "LBRParsedVolume.h"
@@ -32,7 +33,7 @@ static NSString *placeholderCellID = @"placeholderCellID";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    DBLG
     
     NYAlertViewController *alertViewController = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
     
@@ -58,12 +59,14 @@ static NSString *placeholderCellID = @"placeholderCellID";
     alertViewController.message = NSLocalizedString(@"Set the alertViewContentView property to add custom views to the alert view", nil);
     
     UIView *contentView = [[UIView alloc] initWithFrame:CGRectZero];
-    self.singleCellTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+    self.singleCellTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     [self.singleCellTableView registerClass:[VolumeDisplayCell class] forCellReuseIdentifier:cellReuseID];
     [contentView addSubview:self.singleCellTableView];
     self.singleCellTableView.dataSource = self;
     NSDictionary *viewsDictionary = @{@"singleCellTableView" : self.singleCellTableView};
-    
+        self.singleCellTableView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.singleCellTableView removeConstraints:self.singleCellTableView.constraints];
+    self.definesPresentationContext = YES;
     [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[singleCellTableView(160)]|"
                                                                         options:0
                                                                         metrics:nil
@@ -85,6 +88,9 @@ static NSString *placeholderCellID = @"placeholderCellID";
     
     alertViewController.swipeDismissalGestureEnabled = YES;
     alertViewController.backgroundTapDismissalGestureEnabled = NO;
+    
+    
+    alertViewController.alertViewContentView = contentView;
 }
 
 - (void)didReceiveMemoryWarning {

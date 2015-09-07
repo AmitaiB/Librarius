@@ -30,6 +30,7 @@
 		3851DBFD1B8E2E5A00E90B9F /* LBRDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3851DBFC1B8E2E5A00E90B9F /* LBRDataManager.m */; };
 		38565D701B9A20B800349498 /* LBRParsedVolume.m in Sources */ = {isa = PBXBuildFile; fileRef = 38565D6F1B9A20B800349498 /* LBRParsedVolume.m */; };
 		387039B61B9D0FD300381007 /* LBRSingleCellConfirmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 387039B51B9D0FD300381007 /* LBRSingleCellConfirmViewController.m */; };
+		387039B81B9D23C900381007 /* SelectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 387039B71B9D23C900381007 /* SelectionView.xib */; };
 		389C1F131B95E1150009C721 /* LBRDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 389C1F121B95E1150009C721 /* LBRDataStore.m */; };
 		38AAD6F01B901175003062C1 /* Librarius.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 38AAD6EE1B901175003062C1 /* Librarius.xcdatamodeld */; };
 		38AAD71D1B901D35003062C1 /* Volume.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAD71C1B901D35003062C1 /* Volume.m */; };
@@ -93,6 +94,7 @@
 		38565D6F1B9A20B800349498 /* LBRParsedVolume.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRParsedVolume.m; sourceTree = "<group>"; };
 		387039B41B9D0FD300381007 /* LBRSingleCellConfirmViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRSingleCellConfirmViewController.h; sourceTree = "<group>"; };
 		387039B51B9D0FD300381007 /* LBRSingleCellConfirmViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRSingleCellConfirmViewController.m; sourceTree = "<group>"; };
+		387039B71B9D23C900381007 /* SelectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectionView.xib; sourceTree = "<group>"; };
 		389C1F111B95E1150009C721 /* LBRDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRDataStore.h; sourceTree = "<group>"; };
 		389C1F121B95E1150009C721 /* LBRDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRDataStore.m; sourceTree = "<group>"; };
 		38AAD6E91B90107F003062C1 /* libMagicalRecord.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMagicalRecord.a; path = "Pods/../build/Debug-iphoneos/libMagicalRecord.a"; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 				3803753F1B8AC9A8004C4ECE /* Images.xcassets */,
 				380375411B8AC9A8004C4ECE /* LaunchScreen.xib */,
 				38BE31E11B961F7000C46001 /* volumePresentationView.xib */,
+				387039B71B9D23C900381007 /* SelectionView.xib */,
 			);
 			name = Views/Images/nibs;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 				3803757E1B8C16B3004C4ECE /* GoogleService-Info.plist in Resources */,
 				3803757F1B8C17EB004C4ECE /* LaunchScreen.xib in Resources */,
 				380375401B8AC9A8004C4ECE /* Images.xcassets in Resources */,
+				387039B81B9D23C900381007 /* SelectionView.xib in Resources */,
 				38BE31E21B961F7000C46001 /* volumePresentationView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,7 +1,3 @@
-// |X| TODO: #1 Priority! The datamanger now has a new Parsed Volume. Consider making the DataManger the DataSource for all non-persistent tables and other data displays (makes sense, right?). Implement that, and then take stock. (FRC, then UI, then collection manipulation, then UI prettify...)
-
-
-    //
 //  LBRDataManager.m
 //  Librarius
 //
@@ -53,13 +49,6 @@ static NSString * const kUnknown = @"kUnknown";
 -(void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
-//    //Setter
-//-(void)setResponseCollectionOfPotentialVolumeMatches:(GTLBooksVolumes *)responseCollectionOfPotentialVolumeMatches {
-//    _responseCollectionOfPotentialVolumeMatches = responseCollectionOfPotentialVolumeMatches;
-//    [self addGTLVolumeToCurrentLibrary:responseCollectionOfPotentialVolumeMatches.items[0] andSaveContext:NO];
-//    
-//}
 
 /**
  *  Upon receiving a new parsedVolume, the dataManager is notified, 
