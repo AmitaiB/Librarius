@@ -190,6 +190,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
                 [self.googleClient queryForVolumeWithString:code.stringValue withCallback:^(GTLBooksVolume *responseVolume) {
                     [self.spinnerView stopAnimating];
                     self.volumeToConfirm = [[LBRParsedVolume alloc] initWithGoogleVolume:responseVolume];
+                    [self.volumeDetailsTableView reloadData];
 
                     
 //                    confirmSelectionViewController.sourceVolume = volumeToConfirm;
@@ -302,7 +303,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
     singleCellTableView.dataSource = self;
     singleCellTableView.delegate = self;
     singleCellTableView.backgroundColor = [UIColor redColor];
-    singleCellTableView.estimatedRowHeight = 48.0;
+    singleCellTableView.estimatedRowHeight = 75.0;
     singleCellTableView.rowHeight = UITableViewAutomaticDimension;
     
     
@@ -339,6 +340,8 @@ static NSString * const volumeNib          = @"volumePresentationView";
     alertViewController.buttonTitleFont = [UIFont fontWithName:@"AvenirNext-Regular" size:alertViewController.buttonTitleFont.pointSize];
     alertViewController.cancelButtonTitleFont = [UIFont fontWithName:@"AvenirNext-Medium" size:alertViewController.cancelButtonTitleFont.pointSize];
     
+//    [self invertAlertControllerColors:alertViewController];
+    
     alertViewController.swipeDismissalGestureEnabled = YES;
     alertViewController.backgroundTapDismissalGestureEnabled = YES;
     
@@ -354,6 +357,19 @@ static NSString * const volumeNib          = @"volumePresentationView";
     
 }
 
+-(void)invertAlertControllerColors:(NYAlertViewController*)alertViewController {
+    alertViewController.alertViewBackgroundColor = [UIColor colorWithWhite:0.19f alpha:1.0f];
+    alertViewController.alertViewCornerRadius = 10.0f;
+    
+    alertViewController.titleColor = [UIColor colorWithRed:0.42f green:0.78 blue:0.32f alpha:1.0f];
+    alertViewController.messageColor = [UIColor colorWithWhite:0.92f alpha:1.0f];
+    
+    alertViewController.buttonColor = [UIColor colorWithRed:0.42f green:0.78 blue:0.32f alpha:1.0f];
+    alertViewController.buttonTitleColor = [UIColor colorWithWhite:0.19f alpha:1.0f];
+    
+    alertViewController.cancelButtonColor = [UIColor colorWithRed:0.42f green:0.78 blue:0.32f alpha:1.0f];
+    alertViewController.cancelButtonTitleColor = [UIColor colorWithWhite:0.19f alpha:1.0f];
+}
 
 -(void)prepareViewForAutolayout:(UIView *)view
 {

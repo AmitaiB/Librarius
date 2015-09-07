@@ -82,9 +82,9 @@
      *  Cover Art URL
      */
     if (volumeToParse.volumeInfo.imageLinks.thumbnail) {
-        self.cover_art = volumeToParse.volumeInfo.imageLinks.thumbnail;
+        self.cover_art_large = volumeToParse.volumeInfo.imageLinks.thumbnail;
     }
-    else if (volumeToParse.volumeInfo.imageLinks.smallThumbnail) {
+    if (volumeToParse.volumeInfo.imageLinks.smallThumbnail) {
         self.cover_art = volumeToParse.volumeInfo.imageLinks.smallThumbnail;
     }
     

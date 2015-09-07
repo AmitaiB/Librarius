@@ -18,6 +18,7 @@
 @property (nonatomic, strong) NSNumber * height;
 @property (nonatomic, strong) NSNumber * pageCount;
 @property (nonatomic, strong) NSString * cover_art;
+@property (nonatomic, strong) NSString * cover_art_large;
 @property (nonatomic, strong) NSString * author;
 @property (nonatomic, strong) NSString * category;
 @property (nonatomic, strong) NSDate * published;
