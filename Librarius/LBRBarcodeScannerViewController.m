@@ -276,20 +276,22 @@ static NSString * const volumeNib          = @"volumePresentationView";
     alertViewController.title = NSLocalizedString(@"Put this book on your coffee table?", nil);
     alertViewController.message = NSLocalizedString(@"Chuck Norris ipsum. Word out.", nil);
     
-    [alertViewController addAction:[NYAlertAction actionWithTitle:NSLocalizedString(@"Confirm", nil)
-                                                            style:UIAlertActionStyleDestructive
-                                                          handler:^(NYAlertAction *action) {
-                                                              [self dismissViewControllerAnimated:YES completion:^{
+     NYAlertAction *confirmAction = [NYAlertAction actionWithTitle:NSLocalizedString(@"Confirm", nil)
+                                                             style:UIAlertActionStyleDestructive
+                                                           handler:^(NYAlertAction *action) {
+                                                               [self dismissViewControllerAnimated:YES completion:^{
                                                                       //Add to TableView and its datasource.
-                                                              }];
-                                                          }]];
+                                                               }];
+                                                           }];
     
-    [alertViewController addAction:[NYAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil)
+     NYAlertAction *cancelAction = [NYAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil)
                                                             style:UIAlertActionStyleCancel
                                                           handler:^(NYAlertAction *action) {
                                                               [self dismissViewControllerAnimated:YES completion:nil];
-                                                          }]];
+                                                          }];
     
+    [alertViewController addAction: confirmAction];
+    [alertViewController addAction: cancelAction];
     alertViewController.title = NSLocalizedString(@"Content View", nil);
     alertViewController.message = NSLocalizedString(@"Set the alertViewContentView property to add custom views to the alert view", nil);
     
@@ -305,7 +307,8 @@ static NSString * const volumeNib          = @"volumePresentationView";
     singleCellTableView.backgroundColor = [UIColor redColor];
     singleCellTableView.estimatedRowHeight = 75.0;
     singleCellTableView.rowHeight = UITableViewAutomaticDimension;
-    
+    [singleCellTableView setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
+    [singleCellTableView setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
     
     UINib *volumeDetailsNib = [UINib nibWithNibName:@"volumeDetailsCell" bundle:nil];
     [singleCellTableView registerNib:volumeDetailsNib forCellReuseIdentifier:@"volumeDetailsCellID"];
@@ -314,9 +317,8 @@ static NSString * const volumeNib          = @"volumePresentationView";
     
     [contentView addSubview:singleCellTableView];
     
-        //!!!: Replaced this with Masonry. Let's try it one last time.
     [self prepareViewForAutolayout:singleCellTableView];
-    [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[singleCellTableView(>=160)]|"
+    [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[singleCellTableView(100)]|"
                                                                         options:0
                                                                         metrics:nil
                                                                           views:NSDictionaryOfVariableBindings(singleCellTableView)]];
@@ -325,7 +327,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
                                                                         options:0
                                                                         metrics:nil
                                                                           views:NSDictionaryOfVariableBindings(singleCellTableView)]];
-
+        // This was inspiring!, but I didn't need it in the end.
 //    [singleCellTableView makeConstraints:^(MASConstraintMaker *make) {
 //        make.edges.equalTo(singleCellTableView.superview).with.insets(UIEdgeInsetsMake(28, 0, 28, 0));
 //    }];
@@ -340,17 +342,12 @@ static NSString * const volumeNib          = @"volumePresentationView";
     alertViewController.buttonTitleFont = [UIFont fontWithName:@"AvenirNext-Regular" size:alertViewController.buttonTitleFont.pointSize];
     alertViewController.cancelButtonTitleFont = [UIFont fontWithName:@"AvenirNext-Medium" size:alertViewController.cancelButtonTitleFont.pointSize];
     
+//    Uncomment for some funky colors.
 //    [self invertAlertControllerColors:alertViewController];
     
     alertViewController.swipeDismissalGestureEnabled = YES;
     alertViewController.backgroundTapDismissalGestureEnabled = YES;
     
-        // Add alert actions
-    [alertViewController addAction:[NYAlertAction actionWithTitle:NSLocalizedString(@"Done", nil)
-                                                            style:UIAlertActionStyleCancel
-                                                          handler:^(NYAlertAction *action) {
-                                                              [self dismissViewControllerAnimated:YES completion:nil];
-                                                          }]];
     return alertViewController;
     
     
@@ -404,6 +401,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
     
     if (tableView == self.uniqueBarcodesTableView) {
         cell = [tableView dequeueReusableCellWithIdentifier:barcodeCellReuseID forIndexPath:indexPath];
+            //???: Why did this help? Shouldn't `...forIndexPath` have instantiated a new cell for me??
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:barcodeCellReuseID];
         }
@@ -415,8 +413,22 @@ static NSString * const volumeNib          = @"volumePresentationView";
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:volumeCellID];
         }
         
-        NSURL *coverArtURL = [NSURL URLWithString:self.volumeToConfirm.cover_art];
-        [cell.imageView setImageWithURL:coverArtURL placeholderImage:[UIImage imageNamed:@"placeholder"] ];
+            // Large image if available
+        NSURL *coverArtURL = [NSURL URLWithString:(self.volumeToConfirm.cover_art_large)?
+                              self.volumeToConfirm.cover_art_large : self.volumeToConfirm.cover_art];
+        
+            //FIXME: endless loop? Retain cycle?
+        __weak UITableViewCell *blockCell = cell;
+        __weak UITableView *blockTableView = self.volumeDetailsTableView;
+        NSURLRequest *request = [NSURLRequest requestWithURL:coverArtURL];
+        [cell.imageView setImageWithURLRequest:request placeholderImage:[UIImage imageNamed:@"placeholder"] success:^(NSURLRequest *request, NSHTTPURLResponse *responseObj, UIImage *coverArtImage) {
+                // set image. reload data.
+             [blockCell.imageView setImage:coverArtImage];
+            [blockTableView reloadData];
+            DBLG
+        } failure:^(NSURLRequest * request, NSHTTPURLResponse * responseObj, NSError * error) {
+//            report failure
+        }];
         cell.textLabel.text = @"Book Title goes here.";
         cell.detailTextLabel.text = @"author and year go here.";
     }
