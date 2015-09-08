@@ -501,6 +501,19 @@ static NSString * const volumeNib          = @"volumePresentationView";
     [[NSNotificationCenter defaultCenter] postNotificationName:barcodeAddedNotification object:dataManager.uniqueCodes];
 }
 
+-(void)updateDataManagerWithNewTransientVolume:(LBRParsedVolume*)volumeToAdd {
+        // Preliminaries
+    LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
+    if (!dataManager.parsedVolumesToEitherSaveOrDiscard) {
+        dataManager.parsedVolumesToEitherSaveOrDiscard = @[];
+    }
+        // Logic
+    NSArray *oldArray = [dataManager.parsedVolumesToEitherSaveOrDiscard copy];
+    NSArray *newArray = [oldArray arrayByAddingObject:volumeToAdd];
+    
+    dataManager.parsedVolumesToEitherSaveOrDiscard = newArray;
+}
+
 /* CLEAN
  * This snippet will scan once, then stop.
  
