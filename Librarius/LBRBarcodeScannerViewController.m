@@ -165,6 +165,9 @@ static NSString * const volumeNib          = @"volumePresentationView";
    
     
     [self.scanner startScanningWithResultBlock:^(NSArray *codes) {
+    // -------------------------------------------------------------------------------
+    //	Scanning Success Block
+    // -------------------------------------------------------------------------------
         for (AVMetadataMachineReadableCodeObject *code in codes) {
                 // If it's a new barcode, add it to the array.
             if ([self.uniqueCodes indexOfObject:code.stringValue] == NSNotFound) {
@@ -188,6 +191,9 @@ static NSString * const volumeNib          = @"volumePresentationView";
 //[self presentViewController:[LBRSingleCellTVC new] animated:YES completion:^{ DBLG }];
 
                 [self.googleClient queryForVolumeWithString:code.stringValue withCallback:^(GTLBooksVolume *responseVolume) {
+        // -------------------------------------------------------------------------------
+        //	Scanning Block : Google Success Block
+        // -------------------------------------------------------------------------------
                     [self.spinnerView stopAnimating];
                     self.volumeToConfirm = [[LBRParsedVolume alloc] initWithGoogleVolume:responseVolume];
                     [self.volumeDetailsTableView reloadData];
@@ -281,6 +287,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
                                                            handler:^(NYAlertAction *action) {
                                                                [self dismissViewControllerAnimated:YES completion:^{
                                                                       //Add to TableView and its datasource.
+                                                                   [self updateDataManagerWithNewTransientVolume:self.volumeToConfirm];
                                                                }];
                                                            }];
     
