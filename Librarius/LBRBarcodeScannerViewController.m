@@ -37,6 +37,7 @@
 - (IBAction)toggleScanningButtonTapped:(id)sender;
 - (IBAction)cameraButtonTapped:(id)sender;
 - (IBAction)confirmChoicesButtonTapped:(id)sender;
+- (IBAction)saveScannedVolumesToLibraryButtonTapped:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UIButton *confirmChoicesButton;
 @property (weak, nonatomic) IBOutlet UIView *scannerView;
@@ -96,7 +97,6 @@ static NSString * const volumeNib          = @"volumePresentationView";
     self.spinnerView.lineWidth = 1.5f;
     self.spinnerView.tintColor = [UIColor cyanColor];
     self.spinnerView.hidesWhenStopped = YES;
-//    ???Uncomment if this isn't the default.
     [self.view addSubview:self.spinnerView];
 }
 
@@ -140,6 +140,12 @@ static NSString * const volumeNib          = @"volumePresentationView";
 - (IBAction)confirmChoicesButtonTapped:(id)sender {
 //    [self getVolumesFromBarcodeData];
     DBLG
+}
+
+- (IBAction)saveScannedVolumesToLibraryButtonTapped:(id)sender {
+    LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
+    [dataManager saveParsedVolumesToEitherSaveOrDiscardToPersistentStore];
+    [dataManager logCurrentLibrary];
 }
     
 #pragma mark - Scanning
@@ -531,6 +537,8 @@ static NSString * const volumeNib          = @"volumePresentationView";
     dataManager.parsedVolumesToEitherSaveOrDiscard = newArray;
     NSLog(@"%@", [dataManager.parsedVolumesToEitherSaveOrDiscard description]);
     DBLG
+    
+        // Now we have a button to save the coffee table (to CoreData)!
 }
 
 @end

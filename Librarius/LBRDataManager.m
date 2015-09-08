@@ -129,6 +129,38 @@ static NSString * const kUnknown = @"kUnknown";
     }
 }
 
+-(void)saveParsedVolumesToEitherSaveOrDiscardToPersistentStore {
+        // 1. LBRParsedVolume → NSManagedObject
+        // 2. Repeat for all volumes.
+        // 3. Save context.
+        // 4. Test.
+    for (LBRParsedVolume *transientVolumeToSave in self.parsedVolumesToEitherSaveOrDiscard) {
+        Volume *persistentVolume = [NSEntityDescription insertNewObjectForEntityForName:@"Volume" inManagedObjectContext:self.managedObjectContext];
+        persistentVolume.isbn10 = transientVolumeToSave.isbn10;
+        persistentVolume.isbn13 = transientVolumeToSave.isbn13;
+        persistentVolume.title = transientVolumeToSave.title;
+        persistentVolume.thickness = transientVolumeToSave.thickness;
+        persistentVolume.height = transientVolumeToSave.height;
+        persistentVolume.pageCount = transientVolumeToSave.pageCount;
+        persistentVolume.cover_art_large = transientVolumeToSave.cover_art_large;
+        persistentVolume.cover_art = transientVolumeToSave.cover_art;
+        persistentVolume.author = transientVolumeToSave.author;
+        persistentVolume.category = transientVolumeToSave.category;
+        persistentVolume.published = transientVolumeToSave.published;
+        persistentVolume.rating = transientVolumeToSave.rating;
+        persistentVolume.google_id = transientVolumeToSave.google_id;
+        persistentVolume.library = self.currentLibrary;
+    }
+
+    [self saveContext];
+        NSLog(@"Context saved with new volumes to current library.");
+}
+
+-(void)logCurrentLibrary {
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Volume"];
+    NSArray *results = [self.managedObjectContext executeFetchRequest:request error:nil];
+    NSLog(@"Fetched volumes from Core Data: %@", [results description]);
+}
 
 #pragma mark - helper methods
 

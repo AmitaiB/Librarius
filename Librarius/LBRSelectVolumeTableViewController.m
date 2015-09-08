@@ -1,4 +1,4 @@
-////
+////CLEAN:
 ////  LBRPresentVolumesTableViewController.m
 ////  Librarius
 ////
@@ -72,7 +72,7 @@
 //     Each element is a GTLVolume.
 //     someGTLVolume.volumeInfo.title
 //     */
-//        //!!! Stuck here!
+
 //    GTLBooksVolume *thisRowsVolume = self.volumesToDisplay[indexPath.row];
 //    cell.textLabel.text = thisRowsVolume.volumeInfo.title;
 //    cell.detailTextLabel.text = [NSString stringWithFormat:@"by %@", thisRowsVolume.volumeInfo.authors[0]];

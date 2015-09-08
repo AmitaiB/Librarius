@@ -236,9 +236,32 @@
                                             <action selector="confirmChoicesButtonTapped:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="wlQ-L2-aGS"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Bf-2Z-qmt">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="47" id="gES-dq-9Bg"/>
+                                        </constraints>
+                                        <state key="normal" title="dataManager: save transient array o' Books→CoreData" backgroundImage="placeholder">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="gES-dq-9Bg"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="gES-dq-9Bg"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <action selector="saveScannedVolumesToLibraryButtonTapped:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="5RG-K5-mfO"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.79607843140000001" green="0.79607843140000001" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="3Bf-2Z-qmt" firstAttribute="centerX" secondItem="whR-df-RYp" secondAttribute="centerX" id="5Ow-sX-qku"/>
                                     <constraint firstAttribute="trailing" secondItem="GDB-vK-ZBH" secondAttribute="trailing" constant="29" id="5q8-YU-bE7"/>
                                     <constraint firstItem="dw9-VQ-cBw" firstAttribute="leading" secondItem="GDB-vK-ZBH" secondAttribute="leading" id="Mnq-eW-d6K"/>
                                     <constraint firstItem="dcH-IU-Ezd" firstAttribute="trailing" secondItem="whR-df-RYp" secondAttribute="trailingMargin" id="Omu-zJ-ZAg"/>
@@ -246,21 +269,27 @@
                                     <constraint firstItem="GDB-vK-ZBH" firstAttribute="top" secondItem="whR-df-RYp" secondAttribute="top" constant="23" id="hmP-GM-7gD"/>
                                     <constraint firstAttribute="bottom" secondItem="dcH-IU-Ezd" secondAttribute="bottom" constant="14" id="s0J-RR-2vN"/>
                                     <constraint firstItem="GDB-vK-ZBH" firstAttribute="top" secondItem="dw9-VQ-cBw" secondAttribute="top" id="t2M-1S-uAt"/>
+                                    <constraint firstItem="3Bf-2Z-qmt" firstAttribute="top" secondItem="whR-df-RYp" secondAttribute="top" constant="167" id="yeX-uQ-75v"/>
+                                    <constraint firstItem="3Bf-2Z-qmt" firstAttribute="leading" secondItem="whR-df-RYp" secondAttribute="leading" constant="-31" id="zOY-rc-YKv"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="subviews">
                                         <exclude reference="dw9-VQ-cBw"/>
                                         <exclude reference="GDB-vK-ZBH"/>
                                         <exclude reference="dcH-IU-Ezd"/>
+                                        <exclude reference="3Bf-2Z-qmt"/>
                                     </mask>
                                     <mask key="constraints">
+                                        <exclude reference="5Ow-sX-qku"/>
+                                        <exclude reference="yeX-uQ-75v"/>
+                                        <exclude reference="zOY-rc-YKv"/>
                                         <exclude reference="5q8-YU-bE7"/>
                                         <exclude reference="Pm5-If-ZG8"/>
                                         <exclude reference="hmP-GM-7gD"/>
                                         <exclude reference="t2M-1S-uAt"/>
+                                        <exclude reference="Mnq-eW-d6K"/>
                                         <exclude reference="Omu-zJ-ZAg"/>
                                         <exclude reference="s0J-RR-2vN"/>
-                                        <exclude reference="Mnq-eW-d6K"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact">
@@ -268,15 +297,19 @@
                                         <include reference="dw9-VQ-cBw"/>
                                         <include reference="GDB-vK-ZBH"/>
                                         <include reference="dcH-IU-Ezd"/>
+                                        <include reference="3Bf-2Z-qmt"/>
                                     </mask>
                                     <mask key="constraints">
+                                        <include reference="5Ow-sX-qku"/>
+                                        <include reference="yeX-uQ-75v"/>
+                                        <include reference="zOY-rc-YKv"/>
                                         <include reference="5q8-YU-bE7"/>
                                         <include reference="Pm5-If-ZG8"/>
                                         <include reference="hmP-GM-7gD"/>
                                         <include reference="t2M-1S-uAt"/>
+                                        <include reference="Mnq-eW-d6K"/>
                                         <include reference="Omu-zJ-ZAg"/>
                                         <include reference="s0J-RR-2vN"/>
-                                        <include reference="Mnq-eW-d6K"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -539,6 +572,7 @@
         <image name="books49" width="32" height="32"/>
         <image name="collections" width="29" height="29"/>
         <image name="gears6-60@2x-29" width="29" height="29"/>
+        <image name="placeholder" width="48" height="48"/>
         <image name="reverse-1" width="60" height="48"/>
         <image name="scanTarget" width="32" height="32"/>
         <image name="search1" width="32" height="32"/>

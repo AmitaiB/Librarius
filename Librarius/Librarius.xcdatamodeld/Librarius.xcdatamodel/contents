@@ -17,6 +17,7 @@
         <attribute name="author" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="category" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="cover_art" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cover_art_large" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="google_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="height" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="isbn10" optional="YES" attributeType="String" syncable="YES"/>
@@ -32,6 +33,6 @@
     <elements>
         <element name="Bookcase" positionX="0" positionY="0" width="128" height="120"/>
         <element name="Library" positionX="0" positionY="0" width="128" height="105"/>
-        <element name="Volume" positionX="0" positionY="0" width="128" height="255"/>
+        <element name="Volume" positionX="0" positionY="0" width="128" height="270"/>
     </elements>
 </model>
