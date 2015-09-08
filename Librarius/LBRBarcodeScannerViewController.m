@@ -440,6 +440,16 @@ static NSString * const volumeNib          = @"volumePresentationView";
     return cell;
 }
 
+     //FIXME: This works, but kills the image!!
+/**
+ -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    [cell layoutIfNeeded];
+    
+    CGSize size = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    return size.height;
+}
+*/
 #pragma mark - Helper methods
 
 -(void)scrollToBottomCell {
@@ -512,26 +522,8 @@ static NSString * const volumeNib          = @"volumePresentationView";
     NSArray *newArray = [oldArray arrayByAddingObject:volumeToAdd];
     
     dataManager.parsedVolumesToEitherSaveOrDiscard = newArray;
+    NSLog(@"%@", [dataManager.parsedVolumesToEitherSaveOrDiscard description]);
+    DBLG
 }
-
-/* CLEAN
- * This snippet will scan once, then stop.
- 
- - (IBAction)scanOneButtonTapped:(id)sender {
- [MTBBarcodeScanner requestCameraPermissionWithSuccess:^(BOOL success) {
- if (success) {
- [scanner startScanningWithResultBlock:^(NSArray *codes) {
- AVMetadataMachineReadableCodeObject *code = [codes firstObject];
- NSLog(@"Found barcode: %@", code.stringValue);
- [self displayBarcode:code.stringValue];
- [scanner stopScanning];
- }];
- } else {
- //The user denied access to the camera
- NSLog(@"The user denied access to the camera...?");
- }
- }];
- }
- */
 
 @end
