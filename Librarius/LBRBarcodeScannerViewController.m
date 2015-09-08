@@ -102,12 +102,12 @@ static NSString * const volumeNib          = @"volumePresentationView";
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    [self.scanner stopScanning];
+    [self stopScanningOps];
     // Dispose of any resources that can be recreated.
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
-    [self.scanner stopScanning];
+    [self stopScanningOps];
     [super viewWillDisappear:animated];
 }
 
@@ -304,7 +304,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
     self.volumeDetailsTableView = singleCellTableView; //gives the VController a reference to this tableview...
     singleCellTableView.dataSource = self;
     singleCellTableView.delegate = self;
-    singleCellTableView.backgroundColor = [UIColor redColor];
+//    singleCellTableView.backgroundColor = [UIColor redColor];
     singleCellTableView.estimatedRowHeight = 75.0;
     singleCellTableView.rowHeight = UITableViewAutomaticDimension;
     [singleCellTableView setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
