@@ -277,7 +277,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
     alertViewController.message = NSLocalizedString(@"Chuck Norris ipsum. Word out.", nil);
     
      NYAlertAction *confirmAction = [NYAlertAction actionWithTitle:NSLocalizedString(@"Confirm", nil)
-                                                             style:UIAlertActionStyleDestructive
+                                                             style:UIAlertActionStyleDefault
                                                            handler:^(NYAlertAction *action) {
                                                                [self dismissViewControllerAnimated:YES completion:^{
                                                                       //Add to TableView and its datasource.
@@ -285,7 +285,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
                                                            }];
     
      NYAlertAction *cancelAction = [NYAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil)
-                                                            style:UIAlertActionStyleCancel
+                                                            style:UIAlertActionStyleDestructive
                                                           handler:^(NYAlertAction *action) {
                                                               [self dismissViewControllerAnimated:YES completion:nil];
                                                           }];
@@ -304,8 +304,8 @@ static NSString * const volumeNib          = @"volumePresentationView";
     self.volumeDetailsTableView = singleCellTableView; //gives the VController a reference to this tableview...
     singleCellTableView.dataSource = self;
     singleCellTableView.delegate = self;
-//    singleCellTableView.backgroundColor = [UIColor redColor];
-    singleCellTableView.estimatedRowHeight = 75.0;
+    singleCellTableView.backgroundColor = [UIColor whiteColor];
+    singleCellTableView.estimatedRowHeight = 65.0;
     singleCellTableView.rowHeight = UITableViewAutomaticDimension;
     [singleCellTableView setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
     [singleCellTableView setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
@@ -343,7 +343,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
     alertViewController.cancelButtonTitleFont = [UIFont fontWithName:@"AvenirNext-Medium" size:alertViewController.cancelButtonTitleFont.pointSize];
     
 //    Uncomment for some funky colors.
-//    [self invertAlertControllerColors:alertViewController];
+    [self invertAlertControllerColors:alertViewController];
     
     alertViewController.swipeDismissalGestureEnabled = YES;
     alertViewController.backgroundTapDismissalGestureEnabled = YES;
