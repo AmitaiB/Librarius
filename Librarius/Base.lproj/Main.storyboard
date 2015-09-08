@@ -164,7 +164,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iQr-oc-T4h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2419.5" y="534"/>
+            <point key="canvasLocation" x="2427" y="566"/>
         </scene>
         <!--Scan-->
         <scene sceneID="wg7-f3-ORb">
@@ -287,9 +287,9 @@
                                         <exclude reference="Pm5-If-ZG8"/>
                                         <exclude reference="hmP-GM-7gD"/>
                                         <exclude reference="t2M-1S-uAt"/>
-                                        <exclude reference="Mnq-eW-d6K"/>
                                         <exclude reference="Omu-zJ-ZAg"/>
                                         <exclude reference="s0J-RR-2vN"/>
+                                        <exclude reference="Mnq-eW-d6K"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact">
@@ -307,9 +307,9 @@
                                         <include reference="Pm5-If-ZG8"/>
                                         <include reference="hmP-GM-7gD"/>
                                         <include reference="t2M-1S-uAt"/>
-                                        <include reference="Mnq-eW-d6K"/>
                                         <include reference="Omu-zJ-ZAg"/>
                                         <include reference="s0J-RR-2vN"/>
+                                        <include reference="Mnq-eW-d6K"/>
                                     </mask>
                                 </variation>
                             </view>

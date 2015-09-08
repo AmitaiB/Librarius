@@ -191,7 +191,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
                     //2nd APPROACH: NYAlertViewController
                 NYAlertViewController *confirmSelectionViewController = [self confirmSelectionViewController];
                 [self presentViewController:confirmSelectionViewController animated:YES completion:^{ DBLG }];
-                
+                    //TODO: Not for here, but add default text to the cell (oh, and change it from a cell!) to @""
                     // 3rd APPROACH: Like #1, but with a TableViewController.
 //                Present the alert view controller
 //[self presentViewController:[LBRSingleCellTVC new] animated:YES completion:^{ DBLG }];
@@ -362,9 +362,6 @@ static NSString * const volumeNib          = @"volumePresentationView";
     alertViewController.backgroundTapDismissalGestureEnabled = YES;
     
     return alertViewController;
-    
-    
-    
 }
 
 -(void)invertAlertControllerColors:(NYAlertViewController*)alertViewController {
