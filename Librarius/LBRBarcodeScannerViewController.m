@@ -41,14 +41,14 @@
 
 @property (weak, nonatomic) IBOutlet UIView *scannerView;
 @property (weak, nonatomic) IBOutlet UIButton *toggleScanningButton;
-    // Rename a tableview for the Coffee Table, for when the Stop Scanning Button is tapped.
 @property (nonatomic, strong) UITableView *volumeDetailsTableView;
 @property (nonatomic, strong) MTBBarcodeScanner *scanner;
 @property (nonatomic, strong) LBRGoogleGTLClient *googleClient;
 
 @property (nonatomic, strong) MMMaterialDesignSpinner *spinnerView;
 @property (nonatomic, strong) LBRSelectVolumeTableViewController *confirmVolumeTVC;
-@property (weak, nonatomic) UITableView *uniqueBarcodesTableView;
+    // Rename a tableview for the Coffee Table, for when the Stop Scanning Button is tapped.
+@property (weak, nonatomic) UITableView *coffeeTableView;
 
 @property (nonatomic) BOOL isScanning;
 @property (nonatomic) BOOL isNotScanning;
@@ -76,10 +76,6 @@ static NSString * const volumeNib          = @"volumePresentationView";
 
 -(void)initializeProgrammaticProperties {
     self.googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
-    /**
-     *  CLEAN: May be implicitly NO, and can remove this line.
-     */
-    self.isScanning = NO;
     self.scanner = [[MTBBarcodeScanner alloc] initWithPreviewView:self.scannerView];
     self.uniqueCodes = [NSMutableArray new];
     
@@ -172,13 +168,8 @@ static NSString * const volumeNib          = @"volumePresentationView";
                 NSLog(@"Found unique code: %@", code.stringValue);
                 
                 [self.spinnerView startAnimating];
-                /** ✅
-                 *  todo; pop-up confirmation with lazy loading part 1 (Empty cell)
-                 CLEAN:
-                 */
-                    //1st APPROACH: NYAlertViewController sub-class. Should have worked, but didn't.
                 
-
+                    //1st APPROACH: NYAlertViewController sub-class. Should have worked, but didn't.
                     //✅ 2nd APPROACH: NYAlertViewController
                 NYAlertViewController *confirmSelectionViewController = [self confirmSelectionViewController];
                 [self presentViewController:confirmSelectionViewController animated:YES completion:^{ DBLG }];
@@ -191,19 +182,8 @@ static NSString * const volumeNib          = @"volumePresentationView";
                     self.volumeToConfirm = [[LBRParsedVolume alloc] initWithGoogleVolume:responseVolume];
                     [self.volumeDetailsTableView reloadData];
                 }];
-                
-                    //REVIEW:
-//                [self updateDataManagerWithNewBarcode];
-//                [self.scanner stopScanning];
-                /**
-                 *  These next lines were for when the TableView had barcodes. No longer.
-                 */
-//                Update the tableview
-//                [self.uniqueBarcodesTableView reloadData];
-//                [self scrollToBottomCell];
-               
             } else {
-                    //If code is not unique/already in the tableView, then scroll the tableView to it.
+                    //CLEAN: REVIEW - still used?
                 [self scrollToTargetISBNCell:[self.uniqueCodes indexOfObject:code.stringValue]];
                 NSLog(@"Barcode already in list/table.");
             }
@@ -234,7 +214,6 @@ static NSString * const volumeNib          = @"volumePresentationView";
 #pragma mark -
 
 -(NYAlertViewController*)confirmSelectionViewController {
-    
     NYAlertViewController *alertViewController = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
     
         // Set a title and message
@@ -348,12 +327,11 @@ static NSString * const volumeNib          = @"volumePresentationView";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (tableView == self.uniqueBarcodesTableView)
-        return self.uniqueCodes.count;
-    else if (tableView == self.volumeDetailsTableView) {
+    if (tableView == self.volumeDetailsTableView) {
         return 1;
     }
-        return 1;
+// default value
+        return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -361,16 +339,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
     static NSString *volumeCellID = @"volumeCellID";
     
     UITableViewCell *cell;
-    
-    if (tableView == self.uniqueBarcodesTableView) {
-        cell = [tableView dequeueReusableCellWithIdentifier:barcodeCellReuseID forIndexPath:indexPath];
-            //???: Why did this help? Shouldn't `...forIndexPath` have instantiated a new cell for me??
-        if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:barcodeCellReuseID];
-        }
-        cell.textLabel.text = self.uniqueCodes[indexPath.row];
-    }
-    else if (tableView == self.volumeDetailsTableView) {
+    if (tableView == self.volumeDetailsTableView) {
         cell = [tableView dequeueReusableCellWithIdentifier:volumeCellID];
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:volumeCellID];
@@ -403,35 +372,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
     return cell;
 }
 
-     //FIXME: This doesn't actually work. Delete at first opportunity.
-/*
- -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    [cell layoutIfNeeded];
-    
-    CGSize size = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-    return size.height;
-}
-*/
 #pragma mark - Helper methods
-
--(void)scrollToBottomCell {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.uniqueCodes.count - 1 inSection:0];
-    [self.uniqueBarcodesTableView scrollToRowAtIndexPath:indexPath
-                                        atScrollPosition:UITableViewScrollPositionTop
-                                                animated:YES];
-}
-
-/**
- *  CLEAN: Not used. Delete.
- */
--(void)scrollToTargetISBNCell:(NSUInteger)idxOfTarget {
-    
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.uniqueCodes.count - 1 inSection:0];
-//    [self.uniqueBarcodesTableView scrollToRowAtIndexPath:indexPath
-//                                        atScrollPosition:UITableViewScrollPositionTop
-//                                                animated:YES];
-}
 
     //???
 #pragma mark - GoogleClient
@@ -457,25 +398,13 @@ static NSString * const volumeNib          = @"volumePresentationView";
 }
 
 #pragma mark - Data Manager interface
-
+//✅
 -(void)generateTestDataIfNeeded {
     LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
     [dataManager generateTestDataIfNeeded];
 }
 
-/**
- *  Updates dataManager's copy of the barcodes, then posts notification (for googleClient, basically).
- */
--(void)updateDataManagerWithNewBarcode {
-    LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
-    if (!dataManager.uniqueCodes) {
-        dataManager.uniqueCodes = [NSMutableArray new];
-    }
-    
-    [dataManager.uniqueCodes addObject:[self.uniqueCodes lastObject]];
-}
-
-    // Move to Datamanager...
+    // ✅ Part of new flow.
 -(void)updateDataManagerWithNewTransientVolume:(LBRParsedVolume*)volumeToAdd {
         // Preliminaries
     LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
