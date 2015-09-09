@@ -24,11 +24,8 @@
 @property (nonatomic, strong) NSArray *parsedVolumesToEitherSaveOrDiscard;
 @property (nonatomic, strong) LBRParsedVolume *parsedVolumeFromLastBarcode; //<-- Use this to confirm user's selection, then enter it into Persistent Data.
 
-@property (nonatomic, strong) GTLBooksVolumes *responseCollectionOfPotentialVolumeMatches;
-
 +(instancetype)sharedDataManager;
 
--(void)addGTLVolumeToCurrentLibrary:(GTLBooksVolume*)volumeToAdd andSaveContext:(BOOL)saveContext;
 -(void)updateWithNewTransientVolume:(LBRParsedVolume*)volumeToAdd;
 -(void)saveParsedVolumesToEitherSaveOrDiscardToPersistentStore;
     //debug only

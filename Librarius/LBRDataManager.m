@@ -16,8 +16,6 @@
 #define DBLG NSLog(@"<%@:%@:line %d, reporting!>", NSStringFromClass([self class]), NSStringFromSelector(_cmd), __LINE__);
 
 @implementation LBRDataManager
-@synthesize responseCollectionOfPotentialVolumeMatches = _responseCollectionOfPotentialVolumeMatches;
-
 
 static NSString * const kUnknown = @"kUnknown";
 
@@ -39,7 +37,6 @@ static NSString * const kUnknown = @"kUnknown";
 //FIXME:    _googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
     _parsedVolumesToEitherSaveOrDiscard = [NSMutableArray new];
     _parsedVolumeFromLastBarcode = [LBRParsedVolume new];
-    _responseCollectionOfPotentialVolumeMatches = [GTLBooksVolumes new];
     _libraries = @[];
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedNewParsedVolumeNotification:) name:@"newParsedVolumeNotification" object:nil]; DBLG
 //    

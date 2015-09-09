@@ -51,7 +51,6 @@
 
 @property (nonatomic, strong) MMMaterialDesignSpinner *spinnerView;
 @property (nonatomic, strong) LBRSelectVolumeTableViewController *confirmVolumeTVC;
-@property (nonatomic, strong) GTLBooksVolumes *responseCollectionOfPotentialVolumeMatches;
 @property (weak, nonatomic) UITableView *uniqueBarcodesTableView;
 
 @property (nonatomic) BOOL isScanning;
@@ -85,7 +84,6 @@ static NSString * const volumeNib          = @"volumePresentationView";
      */
     self.isScanning = NO;
     self.scanner = [[MTBBarcodeScanner alloc] initWithPreviewView:self.scannerView];
-    self.responseCollectionOfPotentialVolumeMatches = [GTLBooksVolumes new];
     self.uniqueCodes = [NSMutableArray new];
     
     [self initializeSpinner];
