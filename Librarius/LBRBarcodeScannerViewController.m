@@ -22,13 +22,7 @@
 #import "LBRParsedVolume.h"
 #import <AVFoundation/AVFoundation.h>
 #import <LARSTorch.h>
-
-
 #import "LBRConstants.h"
-
-#import "LBRSelectVolumeTableViewController.h"
-#import <LGSemiModalNavViewController.h>
-
 
 
 
@@ -46,7 +40,6 @@
 @property (nonatomic, strong) LBRGoogleGTLClient *googleClient;
 
 @property (nonatomic, strong) MMMaterialDesignSpinner *spinnerView;
-@property (nonatomic, strong) LBRSelectVolumeTableViewController *confirmVolumeTVC;
     // Rename a tableview for the Coffee Table, for when the Stop Scanning Button is tapped.
 @property (weak, nonatomic) UITableView *coffeeTableView;
 
@@ -69,9 +62,6 @@ static NSString * const volumeNib          = @"volumePresentationView";
     [super viewDidLoad];
     [self generateTestDataIfNeeded];
     [self initializeProgrammaticProperties];
-    LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
-    DBLG
-    NSLog(@"CURRENT LIBRARY:\n%@",[dataManager.currentLibrary.volumes description]);
 }
 
 -(void)initializeProgrammaticProperties {
@@ -165,8 +155,6 @@ static NSString * const volumeNib          = @"volumePresentationView";
                 // If it's a new barcode, add it to the array.
             if ([self.uniqueCodes indexOfObject:code.stringValue] == NSNotFound) {
                 [self.uniqueCodes addObject:code.stringValue];
-                NSLog(@"Found unique code: %@", code.stringValue);
-                
                 [self.spinnerView startAnimating];
                 
                     //1st APPROACH: NYAlertViewController sub-class. Should have worked, but didn't.
@@ -375,25 +363,6 @@ static NSString * const volumeNib          = @"volumePresentationView";
     //???
 #pragma mark - GoogleClient
 
-
-
--(void)presentVolumesSemiModally {
-    if (self.confirmVolumeTVC) {
-            //This is the nav controller
-        LGSemiModalNavViewController *semiModal = [[LGSemiModalNavViewController alloc]initWithRootViewController:self.confirmVolumeTVC];
-            //Make sure to set a height on the view controller here.
-        semiModal.view.frame = CGRectMake(0, 0, self.view.frame.size.width * 0.95, self.view.frame.size.height * 0.65);
-        
-            //Selected customization properties, see more in the header of the LGSemiModalNavViewController
-        semiModal.backgroundShadeColor = [UIColor blackColor];
-        semiModal.animationSpeed = 0.35f;
-        semiModal.tapDismissEnabled = YES;
-        semiModal.backgroundShadeAlpha = 0.4;
-        semiModal.scaleTransform = CGAffineTransformMakeScale(.94, .94);
-        
-        [self presentViewController:semiModal animated:YES completion:nil];
-    }
-}
 
 #pragma mark - Data Manager interface
 //✅
