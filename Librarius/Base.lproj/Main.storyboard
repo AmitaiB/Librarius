@@ -200,8 +200,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="confirmChoicesButtonTapped:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="wlQ-L2-aGS"/>
-                                            <action selector="flashToggleButtonTapped:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="uEP-1B-M67"/>
+                                            <action selector="lightToggleButtonTapped:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="BQI-I4-0Xp"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -323,7 +322,6 @@
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="confirmChoicesButton" destination="dcH-IU-Ezd" id="2vW-TH-XQh"/>
                         <outlet property="scannerView" destination="whR-df-RYp" id="dtk-XK-fJV"/>
                         <outlet property="startScanningButton" destination="IOe-eD-XQW" id="gPW-tl-JCK"/>
                     </connections>

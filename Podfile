@@ -11,7 +11,8 @@ pod "MMMaterialDesignSpinner"
 pod 'AFNetworking'
 pod 'NYAlertViewController'
 
-pod 'Masonry'
+pod 'LARSTorch', '~> 1.1'
+
 
 #Not Yet Implemented
 #pod 'AMRatingControl'
@@ -21,6 +22,7 @@ pod 'Masonry'
 
 #Cut
 #pod 'MagicalRecord', '~> 2.3'
+#pod 'Masonry'
 
 end
 

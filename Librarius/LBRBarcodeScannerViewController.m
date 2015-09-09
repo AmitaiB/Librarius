@@ -21,6 +21,7 @@
 #import "Volume.h"
 #import "LBRParsedVolume.h"
 #import <AVFoundation/AVFoundation.h>
+#import <LARSTorch.h>
 
 
 #import "LBRConstants.h"
@@ -38,10 +39,9 @@
 
 - (IBAction)toggleScanningButtonTapped:(id)sender;
 - (IBAction)flipCameraButtonTapped:(id)sender;
-- (IBAction)confirmChoicesButtonTapped:(id)sender;
+- (IBAction)lightToggleButtonTapped:(id)sender;
 - (IBAction)saveScannedVolumesToLibraryButtonTapped:(id)sender;
 
-@property (weak, nonatomic) IBOutlet UIButton *confirmChoicesButton;
 @property (weak, nonatomic) IBOutlet UIView *scannerView;
 @property (weak, nonatomic) IBOutlet UIButton *startScanningButton;
     // Rename a tableview for the Coffee Table, for when the Stop Scanning Button is tapped.
@@ -78,7 +78,8 @@ static NSString * const volumeNib          = @"volumePresentationView";
     [self generateTestDataIfNeeded];
     [self initializeProgrammaticProperties];
     LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
-    NSLog(@"%@",[dataManager.currentLibrary.volumes description]);
+    DBLG
+    NSLog(@"CURRENT LIBRARY:\n%@",[dataManager.currentLibrary.volumes description]);
 }
 
 -(void)initializeProgrammaticProperties {
@@ -140,13 +141,14 @@ static NSString * const volumeNib          = @"volumePresentationView";
  *  @return <#return value description#>
  */
     //And then, Magic!
-- (IBAction)flashToggleButtonTapped:(id)sender {
-    AVCaptureDevice *thisDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-    
-    if ([thisDevice hasTorch] && [thisDevice hasFlash]) {
-        thisDevice.torchMode = !thisDevice.torchMode;
+- (IBAction)lightToggleButtonTapped:(id)sender {
+    LARSTorch *torch = [LARSTorch sharedTorch];
+    if ([torch isTorchOn]) {
+        [torch setTorchState:LARSTorchStateOff];
+    } else {
+        [torch setTorchState:LARSTorchStateOn];
     }
-    DBLG
+        DBLG
 }
 
 - (IBAction)saveScannedVolumesToLibraryButtonTapped:(id)sender {
