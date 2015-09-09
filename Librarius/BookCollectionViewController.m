@@ -1,48 +1,56 @@
 //
-//  MasterViewController.m
-//  HisMovies
+//  BookCollectionViewController.m
+//  Librarius
 //
 //  Created by Amitai Blickstein on 8/25/15.
 //  Copyright (c) 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 
-#import "MasterViewController.h"
+#import "BookCollectionViewController.h"
 #import "DetailViewController.h"
 #import "LBRDataManager.h"
 #import "Library.h"
 #import "Bookcase.h"
 #import "Volume.h"
 
-@interface MasterViewController ()
+@interface BookCollectionViewController ()
 
 @end
 
-@implementation MasterViewController
+@implementation BookCollectionViewController
+
 
 //✅
 - (void)awakeFromNib {
-    [super awakeFromNib];
+    @try {
+        [super awakeFromNib];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"Failed to awakeFromNib: %@", exception);
+    }
+    @finally {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 //✅
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    @try {
+        [super viewDidLoad];
+        self.navigationItem.leftBarButtonItem = self.editButtonItem;        
+    }
+    @catch (NSException *exception) {
+        NSLog(@"Failed to awakeFromNib: %@", exception);
+    }
+    @finally {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 /**
  *  TODO: Change the method called here to "Manual Volume Entry", details below.
  */
 //    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
 //    self.navigationItem.rightBarButtonItem = addButton;
 }
-
-
-//✅
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 /**
  *  TODO: Change this method to "Manual Volume Entry" and fill in all the fields for the/a Volume.
  */
@@ -76,15 +84,16 @@
 }
 
 //✅ALL
-#pragma mark - Table View
+#pragma mark - Table View data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [[self.fetchedResultsController sections] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
-    return [sectionInfo numberOfObjects];
+    NSArray *sections = [self.fetchedResultsController sections];
+    id <NSFetchedResultsSectionInfo> currentSection = sections[section];
+    return currentSection.numberOfObjects;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -93,6 +102,8 @@
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
+
+#pragma mark - Table View delegate
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the specified item to be editable.
@@ -128,27 +139,47 @@
         return _fetchedResultsController;
     }
     
+    /**
+     *  1) The set of all books
+     *  2) in the current library
+     *  3) arranged by category
+     *  4) then author
+     *  5) then year
+     */
     LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
-    
-    NSFetchRequest *libraryRequest = [NSFetchRequest fetchRequestWithEntityName:@"Library"];
+    NSManagedObjectContext *managedObjectContext = dataManager.managedObjectContext;
+    NSFetchRequest *volumesRequest = [NSFetchRequest fetchRequestWithEntityName:@"Volume"]; //(1)
     
     // Set the batch size to a suitable number.
-    [libraryRequest setFetchBatchSize:20];
+    [volumesRequest setFetchBatchSize:20];
     
     // Edit the sort key as appropriate.
-    NSSortDescriptor *orderSorter = [NSSortDescriptor sortDescriptorWithKey:@"orderWhenListed" ascending:YES];
-    libraryRequest.sortDescriptors = @[orderSorter];
+    NSSortDescriptor *categorySorter = [NSSortDescriptor sortDescriptorWithKey:@"category" ascending:YES];
+    NSSortDescriptor *authorSorter = [NSSortDescriptor sortDescriptorWithKey:@"author" ascending:YES comparator:^NSComparisonResult(id obj1, id obj2) {
+        Volume *book1 = obj1;
+        Volume *book2 = obj2;
+        NSString *lastName1 = [self lastNameFrom:book1.author];
+        NSString *lastName2 = [self lastNameFrom:book2.author];
+        
+        return [lastName1 caseInsensitiveCompare:lastName2];
+    }];
+
+    [dataManager generateDefaultLibraryIfNeeded];
+    NSPredicate *libraryPredicate = [NSPredicate predicateWithFormat:@"library = %@", dataManager.currentLibrary];
+    
+    volumesRequest.sortDescriptors = @[categorySorter, authorSorter];
+    volumesRequest.predicate = libraryPredicate;
     
     // Edit the section name key path and cache name if appropriate.
     // nil for section name key path means "no sections".
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:libraryRequest managedObjectContext:dataManager.managedObjectContext sectionNameKeyPath:nil cacheName:nil]; //TODO: cache:@"Master"??
-    aFetchedResultsController.delegate = self;
-    self.fetchedResultsController = aFetchedResultsController;
+    NSFetchedResultsController *frc = [[NSFetchedResultsController alloc] initWithFetchRequest:volumesRequest managedObjectContext:managedObjectContext sectionNameKeyPath:@"category" cacheName:nil];
+    frc.delegate = self;
+    self.fetchedResultsController = frc;
     
 	NSError *error = nil;
 	if (![self.fetchedResultsController performFetch:&error]) {
 	     // Replace this implementation with code to handle the error appropriately.
-	     // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
+	     // abort() causes the application to generate a crash log and terminate. !!!:You should not use this function in a shipping application, although it may be useful during development.
 	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 	    abort();
 	}
@@ -218,5 +249,11 @@
     [self.tableView reloadData];
 }
  */
+
+#pragma mark - Helper methods
+
+-(NSString*)lastNameFrom:(NSString*)fullName {
+    return [fullName componentsSeparatedByString:@" "][1];
+}
 
 @end

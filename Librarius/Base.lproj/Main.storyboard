@@ -49,7 +49,7 @@
         <!--Collections-->
         <scene sceneID="VIX-zl-8yQ">
             <objects>
-                <tableViewController id="bTL-zk-y1V" customClass="MasterViewController" sceneMemberID="viewController">
+                <tableViewController id="bTL-zk-y1V" customClass="BookCollectionViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="k2i-k3-jNX">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -216,13 +216,13 @@
                                         <exclude reference="GDB-vK-ZBH"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <exclude reference="MtT-tL-lEw"/>
-                                        <exclude reference="ZwB-rV-T6W"/>
                                         <exclude reference="5Ow-sX-qku"/>
                                         <exclude reference="TfA-60-pQL"/>
                                         <exclude reference="yeX-uQ-75v"/>
                                         <exclude reference="zOY-rc-YKv"/>
                                         <exclude reference="prn-aS-IqX"/>
+                                        <exclude reference="MtT-tL-lEw"/>
+                                        <exclude reference="ZwB-rV-T6W"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact">
@@ -233,13 +233,13 @@
                                         <include reference="GDB-vK-ZBH"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <include reference="MtT-tL-lEw"/>
-                                        <include reference="ZwB-rV-T6W"/>
                                         <include reference="5Ow-sX-qku"/>
                                         <include reference="TfA-60-pQL"/>
                                         <include reference="yeX-uQ-75v"/>
                                         <include reference="zOY-rc-YKv"/>
                                         <include reference="prn-aS-IqX"/>
+                                        <include reference="MtT-tL-lEw"/>
+                                        <include reference="ZwB-rV-T6W"/>
                                     </mask>
                                 </variation>
                             </view>

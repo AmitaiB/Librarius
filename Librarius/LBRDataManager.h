@@ -46,6 +46,7 @@
 
 -(void) saveContext;
 -(void) generateTestDataIfNeeded;
+-(void) generateDefaultLibraryIfNeeded;
 -(void) fetchData;
 
 

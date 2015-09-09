@@ -78,13 +78,8 @@ static NSString * const kUnknown = @"kUnknown";
 }
 
 #pragma mark - helper methods
-    //TODO: why? A: If I want to arrange by alphabetical order.
--(NSString*)lastNameFrom:(NSString*)fullName {
-    return [fullName componentsSeparatedByString:@" "][1];
-}
 
-
-// ===================== CoreData additions here
+    // ===================== CoreData additions here
 
 #pragma mark - CoreData
 #pragma mark Fetch Data

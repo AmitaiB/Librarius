@@ -22,7 +22,7 @@
 		3803757A1B8C08E0004C4ECE /* LBRSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375791B8C08E0004C4ECE /* LBRSettingsTableViewController.m */; };
 		3803757E1B8C16B3004C4ECE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3803757D1B8C16B3004C4ECE /* GoogleService-Info.plist */; };
 		3803757F1B8C17EB004C4ECE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 380375411B8AC9A8004C4ECE /* LaunchScreen.xib */; };
-		380375F71B8D4E90004C4ECE /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375F41B8D4E90004C4ECE /* MasterViewController.m */; };
+		380375F71B8D4E90004C4ECE /* BookCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375F41B8D4E90004C4ECE /* BookCollectionViewController.m */; };
 		380375F81B8D4E90004C4ECE /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375F61B8D4E90004C4ECE /* DetailViewController.m */; };
 		38466D281B94F24400DD252E /* LBRGoogleGTLClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 38466D271B94F24400DD252E /* LBRGoogleGTLClient.m */; };
 		384E0CC01B97D24B007E7290 /* NSString+dateValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 384E0CBF1B97D24B007E7290 /* NSString+dateValue.m */; };
@@ -76,8 +76,8 @@
 		380375781B8C08E0004C4ECE /* LBRSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRSettingsTableViewController.h; sourceTree = "<group>"; };
 		380375791B8C08E0004C4ECE /* LBRSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRSettingsTableViewController.m; sourceTree = "<group>"; };
 		3803757D1B8C16B3004C4ECE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		380375F31B8D4E90004C4ECE /* MasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
-		380375F41B8D4E90004C4ECE /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
+		380375F31B8D4E90004C4ECE /* BookCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookCollectionViewController.h; sourceTree = "<group>"; };
+		380375F41B8D4E90004C4ECE /* BookCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookCollectionViewController.m; sourceTree = "<group>"; };
 		380375F51B8D4E90004C4ECE /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		380375F61B8D4E90004C4ECE /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		382CE7FB1B9E09ED000A9701 /* Librarius-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Librarius-Prefix.pch"; sourceTree = "<group>"; };
@@ -255,8 +255,8 @@
 				380375791B8C08E0004C4ECE /* LBRSettingsTableViewController.m */,
 				380375681B8BC89D004C4ECE /* LBRGoogleSignInViewController.h */,
 				380375691B8BC89D004C4ECE /* LBRGoogleSignInViewController.m */,
-				380375F31B8D4E90004C4ECE /* MasterViewController.h */,
-				380375F41B8D4E90004C4ECE /* MasterViewController.m */,
+				380375F31B8D4E90004C4ECE /* BookCollectionViewController.h */,
+				380375F41B8D4E90004C4ECE /* BookCollectionViewController.m */,
 				380375F51B8D4E90004C4ECE /* DetailViewController.h */,
 				380375F61B8D4E90004C4ECE /* DetailViewController.m */,
 			);
@@ -468,7 +468,7 @@
 				380375F81B8D4E90004C4ECE /* DetailViewController.m in Sources */,
 				38AAD6F01B901175003062C1 /* Librarius.xcdatamodeld in Sources */,
 				38AAD7201B901D36003062C1 /* Library.m in Sources */,
-				380375F71B8D4E90004C4ECE /* MasterViewController.m in Sources */,
+				380375F71B8D4E90004C4ECE /* BookCollectionViewController.m in Sources */,
 				380375321B8AC9A8004C4ECE /* main.m in Sources */,
 				384E0CC01B97D24B007E7290 /* NSString+dateValue.m in Sources */,
 				380375721B8BF058004C4ECE /* UIImage+FromURL.m in Sources */,
