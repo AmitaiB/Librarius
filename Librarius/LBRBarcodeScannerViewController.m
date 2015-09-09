@@ -183,8 +183,6 @@ static NSString * const volumeNib          = @"volumePresentationView";
                     [self.volumeDetailsTableView reloadData];
                 }];
             } else {
-                    //CLEAN: REVIEW - still used?
-                [self scrollToTargetISBNCell:[self.uniqueCodes indexOfObject:code.stringValue]];
                 NSLog(@"Barcode already in list/table.");
             }
         }
