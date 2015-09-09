@@ -22,7 +22,6 @@
 		3803757A1B8C08E0004C4ECE /* LBRSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375791B8C08E0004C4ECE /* LBRSettingsTableViewController.m */; };
 		3803757E1B8C16B3004C4ECE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3803757D1B8C16B3004C4ECE /* GoogleService-Info.plist */; };
 		3803757F1B8C17EB004C4ECE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 380375411B8AC9A8004C4ECE /* LaunchScreen.xib */; };
-		380375841B8CD49C004C4ECE /* LBRVolume.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375831B8CD49C004C4ECE /* LBRVolume.m */; };
 		380375F71B8D4E90004C4ECE /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375F41B8D4E90004C4ECE /* MasterViewController.m */; };
 		380375F81B8D4E90004C4ECE /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375F61B8D4E90004C4ECE /* DetailViewController.m */; };
 		38466D281B94F24400DD252E /* LBRGoogleGTLClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 38466D271B94F24400DD252E /* LBRGoogleGTLClient.m */; };
@@ -77,8 +76,6 @@
 		380375781B8C08E0004C4ECE /* LBRSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRSettingsTableViewController.h; sourceTree = "<group>"; };
 		380375791B8C08E0004C4ECE /* LBRSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRSettingsTableViewController.m; sourceTree = "<group>"; };
 		3803757D1B8C16B3004C4ECE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		380375821B8CD49C004C4ECE /* LBRVolume.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRVolume.h; sourceTree = "<group>"; };
-		380375831B8CD49C004C4ECE /* LBRVolume.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRVolume.m; sourceTree = "<group>"; };
 		380375F31B8D4E90004C4ECE /* MasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
 		380375F41B8D4E90004C4ECE /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 		380375F51B8D4E90004C4ECE /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
@@ -278,8 +275,6 @@
 		38466D5C1B94FDDF00DD252E /* Cutting Floor */ = {
 			isa = PBXGroup;
 			children = (
-				380375821B8CD49C004C4ECE /* LBRVolume.h */,
-				380375831B8CD49C004C4ECE /* LBRVolume.m */,
 				380375651B8BC758004C4ECE /* LBRGoogleAPIClient.h */,
 				380375661B8BC758004C4ECE /* LBRGoogleAPIClient.m */,
 			);
@@ -473,7 +468,6 @@
 				3803756A1B8BC89D004C4ECE /* LBRGoogleSignInViewController.m in Sources */,
 				3803757A1B8C08E0004C4ECE /* LBRSettingsTableViewController.m in Sources */,
 				38565D701B9A20B800349498 /* LBRParsedVolume.m in Sources */,
-				380375841B8CD49C004C4ECE /* LBRVolume.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
