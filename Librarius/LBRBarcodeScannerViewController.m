@@ -34,6 +34,7 @@
 - (IBAction)saveScannedVolumesToLibraryButtonTapped:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *lightToggleButton;
 @property (weak, nonatomic) IBOutlet UIButton *flipCameraButton;
+@property (weak, nonatomic) IBOutlet UIButton *saveScannedBooksToCoreDataButton;
 
 @property (weak, nonatomic) IBOutlet UIView *scannerView;
 @property (weak, nonatomic) IBOutlet UIButton *toggleScanningButton;
@@ -135,6 +136,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
     self.isScanning = NO;
     [self flipScanButtonAppearance];
     [self.scanner stopScanning];
+    self.saveScannedBooksToCoreDataButton.hidden = NO;
 }
 
 /**
@@ -142,6 +144,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
  */
 -(void)startScanningOps {
     self.isScanning = YES;
+    self.saveScannedBooksToCoreDataButton.hidden = YES;
     [self flipScanButtonAppearance];
 // ???: Consider embedding the scanning in this: [MTBBarcodeScanner requestCameraPermissionWithSuccess:^(BOOL success)...?
 //TODO: Get these buttons to remain on top when the camera comes on.

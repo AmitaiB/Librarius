@@ -30,6 +30,24 @@
         return nil;
     }
     
+        // Default values.
+    _isbn13          = [NSString new];
+    _isbn10          = [NSString new];
+    _title           = [NSString new];
+    _pageCount       = nil;
+    _thickness       = nil;
+    _height          = nil;
+    _cover_art       = nil;
+    _cover_art_large = nil;
+    _author          = @"John Doe";
+    _authorSurname   = @"Doe";
+    _category        = @"No Category";
+    _published       = [NSDate distantPast];
+    _rating          = nil;
+    _google_id       = [NSString new];
+
+    
+    
     /**
      *  ISBN
      */
@@ -132,22 +150,7 @@
 }
 
 -(instancetype)init {
-    self = [self initWithGoogleVolume:nil];
-    
-    _isbn13    = [NSString new];
-    _isbn10    = [NSString new];
-    _title     = [NSString new];
-    _pageCount = nil;
-    _thickness = nil;
-    _height    = nil;
-    _cover_art = @"https://www.google.com";
-    _author    = @"John Doe";
-    _category  = @"General Literature";
-    _published = [NSDate distantPast];
-    _rating    = nil;
-    _google_id = [NSString new];
-    
-    return self;
+    return [self initWithGoogleVolume:nil];
 }
 
 @end
