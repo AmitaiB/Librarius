@@ -190,17 +190,6 @@ static NSString * const volumeNib          = @"volumePresentationView";
                     [self.spinnerView stopAnimating];
                     self.volumeToConfirm = [[LBRParsedVolume alloc] initWithGoogleVolume:responseVolume];
                     [self.volumeDetailsTableView reloadData];
-
-                    
-//                    confirmSelectionViewController.sourceVolume = volumeToConfirm;
-//                    [confirmSelectionViewController.singleCellTableView reloadData];
-                    
-                    /**
-                     9/6 2:55pm
-                     *  TODO: pop-up confirmation with text (part 2) and finally, lazy loading image (part 3). Text we have, lazy image loading is AFNetworking.
-                     
-                     ++If confirmed, interface with DataManager. No notifications are needed!
-                     */
                 }];
                 
                     //REVIEW:
@@ -235,29 +224,6 @@ static NSString * const volumeNib          = @"volumePresentationView";
     }
 }
 
-/**
- *  4th APPROACH: Just use an action sheet.
- *
- *  @param volume <#volume description#>
- */
--(void)confirmViaAlertControllerThisVolume:(LBRParsedVolume*)volume {
-    UIAlertController *confirmationAlert = [UIAlertController alertControllerWithTitle:@"Add this book to the pile on your coffee table?" message:[NSString stringWithFormat:@"%@\nby %@ (%@)", volume.title, volume.author, [self yearFromDate:volume.published]] preferredStyle:UIAlertControllerStyleActionSheet];
-    
-    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"Confirmed!" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-        NSLog(@"add this volume to the dataManager ('coffee table') for non-persistent storage.");
-    }];
-    
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-        
-    }];
-    
-    [confirmationAlert addAction:confirmAction];
-    [confirmationAlert addAction:cancelAction];
-    
-    [self presentViewController:confirmationAlert animated:YES completion:^{
-        DBLG
-    }];
-}
 
 -(NSString*)yearFromDate:(NSDate*)date {
     NSCalendar *calendar = [NSCalendar currentCalendar];
