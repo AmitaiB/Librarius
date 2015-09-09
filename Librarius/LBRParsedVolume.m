@@ -41,7 +41,7 @@
     _cover_art_large = nil;
     _author          = @"John Doe";
     _authorSurname   = @"Doe";
-    _category        = @"No Category";
+    _categories      = @[@"No Category"];
     _published       = [NSDate distantPast];
     _rating          = nil;
     _google_id       = [NSString new];
@@ -124,6 +124,13 @@
     if (_author) {
         _authorSurname = [_author componentsSeparatedByString:@" "][1];
     }
+    /**
+     *  Categories - though for now we will only pass one over to Volume(s).
+     */
+    if (volumeToParse.volumeInfo.categories.count) {
+        _categories = volumeToParse.volumeInfo.categories;
+    }
+
     
     /**
      *  Date of publication.

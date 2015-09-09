@@ -21,7 +21,7 @@
 @property (nonatomic, strong) NSString * cover_art_large;
 @property (nonatomic, strong) NSString * author;
 @property (nonatomic, strong) NSString * authorSurname;
-@property (nonatomic, strong) NSString * category;
+@property (nonatomic, strong) NSArray  * categories;
 @property (nonatomic, strong) NSDate * published;
 @property (nonatomic, strong) NSNumber * rating;
 @property (nonatomic, strong) NSString * google_id;
