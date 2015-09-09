@@ -20,31 +20,14 @@
 @implementation BookCollectionViewController
 
 
-//✅
 - (void)awakeFromNib {
-    @try {
         [super awakeFromNib];
-    }
-    @catch (NSException *exception) {
-        NSLog(@"Failed to awakeFromNib: %@", exception);
-    }
-    @finally {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
 }
 
-//✅
 - (void)viewDidLoad {
-    @try {
+
         [super viewDidLoad];
         self.navigationItem.leftBarButtonItem = self.editButtonItem;        
-    }
-    @catch (NSException *exception) {
-        NSLog(@"Failed to awakeFromNib: %@", exception);
-    }
-    @finally {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
 /**
  *  TODO: Change the method called here to "Manual Volume Entry", details below.
  */
@@ -74,7 +57,7 @@
 //}
 
 #pragma mark - Segues
-//✅
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
@@ -83,7 +66,7 @@
     }
 }
 
-//✅ALL
+
 #pragma mark - Table View data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -101,6 +84,12 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    NSArray *sections = self.fetchedResultsController.sections;
+    id<NSFetchedResultsSectionInfo> currentSection = sections[section];
+    return [currentSection name];
 }
 
 #pragma mark - Table View delegate
@@ -180,6 +169,8 @@
     
     return _fetchedResultsController;
 }    
+
+#pragma mark - Fetched Results Controller Delegate methods
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {

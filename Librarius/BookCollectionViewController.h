@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
-@interface BookCollectionViewController : UITableViewController <NSFetchedResultsControllerDelegate>
+@interface BookCollectionViewController : UITableViewController <NSFetchedResultsControllerDelegate, NSFetchedResultsSectionInfo>
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
