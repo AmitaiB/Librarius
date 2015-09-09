@@ -31,9 +31,9 @@
     }
     
         // Default values.
-    _isbn13          = [NSString new];
-    _isbn10          = [NSString new];
-    _title           = [NSString new];
+    _isbn13          = nil;
+    _isbn10          = nil;
+    _title           = @"Untitled";
     _pageCount       = nil;
     _thickness       = nil;
     _height          = nil;
@@ -44,9 +44,14 @@
     _categories      = @[@"No Category"];
     _published       = [NSDate distantPast];
     _rating          = nil;
-    _google_id       = [NSString new];
+    _google_id       = nil;
 
-    
+    _mainCategory    = @"No Main Category";
+    _publDescription = @"No Description";
+    _subtitle        = nil;
+    _publisher       = nil;
+    _avgRating       = nil;
+    _ratingsCount    = nil;
     
     /**
      *  ISBN
@@ -61,10 +66,13 @@
     }
     
     /**
-     *  Title
+     *  Title & Subtitle
      */
-    if (volumeToParse.volumeInfo.title.length > 0) {
+    if (volumeToParse.volumeInfo.title.length) {
         _title = volumeToParse.volumeInfo.title;
+    }
+    if (volumeToParse.volumeInfo.subtitle.length) {
+        _subtitle = volumeToParse.volumeInfo.subtitle;
     }
     
     /**
@@ -125,25 +133,43 @@
         _authorSurname = [_author componentsSeparatedByString:@" "][1];
     }
     /**
-     *  Categories - though for now we will only pass one over to Volume(s).
+     *  Categories - just in case -- for now we will only pass over the mainCategory to Volume(s).
      */
     if (volumeToParse.volumeInfo.categories.count) {
         _categories = volumeToParse.volumeInfo.categories;
     }
+    
+    if (volumeToParse.volumeInfo.mainCategory) {
+        _mainCategory = volumeToParse.volumeInfo.mainCategory;
+    }
 
     
     /**
-     *  Date of publication.
+     *  Date of publication & publisher.
      */
     if (volumeToParse.volumeInfo.publishedDate) {
         _published = [volumeToParse.volumeInfo.publishedDate dateValue];
     }
+    if (volumeToParse.volumeInfo.publisher) {
+        _publisher = volumeToParse.volumeInfo.publisher;
+    }
     
     /**
-     *  Average rating. TODO: ../ratingsCount?
+     *  Ratings! Yours...Google doesn't tell us, X-number of others' avg. rating.
      */
     if (volumeToParse.volumeInfo.averageRating) {
-        _rating = volumeToParse.volumeInfo.averageRating;
+        _avgRating = volumeToParse.volumeInfo.averageRating;
+    }
+    if (volumeToParse.volumeInfo.ratingsCount) {
+        _ratingsCount = volumeToParse.volumeInfo.ratingsCount;
+    }
+    
+    
+    /**
+     *  Publisher's description.
+     */
+    if (volumeToParse.volumeInfo.descriptionProperty) {
+        _publDescription = volumeToParse.volumeInfo.descriptionProperty;
     }
     
     /**

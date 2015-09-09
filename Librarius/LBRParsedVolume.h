@@ -22,9 +22,17 @@
 @property (nonatomic, strong) NSString * author;
 @property (nonatomic, strong) NSString * authorSurname;
 @property (nonatomic, strong) NSArray  * categories;
-@property (nonatomic, strong) NSDate * published;
+@property (nonatomic, strong) NSString * mainCategory;
+@property (nonatomic, strong) NSDate   * published;
 @property (nonatomic, strong) NSNumber * rating;
 @property (nonatomic, strong) NSString * google_id;
+
+@property (nonatomic, strong) NSString *publDescription;
+@property (nonatomic, strong) NSString *subtitle;
+@property (nonatomic, strong) NSString *publisher;
+@property (nonatomic, strong) NSNumber *avgRating;
+@property (nonatomic, strong) NSNumber *ratingsCount;
+
 
 -(instancetype)initWithGoogleVolume:(GTLBooksVolume*)volumeToParse;
 

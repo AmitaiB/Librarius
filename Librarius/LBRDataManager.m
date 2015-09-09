@@ -49,26 +49,38 @@ static NSString * const kUnknown = @"kUnknown";
         // 3. Save context.
         // 4. Test.
     for (LBRParsedVolume *transientVolumeToSave in self.parsedVolumesToEitherSaveOrDiscard) {
-        Volume *persistentVolume = [NSEntityDescription insertNewObjectForEntityForName:@"Volume" inManagedObjectContext:self.managedObjectContext];
-        persistentVolume.isbn10          = transientVolumeToSave.isbn10;
-        persistentVolume.isbn13          = transientVolumeToSave.isbn13;
-        persistentVolume.title           = transientVolumeToSave.title;
-        persistentVolume.thickness       = transientVolumeToSave.thickness;
-        persistentVolume.height          = transientVolumeToSave.height;
-        persistentVolume.pageCount       = transientVolumeToSave.pageCount;
-        persistentVolume.cover_art_large = transientVolumeToSave.cover_art_large;
-        persistentVolume.cover_art       = transientVolumeToSave.cover_art;
-        persistentVolume.author          = transientVolumeToSave.author;
-        persistentVolume.category        = transientVolumeToSave.category;
-        persistentVolume.published       = transientVolumeToSave.published;
-        persistentVolume.rating          = transientVolumeToSave.rating;
-        persistentVolume.google_id       = transientVolumeToSave.google_id;
-        persistentVolume.library         = self.currentLibrary;
+        [self insertVolumeToContextFromTransientVolume:transientVolumeToSave];
     }
 
     [self saveContext];
-        NSLog(@"Context saved with new volumes to current library.");
+        NSLog(@"Context's (new) volumes saved to current library.");
 }
+
+-(void)insertVolumeToContextFromTransientVolume:(LBRParsedVolume*)volumeToInsert {
+    Volume *persistentVolume = [NSEntityDescription insertNewObjectForEntityForName:@"Volume" inManagedObjectContext:self.managedObjectContext];
+    persistentVolume.isbn10          = volumeToInsert.isbn10;
+    persistentVolume.isbn13          = volumeToInsert.isbn13;
+    persistentVolume.title           = volumeToInsert.title;
+    persistentVolume.thickness       = volumeToInsert.thickness;
+    persistentVolume.height          = volumeToInsert.height;
+    persistentVolume.pageCount       = volumeToInsert.pageCount;
+    persistentVolume.cover_art_large = volumeToInsert.cover_art_large;
+    persistentVolume.cover_art       = volumeToInsert.cover_art;
+    persistentVolume.author          = volumeToInsert.author;
+    persistentVolume.authorSurname   = volumeToInsert.authorSurname;
+    persistentVolume.mainCategory    = volumeToInsert.mainCategory;
+    persistentVolume.published       = volumeToInsert.published;
+    persistentVolume.rating          = volumeToInsert.rating;
+    persistentVolume.google_id       = volumeToInsert.google_id;
+
+    persistentVolume.publDescription = volumeToInsert.publDescription;
+    persistentVolume.subtitle        = volumeToInsert.subtitle;
+    persistentVolume.avgRating       = volumeToInsert.avgRating;
+    persistentVolume.ratingsCount    = volumeToInsert.ratingsCount;
+
+    persistentVolume.library         = self.currentLibrary;
+}
+
 
     //debug-related
 -(void)logCurrentLibrary {

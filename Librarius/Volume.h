@@ -23,11 +23,18 @@
 @property (nonatomic, retain) NSString * cover_art_large;
 @property (nonatomic, retain) NSString * author;
 @property (nonatomic, strong) NSString * authorSurname;
-@property (nonatomic, retain) NSString * category;
+@property (nonatomic, retain) NSString * mainCategory;
 @property (nonatomic, retain) NSDate * published;
 @property (nonatomic, retain) NSNumber * rating;
 @property (nonatomic, retain) NSString * google_id;
 @property (nonatomic, retain) Library *library;
 @property (nonatomic, retain) Bookcase *bookcase;
+
+@property (nonatomic, retain) NSString * publDescription;
+@property (nonatomic, retain) NSString * subtitle;
+@property (nonatomic, retain) NSString * publisher;
+@property (nonatomic, retain) NSNumber * avgRating;
+@property (nonatomic, retain) NSNumber * ratingsCount;
+
 
 @end

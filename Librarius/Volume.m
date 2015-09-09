@@ -23,11 +23,17 @@
 @dynamic cover_art;
 @dynamic author;
 @dynamic authorSurname;
-@dynamic category;
+@dynamic mainCategory;
 @dynamic published;
 @dynamic rating;
 @dynamic google_id;
 @dynamic library;
 @dynamic bookcase;
+
+@dynamic publDescription;
+@dynamic subtitle;
+@dynamic publisher;
+@dynamic avgRating;
+@dynamic ratingsCount;
 
 @end
