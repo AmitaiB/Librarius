@@ -9,40 +9,43 @@
 #define kSpinnerFrameRect CGRectMake(0, 0, 40, 40)
 #define kAppIconSize 48
 
-
-#import <LGSemiModalNavViewController.h>
+    //Definitely Used:
 #import <MTBBarcodeScanner.h>
 #import <MMMaterialDesignSpinner.h>
-
 #import "LBRBarcodeScannerViewController.h"
-#import "LBRSelectVolumeTableViewController.h"
 #import "LBRGoogleGTLClient.h"
-#import "LBRConstants.h"
-
-#import "LBRSingleCellConfirmViewController.h"
-#import "LBRSingleCellTVC.h"
 #import <NYAlertViewController.h>
 #import <UIImageView+AFNetworking.h>
-
 #import "LBRDataManager.h"
 #import "Library.h"
 #import "Volume.h"
 #import "LBRParsedVolume.h"
+#import <AVFoundation/AVFoundation.h>
 
-#import <Masonry.h>
+
+#import "LBRConstants.h"
+
+#import "LBRSelectVolumeTableViewController.h"
+#import <LGSemiModalNavViewController.h>
+#import "LBRSingleCellConfirmViewController.h"
+#import "LBRSingleCellTVC.h"
+
+
+
 
 
 @interface LBRBarcodeScannerViewController ()
-//- (IBAction)scanOneButtonTapped:(id)sender;
+
 - (IBAction)toggleScanningButtonTapped:(id)sender;
-- (IBAction)cameraButtonTapped:(id)sender;
+- (IBAction)flipCameraButtonTapped:(id)sender;
 - (IBAction)confirmChoicesButtonTapped:(id)sender;
 - (IBAction)saveScannedVolumesToLibraryButtonTapped:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UIButton *confirmChoicesButton;
 @property (weak, nonatomic) IBOutlet UIView *scannerView;
 @property (weak, nonatomic) IBOutlet UIButton *startScanningButton;
-@property (weak, nonatomic) IBOutlet UITableView *uniqueBarcodesTableView;
+    // Rename a tableview for the Coffee Table, for when the Stop Scanning Button is tapped.
+@property (weak, nonatomic) UITableView *uniqueBarcodesTableView;
 @property (nonatomic, strong) UITableView *volumeDetailsTableView;
 @property (nonatomic, strong) MTBBarcodeScanner *scanner;
 @property (nonatomic, strong) LBRGoogleGTLClient *googleClient;
@@ -123,7 +126,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
         [self startScanningOps];}
 }
 
-- (IBAction)cameraButtonTapped:(id)sender {
+- (IBAction)flipCameraButtonTapped:(id)sender {
     [self.scanner flipCamera];
 }
 /**
@@ -137,8 +140,12 @@ static NSString * const volumeNib          = @"volumePresentationView";
  *  @return <#return value description#>
  */
     //And then, Magic!
-- (IBAction)confirmChoicesButtonTapped:(id)sender {
-//    [self getVolumesFromBarcodeData];
+- (IBAction)flashToggleButtonTapped:(id)sender {
+    AVCaptureDevice *thisDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    
+    if ([thisDevice hasTorch] && [thisDevice hasFlash]) {
+        thisDevice.torchMode = !thisDevice.torchMode;
+    }
     DBLG
 }
 
