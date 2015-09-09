@@ -225,8 +225,6 @@
                                         <exclude reference="dcH-IU-Ezd"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <exclude reference="uOE-EG-6AF"/>
-                                        <exclude reference="yFe-cr-DRm"/>
                                         <exclude reference="5Ow-sX-qku"/>
                                         <exclude reference="yeX-uQ-75v"/>
                                         <exclude reference="zOY-rc-YKv"/>
@@ -234,6 +232,8 @@
                                         <exclude reference="Pm5-If-ZG8"/>
                                         <exclude reference="hmP-GM-7gD"/>
                                         <exclude reference="t2M-1S-uAt"/>
+                                        <exclude reference="uOE-EG-6AF"/>
+                                        <exclude reference="yFe-cr-DRm"/>
                                         <exclude reference="Mnq-eW-d6K"/>
                                     </mask>
                                 </variation>
@@ -245,8 +245,6 @@
                                         <include reference="dcH-IU-Ezd"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <include reference="uOE-EG-6AF"/>
-                                        <include reference="yFe-cr-DRm"/>
                                         <include reference="5Ow-sX-qku"/>
                                         <include reference="yeX-uQ-75v"/>
                                         <include reference="zOY-rc-YKv"/>
@@ -254,6 +252,8 @@
                                         <include reference="Pm5-If-ZG8"/>
                                         <include reference="hmP-GM-7gD"/>
                                         <include reference="t2M-1S-uAt"/>
+                                        <include reference="uOE-EG-6AF"/>
+                                        <include reference="yFe-cr-DRm"/>
                                         <include reference="Mnq-eW-d6K"/>
                                     </mask>
                                 </variation>
@@ -288,15 +288,15 @@
                                 <exclude reference="IOe-eD-XQW"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="aRl-Kg-wOb"/>
-                                <exclude reference="bJY-Jo-ICX"/>
-                                <exclude reference="s0R-qn-C1d"/>
-                                <exclude reference="4fW-IA-pjg"/>
-                                <exclude reference="e5N-3E-Alh"/>
                                 <exclude reference="Ua9-d9-ZnT"/>
                                 <exclude reference="ggD-rW-6KL"/>
                                 <exclude reference="wXN-p1-76r"/>
+                                <exclude reference="aRl-Kg-wOb"/>
+                                <exclude reference="bJY-Jo-ICX"/>
+                                <exclude reference="s0R-qn-C1d"/>
                                 <exclude reference="t59-fU-kW9"/>
+                                <exclude reference="4fW-IA-pjg"/>
+                                <exclude reference="e5N-3E-Alh"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -306,15 +306,15 @@
                                 <include reference="IOe-eD-XQW"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="aRl-Kg-wOb"/>
-                                <include reference="bJY-Jo-ICX"/>
-                                <include reference="s0R-qn-C1d"/>
-                                <include reference="4fW-IA-pjg"/>
-                                <include reference="e5N-3E-Alh"/>
                                 <include reference="Ua9-d9-ZnT"/>
                                 <include reference="ggD-rW-6KL"/>
                                 <include reference="wXN-p1-76r"/>
+                                <include reference="aRl-Kg-wOb"/>
+                                <include reference="bJY-Jo-ICX"/>
+                                <include reference="s0R-qn-C1d"/>
                                 <include reference="t59-fU-kW9"/>
+                                <include reference="4fW-IA-pjg"/>
+                                <include reference="e5N-3E-Alh"/>
                             </mask>
                         </variation>
                     </view>
@@ -323,7 +323,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="scannerView" destination="whR-df-RYp" id="dtk-XK-fJV"/>
-                        <outlet property="startScanningButton" destination="IOe-eD-XQW" id="gPW-tl-JCK"/>
+                        <outlet property="toggleScanningButton" destination="IOe-eD-XQW" id="N9B-xd-Wxb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>

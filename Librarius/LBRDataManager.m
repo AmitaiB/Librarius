@@ -41,8 +41,8 @@ static NSString * const kUnknown = @"kUnknown";
     _parsedVolumeFromLastBarcode = [LBRParsedVolume new];
     _responseCollectionOfPotentialVolumeMatches = [GTLBooksVolumes new];
     _libraries = @[];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedNewParsedVolumeNotification:) name:@"newParsedVolumeNotification" object:nil]; DBLG
-    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedNewParsedVolumeNotification:) name:@"newParsedVolumeNotification" object:nil]; DBLG
+//    
     return self;
 }
 
@@ -50,85 +50,7 @@ static NSString * const kUnknown = @"kUnknown";
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-/**
- *  Upon receiving a new parsedVolume, the dataManager is notified, 
- *
- *  @param volumeToAdd <#volumeToAdd description#>
- *  @param saveContext <#saveContext description#>
- */
-
--(void)receivedNewParsedVolumeNotification:(NSNotification*)notification {
-    
-}
-
-//-(void)addParsedVolumeToCurrentLibrary:(LBRParsedVolume*)volumeToAdd andSaveContext:(BOOL)saveContext {
-//    DBLG
-//    
-//    [self generateDefaultLibraryIfNeeded];
-//    
-//    Volume *managedVolumeToAdd;
-//    
-//    [self.currentLibrary addVolumesObject:];
-//    
-//    self.parsedVolumeFromLastBarcode = [[LBRParsedVolume alloc] initWithGoogleVolume:volumeToAdd];
-//    
-//    newLBRVolume.isbn13    = self.parsedVolumeFromLastBarcode.isbn13;
-//    newLBRVolume.isbn10    = self.parsedVolumeFromLastBarcode.isbn10;
-//    newLBRVolume.title     = self.parsedVolumeFromLastBarcode.title;
-//    newLBRVolume.pageCount = self.parsedVolumeFromLastBarcode.pageCount;
-//    newLBRVolume.thickness = self.parsedVolumeFromLastBarcode.thickness;
-//    newLBRVolume.height    = self.parsedVolumeFromLastBarcode.height;
-//    newLBRVolume.cover_art = self.parsedVolumeFromLastBarcode.cover_art;
-//    newLBRVolume.author    = self.parsedVolumeFromLastBarcode.author;
-//    newLBRVolume.category  = self.parsedVolumeFromLastBarcode.category;
-//    newLBRVolume.published = self.parsedVolumeFromLastBarcode.published;
-//    newLBRVolume.rating    = self.parsedVolumeFromLastBarcode.rating;
-//    newLBRVolume.google_id = self.parsedVolumeFromLastBarcode.google_id;
-//    
-//    
-//    if (saveContext) {
-//        [self saveContext];
-//    }
-//}
-
-
-/**
- *  CLEAN: was made obselete by addParsedVolumeToCurrentLibrary
- *
- *  @param volumeToAdd <#volumeToAdd description#>
- *  @param saveContext <#saveContext description#>
- */
--(void)addGTLVolumeToCurrentLibrary:(GTLBooksVolume*)volumeToAdd andSaveContext:(BOOL)saveContext {
-    DBLG
-    if (!self.currentLibrary) {
-        self.currentLibrary = [NSEntityDescription insertNewObjectForEntityForName:@"Library" inManagedObjectContext:self.managedObjectContext];
-    }
-    Volume *newLBRVolume = [NSEntityDescription insertNewObjectForEntityForName:@"Volume" inManagedObjectContext:self.managedObjectContext];
-    [self generateDefaultLibraryIfNeeded];
-    
-    [self.currentLibrary addVolumesObject:newLBRVolume];
-    
-    self.parsedVolumeFromLastBarcode = [[LBRParsedVolume alloc] initWithGoogleVolume:volumeToAdd];
-    
-    newLBRVolume.isbn13    = self.parsedVolumeFromLastBarcode.isbn13;
-    newLBRVolume.isbn10    = self.parsedVolumeFromLastBarcode.isbn10;
-    newLBRVolume.title     = self.parsedVolumeFromLastBarcode.title;
-    newLBRVolume.pageCount = self.parsedVolumeFromLastBarcode.pageCount;
-    newLBRVolume.thickness = self.parsedVolumeFromLastBarcode.thickness;
-    newLBRVolume.height    = self.parsedVolumeFromLastBarcode.height;
-    newLBRVolume.cover_art = self.parsedVolumeFromLastBarcode.cover_art;
-    newLBRVolume.author    = self.parsedVolumeFromLastBarcode.author;
-    newLBRVolume.category  = self.parsedVolumeFromLastBarcode.category;
-    newLBRVolume.published = self.parsedVolumeFromLastBarcode.published;
-    newLBRVolume.rating    = self.parsedVolumeFromLastBarcode.rating;
-    newLBRVolume.google_id = self.parsedVolumeFromLastBarcode.google_id;
-    
-   
-    if (saveContext) {
-        [self saveContext];
-    }
-}
-
+    //User-facing ✅
 -(void)saveParsedVolumesToEitherSaveOrDiscardToPersistentStore {
         // 1. LBRParsedVolume → NSManagedObject
         // 2. Repeat for all volumes.
@@ -136,26 +58,27 @@ static NSString * const kUnknown = @"kUnknown";
         // 4. Test.
     for (LBRParsedVolume *transientVolumeToSave in self.parsedVolumesToEitherSaveOrDiscard) {
         Volume *persistentVolume = [NSEntityDescription insertNewObjectForEntityForName:@"Volume" inManagedObjectContext:self.managedObjectContext];
-        persistentVolume.isbn10 = transientVolumeToSave.isbn10;
-        persistentVolume.isbn13 = transientVolumeToSave.isbn13;
-        persistentVolume.title = transientVolumeToSave.title;
-        persistentVolume.thickness = transientVolumeToSave.thickness;
-        persistentVolume.height = transientVolumeToSave.height;
-        persistentVolume.pageCount = transientVolumeToSave.pageCount;
+        persistentVolume.isbn10          = transientVolumeToSave.isbn10;
+        persistentVolume.isbn13          = transientVolumeToSave.isbn13;
+        persistentVolume.title           = transientVolumeToSave.title;
+        persistentVolume.thickness       = transientVolumeToSave.thickness;
+        persistentVolume.height          = transientVolumeToSave.height;
+        persistentVolume.pageCount       = transientVolumeToSave.pageCount;
         persistentVolume.cover_art_large = transientVolumeToSave.cover_art_large;
-        persistentVolume.cover_art = transientVolumeToSave.cover_art;
-        persistentVolume.author = transientVolumeToSave.author;
-        persistentVolume.category = transientVolumeToSave.category;
-        persistentVolume.published = transientVolumeToSave.published;
-        persistentVolume.rating = transientVolumeToSave.rating;
-        persistentVolume.google_id = transientVolumeToSave.google_id;
-        persistentVolume.library = self.currentLibrary;
+        persistentVolume.cover_art       = transientVolumeToSave.cover_art;
+        persistentVolume.author          = transientVolumeToSave.author;
+        persistentVolume.category        = transientVolumeToSave.category;
+        persistentVolume.published       = transientVolumeToSave.published;
+        persistentVolume.rating          = transientVolumeToSave.rating;
+        persistentVolume.google_id       = transientVolumeToSave.google_id;
+        persistentVolume.library         = self.currentLibrary;
     }
 
     [self saveContext];
         NSLog(@"Context saved with new volumes to current library.");
 }
 
+    //debug-related
 -(void)logCurrentLibrary {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Volume"];
     NSArray *results = [self.managedObjectContext executeFetchRequest:request error:nil];
@@ -164,10 +87,11 @@ static NSString * const kUnknown = @"kUnknown";
 
 #pragma mark - helper methods
 
--(NSString*)stringWithOnlyNumbersFrom:(NSString*)string {
-    return [[string componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet]invertedSet]]componentsJoinedByString:@""];
-}
+//-(NSString*)stringWithOnlyNumbersFrom:(NSString*)string {
+//    return [[string componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet]invertedSet]]componentsJoinedByString:@""];
+//}
 
+    //TODO why?
 -(NSString*)lastNameFrom:(NSString*)fullName {
     return [fullName componentsSeparatedByString:@" "][1];
 }
@@ -275,31 +199,27 @@ static NSString * const kUnknown = @"kUnknown";
 }
 
 #pragma mark - Generate Data
-//The completion block needs //to be tailored for each request.
-//    Either /*that, or have*/ lots of repeating code.
 - (void)generateTestDataIfNeeded
 {
     LBRGoogleGTLClient *googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
-    
-        //Books need a library for a home!
     [self generateDefaultLibraryIfNeeded];
-    if (self.currentLibrary.volumes.count) {
-        return;}
-//    Only if the library is empty, generate testData.
+//    Only if the library is non-empty, we're not "needed".
+    if (self.currentLibrary.volumes.count) {return;}
     
     /**
-     *  Given an array of ISBNs, populate the DB
+     *  Given an array of ISBNs, populate the DB.
      */
-
     NSArray *listOfISBNs = @[@"978-1-60309-050-6",
                              @"978-1-60309-266-1",
                              @"978-1-60309-025-4",
                              @"978-1-60309-239-5",
                              @"978-1-60309-042-1"];
     
+    
     for (NSString *ISBN in listOfISBNs) {
         [googleClient queryForVolumeWithString:ISBN withCallback:^(GTLBooksVolume *responseVolume) {
-            [self addGTLVolumeToCurrentLibrary:responseVolume andSaveContext:NO];
+            LBRParsedVolume *newParsedVolume = [[LBRParsedVolume alloc] initWithGoogleVolume:responseVolume];
+            self.parsedVolumesToEitherSaveOrDiscard = [self.parsedVolumesToEitherSaveOrDiscard arrayByAddingObject:newParsedVolume];
         }];
     }
     
@@ -308,7 +228,7 @@ static NSString * const kUnknown = @"kUnknown";
 }
 
 /**
- *  If there's a library, do nothing. If there's no library, make one. And log any errors, of course.
+ *  Seeds the dataManager's currentLibrary property.
  */
 -(void)generateDefaultLibraryIfNeeded {
     NSFetchRequest *libraryRequest = [NSFetchRequest fetchRequestWithEntityName:@"Library"];
@@ -325,6 +245,18 @@ static NSString * const kUnknown = @"kUnknown";
         self.currentLibrary = newDefaultLibrary;
         [self saveContext];
     }
+}
+
+-(void)updateWithNewTransientVolume:(LBRParsedVolume*)volumeToAdd {
+        // Preliminaries
+    if (!self.parsedVolumesToEitherSaveOrDiscard) {
+        self.parsedVolumesToEitherSaveOrDiscard = @[];
+    }
+        // Logic
+    self.parsedVolumesToEitherSaveOrDiscard = [self.parsedVolumesToEitherSaveOrDiscard arrayByAddingObject:volumeToAdd];
+    NSLog(@"%@", [self.parsedVolumesToEitherSaveOrDiscard description]);
+    DBLG
+        //TODO: Now we just need a button to save the coffee table (to CoreData)!
 }
 
 

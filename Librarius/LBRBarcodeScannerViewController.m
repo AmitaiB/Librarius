@@ -43,25 +43,21 @@
 - (IBAction)saveScannedVolumesToLibraryButtonTapped:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UIView *scannerView;
-@property (weak, nonatomic) IBOutlet UIButton *startScanningButton;
+@property (weak, nonatomic) IBOutlet UIButton *toggleScanningButton;
     // Rename a tableview for the Coffee Table, for when the Stop Scanning Button is tapped.
-@property (weak, nonatomic) UITableView *uniqueBarcodesTableView;
 @property (nonatomic, strong) UITableView *volumeDetailsTableView;
 @property (nonatomic, strong) MTBBarcodeScanner *scanner;
 @property (nonatomic, strong) LBRGoogleGTLClient *googleClient;
-@property (nonatomic, strong) GTLBooksVolumes *responseCollectionOfPotentialVolumeMatches;
-@property (nonatomic, strong) LBRSelectVolumeTableViewController *confirmVolumeTVC;
-@property (nonatomic, strong) MMMaterialDesignSpinner *spinnerView;
 
+@property (nonatomic, strong) MMMaterialDesignSpinner *spinnerView;
+@property (nonatomic, strong) LBRSelectVolumeTableViewController *confirmVolumeTVC;
+@property (nonatomic, strong) GTLBooksVolumes *responseCollectionOfPotentialVolumeMatches;
+@property (weak, nonatomic) UITableView *uniqueBarcodesTableView;
 
 @property (nonatomic) BOOL isScanning;
 @property (nonatomic) BOOL isNotScanning;
-
-
-
-
-
 @end
+
 
 @implementation LBRBarcodeScannerViewController
 
@@ -246,14 +242,14 @@ static NSString * const volumeNib          = @"volumePresentationView";
 
 -(void)flipScanButtonAppearance {
     if (self.isNotScanning) {
-        [self.startScanningButton setTitle:@"Start Scanning" forState:UIControlStateNormal];
-        [self.startScanningButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-        self.startScanningButton.backgroundColor = [UIColor cyanColor];
+        [self.toggleScanningButton setTitle:@"Start Scanning" forState:UIControlStateNormal];
+        [self.toggleScanningButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        self.toggleScanningButton.backgroundColor = [UIColor cyanColor];
     }
     if (self.isScanning) {
-        [self.startScanningButton setTitle:@"Stop Scanning" forState:UIControlStateNormal];
-        [self.startScanningButton setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
-        self.startScanningButton.backgroundColor = [UIColor redColor];
+        [self.toggleScanningButton setTitle:@"Stop Scanning" forState:UIControlStateNormal];
+        [self.toggleScanningButton setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+        self.toggleScanningButton.backgroundColor = [UIColor redColor];
     }
 }
 
@@ -459,8 +455,8 @@ static NSString * const volumeNib          = @"volumePresentationView";
     return cell;
 }
 
-     //FIXME: This works, but kills the image!!
-/**
+     //FIXME: This doesn't actually work. Delete at first opportunity.
+/*
  -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     [cell layoutIfNeeded];
@@ -478,6 +474,9 @@ static NSString * const volumeNib          = @"volumePresentationView";
                                                 animated:YES];
 }
 
+/**
+ *  CLEAN: Not used. Delete.
+ */
 -(void)scrollToTargetISBNCell:(NSUInteger)idxOfTarget {
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.uniqueCodes.count - 1 inSection:0];
@@ -530,21 +529,11 @@ static NSString * const volumeNib          = @"volumePresentationView";
     [[NSNotificationCenter defaultCenter] postNotificationName:barcodeAddedNotification object:dataManager.uniqueCodes];
 }
 
+    // Move to Datamanager...
 -(void)updateDataManagerWithNewTransientVolume:(LBRParsedVolume*)volumeToAdd {
         // Preliminaries
     LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
-    if (!dataManager.parsedVolumesToEitherSaveOrDiscard) {
-        dataManager.parsedVolumesToEitherSaveOrDiscard = @[];
-    }
-        // Logic
-    NSArray *oldArray = [dataManager.parsedVolumesToEitherSaveOrDiscard copy];
-    NSArray *newArray = [oldArray arrayByAddingObject:volumeToAdd];
-    
-    dataManager.parsedVolumesToEitherSaveOrDiscard = newArray;
-    NSLog(@"%@", [dataManager.parsedVolumesToEitherSaveOrDiscard description]);
-    DBLG
-    
-        // Now we have a button to save the coffee table (to CoreData)!
+    [dataManager updateWithNewTransientVolume:volumeToAdd];
 }
 
 @end

@@ -29,6 +29,7 @@
 +(instancetype)sharedDataManager;
 
 -(void)addGTLVolumeToCurrentLibrary:(GTLBooksVolume*)volumeToAdd andSaveContext:(BOOL)saveContext;
+-(void)updateWithNewTransientVolume:(LBRParsedVolume*)volumeToAdd;
 -(void)saveParsedVolumesToEitherSaveOrDiscardToPersistentStore;
     //debug only
 -(void)logCurrentLibrary;
