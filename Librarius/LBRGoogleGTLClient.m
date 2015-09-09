@@ -38,16 +38,11 @@
         _service.retryEnabled = YES;
         
         _dataManager = [LBRDataManager sharedDataManager];
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedNewBarcodeStringNotification:) name:barcodeAddedNotification object:nil];
-        
         _debugCounter = 0;
     }
     return self;
 }
 
-//-(void)dealloc {
-//    [[NSNotificationCenter defaultCenter] removeObserver:self];
-//}
 
 - (void)queryForVolumeWithString:(NSString *)queryString withCallback:(void (^)(GTLBooksVolume* responseVolume))block {
     NSLog(@"%lu", (unsigned long)self.debugCounter++);

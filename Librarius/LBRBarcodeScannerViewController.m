@@ -523,8 +523,6 @@ static NSString * const volumeNib          = @"volumePresentationView";
     }
     
     [dataManager.uniqueCodes addObject:[self.uniqueCodes lastObject]];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:barcodeAddedNotification object:dataManager.uniqueCodes];
 }
 
     // Move to Datamanager...

@@ -38,13 +38,8 @@ static NSString * const kUnknown = @"kUnknown";
     _parsedVolumesToEitherSaveOrDiscard = [NSMutableArray new];
     _parsedVolumeFromLastBarcode = [LBRParsedVolume new];
     _libraries = @[];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedNewParsedVolumeNotification:) name:@"newParsedVolumeNotification" object:nil]; DBLG
-//    
+    
     return self;
-}
-
--(void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
     //User-facing ✅
@@ -83,12 +78,12 @@ static NSString * const kUnknown = @"kUnknown";
 }
 
 #pragma mark - helper methods
-
+    //CLEAN:
 //-(NSString*)stringWithOnlyNumbersFrom:(NSString*)string {
 //    return [[string componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet]invertedSet]]componentsJoinedByString:@""];
 //}
 
-    //TODO why?
+    //TODO: why? A: If I want to arrange by alphabetical order.
 -(NSString*)lastNameFrom:(NSString*)fullName {
     return [fullName componentsSeparatedByString:@" "][1];
 }
