@@ -28,9 +28,6 @@
 
 #import "LBRSelectVolumeTableViewController.h"
 #import <LGSemiModalNavViewController.h>
-#import "LBRSingleCellConfirmViewController.h"
-#import "LBRSingleCellTVC.h"
-
 
 
 
@@ -181,13 +178,10 @@ static NSString * const volumeNib          = @"volumePresentationView";
                  */
                     //1st APPROACH: NYAlertViewController sub-class. Should have worked, but didn't.
                 
-                    //2nd APPROACH: NYAlertViewController
+
+                    //✅ 2nd APPROACH: NYAlertViewController
                 NYAlertViewController *confirmSelectionViewController = [self confirmSelectionViewController];
                 [self presentViewController:confirmSelectionViewController animated:YES completion:^{ DBLG }];
-                    //TODO: Not for here, but add default text to the cell (oh, and change it from a cell!) to @""
-                    // 3rd APPROACH: Like #1, but with a TableViewController.
-//                Present the alert view controller
-//[self presentViewController:[LBRSingleCellTVC new] animated:YES completion:^{ DBLG }];
 
                 [self.googleClient queryForVolumeWithString:code.stringValue withCallback:^(GTLBooksVolume *responseVolume) {
         // -------------------------------------------------------------------------------
@@ -435,7 +429,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
         } failure:^(NSURLRequest * request, NSHTTPURLResponse * responseObj, NSError * error) {
             NSLog(@"Failed to load thumbnail with error: %@", error.localizedDescription);
         }];
-        
+            //TODO: add Stage 2: cell.textLabel.text = @"" at first...
         cell.textLabel.text = self.volumeToConfirm.title;
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ (%@)", self.volumeToConfirm.author, [self yearFromDate:self.volumeToConfirm.published]];
     }

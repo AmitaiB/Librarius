@@ -30,7 +30,6 @@
 		3851DBFD1B8E2E5A00E90B9F /* LBRDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3851DBFC1B8E2E5A00E90B9F /* LBRDataManager.m */; };
 		38565D701B9A20B800349498 /* LBRParsedVolume.m in Sources */ = {isa = PBXBuildFile; fileRef = 38565D6F1B9A20B800349498 /* LBRParsedVolume.m */; };
 		387039B81B9D23C900381007 /* SelectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 387039B71B9D23C900381007 /* SelectionView.xib */; };
-		387039BB1B9D67F400381007 /* LBRSingleCellTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 387039BA1B9D67F400381007 /* LBRSingleCellTVC.m */; };
 		388A1E151B9F940000C75825 /* To Do bookmark in Resources */ = {isa = PBXBuildFile; fileRef = 388A1E141B9F940000C75825 /* To Do bookmark */; };
 		389C1F131B95E1150009C721 /* LBRDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 389C1F121B95E1150009C721 /* LBRDataStore.m */; };
 		38AAD6F01B901175003062C1 /* Librarius.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 38AAD6EE1B901175003062C1 /* Librarius.xcdatamodeld */; };
@@ -96,8 +95,6 @@
 		38565D6E1B9A20B800349498 /* LBRParsedVolume.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRParsedVolume.h; sourceTree = "<group>"; };
 		38565D6F1B9A20B800349498 /* LBRParsedVolume.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRParsedVolume.m; sourceTree = "<group>"; };
 		387039B71B9D23C900381007 /* SelectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectionView.xib; sourceTree = "<group>"; };
-		387039B91B9D67F400381007 /* LBRSingleCellTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LBRSingleCellTVC.h; path = ../LBRSingleCellTVC.h; sourceTree = "<group>"; };
-		387039BA1B9D67F400381007 /* LBRSingleCellTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LBRSingleCellTVC.m; path = ../LBRSingleCellTVC.m; sourceTree = "<group>"; };
 		388A1E141B9F940000C75825 /* To Do bookmark */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "To Do bookmark"; path = "Librarius/To Do bookmark"; sourceTree = "<group>"; };
 		389C1F111B95E1150009C721 /* LBRDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRDataStore.h; sourceTree = "<group>"; };
 		389C1F121B95E1150009C721 /* LBRDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRDataStore.m; sourceTree = "<group>"; };
@@ -289,8 +286,6 @@
 			children = (
 				38BE31E31B962BA900C46001 /* LBRSelectVolumeTableViewController.h */,
 				38BE31E41B962BA900C46001 /* LBRSelectVolumeTableViewController.m */,
-				387039B91B9D67F400381007 /* LBRSingleCellTVC.h */,
-				387039BA1B9D67F400381007 /* LBRSingleCellTVC.m */,
 				389C1F111B95E1150009C721 /* LBRDataStore.h */,
 				389C1F121B95E1150009C721 /* LBRDataStore.m */,
 				380375821B8CD49C004C4ECE /* LBRVolume.h */,
@@ -480,7 +475,6 @@
 				380375721B8BF058004C4ECE /* UIImage+FromURL.m in Sources */,
 				38AAD71D1B901D35003062C1 /* Volume.m in Sources */,
 				3803753B1B8AC9A8004C4ECE /* LBRBarcodeScannerViewController.m in Sources */,
-				387039BB1B9D67F400381007 /* LBRSingleCellTVC.m in Sources */,
 				3803755B1B8B9F5E004C4ECE /* LBRConstants.m in Sources */,
 				3851DBFD1B8E2E5A00E90B9F /* LBRDataManager.m in Sources */,
 				389C1F131B95E1150009C721 /* LBRDataStore.m in Sources */,
