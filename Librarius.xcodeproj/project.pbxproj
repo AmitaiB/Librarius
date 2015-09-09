@@ -29,7 +29,6 @@
 		384E0CC01B97D24B007E7290 /* NSString+dateValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 384E0CBF1B97D24B007E7290 /* NSString+dateValue.m */; };
 		3851DBFD1B8E2E5A00E90B9F /* LBRDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3851DBFC1B8E2E5A00E90B9F /* LBRDataManager.m */; };
 		38565D701B9A20B800349498 /* LBRParsedVolume.m in Sources */ = {isa = PBXBuildFile; fileRef = 38565D6F1B9A20B800349498 /* LBRParsedVolume.m */; };
-		387039B61B9D0FD300381007 /* LBRSingleCellConfirmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 387039B51B9D0FD300381007 /* LBRSingleCellConfirmViewController.m */; };
 		387039B81B9D23C900381007 /* SelectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 387039B71B9D23C900381007 /* SelectionView.xib */; };
 		387039BB1B9D67F400381007 /* LBRSingleCellTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 387039BA1B9D67F400381007 /* LBRSingleCellTVC.m */; };
 		388A1E151B9F940000C75825 /* To Do bookmark in Resources */ = {isa = PBXBuildFile; fileRef = 388A1E141B9F940000C75825 /* To Do bookmark */; };
@@ -96,8 +95,6 @@
 		3851DBFC1B8E2E5A00E90B9F /* LBRDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRDataManager.m; sourceTree = "<group>"; };
 		38565D6E1B9A20B800349498 /* LBRParsedVolume.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRParsedVolume.h; sourceTree = "<group>"; };
 		38565D6F1B9A20B800349498 /* LBRParsedVolume.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRParsedVolume.m; sourceTree = "<group>"; };
-		387039B41B9D0FD300381007 /* LBRSingleCellConfirmViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRSingleCellConfirmViewController.h; sourceTree = "<group>"; };
-		387039B51B9D0FD300381007 /* LBRSingleCellConfirmViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRSingleCellConfirmViewController.m; sourceTree = "<group>"; };
 		387039B71B9D23C900381007 /* SelectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectionView.xib; sourceTree = "<group>"; };
 		387039B91B9D67F400381007 /* LBRSingleCellTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LBRSingleCellTVC.h; path = ../LBRSingleCellTVC.h; sourceTree = "<group>"; };
 		387039BA1B9D67F400381007 /* LBRSingleCellTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LBRSingleCellTVC.m; path = ../LBRSingleCellTVC.m; sourceTree = "<group>"; };
@@ -290,8 +287,6 @@
 		38466D5C1B94FDDF00DD252E /* Cutting Floor */ = {
 			isa = PBXGroup;
 			children = (
-				387039B41B9D0FD300381007 /* LBRSingleCellConfirmViewController.h */,
-				387039B51B9D0FD300381007 /* LBRSingleCellConfirmViewController.m */,
 				38BE31E31B962BA900C46001 /* LBRSelectVolumeTableViewController.h */,
 				38BE31E41B962BA900C46001 /* LBRSelectVolumeTableViewController.m */,
 				387039B91B9D67F400381007 /* LBRSingleCellTVC.h */,
@@ -481,7 +476,6 @@
 				38AAD7201B901D36003062C1 /* Library.m in Sources */,
 				380375F71B8D4E90004C4ECE /* MasterViewController.m in Sources */,
 				380375321B8AC9A8004C4ECE /* main.m in Sources */,
-				387039B61B9D0FD300381007 /* LBRSingleCellConfirmViewController.m in Sources */,
 				384E0CC01B97D24B007E7290 /* NSString+dateValue.m in Sources */,
 				380375721B8BF058004C4ECE /* UIImage+FromURL.m in Sources */,
 				38AAD71D1B901D35003062C1 /* Volume.m in Sources */,

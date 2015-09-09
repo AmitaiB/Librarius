@@ -121,20 +121,11 @@ static NSString * const volumeNib          = @"volumePresentationView";
         [self startScanningOps];}
 }
 
+    //TODO: Get these buttons to remain on top when the camera comes on.
 - (IBAction)flipCameraButtonTapped:(id)sender {
     [self.scanner flipCamera];
 }
-/**
- *  CLEAN: TODO: LOW. Once this happens automatically (that is,
- *  scanning hits the API, pushes a confirm button, and adds
- *  a volume to the local library, then continues scanning)
- *  then this whole flow will be obsolete.
- *
- *  @param IBAction <#IBAction description#>
- *
- *  @return <#return value description#>
- */
-    //And then, Magic!
+
 - (IBAction)lightToggleButtonTapped:(id)sender {
     LARSTorch *torch = [LARSTorch sharedTorch];
     if ([torch isTorchOn]) {
@@ -188,8 +179,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
                  *  todo; pop-up confirmation with lazy loading part 1 (Empty cell)
                  CLEAN:
                  */
-                    //1st APPROACH: Single-Cell TableView
-//                __block LBRSingleCellConfirmViewController *confirmSelectionViewController = [LBRSingleCellConfirmViewController new];
+                    //1st APPROACH: NYAlertViewController sub-class. Should have worked, but didn't.
                 
                     //2nd APPROACH: NYAlertViewController
                 NYAlertViewController *confirmSelectionViewController = [self confirmSelectionViewController];
