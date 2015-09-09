@@ -129,7 +129,7 @@
     }
     
     /**
-     *  1) The set of all books
+     *  1) The set of all books (TODO: Uniquify the collection, so you cannot add multiple entries accidentally).
      *  2) in the current library
      *  3) arranged by mainCategory
      *  4) then author
