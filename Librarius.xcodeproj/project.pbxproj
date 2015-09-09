@@ -314,6 +314,7 @@
 				380375291B8AC9A8004C4ECE /* Frameworks */,
 				3803752A1B8AC9A8004C4ECE /* Resources */,
 				CFA5D81F792834EBE39AF74C /* Copy Pods Resources */,
+				381EBBFF1BA0833A000D2FA4 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -412,6 +413,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		381EBBFF1BA0833A000D2FA4 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "KEYWORDS=\"TODO:|FIXME:|\\?\\?\\?:|\\!\\!\\!:|CLEAN:\"\nfind \"${SRCROOT}\" \\( -name \"*.h\" -or -name \"*.m\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($KEYWORDS).*\\$\" | perl -p -e \"s/($KEYWORDS)/ warning: \\$1/\"";
+		};
 		AA88423D6CD43B3E9F89296E /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

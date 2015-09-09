@@ -32,6 +32,8 @@
 - (IBAction)flipCameraButtonTapped:(id)sender;
 - (IBAction)lightToggleButtonTapped:(id)sender;
 - (IBAction)saveScannedVolumesToLibraryButtonTapped:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *lightToggleButton;
+@property (weak, nonatomic) IBOutlet UIButton *flipCameraButton;
 
 @property (weak, nonatomic) IBOutlet UIView *scannerView;
 @property (weak, nonatomic) IBOutlet UIButton *toggleScanningButton;
@@ -104,7 +106,6 @@ static NSString * const volumeNib          = @"volumePresentationView";
         [self startScanningOps];}
 }
 
-    //TODO: Get these buttons to remain on top when the camera comes on.
 - (IBAction)flipCameraButtonTapped:(id)sender {
     [self.scanner flipCamera];
 }
@@ -140,13 +141,13 @@ static NSString * const volumeNib          = @"volumePresentationView";
  *  Flip the button, start scanning, handle the completion.
  */
 -(void)startScanningOps {
-    
-    LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
     self.isScanning = YES;
     [self flipScanButtonAppearance];
 // ???: Consider embedding the scanning in this: [MTBBarcodeScanner requestCameraPermissionWithSuccess:^(BOOL success)...?
-   
-    
+//TODO: Get these buttons to remain on top when the camera comes on.
+    [self.scannerView bringSubviewToFront:self.lightToggleButton.imageView];
+    [self.scannerView bringSubviewToFront:self.flipCameraButton.imageView];
+//    [self.view sendSubviewToBack:self.scannerView];
     [self.scanner startScanningWithResultBlock:^(NSArray *codes) {
     // -------------------------------------------------------------------------------
     //	Scanning Success Block

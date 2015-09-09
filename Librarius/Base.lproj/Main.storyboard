@@ -137,41 +137,26 @@
                             <navigationBar alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gMM-L9-IT3">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                             </navigationBar>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="whR-df-RYp" userLabel="Scanner View">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IOe-eD-XQW">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <color key="backgroundColor" red="0.1077490499" green="0.94305272470000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Start Scanning">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="toggleScanningButtonTapped:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="5gb-wa-5cA"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="whR-df-RYp" userLabel="Middle MGMT View">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reverse-1" translatesAutoresizingMaskIntoConstraints="NO" id="dw9-VQ-cBw">
-                                        <rect key="frame" x="262" y="80" width="30" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="30" id="CoZ-wt-26J"/>
-                                            <constraint firstAttribute="height" constant="30" id="Ngy-Il-UFE"/>
-                                            <constraint firstAttribute="width" constant="30" id="WPJ-Rw-efN"/>
-                                            <constraint firstAttribute="height" constant="30" id="woP-Py-g1F"/>
-                                        </constraints>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="Ngy-Il-UFE"/>
-                                                <exclude reference="WPJ-Rw-efN"/>
-                                            </mask>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Px-hT-9Zr" userLabel="Scanner View (new)">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <variation key="widthClass=compact" fixedFrame="YES">
+                                            <rect key="frame" x="0.0" y="-7" width="317" height="389"/>
                                         </variation>
-                                        <variation key="widthClass=compact">
-                                            <mask key="constraints">
-                                                <exclude reference="CoZ-wt-26J"/>
-                                                <include reference="Ngy-Il-UFE"/>
-                                                <include reference="WPJ-Rw-efN"/>
-                                                <exclude reference="woP-Py-g1F"/>
-                                            </mask>
-                                        </variation>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GDB-vK-ZBH" userLabel="flipCameraButton">
-                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                        <state key="normal" title="Button">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="flipCameraButtonTapped:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="aAT-MI-Ort"/>
-                                        </connections>
-                                    </button>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Bf-2Z-qmt">
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                         <constraints>
@@ -194,7 +179,7 @@
                                             <action selector="saveScannedVolumesToLibraryButtonTapped:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="5RG-K5-mfO"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcH-IU-Ezd" userLabel="confirm barcode Button">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcH-IU-Ezd" userLabel="Flashlight Toggle Button">
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                         <state key="normal" image="FlashLight-lightning">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -203,71 +188,61 @@
                                             <action selector="lightToggleButtonTapped:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="BQI-I4-0Xp"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GDB-vK-ZBH" userLabel="flipCameraButton">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <state key="normal" image="reverse-1">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="flipCameraButtonTapped:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="aAT-MI-Ort"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.79607843140000001" green="0.79607843140000001" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="3Bf-2Z-qmt" firstAttribute="centerX" secondItem="whR-df-RYp" secondAttribute="centerX" id="5Ow-sX-qku"/>
-                                    <constraint firstAttribute="trailing" secondItem="GDB-vK-ZBH" secondAttribute="trailing" constant="29" id="5q8-YU-bE7"/>
-                                    <constraint firstItem="dw9-VQ-cBw" firstAttribute="leading" secondItem="GDB-vK-ZBH" secondAttribute="leading" id="Mnq-eW-d6K"/>
-                                    <constraint firstItem="GDB-vK-ZBH" firstAttribute="trailing" secondItem="dw9-VQ-cBw" secondAttribute="trailing" id="Pm5-If-ZG8"/>
-                                    <constraint firstItem="GDB-vK-ZBH" firstAttribute="top" secondItem="whR-df-RYp" secondAttribute="top" constant="23" id="hmP-GM-7gD"/>
-                                    <constraint firstItem="GDB-vK-ZBH" firstAttribute="top" secondItem="dw9-VQ-cBw" secondAttribute="top" id="t2M-1S-uAt"/>
-                                    <constraint firstItem="dcH-IU-Ezd" firstAttribute="leading" secondItem="whR-df-RYp" secondAttribute="leading" constant="25" id="uOE-EG-6AF"/>
-                                    <constraint firstItem="dcH-IU-Ezd" firstAttribute="bottom" secondItem="GDB-vK-ZBH" secondAttribute="bottom" id="yFe-cr-DRm"/>
+                                    <constraint firstItem="dcH-IU-Ezd" firstAttribute="top" secondItem="whR-df-RYp" secondAttribute="top" constant="33" id="MtT-tL-lEw"/>
+                                    <constraint firstItem="3Bf-2Z-qmt" firstAttribute="top" secondItem="GDB-vK-ZBH" secondAttribute="bottom" constant="95" id="TfA-60-pQL"/>
+                                    <constraint firstItem="dcH-IU-Ezd" firstAttribute="leading" secondItem="whR-df-RYp" secondAttribute="leadingMargin" id="ZwB-rV-T6W"/>
+                                    <constraint firstItem="GDB-vK-ZBH" firstAttribute="trailing" secondItem="whR-df-RYp" secondAttribute="trailingMargin" id="prn-aS-IqX"/>
                                     <constraint firstItem="3Bf-2Z-qmt" firstAttribute="top" secondItem="whR-df-RYp" secondAttribute="top" constant="167" id="yeX-uQ-75v"/>
                                     <constraint firstItem="3Bf-2Z-qmt" firstAttribute="leading" secondItem="whR-df-RYp" secondAttribute="leading" constant="-31" id="zOY-rc-YKv"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="subviews">
-                                        <exclude reference="dw9-VQ-cBw"/>
-                                        <exclude reference="GDB-vK-ZBH"/>
+                                        <exclude reference="3Px-hT-9Zr"/>
                                         <exclude reference="3Bf-2Z-qmt"/>
                                         <exclude reference="dcH-IU-Ezd"/>
+                                        <exclude reference="GDB-vK-ZBH"/>
                                     </mask>
                                     <mask key="constraints">
+                                        <exclude reference="MtT-tL-lEw"/>
+                                        <exclude reference="ZwB-rV-T6W"/>
                                         <exclude reference="5Ow-sX-qku"/>
+                                        <exclude reference="TfA-60-pQL"/>
                                         <exclude reference="yeX-uQ-75v"/>
                                         <exclude reference="zOY-rc-YKv"/>
-                                        <exclude reference="5q8-YU-bE7"/>
-                                        <exclude reference="Pm5-If-ZG8"/>
-                                        <exclude reference="hmP-GM-7gD"/>
-                                        <exclude reference="t2M-1S-uAt"/>
-                                        <exclude reference="uOE-EG-6AF"/>
-                                        <exclude reference="yFe-cr-DRm"/>
-                                        <exclude reference="Mnq-eW-d6K"/>
+                                        <exclude reference="prn-aS-IqX"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact">
                                     <mask key="subviews">
-                                        <include reference="dw9-VQ-cBw"/>
-                                        <include reference="GDB-vK-ZBH"/>
+                                        <include reference="3Px-hT-9Zr"/>
                                         <include reference="3Bf-2Z-qmt"/>
                                         <include reference="dcH-IU-Ezd"/>
+                                        <include reference="GDB-vK-ZBH"/>
                                     </mask>
                                     <mask key="constraints">
+                                        <include reference="MtT-tL-lEw"/>
+                                        <include reference="ZwB-rV-T6W"/>
                                         <include reference="5Ow-sX-qku"/>
+                                        <include reference="TfA-60-pQL"/>
                                         <include reference="yeX-uQ-75v"/>
                                         <include reference="zOY-rc-YKv"/>
-                                        <include reference="5q8-YU-bE7"/>
-                                        <include reference="Pm5-If-ZG8"/>
-                                        <include reference="hmP-GM-7gD"/>
-                                        <include reference="t2M-1S-uAt"/>
-                                        <include reference="uOE-EG-6AF"/>
-                                        <include reference="yFe-cr-DRm"/>
-                                        <include reference="Mnq-eW-d6K"/>
+                                        <include reference="prn-aS-IqX"/>
                                     </mask>
                                 </variation>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IOe-eD-XQW">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <color key="backgroundColor" red="0.1077490499" green="0.94305272470000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Start Scanning">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="toggleScanningButtonTapped:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="5gb-wa-5cA"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -284,8 +259,8 @@
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="gMM-L9-IT3"/>
-                                <exclude reference="whR-df-RYp"/>
                                 <exclude reference="IOe-eD-XQW"/>
+                                <exclude reference="whR-df-RYp"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="Ua9-d9-ZnT"/>
@@ -302,8 +277,8 @@
                         <variation key="widthClass=compact">
                             <mask key="subviews">
                                 <include reference="gMM-L9-IT3"/>
-                                <include reference="whR-df-RYp"/>
                                 <include reference="IOe-eD-XQW"/>
+                                <include reference="whR-df-RYp"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="Ua9-d9-ZnT"/>
@@ -322,7 +297,9 @@
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="scannerView" destination="whR-df-RYp" id="dtk-XK-fJV"/>
+                        <outlet property="flipCameraButton" destination="GDB-vK-ZBH" id="bfL-2d-DQO"/>
+                        <outlet property="lightToggleButton" destination="dcH-IU-Ezd" id="u0F-dh-jmd"/>
+                        <outlet property="scannerView" destination="3Px-hT-9Zr" id="kI7-sB-yVI"/>
                         <outlet property="toggleScanningButton" destination="IOe-eD-XQW" id="N9B-xd-Wxb"/>
                     </connections>
                 </viewController>
