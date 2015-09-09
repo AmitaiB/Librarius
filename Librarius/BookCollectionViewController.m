@@ -7,7 +7,7 @@
 //
 
 #import "BookCollectionViewController.h"
-#import "DetailViewController.h"
+#import "BookDetailViewController.h"
 #import "LBRDataManager.h"
 #import "Library.h"
 #import "Bookcase.h"
@@ -15,10 +15,15 @@
 
 @interface BookCollectionViewController ()
 
+
 @end
 
 @implementation BookCollectionViewController
 
+@dynamic name;
+@dynamic indexTitle;
+@dynamic numberOfObjects;
+@dynamic objects;
 
 - (void)awakeFromNib {
         [super awakeFromNib];
@@ -62,7 +67,7 @@
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-        [[segue destinationViewController] setDetailItem:object];
+//        [[segue destinationViewController] setDetailItem:object];
     }
 }
 

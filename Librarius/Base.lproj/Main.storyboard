@@ -9,7 +9,7 @@
         <!--Collection-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
-                <viewController id="9pv-A4-QxB" customClass="DetailViewController" sceneMemberID="viewController">
+                <viewController id="9pv-A4-QxB" customClass="BookDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ia1-K6-d13"/>
                         <viewControllerLayoutGuide type="bottom" id="4ug-Mw-9AY"/>
@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Book Detail View" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="KQZ-1w-vlD">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" text="Book Detail View" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="KQZ-1w-vlD">
                                 <rect key="frame" x="221" y="279" width="158" height="42"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="36"/>
@@ -29,7 +29,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <items>
                                     <navigationItem title="Title" id="vG7-Zb-0RS">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="7cE-eD-knT"/>
+                                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="7cE-eD-knT">
+                                            <connections>
+                                                <action selector="doneButtonTapped:" destination="9pv-A4-QxB" id="Hja-tP-bvp"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -127,9 +131,47 @@
             <point key="canvasLocation" x="949.5" y="703"/>
         </scene>
         <!--Shelve-->
+        <scene sceneID="2EP-QO-Uby">
+            <objects>
+                <collectionViewController id="ajh-Xd-CoJ" userLabel="Shelve" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="XDD-g2-ajd">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="9oX-OI-coq">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="md9-9c-w5A">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="ajh-Xd-CoJ" id="12t-jw-ZKo"/>
+                            <outlet property="delegate" destination="ajh-Xd-CoJ" id="1eC-ye-Gcx"/>
+                        </connections>
+                    </collectionView>
+                    <tabBarItem key="tabBarItem" title="Shelve." image="books49" id="ohJ-iw-xie"/>
+                    <connections>
+                        <segue destination="r89-FC-I3u" kind="show" id="1dH-Cm-eo4"/>
+                    </connections>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uRq-sK-8fk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1737" y="505"/>
+        </scene>
+        <!--Library/Shelves Layout-->
         <scene sceneID="gtg-I3-sQB">
             <objects>
-                <viewController id="r89-FC-I3u" sceneMemberID="viewController">
+                <viewController id="r89-FC-I3u" userLabel="Library/Shelves Layout" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="sCp-xx-kPb"/>
                         <viewControllerLayoutGuide type="bottom" id="Xv9-St-nnt"/>
@@ -143,7 +185,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MvQ-3f-rxY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1729.5" y="566"/>
+            <point key="canvasLocation" x="1737" y="1226"/>
         </scene>
         <!--Scan-->
         <scene sceneID="wg7-f3-ORb">
@@ -450,7 +492,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
-                        <segue destination="r89-FC-I3u" kind="relationship" relationship="viewControllers" id="Mwk-mP-Vk3"/>
+                        <segue destination="ajh-Xd-CoJ" kind="relationship" relationship="viewControllers" id="wTu-ac-h8U"/>
                         <segue destination="bTL-zk-y1V" kind="relationship" relationship="viewControllers" id="9MK-7n-nPt"/>
                         <segue destination="oJK-od-ZUi" kind="relationship" relationship="viewControllers" id="kRc-jj-rCf"/>
                     </connections>
