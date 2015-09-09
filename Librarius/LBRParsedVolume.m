@@ -35,10 +35,10 @@
      */
     for (GTLBooksVolumeVolumeInfoIndustryIdentifiersItem *item in volumeToParse.volumeInfo.industryIdentifiers) {
         if ([item.type isEqualToString:@"ISBN_10"]) {
-            self.isbn10 = item.identifierProperty;
+            _isbn10 = item.identifierProperty;
         }
         if ([item.type isEqualToString:@"ISBN_13"]) {
-            self.isbn13 = item.identifierProperty;
+            _isbn13 = item.identifierProperty;
         }
     }
     
@@ -46,16 +46,16 @@
      *  Title
      */
     if (volumeToParse.volumeInfo.title.length > 0) {
-        self.title = volumeToParse.volumeInfo.title;
+        _title = volumeToParse.volumeInfo.title;
     }
     
     /**
      *  PageCount
      */
     if ([volumeToParse.volumeInfo.pageCount integerValue] > 0) {
-        self.pageCount = volumeToParse.volumeInfo.pageCount;
+        _pageCount = volumeToParse.volumeInfo.pageCount;
     } else if ([volumeToParse.volumeInfo.printedPageCount integerValue] > 0) {
-        self.pageCount = volumeToParse.volumeInfo.printedPageCount;
+        _pageCount = volumeToParse.volumeInfo.printedPageCount;
     }
     
     
@@ -64,7 +64,7 @@
      */
     NSNumber *height = @([volumeToParse.volumeInfo.dimensions.height floatValue] / 2.54);
     if ([height floatValue] > 0.0) {
-        self.height = height;
+        _height = height;
     }
     /**
      *  Thickness of the book's spine, in inches (from cm). If not given, it will be estimated from the pagecount, if it is defined.
@@ -72,20 +72,20 @@
     NSNumber *thickness = @([volumeToParse.volumeInfo.dimensions.thickness floatValue] / 2.54);
     
     if ([thickness floatValue] > 0.0) {
-        self.thickness = thickness;
+        _thickness = thickness;
     }
-    else if (self.pageCount) {
-        self.thickness = @([self.pageCount floatValue] / CALIPER);
+    else if (_pageCount) {
+        _thickness = @([_pageCount floatValue] / CALIPER);
     }
     
     /**
      *  Cover Art URL
      */
     if (volumeToParse.volumeInfo.imageLinks.thumbnail) {
-        self.cover_art_large = volumeToParse.volumeInfo.imageLinks.thumbnail;
+        _cover_art_large = volumeToParse.volumeInfo.imageLinks.thumbnail;
     }
     if (volumeToParse.volumeInfo.imageLinks.smallThumbnail) {
-        self.cover_art = volumeToParse.volumeInfo.imageLinks.smallThumbnail;
+        _cover_art = volumeToParse.volumeInfo.imageLinks.smallThumbnail;
     }
     
     /**
@@ -95,30 +95,37 @@
     if (!numberOfAuthors) {
             //Do nothing
     } else if (numberOfAuthors == 1) {
-        self.author = volumeToParse.volumeInfo.authors[0];
+        _author = volumeToParse.volumeInfo.authors[0];
     } else if (numberOfAuthors >=2) {
-        self.author = [volumeToParse.volumeInfo.authors componentsJoinedByString:@" & "];
+        _author = [volumeToParse.volumeInfo.authors componentsJoinedByString:@" & "];
+    }
+    
+    /**
+     *  Author's Surname (for sorting purposes).
+     */
+    if (_author) {
+        _authorSurname = [_author componentsSeparatedByString:@" "][1];
     }
     
     /**
      *  Date of publication.
      */
     if (volumeToParse.volumeInfo.publishedDate) {
-        self.published = [volumeToParse.volumeInfo.publishedDate dateValue];
+        _published = [volumeToParse.volumeInfo.publishedDate dateValue];
     }
     
     /**
      *  Average rating. TODO: ../ratingsCount?
      */
     if (volumeToParse.volumeInfo.averageRating) {
-        self.rating = volumeToParse.volumeInfo.averageRating;
+        _rating = volumeToParse.volumeInfo.averageRating;
     }
     
     /**
      *  Google ID for the volume. Vital!
      */
     
-    self.google_id = volumeToParse.identifier;
+    _google_id = volumeToParse.identifier;
     
     
     return self;

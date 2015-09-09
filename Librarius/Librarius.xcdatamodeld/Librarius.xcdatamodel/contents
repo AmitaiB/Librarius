@@ -15,6 +15,7 @@
     </entity>
     <entity name="Volume" representedClassName="Volume" syncable="YES">
         <attribute name="author" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="authorSurname" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="category" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="cover_art" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="cover_art_large" optional="YES" attributeType="String" syncable="YES"/>
@@ -33,6 +34,6 @@
     <elements>
         <element name="Bookcase" positionX="0" positionY="0" width="128" height="120"/>
         <element name="Library" positionX="0" positionY="0" width="128" height="105"/>
-        <element name="Volume" positionX="0" positionY="0" width="128" height="270"/>
+        <element name="Volume" positionX="0" positionY="0" width="128" height="285"/>
     </elements>
 </model>

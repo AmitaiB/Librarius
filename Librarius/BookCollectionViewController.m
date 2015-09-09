@@ -155,15 +155,8 @@
     
     // Edit the sort key as appropriate.
     NSSortDescriptor *categorySorter = [NSSortDescriptor sortDescriptorWithKey:@"category" ascending:YES];
-    NSSortDescriptor *authorSorter = [NSSortDescriptor sortDescriptorWithKey:@"author" ascending:YES comparator:^NSComparisonResult(id obj1, id obj2) {
-        Volume *book1 = obj1;
-        Volume *book2 = obj2;
-        NSString *lastName1 = [self lastNameFrom:book1.author];
-        NSString *lastName2 = [self lastNameFrom:book2.author];
-        
-        return [lastName1 caseInsensitiveCompare:lastName2];
-    }];
-
+    NSSortDescriptor *authorSorter = [NSSortDescriptor sortDescriptorWithKey:@"author" ascending:YES selector:@selector(lastNameCompare:)];
+    
     [dataManager generateDefaultLibraryIfNeeded];
     NSPredicate *libraryPredicate = [NSPredicate predicateWithFormat:@"library = %@", dataManager.currentLibrary];
     
@@ -252,8 +245,21 @@
 
 #pragma mark - Helper methods
 
+-(void)lastNameCompare:
+comparator:^NSComparisonResult(id obj1, id obj2) {
+    Volume *book1 = obj1;
+    Volume *book2 = obj2;
+    NSString *lastName1 = [self lastNameFrom:book1.author];
+    NSString *lastName2 = [self lastNameFrom:book2.author];
+    
+    return [lastName1 caseInsensitiveCompare:lastName2];
+}];
+
+
 -(NSString*)lastNameFrom:(NSString*)fullName {
     return [fullName componentsSeparatedByString:@" "][1];
 }
+
+
 
 @end

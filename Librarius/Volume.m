@@ -22,6 +22,7 @@
 @dynamic cover_art_large;
 @dynamic cover_art;
 @dynamic author;
+@dynamic authorSurname;
 @dynamic category;
 @dynamic published;
 @dynamic rating;
