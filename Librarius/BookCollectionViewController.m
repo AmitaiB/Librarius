@@ -131,7 +131,7 @@
     /**
      *  1) The set of all books
      *  2) in the current library
-     *  3) arranged by category
+     *  3) arranged by mainCategory
      *  4) then author
      *  5) then year
      */
@@ -143,7 +143,7 @@
     [volumesRequest setFetchBatchSize:20];
     
     // Edit the sort key as appropriate.
-    NSSortDescriptor *categorySorter = [NSSortDescriptor sortDescriptorWithKey:@"category" ascending:YES];
+    NSSortDescriptor *categorySorter = [NSSortDescriptor sortDescriptorWithKey:@"mainCategory" ascending:YES];
     NSSortDescriptor *authorSorter = [NSSortDescriptor sortDescriptorWithKey:@"authorSurname" ascending:YES];
     
     [dataManager generateDefaultLibraryIfNeeded];
@@ -155,7 +155,7 @@
     
     // Edit the section name key path and cache name if appropriate.
     // nil for section name key path means "no sections".
-    NSFetchedResultsController *frc = [[NSFetchedResultsController alloc] initWithFetchRequest:volumesRequest managedObjectContext:managedObjectContext sectionNameKeyPath:@"category" cacheName:nil];
+    NSFetchedResultsController *frc = [[NSFetchedResultsController alloc] initWithFetchRequest:volumesRequest managedObjectContext:managedObjectContext sectionNameKeyPath:@"mainCategory" cacheName:nil];
     frc.delegate = self;
     self.fetchedResultsController = frc;
     

@@ -41,12 +41,12 @@
     _cover_art_large = nil;
     _author          = @"John Doe";
     _authorSurname   = @"Doe";
-    _categories      = @[@"No Category"];
+    _categories      = @[];
     _published       = [NSDate distantPast];
     _rating          = nil;
     _google_id       = nil;
 
-    _mainCategory    = @"No Main Category";
+    _mainCategory    = @"No Category";
     _publDescription = @"No Description";
     _subtitle        = nil;
     _publisher       = nil;
@@ -135,13 +135,19 @@
     /**
      *  Categories - just in case -- for now we will only pass over the mainCategory to Volume(s).
      */
-    if (volumeToParse.volumeInfo.categories.count) {
+    BOOL hasEntryForMainCategory = volumeToParse.volumeInfo.mainCategory.length;
+    BOOL hasArrayOfCategories    = volumeToParse.volumeInfo.categories.count;
+        // If there's no mainCategory, take it from categories.
+    if (hasArrayOfCategories) {
         _categories = volumeToParse.volumeInfo.categories;
+        _mainCategory = _categories[0];
+    }
+        // If there's no categories (count == 0), take it from mainCategory.
+    if (hasEntryForMainCategory) {
+        _mainCategory = volumeToParse.volumeInfo.mainCategory;
+        _categories = [_categories arrayByAddingObject:_mainCategory];
     }
     
-    if (volumeToParse.volumeInfo.mainCategory) {
-        _mainCategory = volumeToParse.volumeInfo.mainCategory;
-    }
 
     
     /**
