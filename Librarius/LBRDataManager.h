@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
 @class GTLBooksVolume;
 @class GTLBooksVolumes;
@@ -24,7 +25,9 @@
 @property (nonatomic, strong) NSArray *parsedVolumesToEitherSaveOrDiscard;
 @property (nonatomic, strong) LBRParsedVolume *parsedVolumeFromLastBarcode; //<-- Use this to confirm user's selection, then enter it into Persistent Data.
 
+
 +(instancetype)sharedDataManager;
+-(NSFetchedResultsController*)preconfiguredLBRFetchedResultsController:(UIViewController<NSFetchedResultsControllerDelegate> *)sender;
 
 -(void)updateWithNewTransientVolume:(LBRParsedVolume*)volumeToAdd;
 -(void)saveParsedVolumesToEitherSaveOrDiscardToPersistentStore;

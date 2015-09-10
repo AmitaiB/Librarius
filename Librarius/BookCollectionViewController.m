@@ -125,7 +125,7 @@
 }
 
 
-#pragma mark - Fetched results controller
+#pragma mark - Fetched Results Controller configuration
 
 - (NSFetchedResultsController *)fetchedResultsController
 {

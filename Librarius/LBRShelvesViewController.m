@@ -106,4 +106,15 @@ static NSString * const reuseIdentifier = @"bookCellID";
 }
 */
 
+#pragma mark - Fetched Results Controller configuration
+
+- (NSFetchedResultsController *)fetchedResultsController
+{
+    if (_fetchedResultsController != nil) {
+        return _fetchedResultsController;
+    }
+        //
+    return _fetchedResultsController;
+}
+
 @end
