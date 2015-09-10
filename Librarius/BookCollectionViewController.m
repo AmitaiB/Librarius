@@ -40,7 +40,7 @@
 //    self.navigationItem.rightBarButtonItem = addButton;
 }
 /**
- *  TODO: Change this method to "Manual Volume Entry" and fill in all the fields for the/a Volume.
+ *  TODO: Change this method to "Manual Volume Entry" and fill in all the fields to add a new Volume to the Library, and save.
  */
 //- (void)insertNewObject:(id)sender {
 //    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];

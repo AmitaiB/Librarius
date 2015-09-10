@@ -6,13 +6,19 @@
 //  Copyright (c) 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 
-#import "LBRShelvesFlowCollectionViewController.h"
+#import "LBRShelvesViewController.h"
+#import "LBRDataManager.h"
 
-@interface LBRShelvesFlowCollectionViewController ()
+@interface LBRShelvesViewController ()
+
+@property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *layout;
+
+@property (nonatomic, strong) LBRDataManager *dataManager;
+
 
 @end
 
-@implementation LBRShelvesFlowCollectionViewController
+@implementation LBRShelvesViewController
 
 static NSString * const reuseIdentifier = @"bookCellID";
 
@@ -26,6 +32,9 @@ static NSString * const reuseIdentifier = @"bookCellID";
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
     // Do any additional setup after loading the view.
+    self.collectionView.backgroundColor = [UIColor whiteColor];
+    self.dataManager = [LBRDataManager sharedDataManager];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,12 +56,14 @@ static NSString * const reuseIdentifier = @"bookCellID";
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
 #warning Incomplete method implementation -- Return the number of sections
-    return 0;
+        //1 shelf, for now.
+    return 1;
 }
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
 #warning Incomplete method implementation -- Return the number of items in the section
+    
     return 0;
 }
 
