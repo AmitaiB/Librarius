@@ -25,6 +25,7 @@ static NSString * const reuseIdentifier = @"bookCellID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self configureBooksFlowLayout:self.layout];
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -34,6 +35,7 @@ static NSString * const reuseIdentifier = @"bookCellID";
     // Do any additional setup after loading the view.
     self.collectionView.backgroundColor = [UIColor whiteColor];
     self.dataManager = [LBRDataManager sharedDataManager];
+    
     
 }
 
@@ -51,6 +53,13 @@ static NSString * const reuseIdentifier = @"bookCellID";
     // Pass the selected object to the new view controller.
 }
 */
+#pragma mark - UICollectionView FlowLayout configuration
+
+- (void)configureBooksFlowLayout:(UICollectionViewFlowLayout*)layout {
+    layout.minimumLineSpacing = 1.0;
+    layout.minimumInteritemSpacing = 1.0;
+}
+
 
 #pragma mark <UICollectionViewDataSource>
 
@@ -63,16 +72,20 @@ static NSString * const reuseIdentifier = @"bookCellID";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
 #warning Incomplete method implementation -- Return the number of items in the section
-    
-    return 0;
+    NSArray *sections = [self.fetchedResultsController sections];
+    id <NSFetchedResultsSectionInfo> currentSection = sections[section];
+    return currentSection.numberOfObjects;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    
-    // Configure the cell
-    
+    [self configureCell:cell atIndexPath:indexPath];
     return cell;
+}
+
+-(void)configureCell:(UICollectionViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+        //configure cell for index path...
+    cell.backgroundColor = [UIColor blueColor];
 }
 
 #pragma mark <UICollectionViewDelegate>
@@ -113,8 +126,10 @@ static NSString * const reuseIdentifier = @"bookCellID";
     if (_fetchedResultsController != nil) {
         return _fetchedResultsController;
     }
-        //
-    return _fetchedResultsController;
+    return [[LBRDataManager sharedDataManager]
+            preconfiguredLBRFetchedResultsController:self];
 }
+
+
 
 @end

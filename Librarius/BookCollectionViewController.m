@@ -132,48 +132,8 @@
     if (_fetchedResultsController != nil) {
         return _fetchedResultsController;
     }
-    
-    /**
-     *  1) The set of all books (TODO: Uniquify the collection, so you cannot add multiple entries accidentally).
-     *  2) in the current library
-     *  3) arranged by mainCategory
-     *  4) then author
-     *  5) then year
-     */
-    LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
-    NSManagedObjectContext *managedObjectContext = dataManager.managedObjectContext;
-    NSFetchRequest *volumesRequest = [NSFetchRequest fetchRequestWithEntityName:@"Volume"]; //(1)
-    
-    // Set the batch size to a suitable number.
-    [volumesRequest setFetchBatchSize:20];
-    
-    // Edit the sort key as appropriate.
-    NSSortDescriptor *categorySorter = [NSSortDescriptor sortDescriptorWithKey:@"mainCategory" ascending:YES];
-    NSSortDescriptor *authorSorter = [NSSortDescriptor sortDescriptorWithKey:@"authorSurname" ascending:YES];
-    
-    [dataManager generateDefaultLibraryIfNeeded];
-        //TODO: Might need @"library.name = datamanager.currentLibrary.name"
-    NSPredicate *libraryPredicate = [NSPredicate predicateWithFormat:@"library = %@", dataManager.currentLibrary];
-    
-    volumesRequest.sortDescriptors = @[categorySorter, authorSorter];
-    volumesRequest.predicate = libraryPredicate;
-    
-    // Edit the section name key path and cache name if appropriate.
-    // nil for section name key path means "no sections".
-    NSFetchedResultsController *frc = [[NSFetchedResultsController alloc] initWithFetchRequest:volumesRequest managedObjectContext:managedObjectContext sectionNameKeyPath:@"mainCategory" cacheName:nil];
-    frc.delegate = self;
-    self.fetchedResultsController = frc;
-    
-	NSError *error = nil;
-	if (![self.fetchedResultsController performFetch:&error]) {
-	     // Replace this implementation with code to handle the error appropriately.
-	     // abort() causes the application to generate a crash log and terminate. !!!:You should not use this function in a shipping application, although it may be useful during development.
-	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-	    abort();
-	}
-    NSFetchedResultsController *testFRC = [dataManager preconfiguredLBRFetchedResultsController:self];
-//    return _fetchedResultsController;
-    return testFRC;
+    return [[LBRDataManager sharedDataManager]
+            preconfiguredLBRFetchedResultsController:self];
 }
 
 #pragma mark - Fetched Results Controller Delegate methods
