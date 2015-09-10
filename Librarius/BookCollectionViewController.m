@@ -171,9 +171,10 @@
 	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 	    abort();
 	}
-    
-    return _fetchedResultsController;
-}    
+    NSFetchedResultsController *testFRC = [dataManager preconfiguredLBRFetchedResultsController:self];
+//    return _fetchedResultsController;
+    return testFRC;
+}
 
 #pragma mark - Fetched Results Controller Delegate methods
 
