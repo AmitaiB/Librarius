@@ -24,6 +24,8 @@
 		3803757F1B8C17EB004C4ECE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 380375411B8AC9A8004C4ECE /* LaunchScreen.xib */; };
 		380375F71B8D4E90004C4ECE /* BookCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375F41B8D4E90004C4ECE /* BookCollectionViewController.m */; };
 		380375F81B8D4E90004C4ECE /* BookDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375F61B8D4E90004C4ECE /* BookDetailViewController.m */; };
+		380DF15A1BA2188500DBA20A /* ShelvedBookCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 380DF1591BA2188500DBA20A /* ShelvedBookCell.xib */; };
+		380DF1621BA219D500DBA20A /* ShelvedBookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 380DF1611BA219D500DBA20A /* ShelvedBookCell.m */; };
 		381EBC051BA0FF63000D2FA4 /* LBRShelvesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 381EBC041BA0FF63000D2FA4 /* LBRShelvesViewController.m */; };
 		38466D281B94F24400DD252E /* LBRGoogleGTLClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 38466D271B94F24400DD252E /* LBRGoogleGTLClient.m */; };
 		384E0CC01B97D24B007E7290 /* NSString+dateValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 384E0CBF1B97D24B007E7290 /* NSString+dateValue.m */; };
@@ -81,6 +83,9 @@
 		380375F41B8D4E90004C4ECE /* BookCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookCollectionViewController.m; sourceTree = "<group>"; };
 		380375F51B8D4E90004C4ECE /* BookDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookDetailViewController.h; sourceTree = "<group>"; };
 		380375F61B8D4E90004C4ECE /* BookDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookDetailViewController.m; sourceTree = "<group>"; };
+		380DF1591BA2188500DBA20A /* ShelvedBookCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShelvedBookCell.xib; sourceTree = "<group>"; };
+		380DF1601BA219D500DBA20A /* ShelvedBookCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShelvedBookCell.h; sourceTree = "<group>"; };
+		380DF1611BA219D500DBA20A /* ShelvedBookCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShelvedBookCell.m; sourceTree = "<group>"; };
 		381EBC031BA0FF63000D2FA4 /* LBRShelvesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRShelvesViewController.h; sourceTree = "<group>"; };
 		381EBC041BA0FF63000D2FA4 /* LBRShelvesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRShelvesViewController.m; sourceTree = "<group>"; };
 		382CE7FB1B9E09ED000A9701 /* Librarius-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Librarius-Prefix.pch"; sourceTree = "<group>"; };
@@ -241,6 +246,9 @@
 			isa = PBXGroup;
 			children = (
 				3803753F1B8AC9A8004C4ECE /* Images.xcassets */,
+				380DF1601BA219D500DBA20A /* ShelvedBookCell.h */,
+				380DF1611BA219D500DBA20A /* ShelvedBookCell.m */,
+				380DF1591BA2188500DBA20A /* ShelvedBookCell.xib */,
 				380375411B8AC9A8004C4ECE /* LaunchScreen.xib */,
 				38BE31E11B961F7000C46001 /* volumePresentationView.xib */,
 				387039B71B9D23C900381007 /* SelectionView.xib */,
@@ -405,6 +413,7 @@
 				38CD5FD11B9DE78400963D2F /* VolumeDetailsCell.xib in Resources */,
 				387039B81B9D23C900381007 /* SelectionView.xib in Resources */,
 				38BE31E21B961F7000C46001 /* volumePresentationView.xib in Resources */,
+				380DF15A1BA2188500DBA20A /* ShelvedBookCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,6 +488,7 @@
 				381EBC051BA0FF63000D2FA4 /* LBRShelvesViewController.m in Sources */,
 				380375721B8BF058004C4ECE /* UIImage+FromURL.m in Sources */,
 				38AAD71D1B901D35003062C1 /* Volume.m in Sources */,
+				380DF1621BA219D500DBA20A /* ShelvedBookCell.m in Sources */,
 				3803753B1B8AC9A8004C4ECE /* LBRBarcodeScannerViewController.m in Sources */,
 				3803755B1B8B9F5E004C4ECE /* LBRConstants.m in Sources */,
 				3851DBFD1B8E2E5A00E90B9F /* LBRDataManager.m in Sources */,
