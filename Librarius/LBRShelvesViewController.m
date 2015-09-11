@@ -9,6 +9,12 @@
 #import "LBRShelvesViewController.h"
 #import "LBRDataManager.h"
 #import "ShelvedBookCell.h"
+#import "Volume.h"
+#import <UICollectionView+ARDynamicCacheHeightLayoutCell.h>
+
+#import "LBRShelvedBookCellCollectionViewCell.h"
+#define CUSTOM_CELL_CLASS LBRShelvedBookCellCollectionViewCell
+
 
 @interface LBRShelvesViewController ()
 
@@ -36,17 +42,18 @@ static NSString * const reuseIdentifier = @"bookCellID";
     [super viewDidLoad];
     
     [self configureBooksFlowLayout:self.layout];
-    // Uncomment the following line to preserve selection between presentations
+    self.collectionView.backgroundColor = [UIColor whiteColor];
+    
+    self.title = @"Bookshelves";
+    
+        // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Register cell classes
-    [self.collectionView registerClass:[ShelvedBookCell class] forCellWithReuseIdentifier:reuseIdentifier];
+    [self.collectionView registerClass:[CUSTOM_CELL_CLASS class] forCellWithReuseIdentifier:reuseIdentifier];
     
-    // Do any additional setup after loading the view.
-    self.collectionView.backgroundColor = [UIColor whiteColor];
     self.dataManager = [LBRDataManager sharedDataManager];
     
-    self.title = @"Bookshelves";
     
     
 }
@@ -74,36 +81,42 @@ static NSString * const reuseIdentifier = @"bookCellID";
 
 
 #pragma mark <UICollectionViewDataSource>
-
+/*
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
 #warning Incomplete method implementation -- Return the number of sections
         //1 shelf, for now.
-    return 1;
+    return 0;
 }
-
+*/
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-#warning Incomplete method implementation -- Return the number of items in the section
     NSArray *sections = [self.fetchedResultsController sections];
     id <NSFetchedResultsSectionInfo> currentSection = sections[section];
     return currentSection.numberOfObjects;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    ShelvedBookCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    CUSTOM_CELL_CLASS *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
 
--(void)configureCell:(ShelvedBookCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+-(void)configureCell:(UICollectionViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
         //configure cell for index path...
-    NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.backgroundColor = [UIColor lightGrayColor];
-    cell.bookTitleLabel.text = [object valueForKey:@"title"];
-    cell.bookTitleLabel.textColor = [UIColor redColor];
-    cell.bookTitleLabel.backgroundColor = [UIColor yellowColor];
+//    Volume *object             = [self.fetchedResultsController objectAtIndexPath:indexPath];
+//        //    NSManagedObject *object             = [self.fetchedResultsController objectAtIndexPath:indexPath];
+//    cell.backgroundColor                = [UIColor lightGrayColor];
+//    cell.bookTitleLabel.backgroundColor = [UIColor yellowColor];
+//    cell.bookTitleLabel.textColor       = [UIColor redColor];
+//    cell.bookTitleLabel.text            = [object valueForKey:@"title"];
+//    
+//    CGFloat thickness = (object.thickness)? [object.thickness floatValue]: 10.0f;
+//    CGFloat height = (object.height)? [object.height floatValue] : 15.0f;
+//    
+//    CGSize volumeDimensions2D = CGSizeMake(thickness, height);
+//    cell.cellSize = volumeDimensions2D;
 }
-
+#pragma mark
 #pragma mark <UICollectionViewDelegate>
 
 /*
@@ -134,6 +147,16 @@ static NSString * const reuseIdentifier = @"bookCellID";
 	
 }
 */
+
+#pragma mark - FlowLayout Delegate methods
+
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return [collectionView ar_sizeForCellWithIdentifier:reuseIdentifier indexPath:indexPath configuration:^(id cell) {
+            //cell configuration...
+        [self configureCell:cell atIndexPath:indexPath];
+    }];
+}
 
 #pragma mark - Fetched Results Controller configuration
 

@@ -10,8 +10,10 @@
 
 @implementation ShelvedBookCell
 
--(void)awakeFromNib {
-    
-}
+
+
+//-(void)awakeFromNib {
+//    
+//}
 
 @end

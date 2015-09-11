@@ -23,7 +23,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <LARSTorch.h>
 #import "LBRConstants.h"
-
+    //Testing out:
 
 
 @interface LBRBarcodeScannerViewController ()
@@ -69,7 +69,9 @@ static NSString * const volumeNib          = @"volumePresentationView";
 
 -(void)initializeProgrammaticProperties {
     self.googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
-    self.scanner = [[MTBBarcodeScanner alloc] initWithPreviewView:self.scannerView];
+        //SETTINGS: Choose which objects the scanner reads. Keep this one, but if your book doesn't read, try accepting all metadaobjects...
+    self.scanner = [[MTBBarcodeScanner alloc] initWithMetadataObjectTypes:@[AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeEAN13Code] previewView:self.scannerView];
+//self.scanner = [[MTBBarcodeScanner alloc] initWithPreviewView:self.scannerView];
     self.uniqueCodes = [NSMutableArray new];
     
     [self initializeSpinner];
@@ -147,13 +149,12 @@ static NSString * const volumeNib          = @"volumePresentationView";
     self.saveScannedBooksToCoreDataButton.hidden = YES;
     [self flipScanButtonAppearance];
 // ???: Consider embedding the scanning in this: [MTBBarcodeScanner requestCameraPermissionWithSuccess:^(BOOL success)...?
-//TODO: Get these buttons to remain on top when the camera comes on.
     [self.scannerView bringSubviewToFront:self.lightToggleButton.imageView];
     [self.scannerView bringSubviewToFront:self.flipCameraButton.imageView];
 //    [self.view sendSubviewToBack:self.scannerView];
     [self.scanner startScanningWithResultBlock:^(NSArray *codes) {
     // -------------------------------------------------------------------------------
-    //	Scanning Success Block
+    //	Scanning Success Block: We have a barcode!
     // -------------------------------------------------------------------------------
         for (AVMetadataMachineReadableCodeObject *code in codes) {
                 // If it's a new barcode, add it to the array.
@@ -162,7 +163,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
                 [self.spinnerView startAnimating];
                 
                     //1st APPROACH: NYAlertViewController sub-class. Should have worked, but didn't.
-                    //✅ 2nd APPROACH: NYAlertViewController
+                    //✅ 2nd APPROACH: NYAlertViewController (like #1), but in this controller. Works.
                 NYAlertViewController *confirmSelectionViewController = [self confirmSelectionViewController];
                 [self presentViewController:confirmSelectionViewController animated:YES completion:^{ DBLG }];
 
@@ -179,6 +180,16 @@ static NSString * const volumeNib          = @"volumePresentationView";
             }
         }
     }];
+}
+
+    //TODO: Check isbn validity.
+-(BOOL)checkISBNValidity:(NSString*)testString {
+    NSPredicate *isbn10Predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES '\\\\d{10}|\\\\d{9}[Xx]'"];
+    NSArray *isbn10Array = [@[testString] filteredArrayUsingPredicate:isbn10Predicate];
+//    NSArray *isbn13Array = [@[testString] filteredArrayUsingPredicate:isbn13Predicate];
+    
+//    return (isbn10Array || isbn13Array);
+    return isbn10Array;
 }
 
 -(void)flipScanButtonAppearance {

@@ -40,6 +40,7 @@
 		38BA3CA51B9BDA1500B3B42F /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38BA3CA41B9BDA1500B3B42F /* CloudKit.framework */; };
 		38BE31E21B961F7000C46001 /* volumePresentationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38BE31E11B961F7000C46001 /* volumePresentationView.xib */; };
 		38CD5FD11B9DE78400963D2F /* VolumeDetailsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38CD5FD01B9DE78400963D2F /* VolumeDetailsCell.xib */; };
+		38E71DAF1BA337BB00DE1C61 /* LBRShelvedBookCellCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E71DAE1BA337BB00DE1C61 /* LBRShelvedBookCellCollectionViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +112,8 @@
 		38BA3CA41B9BDA1500B3B42F /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		38BE31E11B961F7000C46001 /* volumePresentationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = volumePresentationView.xib; sourceTree = "<group>"; };
 		38CD5FD01B9DE78400963D2F /* VolumeDetailsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VolumeDetailsCell.xib; sourceTree = "<group>"; };
+		38E71DAD1BA337BB00DE1C61 /* LBRShelvedBookCellCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRShelvedBookCellCollectionViewCell.h; sourceTree = "<group>"; };
+		38E71DAE1BA337BB00DE1C61 /* LBRShelvedBookCellCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRShelvedBookCellCollectionViewCell.m; sourceTree = "<group>"; };
 		8D3D33401D5A34E1C9A90BE0 /* Pods-Librarius.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Librarius.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Librarius/Pods-Librarius.debug.xcconfig"; sourceTree = "<group>"; };
 		9B10AB83782954202B2FDC18 /* Pods-Librarius.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Librarius.release.xcconfig"; path = "Pods/Target Support Files/Pods-Librarius/Pods-Librarius.release.xcconfig"; sourceTree = "<group>"; };
 		EBADCB9C83FA635A577697F9 /* libPods-Librarius.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Librarius.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -245,6 +248,8 @@
 		380375631B8BB711004C4ECE /* Views/Images/nibs */ = {
 			isa = PBXGroup;
 			children = (
+				38E71DAD1BA337BB00DE1C61 /* LBRShelvedBookCellCollectionViewCell.h */,
+				38E71DAE1BA337BB00DE1C61 /* LBRShelvedBookCellCollectionViewCell.m */,
 				3803753F1B8AC9A8004C4ECE /* Images.xcassets */,
 				380DF1601BA219D500DBA20A /* ShelvedBookCell.h */,
 				380DF1611BA219D500DBA20A /* ShelvedBookCell.m */,
@@ -481,6 +486,7 @@
 				38AAD7231B901D36003062C1 /* Bookcase.m in Sources */,
 				380375F81B8D4E90004C4ECE /* BookDetailViewController.m in Sources */,
 				38AAD6F01B901175003062C1 /* Librarius.xcdatamodeld in Sources */,
+				38E71DAF1BA337BB00DE1C61 /* LBRShelvedBookCellCollectionViewCell.m in Sources */,
 				38AAD7201B901D36003062C1 /* Library.m in Sources */,
 				380375F71B8D4E90004C4ECE /* BookCollectionViewController.m in Sources */,
 				380375321B8AC9A8004C4ECE /* main.m in Sources */,

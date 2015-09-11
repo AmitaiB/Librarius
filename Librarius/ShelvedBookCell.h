@@ -10,5 +10,6 @@
 
 @interface ShelvedBookCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UILabel *bookTitleLabel;
+@property (nonatomic) CGSize cellSize;
 
 @end
