@@ -91,6 +91,9 @@ static NSString * const volumeNib          = @"volumePresentationView";
     self.unsavedVolumesTableView  = [UITableView new];
     self.unsavedVolumesTableView.delegate = self;
     self.unsavedVolumesTableView.dataSource = self;
+    self.unsavedVolumesTableView.hidden = NO;
+    [self.mainContentView addSubview:self.unsavedVolumesTableView];
+    [self.mainContentView bringSubviewToFront:self.unsavedVolumesTableView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -142,7 +145,8 @@ static NSString * const volumeNib          = @"volumePresentationView";
     [self flipScanButtonAppearance];
     [self.scanner stopScanning];
     self.saveScannedBooksToCoreDataButton.hidden = NO;
-    self.lightToggleButton.hidden = YES;
+    self.unsavedVolumesTableView.hidden          = NO;
+    self.lightToggleButton.hidden                = YES;
 }
 
 /**
@@ -152,7 +156,9 @@ static NSString * const volumeNib          = @"volumePresentationView";
     self.isScanning = YES;
     [self flipScanButtonAppearance];
     self.saveScannedBooksToCoreDataButton.hidden = YES;
-    self.lightToggleButton.hidden = NO;
+    self.unsavedVolumesTableView.hidden          = YES;
+    self.lightToggleButton.hidden                = NO;
+    
 // ???: Consider embedding the scanning in this: [MTBBarcodeScanner requestCameraPermissionWithSuccess:^(BOOL success)...?
     [self.scannerView bringSubviewToFront:self.lightToggleButton.imageView];
 //    [self.view sendSubviewToBack:self.scannerView];
