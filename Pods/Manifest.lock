@@ -56,6 +56,7 @@ PODS:
   - MMMaterialDesignSpinner (0.2.0)
   - MTBBarcodeScanner (1.6.1)
   - NYAlertViewController (1.2.0)
+  - SAMCache (0.3.3)
   - UICollectionView-ARDynamicHeightLayoutCell_Bell (1.0.2)
 
 DEPENDENCIES:
@@ -66,6 +67,7 @@ DEPENDENCIES:
   - MMMaterialDesignSpinner
   - MTBBarcodeScanner
   - NYAlertViewController
+  - SAMCache
   - UICollectionView-ARDynamicHeightLayoutCell_Bell
 
 SPEC CHECKSUMS:
@@ -84,6 +86,7 @@ SPEC CHECKSUMS:
   MMMaterialDesignSpinner: 8f1a50270b789c76ec500957e518fc3e05e55b9d
   MTBBarcodeScanner: beda75d4c1e2750405f62ee53f7a7ee40bf6825b
   NYAlertViewController: 9198f367c2726184e20ace87f7b6dd2655d42d79
+  SAMCache: 790b2623a3e087c903daff872c90c248726c4c82
   UICollectionView-ARDynamicHeightLayoutCell_Bell: 75d6151d7620ebb3b42bcd3bf25a066f7c98f74b
 
 COCOAPODS: 0.38.2

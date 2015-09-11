@@ -9,6 +9,7 @@
 #import "LBRShelvesViewController.h"
 #import "LBRDataManager.h"
 #import "ShelvedBookCell.h"
+#import <UIImageView+AFNetworking.h>
 #import "Volume.h"
 #import <UICollectionView+ARDynamicCacheHeightLayoutCell.h>
 
@@ -97,7 +98,11 @@ static NSString * const reuseIdentifier = @"bookCellID";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     CUSTOM_CELL_CLASS *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    [self configureCell:cell atIndexPath:indexPath];
+    Volume *volume = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+    [cell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    
+        //    [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
 

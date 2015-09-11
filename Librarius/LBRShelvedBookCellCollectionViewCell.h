@@ -11,6 +11,6 @@
 @interface LBRShelvedBookCellCollectionViewCell : UICollectionViewCell
 
 @property (nonatomic, strong) UIImageView *imageView;
-@property (nonatomic, strong) NSDictionary *photo;
+@property (nonatomic, strong) NSString *coverArtURL;
 
 @end

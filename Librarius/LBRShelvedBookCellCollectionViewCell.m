@@ -7,7 +7,38 @@
 //
 
 #import "LBRShelvedBookCellCollectionViewCell.h"
+#import <SAMCache.h>
+
 
 @implementation LBRShelvedBookCellCollectionViewCell
+
+-(instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (!self) {
+        return nil;
+    }
+        //custom initialization
+    self.imageView = [UIImageView new];
+    [self.contentView addSubview:self.imageView];
+//    [self.imageView setImage:[UIImage imageNamed:@"placeholder"]];
+    
+    return self;
+}
+
+/**
+ *  For TODO: implement cache
+ */
+//-(void)setCoverArt:(NSString *)coverArtURL {
+//    _coverArtURL = coverArtURL;
+//    
+////    NSDictionary *coverArtDict = NSDictionaryOfVariableBindings(coverArtURL);
+////    NSString *key = [coverArtDict allKeys][0];
+//    
+//    UIImage *coverArt = [[SAMCache sharedCache] imageForKey:key];
+//    if (coverArt) {
+//        self.imageView.image = coverArt;
+//        return;
+//    }
+//}
 
 @end

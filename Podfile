@@ -13,7 +13,7 @@ pod 'NYAlertViewController'
 pod 'LARSTorch', '~> 1.1'
 pod 'UICollectionView-ARDynamicHeightLayoutCell_Bell'
 
-
+pod 'SAMCache'
 
 #Not Yet Implemented
 #pod 'AMRatingControl'
