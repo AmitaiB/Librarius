@@ -159,7 +159,7 @@
                             <outlet property="delegate" destination="ajh-Xd-CoJ" id="1eC-ye-Gcx"/>
                         </connections>
                     </collectionView>
-                    <tabBarItem key="tabBarItem" title="Shelve." image="books49" id="ohJ-iw-xie"/>
+                    <navigationItem key="navigationItem" id="U43-k0-844"/>
                     <connections>
                         <outlet property="layout" destination="Bm5-5r-NAZ" id="DM5-so-cgU"/>
                         <segue destination="r89-FC-I3u" kind="show" id="1dH-Cm-eo4"/>
@@ -167,7 +167,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uRq-sK-8fk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1737" y="505"/>
+            <point key="canvasLocation" x="2454" y="505"/>
         </scene>
         <!--Library/Shelves Layout-->
         <scene sceneID="gtg-I3-sQB">
@@ -186,7 +186,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MvQ-3f-rxY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1737" y="1226"/>
+            <point key="canvasLocation" x="2454" y="1202"/>
         </scene>
         <!--Scan-->
         <scene sceneID="wg7-f3-ORb">
@@ -493,7 +493,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
-                        <segue destination="ajh-Xd-CoJ" kind="relationship" relationship="viewControllers" id="wTu-ac-h8U"/>
+                        <segue destination="BK5-aT-ift" kind="relationship" relationship="viewControllers" id="wTu-ac-h8U"/>
                         <segue destination="bTL-zk-y1V" kind="relationship" relationship="viewControllers" id="9MK-7n-nPt"/>
                         <segue destination="oJK-od-ZUi" kind="relationship" relationship="viewControllers" id="kRc-jj-rCf"/>
                     </connections>
@@ -519,6 +519,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KZP-b4-Vma" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-484.5" y="0.0"/>
+        </scene>
+        <!--Shelve.-->
+        <scene sceneID="qEv-u9-RKR">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BK5-aT-ift" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Shelve." image="books49" id="ohJ-iw-xie"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="w3I-at-wo4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ajh-Xd-CoJ" kind="relationship" relationship="rootViewController" id="6JA-in-uy8"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AdP-iG-VXx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1737" y="505"/>
         </scene>
     </scenes>
     <resources>
