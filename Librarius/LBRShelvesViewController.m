@@ -54,6 +54,7 @@ static NSString * const reuseIdentifier = @"bookCellID";
     [self.collectionView registerClass:[CUSTOM_CELL_CLASS class] forCellWithReuseIdentifier:reuseIdentifier];
     
     self.dataManager = [LBRDataManager sharedDataManager];
+    self.fetchedResultsController;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -90,14 +91,16 @@ static NSString * const reuseIdentifier = @"bookCellID";
 */
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    NSArray *sections = [self.fetchedResultsController sections];
-    id <NSFetchedResultsSectionInfo> currentSection = sections[section];
-    return currentSection.numberOfObjects;
+//    NSArray *sections = [self.fetchedResultsController sections];
+//    id <NSFetchedResultsSectionInfo> currentSection = sections[section];
+//    return currentSection.numberOfObjects;
+    return [self.fetchedResultsController.fetchedObjects count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     CUSTOM_CELL_CLASS *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    Volume *volume = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    NSArray *volumesArray = self.fetchedResultsController.fetchedObjects;
+    Volume *volume = (Volume*)volumesArray[indexPath.item];
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", volume.cover_art_large]];
     [cell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder"]];
     cell.backgroundColor = [UIColor lightGrayColor];
