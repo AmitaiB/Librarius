@@ -63,6 +63,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self generateTestDataIfNeeded];
+        //TODO: only remake these if needed (performance)
     [self initializeProgrammaticProperties];
 }
 
@@ -71,7 +72,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
     self.uniqueCodes              = [NSMutableArray new];
     self.lightToggleButton.hidden = YES;
     self.unsavedVolumes           = [NSMutableArray new];
-    [self initializeUnsavedVolumesTableView];
+    [self initializeUnsavedVolumesTableView:self.unsavedVolumesTableView];
     [self initializeSpinner];
         //SETTINGS: Choose which objects the scanner reads. Keep this one, but if your book doesn't read, try accepting all metadaobjects...
     self.scanner = [[MTBBarcodeScanner alloc] initWithMetadataObjectTypes:@[AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeEAN13Code] previewView:self.scannerView];
@@ -87,13 +88,16 @@ static NSString * const volumeNib          = @"volumePresentationView";
     [self.view addSubview:self.spinnerView];
 }
 
--(void)initializeUnsavedVolumesTableView {
-    self.unsavedVolumesTableView  = [UITableView new];
-    self.unsavedVolumesTableView.delegate = self;
-    self.unsavedVolumesTableView.dataSource = self;
-    self.unsavedVolumesTableView.hidden = NO;
-    [self.mainContentView addSubview:self.unsavedVolumesTableView];
-    [self.mainContentView bringSubviewToFront:self.unsavedVolumesTableView];
+-(void)initializeUnsavedVolumesTableView:(UITableView*)tableView {
+    tableView               = [UITableView new];
+    UINib *volumeDetailsNib = [UINib nibWithNibName:@"volumeDetailsCell" bundle:nil];
+    [tableView registerNib:volumeDetailsNib forCellReuseIdentifier:@"volumeDetailsCellID"];
+    tableView.delegate      = self;
+    tableView.dataSource    = self;
+    tableView.hidden        = NO;
+    [self.mainContentView addSubview:tableView];
+    [self.mainContentView bringSubviewToFront:tableView];
+    tableView.frame = self.mainContentView.bounds;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -224,7 +228,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
     return [@(yearComponent) stringValue];
 }
 
-#pragma mark -
+#pragma mark - Confirmation Alert Controller (w/ Confirm/Cancel blocks)
 
 -(NYAlertViewController*)confirmSelectionViewController {
     NYAlertViewController *alertViewController = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
@@ -272,7 +276,9 @@ static NSString * const volumeNib          = @"volumePresentationView";
     [singleCellTableView registerNib:volumeDetailsNib forCellReuseIdentifier:@"volumeDetailsCellID"];
     
     
-    
+    /**
+     *  Magic happens here!
+     */
     [contentView addSubview:singleCellTableView];
     
     [self prepareViewForAutolayout:singleCellTableView];
