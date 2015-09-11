@@ -29,11 +29,9 @@
 @interface LBRBarcodeScannerViewController ()
 
 - (IBAction)toggleScanningButtonTapped:(id)sender;
-- (IBAction)flipCameraButtonTapped:(id)sender;
 - (IBAction)lightToggleButtonTapped:(id)sender;
 - (IBAction)saveScannedVolumesToLibraryButtonTapped:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *lightToggleButton;
-@property (weak, nonatomic) IBOutlet UIButton *flipCameraButton;
 @property (weak, nonatomic) IBOutlet UIButton *saveScannedBooksToCoreDataButton;
 
 @property (weak, nonatomic) IBOutlet UIView *scannerView;
@@ -73,7 +71,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
     self.scanner = [[MTBBarcodeScanner alloc] initWithMetadataObjectTypes:@[AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeEAN13Code] previewView:self.scannerView];
 //self.scanner = [[MTBBarcodeScanner alloc] initWithPreviewView:self.scannerView];
     self.uniqueCodes = [NSMutableArray new];
-    
+    self.lightToggleButton.hidden = YES;
     [self initializeSpinner];
     
 }
@@ -107,10 +105,6 @@ static NSString * const volumeNib          = @"volumePresentationView";
         [self stopScanningOps];}
     if (self.isNotScanning) {
         [self startScanningOps];}
-}
-
-- (IBAction)flipCameraButtonTapped:(id)sender {
-    [self.scanner flipCamera];
 }
 
 - (IBAction)lightToggleButtonTapped:(id)sender {
@@ -150,7 +144,6 @@ static NSString * const volumeNib          = @"volumePresentationView";
     [self flipScanButtonAppearance];
 // ???: Consider embedding the scanning in this: [MTBBarcodeScanner requestCameraPermissionWithSuccess:^(BOOL success)...?
     [self.scannerView bringSubviewToFront:self.lightToggleButton.imageView];
-    [self.scannerView bringSubviewToFront:self.flipCameraButton.imageView];
 //    [self.view sendSubviewToBack:self.scannerView];
     [self.scanner startScanningWithResultBlock:^(NSArray *codes) {
     // -------------------------------------------------------------------------------

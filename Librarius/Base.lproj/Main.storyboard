@@ -255,20 +255,9 @@
                                             <action selector="lightToggleButtonTapped:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="BQI-I4-0Xp"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GDB-vK-ZBH" userLabel="flipCameraButton">
-                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                        <state key="normal" image="reverse-1">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="flipCameraButtonTapped:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="aAT-MI-Ort"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.79607843140000001" green="0.79607843140000001" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="3Bf-2Z-qmt" firstAttribute="top" secondItem="GDB-vK-ZBH" secondAttribute="bottom" constant="95" id="1S0-ty-ZJr"/>
-                                    <constraint firstAttribute="trailing" secondItem="GDB-vK-ZBH" secondAttribute="trailing" constant="39" id="73h-vb-7C3"/>
                                     <constraint firstItem="3Bf-2Z-qmt" firstAttribute="leading" secondItem="whR-df-RYp" secondAttribute="leading" constant="23" id="AU1-7Q-UI7"/>
                                     <constraint firstItem="3Px-hT-9Zr" firstAttribute="centerX" secondItem="3Bf-2Z-qmt" secondAttribute="centerX" id="Dhj-q7-UM2"/>
                                     <constraint firstItem="3Bf-2Z-qmt" firstAttribute="centerY" secondItem="whR-df-RYp" secondAttribute="centerY" id="IQ2-ZU-2bE"/>
@@ -284,7 +273,6 @@
                                         <exclude reference="3Px-hT-9Zr"/>
                                         <exclude reference="3Bf-2Z-qmt"/>
                                         <exclude reference="dcH-IU-Ezd"/>
-                                        <exclude reference="GDB-vK-ZBH"/>
                                     </mask>
                                     <mask key="constraints">
                                         <exclude reference="Dhj-q7-UM2"/>
@@ -293,11 +281,9 @@
                                         <exclude reference="dnn-NV-4Xd"/>
                                         <exclude reference="TtT-xL-T85"/>
                                         <exclude reference="b3V-yp-LeR"/>
-                                        <exclude reference="1S0-ty-ZJr"/>
                                         <exclude reference="AU1-7Q-UI7"/>
                                         <exclude reference="IQ2-ZU-2bE"/>
                                         <exclude reference="s95-dG-vES"/>
-                                        <exclude reference="73h-vb-7C3"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact">
@@ -305,7 +291,6 @@
                                         <include reference="3Px-hT-9Zr"/>
                                         <include reference="3Bf-2Z-qmt"/>
                                         <include reference="dcH-IU-Ezd"/>
-                                        <include reference="GDB-vK-ZBH"/>
                                     </mask>
                                     <mask key="constraints">
                                         <include reference="Dhj-q7-UM2"/>
@@ -314,11 +299,9 @@
                                         <include reference="dnn-NV-4Xd"/>
                                         <include reference="TtT-xL-T85"/>
                                         <include reference="b3V-yp-LeR"/>
-                                        <include reference="1S0-ty-ZJr"/>
                                         <include reference="AU1-7Q-UI7"/>
                                         <include reference="IQ2-ZU-2bE"/>
                                         <include reference="s95-dG-vES"/>
-                                        <include reference="73h-vb-7C3"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -376,7 +359,6 @@
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="flipCameraButton" destination="GDB-vK-ZBH" id="bfL-2d-DQO"/>
                         <outlet property="lightToggleButton" destination="dcH-IU-Ezd" id="u0F-dh-jmd"/>
                         <outlet property="saveScannedBooksToCoreDataButton" destination="3Bf-2Z-qmt" id="HRk-fD-6zy"/>
                         <outlet property="scannerView" destination="3Px-hT-9Zr" id="kI7-sB-yVI"/>
@@ -559,7 +541,6 @@
         <image name="collections" width="29" height="29"/>
         <image name="gears6-60@2x-29" width="29" height="29"/>
         <image name="placeholder" width="48" height="48"/>
-        <image name="reverse-1" width="60" height="48"/>
         <image name="scanTarget" width="32" height="32"/>
         <image name="search1" width="32" height="32"/>
     </resources>
