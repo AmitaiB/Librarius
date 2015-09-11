@@ -97,7 +97,19 @@ static NSString * const volumeNib          = @"volumePresentationView";
     tableView.hidden        = NO;
     [self.mainContentView addSubview:tableView];
     [self.mainContentView bringSubviewToFront:tableView];
-    tableView.frame = self.mainContentView.bounds;
+    tableView.frame = self.scannerView.frame;
+    
+        //FIXME
+//    [tableView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[tableView]|"
+//                                                                        options:0
+//                                                                        metrics:nil
+//                                                                          views:NSDictionaryOfVariableBindings(tableView)]];
+//    
+//    [tableView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[tableView]-|"
+//                                                                        options:0
+//                                                                        metrics:nil
+//                                                                          views:NSDictionaryOfVariableBindings(tableView)]];
+    
 }
 
 - (void)didReceiveMemoryWarning {
