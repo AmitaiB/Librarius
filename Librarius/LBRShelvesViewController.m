@@ -177,7 +177,7 @@ static NSString * const reuseIdentifier = @"bookCellID";
 
     }];
 }
-*/≥
+*/
  
 #pragma mark - Fetched Results Controller configurationÁ
 
