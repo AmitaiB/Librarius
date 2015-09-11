@@ -78,6 +78,7 @@ static NSString * const reuseIdentifier = @"bookCellID";
     layout.minimumInteritemSpacing = 1.0;
     layout.estimatedItemSize = CGSizeMake(106.0, 106.0);
 //    layout.itemSize = CGSizeMake(106.0, 106.0);
+    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
 }
 
 
@@ -99,29 +100,31 @@ static NSString * const reuseIdentifier = @"bookCellID";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     CUSTOM_CELL_CLASS *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    cell.backgroundColor = [UIColor lightGrayColor];
+    
     NSArray *volumesArray = self.fetchedResultsController.fetchedObjects;
-    Volume *volume = (Volume*)volumesArray[indexPath.item];
+    Volume *volume = (Volume*)volumesArray[indexPath.row];
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", volume.cover_art_large]];
     [cell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder"]];
-    cell.backgroundColor = [UIColor lightGrayColor];
         //    [self configureCell:cell atIndexPath:indexPath];
+    
     return cell;
 }
 
 -(void)configureCell:(UICollectionViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-        //configure cell for index path...
+//        configure cell for index path...
 //    Volume *object             = [self.fetchedResultsController objectAtIndexPath:indexPath];
-//        //    NSManagedObject *object             = [self.fetchedResultsController objectAtIndexPath:indexPath];
-//    cell.backgroundColor                = [UIColor lightGrayColor];
+//            NSManagedObject *object             = [self.fetchedResultsController objectAtIndexPath:indexPath];
+//    CGFloat thickness = (object.thickness)? [object.thickness floatValue]: 40.0f;
+//    CGFloat height = (object.height)? [object.height floatValue] : 106.0f;
+//
+//    CGSize volumeDimensions2D = CGSizeMake(thickness, height);
+//    cell.cellSize = volumeDimensions2D;
+//
 //    cell.bookTitleLabel.backgroundColor = [UIColor yellowColor];
 //    cell.bookTitleLabel.textColor       = [UIColor redColor];
 //    cell.bookTitleLabel.text            = [object valueForKey:@"title"];
-//    
-//    CGFloat thickness = (object.thickness)? [object.thickness floatValue]: 10.0f;
-//    CGFloat height = (object.height)? [object.height floatValue] : 15.0f;
-//    
-//    CGSize volumeDimensions2D = CGSizeMake(thickness, height);
-//    cell.cellSize = volumeDimensions2D;
+//
 }
 #pragma mark
 #pragma mark <UICollectionViewDelegate>
@@ -162,12 +165,21 @@ static NSString * const reuseIdentifier = @"bookCellID";
     
     return [collectionView ar_sizeForCellWithIdentifier:reuseIdentifier indexPath:indexPath configuration:^(id cell) {
             //cell configuration...
-        [self configureCell:cell atIndexPath:indexPath];
+//        [self configureCell:cell atIndexPath:indexPath];
+//    Volume *object            = [self.fetchedResultsController objectAtIndexPath:indexPath];
+//            //inches --> pixels...how?
+//    CGFloat thickness         = (object.thickness)? [object.thickness floatValue]: 40.0f;
+//    CGFloat height            = (object.height)? [object.height floatValue] : 106.0f;
+//
+//    CGSize volumeDimensions2D = CGSizeMake(thickness, height);
+//
+//    cell              = volumeDimensions2D;
+
     }];
 }
-*/
+*/≥
  
-#pragma mark - Fetched Results Controller configuration
+#pragma mark - Fetched Results Controller configurationÁ
 
 - (NSFetchedResultsController *)fetchedResultsController
 {

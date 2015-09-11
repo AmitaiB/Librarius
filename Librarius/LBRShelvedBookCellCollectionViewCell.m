@@ -20,9 +20,15 @@
         //custom initialization
     self.imageView = [UIImageView new];
     [self.contentView addSubview:self.imageView];
+    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
 //    [self.imageView setImage:[UIImage imageNamed:@"placeholder"]];
     
     return self;
+}
+
+-(void)layoutSubviews {
+    [super layoutSubviews];
+    self.imageView.frame = self.contentView.bounds;
 }
 
 /**
