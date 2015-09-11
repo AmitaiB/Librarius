@@ -347,6 +347,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="lightToggleButton" destination="dcH-IU-Ezd" id="u0F-dh-jmd"/>
+                        <outlet property="mainContentView" destination="whR-df-RYp" id="pp9-Dc-kBg"/>
                         <outlet property="saveScannedBooksToCoreDataButton" destination="3Bf-2Z-qmt" id="HRk-fD-6zy"/>
                         <outlet property="scannerView" destination="3Px-hT-9Zr" id="kI7-sB-yVI"/>
                         <outlet property="toggleScanningButton" destination="IOe-eD-XQW" id="N9B-xd-Wxb"/>

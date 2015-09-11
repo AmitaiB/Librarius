@@ -34,15 +34,16 @@
 @property (weak, nonatomic) IBOutlet UIButton *lightToggleButton;
 @property (weak, nonatomic) IBOutlet UIButton *saveScannedBooksToCoreDataButton;
 
+@property (weak, nonatomic) IBOutlet UIView *mainContentView;
 @property (weak, nonatomic) IBOutlet UIView *scannerView;
 @property (weak, nonatomic) IBOutlet UIButton *toggleScanningButton;
 @property (nonatomic, strong) UITableView *volumeDetailsTableView;
+@property (nonatomic, strong) UITableView *unsavedVolumesTableView;
+@property (nonatomic, strong) NSMutableArray *unsavedVolumes;
 @property (nonatomic, strong) MTBBarcodeScanner *scanner;
 @property (nonatomic, strong) LBRGoogleGTLClient *googleClient;
 
 @property (nonatomic, strong) MMMaterialDesignSpinner *spinnerView;
-    // Rename a tableview for the Coffee Table, for when the Stop Scanning Button is tapped.
-@property (weak, nonatomic) UITableView *coffeeTableView;
 
 @property (nonatomic) BOOL isScanning;
 @property (nonatomic) BOOL isNotScanning;
@@ -66,13 +67,15 @@ static NSString * const volumeNib          = @"volumePresentationView";
 }
 
 -(void)initializeProgrammaticProperties {
-    self.googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
+    self.googleClient             = [LBRGoogleGTLClient sharedGoogleGTLClient];
+    self.uniqueCodes              = [NSMutableArray new];
+    self.lightToggleButton.hidden = YES;
+    self.unsavedVolumes           = [NSMutableArray new];
+    [self initializeUnsavedVolumesTableView];
+    [self initializeSpinner];
         //SETTINGS: Choose which objects the scanner reads. Keep this one, but if your book doesn't read, try accepting all metadaobjects...
     self.scanner = [[MTBBarcodeScanner alloc] initWithMetadataObjectTypes:@[AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeEAN13Code] previewView:self.scannerView];
-//self.scanner = [[MTBBarcodeScanner alloc] initWithPreviewView:self.scannerView];
-    self.uniqueCodes = [NSMutableArray new];
-    self.lightToggleButton.hidden = YES;
-    [self initializeSpinner];
+        //self.scanner = [[MTBBarcodeScanner alloc] initWithPreviewView:self.scannerView];
     
 }
 
@@ -82,6 +85,12 @@ static NSString * const volumeNib          = @"volumePresentationView";
     self.spinnerView.tintColor = [UIColor cyanColor];
     self.spinnerView.hidesWhenStopped = YES;
     [self.view addSubview:self.spinnerView];
+}
+
+-(void)initializeUnsavedVolumesTableView {
+    self.unsavedVolumesTableView  = [UITableView new];
+    self.unsavedVolumesTableView.delegate = self;
+    self.unsavedVolumesTableView.dataSource = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -141,9 +150,9 @@ static NSString * const volumeNib          = @"volumePresentationView";
  */
 -(void)startScanningOps {
     self.isScanning = YES;
+    [self flipScanButtonAppearance];
     self.saveScannedBooksToCoreDataButton.hidden = YES;
     self.lightToggleButton.hidden = NO;
-    [self flipScanButtonAppearance];
 // ???: Consider embedding the scanning in this: [MTBBarcodeScanner requestCameraPermissionWithSuccess:^(BOOL success)...?
     [self.scannerView bringSubviewToFront:self.lightToggleButton.imageView];
 //    [self.view sendSubviewToBack:self.scannerView];
@@ -187,6 +196,8 @@ static NSString * const volumeNib          = @"volumePresentationView";
     return isbn10Array;
 }
 
+    //FIXME: doesn't work properly.
+    //TODO: impl SelectedButton changes.
 -(void)flipScanButtonAppearance {
     if (self.isNotScanning) {
         [self.toggleScanningButton setTitle:@"Start Scanning" forState:UIControlStateNormal];
@@ -202,7 +213,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
 
 
 -(NSString*)yearFromDate:(NSDate*)date {
-    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSCalendar *calendar    = [NSCalendar currentCalendar];
     NSInteger yearComponent = [calendar component:NSCalendarUnitYear fromDate:date];
     return [@(yearComponent) stringValue];
 }
@@ -312,19 +323,16 @@ static NSString * const volumeNib          = @"volumePresentationView";
     [view removeConstraints:self.view.constraints];
 }
 
-/**
- *  Presents an alert asking the user to confirm her choice.
- */
--(void)confirmVolumeSelection {
-        //"Add <#book title#> to 'CoffeeTable'?
-}
-
 #pragma mark - UITableViewDataSource methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView == self.volumeDetailsTableView) {
         return 1;
+    }
+    
+    if (tableView == self.unsavedVolumesTableView) {
+        return self.unsavedVolumes.count;
     }
 // default value
         return 0;
@@ -363,6 +371,9 @@ static NSString * const volumeNib          = @"volumePresentationView";
             //TODO: add Stage 2: cell.textLabel.text = @"" at first...
         cell.textLabel.text = self.volumeToConfirm.title;
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ (%@)", self.volumeToConfirm.author, [self yearFromDate:self.volumeToConfirm.published]];
+    }
+    if (tableView == self.unsavedVolumesTableView) {
+        cell = self.unsavedVolumes[indexPath.row];
     }
     
     return cell;
