@@ -133,6 +133,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
     [self flipScanButtonAppearance];
     [self.scanner stopScanning];
     self.saveScannedBooksToCoreDataButton.hidden = NO;
+    self.lightToggleButton.hidden = YES;
 }
 
 /**
@@ -141,6 +142,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
 -(void)startScanningOps {
     self.isScanning = YES;
     self.saveScannedBooksToCoreDataButton.hidden = YES;
+    self.lightToggleButton.hidden = NO;
     [self flipScanButtonAppearance];
 // ???: Consider embedding the scanning in this: [MTBBarcodeScanner requestCameraPermissionWithSuccess:^(BOOL success)...?
     [self.scannerView bringSubviewToFront:self.lightToggleButton.imageView];
