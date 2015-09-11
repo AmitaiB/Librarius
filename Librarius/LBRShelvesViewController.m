@@ -54,9 +54,6 @@ static NSString * const reuseIdentifier = @"bookCellID";
     [self.collectionView registerClass:[CUSTOM_CELL_CLASS class] forCellWithReuseIdentifier:reuseIdentifier];
     
     self.dataManager = [LBRDataManager sharedDataManager];
-    
-    
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -78,6 +75,8 @@ static NSString * const reuseIdentifier = @"bookCellID";
 - (void)configureBooksFlowLayout:(UICollectionViewFlowLayout*)layout {
     layout.minimumLineSpacing = 1.0;
     layout.minimumInteritemSpacing = 1.0;
+    layout.estimatedItemSize = CGSizeMake(106.0, 106.0);
+//    layout.itemSize = CGSizeMake(106.0, 106.0);
 }
 
 
@@ -99,9 +98,9 @@ static NSString * const reuseIdentifier = @"bookCellID";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     CUSTOM_CELL_CLASS *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     Volume *volume = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", volume.cover_art_large]];
     [cell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder"]];
-    
+    cell.backgroundColor = [UIColor lightGrayColor];
         //    [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
@@ -155,6 +154,7 @@ static NSString * const reuseIdentifier = @"bookCellID";
 
 #pragma mark - FlowLayout Delegate methods
 
+/*
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     return [collectionView ar_sizeForCellWithIdentifier:reuseIdentifier indexPath:indexPath configuration:^(id cell) {
@@ -162,7 +162,8 @@ static NSString * const reuseIdentifier = @"bookCellID";
         [self configureCell:cell atIndexPath:indexPath];
     }];
 }
-
+*/
+ 
 #pragma mark - Fetched Results Controller configuration
 
 - (NSFetchedResultsController *)fetchedResultsController
