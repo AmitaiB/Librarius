@@ -4,13 +4,15 @@
 target 'Librarius' do
 # Implemented
 pod 'Google/SignIn'
-pod 'Google-API-Client'
+pod 'Google-API-Client/Books'
 pod 'MTBBarcodeScanner'
 pod "MMMaterialDesignSpinner"
 pod 'AFNetworking'
 pod 'NYAlertViewController'
 
 pod 'LARSTorch', '~> 1.1'
+pod 'UICollectionView-ARDynamicHeightLayoutCell_Bell'
+
 
 
 #Not Yet Implemented
