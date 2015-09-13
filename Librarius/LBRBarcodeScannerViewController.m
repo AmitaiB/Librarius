@@ -67,6 +67,10 @@ static NSString * const volumeNib          = @"volumePresentationView";
     [self initializeProgrammaticProperties];
 }
 
+-(void)viewWillLayoutSubviews {
+    self.unsavedVolumesTableView.frame = self.scannerView.bounds;
+}
+
 -(void)initializeProgrammaticProperties {
     self.googleClient             = [LBRGoogleGTLClient sharedGoogleGTLClient];
     self.uniqueCodes              = [NSMutableArray new];
@@ -97,7 +101,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
     tableView.hidden        = NO;
     [self.mainContentView addSubview:tableView];
     [self.mainContentView bringSubviewToFront:tableView];
-    tableView.frame = self.scannerView.frame;
+    
     
         //FIXME
 //    [tableView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[tableView]|"
