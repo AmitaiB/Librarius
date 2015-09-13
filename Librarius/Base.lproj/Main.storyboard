@@ -209,9 +209,6 @@
                                 <state key="normal" title="Start Scanning">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="41.5" y="499" width="317" height="30"/>
-                                </variation>
                                 <connections>
                                     <action selector="toggleScanningButtonTapped:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="5gb-wa-5cA"/>
                                 </connections>
@@ -262,15 +259,15 @@
                                         <exclude reference="dcH-IU-Ezd"/>
                                     </mask>
                                     <mask key="constraints">
+                                        <exclude reference="7em-tl-Fnk"/>
+                                        <exclude reference="LJm-8g-Wl7"/>
+                                        <exclude reference="Lw6-dB-G5t"/>
+                                        <exclude reference="lDy-uP-80C"/>
                                         <exclude reference="3f8-ff-Uo1"/>
                                         <exclude reference="N2Z-H6-eTO"/>
                                         <exclude reference="XNO-yK-Bbw"/>
                                         <exclude reference="stH-ZI-V8s"/>
                                         <exclude reference="wu8-Jb-14o"/>
-                                        <exclude reference="Lw6-dB-G5t"/>
-                                        <exclude reference="lDy-uP-80C"/>
-                                        <exclude reference="7em-tl-Fnk"/>
-                                        <exclude reference="LJm-8g-Wl7"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact">
@@ -280,15 +277,15 @@
                                         <include reference="dcH-IU-Ezd"/>
                                     </mask>
                                     <mask key="constraints">
+                                        <include reference="7em-tl-Fnk"/>
+                                        <include reference="LJm-8g-Wl7"/>
+                                        <include reference="Lw6-dB-G5t"/>
+                                        <include reference="lDy-uP-80C"/>
                                         <include reference="3f8-ff-Uo1"/>
                                         <include reference="N2Z-H6-eTO"/>
                                         <include reference="XNO-yK-Bbw"/>
                                         <include reference="stH-ZI-V8s"/>
                                         <include reference="wu8-Jb-14o"/>
-                                        <include reference="Lw6-dB-G5t"/>
-                                        <include reference="lDy-uP-80C"/>
-                                        <include reference="7em-tl-Fnk"/>
-                                        <include reference="LJm-8g-Wl7"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -313,16 +310,16 @@
                                 <exclude reference="whR-df-RYp"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="NCb-Zx-UzG"/>
-                                <exclude reference="R0J-SD-Rgl"/>
-                                <exclude reference="xi0-ek-iJ6"/>
-                                <exclude reference="PBg-wv-er1"/>
-                                <exclude reference="hIH-yG-F5s"/>
-                                <exclude reference="jJz-MJ-2o8"/>
                                 <exclude reference="E0t-JO-Q1b"/>
                                 <exclude reference="egB-fk-soO"/>
                                 <exclude reference="szo-i1-IR0"/>
+                                <exclude reference="NCb-Zx-UzG"/>
+                                <exclude reference="R0J-SD-Rgl"/>
+                                <exclude reference="xi0-ek-iJ6"/>
                                 <exclude reference="HQ3-Yh-BA5"/>
+                                <exclude reference="PBg-wv-er1"/>
+                                <exclude reference="hIH-yG-F5s"/>
+                                <exclude reference="jJz-MJ-2o8"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -332,16 +329,16 @@
                                 <include reference="whR-df-RYp"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="NCb-Zx-UzG"/>
-                                <include reference="R0J-SD-Rgl"/>
-                                <include reference="xi0-ek-iJ6"/>
-                                <include reference="PBg-wv-er1"/>
-                                <include reference="hIH-yG-F5s"/>
-                                <include reference="jJz-MJ-2o8"/>
                                 <include reference="E0t-JO-Q1b"/>
                                 <include reference="egB-fk-soO"/>
                                 <include reference="szo-i1-IR0"/>
+                                <include reference="NCb-Zx-UzG"/>
+                                <include reference="R0J-SD-Rgl"/>
+                                <include reference="xi0-ek-iJ6"/>
                                 <include reference="HQ3-Yh-BA5"/>
+                                <include reference="PBg-wv-er1"/>
+                                <include reference="hIH-yG-F5s"/>
+                                <include reference="jJz-MJ-2o8"/>
                             </mask>
                         </variation>
                     </view>

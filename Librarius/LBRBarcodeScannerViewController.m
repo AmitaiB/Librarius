@@ -386,16 +386,18 @@ static NSString * const volumeNib          = @"volumePresentationView";
             // We prefer a higher quality image.
         NSURL *coverArtURL = [NSURL URLWithString:(self.volumeToConfirm.cover_art_large)?
                               self.volumeToConfirm.cover_art_large : self.volumeToConfirm.cover_art];
-        NSURLRequest *request = [NSURLRequest requestWithURL:coverArtURL];
+        [cell.imageView setImageWithURL:coverArtURL placeholderImage:[UIImage imageNamed:@"placeholder"]];
         
-            // Thank you, UIImageView+AFNetworking!
-        [cell.imageView setImageWithURLRequest:request placeholderImage:[UIImage imageNamed:@"placeholder"] success:^(NSURLRequest *request, NSHTTPURLResponse *responseObj, UIImage *coverArtImage) {
-            
-                // As per the docs, setImage: needs to be called by the success block.
-             [blockCell.imageView setImage:coverArtImage];
-        } failure:^(NSURLRequest * request, NSHTTPURLResponse * responseObj, NSError * error) {
-            NSLog(@"Failed to load thumbnail with error: %@", error.localizedDescription);
-        }];
+//        NSURLRequest *request = [NSURLRequest requestWithURL:coverArtURL];
+//        
+//            // Thank you, UIImageView+AFNetworking!
+//        [cell.imageView setImageWithURLRequest:request placeholderImage:[UIImage imageNamed:@"placeholder"] success:^(NSURLRequest *request, NSHTTPURLResponse *responseObj, UIImage *coverArtImage) {
+//            
+//                // As per the docs, setImage: needs to be called by the success block.
+//             [blockCell.imageView setImage:coverArtImage];
+//            } failure:^(NSURLRequest * request, NSHTTPURLResponse * responseObj, NSError * error) {
+//                NSLog(@"Failed to load thumbnail with error: %@", error.localizedDescription);
+//            }];
             //TODO: add Stage 2: cell.textLabel.text = @"" at first...
         cell.textLabel.text = self.volumeToConfirm.title;
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ (%@)", self.volumeToConfirm.author, [self yearFromDate:self.volumeToConfirm.published]];
