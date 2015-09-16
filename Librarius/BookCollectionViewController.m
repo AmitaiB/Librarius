@@ -104,6 +104,10 @@
     return YES;
 }
 
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewCellEditingStyleDelete;
+}
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
@@ -121,9 +125,28 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = [object valueForKey:@"title"];
+    NSString *title = [object valueForKey:@"title"];
+    NSString *subtitle = [object valueForKey:@"subtitle"];
+    [self makeTitleCase:title];
+    [self makeTitleCase:subtitle];
+    
+    cell.textLabel.text = title;
+    if (subtitle) {
+        cell.textLabel.text = [NSString stringWithFormat:@"%@: %@", title, subtitle];
+    }
 }
 
+- (void)makeTitleCase:(NSString*)string {
+    NSArray *words = [string componentsSeparatedByString:@" "];
+    for (NSString __strong *word in words) {
+        if ([@[@"the", @"and", @"a", @"of"] containsObject:word]) {
+                // Don't capitalize = do nothing.
+        } else {
+            word = word.capitalizedString;
+        }
+    }
+    string = [words componentsJoinedByString:@" "];
+}
 
 #pragma mark - Fetched Results Controller configuration
 
