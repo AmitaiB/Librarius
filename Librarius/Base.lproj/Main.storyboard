@@ -488,7 +488,7 @@
         <!--Navigation Controller-->
         <scene sceneID="6CS-T3-RTh">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="LWv-rj-2Zu" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="LWv-rj-2Zu" customClass="THNavigationController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Uvh-0J-T5x">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -506,7 +506,7 @@
         <!--Shelve.-->
         <scene sceneID="qEv-u9-RKR">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BK5-aT-ift" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BK5-aT-ift" customClass="THNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Shelve." image="books49" id="ohJ-iw-xie"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="w3I-at-wo4">
