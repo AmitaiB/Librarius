@@ -8,6 +8,9 @@
 
 #import "LBRCustomLayout.h"
 #import "LBRShelvedBookCollectionViewCell.h"
+#import "UIImage+imageScaledToHeight.h"
+#import "LBRDataManager.h"
+#import "BookCollectionViewController.h"
 
 #define kCellDefaultDimension 106.0f//assumes square cell
 #define kHorizontalInset      10.0f //on the left and right
@@ -27,6 +30,7 @@
 
 @property (nonatomic, strong) NSDictionary *layoutInfo;
 @property (nonatomic, strong) NSMutableDictionary *rectsForCells;
+@property (nonatomic) CGFloat max_X;
 
 
 @end
@@ -99,12 +103,18 @@ static NSString * const LBRShelvedBookCollectionViewCellKind = @"coverArtCell";
 
     /**
      *  Track the x-position for laying out, the center points for the cells. X-position
-     *  will move like a typewriter. Once we run out of room on a line, we reset
+     *  will move like a typewriter. Once we run out of room on a line, we reset. Thus:
+        [x] yPosition is a f(shelf#), itself a f(books' spines' thicknesses).
+        [x] xPosition is a f(previous book's rect).
+     
      */
-    CGFloat currentXPosition    = 0.0;
     CGFloat currentYPosition    = 0.0;
-    NSIndexPath *indexPath      = [NSIndexPath indexPathForItem:0 inSection:0];
-    self.centerPointsForCells   = [NSMutableDictionary new];
+    CGFloat currentXPosition    = 0.0; // derived from combined images
+    
+    NSUInteger currentShelfPosition_cm = 0.0;
+    NSIndexPath *indexPath      = [NSIndexPath indexPathForItem:0 inSection:0]; // The longest indexPath begins with the first step.
+    
+    self.centerPointsForCells   = [NSMutableDictionary new]; // ... but just in case.
     self.rectsForSectionHeaders = [NSMutableArray new];
     
     NSMutableDictionary *newLayoutInfo          = [NSMutableDictionary new];
@@ -133,7 +143,8 @@ static NSString * const LBRShelvedBookCollectionViewCellKind = @"coverArtCell";
 
 #pragma mark - Helper methods (aka private)
 /**
- *  Constructs the new item's frame from the
+ *  Constructs the new item's frame from the coords (= where the last cell "left off"
+ *  + whatever inset is specified) and the frame (standard height, scaled width).
  *
  *  @param indexPath <#indexPath description#>
  *
@@ -146,26 +157,78 @@ static NSString * const LBRShelvedBookCollectionViewCellKind = @"coverArtCell";
     NSIndexPath *previousIndexPath = ([indexPath indexPathByRemovingLastIndex])?
     [indexPath indexPathByRemovingLastIndex] : nil;
     if (previousIndexPath) {
-        CGRect *previousRect = (__bridge CGRect *)(self.rectsForCells[previousIndexPath]);
-        CGFloat newX = CGRectGetMaxX(*previousRect) + self.interItemSpacingX;
-        CGFloat newY = CGRectGetMinY(*previousRect);
+        UICollectionViewLayoutAttributes *previousItemsAttributes = self.layoutInfo[previousIndexPath];
+        CGRect previousRect = previousItemsAttributes.frame;
+        CGFloat newX = CGRectGetMaxX(previousRect) + self.interItemSpacingX;
+        CGFloat newY = CGRectGetMinY(previousRect);
+        
+        self.max_X = MAX(self.max_X, newX);
+        
+            //
     
-            // Retrieve the width of the current cell's coverArt.
-        [self.collectionView cellForItemAtIndexPath:indexPath];
-    
+        width = [self widthForCellAtIndexPath:indexPath];
         newFrame = CGRectMake(newX, newY, width, kCellDefaultDimension);
     } else {
         newFrame = CGRectMake(kHorizontalInset, kSectionHeight, width, kCellDefaultDimension);
     }
+    
     return newFrame;
 }
 
+// Retrieve the width of the current cell's coverArt.
+-(CGFloat)widthForCellAtIndexPath:(NSIndexPath*)indexPath {
+    BookCollectionViewController *bookCollectionVC = self.collectionView/*something something...
+                                                                         we need to track the books' combined thickness so that we can see when the typewriter has hit the end of the line, and needs to be reset at the next shelf (until we run out of books, or run out of shelves).
+                                                                         
+                                                                         */;
+    NSFetchedResultsController *fetchedResultsController = bookCollectionVC.fetchedResultsController;
+    
+    LBRShelvedBookCollectionViewCell *cell = (LBRShelvedBookCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    UIImage *scaledImage = [UIImage imageWithImage:cell.imageView.image scaledToHeight:kCellDefaultDimension];
+    CGFloat width = (scaledImage.size.width)? scaledImage.size.width : kCellDefaultDimension;
+    return width;
+}
 
-
+-(CGFloat)bookThicknessForCellAtIndexPath:(NSIndexPath*)indexPath {
+    LBRShelvedBookCollectionViewCell *cell = (LBRShelvedBookCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    
+    
+    CGFloat thickness;
+    return thickness;
+}
 
 -(CGFloat)yPositionForShelf:(NSUInteger)shelfNum {
 #warning This should be non-zero.
     return 0.0f;
+}
+
+/**
+ *  We start off by creating a mutable array where we can store all the attributes that need to be returned. Next we're going to take advantage of the nice block-based dictionary enumeration to cruise through our layoutInfo dictionary. The outer block iterates through each of the sub-dictionaries we've added (only the cells at the moment), then we iterate through each cell in the sub-dictionary. CGRectIntersectsRect makes it simple to check if the cell we're looking at intersects with the rect that was passed in. If it does, we add it to the array we'll be passing back.
+ */
+-(NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {
+    NSMutableArray *allAttributes = [NSMutableArray arrayWithCapacity:self.layoutInfo.count];
+    
+    [self.layoutInfo enumerateKeysAndObjectsUsingBlock:^(NSString *elementIdentifier, NSDictionary *elementsInfo, BOOL *stop) {
+        [elementsInfo enumerateKeysAndObjectsUsingBlock:^(NSIndexPath *indexPath, UICollectionViewLayoutAttributes *attributes, BOOL *innerStop) {
+            if (CGRectIntersectsRect(rect, attributes.frame)) {
+                [allAttributes addObject:attributes];
+            }
+        }];
+    }];
+    
+    return allAttributes;
+}
+
+/**
+ *  All we're doing here is looking up the sub-dictionary for cells and then returning the layout attributes for a cell at the passed in index path.
+ */
+-(UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return self.layoutInfo[LBRShelvedBookCollectionViewCellKind][indexPath];
+}
+
+-(CGSize)collectionViewContentSize {
+    CGFloat max_Y = self.shelvesPerBookcase * (kSectionHeight + kCellDefaultDimension) + kSectionHeight;
+    return CGSizeMake(self.max_X, max_Y);
 }
 
 @end
