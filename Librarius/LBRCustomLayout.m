@@ -9,11 +9,12 @@
 #import "LBRCustomLayout.h"
 #import "LBRShelvedBookCollectionViewCell.h"
 
-#define kCellDefaultDimension   106.0 //assumes square cell
-#define kHorizontalInset    10.0 //on the left and right
-#define kVerticalSpace  1.0  //vertical space between cells
-#define kSectionHeight  20.0
-#define kCenterXPosition    160.0
+#define kCellDefaultDimension 106.0f//assumes square cell
+#define kHorizontalInset      10.0f //on the left and right
+#define kHorizontalSpace      1.0f  //horizontal space between cells
+#define kSectionHeight        20.0f
+
+#define kCenterXPosition      160.0f
 
 @interface LBRCustomLayout ()
 @property (nonatomic, strong) NSMutableDictionary *centerPointsForCells;
@@ -131,11 +132,32 @@ static NSString * const LBRShelvedBookCollectionViewCellKind = @"coverArtCell";
 }
 
 #pragma mark - Helper methods (aka private)
-
+/**
+ *  Constructs the new item's frame from the
+ *
+ *  @param indexPath <#indexPath description#>
+ *
+ *  @return <#return value description#>
+ */
 - (CGRect) frameForCoverArtImageAtIndexPath:(NSIndexPath*)indexPath {
-    NSIndexPath *previousIndexPath = [indexPath indexPathByRemovingLastIndex];
-    CGRect *previousRect = (__bridge CGRect *)(self.rectsForCells[previousIndexPath]);
+    CGRect newFrame;
+    CGFloat width;
     
+    NSIndexPath *previousIndexPath = ([indexPath indexPathByRemovingLastIndex])?
+    [indexPath indexPathByRemovingLastIndex] : nil;
+    if (previousIndexPath) {
+        CGRect *previousRect = (__bridge CGRect *)(self.rectsForCells[previousIndexPath]);
+        CGFloat newX = CGRectGetMaxX(*previousRect) + self.interItemSpacingX;
+        CGFloat newY = CGRectGetMinY(*previousRect);
+    
+            // Retrieve the width of the current cell's coverArt.
+        [self.collectionView cellForItemAtIndexPath:indexPath];
+    
+        newFrame = CGRectMake(newX, newY, width, kCellDefaultDimension);
+    } else {
+        newFrame = CGRectMake(kHorizontalInset, kSectionHeight, width, kCellDefaultDimension);
+    }
+    return newFrame;
 }
 
 
