@@ -84,15 +84,22 @@ static NSString * const LBRShelvedBookCollectionViewCellKind = @"coverArtCell";
 
 
 /**
+ *  ##Strategy
  *  Apple's recommended approach for layouts which change infrequently
  *  and hold hundreds of items (rather than thousands) is to calculate
  *  and cache all of the layout information upfront and then access that
  *  cache when the collection view requests it.
- *   Taking my cue from ICF (Richter & Keeley 2015) and some blogs (e.g., 
+ *
+ *  ##Credit
+ *   Taking my cue from ICF (Richter & Keeley 2015) and some blogs (e.g.,
  *  http://skeuo.com/uicollectionview-custom-layout-tutorial ), this will
  *  be done with Dictionaries that have (conveniently ordered) indexPath(s)
  *  as keys. Advance one indexPath/key, and you get the next cell's layout
  *  attributes (see the nested for-loop below).
+ *
+ *  ##Specifics
+ *   Layout is simple: One cell follows the next.
+ *   Shelving is more complicated: Track book thickness until shelf space runs out.
  */
 - (void)prepareLayout
 {
@@ -110,8 +117,14 @@ static NSString * const LBRShelvedBookCollectionViewCellKind = @"coverArtCell";
      */
     CGFloat currentYPosition    = 0.0;
     CGFloat currentXPosition    = 0.0; // derived from combined images
+    typedef struct  {
+        NSUInteger shelfNum;
+        CGFloat shelfPositionX_cm;
+    } ShelfPosition;
     
-    NSUInteger currentShelfPosition_cm = 0.0;
+    ShelfPosition positionForNextBook = {0, 0.0f};
+    
+    
     NSIndexPath *indexPath      = [NSIndexPath indexPathForItem:0 inSection:0]; // The longest indexPath begins with the first step.
     
     self.centerPointsForCells   = [NSMutableDictionary new]; // ... but just in case.
@@ -177,11 +190,17 @@ static NSString * const LBRShelvedBookCollectionViewCellKind = @"coverArtCell";
 
 // Retrieve the width of the current cell's coverArt.
 -(CGFloat)widthForCellAtIndexPath:(NSIndexPath*)indexPath {
+        // Experimental:
+    LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
+    UIViewController<NSFetchedResultsControllerDelegate> *tempVC = [[UIViewController alloc] init];
+    NSFetchedResultsController *frc = [dataManager preconfiguredLBRFetchedResultsController:tempVC];
+    
     BookCollectionViewController *bookCollectionVC = self.collectionView/*something something...
                                                                          we need to track the books' combined thickness so that we can see when the typewriter has hit the end of the line, and needs to be reset at the next shelf (until we run out of books, or run out of shelves).
                                                                          
                                                                          */;
     NSFetchedResultsController *fetchedResultsController = bookCollectionVC.fetchedResultsController;
+        //END experimental.
     
     LBRShelvedBookCollectionViewCell *cell = (LBRShelvedBookCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
     UIImage *scaledImage = [UIImage imageWithImage:cell.imageView.image scaledToHeight:kCellDefaultDimension];

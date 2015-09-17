@@ -27,7 +27,6 @@
 
 
 +(instancetype)sharedDataManager;
--(NSFetchedResultsController*)preconfiguredLBRFetchedResultsController:(UIViewController<NSFetchedResultsControllerDelegate> *)sender;
 
 -(void)updateWithNewTransientVolume:(LBRParsedVolume*)volumeToAdd;
 -(void)saveParsedVolumesToEitherSaveOrDiscardToPersistentStore;
@@ -35,7 +34,7 @@
 -(void)logCurrentLibrary;
 
 
-//============== adding CoreData functions here
+//============== CoreData functions here
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSManagedObjectModel *managedObjectModel;
@@ -47,6 +46,7 @@
 @property (nonatomic, strong) Library *currentLibrary;
     //http://stackoverflow.com/questions/14671478/coredata-error-failed-to-call-designated-initializer-on-nsmanagedobject-class
 
+-(NSFetchedResultsController*)preconfiguredLBRFetchedResultsController:(UIViewController<NSFetchedResultsControllerDelegate> *)sender;
 -(void) saveContext;
 -(void) generateTestDataIfNeeded;
 -(void) generateDefaultLibraryIfNeeded;

@@ -14,7 +14,7 @@
 #import <UICollectionView+ARDynamicCacheHeightLayoutCell.h>
 
 #import "LBRShelvedBookCollectionViewCell.h"
-#define CUSTOM_CELL_CLASS LBRShelvedBookCellCollectionViewCell
+#define CUSTOM_CELL_CLASS LBRShelvedBookCollectionViewCell
 
 
 @interface LBRShelvesViewController ()
@@ -54,7 +54,7 @@ static NSString * const reuseIdentifier = @"bookCellID";
     [self.collectionView registerClass:[CUSTOM_CELL_CLASS class] forCellWithReuseIdentifier:reuseIdentifier];
     
     self.dataManager = [LBRDataManager sharedDataManager];
-    self.fetchedResultsController;
+    self.fetchedResultsController; //!!!: What is this for?
 }
 
 - (void)didReceiveMemoryWarning {
@@ -106,6 +106,7 @@ static NSString * const reuseIdentifier = @"bookCellID";
     Volume *volume = (Volume*)volumesArray[indexPath.row];
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", volume.cover_art_large]];
     [cell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    cell.thickness = [volume.thickness floatValue];
         //    [self configureCell:cell atIndexPath:indexPath];
     
     return cell;
