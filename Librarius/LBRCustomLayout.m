@@ -7,39 +7,66 @@
 //
 
 #import "LBRCustomLayout.h"
+#import "LBRShelvedBookCollectionViewCell.h"
 
-#define kCellSize   50.0 //assumes square cell
+#define kCellDefaultDimension   106.0 //assumes square cell
 #define kHorizontalInset    10.0 //on the left and right
-#define kPi 3.141592653
-#define kVerticalSpace  10.0  //vertical space between cells
+#define kVerticalSpace  1.0  //vertical space between cells
 #define kSectionHeight  20.0
 #define kCenterXPosition    160.0
-#define kMaxAmplitude   125.0
-
-#define kNumberOfShelvesPerBookcase 5.0
 
 @interface LBRCustomLayout ()
 @property (nonatomic, strong) NSMutableDictionary *centerPointsForCells;
 @property (nonatomic, strong) NSMutableArray *rectsForSectionHeaders;
-@property (nonatomic, assign) CGSize contentSize;
+@property (nonatomic, assign) CGSize defaultItemSize;
+@property (nonatomic, assign) CGFloat interItemSpacingX;
+@property (nonatomic) UIEdgeInsets insets;
+@property (nonatomic) NSUInteger shelvesPerBookcase;
+@property (nonatomic) CGFloat bookcaseWidth_cm;
+
+@property (nonatomic, strong) NSDictionary *layoutInfo;
+@property (nonatomic, strong) NSMutableDictionary *rectsForCells;
+
+
 @end
 
 @implementation LBRCustomLayout
 
-- (id)init
+static NSString * const LBRShelvedBookCollectionViewCellKind = @"coverArtCell";
+
+#pragma mark - Lifecycle
+
+- (instancetype)init
 {
     self = [super init];
     if (self)
     {
-        //self.centerXPosition = self.collectionView.bounds.size.width / 2;
-        //self.maxAmplitude = (self.collectionView.bounds.size.width - 2 * kHorizontalInset) / 2;
-        //[self registerClass:[ShelfView class] forDecorationViewOfKind:[ShelfView kind]];
+        [self setup];
     }
     return self;
 }
 
+-(id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super init];
+    if (self) {
+        [self setup];
+    }
+    return self;
+}
+
+- (void)setup {
+    self.insets = UIEdgeInsetsMake(22.0f, kHorizontalInset,
+                                   13.0f, kHorizontalInset);
+    self.defaultItemSize = CGSizeMake(106.0f, 106.0f);
+    self.interItemSpacingX = 1.0f;
+    self.shelvesPerBookcase = 5;
+    self.bookcaseWidth_cm = 55.0f;
+}
+
+
+
 /**
- *  ICF method.
+ *  CLEAN: ICF method.
  */
 //- (CGFloat)calculateSineXPositionForY:(CGFloat)yPosition
 //{
@@ -50,130 +77,73 @@
 //    return adjustedXPosition;
 //}
 
+
+/**
+ *  Apple's recommended approach for layouts which change infrequently
+ *  and hold hundreds of items (rather than thousands) is to calculate
+ *  and cache all of the layout information upfront and then access that
+ *  cache when the collection view requests it.
+ *   Taking my cue from ICF (Richter & Keeley 2015) and some blogs (e.g., 
+ *  http://skeuo.com/uicollectionview-custom-layout-tutorial ), this will
+ *  be done with Dictionaries that have (conveniently ordered) indexPath(s)
+ *  as keys. Advance one indexPath/key, and you get the next cell's layout
+ *  attributes (see the nested for-loop below).
+ */
 - (void)prepareLayout
 {
     /**
-     *  It should be easier to start each section as a new line, so
-     * each section is a new "shelf"
+     * Note: The sections from the Fetched Results Controller are book "categories", not shelves.
      */
-    NSUInteger numShelves = kNumberOfShelvesPerBookcase; // Most Bookcases have around 5 shelves.
-//    NSInteger numSections = [self.collectionView numberOfSections];
+    NSInteger sectionCount = [self.collectionView numberOfSections];
 
-    CGFloat currentXPosition = 0.0;
-    self.centerPointsForCells = [NSMutableDictionary new];
-//    self.rectsForSectionHeaders = [[NSMutableArray alloc] init];
+    /**
+     *  Track the x-position for laying out, the center points for the cells. X-position
+     *  will move like a typewriter. Once we run out of room on a line, we reset
+     */
+    CGFloat currentXPosition    = 0.0;
+    CGFloat currentYPosition    = 0.0;
+    NSIndexPath *indexPath      = [NSIndexPath indexPathForItem:0 inSection:0];
+    self.centerPointsForCells   = [NSMutableDictionary new];
+    self.rectsForSectionHeaders = [NSMutableArray new];
     
-    for (NSUInteger sectionIndex = 0; sectionIndex < numSections;
-         sectionIndex++)
-    {
-        CGRect rectForNextSection = CGRectMake(0, currentYPosition,
-        self.collectionView.bounds.size.width, kSectionHeight);
+    NSMutableDictionary *newLayoutInfo          = [NSMutableDictionary new];
+    NSMutableDictionary *cellLayoutInfo         = [NSMutableDictionary new];
+    NSMutableDictionary *leadingPathsForShelves = [NSMutableDictionary new];
+ 
+    
+    for (NSUInteger section = 0; section < sectionCount; section++) {
+        NSUInteger itemCount = [self.collectionView numberOfItemsInSection:section];
         
-        self.rectsForSectionHeaders[sectionIndex] =
-        [NSValue valueWithCGRect:rectForNextSection];
-        
-        currentYPosition +=
-        kSectionHeight + kVerticalSpace + kCellSize / 2;
-        
-        NSInteger numCellsForSection =
-        [self.collectionView numberOfItemsInSection:sectionIndex];
-        
-        for (NSInteger cellIndex = 0; cellIndex < numCellsForSection;
-             cellIndex++)
-        {
-            CGFloat xPosition =
-            [self calculateSineXPositionForY:currentYPosition];
+        for (NSUInteger item = 0; item < itemCount; item++) {
+            indexPath = [NSIndexPath indexPathForItem:item inSection:section];
             
-            CGPoint cellCenterPoint =
-            CGPointMake(xPosition, currentYPosition);
+            UICollectionViewLayoutAttributes *itemAttributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
             
-            NSIndexPath *cellIndexPath = [NSIndexPath
-            indexPathForItem:cellIndex inSection:sectionIndex];
+            itemAttributes.frame = [self frameForCoverArtImageAtIndexPath:indexPath];
             
-            self.centerPointsForCells[cellIndexPath] =
-            [NSValue valueWithCGPoint:cellCenterPoint];
-            
-            currentYPosition += kCellSize + kVerticalSpace;
-        }
-    }
-
-    self.contentSize =
-    CGSizeMake(self.collectionView.bounds.size.width,
-               currentYPosition + kVerticalSpace);
-   
-}
-
-- (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)path
-{
-    UICollectionViewLayoutAttributes *attributes =
-    [UICollectionViewLayoutAttributes
-     layoutAttributesForCellWithIndexPath:path];
-
-    attributes.size = CGSizeMake(kCellSize, kCellSize);
-    NSValue *centerPointValue = self.centerPointsForCells[path];
-    attributes.center = [centerPointValue CGPointValue];
-    return attributes;
-}
-
-- (UICollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
-{
-    UICollectionViewLayoutAttributes *attributes =
-    [UICollectionViewLayoutAttributes
-     layoutAttributesForSupplementaryViewOfKind:
-     UICollectionElementKindSectionHeader withIndexPath:indexPath];
-
-    CGRect sectionRect =
-    [self.rectsForSectionHeaders[indexPath.section] CGRectValue];
-
-    attributes.size =
-    CGSizeMake(sectionRect.size.width, sectionRect.size.height);
-
-    attributes.center =
-    CGPointMake(CGRectGetMidX(sectionRect),
-                CGRectGetMidY(sectionRect));
-
-    return attributes;
-}
-
--(NSArray*)layoutAttributesForElementsInRect:(CGRect)rect
-{
-    NSMutableArray *attributes = [NSMutableArray array];
-    for (NSValue *sectionRect in self.rectsForSectionHeaders)
-    {
-        if (CGRectIntersectsRect(rect, sectionRect.CGRectValue))
-        {
-            NSInteger sectionIndex =
-            [self.rectsForSectionHeaders indexOfObject:sectionRect];
-            
-            NSIndexPath *secIndexPath =
-            [NSIndexPath indexPathForItem:0 inSection:sectionIndex];
-            
-            [attributes addObject:
-             [self layoutAttributesForSupplementaryViewOfKind:
-              UICollectionElementKindSectionHeader
-              atIndexPath:secIndexPath]];
+            cellLayoutInfo[indexPath] = itemAttributes;
         }
     }
     
-    [self.centerPointsForCells enumerateKeysAndObjectsUsingBlock:
-     ^(NSIndexPath *indexPath, NSValue *centerPoint, BOOL *stop) {
-         
-        CGPoint center = [centerPoint CGPointValue];
-        
-        CGRect cellRect = CGRectMake(center.x - kCellSize/2,
-        center.y - kCellSize/2, kCellSize, kCellSize);
-         
-        if (CGRectIntersectsRect(rect, cellRect)) {
-            [attributes addObject:
-            [self layoutAttributesForItemAtIndexPath:indexPath]];
-        }
-    }];
+    newLayoutInfo[LBRShelvedBookCollectionViewCellKind] = cellLayoutInfo;
     
-    return [NSArray arrayWithArray:attributes];
+    self.layoutInfo = newLayoutInfo;
 }
 
-- (CGSize)collectionViewContentSize
-{
-    return self.contentSize;
+#pragma mark - Helper methods (aka private)
+
+- (CGRect) frameForCoverArtImageAtIndexPath:(NSIndexPath*)indexPath {
+    NSIndexPath *previousIndexPath = [indexPath indexPathByRemovingLastIndex];
+    CGRect *previousRect = (__bridge CGRect *)(self.rectsForCells[previousIndexPath]);
+    
 }
+
+
+
+
+-(CGFloat)yPositionForShelf:(NSUInteger)shelfNum {
+#warning This should be non-zero.
+    return 0.0f;
+}
+
 @end

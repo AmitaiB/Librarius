@@ -1,5 +1,5 @@
 //
-//  LBRShelvedBookCellCollectionViewCell.h
+//  LBRShelvedBookCollectionViewCell.h
 //  Librarius
 //
 //  Created by Amitai Blickstein on 9/11/15.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LBRShelvedBookCellCollectionViewCell : UICollectionViewCell
+@interface LBRShelvedBookCollectionViewCell : UICollectionViewCell
 
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) NSString *coverArtURL;

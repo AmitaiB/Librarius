@@ -1,16 +1,16 @@
 //
-//  LBRShelvedBookCellCollectionViewCell.m
+//  LBRShelvedBookCollectionViewCell.m
 //  Librarius
 //
 //  Created by Amitai Blickstein on 9/11/15.
 //  Copyright (c) 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 
-#import "LBRShelvedBookCellCollectionViewCell.h"
+#import "LBRShelvedBookCollectionViewCell.h"
 #import <SAMCache.h>
 
 
-@implementation LBRShelvedBookCellCollectionViewCell
+@implementation LBRShelvedBookCollectionViewCell
 
 -(instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];

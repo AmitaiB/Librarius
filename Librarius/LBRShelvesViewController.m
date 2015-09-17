@@ -13,7 +13,7 @@
 #import "Volume.h"
 #import <UICollectionView+ARDynamicCacheHeightLayoutCell.h>
 
-#import "LBRShelvedBookCellCollectionViewCell.h"
+#import "LBRShelvedBookCollectionViewCell.h"
 #define CUSTOM_CELL_CLASS LBRShelvedBookCellCollectionViewCell
 
 
