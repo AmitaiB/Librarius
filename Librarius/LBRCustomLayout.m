@@ -7,7 +7,7 @@
 //
 
 #import "LBRCustomLayout.h"
-#import "LBRShelvedBookCollectionViewCell.h"
+#import "LBRShelvedBookCollectionViewCell.h" //TODO: <--comment this out and fix what breaks -- don't reference the cell, rather get the data from the model. Choose! Representational, or otherwise??
 #import "UIImage+imageScaledToHeight.h"
 #import "LBRDataManager.h"
 #import "BookCollectionViewController.h"

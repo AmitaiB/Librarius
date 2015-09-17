@@ -9,7 +9,7 @@
 #import "UIImage+imageScaledToHeight.h"
 
 @implementation UIImage (imageScaledToHeight)
-
+    //TODO: do this mathematically, the image will take care of itself (like a gas)
 + (UIImage*)imageWithImage:(UIImage*)sourceImage scaledToHeight:(CGFloat)i_height {
     CGFloat oldHeight = sourceImage.size.height;
     CGFloat scaleFactor = i_height / oldHeight;
