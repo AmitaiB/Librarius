@@ -180,9 +180,10 @@ static NSString * const LBRShelvedBookCollectionViewCellKind = @"coverArtCell";
     if (previousIndexPath) {
         UICollectionViewLayoutAttributes *previousItemsAttributes = self.layoutInfo[previousIndexPath];
         CGRect previousRect = previousItemsAttributes.frame;
-        CGFloat newX = CGRectGetMaxX(previousRect) + self.interItemSpacingX;
+        
+        CGFloat newX = (onNewLine)? (0.0f + self.insets.left) : (CGRectGetMaxX(previousRect) + self.interItemSpacingX);
+//      CGFloat newY = CGRectGetMinY(previousRect);
         CGFloat newY = [self yPositionForShelf:self.shelvesForCells[indexPath]];
-        CGRectGetMinY(previousRect);
     
         newFrame = CGRectMake(newX, newY, variableWidth, kCellHeight);
         
