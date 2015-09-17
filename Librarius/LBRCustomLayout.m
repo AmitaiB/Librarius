@@ -12,12 +12,12 @@
 #import "LBRDataManager.h"
 #import "BookCollectionViewController.h"
 
-#define kCellDefaultDimension 106.0f//assumes square cell
+#define kCellHeight 106.0f//for a square cell
 #define kHorizontalInset      10.0f //on the left and right
 #define kHorizontalSpace      1.0f  //horizontal space between cells
 #define kSectionHeight        20.0f
+#define offByOneAdjmt         1
 
-#define kCenterXPosition      160.0f
 
 @interface LBRCustomLayout ()
 @property (nonatomic, strong) NSMutableDictionary *centerPointsForCells;
@@ -25,12 +25,18 @@
 @property (nonatomic, assign) CGSize defaultItemSize;
 @property (nonatomic, assign) CGFloat interItemSpacingX;
 @property (nonatomic) UIEdgeInsets insets;
+
 @property (nonatomic) NSUInteger shelvesPerBookcase;
 @property (nonatomic) CGFloat bookcaseWidth_cm;
+@property (nonatomic) CGFloat xPosition_cm;
+@property (nonatomic) NSUInteger shelfPosition;
 
 @property (nonatomic, strong) NSDictionary *layoutInfo;
 @property (nonatomic, strong) NSMutableDictionary *rectsForCells;
 @property (nonatomic) CGFloat max_X;
+
+@property (nonatomic, strong) NSMutableDictionary *shelvesForCells;
+
 
 
 @end
@@ -125,10 +131,12 @@ static NSString * const LBRShelvedBookCollectionViewCellKind = @"coverArtCell";
     ShelfPosition positionForNextBook = {0, 0.0f};
     
     
+    
     NSIndexPath *indexPath      = [NSIndexPath indexPathForItem:0 inSection:0]; // The longest indexPath begins with the first step.
     
     self.centerPointsForCells   = [NSMutableDictionary new]; // ... but just in case.
     self.rectsForSectionHeaders = [NSMutableArray new];
+    self.shelvesForCells        = [NSMutableDictionary new];
     
     NSMutableDictionary *newLayoutInfo          = [NSMutableDictionary new];
     NSMutableDictionary *cellLayoutInfo         = [NSMutableDictionary new];
@@ -142,7 +150,7 @@ static NSString * const LBRShelvedBookCollectionViewCellKind = @"coverArtCell";
             indexPath = [NSIndexPath indexPathForItem:item inSection:section];
             
             UICollectionViewLayoutAttributes *itemAttributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
-            
+            self.shelvesForCells[indexPath] = [self shelfForCellAtIndexPath:indexPath];
             itemAttributes.frame = [self frameForCoverArtImageAtIndexPath:indexPath];
             
             cellLayoutInfo[indexPath] = itemAttributes;
@@ -159,66 +167,63 @@ static NSString * const LBRShelvedBookCollectionViewCellKind = @"coverArtCell";
  *  Constructs the new item's frame from the coords (= where the last cell "left off"
  *  + whatever inset is specified) and the frame (standard height, scaled width).
  *
- *  @param indexPath <#indexPath description#>
  *
- *  @return <#return value description#>
  */
 - (CGRect) frameForCoverArtImageAtIndexPath:(NSIndexPath*)indexPath {
     CGRect newFrame;
-    CGFloat width;
+    CGFloat variableWidth = [self widthForCellAtIndexPath:indexPath];
     
     NSIndexPath *previousIndexPath = ([indexPath indexPathByRemovingLastIndex])?
     [indexPath indexPathByRemovingLastIndex] : nil;
+    BOOL onNewLine = [self.shelvesForCells[indexPath] isEqual:self.shelvesForCells[previousIndexPath]];
+
     if (previousIndexPath) {
         UICollectionViewLayoutAttributes *previousItemsAttributes = self.layoutInfo[previousIndexPath];
         CGRect previousRect = previousItemsAttributes.frame;
         CGFloat newX = CGRectGetMaxX(previousRect) + self.interItemSpacingX;
-        CGFloat newY = CGRectGetMinY(previousRect);
-        
-        self.max_X = MAX(self.max_X, newX);
-        
-            //
+        CGFloat newY = [self yPositionForShelf:self.shelvesForCells[indexPath]];
+        CGRectGetMinY(previousRect);
     
-        width = [self widthForCellAtIndexPath:indexPath];
-        newFrame = CGRectMake(newX, newY, width, kCellDefaultDimension);
+        newFrame = CGRectMake(newX, newY, variableWidth, kCellHeight);
+        
     } else {
-        newFrame = CGRectMake(kHorizontalInset, kSectionHeight, width, kCellDefaultDimension);
+            // If this is the first indexPath:
+        newFrame = CGRectMake(kHorizontalInset, kSectionHeight, variableWidth, kCellHeight);
     }
+    
     
     return newFrame;
 }
 
 // Retrieve the width of the current cell's coverArt.
 -(CGFloat)widthForCellAtIndexPath:(NSIndexPath*)indexPath {
-        // Experimental:
-    LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
-    UIViewController<NSFetchedResultsControllerDelegate> *tempVC = [[UIViewController alloc] init];
-    NSFetchedResultsController *frc = [dataManager preconfiguredLBRFetchedResultsController:tempVC];
-    
-    BookCollectionViewController *bookCollectionVC = self.collectionView/*something something...
-                                                                         we need to track the books' combined thickness so that we can see when the typewriter has hit the end of the line, and needs to be reset at the next shelf (until we run out of books, or run out of shelves).
-                                                                         
-                                                                         */;
-    NSFetchedResultsController *fetchedResultsController = bookCollectionVC.fetchedResultsController;
-        //END experimental.
-    
     LBRShelvedBookCollectionViewCell *cell = (LBRShelvedBookCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
-    UIImage *scaledImage = [UIImage imageWithImage:cell.imageView.image scaledToHeight:kCellDefaultDimension];
-    CGFloat width = (scaledImage.size.width)? scaledImage.size.width : kCellDefaultDimension;
+    UIImage *scaledImage = [UIImage imageWithImage:cell.imageView.image scaledToHeight:kCellHeight];
+    CGFloat width = (scaledImage.size.width)? scaledImage.size.width : kCellHeight;
     return width;
 }
 
--(CGFloat)bookThicknessForCellAtIndexPath:(NSIndexPath*)indexPath {
+-(NSNumber*)shelfForCellAtIndexPath:(NSIndexPath*)indexPath {
     LBRShelvedBookCollectionViewCell *cell = (LBRShelvedBookCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
-    
-    
-    CGFloat thickness;
-    return thickness;
+    self.xPosition_cm += cell.thickness;
+    if (self.xPosition_cm > self.bookcaseWidth_cm) {
+        self.xPosition_cm = 0;
+        self.shelfPosition++;
+    }
+    if (self.shelfPosition > self.shelvesPerBookcase) {
+        NSLog(@"Error: ran out of space on bookshelf!");
+    }
+    return @(self.shelfPosition);
 }
 
--(CGFloat)yPositionForShelf:(NSUInteger)shelfNum {
-#warning This should be non-zero.
-    return 0.0f;
+
+-(CGFloat)yPositionForShelf:(NSNumber*)shelfNum {
+    CGFloat yPosition = 0.0f;
+        // Top-inset + (top section header + superior cells' height) * shelf_number
+    NSInteger nthShelf = [shelfNum integerValue] + offByOneAdjmt;
+    yPosition = self.insets.top +  nthShelf * (kSectionHeight + kCellHeight);
+    
+    return yPosition;
 }
 
 /**
@@ -246,7 +251,7 @@ static NSString * const LBRShelvedBookCollectionViewCellKind = @"coverArtCell";
 }
 
 -(CGSize)collectionViewContentSize {
-    CGFloat max_Y = self.shelvesPerBookcase * (kSectionHeight + kCellDefaultDimension) + kSectionHeight;
+    CGFloat max_Y = self.shelvesPerBookcase * (kSectionHeight + kCellHeight) + kSectionHeight;
     return CGSizeMake(self.max_X, max_Y);
 }
 
