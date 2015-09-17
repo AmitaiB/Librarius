@@ -123,24 +123,18 @@ static NSString * const LBRShelvedBookCollectionViewCellKind = @"coverArtCell";
      */
     CGFloat currentYPosition    = 0.0;
     CGFloat currentXPosition    = 0.0; // derived from combined images
-    typedef struct  {
-        NSUInteger shelfNum;
-        CGFloat shelfPositionX_cm;
-    } ShelfPosition;
-    
-    ShelfPosition positionForNextBook = {0, 0.0f};
-    
     
     
     NSIndexPath *indexPath      = [NSIndexPath indexPathForItem:0 inSection:0]; // The longest indexPath begins with the first step.
     
-    self.centerPointsForCells   = [NSMutableDictionary new]; // ... but just in case.
+//    self.centerPointsForCells   = [NSMutableDictionary new]; // ... but just in case.
+
     self.rectsForSectionHeaders = [NSMutableArray new];
     self.shelvesForCells        = [NSMutableDictionary new];
     
     NSMutableDictionary *newLayoutInfo          = [NSMutableDictionary new];
     NSMutableDictionary *cellLayoutInfo         = [NSMutableDictionary new];
-    NSMutableDictionary *leadingPathsForShelves = [NSMutableDictionary new];
+//    NSMutableDictionary *leadingPathsForShelves = [NSMutableDictionary new];
  
     
     for (NSUInteger section = 0; section < sectionCount; section++) {
@@ -173,9 +167,14 @@ static NSString * const LBRShelvedBookCollectionViewCellKind = @"coverArtCell";
     CGRect newFrame;
     CGFloat variableWidth = [self widthForCellAtIndexPath:indexPath];
     
+    /**
+     *  FIXME: replace with a good ol' ThisOneMinusOne thang.
+    *  @param indexPathByRemovingLastIndex]
+     */
     NSIndexPath *previousIndexPath = ([indexPath indexPathByRemovingLastIndex])?
     [indexPath indexPathByRemovingLastIndex] : nil;
-    BOOL onNewLine = [self.shelvesForCells[indexPath] isEqual:self.shelvesForCells[previousIndexPath]];
+
+    BOOL onNewLine = ![self.shelvesForCells[indexPath] isEqual:self.shelvesForCells[previousIndexPath]];
 
     if (previousIndexPath) {
         UICollectionViewLayoutAttributes *previousItemsAttributes = self.layoutInfo[previousIndexPath];
@@ -191,8 +190,6 @@ static NSString * const LBRShelvedBookCollectionViewCellKind = @"coverArtCell";
             // If this is the first indexPath:
         newFrame = CGRectMake(kHorizontalInset, kSectionHeight, variableWidth, kCellHeight);
     }
-    
-    
     return newFrame;
 }
 

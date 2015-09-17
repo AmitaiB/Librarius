@@ -46,7 +46,6 @@
 @property (nonatomic, strong) MMMaterialDesignSpinner *spinnerView;
 
 @property (nonatomic) BOOL isScanning;
-@property (nonatomic) BOOL isNotScanning;
 @end
 
 
@@ -130,12 +129,9 @@ static NSString * const volumeNib          = @"volumePresentationView";
 #pragma mark - buttons
 
 - (IBAction)toggleScanningButtonTapped:(id)sender {
-        // I like how it reads, don't you?
-    self.isNotScanning = !self.isScanning;
-    
     if (self.isScanning) {
         [self stopScanningOps];}
-    if (self.isNotScanning) {
+    else {
         [self startScanningOps];}
 }
 
@@ -225,15 +221,14 @@ static NSString * const volumeNib          = @"volumePresentationView";
     //FIXME: doesn't work properly.
     //TODO: impl SelectedButton changes.
 -(void)flipScanButtonAppearance {
-    if (self.isNotScanning) {
-        [self.toggleScanningButton setTitle:@"Start Scanning" forState:UIControlStateNormal];
-        [self.toggleScanningButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-        self.toggleScanningButton.backgroundColor = [UIColor cyanColor];
-    }
     if (self.isScanning) {
         [self.toggleScanningButton setTitle:@"Stop Scanning" forState:UIControlStateNormal];
         [self.toggleScanningButton setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
         self.toggleScanningButton.backgroundColor = [UIColor redColor];
+    } else {
+        [self.toggleScanningButton setTitle:@"Start Scanning" forState:UIControlStateNormal];
+        [self.toggleScanningButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        self.toggleScanningButton.backgroundColor = [UIColor cyanColor];
     }
 }
 
