@@ -45,6 +45,8 @@
 
 @property (nonatomic, strong) MMMaterialDesignSpinner *spinnerView;
 
+@property (nonatomic) BOOL isConfigured;
+
 @property (nonatomic) BOOL isScanning;
 @end
 
@@ -62,15 +64,16 @@ static NSString * const volumeNib          = @"volumePresentationView";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self generateTestDataIfNeeded];
-        //TODO: only remake these if needed (performance)
-    [self initializeProgrammaticProperties];
+
+    if (!self.isConfigured) {
+        [self configureProgrammaticProperties];}
 }
 
 -(void)viewWillLayoutSubviews {
     self.unsavedVolumesTableView.frame = self.scannerView.bounds;
 }
 
--(void)initializeProgrammaticProperties {
+-(void)configureProgrammaticProperties {
     self.googleClient             = [LBRGoogleGTLClient sharedGoogleGTLClient];
     self.uniqueCodes              = [NSMutableArray new];
     self.lightToggleButton.hidden = YES;
@@ -80,7 +83,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
         //SETTINGS: Choose which objects the scanner reads. Keep this one, but if your book doesn't read, try accepting all metadaobjects...
     self.scanner = [[MTBBarcodeScanner alloc] initWithMetadataObjectTypes:@[AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeEAN13Code] previewView:self.scannerView];
         //self.scanner = [[MTBBarcodeScanner alloc] initWithPreviewView:self.scannerView];
-    
+    self.isConfigured = YES;
 }
 
 -(void)initializeSpinner {

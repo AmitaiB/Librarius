@@ -199,6 +199,8 @@
 		3803752F1B8AC9A8004C4ECE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				388DBDF11BA9174A005C5125 /* THNavigationController.h */,
+				388DBDF21BA9174A005C5125 /* THNavigationController.m */,
 				382CE7FB1B9E09ED000A9701 /* Librarius-Prefix.pch */,
 				384E0CBD1B97D231007E7290 /* Categories */,
 				3803757D1B8C16B3004C4ECE /* GoogleService-Info.plist */,
@@ -278,8 +280,6 @@
 				380375691B8BC89D004C4ECE /* LBRGoogleSignInViewController.m */,
 				380375391B8AC9A8004C4ECE /* LBRBarcodeScannerViewController.h */,
 				3803753A1B8AC9A8004C4ECE /* LBRBarcodeScannerViewController.m */,
-				388DBDF11BA9174A005C5125 /* THNavigationController.h */,
-				388DBDF21BA9174A005C5125 /* THNavigationController.m */,
 				380375781B8C08E0004C4ECE /* LBRSettingsTableViewController.h */,
 				380375791B8C08E0004C4ECE /* LBRSettingsTableViewController.m */,
 				380375F31B8D4E90004C4ECE /* BookCollectionViewController.h */,
