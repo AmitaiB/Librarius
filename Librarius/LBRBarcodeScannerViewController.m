@@ -24,7 +24,8 @@
 #import <LARSTorch.h>
 #import "LBRConstants.h"
     //Testing out:
-
+    //TODO: grab the color stuff from UIKit, and junk the rest.
+#import <FlatUIKit.h>
 
 @interface LBRBarcodeScannerViewController ()
 
@@ -74,17 +75,33 @@ static NSString * const volumeNib          = @"volumePresentationView";
 }
 
 -(void)configureProgrammaticProperties {
-    self.googleClient             = [LBRGoogleGTLClient sharedGoogleGTLClient];
-    self.uniqueCodes              = [NSMutableArray new];
-    self.lightToggleButton.hidden = YES;
-    self.unsavedVolumes           = [NSMutableArray new];
+        // Initializations
+    self.googleClient    = [LBRGoogleGTLClient sharedGoogleGTLClient];
+    self.uniqueCodes     = [NSMutableArray new];
+    self.unsavedVolumes  = [NSMutableArray new];
+    self.volumeToConfirm = [LBRParsedVolume new];
     [self initializeUnsavedVolumesTableView:self.unsavedVolumesTableView];
     [self initializeSpinner];
-        //SETTINGS: Choose which objects the scanner reads. Keep this one, but if your book doesn't read, try accepting all metadaobjects...
-    self.scanner = [[MTBBarcodeScanner alloc] initWithMetadataObjectTypes:@[AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeEAN13Code] previewView:self.scannerView];
-        //self.scanner = [[MTBBarcodeScanner alloc] initWithPreviewView:self.scannerView];
+    self.scanner         = [[MTBBarcodeScanner alloc] initWithMetadataObjectTypes:@[AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeEAN13Code] previewView:self.scannerView];
+        ///Alternative: self.scanner = [[MTBBarcodeScanner alloc] initWithPreviewView:self.scannerView];
+    
+        // Hidden Things
+    self.lightToggleButton.hidden = YES;
+    
+        // UI Elements
+    self.toggleScanningButton.backgroundColor = [UIColor belizeHoleColor];
+//    self.toggleScanningButton.titleLabel.textColor = [UIColor sunflowerColor];
+    self.toggleScanningButton.tintColor = [UIColor turquoiseColor];
+    self.toggleScanningButton.layer.cornerRadius             = 5.0f;
+    self.saveScannedBooksToCoreDataButton.layer.cornerRadius = 5.0f;
+    self.saveScannedBooksToCoreDataButton.clipsToBounds      = YES;
+    self.saveScannedBooksToCoreDataButton.backgroundColor = [UIColor wetAsphaltColor];
+    
+    
+        // So we don't repeat ourselves.
     self.isConfigured = YES;
 }
+
 
 -(void)initializeSpinner {
     self.spinnerView = [[MMMaterialDesignSpinner alloc] initWithFrame:kSpinnerFrameRect];
@@ -213,12 +230,14 @@ static NSString * const volumeNib          = @"volumePresentationView";
 -(void)flipScanButtonAppearance {
     if (self.isScanning) {
         [self.toggleScanningButton setTitle:@"Stop Scanning" forState:UIControlStateNormal];
-        [self.toggleScanningButton setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
-        self.toggleScanningButton.backgroundColor = [UIColor redColor];
+        [self.toggleScanningButton setTitleColor:[UIColor midnightBlueColor] forState:UIControlStateNormal];
+        self.toggleScanningButton.backgroundColor = [UIColor pomegranateColor];
+        [self.toggleScanningButton setTitleColor:[UIColor amethystColor] forState:UIControlStateNormal];
     } else {
         [self.toggleScanningButton setTitle:@"Start Scanning" forState:UIControlStateNormal];
-        [self.toggleScanningButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-        self.toggleScanningButton.backgroundColor = [UIColor cyanColor];
+        [self.toggleScanningButton setTitleColor:[UIColor belizeHoleColor] forState:UIControlStateNormal];
+        self.toggleScanningButton.backgroundColor = [UIColor greenSeaColor];
+        [self.toggleScanningButton setTitleColor:[UIColor carrotColor] forState:UIControlStateNormal];
     }
 }
 

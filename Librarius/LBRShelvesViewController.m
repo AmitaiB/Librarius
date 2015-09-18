@@ -11,8 +11,6 @@
 #import "ShelvedBookCell.h"
 #import <UIImageView+AFNetworking.h>
 #import "Volume.h"
-#import <UICollectionView+ARDynamicCacheHeightLayoutCell.h>
-
 #import "LBRShelvedBookCollectionViewCell.h"
 #define CUSTOM_CELL_CLASS LBRShelvedBookCollectionViewCell
 

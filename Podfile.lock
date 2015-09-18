@@ -20,6 +20,7 @@ PODS:
   - AFNetworking/UIKit (2.6.0):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - FlatUIKit (1.6.2)
   - Google-API-Client/Books (1.0.422):
     - Google-API-Client/Common
     - gtm-http-fetcher (~> 1.0.141)
@@ -56,22 +57,20 @@ PODS:
   - MMMaterialDesignSpinner (0.2.0)
   - MTBBarcodeScanner (1.6.1)
   - NYAlertViewController (1.2.0)
-  - SAMCache (0.3.3)
-  - UICollectionView-ARDynamicHeightLayoutCell_Bell (1.0.2)
 
 DEPENDENCIES:
   - AFNetworking
+  - FlatUIKit
   - Google-API-Client/Books
   - Google/SignIn
   - LARSTorch (~> 1.1)
   - MMMaterialDesignSpinner
   - MTBBarcodeScanner
   - NYAlertViewController
-  - SAMCache
-  - UICollectionView-ARDynamicHeightLayoutCell_Bell
 
 SPEC CHECKSUMS:
   AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
+  FlatUIKit: 1b41f0d4952ce8d970d8479ce79df54a960242c4
   Google: 875f5a8ade86dd02e36586e4a54814843938c7f6
   Google-API-Client: cb712cf122f1d7fda966de4c2bc551324573366c
   GoogleAppUtilities: c01c6a5671e9da8b9d690fdaec5959d6c2aac699
@@ -86,7 +85,5 @@ SPEC CHECKSUMS:
   MMMaterialDesignSpinner: 8f1a50270b789c76ec500957e518fc3e05e55b9d
   MTBBarcodeScanner: beda75d4c1e2750405f62ee53f7a7ee40bf6825b
   NYAlertViewController: 9198f367c2726184e20ace87f7b6dd2655d42d79
-  SAMCache: 790b2623a3e087c903daff872c90c248726c4c82
-  UICollectionView-ARDynamicHeightLayoutCell_Bell: 75d6151d7620ebb3b42bcd3bf25a066f7c98f74b
 
 COCOAPODS: 0.38.2
