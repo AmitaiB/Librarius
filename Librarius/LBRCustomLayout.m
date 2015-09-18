@@ -1,3 +1,21 @@
+#pragma mark - class summary
+/**
+ *  Apple's recommended approach for layouts which change infrequently
+ *  and hold hundreds of items (rather than thousands) is to calculate
+ *  and cache all of the layout information upfront and then access that
+ *  cache when the collection view requests it.
+ *
+ *  ##Credit
+ *   Taking my cue from ICF (Richter & Keeley 2015) and some blogs (e.g.,
+ *  http://skeuo.com/uicollectionview-custom-layout-tutorial ), this will
+ *  be done with Dictionaries that have (conveniently ordered) indexPath(s)
+ *  as keys. Advance one indexPath/key, and you get the next cell's layout
+ *  attributes (see the nested for-loop below).
+ *
+ *  ##Specifics
+ *   Layout is simple: One cell follows the next.
+ *   Shelving is more complicated: Track book thickness until shelf space runs out.
+ */
 //
 //  PHGCustomLayout.m
 //  PhotoGallery
@@ -20,22 +38,22 @@
 
 
 @interface LBRCustomLayout ()
-@property (nonatomic, strong) NSMutableDictionary *centerPointsForCells;
-@property (nonatomic, strong) NSMutableArray *rectsForSectionHeaders;
-@property (nonatomic, assign) CGSize defaultItemSize;
-@property (nonatomic, assign) CGFloat interItemSpacingX;
-@property (nonatomic) UIEdgeInsets insets;
+@property (nonatomic, strong) NSMutableArray      *rectsForSectionHeaders;
+@property (nonatomic, strong) NSMutableDictionary *rectsForCells;
+@property (nonatomic, strong) NSMutableDictionary *shelvesForCells;
 
-@property (nonatomic) NSUInteger shelvesPerBookcase;
-@property (nonatomic) CGFloat bookcaseWidth_cm;
-@property (nonatomic) CGFloat xPosition_cm;
+@property (nonatomic, assign) CGSize  defaultItemSize;
+@property (nonatomic, assign) CGFloat interItemSpacingX;
+@property (nonatomic) UIEdgeInsets    insets;
+@property (nonatomic) NSUInteger      shelvesPerBookcase;
+@property (nonatomic) CGFloat         bookcaseWidth_cm;
+
+@property (nonatomic) CGFloat    xPosition_cm;
 @property (nonatomic) NSUInteger shelfPosition;
+@property (nonatomic) CGFloat    max_X;
 
 @property (nonatomic, strong) NSDictionary *layoutInfo;
-@property (nonatomic, strong) NSMutableDictionary *rectsForCells;
-@property (nonatomic) CGFloat max_X;
 
-@property (nonatomic, strong) NSMutableDictionary *shelvesForCells;
 
 
 
@@ -44,8 +62,9 @@
 @implementation LBRCustomLayout
 
 static NSString * const LBRShelvedBookCollectionViewCellKind = @"coverArtCell";
-
-#pragma mark - Lifecycle
+#pragma mark -
+#pragma mark - === Lifecycle ===
+#pragma mark -
 
 - (instancetype)init
 {
@@ -89,28 +108,16 @@ static NSString * const LBRShelvedBookCollectionViewCellKind = @"coverArtCell";
  layoutAttributesForDecorationViewOfKind:atIndexPath: (if your layout supports decoration views)
  
  shouldInvalidateLayoutForBoundsChange:
- 
- These methods provide the fundamental layout information that the collection view needs to place contents on the screen. Of course, if your layout does not support supplementary or decoration views, do not implement the corresponding methods.
- */
+*/
 
 
+
+#pragma mark -
+#pragma mark - === UICollectionViewLayout methods
+#pragma mark -
+#pragma mark layout info caching (prepareLayout)
 /**
- *  ##Strategy
- *  Apple's recommended approach for layouts which change infrequently
- *  and hold hundreds of items (rather than thousands) is to calculate
- *  and cache all of the layout information upfront and then access that
- *  cache when the collection view requests it.
- *
- *  ##Credit
- *   Taking my cue from ICF (Richter & Keeley 2015) and some blogs (e.g.,
- *  http://skeuo.com/uicollectionview-custom-layout-tutorial ), this will
- *  be done with Dictionaries that have (conveniently ordered) indexPath(s)
- *  as keys. Advance one indexPath/key, and you get the next cell's layout
- *  attributes (see the nested for-loop below).
- *
- *  ##Specifics
- *   Layout is simple: One cell follows the next.
- *   Shelving is more complicated: Track book thickness until shelf space runs out.
+ *  Pre-caching will be done and calculated here.
  */
 - (void)prepareLayout
 {
@@ -118,12 +125,12 @@ static NSString * const LBRShelvedBookCollectionViewCellKind = @"coverArtCell";
      * Note: The sections from the Fetched Results Controller are book "categories", not shelves.
      */
     NSInteger sectionCount = [self.collectionView numberOfSections];
-
+    
     /**
      *  Track the x-position for laying out, the center points for the cells. X-position
      *  will move like a typewriter. Once we run out of room on a line, we reset. Thus:
-        [x] yPosition is a f(shelf#), itself a f(books' spines' thicknesses).
-        [x] xPosition is a f(previous book's rect).
+     [x] yPosition is a f(shelf#), itself a f(books' spines' thicknesses).
+     [x] xPosition is a f(previous book's rect).
      
      */
     CGFloat currentYPosition    = 0.0;
@@ -132,15 +139,13 @@ static NSString * const LBRShelvedBookCollectionViewCellKind = @"coverArtCell";
     
     NSIndexPath *indexPath      = [NSIndexPath indexPathForItem:0 inSection:0]; // The longest indexPath begins with the first step.
     
-//    self.centerPointsForCells   = [NSMutableDictionary new]; // ... but just in case.
-
     self.rectsForSectionHeaders = [NSMutableArray new];
     self.shelvesForCells        = [NSMutableDictionary new];
     
     NSMutableDictionary *newLayoutInfo          = [NSMutableDictionary new];
     NSMutableDictionary *cellLayoutInfo         = [NSMutableDictionary new];
-//    NSMutableDictionary *leadingPathsForShelves = [NSMutableDictionary new];
- 
+        //    NSMutableDictionary *leadingPathsForShelves = [NSMutableDictionary new];
+    
     
     for (NSUInteger section = 0; section < sectionCount; section++) {
         NSUInteger itemCount = [self.collectionView numberOfItemsInSection:section];
@@ -160,6 +165,49 @@ static NSString * const LBRShelvedBookCollectionViewCellKind = @"coverArtCell";
     
     self.layoutInfo = newLayoutInfo;
 }
+
+#pragma mark other methods
+
+-(CGSize)collectionViewContentSize {
+    CGFloat fullHeightPerShelf      = kSectionHeight + kCellHeight;
+    CGFloat shelvesCount            = self.shelvesPerBookcase;
+    CGFloat bottomMostSectionHeight = kSectionHeight;
+    
+    CGFloat initialMax_Y = (fullHeightPerShelf * shelvesCount) + bottomMostSectionHeight;
+    CGFloat initialMax_X = self.insets.left + kCellHeight * (1 + self.bookcaseWidth_cm) + self.insets.right;
+    return CGSizeMake(initialMax_X, initialMax_Y);
+}
+
+/**
+ *  We start off by creating a mutable array where we can store all the attributes that need to be returned. Next we're going to take advantage of the nice block-based dictionary enumeration to cruise through our layoutInfo dictionary. The outer block iterates through each of the sub-dictionaries we've added (only the cells at the moment), then we iterate through each cell in the sub-dictionary. CGRectIntersectsRect makes it simple to check if the cell we're looking at intersects with the rect that was passed in. If it does, we add it to the array we'll be passing back.
+ */
+-(NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {
+    NSMutableArray *allAttributes = [NSMutableArray arrayWithCapacity:self.layoutInfo.count];
+    
+    [self.layoutInfo enumerateKeysAndObjectsUsingBlock:^(NSString *elementIdentifier, NSDictionary *elementsInfo, BOOL *stop) {
+        [elementsInfo enumerateKeysAndObjectsUsingBlock:^(NSIndexPath *indexPath, UICollectionViewLayoutAttributes *attributes, BOOL *innerStop) {
+            if (CGRectIntersectsRect(rect, attributes.frame)) {
+                [allAttributes addObject:attributes];
+            }
+        }];
+    }];
+    
+    return allAttributes;
+}
+
+/**
+ *  All we're doing here is looking up the sub-dictionary for cells and then returning the layout attributes for a cell at the passed in index path.
+ */
+-(UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return self.layoutInfo[LBRShelvedBookCollectionViewCellKind][indexPath];
+}
+
+
+    // Default is NO
+-(BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds {
+    return NO;
+}
+
 
 #pragma mark - Helper methods (aka private)
 /**
@@ -246,38 +294,5 @@ static NSString * const LBRShelvedBookCollectionViewCellKind = @"coverArtCell";
     return yPosition;
 }
 
-/**
- *  We start off by creating a mutable array where we can store all the attributes that need to be returned. Next we're going to take advantage of the nice block-based dictionary enumeration to cruise through our layoutInfo dictionary. The outer block iterates through each of the sub-dictionaries we've added (only the cells at the moment), then we iterate through each cell in the sub-dictionary. CGRectIntersectsRect makes it simple to check if the cell we're looking at intersects with the rect that was passed in. If it does, we add it to the array we'll be passing back.
- */
--(NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {
-    NSMutableArray *allAttributes = [NSMutableArray arrayWithCapacity:self.layoutInfo.count];
-    
-    [self.layoutInfo enumerateKeysAndObjectsUsingBlock:^(NSString *elementIdentifier, NSDictionary *elementsInfo, BOOL *stop) {
-        [elementsInfo enumerateKeysAndObjectsUsingBlock:^(NSIndexPath *indexPath, UICollectionViewLayoutAttributes *attributes, BOOL *innerStop) {
-            if (CGRectIntersectsRect(rect, attributes.frame)) {
-                [allAttributes addObject:attributes];
-            }
-        }];
-    }];
-    
-    return allAttributes;
-}
-
-/**
- *  All we're doing here is looking up the sub-dictionary for cells and then returning the layout attributes for a cell at the passed in index path.
- */
--(UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return self.layoutInfo[LBRShelvedBookCollectionViewCellKind][indexPath];
-}
-
--(CGSize)collectionViewContentSize {
-    CGFloat max_Y = self.shelvesPerBookcase * (kSectionHeight + kCellHeight) + kSectionHeight;
-    return CGSizeMake(self.max_X, max_Y);
-}
-
-    // Default is NO
--(BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds {
-    return NO;
-}
 
 @end
