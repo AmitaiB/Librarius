@@ -73,6 +73,26 @@ static NSString * const LBRShelvedBookCollectionViewCellKind = @"coverArtCell";
     self.shelvesPerBookcase = 5;
     self.bookcaseWidth_cm = 55.0f;
 }
+/**
+ * 
+ Methods to Override
+ Every layout object should implement the following methods:
+ 
+ collectionViewContentSize
+ 
+ layoutAttributesForElementsInRect:
+ 
+ layoutAttributesForItemAtIndexPath:
+ 
+ layoutAttributesForSupplementaryViewOfKind:atIndexPath: (if your layout supports supplementary views)
+ 
+ layoutAttributesForDecorationViewOfKind:atIndexPath: (if your layout supports decoration views)
+ 
+ shouldInvalidateLayoutForBoundsChange:
+ 
+ These methods provide the fundamental layout information that the collection view needs to place contents on the screen. Of course, if your layout does not support supplementary or decoration views, do not implement the corresponding methods.
+ */
+
 
 /**
  *  ##Strategy
@@ -253,6 +273,11 @@ static NSString * const LBRShelvedBookCollectionViewCellKind = @"coverArtCell";
 -(CGSize)collectionViewContentSize {
     CGFloat max_Y = self.shelvesPerBookcase * (kSectionHeight + kCellHeight) + kSectionHeight;
     return CGSizeMake(self.max_X, max_Y);
+}
+
+    // Default is NO
+-(BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds {
+    return NO;
 }
 
 @end

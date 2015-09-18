@@ -171,7 +171,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uRq-sK-8fk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2454" y="505"/>
+            <point key="canvasLocation" x="2427" y="505"/>
         </scene>
         <!--Library/Shelves Layout-->
         <scene sceneID="gtg-I3-sQB">
@@ -190,7 +190,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MvQ-3f-rxY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2454" y="1202"/>
+            <point key="canvasLocation" x="2427" y="1242"/>
         </scene>
         <!--Scan-->
         <scene sceneID="wg7-f3-ORb">
