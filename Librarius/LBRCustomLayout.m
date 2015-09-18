@@ -122,20 +122,16 @@ static NSString * const LBRShelvedBookCollectionViewCellKind = @"coverArtCell";
 - (void)prepareLayout
 {
     /**
-     * Note: The sections from the Fetched Results Controller are book "categories", not shelves.
+     * Note: "sections" are the @"categories" from our managedObjectContext (not shelves).
      */
     NSInteger sectionCount = [self.collectionView numberOfSections];
     
     /**
-     *  Track the x-position for laying out, the center points for the cells. X-position
-     *  will move like a typewriter. Once we run out of room on a line, we reset. Thus:
+     *  X-position will move like a typewriter. Once we run out of room on a line, we reset. Thus:
      [x] yPosition is a f(shelf#), itself a f(books' spines' thicknesses).
      [x] xPosition is a f(previous book's rect).
      
      */
-    CGFloat currentYPosition    = 0.0;
-    CGFloat currentXPosition    = 0.0; // derived from combined images
-    
     
     NSIndexPath *indexPath      = [NSIndexPath indexPathForItem:0 inSection:0]; // The longest indexPath begins with the first step.
     
