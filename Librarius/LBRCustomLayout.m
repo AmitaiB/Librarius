@@ -74,21 +74,6 @@ static NSString * const LBRShelvedBookCollectionViewCellKind = @"coverArtCell";
     self.bookcaseWidth_cm = 55.0f;
 }
 
-
-
-/**
- *  CLEAN: ICF method.
- */
-//- (CGFloat)calculateSineXPositionForY:(CGFloat)yPosition
-//{
-//    CGFloat currentTime = (yPosition / self.collectionView.bounds.size.height);
-//    
-//    CGFloat sineCalc = kMaxAmplitude * sinf(2 * kPi * currentTime);
-//    CGFloat adjustedXPosition = sineCalc + kCenterXPosition;
-//    return adjustedXPosition;
-//}
-
-
 /**
  *  ##Strategy
  *  Apple's recommended approach for layouts which change infrequently
@@ -165,23 +150,16 @@ static NSString * const LBRShelvedBookCollectionViewCellKind = @"coverArtCell";
  */
 - (CGRect) frameForCoverArtImageAtIndexPath:(NSIndexPath*)indexPath {
     CGRect newFrame;
-    CGFloat variableWidth = [self widthForCellAtIndexPath:indexPath];
-    
-    /**
-     *  FIXME: replace with a good ol' ThisOneMinusOne thang.
-    *  @param indexPathByRemovingLastIndex]
-     */
-    NSIndexPath *previousIndexPath = ([indexPath indexPathByRemovingLastIndex])?
-    [indexPath indexPathByRemovingLastIndex] : nil;
-
-    BOOL onNewLine = ![self.shelvesForCells[indexPath] isEqual:self.shelvesForCells[previousIndexPath]];
+    CGFloat variableWidth          = [self widthForCellAtIndexPath:indexPath];
+    NSIndexPath *previousIndexPath = [self indexPathByDecrementingItem:indexPath];
+    BOOL onNewLine                 = ![self.shelvesForCells[indexPath]
+                                       isEqual:self.shelvesForCells[previousIndexPath]];
 
     if (previousIndexPath) {
         UICollectionViewLayoutAttributes *previousItemsAttributes = self.layoutInfo[previousIndexPath];
         CGRect previousRect = previousItemsAttributes.frame;
         
         CGFloat newX = (onNewLine)? (0.0f + self.insets.left) : (CGRectGetMaxX(previousRect) + self.interItemSpacingX);
-//      CGFloat newY = CGRectGetMinY(previousRect);
         CGFloat newY = [self yPositionForShelf:self.shelvesForCells[indexPath]];
     
         newFrame = CGRectMake(newX, newY, variableWidth, kCellHeight);
@@ -198,6 +176,7 @@ static NSString * const LBRShelvedBookCollectionViewCellKind = @"coverArtCell";
     LBRShelvedBookCollectionViewCell *cell = (LBRShelvedBookCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
     UIImage *scaledImage = [UIImage imageWithImage:cell.imageView.image scaledToHeight:kCellHeight];
     CGFloat width = (scaledImage.size.width)? scaledImage.size.width : kCellHeight;
+
     return width;
 }
 
@@ -211,9 +190,32 @@ static NSString * const LBRShelvedBookCollectionViewCellKind = @"coverArtCell";
     if (self.shelfPosition > self.shelvesPerBookcase) {
         NSLog(@"Error: ran out of space on bookshelf!");
     }
+
     return @(self.shelfPosition);
 }
 
+/**
+ *  Retrieves the indexPath to the previous item by walking backwards one item (or if
+ *   this is the first item in the section, walking back to the **last** item of the
+ *   previous section).
+ */
+-(NSIndexPath*)indexPathByDecrementingItem:(NSIndexPath*)indexPath {
+    NSUInteger previousItem        = 0;
+    NSUInteger previousSection     = 0;
+    NSIndexPath *previousIndexPath = nil;
+
+    if (indexPath.item) {
+        previousItem = indexPath.item - 1;
+    } else if (indexPath.section) {
+        previousSection = indexPath.section - 1;
+        previousItem = [self.collectionView numberOfItemsInSection:previousSection] - offByOneAdjmt;
+    }
+    if (previousItem && previousSection) {
+        previousIndexPath = [NSIndexPath indexPathForItem:previousItem inSection:previousSection];
+    }
+
+    return previousIndexPath;
+}
 
 -(CGFloat)yPositionForShelf:(NSNumber*)shelfNum {
     CGFloat yPosition = 0.0f;

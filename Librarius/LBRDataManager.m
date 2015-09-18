@@ -197,7 +197,7 @@ static NSString * const kUnknown = @"kUnknown";
 - (NSFetchedResultsController *)preconfiguredLBRFetchedResultsController:(UIViewController<NSFetchedResultsControllerDelegate> *)sender
 {
     /**
-     *  1) The set of all books (TODO: Uniquify the collection, so you cannot add multiple entries accidentally).
+     *  1) The set of all books (TODO: Uniquify the collection, so you cannot add multiple entries accidentally - UPDATE: This is a Tall Order.).
      *  2) in the current library
      *  3) arranged by mainCategory
      *  4) then author
@@ -296,7 +296,6 @@ static NSString * const kUnknown = @"kUnknown";
     self.parsedVolumesToEitherSaveOrDiscard = [self.parsedVolumesToEitherSaveOrDiscard arrayByAddingObject:volumeToAdd];
     NSLog(@"%@", [self.parsedVolumesToEitherSaveOrDiscard description]);
     DBLG
-        //TODO: Now we just need a button to save the coffee table (to CoreData)!
 }
 
 

@@ -104,18 +104,6 @@ static NSString * const volumeNib          = @"volumePresentationView";
     [self.mainContentView addSubview:tableView];
     [self.mainContentView bringSubviewToFront:tableView];
     
-    
-        //FIXME
-//    [tableView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[tableView]|"
-//                                                                        options:0
-//                                                                        metrics:nil
-//                                                                          views:NSDictionaryOfVariableBindings(tableView)]];
-//    
-//    [tableView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[tableView]-|"
-//                                                                        options:0
-//                                                                        metrics:nil
-//                                                                          views:NSDictionaryOfVariableBindings(tableView)]];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -221,8 +209,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
     return isbn10Array;
 }
 
-    //FIXME: doesn't work properly.
-    //TODO: impl SelectedButton changes.
+    //???: "impl SelectedButton changes."
 -(void)flipScanButtonAppearance {
     if (self.isScanning) {
         [self.toggleScanningButton setTitle:@"Stop Scanning" forState:UIControlStateNormal];
