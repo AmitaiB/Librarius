@@ -24,8 +24,7 @@
 #import <LARSTorch.h>
 #import "LBRConstants.h"
     //Testing out:
-    //TODO: grab the color stuff from UIKit, and junk the rest.
-#import <FlatUIKit.h>
+#import "FlatUI+Categories.h"
 
 @interface LBRBarcodeScannerViewController ()
 

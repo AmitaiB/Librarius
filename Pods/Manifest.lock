@@ -20,7 +20,6 @@ PODS:
   - AFNetworking/UIKit (2.6.0):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - FlatUIKit (1.6.2)
   - Google-API-Client/Books (1.0.422):
     - Google-API-Client/Common
     - gtm-http-fetcher (~> 1.0.141)
@@ -60,7 +59,6 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
-  - FlatUIKit
   - Google-API-Client/Books
   - Google/SignIn
   - LARSTorch (~> 1.1)
@@ -70,7 +68,6 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
-  FlatUIKit: 1b41f0d4952ce8d970d8479ce79df54a960242c4
   Google: 875f5a8ade86dd02e36586e4a54814843938c7f6
   Google-API-Client: cb712cf122f1d7fda966de4c2bc551324573366c
   GoogleAppUtilities: c01c6a5671e9da8b9d690fdaec5959d6c2aac699
