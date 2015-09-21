@@ -52,7 +52,7 @@ static NSString * const reuseIdentifier = @"bookCellID";
     [self.collectionView registerClass:[CUSTOM_CELL_CLASS class] forCellWithReuseIdentifier:reuseIdentifier];
     
     self.dataManager = [LBRDataManager sharedDataManager];
-    self.fetchedResultsController; //!!!: What is this for?
+//    self.fetchedResultsController; //!!!: What is this for?
 }
 
 - (void)didReceiveMemoryWarning {

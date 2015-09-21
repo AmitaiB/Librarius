@@ -15,12 +15,10 @@
 #import "UIFont+FlatUI.h"
 #import "UIImage+FlatUI.h"
 #import "UINavigationBar+FlatUI.h"
-#import "UIPopoverController+FlatUI.h"
 #import "UIProgressView+FlatUI.h"
 #import "UISlider+FlatUI.h"
-#import "UISlider+FlatUI.m"
+#import "UISlider+FlatUI.h"
 #import "UIStepper+FlatUI.h"
-#import "UITableViewCell+FlatUI.h"
 #import "UIToolbar+FlatUI.h"
 
 #endif /* FlatUI_Categories_h */
