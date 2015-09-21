@@ -69,10 +69,6 @@ static NSString * const volumeNib          = @"volumePresentationView";
         [self configureProgrammaticProperties];}
 }
 
--(void)viewWillLayoutSubviews {
-    self.unsavedVolumesTableView.frame = self.scannerView.bounds;
-}
-
 -(void)configureProgrammaticProperties {
         // Initializations
     self.googleClient    = [LBRGoogleGTLClient sharedGoogleGTLClient];
@@ -89,7 +85,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
     
         // UI Elements
     self.lightToggleButton.backgroundColor = [UIColor sunflowerColor];
-    self.lightToggleButton.layer.cornerRadius = 5.0f;
+self.lightToggleButton.layer.cornerRadius = 5.0f;
     self.toggleScanningButton.backgroundColor = [UIColor belizeHoleColor];
     self.toggleScanningButton.tintColor = [UIColor turquoiseColor];
     self.toggleScanningButton.layer.cornerRadius             = 5.0f;
@@ -120,6 +116,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
     tableView.hidden        = NO;
     [self.mainContentView addSubview:tableView];
     [self.mainContentView bringSubviewToFront:tableView];
+    self.unsavedVolumesTableView = tableView;
     
 }
 
@@ -282,7 +279,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
     alertViewController.alertViewContentView = contentView;
     
         // The TableView that really should be simple!
-    UITableView *singleCellTableView = [[UITableView alloc] initWithFrame:contentView.frame style:UITableViewStyleGrouped];
+    UITableView *singleCellTableView = [[UITableView alloc] init];
     self.volumeDetailsTableView = singleCellTableView; //gives the VController a reference to this tableview...
     singleCellTableView.dataSource = self;
     singleCellTableView.delegate = self;

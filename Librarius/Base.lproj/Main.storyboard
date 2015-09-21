@@ -352,7 +352,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="lightToggleButton" destination="dcH-IU-Ezd" id="u0F-dh-jmd"/>
-                        <outlet property="mainContentView" destination="whR-df-RYp" id="pp9-Dc-kBg"/>
+                        <outlet property="mainContentView" destination="whR-df-RYp" id="iL7-ce-hyk"/>
                         <outlet property="saveScannedBooksToCoreDataButton" destination="3Bf-2Z-qmt" id="HRk-fD-6zy"/>
                         <outlet property="scannerView" destination="3Px-hT-9Zr" id="kI7-sB-yVI"/>
                         <outlet property="toggleScanningButton" destination="IOe-eD-XQW" id="N9B-xd-Wxb"/>
@@ -362,10 +362,10 @@
             </objects>
             <point key="canvasLocation" x="1737" y="-168"/>
         </scene>
-        <!--Select Volume Table View Controller-->
+        <!--Table View Controller-->
         <scene sceneID="vmL-pV-vmF">
             <objects>
-                <tableViewController id="iav-3d-30X" customClass="LBRSelectVolumeTableViewController" sceneMemberID="viewController">
+                <tableViewController id="iav-3d-30X" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="A6H-zg-aYg">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
