@@ -88,8 +88,9 @@ static NSString * const volumeNib          = @"volumePresentationView";
     self.lightToggleButton.hidden = YES;
     
         // UI Elements
+    self.lightToggleButton.backgroundColor = [UIColor sunflowerColor];
+    self.lightToggleButton.layer.cornerRadius = 5.0f;
     self.toggleScanningButton.backgroundColor = [UIColor belizeHoleColor];
-//    self.toggleScanningButton.titleLabel.textColor = [UIColor sunflowerColor];
     self.toggleScanningButton.tintColor = [UIColor turquoiseColor];
     self.toggleScanningButton.layer.cornerRadius             = 5.0f;
     self.saveScannedBooksToCoreDataButton.layer.cornerRadius = 5.0f;
