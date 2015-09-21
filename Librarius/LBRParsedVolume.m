@@ -69,10 +69,10 @@
      *  Title & Subtitle
      */
     if (volumeToParse.volumeInfo.title.length) {
-        _title = volumeToParse.volumeInfo.title;
+        _title = [volumeToParse.volumeInfo.title capitalizedString];
     }
     if (volumeToParse.volumeInfo.subtitle.length) {
-        _subtitle = volumeToParse.volumeInfo.subtitle;
+        _subtitle = [volumeToParse.volumeInfo.subtitle capitalizedString];
     }
     
     /**
