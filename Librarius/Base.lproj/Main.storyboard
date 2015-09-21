@@ -166,6 +166,7 @@
                     </collectionView>
                     <navigationItem key="navigationItem" id="U43-k0-844"/>
                     <connections>
+                        <outlet property="layout" destination="TLp-nF-c8U" id="Ixb-7f-X1H"/>
                         <segue destination="r89-FC-I3u" kind="show" id="1dH-Cm-eo4"/>
                     </connections>
                 </collectionViewController>
