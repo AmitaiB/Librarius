@@ -73,9 +73,9 @@ static NSString * const volumeNib          = @"volumePresentationView";
         // Initializations
     self.googleClient    = [LBRGoogleGTLClient sharedGoogleGTLClient];
     self.uniqueCodes     = [NSMutableArray new];
-    self.unsavedVolumes  = [NSMutableArray new];
+//    self.unsavedVolumes  = [NSMutableArray new];
     self.volumeToConfirm = [LBRParsedVolume new];
-    [self initializeUnsavedVolumesTableView:self.unsavedVolumesTableView];
+    [self initializeUnsavedVolumesTableView];
     [self initializeSpinner];
     self.scanner         = [[MTBBarcodeScanner alloc] initWithMetadataObjectTypes:@[AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeEAN13Code] previewView:self.scannerView];
         ///Alternative: self.scanner = [[MTBBarcodeScanner alloc] initWithPreviewView:self.scannerView];
@@ -108,8 +108,8 @@ self.lightToggleButton.layer.cornerRadius = 5.0f;
     [self.view addSubview:self.spinnerView];
 }
 
--(void)initializeUnsavedVolumesTableView:(UITableView*)tableView {
-    tableView               = [UITableView new];
+-(void)initializeUnsavedVolumesTableView {
+    UITableView *tableView  = [UITableView new];
     UINib *volumeDetailsNib = [UINib nibWithNibName:@"volumeDetailsCell" bundle:nil];
     [tableView registerNib:volumeDetailsNib forCellReuseIdentifier:@"volumeDetailsCellID"];
     tableView.delegate      = self;
