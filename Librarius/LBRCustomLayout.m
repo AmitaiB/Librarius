@@ -198,7 +198,6 @@ static NSString * const LBRShelvedBookCollectionViewCellKind = @"coverArtCell";
     return self.layoutInfo[LBRShelvedBookCollectionViewCellKind][indexPath];
 }
 
-
     // Default is NO
 -(BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds {
     return NO;

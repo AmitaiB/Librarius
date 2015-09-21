@@ -10,19 +10,19 @@
 #define kAppIconSize 48
 
     //Definitely Used:
-#import <MTBBarcodeScanner.h>
+#import <AVFoundation/AVFoundation.h>
+#import <UIImageView+AFNetworking.h>
 #import <MMMaterialDesignSpinner.h>
+#import <NYAlertViewController.h>
+#import <MTBBarcodeScanner.h>
+#import <LARSTorch.h>
+#import "LBRConstants.h"
 #import "LBRBarcodeScannerViewController.h"
 #import "LBRGoogleGTLClient.h"
-#import <NYAlertViewController.h>
-#import <UIImageView+AFNetworking.h>
 #import "LBRDataManager.h"
 #import "Library.h"
 #import "Volume.h"
 #import "LBRParsedVolume.h"
-#import <AVFoundation/AVFoundation.h>
-#import <LARSTorch.h>
-#import "LBRConstants.h"
     //Testing out:
 #import "FlatUI+Categories.h"
 
@@ -100,7 +100,8 @@ self.lightToggleButton.layer.cornerRadius = 5.0f;
 
 
 -(void)initializeSpinner {
-    self.spinnerView = [[MMMaterialDesignSpinner alloc] initWithFrame:kSpinnerFrameRect];
+        //TODO: place this view somewhere, and give it a size somehow.
+    self.spinnerView = [MMMaterialDesignSpinner new];
     self.spinnerView.lineWidth = 1.5f;
     self.spinnerView.tintColor = [UIColor cyanColor];
     self.spinnerView.hidesWhenStopped = YES;
@@ -275,7 +276,12 @@ self.lightToggleButton.layer.cornerRadius = 5.0f;
     alertViewController.message = NSLocalizedString(@"Set the alertViewContentView property to add custom views to the alert view", nil);
     
         // The content view that will contain our custom view.
-    UIView *contentView = [[UIView alloc] initWithFrame:CGRectZero];
+    UIView *contentView = [[UIView alloc] init];
+    
+    NSArray *contentHConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[contentView]|" options:NSLayoutFormatAlignAllLeading metrics:nil views:NSDictionaryOfVariableBindings(contentView)];
+
+        NSArray *contentVConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[contentView]|" options:NSLayoutFormatAlignAllTop metrics:nil views:NSDictionaryOfVariableBindings(contentView)];
+    
     alertViewController.alertViewContentView = contentView;
     
         // The TableView that really should be simple!
