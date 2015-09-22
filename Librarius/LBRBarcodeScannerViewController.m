@@ -72,26 +72,25 @@ static NSString * const volumeNib          = @"volumePresentationView";
 -(void)configureProgrammaticProperties {
         // Initializations
     self.googleClient    = [LBRGoogleGTLClient sharedGoogleGTLClient];
-    self.uniqueCodes     = [NSMutableArray new];
-//    self.unsavedVolumes  = [NSMutableArray new];
+    self.uniqueCodes     = [NSMutableArray  new];
     self.volumeToConfirm = [LBRParsedVolume new];
-    [self initializeUnsavedVolumesTableView];
-    [self initializeSpinner];
     self.scanner         = [[MTBBarcodeScanner alloc] initWithMetadataObjectTypes:@[AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeEAN13Code] previewView:self.scannerView];
         ///Alternative: self.scanner = [[MTBBarcodeScanner alloc] initWithPreviewView:self.scannerView];
+    [self initializeUnsavedVolumesTableView];
+    [self initializeSpinner];
     
         // Hidden Things
     self.lightToggleButton.hidden = YES;
     
         // UI Elements
-    self.lightToggleButton.backgroundColor = [UIColor sunflowerColor];
-self.lightToggleButton.layer.cornerRadius = 5.0f;
-    self.toggleScanningButton.backgroundColor = [UIColor belizeHoleColor];
-    self.toggleScanningButton.tintColor = [UIColor turquoiseColor];
+    self.lightToggleButton.layer.cornerRadius                = 5.0f;
+    self.lightToggleButton.backgroundColor                   = [UIColor sunflowerColor];
+    self.toggleScanningButton.backgroundColor                = [UIColor belizeHoleColor];
+    self.toggleScanningButton.tintColor                      = [UIColor turquoiseColor];
     self.toggleScanningButton.layer.cornerRadius             = 5.0f;
     self.saveScannedBooksToCoreDataButton.layer.cornerRadius = 5.0f;
     self.saveScannedBooksToCoreDataButton.clipsToBounds      = YES;
-    self.saveScannedBooksToCoreDataButton.backgroundColor = [UIColor wetAsphaltColor];
+    self.saveScannedBooksToCoreDataButton.backgroundColor    = [UIColor wetAsphaltColor];
     
     
         // So we don't repeat ourselves.
@@ -101,9 +100,9 @@ self.lightToggleButton.layer.cornerRadius = 5.0f;
 
 -(void)initializeSpinner {
         //TODO: place this view somewhere, and give it a size somehow.
-    self.spinnerView = [MMMaterialDesignSpinner new];
-    self.spinnerView.lineWidth = 1.5f;
-    self.spinnerView.tintColor = [UIColor cyanColor];
+    self.spinnerView                  = [MMMaterialDesignSpinner new];
+    self.spinnerView.lineWidth        = 1.5f;
+    self.spinnerView.tintColor        = [UIColor cyanColor];
     self.spinnerView.hidesWhenStopped = YES;
     [self.view addSubview:self.spinnerView];
 }
@@ -124,7 +123,6 @@ self.lightToggleButton.layer.cornerRadius = 5.0f;
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     [self stopScanningOps];
-    // Dispose of any resources that can be recreated.
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
@@ -183,7 +181,6 @@ self.lightToggleButton.layer.cornerRadius = 5.0f;
     
 // ???: Consider embedding the scanning in this: [MTBBarcodeScanner requestCameraPermissionWithSuccess:^(BOOL success)...?
     [self.scannerView bringSubviewToFront:self.lightToggleButton.imageView];
-//    [self.view sendSubviewToBack:self.scannerView];
     [self.scanner startScanningWithResultBlock:^(NSArray *codes) {
     // -------------------------------------------------------------------------------
     //	Scanning Success Block: We have a barcode!
@@ -214,17 +211,17 @@ self.lightToggleButton.layer.cornerRadius = 5.0f;
     }];
 }
 
-    //TODO: Check isbn validity.
+    ///TODO: Check isbn validity.
 -(BOOL)checkISBNValidity:(NSString*)testString {
     NSPredicate *isbn10Predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES '\\\\d{10}|\\\\d{9}[Xx]'"];
     NSArray *isbn10Array = [@[testString] filteredArrayUsingPredicate:isbn10Predicate];
 //    NSArray *isbn13Array = [@[testString] filteredArrayUsingPredicate:isbn13Predicate];
     
 //    return (isbn10Array || isbn13Array);
-    return isbn10Array;
+//    return isbn10Array;
+    return 0;
 }
 
-    //???: "impl SelectedButton changes."
 -(void)flipScanButtonAppearance {
     if (self.isScanning) {
         [self.toggleScanningButton setTitle:@"Stop Scanning" forState:UIControlStateNormal];
@@ -252,13 +249,13 @@ self.lightToggleButton.layer.cornerRadius = 5.0f;
     NYAlertViewController *alertViewController = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
     
         // Set a title and message
-    alertViewController.title = NSLocalizedString(@"Put this book on your coffee table?", nil);
-    alertViewController.message = NSLocalizedString(@"Chuck Norris ipsum. Word out.", nil);
-    
-     NYAlertAction *confirmAction = [NYAlertAction actionWithTitle:NSLocalizedString(@"Confirm", nil)
-                                                             style:UIAlertActionStyleDefault
-                                                           handler:^(NYAlertAction *action) {
-                                                               [self dismissViewControllerAnimated:YES completion:^{
+    alertViewController.title    = NSLocalizedString(@"Put this book on your coffee table?", nil);
+    alertViewController.message  = NSLocalizedString(@"Chuck Norris ipsum. Word out.", nil);
+
+    NYAlertAction *confirmAction = [NYAlertAction actionWithTitle:NSLocalizedString(@"Confirm", nil)
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:^(NYAlertAction *action) {
+                                                              [self dismissViewControllerAnimated:YES completion:^{
                                                                       //Add to TableView and its datasource.
                                                                    [self updateDataManagerWithNewTransientVolume:self.volumeToConfirm];
                                                                }];
@@ -278,9 +275,6 @@ self.lightToggleButton.layer.cornerRadius = 5.0f;
         // The content view that will contain our custom view.
     UIView *contentView = [[UIView alloc] init];
     
-    NSArray *contentHConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[contentView]|" options:NSLayoutFormatAlignAllLeading metrics:nil views:NSDictionaryOfVariableBindings(contentView)];
-
-        NSArray *contentVConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[contentView]|" options:NSLayoutFormatAlignAllTop metrics:nil views:NSDictionaryOfVariableBindings(contentView)];
     
     alertViewController.alertViewContentView = contentView;
     
@@ -324,10 +318,10 @@ self.lightToggleButton.layer.cornerRadius = 5.0f;
     alertViewController.buttonCornerRadius = 20.0f;
     alertViewController.view.tintColor = self.view.tintColor;
     
-    alertViewController.titleFont = [UIFont fontWithName:@"AvenirNext-Bold" size:19.0f];
-    alertViewController.messageFont = [UIFont fontWithName:@"AvenirNext-Medium" size:16.0f];
-    alertViewController.buttonTitleFont = [UIFont fontWithName:@"AvenirNext-Regular" size:alertViewController.buttonTitleFont.pointSize];
+    alertViewController.titleFont             = [UIFont fontWithName:@"AvenirNext-Bold" size:19.0f];
+    alertViewController.messageFont           = [UIFont fontWithName:@"AvenirNext-Medium" size:16.0f];
     alertViewController.cancelButtonTitleFont = [UIFont fontWithName:@"AvenirNext-Medium" size:alertViewController.cancelButtonTitleFont.pointSize];
+    alertViewController.buttonTitleFont       = [UIFont fontWithName:@"AvenirNext-Regular" size:alertViewController.buttonTitleFont.pointSize];
     
 //    Uncomment for some funky colors.
     [self invertAlertControllerColors:alertViewController];
