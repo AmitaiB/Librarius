@@ -23,6 +23,7 @@
 #import "Library.h"
 #import "Volume.h"
 #import "LBRParsedVolume.h"
+#import "UIView+ConfigureForAutoLayout.h"
     //Testing out:
 #import "FlatUI+Categories.h"
 
@@ -298,7 +299,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
      */
     [contentView addSubview:singleCellTableView];
     
-    [self prepareViewForAutolayout:singleCellTableView];
+    [singleCellTableView configureForAutolayout];
     [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[singleCellTableView(100)]|"
                                                                         options:0
                                                                         metrics:nil
@@ -344,12 +345,6 @@ static NSString * const volumeNib          = @"volumePresentationView";
     
     alertViewController.cancelButtonColor = [UIColor colorWithRed:0.42f green:0.78 blue:0.32f alpha:1.0f];
     alertViewController.cancelButtonTitleColor = [UIColor colorWithWhite:0.19f alpha:1.0f];
-}
-
--(void)prepareViewForAutolayout:(UIView *)view
-{
-    view.translatesAutoresizingMaskIntoConstraints = NO;
-    [view removeConstraints:self.view.constraints];
 }
 
 #pragma mark - UITableViewDataSource methods

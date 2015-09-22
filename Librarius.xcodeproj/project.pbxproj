@@ -32,6 +32,7 @@
 		3851DBFD1B8E2E5A00E90B9F /* LBRDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3851DBFC1B8E2E5A00E90B9F /* LBRDataManager.m */; };
 		3855E26C1BB0D88C004C5D11 /* LBRAlertContent_TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3855E26B1BB0D88C004C5D11 /* LBRAlertContent_TableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		3855E26F1BB0DBD4004C5D11 /* LBRAlertContent_TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3855E26E1BB0DBD4004C5D11 /* LBRAlertContent_TableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		3855E2721BB10AA5004C5D11 /* UIView+ConfigureForAutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3855E2711BB10AA5004C5D11 /* UIView+ConfigureForAutoLayout.m */; settings = {ASSET_TAGS = (); }; };
 		38565D701B9A20B800349498 /* LBRParsedVolume.m in Sources */ = {isa = PBXBuildFile; fileRef = 38565D6F1B9A20B800349498 /* LBRParsedVolume.m */; };
 		387039B81B9D23C900381007 /* SelectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 387039B71B9D23C900381007 /* SelectionView.xib */; };
 		388A1E151B9F940000C75825 /* To Do bookmark in Resources */ = {isa = PBXBuildFile; fileRef = 388A1E141B9F940000C75825 /* To Do bookmark */; };
@@ -116,6 +117,8 @@
 		3855E26B1BB0D88C004C5D11 /* LBRAlertContent_TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRAlertContent_TableViewController.m; sourceTree = "<group>"; };
 		3855E26D1BB0DBD4004C5D11 /* LBRAlertContent_TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRAlertContent_TableViewCell.h; sourceTree = "<group>"; };
 		3855E26E1BB0DBD4004C5D11 /* LBRAlertContent_TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRAlertContent_TableViewCell.m; sourceTree = "<group>"; };
+		3855E2701BB10AA5004C5D11 /* UIView+ConfigureForAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ConfigureForAutoLayout.h"; sourceTree = "<group>"; };
+		3855E2711BB10AA5004C5D11 /* UIView+ConfigureForAutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ConfigureForAutoLayout.m"; sourceTree = "<group>"; };
 		38565D6E1B9A20B800349498 /* LBRParsedVolume.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRParsedVolume.h; sourceTree = "<group>"; };
 		38565D6F1B9A20B800349498 /* LBRParsedVolume.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRParsedVolume.m; sourceTree = "<group>"; };
 		387039B71B9D23C900381007 /* SelectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectionView.xib; sourceTree = "<group>"; };
@@ -365,6 +368,8 @@
 		384E0CBD1B97D231007E7290 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				3855E2701BB10AA5004C5D11 /* UIView+ConfigureForAutoLayout.h */,
+				3855E2711BB10AA5004C5D11 /* UIView+ConfigureForAutoLayout.m */,
 				380375701B8BF058004C4ECE /* UIImage+FromURL.h */,
 				380375711B8BF058004C4ECE /* UIImage+FromURL.m */,
 				384E0CBE1B97D24B007E7290 /* NSString+dateValue.h */,
@@ -629,6 +634,7 @@
 				388DBE331BAA54C8005C5125 /* UIImage+imageScaledToHeight.m in Sources */,
 				38565D701B9A20B800349498 /* LBRParsedVolume.m in Sources */,
 				38F57BC01BB0707200CC2EE8 /* UIFont+FlatUI.m in Sources */,
+				3855E2721BB10AA5004C5D11 /* UIView+ConfigureForAutoLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
