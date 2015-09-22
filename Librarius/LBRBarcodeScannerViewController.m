@@ -275,54 +275,20 @@ static NSString * const volumeNib          = @"volumePresentationView";
     alertViewController.message = NSLocalizedString(@"Set the alertViewContentView property to add custom views to the alert view", nil);
     
         // The content view that will contain our custom view.
-    UIView *contentView = [[UIView alloc] init];
+        ///Working on this now...
+    UITableView *alertTableView = [[UITableView alloc] init];
     
     
-    alertViewController.alertViewContentView = contentView;
+    
+    
+    [self configureAlertController:alertViewController andInvertColors:YES];
+    return alertViewController;
+}
 
-        // The TableView that really should be simple!
-    UITableView *singleCellTableView = [[UITableView alloc] init];
-    self.volumeDetailsTableView = singleCellTableView; //gives the VController a reference to this tableview...
-    singleCellTableView.dataSource = self;
-    singleCellTableView.delegate = self;
-    singleCellTableView.backgroundColor = [UIColor whiteColor];
-    singleCellTableView.estimatedRowHeight = 65.0;
-    singleCellTableView.rowHeight = UITableViewAutomaticDimension;
-    [singleCellTableView setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
-    [singleCellTableView setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
-    
-    UINib *volumeDetailsNib = [UINib nibWithNibName:@"volumeDetailsCell" bundle:nil];
-    [singleCellTableView registerNib:volumeDetailsNib forCellReuseIdentifier:@"volumeDetailsCellID"];
-    
-    LBRAlertContent_TableViewController *confirmVolumeTableVC = [LBRAlertContent_TableViewController new];
-    [contentView addSubview:confirmVolumeTableVC.tableView];
-    [contentView clipsToBounds];
-    
-    /**
-     *  Magic happens here!
-     */
-    
-//    [contentView addSubview:singleCellTableView];
-//    
-//    [singleCellTableView configureForAutolayout];
-//    [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[singleCellTableView(100)]|"
-//                                                                        options:0
-//                                                                        metrics:nil
-//                                                                          views:NSDictionaryOfVariableBindings(singleCellTableView)]];
-//    
-//    [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[singleCellTableView]-|"
-//                                                                        options:0
-//                                                                        metrics:nil
-//                                                                          views:NSDictionaryOfVariableBindings(singleCellTableView)]];
 
-    
-        // This was inspiring!, but I didn't need it in the end.
-//    [singleCellTableView makeConstraints:^(MASConstraintMaker *make) {
-//        make.edges.equalTo(singleCellTableView.superview).with.insets(UIEdgeInsetsMake(28, 0, 28, 0));
-//    }];
-    
-    [contentView sizeToFit];
-        // Customize appearance as desired
+
+    // Customize appearance as desired
+-(void)configureAlertController:(NYAlertViewController*)alertViewController andInvertColors:(BOOL)invertColors {
     alertViewController.buttonCornerRadius = 20.0f;
     alertViewController.view.tintColor = self.view.tintColor;
     
@@ -331,27 +297,23 @@ static NSString * const volumeNib          = @"volumePresentationView";
     alertViewController.cancelButtonTitleFont = [UIFont fontWithName:@"AvenirNext-Medium" size:alertViewController.cancelButtonTitleFont.pointSize];
     alertViewController.buttonTitleFont       = [UIFont fontWithName:@"AvenirNext-Regular" size:alertViewController.buttonTitleFont.pointSize];
     
-//    Uncomment for some funky colors.
-    [self invertAlertControllerColors:alertViewController];
     
     alertViewController.swipeDismissalGestureEnabled = YES;
     alertViewController.backgroundTapDismissalGestureEnabled = YES;
     
-    return alertViewController;
-}
-
--(void)invertAlertControllerColors:(NYAlertViewController*)alertViewController {
-    alertViewController.alertViewBackgroundColor = [UIColor colorWithWhite:0.19f alpha:1.0f];
-    alertViewController.alertViewCornerRadius = 10.0f;
-    
-    alertViewController.titleColor = [UIColor colorWithRed:0.42f green:0.78 blue:0.32f alpha:1.0f];
-    alertViewController.messageColor = [UIColor colorWithWhite:0.92f alpha:1.0f];
-    
-    alertViewController.buttonColor = [UIColor colorWithRed:0.42f green:0.78 blue:0.32f alpha:1.0f];
-    alertViewController.buttonTitleColor = [UIColor colorWithWhite:0.19f alpha:1.0f];
-    
-    alertViewController.cancelButtonColor = [UIColor colorWithRed:0.42f green:0.78 blue:0.32f alpha:1.0f];
-    alertViewController.cancelButtonTitleColor = [UIColor colorWithWhite:0.19f alpha:1.0f];
+    if (invertColors) {
+        alertViewController.alertViewBackgroundColor = [UIColor colorWithWhite:0.19f alpha:1.0f];
+        alertViewController.alertViewCornerRadius = 10.0f;
+        
+        alertViewController.titleColor = [UIColor colorWithRed:0.42f green:0.78 blue:0.32f alpha:1.0f];
+        alertViewController.messageColor = [UIColor colorWithWhite:0.92f alpha:1.0f];
+        
+        alertViewController.buttonColor = [UIColor colorWithRed:0.42f green:0.78 blue:0.32f alpha:1.0f];
+        alertViewController.buttonTitleColor = [UIColor colorWithWhite:0.19f alpha:1.0f];
+        
+        alertViewController.cancelButtonColor = [UIColor colorWithRed:0.42f green:0.78 blue:0.32f alpha:1.0f];
+        alertViewController.cancelButtonTitleColor = [UIColor colorWithWhite:0.19f alpha:1.0f];
+    }
 }
 
 #pragma mark - UITableViewDataSource methods

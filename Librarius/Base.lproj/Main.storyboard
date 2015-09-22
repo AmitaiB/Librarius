@@ -362,31 +362,22 @@
             </objects>
             <point key="canvasLocation" x="1737" y="-168"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Alert Content Table View Controller-->
         <scene sceneID="vmL-pV-vmF">
             <objects>
-                <tableViewController id="iav-3d-30X" sceneMemberID="viewController">
+                <tableViewController id="iav-3d-30X" customClass="LBRAlertContent_TableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="112" sectionHeaderHeight="22" sectionFooterHeight="22" id="A6H-zg-aYg">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="112" id="7zh-6P-gda" customClass="LBRAlertContent_TableViewCell">
-                                <rect key="frame" x="0.0" y="22" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="22" width="600" height="112"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7zh-6P-gda" id="Jyt-Mv-g21">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="111.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title: subtitle, byline (year: publisher)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SEY-aM-JoZ">
-                                            <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                            <variation key="widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="113" y="8" width="279" height="96"/>
-                                            </variation>
-                                        </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" semanticContentAttribute="forceLeftToRight" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="n0W-Sx-u1C">
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                             <constraints>
@@ -403,6 +394,12 @@
                                                 </mask>
                                             </variation>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title: subtitle, byline (year: publisher)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SEY-aM-JoZ">
+                                            <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailingMargin" secondItem="SEY-aM-JoZ" secondAttribute="trailing" id="0Yc-eZ-N79"/>
@@ -414,30 +411,30 @@
                                     </constraints>
                                     <variation key="default">
                                         <mask key="subviews">
-                                            <exclude reference="SEY-aM-JoZ"/>
                                             <exclude reference="n0W-Sx-u1C"/>
+                                            <exclude reference="SEY-aM-JoZ"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <exclude reference="LYm-vK-mDq"/>
-                                            <exclude reference="TMf-ME-cMn"/>
-                                            <exclude reference="dQC-5k-UXc"/>
                                             <exclude reference="0Yc-eZ-N79"/>
                                             <exclude reference="Dx0-9J-7mq"/>
                                             <exclude reference="y1O-ec-s2w"/>
+                                            <exclude reference="LYm-vK-mDq"/>
+                                            <exclude reference="TMf-ME-cMn"/>
+                                            <exclude reference="dQC-5k-UXc"/>
                                         </mask>
                                     </variation>
                                     <variation key="widthClass=compact">
                                         <mask key="subviews">
-                                            <include reference="SEY-aM-JoZ"/>
                                             <include reference="n0W-Sx-u1C"/>
+                                            <include reference="SEY-aM-JoZ"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <include reference="LYm-vK-mDq"/>
-                                            <include reference="TMf-ME-cMn"/>
-                                            <include reference="dQC-5k-UXc"/>
                                             <include reference="0Yc-eZ-N79"/>
                                             <include reference="Dx0-9J-7mq"/>
                                             <include reference="y1O-ec-s2w"/>
+                                            <include reference="LYm-vK-mDq"/>
+                                            <include reference="TMf-ME-cMn"/>
+                                            <include reference="dQC-5k-UXc"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>

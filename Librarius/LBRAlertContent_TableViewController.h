@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+@class LBRParsedVolume;
 @interface LBRAlertContent_TableViewController : UITableViewController
+
+@property (nonatomic, strong) LBRParsedVolume *volumeToConfirm;
 
 @end
