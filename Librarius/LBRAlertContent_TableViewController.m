@@ -107,9 +107,27 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 
-#pragma mark
-#pragma mark <UICollectionViewDelegate>
+#pragma mark -
+#pragma mark === UICollectionViewDelegate ===
+#pragma mark -
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self configureCell:self.prototypeCell forRowAtIndexPath:indexPath];
+    
+        // As in UseYourLoaf (blog): Need to set the width of the prototype cell to the width of
+        //  the table view as this will change when the device is rotated.
+    self.prototypeCell.bounds = CGRectMake(0, 0, CGRectGetWidth(self.tableView.bounds), CGRectGetHeight(self.prototypeCell.bounds));
+    
+    [self.prototypeCell layoutIfNeeded];
+    
+    CGSize size = [self.prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    
+    return size.height+1;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewAutomaticDimension;
+}
 
 
 @end

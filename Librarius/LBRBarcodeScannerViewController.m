@@ -276,7 +276,9 @@ static NSString * const volumeNib          = @"volumePresentationView";
     
         // The content view that will contain our custom view.
         ///Working on this now...
-    UITableView *alertTableView = [[UITableView alloc] init];
+    LBRAlertContent_TableViewController *alertContentViewController = [LBRAlertContent_TableViewController new];
+    alertContentViewController.volumeToConfirm = self.volumeToConfirm;
+    alertViewController.alertViewContentView = alertContentViewController.tableView;
     
     
     
@@ -373,12 +375,6 @@ static NSString * const volumeNib          = @"volumePresentationView";
     
     return cell;
 }
-
-#pragma mark - Helper methods
-
-    //???
-#pragma mark - GoogleClient
-
 
 #pragma mark - Data Manager interface
 //✅
