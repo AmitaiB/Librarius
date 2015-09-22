@@ -378,32 +378,66 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" semanticContentAttribute="forceLeftToRight" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="n0W-Sx-u1C">
-                                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                            <variation key="widthClass=compact" fixedFrame="YES">
-                                                <rect key="frame" x="8" y="8" width="97" height="96"/>
-                                            </variation>
-                                        </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title: subtitle, byline (year: publisher)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SEY-aM-JoZ">
                                             <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
-                                            <variation key="widthClass=compact" fixedFrame="YES">
-                                                <rect key="frame" x="110" y="8" width="282" height="96"/>
-                                            </variation>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" semanticContentAttribute="forceLeftToRight" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="n0W-Sx-u1C">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="97" id="ukU-5h-QaL"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="ukU-5h-QaL"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="widthClass=compact">
+                                                <mask key="constraints">
+                                                    <include reference="ukU-5h-QaL"/>
+                                                </mask>
+                                            </variation>
+                                        </imageView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="n0W-Sx-u1C" firstAttribute="leading" secondItem="Jyt-Mv-g21" secondAttribute="leadingMargin" id="FfP-mq-QVp"/>
+                                        <constraint firstItem="n0W-Sx-u1C" firstAttribute="centerY" secondItem="Jyt-Mv-g21" secondAttribute="centerY" id="Sgl-CP-Ih3"/>
+                                        <constraint firstItem="SEY-aM-JoZ" firstAttribute="top" secondItem="Jyt-Mv-g21" secondAttribute="topMargin" id="T13-4Q-ODQ"/>
+                                        <constraint firstItem="SEY-aM-JoZ" firstAttribute="leading" secondItem="n0W-Sx-u1C" secondAttribute="trailing" constant="8" symbolic="YES" id="WOl-Ir-8EW"/>
+                                        <constraint firstItem="SEY-aM-JoZ" firstAttribute="trailing" secondItem="Jyt-Mv-g21" secondAttribute="trailingMargin" id="hc4-WA-eRQ"/>
+                                        <constraint firstItem="SEY-aM-JoZ" firstAttribute="top" secondItem="n0W-Sx-u1C" secondAttribute="top" id="mZc-SA-hh6"/>
+                                        <constraint firstItem="n0W-Sx-u1C" firstAttribute="bottom" secondItem="SEY-aM-JoZ" secondAttribute="bottom" id="obD-PK-7nS"/>
+                                    </constraints>
                                     <variation key="default">
                                         <mask key="subviews">
-                                            <exclude reference="n0W-Sx-u1C"/>
                                             <exclude reference="SEY-aM-JoZ"/>
+                                            <exclude reference="n0W-Sx-u1C"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <exclude reference="FfP-mq-QVp"/>
+                                            <exclude reference="Sgl-CP-Ih3"/>
+                                            <exclude reference="obD-PK-7nS"/>
+                                            <exclude reference="T13-4Q-ODQ"/>
+                                            <exclude reference="WOl-Ir-8EW"/>
+                                            <exclude reference="hc4-WA-eRQ"/>
+                                            <exclude reference="mZc-SA-hh6"/>
                                         </mask>
                                     </variation>
                                     <variation key="widthClass=compact">
                                         <mask key="subviews">
-                                            <include reference="n0W-Sx-u1C"/>
                                             <include reference="SEY-aM-JoZ"/>
+                                            <include reference="n0W-Sx-u1C"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <include reference="FfP-mq-QVp"/>
+                                            <include reference="Sgl-CP-Ih3"/>
+                                            <include reference="obD-PK-7nS"/>
+                                            <include reference="T13-4Q-ODQ"/>
+                                            <include reference="WOl-Ir-8EW"/>
+                                            <include reference="hc4-WA-eRQ"/>
+                                            <include reference="mZc-SA-hh6"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>

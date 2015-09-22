@@ -7,6 +7,7 @@
 //
 
 #import "LBRAlertContent_TableViewController.h"
+#import "LBRAlertContent_TableViewCell.h"
 
 @interface LBRAlertContent_TableViewController ()
 
@@ -20,14 +21,16 @@ static NSString * const reuseIdentifier = @"Cell";
     [super viewDidLoad];
     
     // Register cell classes
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:reuseIdentifier];
+    [self.tableView registerClass:[LBRAlertContent_TableViewCell class] forCellReuseIdentifier:reuseIdentifier];
     
-    // Do any additional setup after loading the view.
+        // Do any additional setup after loading the view.
+    self.tableView.estimatedRowHeight = 100;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (NSString *)getText {
+    return @"This is some long text that should wrap. It is multiple long sentences that may or may not have spelling and grammatical errors. Yep it should wrap quite nicely and serve as a nice example!";
 }
 
 
@@ -42,6 +45,8 @@ static NSString * const reuseIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
     
         // Configure the cell
+    cell.textLabel.text = [self getText];
+    
     
     return cell;
 }
