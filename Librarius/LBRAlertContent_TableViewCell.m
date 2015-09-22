@@ -3,7 +3,7 @@
 //  Librarius
 //
 //  Created by Amitai Blickstein on 9/21/15.
-//  Copyright © 2015 Amitai Blickstein, LLC. All rights reserved.
+// Thanks to http://derpturkey.com/autosize-uitableviewcell-height-programmatically/ !!
 //
 
 #import "LBRAlertContent_TableViewCell.h"
@@ -17,14 +17,45 @@
         return nil;
     }
     
+    self.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    self.textLabel.numberOfLines = 0;
+    [self configureViewsForAutoLayout:@[self.textLabel, self.coverArtImageView]];
+    NSDictionary *viewsDictionary = @{@"imageView" : self.coverArtImageView,
+                                      @"textLabel" : self.textLabel
+                                      };
     
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[imageView]-[textLabel]-|"
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:viewsDictionary]];
+
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[imageView]-|"
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:viewsDictionary]];
+
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[textLabel]-|"
+                                                                             options:0
+                                                                             metrics:nil
+                                                                               views:viewsDictionary]];
+
+    return self;
 }
 
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+-(void)configureViewsForAutoLayout:(NSArray*)views {
+    for (UIView* view in views) {
+        [view removeConstraints:view.constraints];
+        view.translatesAutoresizingMaskIntoConstraints = NO;
+    }
 }
+
+-(void)layoutSubviews {
+    [super layoutSubviews];
+    
+        //Make sure the contentView does a layout pass here so that its subviews have their
+        // frames set, which we need to use to set the prefferedMaxLayoutWidth below.
+    self.textLabel.preferredMaxLayoutWidth = CGRectGetWidth(self.textLabel.frame);
+}
+
 
 @end
