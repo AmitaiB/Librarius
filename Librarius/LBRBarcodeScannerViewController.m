@@ -50,6 +50,12 @@
 @property (nonatomic) BOOL isConfigured;
 
 @property (nonatomic) BOOL isScanning;
+
+
+
+
+
+
 @end
 
 
@@ -69,6 +75,9 @@ static NSString * const volumeNib          = @"volumePresentationView";
 
     if (!self.isConfigured) {
         [self configureProgrammaticProperties];}
+    
+    [self addSneakyGestureAlert];
+    
 }
 
 -(void)configureProgrammaticProperties {
@@ -195,9 +204,11 @@ static NSString * const volumeNib          = @"volumePresentationView";
                 
                     //1st APPROACH: NYAlertViewController sub-class. Should have worked, but didn't.
                     //✅ 2nd APPROACH: NYAlertViewController (like #1), but in this controller. Works.
-                NYAlertViewController *confirmSelectionViewController = [self confirmSelectionViewController];
-                [self presentViewController:confirmSelectionViewController animated:YES completion:^{ DBLG }];
+//                NYAlertViewController *confirmSelectionViewController = [self confirmSelectionViewController];
+//                [self presentViewController:confirmSelectionViewController animated:YES completion:^{ DBLG }];
 
+                [self showMyCustomAlertController];
+                
                 [self.googleClient queryForVolumeWithString:code.stringValue withCallback:^(GTLBooksVolume *responseVolume) {
         // -------------------------------------------------------------------------------
         //	Scanning Block : Google Success Block
@@ -372,7 +383,6 @@ static NSString * const volumeNib          = @"volumePresentationView";
     if (tableView == self.unsavedVolumesTableView) {
         cell = self.unsavedVolumes[indexPath.row];
     }
-    
     return cell;
 }
 
@@ -388,6 +398,58 @@ static NSString * const volumeNib          = @"volumePresentationView";
         // Preliminaries
     LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
     [dataManager updateWithNewTransientVolume:volumeToAdd];
+}
+
+- (void)showMapViewAlertView {
+DBLG
+    NYAlertViewController *alertViewController = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
+    
+    [alertViewController addAction:[NYAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDestructive handler:^(NYAlertAction *action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }]];
+    
+    [alertViewController addAction:[NYAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(NYAlertAction *action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }]];
+
+    alertViewController.title = @"Content View";
+    alertViewController.message = @"YOUR AD HERE";
+    
+    UIView *contentView = [[UIView alloc] init];
+    
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@""];
+    [contentView addSubview:cell];
+    [cell.imageView setImage:[UIImage imageNamed:@"placeholder"]];
+    cell.textLabel.text = (self.volumeToConfirm)? self.volumeToConfirm.title : @"Title Here";
+    cell.detailTextLabel.text = @"byline here";
+
+    alertViewController.alertViewContentView = contentView;
+    
+    [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[cell(160)]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(cell)]];
+    [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[cell]-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(cell)]];
+
+    
+    [self presentViewController:alertViewController animated:YES completion:nil];
+}
+
+-(void)addSneakyGestureAlert {
+DBLG
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showMapViewAlertView)];
+    [self.toggleScanningButton addGestureRecognizer:longPress];
+}
+
+
+- (void)showMyCustomAlertController {
+    UIAlertController *confirmationAlert = [UIAlertController alertControllerWithTitle:@"Is this the book you're looking for?" message:@"Toss this book on the coffee table?" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"Confirm" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        DBLG
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Nah, forget it" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        DBLG
+    }];
+    [confirmationAlert addAction:confirmAction];
+    [confirmationAlert addAction:cancelAction];
+    [self presentViewController:confirmationAlert animated:YES completion:nil];
 }
 
 @end
