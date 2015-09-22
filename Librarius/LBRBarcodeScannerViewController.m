@@ -23,9 +23,10 @@
 #import "Library.h"
 #import "Volume.h"
 #import "LBRParsedVolume.h"
-#import "UIView+ConfigureForAutoLayout.h"
-    //Testing out:
 #import "FlatUI+Categories.h"
+    //Testing out:
+#import "UIView+ConfigureForAutoLayout.h"
+#import "LBRAlertContent_TableViewController.h"
 
 @interface LBRBarcodeScannerViewController ()
 
@@ -293,22 +294,27 @@ static NSString * const volumeNib          = @"volumePresentationView";
     UINib *volumeDetailsNib = [UINib nibWithNibName:@"volumeDetailsCell" bundle:nil];
     [singleCellTableView registerNib:volumeDetailsNib forCellReuseIdentifier:@"volumeDetailsCellID"];
     
+    LBRAlertContent_TableViewController *confirmVolumeTableVC = [LBRAlertContent_TableViewController new];
+    [contentView addSubview:confirmVolumeTableVC.tableView];
     
     /**
      *  Magic happens here!
      */
-    [contentView addSubview:singleCellTableView];
     
-    [singleCellTableView configureForAutolayout];
-    [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[singleCellTableView(100)]|"
-                                                                        options:0
-                                                                        metrics:nil
-                                                                          views:NSDictionaryOfVariableBindings(singleCellTableView)]];
+//    [contentView addSubview:singleCellTableView];
+//    
+//    [singleCellTableView configureForAutolayout];
+//    [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[singleCellTableView(100)]|"
+//                                                                        options:0
+//                                                                        metrics:nil
+//                                                                          views:NSDictionaryOfVariableBindings(singleCellTableView)]];
+//    
+//    [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[singleCellTableView]-|"
+//                                                                        options:0
+//                                                                        metrics:nil
+//                                                                          views:NSDictionaryOfVariableBindings(singleCellTableView)]];
+
     
-    [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[singleCellTableView]-|"
-                                                                        options:0
-                                                                        metrics:nil
-                                                                          views:NSDictionaryOfVariableBindings(singleCellTableView)]];
         // This was inspiring!, but I didn't need it in the end.
 //    [singleCellTableView makeConstraints:^(MASConstraintMaker *make) {
 //        make.edges.equalTo(singleCellTableView.superview).with.insets(UIEdgeInsetsMake(28, 0, 28, 0));
