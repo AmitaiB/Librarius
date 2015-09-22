@@ -277,7 +277,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
     
     
     alertViewController.alertViewContentView = contentView;
-    
+
         // The TableView that really should be simple!
     UITableView *singleCellTableView = [[UITableView alloc] init];
     self.volumeDetailsTableView = singleCellTableView; //gives the VController a reference to this tableview...
@@ -313,7 +313,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
 //        make.edges.equalTo(singleCellTableView.superview).with.insets(UIEdgeInsetsMake(28, 0, 28, 0));
 //    }];
     
-    
+    [contentView sizeToFit];
         // Customize appearance as desired
     alertViewController.buttonCornerRadius = 20.0f;
     alertViewController.view.tintColor = self.view.tintColor;
