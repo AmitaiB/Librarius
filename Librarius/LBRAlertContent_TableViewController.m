@@ -24,7 +24,7 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.tableView registerClass:[LBRAlertContent_TableViewCell class] forCellReuseIdentifier:reuseIdentifier];
     
         // Do any additional setup after loading the view.
-    self.tableView.estimatedRowHeight = 100;
+    self.tableView.estimatedRowHeight = 60;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     
 }

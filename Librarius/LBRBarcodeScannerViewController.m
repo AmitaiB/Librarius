@@ -296,6 +296,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
     
     LBRAlertContent_TableViewController *confirmVolumeTableVC = [LBRAlertContent_TableViewController new];
     [contentView addSubview:confirmVolumeTableVC.tableView];
+    [contentView clipsToBounds];
     
     /**
      *  Magic happens here!
