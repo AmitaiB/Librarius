@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class LBRParsedVolume;
-@interface LBRBarcodeScannerViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface LBRBarcodeScannerViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *uniqueCodes;
 @property (nonatomic, strong) LBRParsedVolume *volumeToConfirm;

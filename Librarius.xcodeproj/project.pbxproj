@@ -30,6 +30,7 @@
 		382A83BA1BB3BA94008860CF /* LBRRecommendationsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 382A83B91BB3BA94008860CF /* LBRRecommendationsCollectionViewController.m */; settings = {ASSET_TAGS = (); }; };
 		382A83BD1BB3D6E1008860CF /* PresentDetailTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 382A83BC1BB3D6E1008860CF /* PresentDetailTransition.m */; settings = {ASSET_TAGS = (); }; };
 		382A83C11BB3D926008860CF /* DismissDetailTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 382A83C01BB3D926008860CF /* DismissDetailTransition.m */; settings = {ASSET_TAGS = (); }; };
+		382A83ED1BB4AF98008860CF /* LBRBatchScanScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 382A83EC1BB4AF98008860CF /* LBRBatchScanScrollView.m */; settings = {ASSET_TAGS = (); }; };
 		38466D281B94F24400DD252E /* LBRGoogleGTLClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 38466D271B94F24400DD252E /* LBRGoogleGTLClient.m */; };
 		384E0CC01B97D24B007E7290 /* NSString+dateValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 384E0CBF1B97D24B007E7290 /* NSString+dateValue.m */; };
 		3851DBFD1B8E2E5A00E90B9F /* LBRDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3851DBFC1B8E2E5A00E90B9F /* LBRDataManager.m */; };
@@ -114,6 +115,8 @@
 		382A83BC1BB3D6E1008860CF /* PresentDetailTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentDetailTransition.m; sourceTree = "<group>"; };
 		382A83BF1BB3D926008860CF /* DismissDetailTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DismissDetailTransition.h; sourceTree = "<group>"; };
 		382A83C01BB3D926008860CF /* DismissDetailTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DismissDetailTransition.m; sourceTree = "<group>"; };
+		382A83EB1BB4AF98008860CF /* LBRBatchScanScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRBatchScanScrollView.h; sourceTree = "<group>"; };
+		382A83EC1BB4AF98008860CF /* LBRBatchScanScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRBatchScanScrollView.m; sourceTree = "<group>"; };
 		382CE7FB1B9E09ED000A9701 /* Librarius-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Librarius-Prefix.pch"; sourceTree = "<group>"; };
 		38466D261B94F24400DD252E /* LBRGoogleGTLClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRGoogleGTLClient.h; sourceTree = "<group>"; };
 		38466D271B94F24400DD252E /* LBRGoogleGTLClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRGoogleGTLClient.m; sourceTree = "<group>"; };
@@ -315,10 +318,14 @@
 		380375631B8BB711004C4ECE /* Views/Images/nibs */ = {
 			isa = PBXGroup;
 			children = (
+				382A83EB1BB4AF98008860CF /* LBRBatchScanScrollView.h */,
+				382A83EC1BB4AF98008860CF /* LBRBatchScanScrollView.m */,
 				3855E26D1BB0DBD4004C5D11 /* LBRAlertContent_TableViewCell.h */,
 				3855E26E1BB0DBD4004C5D11 /* LBRAlertContent_TableViewCell.m */,
 				38E71DAD1BA337BB00DE1C61 /* LBRShelvedBookCollectionViewCell.h */,
 				38E71DAE1BA337BB00DE1C61 /* LBRShelvedBookCollectionViewCell.m */,
+				388DBE2E1BAA0F60005C5125 /* LBRCustomLayout.h */,
+				388DBE2F1BAA0F60005C5125 /* LBRCustomLayout.m */,
 				3803753F1B8AC9A8004C4ECE /* Images.xcassets */,
 				380DF1601BA219D500DBA20A /* ShelvedBookCell.h */,
 				380DF1611BA219D500DBA20A /* ShelvedBookCell.m */,
@@ -346,8 +353,6 @@
 				380375F61B8D4E90004C4ECE /* BookDetailViewController.m */,
 				381EBC031BA0FF63000D2FA4 /* LBRShelvesViewController.h */,
 				381EBC041BA0FF63000D2FA4 /* LBRShelvesViewController.m */,
-				388DBE2E1BAA0F60005C5125 /* LBRCustomLayout.h */,
-				388DBE2F1BAA0F60005C5125 /* LBRCustomLayout.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -654,6 +659,7 @@
 				388DBE331BAA54C8005C5125 /* UIImage+imageScaledToHeight.m in Sources */,
 				38565D701B9A20B800349498 /* LBRParsedVolume.m in Sources */,
 				38F57BC01BB0707200CC2EE8 /* UIFont+FlatUI.m in Sources */,
+				382A83ED1BB4AF98008860CF /* LBRBatchScanScrollView.m in Sources */,
 				3855E2721BB10AA5004C5D11 /* UIView+ConfigureForAutoLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

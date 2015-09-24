@@ -27,6 +27,7 @@
     //Testing out:
 #import "UIView+ConfigureForAutoLayout.h"
 #import "LBRAlertContent_TableViewController.h"
+#import "LBRBatchScanScrollView.h"
 
 @interface LBRBarcodeScannerViewController ()
 
@@ -53,6 +54,7 @@
 
 
 - (IBAction)toggleUnsavedVolumesTableView:(id)sender;
+@property (weak, nonatomic) IBOutlet LBRBatchScanScrollView *unsavedVolumesScrollView;
 
 
 
