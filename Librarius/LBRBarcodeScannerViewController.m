@@ -207,14 +207,16 @@ static NSString * const volumeNib          = @"volumePresentationView";
 //                NYAlertViewController *confirmSelectionViewController = [self confirmSelectionViewController];
 //                [self presentViewController:confirmSelectionViewController animated:YES completion:^{ DBLG }];
 
-                [self showMyCustomAlertController];
                 
                 [self.googleClient queryForVolumeWithString:code.stringValue withCallback:^(GTLBooksVolume *responseVolume) {
         // -------------------------------------------------------------------------------
         //	Scanning Block : Google Success Block
         // -------------------------------------------------------------------------------
                     [self.spinnerView stopAnimating];
+                    
                     self.volumeToConfirm = [[LBRParsedVolume alloc] initWithGoogleVolume:responseVolume];
+                    NYAlertViewController *confirmationViewController = [self confirmSelectionViewController];
+                    [self presentViewController:confirmationViewController animated:YES completion:nil];
                     [self.volumeDetailsTableView reloadData];
                 }];
             } else {
@@ -287,12 +289,28 @@ static NSString * const volumeNib          = @"volumePresentationView";
     
         // The content view that will contain our custom view.
         ///Working on this now...
-    LBRAlertContent_TableViewController *alertContentViewController = [LBRAlertContent_TableViewController new];
-    alertContentViewController.volumeToConfirm = self.volumeToConfirm;
-    alertViewController.alertViewContentView = alertContentViewController.tableView;
+    UITableViewCell *confirmationCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@""];
+    NSURL *url = [NSURL URLWithString:self.volumeToConfirm.cover_art_large];
+    [confirmationCell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    confirmationCell.textLabel.text = @"";
+    confirmationCell.detailTextLabel.text = @"";
+    confirmationCell.textLabel.text = self.volumeToConfirm.title;
+    confirmationCell.detailTextLabel.text = [NSString stringWithFormat:@"by %@", self.volumeToConfirm.author];
     
     
+//    LBRAlertContent_TableViewController *alertContentViewController = [LBRAlertContent_TableViewController new];
+//    alertContentViewController.volumeToConfirm = self.volumeToConfirm;
+//    alertViewController.alertViewContentView = alertContentViewController.tableView;
+    UIView *contentView = [[UIView alloc] init];
+    alertViewController.alertViewContentView = contentView;
     
+    [contentView addSubview:confirmationCell];
+    
+    [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[confirmationCell(60)]-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(confirmationCell)]];
+    [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[confirmationCell]-|"options:0 metrics:nil views:NSDictionaryOfVariableBindings(confirmationCell)]];
+    
+    
+  
     
     [self configureAlertController:alertViewController andInvertColors:YES];
     return alertViewController;
@@ -439,23 +457,8 @@ DBLG
 }
 
 
-- (void)showMyCustomAlertController {
-    UIAlertController *confirmationAlert = [UIAlertController alertControllerWithTitle:@"Is this the book you're looking for?" message:@"Toss this book on the coffee table?" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"Confirm" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        DBLG
-    }];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Nah, forget it" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        DBLG
-    }];
-    [confirmationAlert addAction:confirmAction];
-    [confirmationAlert addAction:cancelAction];
-    [self presentViewController:confirmationAlert animated:YES completion:nil];
-    
-    UIView *payloadView = [[UIView alloc] init];
-    [confirmationAlert.view addSubview:payloadView];
-    UILabel *label = [[UILabel alloc] init];
-    label.text = @"Test Label\n2nd line\n3rd line";
-    [payloadView addSubview:label];
+- (void)showMyCustomViewController {
+
 }
 
 @end
