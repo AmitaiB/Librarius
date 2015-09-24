@@ -39,7 +39,7 @@
 @property (weak, nonatomic) IBOutlet UIView *mainContentView;
 @property (weak, nonatomic) IBOutlet UIView *scannerView;
 @property (weak, nonatomic) IBOutlet UIButton *toggleScanningButton;
-@property (nonatomic, strong) UITableView *volumeDetailsTableView;
+//@property (nonatomic, strong) UITableView *volumeDetailsTableView;
 @property (nonatomic, strong) UITableView *unsavedVolumesTableView;
 @property (nonatomic, strong) NSMutableArray *unsavedVolumes;
 @property (nonatomic, strong) MTBBarcodeScanner *scanner;
@@ -83,8 +83,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
     self.googleClient    = [LBRGoogleGTLClient sharedGoogleGTLClient];
     self.uniqueCodes     = [NSMutableArray  new];
     self.volumeToConfirm = [LBRParsedVolume new];
-    self.scanner         = [[MTBBarcodeScanner alloc] initWithMetadataObjectTypes:@[AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeEAN13Code] previewView:self.scannerView];
-        ///Alternative: self.scanner = [[MTBBarcodeScanner alloc] initWithPreviewView:self.scannerView];
+    [self initializeScannerView];
     [self initializeUnsavedVolumesTableView];
 //    [self initializeSpinner];
     
@@ -106,6 +105,12 @@ static NSString * const volumeNib          = @"volumePresentationView";
     self.isConfigured = YES;
 }
 
+-(void)initializeScannerView {
+    self.scanner         = [[MTBBarcodeScanner alloc] initWithMetadataObjectTypes:@[AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeEAN13Code] previewView:self.scannerView];
+        ///Alternative: self.scanner = [[MTBBarcodeScanner alloc] initWithPreviewView:self.scannerView];
+
+    self.scannerView.layer.cornerRadius = 5.0f;
+}
 
 //-(void)initializeSpinner {
 //        //TODO: place this view somewhere, and give it a size somehow.
@@ -198,7 +203,6 @@ static NSString * const volumeNib          = @"volumePresentationView";
                 // If it's a new barcode, add it to the array.
             if ([self.uniqueCodes indexOfObject:code.stringValue] == NSNotFound) {
                 [self.uniqueCodes addObject:code.stringValue];
-                [self.spinnerView startAnimating];
                 
                     //1st APPROACH: NYAlertViewController sub-class. Should have worked, but didn't.
                     //✅ 2nd APPROACH: NYAlertViewController (like #1), but in this controller. Works.
@@ -210,12 +214,10 @@ static NSString * const volumeNib          = @"volumePresentationView";
         // -------------------------------------------------------------------------------
         //	Scanning Block : Google Success Block
         // -------------------------------------------------------------------------------
-                    [self.spinnerView stopAnimating];
                     
                     self.volumeToConfirm = [[LBRParsedVolume alloc] initWithGoogleVolume:responseVolume];
                     NYAlertViewController *confirmationViewController = [self confirmSelectionViewController];
                     [self presentViewController:confirmationViewController animated:YES completion:nil];
-                    [self.volumeDetailsTableView reloadData];
                 }];
             } else {
                 NSLog(@"Barcode already in list/table.");
@@ -296,9 +298,6 @@ static NSString * const volumeNib          = @"volumePresentationView";
     confirmationCell.detailTextLabel.text = [NSString stringWithFormat:@"by %@", self.volumeToConfirm.author];
     
     
-//    LBRAlertContent_TableViewController *alertContentViewController = [LBRAlertContent_TableViewController new];
-//    alertContentViewController.volumeToConfirm = self.volumeToConfirm;
-//    alertViewController.alertViewContentView = alertContentViewController.tableView;
     UIView *contentView = [[UIView alloc] init];
     alertViewController.alertViewContentView = contentView;
     
@@ -307,6 +306,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
     [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[confirmationCell(60)]-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(confirmationCell)]];
     [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[confirmationCell]-|"options:0 metrics:nil views:NSDictionaryOfVariableBindings(confirmationCell)]];
     [self configureAlertController:alertViewController andInvertColors:YES];
+    
     return alertViewController;
 }
 
@@ -339,30 +339,32 @@ static NSString * const volumeNib          = @"volumePresentationView";
     }
 }
 
+#pragma mark -
 #pragma mark - UITableViewDataSource methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (tableView == self.volumeDetailsTableView) {
-        return 1;
-    }
-    
-    if (tableView == self.unsavedVolumesTableView) {
         return self.unsavedVolumes.count;
-    }
-// default value
-        return 0;
 }
 
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:barcodeCellReuseID forIndexPath:indexPath];
+    cell = self.unsavedVolumes[indexPath.row];
+    return cell;
+}
 
+-(void)configureCell:(UITableViewCell*)cell forRowAtIndexPath:(NSIndexPath*)indexPath {
+    
+}
+
+#pragma mark -
 #pragma mark - Data Manager interface
-//✅
+
 -(void)generateTestDataIfNeeded {
     LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
     [dataManager generateTestDataIfNeeded];
 }
 
-    // ✅ Part of new flow.
 -(void)updateDataManagerWithNewTransientVolume:(LBRParsedVolume*)volumeToAdd {
         // Preliminaries
     LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
@@ -397,7 +399,6 @@ DBLG
     [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[cell(160)]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(cell)]];
     [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[cell]-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(cell)]];
 
-    
     [self presentViewController:alertViewController animated:YES completion:nil];
 }
 

@@ -33,7 +33,6 @@
 		38466D281B94F24400DD252E /* LBRGoogleGTLClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 38466D271B94F24400DD252E /* LBRGoogleGTLClient.m */; };
 		384E0CC01B97D24B007E7290 /* NSString+dateValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 384E0CBF1B97D24B007E7290 /* NSString+dateValue.m */; };
 		3851DBFD1B8E2E5A00E90B9F /* LBRDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3851DBFC1B8E2E5A00E90B9F /* LBRDataManager.m */; };
-		3855E26C1BB0D88C004C5D11 /* LBRAlertContent_TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3855E26B1BB0D88C004C5D11 /* LBRAlertContent_TableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		3855E26F1BB0DBD4004C5D11 /* LBRAlertContent_TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3855E26E1BB0DBD4004C5D11 /* LBRAlertContent_TableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		3855E2721BB10AA5004C5D11 /* UIView+ConfigureForAutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3855E2711BB10AA5004C5D11 /* UIView+ConfigureForAutoLayout.m */; settings = {ASSET_TAGS = (); }; };
 		38565D701B9A20B800349498 /* LBRParsedVolume.m in Sources */ = {isa = PBXBuildFile; fileRef = 38565D6F1B9A20B800349498 /* LBRParsedVolume.m */; };
@@ -122,8 +121,6 @@
 		384E0CBF1B97D24B007E7290 /* NSString+dateValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+dateValue.m"; sourceTree = "<group>"; };
 		3851DBFB1B8E2E5A00E90B9F /* LBRDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRDataManager.h; sourceTree = "<group>"; };
 		3851DBFC1B8E2E5A00E90B9F /* LBRDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRDataManager.m; sourceTree = "<group>"; };
-		3855E26A1BB0D88C004C5D11 /* LBRAlertContent_TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRAlertContent_TableViewController.h; sourceTree = "<group>"; };
-		3855E26B1BB0D88C004C5D11 /* LBRAlertContent_TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRAlertContent_TableViewController.m; sourceTree = "<group>"; };
 		3855E26D1BB0DBD4004C5D11 /* LBRAlertContent_TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRAlertContent_TableViewCell.h; sourceTree = "<group>"; };
 		3855E26E1BB0DBD4004C5D11 /* LBRAlertContent_TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRAlertContent_TableViewCell.m; sourceTree = "<group>"; };
 		3855E2701BB10AA5004C5D11 /* UIView+ConfigureForAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ConfigureForAutoLayout.h"; sourceTree = "<group>"; };
@@ -341,8 +338,6 @@
 				380375691B8BC89D004C4ECE /* LBRGoogleSignInViewController.m */,
 				380375391B8AC9A8004C4ECE /* LBRBarcodeScannerViewController.h */,
 				3803753A1B8AC9A8004C4ECE /* LBRBarcodeScannerViewController.m */,
-				3855E26A1BB0D88C004C5D11 /* LBRAlertContent_TableViewController.h */,
-				3855E26B1BB0D88C004C5D11 /* LBRAlertContent_TableViewController.m */,
 				380375781B8C08E0004C4ECE /* LBRSettingsTableViewController.h */,
 				380375791B8C08E0004C4ECE /* LBRSettingsTableViewController.m */,
 				380375F31B8D4E90004C4ECE /* BookCollectionViewController.h */,
@@ -627,7 +622,6 @@
 				38F57BBF1BB0707200CC2EE8 /* UIImage+FlatUI.m in Sources */,
 				38E71DAF1BA337BB00DE1C61 /* LBRShelvedBookCollectionViewCell.m in Sources */,
 				38F57BC11BB0707200CC2EE8 /* UIColor+FlatUI.m in Sources */,
-				3855E26C1BB0D88C004C5D11 /* LBRAlertContent_TableViewController.m in Sources */,
 				3855E26F1BB0DBD4004C5D11 /* LBRAlertContent_TableViewCell.m in Sources */,
 				38AAD7201B901D36003062C1 /* Library.m in Sources */,
 				380375F71B8D4E90004C4ECE /* BookCollectionViewController.m in Sources */,
