@@ -450,6 +450,12 @@ DBLG
     [confirmationAlert addAction:confirmAction];
     [confirmationAlert addAction:cancelAction];
     [self presentViewController:confirmationAlert animated:YES completion:nil];
+    
+    UIView *payloadView = [[UIView alloc] init];
+    [confirmationAlert.view addSubview:payloadView];
+    UILabel *label = [[UILabel alloc] init];
+    label.text = @"Test Label\n2nd line\n3rd line";
+    [payloadView addSubview:label];
 }
 
 @end

@@ -1,58 +1,53 @@
 //
-//  LBRShelvesFlowCollectionViewController.m
+//  LBRRecommendationsCollectionViewController.m
 //  Librarius
 //
-//  Created by Amitai Blickstein on 9/9/15.
-//  Copyright (c) 2015 Amitai Blickstein, LLC. All rights reserved.
+//  Created by Amitai Blickstein on 9/24/15.
+//  Copyright © 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 
-#import "LBRShelvesViewController.h"
-#import "LBRDataManager.h"
-#import "ShelvedBookCell.h"
+#import "LBRRecommendationsCollectionViewController.h"
 #import <UIImageView+AFNetworking.h>
-#import "Volume.h"
+#import "LBRDataManager.h"
 #import "LBRShelvedBookCollectionViewCell.h"
-#import "UIColor+FlatUI.h"
+#import "Library.h"
+#import "Bookcase.h"
+#import "Volume.h"
 
+@interface LBRRecommendationsCollectionViewController ()
 
-@interface LBRShelvesViewController ()
+@property (nonatomic, strong) IBOutlet UICollectionViewFlowLayout *layout;
 
-@property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *layout;
-
-
-@property (nonatomic, strong) LBRDataManager *dataManager;
+@property (nonatomic, strong) LBRDataManager *dataManger;
 @property (nonatomic, strong) NSMutableArray *sectionChanges;
 @property (nonatomic, strong) NSMutableArray *itemChanges;
 
 @end
 
-@implementation LBRShelvesViewController
-
-static NSString * const reuseIdentifier = @"bookCellID";
+@implementation LBRRecommendationsCollectionViewController
 
 @dynamic name;
 @dynamic indexTitle;
 @dynamic numberOfObjects;
 @dynamic objects;
 
-
+static NSString * const reuseIdentifier = @"Cell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     [self configureBooksFlowLayout:self.layout];
     self.collectionView.backgroundColor = [UIColor whiteColor];
     
-    self.title = @"Bookshelves";
+    self.title = @"Recommended Books";
     
-        // Uncomment the following line to preserve selection between presentations
+    // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Register cell classes
     [self.collectionView registerClass:[LBRShelvedBookCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
-    self.dataManager = [LBRDataManager sharedDataManager];
-//    self.fetchedResultsController; //!!!: What is this for?
+    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
@@ -69,47 +64,42 @@ static NSString * const reuseIdentifier = @"bookCellID";
     // Pass the selected object to the new view controller.
 }
 */
+
 #pragma mark - UICollectionView FlowLayout configuration
 
 - (void)configureBooksFlowLayout:(UICollectionViewFlowLayout*)layout {
     layout.minimumLineSpacing = 1.0;
     layout.minimumInteritemSpacing = 1.0;
     layout.estimatedItemSize = CGSizeMake(106.0, 106.0);
-//    layout.itemSize = CGSizeMake(106.0, 106.0);
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
 }
 
-
 #pragma mark <UICollectionViewDataSource>
-/*
+
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-#warning Incomplete method implementation -- Return the number of sections
-        //1 shelf, for now.
-    return 0;
+    return self.fetchedResultsController.sections.count;
 }
-*/
+
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-//    NSArray *sections = [self.fetchedResultsController sections];
-//    id <NSFetchedResultsSectionInfo> currentSection = sections[section];
-//    return currentSection.numberOfObjects;
-    return [self.fetchedResultsController.fetchedObjects count];
+    NSArray *sections = [self.fetchedResultsController sections];
+    id<NSFetchedResultsSectionInfo> currentSection = sections[section];
+    return [currentSection numberOfObjects];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     LBRShelvedBookCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor asbestosColor];
     
     NSArray *volumesArray = self.fetchedResultsController.fetchedObjects;
     Volume *volume = (Volume*)volumesArray[indexPath.row];
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", volume.cover_art_large]];
     [cell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder"]];
-    cell.thickness = [volume.thickness floatValue];
     
+    // Configure the cell
+
     return cell;
 }
 
-#pragma mark
 #pragma mark <UICollectionViewDelegate>
 
 /*
@@ -141,39 +131,19 @@ static NSString * const reuseIdentifier = @"bookCellID";
 }
 */
 
-#pragma mark - FlowLayout Delegate methods
-
-/*
--(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    return [collectionView ar_sizeForCellWithIdentifier:reuseIdentifier indexPath:indexPath configuration:^(id cell) {
-            //cell configuration...
-//        [self configureCell:cell atIndexPath:indexPath];
-//    Volume *object            = [self.fetchedResultsController objectAtIndexPath:indexPath];
-//            //inches --> pixels...how?
-//    CGFloat thickness         = (object.thickness)? [object.thickness floatValue]: 40.0f;
-//    CGFloat height            = (object.height)? [object.height floatValue] : 106.0f;
-//
-//    CGSize volumeDimensions2D = CGSizeMake(thickness, height);
-//
-//    cell              = volumeDimensions2D;
-
-    }];
-}
-*/
- 
+#pragma mark -
 #pragma mark - Fetched Results Controller configuration
 
-- (NSFetchedResultsController *)fetchedResultsController
-{
+-(NSFetchedResultsController *)fetchedResultsController {
     if (_fetchedResultsController != nil) {
         return _fetchedResultsController;
     }
-    return [[LBRDataManager sharedDataManager]
-            preconfiguredLBRFetchedResultsController:self];
+    
+    return [[LBRDataManager sharedDataManager] preconfiguredLBRFetchedResultsController:self];
 }
 
-#pragma mark - Fetched Results Controller Delegate methods
+#pragma mark -
+#pragma mark - FetchedResultsController Delegate methods
 
 -(void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
         // Instead of UITableView's '-beginUpdates' method.

@@ -397,7 +397,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title: subtitle, byline (year: publisher)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SEY-aM-JoZ">
                                             <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -514,6 +514,43 @@
             </objects>
             <point key="canvasLocation" x="205.5" y="0.0"/>
         </scene>
+        <!--Recommendations Collection View Controller-->
+        <scene sceneID="dve-vn-Qr2">
+            <objects>
+                <collectionViewController id="9Mv-tj-U5P" customClass="LBRRecommendationsCollectionViewController" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="8yD-6e-VJh">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YLL-v8-ZmJ">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="FlX-Ty-Yll">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="9Mv-tj-U5P" id="smH-3t-Boj"/>
+                            <outlet property="delegate" destination="9Mv-tj-U5P" id="AIg-iO-kbm"/>
+                        </connections>
+                    </collectionView>
+                    <tabBarItem key="tabBarItem" selectedImage="first" systemItem="featured" id="RCr-ea-gQx"/>
+                    <connections>
+                        <outlet property="layout" destination="YLL-v8-ZmJ" id="Dkn-er-gPm"/>
+                    </connections>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hVK-su-L0T" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="949.5" y="-702"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
@@ -526,9 +563,10 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
-                        <segue destination="BK5-aT-ift" kind="relationship" relationship="viewControllers" id="wTu-ac-h8U"/>
                         <segue destination="bTL-zk-y1V" kind="relationship" relationship="viewControllers" id="9MK-7n-nPt"/>
+                        <segue destination="BK5-aT-ift" kind="relationship" relationship="viewControllers" id="wTu-ac-h8U"/>
+                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
+                        <segue destination="9Mv-tj-U5P" kind="relationship" relationship="viewControllers" id="TBB-3r-H23"/>
                         <segue destination="oJK-od-ZUi" kind="relationship" relationship="viewControllers" id="kRc-jj-rCf"/>
                     </connections>
                 </tabBarController>
@@ -578,6 +616,7 @@
         <image name="FlashLight-lightning" width="29" height="29"/>
         <image name="books49" width="32" height="32"/>
         <image name="collections" width="29" height="29"/>
+        <image name="first" width="30" height="30"/>
         <image name="gears6-60@2x-29" width="29" height="29"/>
         <image name="placeholder" width="48" height="48"/>
         <image name="scanTarget" width="32" height="32"/>
