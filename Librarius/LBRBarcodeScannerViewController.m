@@ -12,7 +12,7 @@
     //Definitely Used:
 #import <AVFoundation/AVFoundation.h>
 #import <UIImageView+AFNetworking.h>
-#import <MMMaterialDesignSpinner.h>
+//#import <MMMaterialDesignSpinner.h>
 #import <NYAlertViewController.h>
 #import <MTBBarcodeScanner.h>
 #import <LARSTorch.h>
@@ -45,7 +45,7 @@
 @property (nonatomic, strong) MTBBarcodeScanner *scanner;
 @property (nonatomic, strong) LBRGoogleGTLClient *googleClient;
 
-@property (nonatomic, strong) MMMaterialDesignSpinner *spinnerView;
+//@property (nonatomic, strong) MMMaterialDesignSpinner *spinnerView;
 
 @property (nonatomic) BOOL isConfigured;
 
@@ -76,8 +76,6 @@ static NSString * const volumeNib          = @"volumePresentationView";
     if (!self.isConfigured) {
         [self configureProgrammaticProperties];}
     
-    [self addSneakyGestureAlert];
-    
 }
 
 -(void)configureProgrammaticProperties {
@@ -88,7 +86,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
     self.scanner         = [[MTBBarcodeScanner alloc] initWithMetadataObjectTypes:@[AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeEAN13Code] previewView:self.scannerView];
         ///Alternative: self.scanner = [[MTBBarcodeScanner alloc] initWithPreviewView:self.scannerView];
     [self initializeUnsavedVolumesTableView];
-    [self initializeSpinner];
+//    [self initializeSpinner];
     
         // Hidden Things
     self.lightToggleButton.hidden = YES;
@@ -109,14 +107,14 @@ static NSString * const volumeNib          = @"volumePresentationView";
 }
 
 
--(void)initializeSpinner {
-        //TODO: place this view somewhere, and give it a size somehow.
-    self.spinnerView                  = [MMMaterialDesignSpinner new];
-    self.spinnerView.lineWidth        = 1.5f;
-    self.spinnerView.tintColor        = [UIColor cyanColor];
-    self.spinnerView.hidesWhenStopped = YES;
-    [self.view addSubview:self.spinnerView];
-}
+//-(void)initializeSpinner {
+//        //TODO: place this view somewhere, and give it a size somehow.
+//    self.spinnerView                  = [MMMaterialDesignSpinner new];
+//    self.spinnerView.lineWidth        = 1.5f;
+//    self.spinnerView.tintColor        = [UIColor cyanColor];
+//    self.spinnerView.hidesWhenStopped = YES;
+//    [self.view addSubview:self.spinnerView];
+//}
 
 -(void)initializeUnsavedVolumesTableView {
     UITableView *tableView  = [UITableView new];
@@ -308,15 +306,9 @@ static NSString * const volumeNib          = @"volumePresentationView";
     
     [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[confirmationCell(60)]-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(confirmationCell)]];
     [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[confirmationCell]-|"options:0 metrics:nil views:NSDictionaryOfVariableBindings(confirmationCell)]];
-    
-    
-  
-    
     [self configureAlertController:alertViewController andInvertColors:YES];
     return alertViewController;
 }
-
-
 
     // Customize appearance as desired
 -(void)configureAlertController:(NYAlertViewController*)alertViewController andInvertColors:(BOOL)invertColors {
@@ -362,47 +354,6 @@ static NSString * const volumeNib          = @"volumePresentationView";
         return 0;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *volumeCellID = @"volumeCellID";
-    
-    UITableViewCell *cell;
-    if (tableView == self.volumeDetailsTableView) {
-        cell = [tableView dequeueReusableCellWithIdentifier:volumeCellID];
-        if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:volumeCellID];
-        }
-
-// -------------------------------------------------------------------------------
-//	Lazy-Loading the thumbnail image here.
-// -------------------------------------------------------------------------------
-            // Weak pointer to our cell, for use inside the block, to prevent retain cycles.
-        __weak UITableViewCell *blockCell = cell;
-
-            // We prefer a higher quality image.
-        NSURL *coverArtURL = [NSURL URLWithString:(self.volumeToConfirm.cover_art_large)?
-                              self.volumeToConfirm.cover_art_large : self.volumeToConfirm.cover_art];
-        [cell.imageView setImageWithURL:coverArtURL placeholderImage:[UIImage imageNamed:@"placeholder"]];
-        
-//        NSURLRequest *request = [NSURLRequest requestWithURL:coverArtURL];
-//        
-//            // Thank you, UIImageView+AFNetworking!
-//        [cell.imageView setImageWithURLRequest:request placeholderImage:[UIImage imageNamed:@"placeholder"] success:^(NSURLRequest *request, NSHTTPURLResponse *responseObj, UIImage *coverArtImage) {
-//            
-//                // As per the docs, setImage: needs to be called by the success block.
-//             [blockCell.imageView setImage:coverArtImage];
-//            } failure:^(NSURLRequest * request, NSHTTPURLResponse * responseObj, NSError * error) {
-//                NSLog(@"Failed to load thumbnail with error: %@", error.localizedDescription);
-//            }];
-            //TODO: add Stage 2: cell.textLabel.text = @"" at first...
-        cell.textLabel.text = self.volumeToConfirm.title;
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ (%@)", self.volumeToConfirm.author, [self yearFromDate:self.volumeToConfirm.published]];
-    }
-    if (tableView == self.unsavedVolumesTableView) {
-        cell = self.unsavedVolumes[indexPath.row];
-    }
-    return cell;
-}
 
 #pragma mark - Data Manager interface
 //✅
@@ -450,15 +401,6 @@ DBLG
     [self presentViewController:alertViewController animated:YES completion:nil];
 }
 
--(void)addSneakyGestureAlert {
-DBLG
-    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(showMapViewAlertView)];
-    [self.toggleScanningButton addGestureRecognizer:longPress];
-}
 
-
-- (void)showMyCustomViewController {
-
-}
 
 @end
