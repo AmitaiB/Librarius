@@ -40,7 +40,7 @@
 @property (weak, nonatomic) IBOutlet UIView *scannerView;
 @property (weak, nonatomic) IBOutlet UIButton *toggleScanningButton;
 //@property (nonatomic, strong) UITableView *volumeDetailsTableView;
-@property (nonatomic, strong) UITableView *unsavedVolumesTableView;
+@property (nonatomic, strong) IBOutlet UITableView *unsavedVolumesTableView;
 @property (nonatomic, strong) NSMutableArray *unsavedVolumes;
 @property (nonatomic, strong) MTBBarcodeScanner *scanner;
 @property (nonatomic, strong) LBRGoogleGTLClient *googleClient;
@@ -52,6 +52,7 @@
 @property (nonatomic) BOOL isScanning;
 
 
+- (IBAction)toggleUnsavedVolumesTableView:(id)sender;
 
 
 
@@ -179,7 +180,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
     [self flipScanButtonAppearance];
     [self.scanner stopScanning];
     self.saveScannedBooksToCoreDataButton.hidden = NO;
-    self.unsavedVolumesTableView.hidden          = NO;
+//    self.unsavedVolumesTableView.hidden          = NO;
     self.lightToggleButton.hidden                = YES;
 }
 
@@ -190,7 +191,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
     self.isScanning = YES;
     [self flipScanButtonAppearance];
     self.saveScannedBooksToCoreDataButton.hidden = YES;
-    self.unsavedVolumesTableView.hidden          = YES;
+//    self.unsavedVolumesTableView.hidden          = YES;
     self.lightToggleButton.hidden                = NO;
     
 // ???: Consider embedding the scanning in this: [MTBBarcodeScanner requestCameraPermissionWithSuccess:^(BOOL success)...?
@@ -403,5 +404,9 @@ DBLG
 }
 
 
+
+- (IBAction)toggleUnsavedVolumesTableView:(id)sender {
+self.unsavedVolumesTableView.hidden = !self.unsavedVolumesTableView.hidden;
+    }
 
 @end
