@@ -69,8 +69,9 @@
 static NSString * const barcodeCellReuseID = @"barcodeCellReuseID";
 static NSString * const volumeNib          = @"volumePresentationView";
 
-
-#pragma mark - Lifecycle
+#pragma mark -
+#pragma mark - === Lifecycle ===
+#pragma mark -
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -87,7 +88,10 @@ static NSString * const volumeNib          = @"volumePresentationView";
     self.uniqueCodes     = [NSMutableArray  new];
     self.volumeToConfirm = [LBRParsedVolume new];
     [self initializeScannerView];
-    [self initializeUnsavedVolumesTableView];
+//    [self initializeUnsavedVolumesTableView];
+    self.unsavedVolumesTableView.delegate = self;
+    self.unsavedVolumesTableView.dataSource = self;
+    [self configureUnsavedVolumesScrollView];
 //    [self initializeSpinner];
     
         // Hidden Things
@@ -103,10 +107,21 @@ static NSString * const volumeNib          = @"volumePresentationView";
     self.saveScannedBooksToCoreDataButton.clipsToBounds      = YES;
     self.saveScannedBooksToCoreDataButton.backgroundColor    = [UIColor wetAsphaltColor];
     
+    [self.mainContentView bringSubviewToFront:self.unsavedVolumesScrollView];
+    [self.unsavedVolumesScrollView bringSubviewToFront:self.unsavedVolumesTableView];
     
         // So we don't repeat ourselves.
     self.isConfigured = YES;
 }
+-(void)configureUnsavedVolumesScrollView {
+    self.unsavedVolumesScrollView.delegate                     = self;
+    self.unsavedVolumesScrollView.pagingEnabled                = NO;
+    self.unsavedVolumesScrollView.alwaysBounceVertical         = YES;
+    self.unsavedVolumesScrollView.alwaysBounceHorizontal       = NO;
+    self.unsavedVolumesScrollView.showsVerticalScrollIndicator = NO;
+    self.unsavedVolumesScrollView.contentInset                 = UIEdgeInsetsMake(500, 0, 0, 0);
+}
+
 
 -(void)initializeScannerView {
     self.scanner         = [[MTBBarcodeScanner alloc] initWithMetadataObjectTypes:@[AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeEAN13Code] previewView:self.scannerView];
@@ -124,16 +139,18 @@ static NSString * const volumeNib          = @"volumePresentationView";
 //    [self.view addSubview:self.spinnerView];
 //}
 
+//CLEAN: We put the tableView in storyboard, no need to go to these lengths now.
 -(void)initializeUnsavedVolumesTableView {
-    UITableView *tableView  = [UITableView new];
-    UINib *volumeDetailsNib = [UINib nibWithNibName:@"volumeDetailsCell" bundle:nil];
-    [tableView registerNib:volumeDetailsNib forCellReuseIdentifier:@"volumeDetailsCellID"];
+        // CLEAN: It's in storyboard, no need to alloc init.
+//    UITableView *tableView  = [UITableView new];
+//    UINib *volumeDetailsNib = [UINib nibWithNibName:@"volumeDetailsCell" bundle:nil];
+//    [tableView registerNib:volumeDetailsNib forCellReuseIdentifier:@"volumeDetailsCellID"];
+    UITableView *tableView = self.unsavedVolumesTableView;
     tableView.delegate      = self;
     tableView.dataSource    = self;
-    tableView.hidden        = NO;
-    [self.mainContentView addSubview:tableView];
-    [self.mainContentView bringSubviewToFront:tableView];
-    self.unsavedVolumesTableView = tableView;
+//    tableView.hidden        = NO;
+//    [self.mainContentView addSubview:tableView];
+//    [self.mainContentView bringSubviewToFront:tableView];
     
 }
 
@@ -171,8 +188,10 @@ static NSString * const volumeNib          = @"volumePresentationView";
     [dataManager saveParsedVolumesToEitherSaveOrDiscardToPersistentStore];
     [dataManager logCurrentLibrary];
 }
-    
-#pragma mark - Scanning
+
+#pragma mark -
+#pragma mark - === Scanning ===
+#pragma mark -
 
 /**
  *  Stop scanning, flip the button.
@@ -261,7 +280,9 @@ static NSString * const volumeNib          = @"volumePresentationView";
     return [@(yearComponent) stringValue];
 }
 
-#pragma mark - Confirmation Alert Controller (w/ Confirm/Cancel blocks)
+#pragma mark -
+#pragma mark - == Confirmation Alert Controller (w/ Confirm/Cancel blocks) ==
+#pragma mark -
 
 -(NYAlertViewController*)confirmSelectionViewController {
     NYAlertViewController *alertViewController = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
@@ -343,7 +364,8 @@ static NSString * const volumeNib          = @"volumePresentationView";
 }
 
 #pragma mark -
-#pragma mark - UITableViewDataSource methods
+#pragma mark - === UITableViewDataSource methods ===
+#pragma mark -
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -410,5 +432,10 @@ DBLG
 - (IBAction)toggleUnsavedVolumesTableView:(id)sender {
 self.unsavedVolumesTableView.hidden = !self.unsavedVolumesTableView.hidden;
     }
+
+#pragma mark -
+#pragma mark - === UIScrollViewDelegate ===
+
+
 
 @end

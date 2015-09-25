@@ -1,3 +1,5 @@
+
+
 #pragma mark - class summary
 /**
  *  Apple's recommended approach for layouts which change infrequently
@@ -113,7 +115,7 @@ static NSString * const LBRShelvedBookCollectionViewCellKind = @"coverArtCell";
 
 
 #pragma mark -
-#pragma mark - === UICollectionViewLayout methods
+#pragma mark - === UICollectionViewLayout methods ===
 #pragma mark -
 #pragma mark layout info caching (prepareLayout)
 /**
