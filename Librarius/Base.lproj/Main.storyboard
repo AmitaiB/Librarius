@@ -211,29 +211,6 @@
                             <navigationBar alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gMM-L9-IT3">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                             </navigationBar>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IOe-eD-XQW">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <color key="backgroundColor" red="0.1077490499" green="0.94305272470000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="163" id="8eu-nt-CIu"/>
-                                </constraints>
-                                <state key="normal" title="Start Scanning">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="8eu-nt-CIu"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="8eu-nt-CIu"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="toggleScanningButtonTapped:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="5gb-wa-5cA"/>
-                                </connections>
-                            </button>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="whR-df-RYp" userLabel="Middle MGMT View">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
@@ -334,6 +311,8 @@
                                         <exclude reference="Oa8-mQ-l0H"/>
                                     </mask>
                                     <mask key="constraints">
+                                        <exclude reference="Jbg-C2-g4Y"/>
+                                        <exclude reference="fcZ-77-8Cu"/>
                                         <exclude reference="8Aw-SA-D86"/>
                                         <exclude reference="Bw8-gc-acS"/>
                                         <exclude reference="jkf-pW-v09"/>
@@ -342,8 +321,6 @@
                                         <exclude reference="Qvh-D5-uKs"/>
                                         <exclude reference="W7O-qe-33P"/>
                                         <exclude reference="nRs-mu-rpE"/>
-                                        <exclude reference="Jbg-C2-g4Y"/>
-                                        <exclude reference="fcZ-77-8Cu"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact">
@@ -353,6 +330,8 @@
                                         <include reference="Oa8-mQ-l0H"/>
                                     </mask>
                                     <mask key="constraints">
+                                        <include reference="Jbg-C2-g4Y"/>
+                                        <include reference="fcZ-77-8Cu"/>
                                         <include reference="8Aw-SA-D86"/>
                                         <include reference="Bw8-gc-acS"/>
                                         <include reference="jkf-pW-v09"/>
@@ -361,20 +340,9 @@
                                         <include reference="Qvh-D5-uKs"/>
                                         <include reference="W7O-qe-33P"/>
                                         <include reference="nRs-mu-rpE"/>
-                                        <include reference="Jbg-C2-g4Y"/>
-                                        <include reference="fcZ-77-8Cu"/>
                                     </mask>
                                 </variation>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Bf-2Z-qmt" userLabel="&quot;Save scannedbooks to CoreData&quot; Button">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <state key="normal" title="Save Books to Collection" backgroundImage="placeholder">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="saveScannedVolumesToLibraryButtonTapped:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="5RG-K5-mfO"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lcy-zw-nW5" userLabel="TemporaryButton">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <color key="backgroundColor" red="0.79607843140000001" green="0.077853351850000002" blue="0.14606379920000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -383,23 +351,70 @@
                                     <action selector="toggleUnsavedVolumesTableView:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="y7p-A9-3XZ"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IOe-eD-XQW">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <color key="backgroundColor" red="0.1077490499" green="0.94305272470000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="163" id="8eu-nt-CIu"/>
+                                </constraints>
+                                <state key="normal" title="Start Scanning">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="8eu-nt-CIu"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="8eu-nt-CIu"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="toggleScanningButtonTapped:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="5gb-wa-5cA"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Bf-2Z-qmt" userLabel="&quot;Save scannedbooks to CoreData&quot; Button">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <color key="backgroundColor" red="0.80000000000000004" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Save Books to Collection">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="saveScannedVolumesToLibraryButtonTapped:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="5RG-K5-mfO"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="3Bf-2Z-qmt" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" id="4M8-1g-KsS"/>
+                            <constraint firstItem="3Bf-2Z-qmt" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" id="4M8-1g-KsS">
+                                <variation key="widthClass=compact" constant="-2"/>
+                            </constraint>
                             <constraint firstAttribute="trailingMargin" secondItem="whR-df-RYp" secondAttribute="trailing" constant="-10" id="8dN-Hh-xs1"/>
                             <constraint firstItem="IOe-eD-XQW" firstAttribute="baseline" secondItem="3Bf-2Z-qmt" secondAttribute="baseline" id="Aqu-tp-SFc"/>
+                            <constraint firstItem="3Bf-2Z-qmt" firstAttribute="top" secondItem="IOe-eD-XQW" secondAttribute="top" id="BxP-iE-Uhk"/>
                             <constraint firstItem="whR-df-RYp" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="57" id="C8D-YQ-c8f"/>
                             <constraint firstItem="Iy8-FC-gUc" firstAttribute="top" secondItem="gMM-L9-IT3" secondAttribute="top" id="LXu-HF-Ds5"/>
-                            <constraint firstItem="3Bf-2Z-qmt" firstAttribute="top" secondItem="lcy-zw-nW5" secondAttribute="bottom" constant="8" symbolic="YES" id="NCA-AA-yLb"/>
+                            <constraint firstItem="3Bf-2Z-qmt" firstAttribute="top" secondItem="lcy-zw-nW5" secondAttribute="bottom" constant="8" symbolic="YES" id="NCA-AA-yLb">
+                                <variation key="widthClass=compact" constant="-10"/>
+                            </constraint>
                             <constraint firstItem="gMM-L9-IT3" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leading" id="Wac-0u-fKz"/>
                             <constraint firstItem="lcy-zw-nW5" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leading" constant="192" id="YIq-uO-AZx"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="IOe-eD-XQW" secondAttribute="trailing" constant="-5" id="a8M-GQ-cvj"/>
-                            <constraint firstItem="whR-df-RYp" firstAttribute="leading" secondItem="3Bf-2Z-qmt" secondAttribute="leading" id="bti-L6-rJv"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="IOe-eD-XQW" secondAttribute="trailing" constant="-5" id="a8M-GQ-cvj">
+                                <variation key="widthClass=compact" constant="-3"/>
+                            </constraint>
+                            <constraint firstItem="3Bf-2Z-qmt" firstAttribute="height" secondItem="IOe-eD-XQW" secondAttribute="height" id="aOs-X3-bAc"/>
+                            <constraint firstItem="whR-df-RYp" firstAttribute="leading" secondItem="3Bf-2Z-qmt" secondAttribute="leading" id="bti-L6-rJv">
+                                <variation key="widthClass=compact" constant="2"/>
+                            </constraint>
                             <constraint firstAttribute="trailing" secondItem="gMM-L9-IT3" secondAttribute="trailing" id="cub-Gh-7cN"/>
                             <constraint firstItem="Iy8-FC-gUc" firstAttribute="bottom" secondItem="Djb-ko-YwX" secondAttribute="top" id="d4Z-Fi-wbu"/>
-                            <constraint firstItem="Djb-ko-YwX" firstAttribute="top" secondItem="3Bf-2Z-qmt" secondAttribute="bottom" constant="2" id="fhv-oK-Buo"/>
-                            <constraint firstItem="3Bf-2Z-qmt" firstAttribute="top" secondItem="whR-df-RYp" secondAttribute="bottom" constant="31" id="ht0-8B-GAB"/>
+                            <constraint firstItem="Djb-ko-YwX" firstAttribute="top" secondItem="3Bf-2Z-qmt" secondAttribute="bottom" constant="2" id="fhv-oK-Buo">
+                                <variation key="widthClass=compact" constant="20"/>
+                            </constraint>
+                            <constraint firstItem="3Bf-2Z-qmt" firstAttribute="top" secondItem="whR-df-RYp" secondAttribute="bottom" constant="31" id="ht0-8B-GAB">
+                                <variation key="widthClass=compact" constant="13"/>
+                            </constraint>
                             <constraint firstItem="IOe-eD-XQW" firstAttribute="leading" secondItem="3Bf-2Z-qmt" secondAttribute="trailing" constant="22" id="iG0-M3-spa"/>
                             <constraint firstItem="Iy8-FC-gUc" firstAttribute="leading" secondItem="gMM-L9-IT3" secondAttribute="leading" id="oWd-CU-5F8"/>
                             <constraint firstItem="gMM-L9-IT3" firstAttribute="trailing" secondItem="Iy8-FC-gUc" secondAttribute="trailing" id="tvA-CP-6kn"/>
@@ -409,10 +424,10 @@
                             <mask key="subviews">
                                 <exclude reference="Iy8-FC-gUc"/>
                                 <exclude reference="gMM-L9-IT3"/>
-                                <exclude reference="IOe-eD-XQW"/>
                                 <exclude reference="whR-df-RYp"/>
-                                <exclude reference="3Bf-2Z-qmt"/>
                                 <exclude reference="lcy-zw-nW5"/>
+                                <exclude reference="IOe-eD-XQW"/>
+                                <exclude reference="3Bf-2Z-qmt"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="LXu-HF-Ds5"/>
@@ -427,7 +442,9 @@
                                 <exclude reference="bti-L6-rJv"/>
                                 <exclude reference="YIq-uO-AZx"/>
                                 <exclude reference="4M8-1g-KsS"/>
+                                <exclude reference="BxP-iE-Uhk"/>
                                 <exclude reference="NCA-AA-yLb"/>
+                                <exclude reference="aOs-X3-bAc"/>
                                 <exclude reference="ht0-8B-GAB"/>
                                 <exclude reference="fhv-oK-Buo"/>
                                 <exclude reference="Aqu-tp-SFc"/>
@@ -439,10 +456,10 @@
                             <mask key="subviews">
                                 <include reference="Iy8-FC-gUc"/>
                                 <include reference="gMM-L9-IT3"/>
-                                <include reference="IOe-eD-XQW"/>
                                 <include reference="whR-df-RYp"/>
-                                <include reference="3Bf-2Z-qmt"/>
                                 <include reference="lcy-zw-nW5"/>
+                                <include reference="IOe-eD-XQW"/>
+                                <include reference="3Bf-2Z-qmt"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="LXu-HF-Ds5"/>
@@ -457,7 +474,9 @@
                                 <include reference="bti-L6-rJv"/>
                                 <include reference="YIq-uO-AZx"/>
                                 <include reference="4M8-1g-KsS"/>
+                                <include reference="BxP-iE-Uhk"/>
                                 <include reference="NCA-AA-yLb"/>
+                                <include reference="aOs-X3-bAc"/>
                                 <include reference="ht0-8B-GAB"/>
                                 <include reference="fhv-oK-Buo"/>
                                 <include reference="Aqu-tp-SFc"/>
@@ -488,12 +507,15 @@
             <objects>
                 <tableViewController id="mDs-dY-Cw2" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="CbW-35-euz">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="w19-qn-czN">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="w19-qn-czN" id="ezh-3x-CE9">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -666,6 +688,7 @@
             <objects>
                 <collectionViewController id="9Mv-tj-U5P" customClass="LBRRecommendationsCollectionViewController" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="8yD-6e-VJh">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YLL-v8-ZmJ">
                             <size key="itemSize" width="50" height="50"/>
@@ -675,7 +698,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="FlX-Ty-Yll">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <rect key="frame" x="0.0" y="64" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
