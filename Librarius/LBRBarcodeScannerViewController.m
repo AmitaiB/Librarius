@@ -51,8 +51,6 @@
 @property (weak, nonatomic) IBOutlet UIView *mainContentView;
 @property (weak, nonatomic) IBOutlet UIView *scannerView;
 @property (weak, nonatomic) IBOutlet UIButton *toggleScanningButton;
-//@property (nonatomic, strong) UITableView *volumeDetailsTableView;
-@property (nonatomic, strong) IBOutlet UITableView *unsavedVolumesTableView;
 @property (nonatomic, strong) NSMutableArray *unsavedVolumes;
 @property (nonatomic, strong) MTBBarcodeScanner *scanner;
 @property (nonatomic, strong) LBRGoogleGTLClient *googleClient;
@@ -63,8 +61,6 @@
 
 @property (nonatomic) BOOL isScanning;
 
-
-- (IBAction)toggleUnsavedVolumesTableView:(id)sender;
 @property (weak, nonatomic) IBOutlet LBRBatchScanScrollView *unsavedVolumesScrollView;
 
 
@@ -98,9 +94,6 @@ static NSString * const volumeNib          = @"volumePresentationView";
     self.uniqueCodes     = [NSMutableArray  new];
     self.volumeToConfirm = [LBRParsedVolume new];
     [self initializeScannerView];
-//    [self initializeUnsavedVolumesTableView];
-    self.unsavedVolumesTableView.delegate = self;
-    self.unsavedVolumesTableView.dataSource = self;
     [self configureUnsavedVolumesScrollView];
 //    [self initializeSpinner];
     
@@ -118,7 +111,6 @@ static NSString * const volumeNib          = @"volumePresentationView";
     self.saveScannedBooksToCoreDataButton.backgroundColor    = [UIColor wetAsphaltColor];
     
     [self.mainContentView bringSubviewToFront:self.unsavedVolumesScrollView];
-    [self.unsavedVolumesScrollView bringSubviewToFront:self.unsavedVolumesTableView];
     
         // So we don't repeat ourselves.
     self.isConfigured = YES;
@@ -149,20 +141,6 @@ static NSString * const volumeNib          = @"volumePresentationView";
 //    [self.view addSubview:self.spinnerView];
 //}
 
-//CLEAN: We put the tableView in storyboard, no need to go to these lengths now.
--(void)initializeUnsavedVolumesTableView {
-        // CLEAN: It's in storyboard, no need to alloc init.
-//    UITableView *tableView  = [UITableView new];
-//    UINib *volumeDetailsNib = [UINib nibWithNibName:@"volumeDetailsCell" bundle:nil];
-//    [tableView registerNib:volumeDetailsNib forCellReuseIdentifier:@"volumeDetailsCellID"];
-    UITableView *tableView = self.unsavedVolumesTableView;
-    tableView.delegate      = self;
-    tableView.dataSource    = self;
-//    tableView.hidden        = NO;
-//    [self.mainContentView addSubview:tableView];
-//    [self.mainContentView bringSubviewToFront:tableView];
-    
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -211,7 +189,6 @@ static NSString * const volumeNib          = @"volumePresentationView";
     [self flipScanButtonAppearance];
     [self.scanner stopScanning];
     self.saveScannedBooksToCoreDataButton.hidden = NO;
-//    self.unsavedVolumesTableView.hidden          = NO;
     self.lightToggleButton.hidden                = YES;
 }
 
@@ -222,7 +199,6 @@ static NSString * const volumeNib          = @"volumePresentationView";
     self.isScanning = YES;
     [self flipScanButtonAppearance];
     self.saveScannedBooksToCoreDataButton.hidden = YES;
-//    self.unsavedVolumesTableView.hidden          = YES;
     self.lightToggleButton.hidden                = NO;
     
 // ???: Consider embedding the scanning in this: [MTBBarcodeScanner requestCameraPermissionWithSuccess:^(BOOL success)...?
@@ -437,14 +413,6 @@ DBLG
     [self presentViewController:alertViewController animated:YES completion:nil];
 }
 
-
-
-- (IBAction)toggleUnsavedVolumesTableView:(id)sender {
-//self.unsavedVolumesTableView.hidden = !self.unsavedVolumesTableView.hidden;
-    UITableViewController *tvc = [[UITableViewController alloc] init];
-    tvc.tableView = self.unsavedVolumesTableView;
-    [self presentViewController:tvc animated:YES completion:nil];
-    }
 
 #pragma mark -
 #pragma mark - === UIScrollViewDelegate ===
