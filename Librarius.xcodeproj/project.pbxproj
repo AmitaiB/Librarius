@@ -246,13 +246,12 @@
 				380375341B8AC9A8004C4ECE /* AppDelegate.m */,
 				3803753C1B8AC9A8004C4ECE /* Main.storyboard */,
 				3803755F1B8BB6C3004C4ECE /* Data */,
-				380375581B8B9F11004C4ECE /* Models */,
 				380375641B8BB71D004C4ECE /* Controllers */,
 				380375631B8BB711004C4ECE /* Views/Images/nibs */,
-				382A83BE1BB3D6EB008860CF /* Transitions/Animations */,
+				380375581B8B9F11004C4ECE /* Models */,
 				3803752F1B8AC9A8004C4ECE /* Supporting Files */,
-				38466D5C1B94FDDF00DD252E /* Cutting Floor */,
 				38466D5B1B94FDD400DD252E /* Not Yet Implemented */,
+				38466D5C1B94FDDF00DD252E /* Cutting Floor */,
 			);
 			path = Librarius;
 			sourceTree = "<group>";
@@ -260,16 +259,12 @@
 		3803752F1B8AC9A8004C4ECE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				38CF73FD1BAF51130070134E /* FlatUIKit Categories */,
+				38DC81C91BCB3E66002A3B80 /* Constants */,
+				382A83BE1BB3D6EB008860CF /* Transitions/Animations */,
+				384E0CBD1B97D231007E7290 /* Categories */,
 				388DBDF11BA9174A005C5125 /* THNavigationController.h */,
 				388DBDF21BA9174A005C5125 /* THNavigationController.m */,
-				382CE7FB1B9E09ED000A9701 /* Librarius-Prefix.pch */,
-				384E0CBD1B97D231007E7290 /* Categories */,
-				3803757D1B8C16B3004C4ECE /* GoogleService-Info.plist */,
-				380375301B8AC9A8004C4ECE /* Info.plist */,
-				380375311B8AC9A8004C4ECE /* main.m */,
-				380375591B8B9F5E004C4ECE /* LBRConstants.h */,
-				3803755A1B8B9F5E004C4ECE /* LBRConstants.m */,
+				38DC81C81BCB3E57002A3B80 /* NSBoilerPlate */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -321,16 +316,12 @@
 		380375631B8BB711004C4ECE /* Views/Images/nibs */ = {
 			isa = PBXGroup;
 			children = (
-				389168DB1BCA3A65007ED199 /* LBRBookshelfDecorationView.h */,
-				389168DC1BCA3A65007ED199 /* LBRBookshelfDecorationView.m */,
 				382A83EB1BB4AF98008860CF /* LBRBatchScanScrollView.h */,
 				382A83EC1BB4AF98008860CF /* LBRBatchScanScrollView.m */,
 				3855E26D1BB0DBD4004C5D11 /* LBRAlertContent_TableViewCell.h */,
 				3855E26E1BB0DBD4004C5D11 /* LBRAlertContent_TableViewCell.m */,
 				38E71DAD1BA337BB00DE1C61 /* LBRShelvedBookCollectionViewCell.h */,
 				38E71DAE1BA337BB00DE1C61 /* LBRShelvedBookCollectionViewCell.m */,
-				388DBE2E1BAA0F60005C5125 /* LBRCustomLayout.h */,
-				388DBE2F1BAA0F60005C5125 /* LBRCustomLayout.m */,
 				3803753F1B8AC9A8004C4ECE /* Images.xcassets */,
 				380DF1601BA219D500DBA20A /* ShelvedBookCell.h */,
 				380DF1611BA219D500DBA20A /* ShelvedBookCell.m */,
@@ -376,6 +367,10 @@
 		38466D5B1B94FDD400DD252E /* Not Yet Implemented */ = {
 			isa = PBXGroup;
 			children = (
+				388DBE2E1BAA0F60005C5125 /* LBRCustomLayout.h */,
+				388DBE2F1BAA0F60005C5125 /* LBRCustomLayout.m */,
+				389168DB1BCA3A65007ED199 /* LBRBookshelfDecorationView.h */,
+				389168DC1BCA3A65007ED199 /* LBRBookshelfDecorationView.m */,
 				380375601B8BB707004C4ECE /* LBRGoodReadsAPIClient.h */,
 				380375611B8BB707004C4ECE /* LBRGoodReadsAPIClient.m */,
 			);
@@ -396,6 +391,7 @@
 		384E0CBD1B97D231007E7290 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				38CF73FD1BAF51130070134E /* FlatUIKit Categories */,
 				3855E2701BB10AA5004C5D11 /* UIView+ConfigureForAutoLayout.h */,
 				3855E2711BB10AA5004C5D11 /* UIView+ConfigureForAutoLayout.m */,
 				380375701B8BF058004C4ECE /* UIImage+FromURL.h */,
@@ -450,6 +446,26 @@
 			);
 			name = Resources;
 			path = ../Pods/FlatUIKit;
+			sourceTree = "<group>";
+		};
+		38DC81C81BCB3E57002A3B80 /* NSBoilerPlate */ = {
+			isa = PBXGroup;
+			children = (
+				382CE7FB1B9E09ED000A9701 /* Librarius-Prefix.pch */,
+				3803757D1B8C16B3004C4ECE /* GoogleService-Info.plist */,
+				380375301B8AC9A8004C4ECE /* Info.plist */,
+				380375311B8AC9A8004C4ECE /* main.m */,
+			);
+			name = NSBoilerPlate;
+			sourceTree = "<group>";
+		};
+		38DC81C91BCB3E66002A3B80 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				380375591B8B9F5E004C4ECE /* LBRConstants.h */,
+				3803755A1B8B9F5E004C4ECE /* LBRConstants.m */,
+			);
+			name = Constants;
 			sourceTree = "<group>";
 		};
 		8D3D60166B48602A9D5DE1B9 /* Frameworks */ = {

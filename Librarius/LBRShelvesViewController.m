@@ -26,7 +26,9 @@
 
 @end
 
-@implementation LBRShelvesViewController
+@implementation LBRShelvesViewController {
+        //Array of book objects
+}
 
 static NSString * const reuseIdentifier = @"bookCellID";
 
@@ -45,14 +47,10 @@ static NSString * const reuseIdentifier = @"bookCellID";
     
     self.title = @"Bookshelves";
     
-        // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
     // Register cell classes
     [self.collectionView registerClass:[LBRShelvedBookCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
     self.dataManager = [LBRDataManager sharedDataManager];
-//    self.fetchedResultsController; //!!!: What is this for?
 }
 
 - (void)didReceiveMemoryWarning {
@@ -72,11 +70,11 @@ static NSString * const reuseIdentifier = @"bookCellID";
 #pragma mark - UICollectionView FlowLayout configuration
 
 - (void)configureBooksFlowLayout:(UICollectionViewFlowLayout*)layout {
-    layout.minimumLineSpacing = 1.0;
+    layout.scrollDirection         = UICollectionViewScrollDirectionHorizontal;
+    layout.minimumLineSpacing      = 1.0;
     layout.minimumInteritemSpacing = 1.0;
-    layout.estimatedItemSize = CGSizeMake(106.0, 106.0);
+    layout.estimatedItemSize       = CGSizeMake(106.0, 106.0);
 //    layout.itemSize = CGSizeMake(106.0, 106.0);
-    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
 }
 
 
@@ -143,25 +141,34 @@ static NSString * const reuseIdentifier = @"bookCellID";
 
 #pragma mark - FlowLayout Delegate methods
 
-/*
+
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+        //Grab the book model for the cell
+    LBRParsedVolume *bookModel = [self ]
     
     return [collectionView ar_sizeForCellWithIdentifier:reuseIdentifier indexPath:indexPath configuration:^(id cell) {
             //cell configuration...
-//        [self configureCell:cell atIndexPath:indexPath];
-//    Volume *object            = [self.fetchedResultsController objectAtIndexPath:indexPath];
-//            //inches --> pixels...how?
-//    CGFloat thickness         = (object.thickness)? [object.thickness floatValue]: 40.0f;
-//    CGFloat height            = (object.height)? [object.height floatValue] : 106.0f;
-//
-//    CGSize volumeDimensions2D = CGSizeMake(thickness, height);
-//
-//    cell              = volumeDimensions2D;
+        [self configureCell:cell atIndexPath:indexPath];
+    Volume *object            = [self.fetchedResultsController objectAtIndexPath:indexPath];
+            //inches --> pixels...how?
+    CGFloat thickness         = (object.thickness)? [object.thickness floatValue]: 40.0f;
+    CGFloat height            = (object.height)? [object.height floatValue] : 106.0f;
+
+    CGSize volumeDimensions2D = CGSizeMake(thickness, height);
+
+    cell              = volumeDimensions2D;
 
     }];
 }
-*/
- 
+
+    //Handy dandy - returns the book at any index path
+    //thx to Ash Furrow.
+-(LBRParsedVolume*)bookVolumeForIndexPath:(NSIndexPath*)indexPath {
+    
+}
+
+
 #pragma mark - Fetched Results Controller configuration
 
 - (NSFetchedResultsController *)fetchedResultsController
