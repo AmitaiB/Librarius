@@ -9,25 +9,36 @@
 #define kSpinnerFrameRect CGRectMake(0, 0, 40, 40)
 #define kAppIconSize 48
 
-    //Definitely Used:
 #import <AVFoundation/AVFoundation.h>
-#import <UIImageView+AFNetworking.h>
-//#import <MMMaterialDesignSpinner.h>
-#import <NYAlertViewController.h>
-#import <MTBBarcodeScanner.h>
-#import <LARSTorch.h>
 #import "LBRConstants.h"
-#import "LBRBarcodeScannerViewController.h"
+
+
+    //Data
 #import "LBRGoogleGTLClient.h"
 #import "LBRDataManager.h"
+
+    //Models
 #import "Library.h"
 #import "Volume.h"
 #import "LBRParsedVolume.h"
-#import "FlatUI+Categories.h"
-    //Testing out:
+#import <LARSTorch.h>
+
+    //Views
 #import "UIView+ConfigureForAutoLayout.h"
-#import "LBRAlertContent_TableViewController.h"
+#import <UIImageView+AFNetworking.h>
 #import "LBRBatchScanScrollView.h"
+#import <MTBBarcodeScanner.h>
+#import "FlatUI+Categories.h"
+    //#import <MMMaterialDesignSpinner.h>
+
+
+    //Controllers
+#import "LBRBarcodeScannerViewController.h"
+#import "LBRAlertContent_TableViewController.h"
+#import <NYAlertViewController.h>
+
+
+
 
 @interface LBRBarcodeScannerViewController ()
 
@@ -69,9 +80,8 @@
 static NSString * const barcodeCellReuseID = @"barcodeCellReuseID";
 static NSString * const volumeNib          = @"volumePresentationView";
 
-#pragma mark -
 #pragma mark - === Lifecycle ===
-#pragma mark -
+#pragma mark
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -430,7 +440,10 @@ DBLG
 
 
 - (IBAction)toggleUnsavedVolumesTableView:(id)sender {
-self.unsavedVolumesTableView.hidden = !self.unsavedVolumesTableView.hidden;
+//self.unsavedVolumesTableView.hidden = !self.unsavedVolumesTableView.hidden;
+    UITableViewController *tvc = [[UITableViewController alloc] init];
+    tvc.tableView = self.unsavedVolumesTableView;
+    [self presentViewController:tvc animated:YES completion:nil];
     }
 
 #pragma mark -
