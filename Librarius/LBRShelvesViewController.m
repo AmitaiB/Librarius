@@ -145,7 +145,7 @@ static NSString * const reuseIdentifier = @"bookCellID";
 
 #pragma mark - FlowLayout Delegate methods
 
-
+    //???: Why doesn't this work?
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
         //Provides a different size for each individual cell
     
@@ -155,8 +155,11 @@ static NSString * const reuseIdentifier = @"bookCellID";
         //Determine the size and aspect ratio for the cell's image, given
         //that the height is 106.0
     CGSize imageSize = cell.imageView.image.size;
-    CGFloat aspectRatio = kDefaultCellSize.height / imageSize.height;
-    CGSize itemSize = CGSizeMake(imageSize.width * aspectRatio, kDefaultCellSize.height);
+    CGSize itemSize = kDefaultCellSize;
+    if (imageSize.height) {
+        CGFloat aspectRatio = kDefaultCellSize.height / imageSize.height;
+        itemSize = CGSizeMake(imageSize.width * aspectRatio, kDefaultCellSize.height);
+    }
     return itemSize;
 }
 
@@ -166,7 +169,8 @@ static NSString * const reuseIdentifier = @"bookCellID";
     //thx to Ash Furrow.
 -(void)configureCell:(LBRShelvedBookCollectionViewCell*)cell forIndexPath:(NSIndexPath*)indexPath {
         //configure the cell
-    cell.backgroundColor = [UIColor asbestosColor];
+//    cell.backgroundColor = [UIColor clearColor];
+//    cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"wood_floor"]];
     
     NSArray *volumesArray = self.fetchedResultsController.fetchedObjects;
     Volume *volume = (Volume*)volumesArray[indexPath.row];
