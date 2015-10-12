@@ -80,8 +80,7 @@ static NSString * const reuseIdentifier = @"bookCellID";
 //    layout.itemSize = CGSizeMake(106.0, 106.0);
 }
 
-
-#pragma mark <UICollectionViewDataSource>
+#pragma mark - === UICollectionViewDataSource ===
 /*
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
 #warning Incomplete method implementation -- Return the number of sections
@@ -99,6 +98,8 @@ static NSString * const reuseIdentifier = @"bookCellID";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     LBRShelvedBookCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    
+        //configure the cell
     cell.backgroundColor = [UIColor asbestosColor];
     
     NSArray *volumesArray = self.fetchedResultsController.fetchedObjects;
@@ -146,24 +147,32 @@ static NSString * const reuseIdentifier = @"bookCellID";
 
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    if (![object isMemberOfClass:[Volume class]]) {
-        return kDefaultCellSize;
-    }
-    Volume *bookVolume = (Volume*)object;
+        //Provides a different size for each individual cell
     
-    NSURL *coverArtURL = [NSURL URLWithString:bookVolume.cover_art_large];
+        //Grab the image for/from the cell
+    LBRShelvedBookCollectionViewCell *cell = (LBRShelvedBookCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
     
-    [reusableImageView setImageWithURL:coverArtURL placeholderImage:[UIImage imageNamed:@"placeholder"]];
-    
-    
-    
+        //Determine the size and aspect ratio for the cell's image, given
+        //that the height is 106.0
+    CGSize imageSize = cell.imageView.image.size;
+    CGFloat aspectRatio = kDefaultCellSize.height / imageSize.height;
+    CGSize itemSize = CGSizeMake(imageSize.width * aspectRatio, kDefaultCellSize.height);
+    return itemSize;
 }
 
+
+#pragma mark - Helper methods
     //Handy dandy - returns the book at any index path
     //thx to Ash Furrow.
--(LBRParsedVolume*)bookVolumeForIndexPath:(NSIndexPath*)indexPath {
+-(void)configureCell:(LBRShelvedBookCollectionViewCell*)cell forIndexPath:(NSIndexPath*)indexPath {
+        //configure the cell
+    cell.backgroundColor = [UIColor asbestosColor];
     
+    NSArray *volumesArray = self.fetchedResultsController.fetchedObjects;
+    Volume *volume = (Volume*)volumesArray[indexPath.row];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", volume.cover_art_large]];
+    [cell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    cell.thickness = [volume.thickness floatValue];
 }
 
 
