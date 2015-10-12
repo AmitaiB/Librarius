@@ -8,12 +8,12 @@
 
 #import "LBRShelvesViewController.h"
 #import "LBRDataManager.h"
-#import "ShelvedBookCell.h"
 #import <UIImageView+AFNetworking.h>
 #import "Volume.h"
 #import "LBRShelvedBookCollectionViewCell.h"
 #import "UIColor+FlatUI.h"
 
+#define kDefaultCellSize CGSizeMake(106.0, 106.0)
 
 @interface LBRShelvesViewController ()
 
@@ -27,7 +27,8 @@
 @end
 
 @implementation LBRShelvesViewController {
-        //Array of book objects
+        //Reusable imageView
+    UIImageView *reusableImageView;
 }
 
 static NSString * const reuseIdentifier = @"bookCellID";
@@ -51,6 +52,8 @@ static NSString * const reuseIdentifier = @"bookCellID";
     [self.collectionView registerClass:[LBRShelvedBookCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
     self.dataManager = [LBRDataManager sharedDataManager];
+    
+    reusableImageView = [[UIImageView alloc] init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -143,23 +146,18 @@ static NSString * const reuseIdentifier = @"bookCellID";
 
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    if (![object isMemberOfClass:[Volume class]]) {
+        return kDefaultCellSize;
+    }
+    Volume *bookVolume = (Volume*)object;
     
-        //Grab the book model for the cell
-    LBRParsedVolume *bookModel = [self ]
+    NSURL *coverArtURL = [NSURL URLWithString:bookVolume.cover_art_large];
     
-    return [collectionView ar_sizeForCellWithIdentifier:reuseIdentifier indexPath:indexPath configuration:^(id cell) {
-            //cell configuration...
-        [self configureCell:cell atIndexPath:indexPath];
-    Volume *object            = [self.fetchedResultsController objectAtIndexPath:indexPath];
-            //inches --> pixels...how?
-    CGFloat thickness         = (object.thickness)? [object.thickness floatValue]: 40.0f;
-    CGFloat height            = (object.height)? [object.height floatValue] : 106.0f;
-
-    CGSize volumeDimensions2D = CGSizeMake(thickness, height);
-
-    cell              = volumeDimensions2D;
-
-    }];
+    [reusableImageView setImageWithURL:coverArtURL placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    
+    
+    
 }
 
     //Handy dandy - returns the book at any index path
