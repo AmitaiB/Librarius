@@ -19,6 +19,8 @@
 
 @property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *layout;
 
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
 @property (nonatomic, strong) LBRDataManager *dataManager;
 @property (nonatomic, strong) NSMutableArray *sectionChanges;

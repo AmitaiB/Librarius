@@ -24,6 +24,9 @@
 		3803757F1B8C17EB004C4ECE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 380375411B8AC9A8004C4ECE /* LaunchScreen.xib */; };
 		380375F71B8D4E90004C4ECE /* BookCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375F41B8D4E90004C4ECE /* BookCollectionViewController.m */; };
 		380375F81B8D4E90004C4ECE /* BookDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375F61B8D4E90004C4ECE /* BookDetailViewController.m */; };
+		38103B591BD033AE009F22E3 /* LBR_ShelvedBookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38103B581BD033AE009F22E3 /* LBR_ShelvedBookCell.m */; settings = {ASSET_TAGS = (); }; };
+		38103B5C1BD033E4009F22E3 /* LBR_BookcaseLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 38103B5B1BD033E4009F22E3 /* LBR_BookcaseLayout.m */; settings = {ASSET_TAGS = (); }; };
+		38103B601BD03452009F22E3 /* LBR_BookcaseLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 38103B5F1BD03452009F22E3 /* LBR_BookcaseLayoutAttributes.m */; settings = {ASSET_TAGS = (); }; };
 		381EBC051BA0FF63000D2FA4 /* LBRShelvesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 381EBC041BA0FF63000D2FA4 /* LBRShelvesViewController.m */; };
 		382A83BA1BB3BA94008860CF /* LBRRecommendationsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 382A83B91BB3BA94008860CF /* LBRRecommendationsCollectionViewController.m */; settings = {ASSET_TAGS = (); }; };
 		382A83BD1BB3D6E1008860CF /* PresentDetailTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 382A83BC1BB3D6E1008860CF /* PresentDetailTransition.m */; settings = {ASSET_TAGS = (); }; };
@@ -103,6 +106,12 @@
 		380375F41B8D4E90004C4ECE /* BookCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookCollectionViewController.m; sourceTree = "<group>"; };
 		380375F51B8D4E90004C4ECE /* BookDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookDetailViewController.h; sourceTree = "<group>"; };
 		380375F61B8D4E90004C4ECE /* BookDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookDetailViewController.m; sourceTree = "<group>"; };
+		38103B571BD033AE009F22E3 /* LBR_ShelvedBookCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBR_ShelvedBookCell.h; sourceTree = "<group>"; };
+		38103B581BD033AE009F22E3 /* LBR_ShelvedBookCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBR_ShelvedBookCell.m; sourceTree = "<group>"; };
+		38103B5A1BD033E4009F22E3 /* LBR_BookcaseLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBR_BookcaseLayout.h; sourceTree = "<group>"; };
+		38103B5B1BD033E4009F22E3 /* LBR_BookcaseLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBR_BookcaseLayout.m; sourceTree = "<group>"; };
+		38103B5E1BD03452009F22E3 /* LBR_BookcaseLayoutAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBR_BookcaseLayoutAttributes.h; sourceTree = "<group>"; };
+		38103B5F1BD03452009F22E3 /* LBR_BookcaseLayoutAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBR_BookcaseLayoutAttributes.m; sourceTree = "<group>"; };
 		381EBC031BA0FF63000D2FA4 /* LBRShelvesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRShelvesViewController.h; sourceTree = "<group>"; };
 		381EBC041BA0FF63000D2FA4 /* LBRShelvesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRShelvesViewController.m; sourceTree = "<group>"; };
 		382A83B81BB3BA94008860CF /* LBRRecommendationsCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRRecommendationsCollectionViewController.h; sourceTree = "<group>"; };
@@ -236,6 +245,7 @@
 		3803752E1B8AC9A8004C4ECE /* Librarius */ = {
 			isa = PBXGroup;
 			children = (
+				38103B5D1BD033EC009F22E3 /* Bookcase Files */,
 				38AAD7241B90A1AC003062C1 /* Librarius.entitlements */,
 				380375331B8AC9A8004C4ECE /* AppDelegate.h */,
 				380375341B8AC9A8004C4ECE /* AppDelegate.m */,
@@ -339,10 +349,23 @@
 				380375F41B8D4E90004C4ECE /* BookCollectionViewController.m */,
 				380375F51B8D4E90004C4ECE /* BookDetailViewController.h */,
 				380375F61B8D4E90004C4ECE /* BookDetailViewController.m */,
-				381EBC031BA0FF63000D2FA4 /* LBRShelvesViewController.h */,
-				381EBC041BA0FF63000D2FA4 /* LBRShelvesViewController.m */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		38103B5D1BD033EC009F22E3 /* Bookcase Files */ = {
+			isa = PBXGroup;
+			children = (
+				381EBC031BA0FF63000D2FA4 /* LBRShelvesViewController.h */,
+				381EBC041BA0FF63000D2FA4 /* LBRShelvesViewController.m */,
+				38103B571BD033AE009F22E3 /* LBR_ShelvedBookCell.h */,
+				38103B581BD033AE009F22E3 /* LBR_ShelvedBookCell.m */,
+				38103B5A1BD033E4009F22E3 /* LBR_BookcaseLayout.h */,
+				38103B5B1BD033E4009F22E3 /* LBR_BookcaseLayout.m */,
+				38103B5E1BD03452009F22E3 /* LBR_BookcaseLayoutAttributes.h */,
+				38103B5F1BD03452009F22E3 /* LBR_BookcaseLayoutAttributes.m */,
+			);
+			name = "Bookcase Files";
 			sourceTree = "<group>";
 		};
 		382A83BE1BB3D6EB008860CF /* Transitions/Animations */ = {
@@ -676,7 +699,10 @@
 				3803755B1B8B9F5E004C4ECE /* LBRConstants.m in Sources */,
 				3851DBFD1B8E2E5A00E90B9F /* LBRDataManager.m in Sources */,
 				380375621B8BB707004C4ECE /* LBRGoodReadsAPIClient.m in Sources */,
+				38103B591BD033AE009F22E3 /* LBR_ShelvedBookCell.m in Sources */,
+				38103B601BD03452009F22E3 /* LBR_BookcaseLayoutAttributes.m in Sources */,
 				388DBDF31BA9174A005C5125 /* THNavigationController.m in Sources */,
+				38103B5C1BD033E4009F22E3 /* LBR_BookcaseLayout.m in Sources */,
 				38F57BC21BB0707200CC2EE8 /* UIBarButtonItem+FlatUI.m in Sources */,
 				380375671B8BC758004C4ECE /* LBRGoogleAPIClient.m in Sources */,
 				38466D281B94F24400DD252E /* LBRGoogleGTLClient.m in Sources */,

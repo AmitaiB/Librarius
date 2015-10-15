@@ -11,7 +11,5 @@
 
 @interface LBRShelvesViewController : UICollectionViewController <NSFetchedResultsControllerDelegate, NSFetchedResultsSectionInfo, UICollectionViewDelegateFlowLayout>
 
-@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
 @end
