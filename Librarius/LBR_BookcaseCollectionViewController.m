@@ -6,26 +6,55 @@
 //  Copyright © 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 
+#define kNumberOfShelvesInBookcase 5
+
 #import "LBR_BookcaseCollectionViewController.h"
+#import "LBRDataManager.h"
+
+
+    //Views
+#import "LBR_ShelvedBookCell.h"
+
+    //Models
+#import "Volume.h"
+
+    //Layout
+#import "LBR_BookcaseLayout.h"
+
+
 
 @interface LBR_BookcaseCollectionViewController ()
 
+@property (nonatomic, weak) IBOutlet LBR_BookcaseLayout *layout;
+
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong) NSMutableArray *sectionChanges;
+
+
 @end
 
-@implementation LBR_BookcaseCollectionViewController
+@implementation LBR_BookcaseCollectionViewController {
+    LBRDataManager *dataManager;
+}
 
 static NSString * const reuseIdentifier = @"Cell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = NO;
+    self.clearsSelectionOnViewWillAppear = NO;
+    self.title = @"Bookshelves";
     
     // Register cell classes
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
+    [self.collectionView registerClass:[LBR_ShelvedBookCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
-    // Do any additional setup after loading the view.
+        //Rope in the singleton dataManger
+    dataManager = [LBRDataManager sharedDataManager];
+    
+    self.fetchedObjects = [self.fetchedResultsController.fetchedObjects copy];
+
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -43,11 +72,10 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 */
 
-#pragma mark <UICollectionViewDataSource>
+#pragma mark - === UICollectionViewDataSource ===
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+    return kNumberOfShelvesInBookcase;
 }
 
 
@@ -94,5 +122,14 @@ static NSString * const reuseIdentifier = @"Cell";
 	
 }
 */
+
+#pragma mark - Fetched Results Controller configuration
+
+- (NSFetchedResultsController *)fetchedResultsController {
+    if (_fetchedResultsController != nil)
+        return _fetchedResultsController;
+    
+    return [dataManager preconfiguredLBRFetchedResultsController:self];
+}
 
 @end

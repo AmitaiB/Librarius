@@ -197,11 +197,11 @@ static NSString * const kUnknown = @"kUnknown";
 - (NSFetchedResultsController *)preconfiguredLBRFetchedResultsController:(UIViewController<NSFetchedResultsControllerDelegate> *)sender
 {
     /**
-     *  1) The set of all books (TODO: Uniquify the collection, so you cannot add multiple entries accidentally - UPDATE: This is a Tall Order.).
-     *  2) in the current library
-     *  3) arranged by mainCategory
-     *  4) then author
-     *  5) then year
+     *  1) The set of all books (TODO: Uniquify the collection, so you cannot add multiple entries accidentally - UPDATE: Trickier than it looks)...
+     *  2) ...in the current library,
+     *  3) ...arranged by mainCategory,
+     *  4) ...then author,
+     *  5) ...then year.
      */
     NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
     NSFetchRequest *volumesRequest = [NSFetchRequest fetchRequestWithEntityName:@"Volume"]; //(1)

@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 
-@interface LBR_BookcaseCollectionViewController : UICollectionViewController
+@interface LBR_BookcaseCollectionViewController : UICollectionViewController <NSFetchedResultsControllerDelegate, NSFetchedResultsSectionInfo>
+
+@property (nonatomic, strong) NSArray *fetchedObjects;
+
 
 @end
