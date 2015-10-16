@@ -10,4 +10,10 @@
 
 @interface LBR_BookcaseModel : NSObject
 
+@property (nonatomic, strong) NSArray<NSArray *> *shelves;
+
+-(instancetype)initWithWidth:(CGFloat)width shelvesCount:(NSUInteger)numShelves;
+
+-(NSArray*)shelveBooks:(NSArray *)booksArray;
+
 @end

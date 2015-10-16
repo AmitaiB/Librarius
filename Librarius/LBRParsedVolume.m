@@ -86,22 +86,22 @@
     
     
     /**
-     *  Height, in inches (from cm), if the information is present.
+     *  Height, in cm, if the information is present.
      */
-    NSNumber *height = @([volumeToParse.volumeInfo.dimensions.height floatValue] / 2.54);
+    NSNumber *height = @([volumeToParse.volumeInfo.dimensions.height floatValue]);
     if ([height floatValue] > 0.0) {
         _height = height;
     }
     /**
-     *  Thickness of the book's spine, in inches (from cm). If not given, it will be estimated from the pagecount, if it is defined.
+     *  Thickness of the book's spine, in cm. If not given, it will be estimated from the pagecount, if it is defined.
      */
-    NSNumber *thickness = @([volumeToParse.volumeInfo.dimensions.thickness floatValue] / 2.54);
+    NSNumber *thickness = @([volumeToParse.volumeInfo.dimensions.thickness floatValue]);
     
     if ([thickness floatValue] > 0.0) {
         _thickness = thickness;
     }
     else if (_pageCount) {
-        _thickness = @([_pageCount floatValue] / CALIPER);
+        _thickness = @([_pageCount floatValue] / (CALIPER / 2.54)); //Caliper from ppi → ppcm
     }
     
     /**
