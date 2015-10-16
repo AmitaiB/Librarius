@@ -29,6 +29,7 @@
 		38103B601BD03452009F22E3 /* LBR_BookcaseLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 38103B5F1BD03452009F22E3 /* LBR_BookcaseLayoutAttributes.m */; settings = {ASSET_TAGS = (); }; };
 		381EBC051BA0FF63000D2FA4 /* LBRShelvesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 381EBC041BA0FF63000D2FA4 /* LBRShelvesViewController.m */; };
 		381FC2951BD13A09003A3C52 /* LBR_BookcaseCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 381FC2941BD13A09003A3C52 /* LBR_BookcaseCollectionViewController.m */; settings = {ASSET_TAGS = (); }; };
+		381FC2BB1BD15D45003A3C52 /* LBR_BookcaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 381FC2BA1BD15D45003A3C52 /* LBR_BookcaseModel.m */; settings = {ASSET_TAGS = (); }; };
 		382A83BA1BB3BA94008860CF /* LBRRecommendationsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 382A83B91BB3BA94008860CF /* LBRRecommendationsCollectionViewController.m */; settings = {ASSET_TAGS = (); }; };
 		382A83BD1BB3D6E1008860CF /* PresentDetailTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 382A83BC1BB3D6E1008860CF /* PresentDetailTransition.m */; settings = {ASSET_TAGS = (); }; };
 		382A83C11BB3D926008860CF /* DismissDetailTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 382A83C01BB3D926008860CF /* DismissDetailTransition.m */; settings = {ASSET_TAGS = (); }; };
@@ -117,6 +118,8 @@
 		381EBC041BA0FF63000D2FA4 /* LBRShelvesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRShelvesViewController.m; sourceTree = "<group>"; };
 		381FC2931BD13A09003A3C52 /* LBR_BookcaseCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBR_BookcaseCollectionViewController.h; sourceTree = "<group>"; };
 		381FC2941BD13A09003A3C52 /* LBR_BookcaseCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBR_BookcaseCollectionViewController.m; sourceTree = "<group>"; };
+		381FC2B91BD15D45003A3C52 /* LBR_BookcaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBR_BookcaseModel.h; sourceTree = "<group>"; };
+		381FC2BA1BD15D45003A3C52 /* LBR_BookcaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBR_BookcaseModel.m; sourceTree = "<group>"; };
 		382A83B81BB3BA94008860CF /* LBRRecommendationsCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRRecommendationsCollectionViewController.h; sourceTree = "<group>"; };
 		382A83B91BB3BA94008860CF /* LBRRecommendationsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRRecommendationsCollectionViewController.m; sourceTree = "<group>"; };
 		382A83BB1BB3D6E1008860CF /* PresentDetailTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentDetailTransition.h; sourceTree = "<group>"; };
@@ -367,6 +370,8 @@
 				38103B581BD033AE009F22E3 /* LBR_ShelvedBookCell.m */,
 				38103B5A1BD033E4009F22E3 /* LBR_BookcaseLayout.h */,
 				38103B5B1BD033E4009F22E3 /* LBR_BookcaseLayout.m */,
+				381FC2B91BD15D45003A3C52 /* LBR_BookcaseModel.h */,
+				381FC2BA1BD15D45003A3C52 /* LBR_BookcaseModel.m */,
 				38103B5E1BD03452009F22E3 /* LBR_BookcaseLayoutAttributes.h */,
 				38103B5F1BD03452009F22E3 /* LBR_BookcaseLayoutAttributes.m */,
 			);
@@ -716,6 +721,7 @@
 				38F57BBE1BB0707200CC2EE8 /* UINavigationBar+FlatUI.m in Sources */,
 				382A83BA1BB3BA94008860CF /* LBRRecommendationsCollectionViewController.m in Sources */,
 				3803757A1B8C08E0004C4ECE /* LBRSettingsTableViewController.m in Sources */,
+				381FC2BB1BD15D45003A3C52 /* LBR_BookcaseModel.m in Sources */,
 				388DBE331BAA54C8005C5125 /* UIImage+imageScaledToHeight.m in Sources */,
 				38565D701B9A20B800349498 /* LBRParsedVolume.m in Sources */,
 				38F57BC01BB0707200CC2EE8 /* UIFont+FlatUI.m in Sources */,
