@@ -13,7 +13,7 @@
 
 
 @interface LBR_BookcaseLayout ()
-@property (nonatomic, strong) NSMutableDictionary *centerPointsForCells;
+
 @property (nonatomic, strong) NSMutableDictionary *framesForCells;
 
 
@@ -34,10 +34,19 @@
     
     self.filledBookcaseModel = [self.dataSource filledBookcaseModel];
     
+    NSMutableDictionary __block *booksDictByIndexPath = [NSMutableDictionary new];
+    UICollectionViewLayoutAttributes __block *attributes = [UICollectionViewLayoutAttributes new];
+    NSIndexPath __block *indexPath;
     
-    UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes new];
-    attributes.size = kDefaultCellSize;
-    attributes.center = CGPointMake(kDefaultCellSize.width * (0.5 + 0), kDefaultCellSize.height * (0.5 + 0));
+//    Key each book to an indexPath
+    [self.filledBookcaseModel enumerateObjectsUsingBlock:^(NSArray<Volume *> * shelfModel, NSUInteger idx, BOOL * _Nonnull stop) {
+        for (NSUInteger bookIndex = 0; bookIndex < shelfModel.count; bookIndex++) {
+            indexPath = [NSIndexPath indexPathForItem:bookIndex inSection:idx];
+            [booksDictByIndexPath setObject:shelfModel[bookIndex] forKey:indexPath];
+        }
+    }];
+    
+    
     
 }
 
