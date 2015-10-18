@@ -17,6 +17,7 @@
 
     //Models
 #import "Volume.h"
+#import "LBR_BookcaseModel.h"
 
     //Layout
 #import "LBR_BookcaseLayout.h"

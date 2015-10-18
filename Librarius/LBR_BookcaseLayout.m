@@ -22,7 +22,7 @@
     ///Take an ordered array of bookModel objects, and put them into a dictionary, where the keys are indexPaths.
     ///The indexPaths should be chosen where Section = shelf (from top).
 -(void)prepareLayout {
-    NSInteger numSections = [self.collectionView numberOfSections];
+    NSInteger numSections = [self.collectionView.dataSource ];
     
     
     
