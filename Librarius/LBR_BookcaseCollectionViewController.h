@@ -9,10 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
-@class LBR_BookcaseModel;
 @interface LBR_BookcaseCollectionViewController : UICollectionViewController <NSFetchedResultsControllerDelegate, NSFetchedResultsSectionInfo>
 
 @property (nonatomic, strong) NSArray *fetchedObjects;
-@property (nonatomic, strong) LBR_BookcaseModel *bookcaseModel;
 
 @end
