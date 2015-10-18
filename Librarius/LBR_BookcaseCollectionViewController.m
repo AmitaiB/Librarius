@@ -17,7 +17,7 @@
 
     //Models
 #import "Volume.h"
-#import "LBR_BookcaseModel.h"
+
 
     //Layout
 #import "LBR_BookcaseLayout.h"
@@ -44,6 +44,7 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.layout.dataSource = self;
     self.clearsSelectionOnViewWillAppear = NO;
     self.title = @"Bookshelves";
     
