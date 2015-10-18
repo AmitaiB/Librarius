@@ -14,7 +14,7 @@
 
 @interface LBR_BookcaseLayout ()
 
-@property (nonatomic, strong) NSMutableDictionary *framesForCells;
+@property (nonatomic, strong) NSMutableDictionary *attributesForCells;
 
 
 @property (nonatomic, assign) NSUInteger widestShelfWidth;
@@ -62,7 +62,7 @@
         attributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPathKey];
         attributes.frame = rect;
         
-        [self.framesForCells setObject:[attributes copy] forKey:indexPathKey];
+        [self.attributesForCells setObject:[attributes copy] forKey:indexPathKey];
         
         
         xMax = MAX(xMax, newOrigin.x);
@@ -81,14 +81,18 @@
 -(NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect {
         //Check for all elements that are in the rect, and add the corresponding attributes
         //to the array, which is then returned.
-    NSMutableArray *attributeObjectsToReturn = [NSMutableArray new];
-    for (<#type *object#> in <#collection#>) {
-        <#statements#>
-    }
+    NSMutableArray __block *attributeObjectsToReturn = [NSMutableArray new];
+    [self.attributesForCells enumerateKeysAndObjectsUsingBlock:^(NSIndexPath * indexPathKey, UICollectionViewLayoutAttributes *attributes, BOOL * _Nonnull stop) {
+        if (CGRectIntersectsRect(attributes.frame, rect)) {
+            [attributeObjectsToReturn addObject:attributes];
+        }
+    }];
+    
+    return [attributeObjectsToReturn copy];
 }
 
 -(UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+    return self.attributesForCells[indexPath];
 }
 
 @end
