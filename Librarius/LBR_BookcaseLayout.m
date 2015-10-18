@@ -35,7 +35,6 @@
     self.filledBookcaseModel = [self.dataSource filledBookcaseModel];
     
     NSMutableDictionary __block *booksDictByIndexPath = [NSMutableDictionary new];
-    UICollectionViewLayoutAttributes __block *attributes = [UICollectionViewLayoutAttributes new];
     NSIndexPath __block *indexPath;
     
 //    Key each book to an indexPath
@@ -46,12 +45,37 @@
         }
     }];
     
+//    Frames for IndexPath
+    NSIndexPath *indexPathKey;
+    CGPoint newOrigin;
+    CGRect rect;
+    UICollectionViewLayoutAttributes *attributes;
     
+//    Grab content size at the same time.
+    CGFloat xMax = 0.0f;
+    CGFloat yMax = 0.0f;
     
+    for (NSUInteger i = 0; i < [booksDictByIndexPath allKeys].count; i++) {
+        indexPathKey = [booksDictByIndexPath allKeys][i];
+        newOrigin = CGPointMake(indexPathKey.item * kDefaulCellDimension, indexPathKey.section * kDefaulCellDimension);
+        rect = CGRectMake(newOrigin.x, newOrigin.y, kDefaulCellDimension, kDefaulCellDimension);
+        attributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPathKey];
+        attributes.frame = rect;
+        
+        [self.framesForCells setObject:[attributes copy] forKey:indexPathKey];
+        
+        
+        xMax = MAX(xMax, newOrigin.x);
+        yMax = MAX(yMax, newOrigin.y);
+    }
+    
+    self.contentSize = CGSizeMake(xMax + kDefaulCellDimension, yMax + kDefaulCellDimension);
 }
 
--(CGSize)contentSize {
 
+
+-(CGSize)contentSize {
+    return self.contentSize;
 }
 
 -(NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect {
