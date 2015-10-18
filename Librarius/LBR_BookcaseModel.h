@@ -22,6 +22,6 @@
 
 -(instancetype)initWithWidth:(CGFloat)width shelvesCount:(NSUInteger)numShelves;
 
--(void)shelveBooks:(NSArray *)booksArray;
+-(void)shelveBooks:(NSArray <Volume *> *)booksArray;
 
 @end

@@ -19,9 +19,6 @@
 #import "Volume.h"
 #import "LBR_BookcaseModel.h"
 
-    //Layout
-
-
 
 @interface LBR_BookcaseCollectionViewController ()
 
@@ -30,6 +27,7 @@
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSMutableArray *sectionChanges;
+@property (nonatomic, strong) LBR_BookcaseModel *bookcaseModel;
 
 
 @end
@@ -42,22 +40,28 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"Bookshelves";
+        //Rope in the singleton dataManger
+    dataManager = [LBRDataManager sharedDataManager];
+
+        //Init and Configure bookcaseModel
+    self.fetchedObjects = [self.fetchedResultsController.fetchedObjects copy];
+    self.bookcaseModel  = [[LBR_BookcaseModel alloc] initWithWidth:58.0 shelvesCount:5];
+    [self.bookcaseModel shelveBooks:self.fetchedObjects];
     
         //Set custom layout with protocol
-    self.layout = [LBR_BookcaseLayout new];
-    self.layout.dataSource = self;
-    self.collectionView.collectionViewLayout = self.layout;
+    LBR_BookcaseLayout *layout               = [LBR_BookcaseLayout new];
+    layout.dataSource                        = self;
+    self.filledBookcaseModel                 = self.bookcaseModel.shelves;
+    self.collectionView.collectionViewLayout = layout;
+
+        //Do I really need this as a property???
+    self.layout = layout;
     
     self.clearsSelectionOnViewWillAppear = NO;
-    self.title = @"Bookshelves";
     
     // Register cell classes
     [self.collectionView registerClass:[LBR_ShelvedBookCell class] forCellWithReuseIdentifier:reuseIdentifier];
-    
-        //Rope in the singleton dataManger
-    dataManager = [LBRDataManager sharedDataManager];
-    
-    self.fetchedObjects = [self.fetchedResultsController.fetchedObjects copy];
 }
 
 - (void)didReceiveMemoryWarning {
