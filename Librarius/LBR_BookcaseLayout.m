@@ -32,7 +32,7 @@
 -(void)prepareLayout {
     NSAssert(self.filledBookcaseModel, @"BookcaseMode not initialized.");
     
-    
+    self.filledBookcaseModel = [self.dataSource filledBookcaseModel];
     
     
     UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes new];

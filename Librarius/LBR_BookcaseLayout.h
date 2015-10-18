@@ -12,7 +12,6 @@
 
 @protocol LBRBookLayoutDataSource <NSObject>
 
-@required
     ///An array (bookcase model) of arrays (shelf models) of Volume objects.
 @property (nonatomic, strong)  NSArray <NSArray <Volume *> *> *filledBookcaseModel;
 
