@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-#import "LBR_BookcaseModel.h"
+#import "LBR_BookcaseLayout.h"
 
 @interface LBR_BookcaseCollectionViewController : UICollectionViewController <NSFetchedResultsControllerDelegate, NSFetchedResultsSectionInfo, LBRBookLayoutDataSource>
 

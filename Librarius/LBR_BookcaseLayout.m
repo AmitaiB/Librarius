@@ -49,6 +49,7 @@
 -(NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect {
         //Check for all elements that are in the rect, and add the corresponding attributes
         //to the array, which is then returned.
+    NSMutableArray *attributeObjectsToReturn = [NSMutableArray new];
 }
 
 

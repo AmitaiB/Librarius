@@ -17,16 +17,15 @@
 
     //Models
 #import "Volume.h"
-
+#import "LBR_BookcaseModel.h"
 
     //Layout
-#import "LBR_BookcaseLayout.h"
 
 
 
 @interface LBR_BookcaseCollectionViewController ()
 
-@property (nonatomic, weak) IBOutlet LBR_BookcaseLayout *layout;
+@property (nonatomic, strong) LBR_BookcaseLayout *layout;
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
@@ -44,7 +43,11 @@ static NSString * const reuseIdentifier = @"Cell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+        //Set custom layout with protocol
+    self.layout = [LBR_BookcaseLayout new];
     self.layout.dataSource = self;
+    self.collectionView.collectionViewLayout = self.layout;
+    
     self.clearsSelectionOnViewWillAppear = NO;
     self.title = @"Bookshelves";
     
@@ -55,8 +58,6 @@ static NSString * const reuseIdentifier = @"Cell";
     dataManager = [LBRDataManager sharedDataManager];
     
     self.fetchedObjects = [self.fetchedResultsController.fetchedObjects copy];
-
-    
 }
 
 - (void)didReceiveMemoryWarning {
