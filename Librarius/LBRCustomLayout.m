@@ -30,7 +30,7 @@
 #import "LBRShelvedBookCollectionViewCell.h" //TODO: <--comment this out and fix what breaks -- don't reference the cell, rather get the data from the model. Choose! Representational, or otherwise??
 #import "UIImage+imageScaledToHeight.h"
 #import "LBRDataManager.h"
-#import "BookCollectionViewController.h"
+#import "BookCollection_TableViewController.h"
 
 #define kCellHeight 106.0f//for a square cell
 #define kHorizontalInset      10.0f //on the left and right

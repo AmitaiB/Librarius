@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import <GoogleSignIn.h>
 #import "BookDetailViewController.h"
-#import "BookCollectionViewController.h"
+#import "BookCollection_TableViewController.h"
 #import "LBRDataManager.h"
 //#import <UIKit+AFNetworking.h>
 //#import <AFNetworking.h>

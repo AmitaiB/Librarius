@@ -6,19 +6,19 @@
 //  Copyright (c) 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 
-#import "BookCollectionViewController.h"
+#import "BookCollection_TableViewController.h"
 #import "BookDetailViewController.h"
 #import "LBRDataManager.h"
 #import "Library.h"
 #import "Bookcase.h"
 #import "Volume.h"
 
-@interface BookCollectionViewController ()
+@interface BookCollection_TableViewController ()
 
 
 @end
 
-@implementation BookCollectionViewController
+@implementation BookCollection_TableViewController
 
 @dynamic name;
 @dynamic indexTitle;
