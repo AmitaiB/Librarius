@@ -74,6 +74,7 @@
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = [UIColor mySinColor];
     
+    [[UITableViewCell appearance] setBackgroundColor:[UIColor irisBlueColor]];
 
     
 }
@@ -173,7 +174,17 @@
     if (subtitle) {
         cell.textLabel.text = [NSString stringWithFormat:@"%@: %@", title, subtitle];
     }
+    
+    cell.textLabel.textColor = [UIColor cloudsColor];
+    cell.contentView.backgroundColor = [UIColor shirazColor];
+
+
+    if (indexPath.row == 0) {
+        cell.layer.cornerRadius = 5;
+    }
+    
 }
+
 
 - (void)makeTitleCase:(NSString*)string {
     NSArray *words = [string componentsSeparatedByString:@" "];

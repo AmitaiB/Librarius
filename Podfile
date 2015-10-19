@@ -12,6 +12,7 @@ pod 'NYAlertViewController'
 
 pod 'LARSTorch', '~> 1.1'
 
+pod 'PrettyKit', '~> 0.2'
 
 
 #pod 'UICollectionView-ARDynamicHeightLayoutCell_Bell'
