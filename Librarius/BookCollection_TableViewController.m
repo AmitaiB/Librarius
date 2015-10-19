@@ -13,6 +13,10 @@
 #import "Bookcase.h"
 #import "Volume.h"
 
+    //UI
+#import "UIColor+FlatUI.h"
+#import "UIColor+ABBColors.h"
+
 @interface BookCollection_TableViewController ()
 
 
@@ -29,7 +33,8 @@
 - (void)viewDidLoad {
 
         [super viewDidLoad];
-        self.navigationItem.leftBarButtonItem = self.editButtonItem;        
+        self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    [self flattenUI];
 /**
  *  TODO: Change the method called here to "Manual Volume Entry", details below.
  */
@@ -60,6 +65,20 @@
 //    }
 //}
 
+-(void)flattenUI {
+        //Set the separator color
+    self.tableView.separatorColor = [UIColor irisBlueColor];
+    
+        //Set the background color
+        ///"You must set this property to nil to set the background color of the table view." (Apple docs)
+    self.tableView.backgroundView = nil;
+    self.tableView.backgroundColor = [UIColor mySinColor];
+    
+
+    
+}
+
+
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
@@ -77,7 +96,7 @@
 }
 
 
-#pragma mark - Table View data source
+#pragma mark - === Table View data source ===
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [[self.fetchedResultsController sections] count];
@@ -102,7 +121,7 @@
     return [currentSection name];
 }
 
-#pragma mark - Table View delegate
+#pragma mark - === Table View delegate ===
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the specified item to be editable.
@@ -131,6 +150,17 @@
         [tableView reloadData];
     }
 }
+
+-(void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
+        //Background color
+    view.tintColor = [UIColor shirazColor];
+    
+        //Text color
+    UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
+    [header.textLabel setTextColor:[UIColor midnightBlueColor]];
+}
+
+#pragma mark private delegate helpers
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
@@ -168,7 +198,7 @@
             preconfiguredLBRFetchedResultsController:self];
 }
 
-#pragma mark - Fetched Results Controller Delegate methods
+#pragma mark - === Fetched Results Controller Delegate methods ===
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
