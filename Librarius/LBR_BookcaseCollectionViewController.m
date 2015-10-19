@@ -36,13 +36,6 @@
     LBRDataManager *dataManager;
 }
 
-    //!!!: These shouldn't be necessary, right...?
-@dynamic name;
-@dynamic indexTitle;
-@dynamic objects;
-@dynamic numberOfObjects;
-@dynamic filledBookcaseModel;
-
 static NSString * const reuseIdentifier = @"Cell";
 
 - (void)viewDidLoad {
