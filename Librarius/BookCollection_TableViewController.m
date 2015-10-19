@@ -16,6 +16,9 @@
     //UI
 #import "UIColor+FlatUI.h"
 #import "UIColor+ABBColors.h"
+#import "UIFont+FlatUI.h"
+#import "UITableViewCell+FlatUI.h"
+
 
 @interface BookCollection_TableViewController ()
 
@@ -67,7 +70,7 @@
 
 -(void)flattenUI {
         //Set the separator color
-    self.tableView.separatorColor = [UIColor irisBlueColor];
+    self.tableView.separatorColor = [UIColor midnightBlueColor];
     
         //Set the background color
         ///"You must set this property to nil to set the background color of the table view." (Apple docs)
@@ -76,6 +79,7 @@
     
     [[UITableViewCell appearance] setBackgroundColor:[UIColor irisBlueColor]];
 
+    [self.tableView setClipsToBounds:YES];
     
 }
 
@@ -175,12 +179,18 @@
         cell.textLabel.text = [NSString stringWithFormat:@"%@: %@", title, subtitle];
     }
     
+    [cell configureFlatCellWithColor:[UIColor greenSeaColor] selectedColor:[UIColor turquoiseColor] roundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight];
+    
+    cell.textLabel.font = [UIFont boldFlatFontOfSize:20];
     cell.textLabel.textColor = [UIColor cloudsColor];
     cell.contentView.backgroundColor = [UIColor shirazColor];
+    
+    [cell setCornerRadius:10];
 
 
     if (indexPath.row == 0) {
-        cell.layer.cornerRadius = 5;
+        cell.backgroundView.layer.cornerRadius = 10;
+//        cell.layer.cornerRadius = 5;
     }
     
 }
