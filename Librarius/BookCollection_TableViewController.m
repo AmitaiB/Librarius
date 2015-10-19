@@ -25,9 +25,6 @@
 @dynamic numberOfObjects;
 @dynamic objects;
 
-- (void)awakeFromNib {
-        [super awakeFromNib];
-}
 
 - (void)viewDidLoad {
 
@@ -39,6 +36,8 @@
 //    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
 //    self.navigationItem.rightBarButtonItem = addButton;
 }
+
+
 /**
  *  TODO: Change this method to "Manual Volume Entry" and fill in all the fields to add a new Volume to the Library, and save.
  */
