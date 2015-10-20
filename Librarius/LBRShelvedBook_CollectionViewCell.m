@@ -6,10 +6,10 @@
 //  Copyright (c) 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 
-#import "LBRShelvedBookCollectionViewCell.h"
+#import "LBRShelvedBook_CollectionViewCell.h"
 
 
-@implementation LBRShelvedBookCollectionViewCell
+@implementation LBRShelvedBook_CollectionViewCell
 
 -(instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];

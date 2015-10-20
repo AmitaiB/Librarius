@@ -63,7 +63,7 @@
 		38BA3CA51B9BDA1500B3B42F /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38BA3CA41B9BDA1500B3B42F /* CloudKit.framework */; };
 		38BE31E21B961F7000C46001 /* volumePresentationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38BE31E11B961F7000C46001 /* volumePresentationView.xib */; };
 		38CD5FD11B9DE78400963D2F /* VolumeDetailsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38CD5FD01B9DE78400963D2F /* VolumeDetailsCell.xib */; };
-		38E71DAF1BA337BB00DE1C61 /* LBRShelvedBookCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E71DAE1BA337BB00DE1C61 /* LBRShelvedBookCollectionViewCell.m */; };
+		38E71DAF1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E71DAE1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.m */; };
 		38F57BB71BB0707200CC2EE8 /* UIToolbar+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F57B9D1BB0707200CC2EE8 /* UIToolbar+FlatUI.m */; settings = {ASSET_TAGS = (); }; };
 		38F57BB91BB0707200CC2EE8 /* UITabBar+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F57BA11BB0707200CC2EE8 /* UITabBar+FlatUI.m */; settings = {ASSET_TAGS = (); }; };
 		38F57BBA1BB0707200CC2EE8 /* UIStepper+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F57BA31BB0707200CC2EE8 /* UIStepper+FlatUI.m */; settings = {ASSET_TAGS = (); }; };
@@ -194,8 +194,8 @@
 		38BE31E11B961F7000C46001 /* volumePresentationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = volumePresentationView.xib; sourceTree = "<group>"; };
 		38CD5FD01B9DE78400963D2F /* VolumeDetailsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VolumeDetailsCell.xib; sourceTree = "<group>"; };
 		38CF74301BAF51AF0070134E /* FlatUI+Categories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FlatUI+Categories.h"; sourceTree = "<group>"; };
-		38E71DAD1BA337BB00DE1C61 /* LBRShelvedBookCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRShelvedBookCollectionViewCell.h; sourceTree = "<group>"; };
-		38E71DAE1BA337BB00DE1C61 /* LBRShelvedBookCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRShelvedBookCollectionViewCell.m; sourceTree = "<group>"; };
+		38E71DAD1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRShelvedBook_CollectionViewCell.h; sourceTree = "<group>"; };
+		38E71DAE1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRShelvedBook_CollectionViewCell.m; sourceTree = "<group>"; };
 		38F57B9D1BB0707200CC2EE8 /* UIToolbar+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIToolbar+FlatUI.m"; sourceTree = "<group>"; };
 		38F57B9E1BB0707200CC2EE8 /* UIToolbar+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIToolbar+FlatUI.h"; sourceTree = "<group>"; };
 		38F57BA11BB0707200CC2EE8 /* UITabBar+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+FlatUI.m"; sourceTree = "<group>"; };
@@ -364,8 +364,8 @@
 				382A83EC1BB4AF98008860CF /* LBRBatchScanScrollView.m */,
 				3855E26D1BB0DBD4004C5D11 /* LBRAlertContent_TableViewCell.h */,
 				3855E26E1BB0DBD4004C5D11 /* LBRAlertContent_TableViewCell.m */,
-				38E71DAD1BA337BB00DE1C61 /* LBRShelvedBookCollectionViewCell.h */,
-				38E71DAE1BA337BB00DE1C61 /* LBRShelvedBookCollectionViewCell.m */,
+				38E71DAD1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.h */,
+				38E71DAE1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.m */,
 				3803753F1B8AC9A8004C4ECE /* Images.xcassets */,
 				380375411B8AC9A8004C4ECE /* LaunchScreen.xib */,
 				38BE31E11B961F7000C46001 /* volumePresentationView.xib */,
@@ -767,7 +767,7 @@
 				38AAD6F01B901175003062C1 /* Librarius.xcdatamodeld in Sources */,
 				3810DA1E1BD5E0ED0093D5C2 /* MBProgressHUD.m in Sources */,
 				38F57BBF1BB0707200CC2EE8 /* UIImage+FlatUI.m in Sources */,
-				38E71DAF1BA337BB00DE1C61 /* LBRShelvedBookCollectionViewCell.m in Sources */,
+				38E71DAF1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.m in Sources */,
 				389168DD1BCA3A65007ED199 /* LBRBookshelfDecorationView.m in Sources */,
 				38F57BC11BB0707200CC2EE8 /* UIColor+FlatUI.m in Sources */,
 				3855E26F1BB0DBD4004C5D11 /* LBRAlertContent_TableViewCell.m in Sources */,

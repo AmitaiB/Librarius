@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LBRShelvedBookCollectionViewCell : UICollectionViewCell
+@interface LBRShelvedBook_CollectionViewCell : UICollectionViewCell
 
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) NSString *coverArtURL;

@@ -9,7 +9,7 @@
 #import "LBRRecommendationsCollectionViewController.h"
 #import <UIImageView+AFNetworking.h>
 #import "LBRDataManager.h"
-#import "LBRShelvedBookCollectionViewCell.h"
+#import "LBRShelvedBook_CollectionViewCell.h"
 #import "Library.h"
 #import "Bookcase.h"
 #import "Volume.h"
@@ -88,7 +88,7 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    LBRShelvedBookCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    LBRShelvedBook_CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     NSArray *volumesArray = self.fetchedResultsController.fetchedObjects;
     Volume *volume = (Volume*)volumesArray[indexPath.row];

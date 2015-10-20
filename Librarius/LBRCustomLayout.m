@@ -27,7 +27,7 @@
 //
 
 #import "LBRCustomLayout.h"
-#import "LBRShelvedBookCollectionViewCell.h" //TODO: <--comment this out and fix what breaks -- don't reference the cell, rather get the data from the model. Choose! Representational, or otherwise??
+#import "LBRShelvedBook_CollectionViewCell.h" //TODO: <--comment this out and fix what breaks -- don't reference the cell, rather get the data from the model. Choose! Representational, or otherwise??
 #import "UIImage+imageScaledToHeight.h"
 #import "LBRDataManager.h"
 #import "BookCollection_TableViewController.h"
@@ -238,7 +238,7 @@ static NSString * const LBRShelvedBookCollectionViewCellKind = @"coverArtCell";
 
 // Retrieve the width of the current cell's coverArt.
 -(CGFloat)widthForCellAtIndexPath:(NSIndexPath*)indexPath {
-    LBRShelvedBookCollectionViewCell *cell = (LBRShelvedBookCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    LBRShelvedBook_CollectionViewCell *cell = (LBRShelvedBook_CollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
     UIImage *scaledImage = [UIImage imageWithImage:cell.imageView.image scaledToHeight:kCellHeight];
     CGFloat width = (scaledImage.size.width)? scaledImage.size.width : kCellHeight;
 
@@ -246,7 +246,7 @@ static NSString * const LBRShelvedBookCollectionViewCellKind = @"coverArtCell";
 }
 
 -(NSNumber*)shelfForCellAtIndexPath:(NSIndexPath*)indexPath {
-    LBRShelvedBookCollectionViewCell *cell = (LBRShelvedBookCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    LBRShelvedBook_CollectionViewCell *cell = (LBRShelvedBook_CollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
     self.xPosition_cm += cell.thickness;
     if (self.xPosition_cm > self.bookcaseWidth_cm) {
         self.xPosition_cm = 0;

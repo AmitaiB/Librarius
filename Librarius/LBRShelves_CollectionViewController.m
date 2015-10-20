@@ -10,7 +10,7 @@
 #import "LBRDataManager.h"
 #import <UIImageView+AFNetworking.h>
 #import "Volume.h"
-#import "LBRShelvedBookCollectionViewCell.h"
+#import "LBRShelvedBook_CollectionViewCell.h"
 #import "UIColor+FlatUI.h"
 
 #define kDefaultCellSize CGSizeMake(106.0, 106.0)
@@ -99,7 +99,7 @@ static NSString * const reuseIdentifier = @"bookCellID";
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    LBRShelvedBookCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    LBRShelvedBook_CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
         //configure the cell
     cell.backgroundColor = [UIColor asbestosColor];
@@ -152,7 +152,7 @@ static NSString * const reuseIdentifier = @"bookCellID";
         //Provides a different size for each individual cell
     
         //Grab the image for/from the cell
-    LBRShelvedBookCollectionViewCell *cell = (LBRShelvedBookCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
+    LBRShelvedBook_CollectionViewCell *cell = (LBRShelvedBook_CollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
     
         //Determine the size and aspect ratio for the cell's image, given
         //that the height is 106.0
@@ -169,7 +169,7 @@ static NSString * const reuseIdentifier = @"bookCellID";
 #pragma mark - Helper methods
     //Handy dandy - returns the book at any index path
     //thx to Ash Furrow.
--(void)configureCell:(LBRShelvedBookCollectionViewCell*)cell forIndexPath:(NSIndexPath*)indexPath {
+-(void)configureCell:(LBRShelvedBook_CollectionViewCell*)cell forIndexPath:(NSIndexPath*)indexPath {
         //configure the cell
 //    cell.backgroundColor = [UIColor clearColor];
 //    cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"wood_floor"]];
