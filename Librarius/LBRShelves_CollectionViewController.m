@@ -169,6 +169,7 @@ static NSString * const reuseIdentifier = @"bookCellID";
 
 
 #pragma mark - Helper methods
+    //???: Redundant! Duplicated code, see above!
     //Handy dandy - returns the book at any index path
     //thx to Ash Furrow.
 -(void)configureCell:(LBRShelvedBook_CollectionViewCell*)cell forIndexPath:(NSIndexPath*)indexPath {
