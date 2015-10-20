@@ -157,18 +157,19 @@
 -(NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect {
         //Check for all elements that are in the rect, and add the corresponding attributes
         //to the array, which is then returned.
-    NSMutableArray __block *attributeObjectsToReturn = [NSMutableArray new];
-    [self.attributesForCells enumerateKeysAndObjectsUsingBlock:^(NSIndexPath * indexPathKey, UICollectionViewLayoutAttributes *attributes, BOOL * _Nonnull stop) {
+    NSMutableArray *attributeObjectsToReturn = [NSMutableArray array];
+    
+    for (UICollectionViewLayoutAttributes *attributes in self.layoutInformation) {
         if (CGRectIntersectsRect(attributes.frame, rect)) {
             [attributeObjectsToReturn addObject:attributes];
         }
-    }];
+    }
     
     return [attributeObjectsToReturn copy];
 }
 
 -(UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return self.attributesForCells[indexPath];
+    return self.layoutInformation[indexPath];
 }
 
 @end
