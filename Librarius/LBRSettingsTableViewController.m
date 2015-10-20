@@ -99,28 +99,75 @@
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
     headerView.backgroundColor = [UIColor darkLavalColor];
     
-
+    UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(30, 20, 200, 40)];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:self.boldFontName size:20.0f];
+    label.textColor = self.onColor;
+    
+    label.text = section == 0 ? @"Account Settings" : @"User Information";
+    
+    [headerView addSubview:label];
+    
+    return headerView;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section
+{
+    return 50;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    SettingsCell1 *cell = [tableView dequeueReusableCellWithIdentifier:@"SettingsCell1" forIndexPath:indexPath];
     
-    // Configure the cell...
+    NSString *title = self.settingTitles[indexPath.row];
+    NSString *element = self.settingsElements[indexPath.row];
     
-    cell.textLabel.text = @"CONFIGURE CELLS";
+    cell.settingTitle.text = title;
     
+    if ([element isEqualToString:@"Switch"])
+    {
+        RCSwitchOnOff *cellSwitch = [self createSwitch];
+        [cell addSubview:cellSwitch];
+    }
+    else if ([element isEqualToString:@"Segment"])
+    {
+        UISegmentedControl *control = [self createSegmentedControlWithItems:@[@"YES", @"NO", @"ALL"]];
+        [cell addSubview:control];
+    }
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        [self disconnect];
-        DBLG
-    }
+-(RCSwitchOnOff *)createSwitch
+{
+    FlatTheme *theme = [FlatTheme new];
+    theme.switchOnBackground = [Utils drawImageOfSize:CGSizeMake(70, 30) andColor:self.onColor];
+    theme.switchOffBackground = [Utils drawImageOfSize:CGSizeMake(70, 30) andColor:self.offColor];
+    theme.switchThumb = [Utils drawImageOfSize:CGSizeMake(30, 29) andColor:[UIColor colorWithWhite:0.7f alpha:1.0f]];
+    theme.switchTextOffColor = [UIColor whiteColor];
+    theme.switchTextOnColor = [UIColor whiteColor];
+    theme.switchFont = [UIFont fontWithName:self.boldFontName size:12.0f];
+    
+    RCSwitchOnOff *settingSwitch = [[RCSwitchOnOff alloc] initWithFrame:CGRectMake(230, 15, 70, 30) andTheme:theme];
+    return settingSwitch;
 }
 
+-(UISegmentedControl *)createSegmentedControlWithItems:(NSArray *)items
+{
+    UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] initWithItems:items];
+    
+    segmentedControl.frame = CGRectMake(150, 15, 150, 30);
+    segmentedControl.selectedSegmentIndex = 0;
+    return segmentedControl;
+}
+
+-(IBAction)dismissView:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+    //TODO: implement this
 - (void)disconnect {
     [[GIDSignIn sharedInstance] signOut];
     DBLG
@@ -135,48 +182,6 @@
     }
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
