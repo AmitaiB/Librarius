@@ -29,6 +29,14 @@
 		38103B601BD03452009F22E3 /* LBR_BookcaseLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 38103B5F1BD03452009F22E3 /* LBR_BookcaseLayoutAttributes.m */; settings = {ASSET_TAGS = (); }; };
 		3810D9F81BD585150093D5C2 /* UITableViewCell+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 3810D9F71BD585150093D5C2 /* UITableViewCell+FlatUI.m */; settings = {ASSET_TAGS = (); }; };
 		3810D9FB1BD585300093D5C2 /* FUICellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3810D9FA1BD585300093D5C2 /* FUICellBackgroundView.m */; settings = {ASSET_TAGS = (); }; };
+		3810D9FE1BD5BDE60093D5C2 /* UIColor-Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 3810D9FC1BD5BDE60093D5C2 /* UIColor-Expanded.m */; settings = {ASSET_TAGS = (); }; };
+		3810DA101BD5E0980093D5C2 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3810DA0D1BD5E0980093D5C2 /* Utils.m */; settings = {ASSET_TAGS = (); }; };
+		3810DA111BD5E0980093D5C2 /* FlatTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 3810DA0F1BD5E0980093D5C2 /* FlatTheme.m */; settings = {ASSET_TAGS = (); }; };
+		3810DA141BD5E0A90093D5C2 /* SettingsCell1.m in Sources */ = {isa = PBXBuildFile; fileRef = 3810DA131BD5E0A90093D5C2 /* SettingsCell1.m */; settings = {ASSET_TAGS = (); }; };
+		3810DA191BD5E0D60093D5C2 /* RCSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 3810DA161BD5E0D60093D5C2 /* RCSwitch.m */; settings = {ASSET_TAGS = (); }; };
+		3810DA1A1BD5E0D60093D5C2 /* RCSwitchOnOff.m in Sources */ = {isa = PBXBuildFile; fileRef = 3810DA181BD5E0D60093D5C2 /* RCSwitchOnOff.m */; settings = {ASSET_TAGS = (); }; };
+		3810DA1E1BD5E0ED0093D5C2 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3810DA1D1BD5E0ED0093D5C2 /* MBProgressHUD.m */; settings = {ASSET_TAGS = (); }; };
+		3810DA211BD5E1420093D5C2 /* ADVFlatUI-Resources.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3810DA201BD5E1420093D5C2 /* ADVFlatUI-Resources.xcassets */; settings = {ASSET_TAGS = (); }; };
 		381EBC051BA0FF63000D2FA4 /* LBRShelvesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 381EBC041BA0FF63000D2FA4 /* LBRShelvesViewController.m */; };
 		381FC2951BD13A09003A3C52 /* LBR_BookcaseCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 381FC2941BD13A09003A3C52 /* LBR_BookcaseCollectionViewController.m */; settings = {ASSET_TAGS = (); }; };
 		381FC2BB1BD15D45003A3C52 /* LBR_BookcaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 381FC2BA1BD15D45003A3C52 /* LBR_BookcaseModel.m */; settings = {ASSET_TAGS = (); }; };
@@ -121,6 +129,21 @@
 		3810D9F71BD585150093D5C2 /* UITableViewCell+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+FlatUI.m"; sourceTree = "<group>"; };
 		3810D9F91BD585300093D5C2 /* FUICellBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICellBackgroundView.h; sourceTree = "<group>"; };
 		3810D9FA1BD585300093D5C2 /* FUICellBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUICellBackgroundView.m; sourceTree = "<group>"; };
+		3810D9FC1BD5BDE60093D5C2 /* UIColor-Expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor-Expanded.m"; sourceTree = "<group>"; };
+		3810D9FD1BD5BDE60093D5C2 /* UIColor-Expanded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor-Expanded.h"; sourceTree = "<group>"; };
+		3810DA0C1BD5E0980093D5C2 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		3810DA0D1BD5E0980093D5C2 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
+		3810DA0E1BD5E0980093D5C2 /* FlatTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlatTheme.h; sourceTree = "<group>"; };
+		3810DA0F1BD5E0980093D5C2 /* FlatTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlatTheme.m; sourceTree = "<group>"; };
+		3810DA121BD5E0A90093D5C2 /* SettingsCell1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsCell1.h; sourceTree = "<group>"; };
+		3810DA131BD5E0A90093D5C2 /* SettingsCell1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsCell1.m; sourceTree = "<group>"; };
+		3810DA151BD5E0D60093D5C2 /* RCSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCSwitch.h; sourceTree = "<group>"; };
+		3810DA161BD5E0D60093D5C2 /* RCSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCSwitch.m; sourceTree = "<group>"; };
+		3810DA171BD5E0D60093D5C2 /* RCSwitchOnOff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCSwitchOnOff.h; sourceTree = "<group>"; };
+		3810DA181BD5E0D60093D5C2 /* RCSwitchOnOff.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCSwitchOnOff.m; sourceTree = "<group>"; };
+		3810DA1C1BD5E0ED0093D5C2 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		3810DA1D1BD5E0ED0093D5C2 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		3810DA201BD5E1420093D5C2 /* ADVFlatUI-Resources.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "ADVFlatUI-Resources.xcassets"; sourceTree = "<group>"; };
 		381EBC031BA0FF63000D2FA4 /* LBRShelvesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRShelvesViewController.h; sourceTree = "<group>"; };
 		381EBC041BA0FF63000D2FA4 /* LBRShelvesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRShelvesViewController.m; sourceTree = "<group>"; };
 		381FC2931BD13A09003A3C52 /* LBR_BookcaseCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBR_BookcaseCollectionViewController.h; sourceTree = "<group>"; };
@@ -336,6 +359,7 @@
 		380375631B8BB711004C4ECE /* Views/Images/nibs */ = {
 			isa = PBXGroup;
 			children = (
+				3810DA0B1BD5E04C0093D5C2 /* ADVFlatUI (Tope) */,
 				382A83EB1BB4AF98008860CF /* LBRBatchScanScrollView.h */,
 				382A83EC1BB4AF98008860CF /* LBRBatchScanScrollView.m */,
 				3855E26D1BB0DBD4004C5D11 /* LBRAlertContent_TableViewCell.h */,
@@ -347,6 +371,7 @@
 				38BE31E11B961F7000C46001 /* volumePresentationView.xib */,
 				387039B71B9D23C900381007 /* SelectionView.xib */,
 				38CD5FD01B9DE78400963D2F /* VolumeDetailsCell.xib */,
+				3810DA201BD5E1420093D5C2 /* ADVFlatUI-Resources.xcassets */,
 			);
 			name = Views/Images/nibs;
 			sourceTree = "<group>";
@@ -358,14 +383,14 @@
 				380375691B8BC89D004C4ECE /* LBRGoogleSignInViewController.m */,
 				380375391B8AC9A8004C4ECE /* LBRBarcodeScannerViewController.h */,
 				3803753A1B8AC9A8004C4ECE /* LBRBarcodeScannerViewController.m */,
-				380375781B8C08E0004C4ECE /* LBRSettingsTableViewController.h */,
-				380375791B8C08E0004C4ECE /* LBRSettingsTableViewController.m */,
 				380375F31B8D4E90004C4ECE /* BookCollection_TableViewController.h */,
 				380375F41B8D4E90004C4ECE /* BookCollection_TableViewController.m */,
 				381EBC031BA0FF63000D2FA4 /* LBRShelvesViewController.h */,
 				381EBC041BA0FF63000D2FA4 /* LBRShelvesViewController.m */,
 				380375F51B8D4E90004C4ECE /* BookDetailViewController.h */,
 				380375F61B8D4E90004C4ECE /* BookDetailViewController.m */,
+				380375781B8C08E0004C4ECE /* LBRSettingsTableViewController.h */,
+				380375791B8C08E0004C4ECE /* LBRSettingsTableViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -385,6 +410,41 @@
 				38103B5F1BD03452009F22E3 /* LBR_BookcaseLayoutAttributes.m */,
 			);
 			name = "Bookcase Files";
+			sourceTree = "<group>";
+		};
+		3810DA0B1BD5E04C0093D5C2 /* ADVFlatUI (Tope) */ = {
+			isa = PBXGroup;
+			children = (
+				3810DA121BD5E0A90093D5C2 /* SettingsCell1.h */,
+				3810DA131BD5E0A90093D5C2 /* SettingsCell1.m */,
+				3810DA0C1BD5E0980093D5C2 /* Utils.h */,
+				3810DA0D1BD5E0980093D5C2 /* Utils.m */,
+				3810DA0E1BD5E0980093D5C2 /* FlatTheme.h */,
+				3810DA0F1BD5E0980093D5C2 /* FlatTheme.m */,
+				3810DA1F1BD5E0F10093D5C2 /* MBProgressHUD */,
+				3810DA1B1BD5E0DA0093D5C2 /* RCSwitch */,
+			);
+			name = "ADVFlatUI (Tope)";
+			sourceTree = "<group>";
+		};
+		3810DA1B1BD5E0DA0093D5C2 /* RCSwitch */ = {
+			isa = PBXGroup;
+			children = (
+				3810DA151BD5E0D60093D5C2 /* RCSwitch.h */,
+				3810DA161BD5E0D60093D5C2 /* RCSwitch.m */,
+				3810DA171BD5E0D60093D5C2 /* RCSwitchOnOff.h */,
+				3810DA181BD5E0D60093D5C2 /* RCSwitchOnOff.m */,
+			);
+			name = RCSwitch;
+			sourceTree = "<group>";
+		};
+		3810DA1F1BD5E0F10093D5C2 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				3810DA1C1BD5E0ED0093D5C2 /* MBProgressHUD.h */,
+				3810DA1D1BD5E0ED0093D5C2 /* MBProgressHUD.m */,
+			);
+			name = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 		382A83BE1BB3D6EB008860CF /* Transitions/Animations */ = {
@@ -443,6 +503,8 @@
 		38CF73FD1BAF51130070134E /* FlatUIKit Categories */ = {
 			isa = PBXGroup;
 			children = (
+				3810D9FC1BD5BDE60093D5C2 /* UIColor-Expanded.m */,
+				3810D9FD1BD5BDE60093D5C2 /* UIColor-Expanded.h */,
 				38CF74301BAF51AF0070134E /* FlatUI+Categories.h */,
 				38F57B9D1BB0707200CC2EE8 /* UIToolbar+FlatUI.m */,
 				38F57B9E1BB0707200CC2EE8 /* UIToolbar+FlatUI.h */,
@@ -612,6 +674,7 @@
 				3803753E1B8AC9A8004C4ECE /* Main.storyboard in Resources */,
 				3803757E1B8C16B3004C4ECE /* GoogleService-Info.plist in Resources */,
 				3803757F1B8C17EB004C4ECE /* LaunchScreen.xib in Resources */,
+				3810DA211BD5E1420093D5C2 /* ADVFlatUI-Resources.xcassets in Resources */,
 				380375401B8AC9A8004C4ECE /* Images.xcassets in Resources */,
 				388A1E151B9F940000C75825 /* To Do bookmark in Resources */,
 				38CD5FD11B9DE78400963D2F /* VolumeDetailsCell.xib in Resources */,
@@ -698,8 +761,11 @@
 				38F57BC31BB0707200CC2EE8 /* NSString+Icons.m in Sources */,
 				380375351B8AC9A8004C4ECE /* AppDelegate.m in Sources */,
 				38AAD7231B901D36003062C1 /* Bookcase.m in Sources */,
+				3810DA101BD5E0980093D5C2 /* Utils.m in Sources */,
+				3810DA111BD5E0980093D5C2 /* FlatTheme.m in Sources */,
 				380375F81B8D4E90004C4ECE /* BookDetailViewController.m in Sources */,
 				38AAD6F01B901175003062C1 /* Librarius.xcdatamodeld in Sources */,
+				3810DA1E1BD5E0ED0093D5C2 /* MBProgressHUD.m in Sources */,
 				38F57BBF1BB0707200CC2EE8 /* UIImage+FlatUI.m in Sources */,
 				38E71DAF1BA337BB00DE1C61 /* LBRShelvedBookCollectionViewCell.m in Sources */,
 				389168DD1BCA3A65007ED199 /* LBRBookshelfDecorationView.m in Sources */,
@@ -709,10 +775,12 @@
 				380375F71B8D4E90004C4ECE /* BookCollection_TableViewController.m in Sources */,
 				38F57BB71BB0707200CC2EE8 /* UIToolbar+FlatUI.m in Sources */,
 				38F57BBB1BB0707200CC2EE8 /* UISlider+FlatUI.m in Sources */,
+				3810DA191BD5E0D60093D5C2 /* RCSwitch.m in Sources */,
 				38F57BB91BB0707200CC2EE8 /* UITabBar+FlatUI.m in Sources */,
 				38F57BBA1BB0707200CC2EE8 /* UIStepper+FlatUI.m in Sources */,
 				380375321B8AC9A8004C4ECE /* main.m in Sources */,
 				384E0CC01B97D24B007E7290 /* NSString+dateValue.m in Sources */,
+				3810DA141BD5E0A90093D5C2 /* SettingsCell1.m in Sources */,
 				381FC2951BD13A09003A3C52 /* LBR_BookcaseCollectionViewController.m in Sources */,
 				381EBC051BA0FF63000D2FA4 /* LBRShelvesViewController.m in Sources */,
 				382A83BD1BB3D6E1008860CF /* PresentDetailTransition.m in Sources */,
@@ -736,9 +804,11 @@
 				380375671B8BC758004C4ECE /* LBRGoogleAPIClient.m in Sources */,
 				38466D281B94F24400DD252E /* LBRGoogleGTLClient.m in Sources */,
 				3803756A1B8BC89D004C4ECE /* LBRGoogleSignInViewController.m in Sources */,
+				3810D9FE1BD5BDE60093D5C2 /* UIColor-Expanded.m in Sources */,
 				38F57BBE1BB0707200CC2EE8 /* UINavigationBar+FlatUI.m in Sources */,
 				382A83BA1BB3BA94008860CF /* LBRRecommendationsCollectionViewController.m in Sources */,
 				3803757A1B8C08E0004C4ECE /* LBRSettingsTableViewController.m in Sources */,
+				3810DA1A1BD5E0D60093D5C2 /* RCSwitchOnOff.m in Sources */,
 				381FC2BB1BD15D45003A3C52 /* LBR_BookcaseModel.m in Sources */,
 				388DBE331BAA54C8005C5125 /* UIImage+imageScaledToHeight.m in Sources */,
 				38565D701B9A20B800349498 /* LBRParsedVolume.m in Sources */,

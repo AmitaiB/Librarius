@@ -11,6 +11,12 @@
 #import "LBRSettingsTableViewController.h"
 #import <Google/SignIn.h>
 
+    //ADVFlatUI
+#import "SettingsCell1.h"
+#import "Utils.h"
+#import "RCSwitchOnOff.h"
+#import "FlatTheme.h"
+
 @interface LBRSettingsTableViewController ()
 
 @end

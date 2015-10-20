@@ -18,6 +18,7 @@
 #import "UIColor+ABBColors.h"
 #import "UIFont+FlatUI.h"
 #import "UITableViewCell+FlatUI.h"
+#import "UIColor-Expanded.h"
 
 
 @interface BookCollection_TableViewController ()
@@ -70,14 +71,14 @@
 
 -(void)flattenUI {
         //Set the separator color
-    self.tableView.separatorColor = [UIColor midnightBlueColor];
+    self.tableView.separatorColor = [[UIColor mySinColor] contrastingColor];
     
         //Set the background color
         ///"You must set this property to nil to set the background color of the table view." (Apple docs)
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = [UIColor mySinColor];
     
-    [[UITableViewCell appearance] setBackgroundColor:[UIColor irisBlueColor]];
+    [[UITableViewCell appearance] setBackgroundColor:[[UIColor mySinColor] triadicColors][0]];
 
     [self.tableView setClipsToBounds:YES];
     
@@ -158,19 +159,19 @@
 
 -(void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
         //Background color
-    view.tintColor = [UIColor shirazColor];
+//    view.tintColor = [UIColor shirazColor];
     
         //Text color
     UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
-    [header.textLabel setTextColor:[UIColor midnightBlueColor]];
+//    [header.textLabel setTextColor:[UIColor midnightBlueColor]];
 }
 
 #pragma mark private delegate helpers
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    NSString *title = [object valueForKey:@"title"];
-    NSString *subtitle = [object valueForKey:@"subtitle"];
+    NSString *title         = [object valueForKey:@"title"];
+    NSString *subtitle      = [object valueForKey:@"subtitle"];
     [self makeTitleCase:title];
     [self makeTitleCase:subtitle];
     
@@ -179,18 +180,15 @@
         cell.textLabel.text = [NSString stringWithFormat:@"%@: %@", title, subtitle];
     }
     
-    [cell configureFlatCellWithColor:[UIColor greenSeaColor] selectedColor:[UIColor turquoiseColor] roundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight];
+    [cell configureFlatCellWithColor:[[UIColor mySinColor] triadicColors][0] selectedColor:[[UIColor mySinColor] triadicColors][1] roundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight];
     
-    cell.textLabel.font = [UIFont boldFlatFontOfSize:20];
-    cell.textLabel.textColor = [UIColor cloudsColor];
-    cell.contentView.backgroundColor = [UIColor shirazColor];
-    
-    [cell setCornerRadius:10];
+//    cell.textLabel.font = [UIFont boldFlatFontOfSize:20];
+    cell.textLabel.font = [UIFont fontWithName:@"Avenir-Book" size:20];
+    cell.textLabel.textColor = [UIColor asbestosColor];
 
 
     if (indexPath.row == 0) {
-        cell.backgroundView.layer.cornerRadius = 10;
-//        cell.layer.cornerRadius = 5;
+        [cell setCornerRadius:10];
     }
     
 }
