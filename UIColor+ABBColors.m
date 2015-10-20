@@ -37,4 +37,20 @@
 +(UIColor *)armadilloColor {
     return [UIColor colorWithRed:0.29 green:0.29 blue:0.29 alpha:1];
 }
+
++(UIColor *)bleuDeFranceColor {
+    return [UIColor colorWithRed:53.0/255 green:150.0/255 blue:225.0/255 alpha:1.0];
+}
+
++(UIColor *)darkJungleGreenColor {
+    return [UIColor colorWithRed:33.0/255 green:36.0/255 blue:39.0/255 alpha:1.0];
+}
+
++(UIColor *)outerSpaceColor {
+    return [UIColor colorWithRed:65.0/255 green:75.0/255 blue:89.0/255 alpha:1.0];
+}
+
++(UIColor *)glitterColor {
+    return [UIColor colorWithRed:231.0/255 green:235.0/255 blue:238.0/255 alpha:1.0f];
+}
 @end

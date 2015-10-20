@@ -18,4 +18,10 @@
 +(UIColor *)shirazColor;
 +(UIColor *)armadilloColor;
 
+    //ADVFlatUI
++(UIColor *)bleuDeFranceColor;
++(UIColor *)darkJungleGreenColor;
++(UIColor *)outerSpaceColor;
++(UIColor *)glitterColor;
+
 @end

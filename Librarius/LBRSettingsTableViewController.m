@@ -11,6 +11,8 @@
 #import "LBRSettingsTableViewController.h"
 #import <Google/SignIn.h>
 
+#import "UIColor+ABBColors.h"
+
     //ADVFlatUI
 #import "SettingsCell1.h"
 #import "Utils.h"
@@ -19,13 +21,29 @@
 
 @interface LBRSettingsTableViewController ()
 
+@property (nonatomic, strong) NSArray *settingTitles;
+@property (nonatomic, strong) NSArray *settingsElements;
+@property (nonatomic, strong) NSString *boldFontName;
+@property (nonatomic, strong) UIColor *onColor;
+@property (nonatomic, strong) UIColor *offColor;
+@property (nonatomic, strong) UIColor *dividerColor;
 @end
+
 
 @implementation LBRSettingsTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.boldFontName = @"Avenir-Black";
+    
+    self.onColor      = [UIColor bleuDeFranceColor];
+    self.offColor     = [UIColor darkJungleGreenColor];
+    self.dividerColor = [UIColor colorWithWhite:0.1 alpha:1.0f];
+
+    [FlatTheme styleNavigationBar:self.navigationController.navigationBar withFontName:self.boldFontName andColor:<#(UIColor *)#>]
+    
+//==============
     [self.settingsGroups addObject:@"GoogleSignout from Librarius"];
     
     // Uncomment the following line to preserve selection between presentations.
