@@ -51,7 +51,7 @@ static NSString * const reuseIdentifier = @"bookCellID";
     self.title = @"Bookshelves";
     
     // Register cell classes
-    [self.collectionView registerClass:[LBRShelvedBookCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
+    [self.collectionView registerClass:[LBRShelvedBook_CollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     
     self.dataManager = [LBRDataManager sharedDataManager];
     

@@ -12,6 +12,6 @@
 
 @interface LBR_BookcaseCollectionViewController : UICollectionViewController <NSFetchedResultsControllerDelegate, NSFetchedResultsSectionInfo, LBRBookLayoutDataSource>
 
-@property (nonatomic, strong) NSArray *fetchedObjects;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
 @end

@@ -15,6 +15,7 @@
 
 
 #import "LBR_BookcaseLayout.h"
+#import "LBR_BookcaseCollectionViewController.h"
 
 
 @interface LBR_BookcaseLayout ()
@@ -25,6 +26,7 @@
 @property (nonatomic, assign) NSUInteger widestShelfWidth;
 @property (nonatomic, assign) CGSize contentSize;
 @property (nonatomic, strong) NSArray <NSArray <Volume *> *> *filledBookcaseModel;
+
 @property (nonatomic, strong) NSDictionary *layoutInformation;
 @property (nonatomic, assign) UIEdgeInsets insets;
 
@@ -53,11 +55,23 @@
  indexPath is used kept on only as necessary to work with the APIs. The cells
  are to be laid out according to real-world thickness, however, which we track seperately.
  */
+
+    //    self.bookcaseModel  = [[LBR_BookcaseModel alloc] initWithWidth:58.0 shelvesCount:5];
+//[self.bookcaseModel shelveBooks:self.fetchedObjects];
+//self.filledBookcaseModel                 = self.bookcaseModel.shelves;
+
 -(void)prepareLayout {
     NSAssert([self.dataSource filledBookcaseModel], @"BookcaseModel not initialized.");
     
-    NSMutableDictionary __block *booksDictByIndexPath = [NSMutableDictionary new];
+    NSMutableDictionary *layoutInformation = [NSMutableDictionary dictionary];
+    NSMutableDictionary *cellInformation   = [NSMutableDictionary dictionary];
     NSIndexPath __block *indexPath;
+    
+    LBR_BookcaseCollectionViewController *dataSource = (LBR_BookcaseCollectionViewController *)self.dataSource;
+    
+    NSUInteger numSections = dataSource.fetchedObjects ;
+    
+    NSMutableDictionary __block *booksDictByIndexPath = [NSMutableDictionary new];
     
 //    Key each book to an indexPath
     [[self.dataSource filledBookcaseModel] enumerateObjectsUsingBlock:^(NSArray<Volume *> * shelfModel, NSUInteger idx, BOOL * _Nonnull stop) {

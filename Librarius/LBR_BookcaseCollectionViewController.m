@@ -24,11 +24,10 @@
 
 @property (nonatomic, strong) LBR_BookcaseLayout *layout;
 
-@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSMutableArray *sectionChanges;
 @property (nonatomic, strong) NSMutableArray *itemChanges;
-@property (nonatomic, strong) LBR_BookcaseModel *bookcaseModel;
+
 
 
 @end
@@ -45,15 +44,9 @@ static NSString * const reuseIdentifier = @"Cell";
         //Rope in the singleton dataManger
     dataManager = [LBRDataManager sharedDataManager];
 
-        //Init and Configure bookcaseModel
-    self.fetchedObjects = [self.fetchedResultsController.fetchedObjects copy];
-    self.bookcaseModel  = [[LBR_BookcaseModel alloc] initWithWidth:58.0 shelvesCount:5];
-    [self.bookcaseModel shelveBooks:self.fetchedObjects];
-    
         //Set custom layout with protocol
     LBR_BookcaseLayout *layout               = [LBR_BookcaseLayout new];
     layout.dataSource                        = self;
-    self.filledBookcaseModel                 = self.bookcaseModel.shelves;
     self.collectionView.collectionViewLayout = layout;
 
         //Do I really need this as a property???
