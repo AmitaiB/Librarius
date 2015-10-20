@@ -82,6 +82,8 @@ static NSString * const reuseIdentifier = @"bookCellID";
 //    layout.itemSize = CGSizeMake(106.0, 106.0);
 }
 
+
+
 #pragma mark - === UICollectionViewDataSource ===
 /*
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {

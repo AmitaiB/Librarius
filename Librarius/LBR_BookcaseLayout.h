@@ -20,6 +20,9 @@
 
 @interface LBR_BookcaseLayout : UICollectionViewLayout
 
+@property (nonatomic, assign) CGFloat interItemSpacing;
+@property (nonatomic, assign) CGFloat interShelfSpacing;
+
 //@property (nonatomic, weak) id <LBRBookLayoutDataSource> dataSource;
 
 @end

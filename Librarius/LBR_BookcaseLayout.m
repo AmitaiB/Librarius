@@ -35,6 +35,8 @@
 @property (nonatomic, assign) NSUInteger bookOnShelfCounter;
 @property (nonatomic, strong) LBR_BookcaseModel *bookcaseModel;
 
+
+
 @end
 
 @implementation LBR_BookcaseLayout
@@ -94,12 +96,17 @@
     }
 }
 
+-(CGPoint)originPointForBook:(NSUInteger)bookCounter onShelf:(NSUInteger)shelfCounter {
+    CGFloat xPosition = INSET_LEFT + bookCounter  * (kDefaulCellDimension + self.interItemSpacing);
+    CGFloat yPosition = INSET_TOP  + shelfCounter * (kDefaulCellDimension + self.interShelfSpacing);
+    return CGPointMake(xPosition, yPosition);
+}
+
 -(void)prepareLayout {
     
     NSMutableDictionary *layoutInformation = [NSMutableDictionary dictionary];
-    NSMutableDictionary *cellInformation   = [NSMutableDictionary dictionary];
-    NSIndexPath __block *indexPath;
-    
+//    NSMutableDictionary *cellInformation   = [NSMutableDictionary dictionary];
+    NSIndexPath *indexPath;
     
     
     self.shelfCounter = 0;
@@ -107,79 +114,45 @@
     self.bookcaseModel = [self configuredBookcaseModel];
     NSUInteger maxShelves = self.bookcaseModel.shelves.count;
     
+    CGFloat xMax = 0;
+    CGFloat yMax = 0;
     
+        ///First, create an attributes object for each cell (keyed to indexPath, provided by the collectionView's dataSource.
+    NSInteger numSections = [self.collectionView numberOfSections];
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    LBR_BookcaseCollectionViewController *dataSource = (LBR_BookcaseCollectionViewController *)self.collectionView;
-    
-//    NSUInteger numSections = dataSource.fetchedObjects ;
-    
-    NSMutableDictionary __block *booksDictByIndexPath = [NSMutableDictionary new];
-    
-//    Key each book to an indexPath
-//    [[self.dataSource filledBookcaseModel] enumerateObjectsUsingBlock:^(NSArray<Volume *> * shelfModel, NSUInteger idx, BOOL * _Nonnull stop) {
-//        for (NSUInteger bookIndex = 0; bookIndex < shelfModel.count; bookIndex++) {
-//            indexPath = [NSIndexPath indexPathForItem:bookIndex inSection:idx];
-//            [booksDictByIndexPath setObject:shelfModel[bookIndex] forKey:indexPath];
-//        }
-//    }];
-    
-//    Frames for IndexPath
-    NSIndexPath *indexPathKey;
-    CGPoint newOrigin;
-    CGRect rect;
-    UICollectionViewLayoutAttributes *attributes;
-    
-//    Grab content size at the same time.
-    CGFloat xMax = 0.0f;
-    CGFloat yMax = 0.0f;
-    
-    for (NSUInteger i = 0; i < [booksDictByIndexPath allKeys].count; i++) {
-        indexPathKey = [booksDictByIndexPath allKeys][i];
-        newOrigin = CGPointMake(indexPathKey.item * kDefaulCellDimension, indexPathKey.section * kDefaulCellDimension);
-        rect = CGRectMake(newOrigin.x, newOrigin.y, kDefaulCellDimension, kDefaulCellDimension);
-        attributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPathKey];
-        attributes.frame = rect;
-        
-        [self.attributesForCells setObject:[attributes copy] forKey:indexPathKey];
-        
-        
-        xMax = MAX(xMax, newOrigin.x);
-        yMax = MAX(yMax, newOrigin.y);
+    for (NSUInteger section = 0; section < numSections; section++) {
+        NSUInteger numItems = [self.collectionView numberOfItemsInSection:section];
+        for (NSUInteger item = 0; item < numItems; item++) {
+                //Many things need to happen here:
+            indexPath = [NSIndexPath indexPathForItem:item inSection:section];
+            UICollectionViewLayoutAttributes *attributes = [self layoutAttributesForItemAtIndexPath:indexPath];
+            
+            CGPoint origin = [self originPointForBook:self.bookOnShelfCounter onShelf:self.shelfCounter];
+            attributes.frame = CGRectMake(origin.x, origin.y, kDefaulCellDimension, kDefaulCellDimension);
+            [self incrementBookcaseModelCounter];
+            
+                //Grab ContentSize while we're here.
+            xMax = MAX(xMax, origin.x);
+            yMax = MAX(yMax, origin.y);
+            
+            [layoutInformation setObject:attributes forKey:indexPath];
+        }
     }
     
-    self.contentSize = CGSizeMake(xMax + kDefaulCellDimension, yMax + kDefaulCellDimension);
+        //A bit more tweaking is needed for the contentSize
+    xMax += kDefaulCellDimension + INSET_RIGHT;
+    yMax += kDefaulCellDimension + INSET_BOTTOM;
+    self.contentSize = CGSizeMake(xMax, yMax);
+        ///At this point, we should have appropriate layout data for our cells per indexPath,
+        ///having fully encapsulated the dirty work of arranging it appropriately.
 }
 
 
-
--(CGSize)contentSize {
+-(CGSize)contentSize
+{
     return self.contentSize;
 }
+
 
 -(NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect {
         //Check for all elements that are in the rect, and add the corresponding attributes
