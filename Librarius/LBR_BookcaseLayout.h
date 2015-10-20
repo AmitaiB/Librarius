@@ -10,16 +10,16 @@
 
 #import "LBR_BookcaseModel.h"
 
-@protocol LBRBookLayoutDataSource <NSObject>
-
-    ///An array (bookcase model) of arrays (shelf models) of Volume objects.
-@property (nonatomic, strong)  NSArray <NSArray <Volume *> *> *filledBookcaseModel;
-
-@end
+//@protocol LBRBookLayoutDataSource <NSObject>
+//
+//    ///An array (bookcase model) of arrays (shelf models) of Volume objects.
+//@property (nonatomic, strong)  NSArray <NSArray <Volume *> *> *filledBookcaseModel;
+//
+//@end
 
 
 @interface LBR_BookcaseLayout : UICollectionViewLayout
 
-@property (nonatomic, weak) id <LBRBookLayoutDataSource> dataSource;
+//@property (nonatomic, weak) id <LBRBookLayoutDataSource> dataSource;
 
 @end

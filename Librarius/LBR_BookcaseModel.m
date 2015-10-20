@@ -32,7 +32,7 @@
     return [self initWithWidth:58.0 shelvesCount:5];
 }
 
--(void)shelveBooks:(NSArray *)booksArray {
+-(void)shelveBooks:(NSArray<Volume *> *)booksArray {
     
 /*
     For each book, add its thickness to the x-position. If that takes us over 

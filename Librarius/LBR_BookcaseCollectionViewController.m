@@ -46,8 +46,9 @@ static NSString * const reuseIdentifier = @"Cell";
 
         //Set custom layout with protocol
     LBR_BookcaseLayout *layout               = [LBR_BookcaseLayout new];
-    layout.dataSource                        = self;
     self.collectionView.collectionViewLayout = layout;
+
+        //    layout.dataSource                        = self;
 
         //Do I really need this as a property???
     self.layout = layout;

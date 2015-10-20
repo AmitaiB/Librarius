@@ -211,7 +211,7 @@ static NSString * const kUnknown = @"kUnknown";
     
         // Edit the sort key as appropriate.
     NSSortDescriptor *categorySorter = [NSSortDescriptor sortDescriptorWithKey:@"mainCategory" ascending:YES];
-    NSSortDescriptor *authorSorter = [NSSortDescriptor sortDescriptorWithKey:@"authorSurname" ascending:YES];
+    NSSortDescriptor *authorSorter   = [NSSortDescriptor sortDescriptorWithKey:@"authorSurname" ascending:YES];
     
     [self generateDefaultLibraryIfNeeded];
         //TODO: Might need @"library.name = datamanager.currentLibrary.name"

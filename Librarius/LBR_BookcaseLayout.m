@@ -16,6 +16,7 @@
 
 #import "LBR_BookcaseLayout.h"
 #import "LBR_BookcaseCollectionViewController.h"
+#import "LBR_BookcaseModel.h"
 
 
 @interface LBR_BookcaseLayout ()
@@ -25,11 +26,14 @@
 
 @property (nonatomic, assign) NSUInteger widestShelfWidth;
 @property (nonatomic, assign) CGSize contentSize;
-@property (nonatomic, strong) NSArray <NSArray <Volume *> *> *filledBookcaseModel;
+//@property (nonatomic, strong) NSArray <NSArray <Volume *> *> *filledBookcaseModel;
 
 @property (nonatomic, strong) NSDictionary *layoutInformation;
 @property (nonatomic, assign) UIEdgeInsets insets;
 
+@property (nonatomic, assign) NSUInteger shelfCounter;
+@property (nonatomic, assign) NSUInteger bookOnShelfCounter;
+@property (nonatomic, strong) LBR_BookcaseModel *bookcaseModel;
 
 @end
 
@@ -49,37 +53,100 @@
 }
 
 /**
- Iterate over every cell, produce a layouts attribute object for it, and then cache
- it in the layoutInformation property by indexPath. 
- REMEMBER: don't get confused between indexPath and 'layoutPath'. For this layout,
- indexPath is used kept on only as necessary to work with the APIs. The cells
- are to be laid out according to real-world thickness, however, which we track seperately.
+ +Iterate over every cell,
+ -produce a layouts attribute object for each one
+ --This is where we encapsulate and bury the confusing logic**
+ -and then cache the info in the layoutInformation dictionary by indexPath.
+ 
+ **"Confusing Logic"
+ === Iterate through each cell, increment through the bookcaseModel each time.
+ 
  */
 
-    //    self.bookcaseModel  = [[LBR_BookcaseModel alloc] initWithWidth:58.0 shelvesCount:5];
-//[self.bookcaseModel shelveBooks:self.fetchedObjects];
-//self.filledBookcaseModel                 = self.bookcaseModel.shelves;
+-(LBR_BookcaseModel *)configuredBookcaseModel {
+    LBR_BookcaseModel *bookcaseModel = [[LBR_BookcaseModel alloc] initWithWidth:58.0 shelvesCount:5];
+    LBR_BookcaseCollectionViewController *collectionViewController = (LBR_BookcaseCollectionViewController *)self.collectionView.dataSource;
+    [bookcaseModel shelveBooks:collectionViewController.fetchedResultsController.fetchedObjects];
+    return bookcaseModel;
+}
+
+-(void)incrementBookcaseModelCounter {
+    NSArray *currentShelf = self.bookcaseModel.shelves[self.shelfCounter];
+    NSUInteger maxShelves = self.bookcaseModel.shelves.count;
+
+        //No more shelves.
+    if (self.shelfCounter == maxShelves)
+        return;
+    
+        //If there are more books on this shelf.
+    if (self.bookOnShelfCounter < currentShelf.count)
+    {
+        self.bookOnShelfCounter++;
+        return;
+    }
+    
+        //If this book was the last book on the current shelf.
+    if (self.bookOnShelfCounter >= currentShelf.count && self.shelfCounter < maxShelves)
+    {
+        self.shelfCounter++;
+        self.bookOnShelfCounter = 0;
+        return;
+    }
+}
 
 -(void)prepareLayout {
-    NSAssert([self.dataSource filledBookcaseModel], @"BookcaseModel not initialized.");
     
     NSMutableDictionary *layoutInformation = [NSMutableDictionary dictionary];
     NSMutableDictionary *cellInformation   = [NSMutableDictionary dictionary];
     NSIndexPath __block *indexPath;
     
-    LBR_BookcaseCollectionViewController *dataSource = (LBR_BookcaseCollectionViewController *)self.dataSource;
     
-    NSUInteger numSections = dataSource.fetchedObjects ;
+    
+    self.shelfCounter = 0;
+    self.bookOnShelfCounter = 0;
+    self.bookcaseModel = [self configuredBookcaseModel];
+    NSUInteger maxShelves = self.bookcaseModel.shelves.count;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    LBR_BookcaseCollectionViewController *dataSource = (LBR_BookcaseCollectionViewController *)self.collectionView;
+    
+//    NSUInteger numSections = dataSource.fetchedObjects ;
     
     NSMutableDictionary __block *booksDictByIndexPath = [NSMutableDictionary new];
     
 //    Key each book to an indexPath
-    [[self.dataSource filledBookcaseModel] enumerateObjectsUsingBlock:^(NSArray<Volume *> * shelfModel, NSUInteger idx, BOOL * _Nonnull stop) {
-        for (NSUInteger bookIndex = 0; bookIndex < shelfModel.count; bookIndex++) {
-            indexPath = [NSIndexPath indexPathForItem:bookIndex inSection:idx];
-            [booksDictByIndexPath setObject:shelfModel[bookIndex] forKey:indexPath];
-        }
-    }];
+//    [[self.dataSource filledBookcaseModel] enumerateObjectsUsingBlock:^(NSArray<Volume *> * shelfModel, NSUInteger idx, BOOL * _Nonnull stop) {
+//        for (NSUInteger bookIndex = 0; bookIndex < shelfModel.count; bookIndex++) {
+//            indexPath = [NSIndexPath indexPathForItem:bookIndex inSection:idx];
+//            [booksDictByIndexPath setObject:shelfModel[bookIndex] forKey:indexPath];
+//        }
+//    }];
     
 //    Frames for IndexPath
     NSIndexPath *indexPathKey;
