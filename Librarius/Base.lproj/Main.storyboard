@@ -106,6 +106,7 @@
                             <outlet property="delegate" destination="bTL-zk-y1V" id="frT-3V-hrU"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <tabBarItem key="tabBarItem" title="Collections" image="collections" id="7pu-Vo-ons"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Azg-4B-XOz" userLabel="First Responder" sceneMemberID="firstResponder"/>

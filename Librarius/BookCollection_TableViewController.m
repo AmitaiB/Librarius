@@ -33,12 +33,16 @@
 @dynamic numberOfObjects;
 @dynamic objects;
 
+-(BOOL)prefersStatusBarHidden {
+    return YES;
+}
 
 - (void)viewDidLoad {
 
         [super viewDidLoad];
         self.navigationItem.leftBarButtonItem = self.editButtonItem;
     [self flattenUI];
+    
 /**
  *  TODO: Change the method called here to "Manual Volume Entry", details below.
  */
@@ -81,6 +85,8 @@
     [[UITableViewCell appearance] setBackgroundColor:[[UIColor mySinColor] triadicColors][0]];
 
     [self.tableView setClipsToBounds:YES];
+//    
+//    [self.tableView.topAnchor constraintEqualToAnchor:self.topLayoutGuide.bottomAnchor].active = true;
     
 }
 
