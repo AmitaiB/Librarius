@@ -41,8 +41,31 @@
     self.offColor     = [UIColor darkJungleGreenColor];
     self.dividerColor = [UIColor colorWithWhite:0.1 alpha:1.0f];
 
-    [FlatTheme styleNavigationBar:self.navigationController.navigationBar withFontName:self.boldFontName andColor:<#(UIColor *)#>]
+    [FlatTheme styleNavigationBar:self.navigationController.navigationBar withFontName:self.boldFontName andColor:[UIColor outerSpaceColor]];
+    [FlatTheme styleSegmentedControlWithFontName:self.boldFontName andSelectedColor:self.onColor andUnselectedColor:self.offColor andDidviderColor:self.dividerColor];
     
+    self.title = @"Settings";
+
+    self.tableView.backgroundColor = [UIColor glitterColor];
+    self.tableView.separatorColor = [UIColor clearColor];
+    
+    self.settingTitles = @[@"Bluetooth", @"Cloud backup", @"Show Offers", @"Streaming", @"Manage Accounts"];
+    self.settingsElements = @[@"None", @"Switch", @"Segment", @"None", @"None"];
+    
+        //Clever technique!!!
+    UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 28, 20)];
+    [menuButton setImage:[UIImage imageNamed:@"menu"] forState:UIControlStateNormal];
+    [menuButton addTarget:self action:@selector(dismissView:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *menuItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
+    self.navigationItem.leftBarButtonItem = menuItem;
+    
+        //TODO: Switch to Autolayout
+    UIImageView *searchView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"search"]];
+    searchView.frame = CGRectMake(0, 0, 20, 20);
+    UIBarButtonItem *searchItem = [[UIBarButtonItem alloc] initWithCustomView:searchView];
+    self.navigationItem.rightBarButtonItem = searchItem;
+    
+
 //==============
     [self.settingsGroups addObject:@"GoogleSignout from Librarius"];
     
@@ -60,18 +83,28 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    return self.settingsGroups.count;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    return 1;
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 4;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
+    headerView.backgroundColor = [UIColor darkLavalColor];
+    
+
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
     // Configure the cell...
