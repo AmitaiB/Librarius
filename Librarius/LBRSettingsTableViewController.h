@@ -10,6 +10,4 @@
 
 @interface LBRSettingsTableViewController : UITableViewController
 
-@property (nonatomic, strong) NSMutableArray *settingsGroups;
-
 @end

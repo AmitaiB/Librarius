@@ -112,7 +112,7 @@
             </objects>
             <point key="canvasLocation" x="1729.5" y="-840"/>
         </scene>
-        <!--Settings-->
+        <!--Settings Table View Controller-->
         <scene sceneID="cdc-Bu-pzL">
             <objects>
                 <tableViewController id="oJK-od-ZUi" customClass="LBRSettingsTableViewController" sceneMemberID="viewController">
@@ -173,6 +173,11 @@
                                     </variation>
                                 </tableViewCellContentView>
                                 <animations/>
+                                <connections>
+                                    <outlet property="bgView" destination="V3l-ih-B04" id="nlt-SV-5OA"/>
+                                    <outlet property="separatorLineView" destination="rJ6-wE-IHp" id="hp0-Ds-5mN"/>
+                                    <outlet property="settingTitle" destination="l5i-vs-lvU" id="VKp-0b-h5X"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -180,11 +185,11 @@
                             <outlet property="delegate" destination="oJK-od-ZUi" id="moH-2E-Fah"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Settings" image="gears6-60@2x-29" id="UR5-ty-ind"/>
+                    <navigationItem key="navigationItem" id="8iV-RF-UiL"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LFc-2g-zxb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="949.5" y="703"/>
+            <point key="canvasLocation" x="1737" y="703"/>
         </scene>
         <!--Shelve-->
         <scene sceneID="2EP-QO-Uby">
@@ -226,7 +231,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uRq-sK-8fk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2427" y="505"/>
+            <point key="canvasLocation" x="3345" y="505"/>
         </scene>
         <!--Library/Shelves Layout-->
         <scene sceneID="gtg-I3-sQB">
@@ -246,7 +251,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MvQ-3f-rxY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2427" y="1242"/>
+            <point key="canvasLocation" x="3345" y="1242"/>
         </scene>
         <!--Scan-->
         <scene sceneID="wg7-f3-ORb">
@@ -600,7 +605,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EPH-Sv-Btn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3075" y="505"/>
+            <point key="canvasLocation" x="3993" y="505"/>
         </scene>
         <!--Google Sign In View Controller-->
         <scene sceneID="laV-a9-6q2">
@@ -722,7 +727,7 @@
                         <segue destination="BK5-aT-ift" kind="relationship" relationship="viewControllers" id="wTu-ac-h8U"/>
                         <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
                         <segue destination="9Mv-tj-U5P" kind="relationship" relationship="viewControllers" id="TBB-3r-H23"/>
-                        <segue destination="oJK-od-ZUi" kind="relationship" relationship="viewControllers" id="kRc-jj-rCf"/>
+                        <segue destination="a1o-lg-1yo" kind="relationship" relationship="viewControllers" id="kRc-jj-rCf"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
@@ -766,7 +771,27 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AdP-iG-VXx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1737" y="505"/>
+            <point key="canvasLocation" x="2655" y="505"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="cC4-u1-Syw">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="a1o-lg-1yo" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Settings" image="gears6-60@2x-29" id="UR5-ty-ind"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="UfL-zN-Hcd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="oJK-od-ZUi" kind="relationship" relationship="rootViewController" id="CMM-lm-5k2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0rg-wq-VPp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="949.5" y="703"/>
         </scene>
     </scenes>
     <resources>
