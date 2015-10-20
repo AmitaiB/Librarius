@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 
-#import "LBRShelvesViewController.h"
+#import "LBRShelves_CollectionViewController.h"
 #import "LBRDataManager.h"
 #import <UIImageView+AFNetworking.h>
 #import "Volume.h"
@@ -15,7 +15,7 @@
 
 #define kDefaultCellSize CGSizeMake(106.0, 106.0)
 
-@interface LBRShelvesViewController ()
+@interface LBRShelves_CollectionViewController ()
 
 @property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *layout;
 
@@ -28,7 +28,7 @@
 
 @end
 
-@implementation LBRShelvesViewController {
+@implementation LBRShelves_CollectionViewController {
         //Reusable imageView
     UIImageView *reusableImageView;
 }

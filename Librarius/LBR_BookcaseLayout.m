@@ -8,6 +8,11 @@
 #define kDefaulCellDimension 106.0
 #define kDefaultCellSize CGSizeMake(kDefaulCellDimension, kDefaulCellDimension)
 
+#define INSET_TOP 1.0
+#define INSET_LEFT 1.0
+#define INSET_BOTTOM 1.0
+#define INSET_RIGHT 1.0
+
 
 #import "LBR_BookcaseLayout.h"
 
@@ -20,6 +25,9 @@
 @property (nonatomic, assign) NSUInteger widestShelfWidth;
 @property (nonatomic, assign) CGSize contentSize;
 @property (nonatomic, strong) NSArray <NSArray <Volume *> *> *filledBookcaseModel;
+@property (nonatomic, strong) NSDictionary *layoutInformation;
+@property (nonatomic, assign) UIEdgeInsets insets;
+
 
 @end
 
@@ -29,16 +37,30 @@
  
  */
 
--(void)prepareLayout {
-    NSAssert(self.filledBookcaseModel, @"BookcaseMode not initialized.");
+-(instancetype)init
+{
+    if (!(self = [super init])) return nil;
     
-    self.filledBookcaseModel = [self.dataSource filledBookcaseModel];
+    self.insets = UIEdgeInsetsMake(INSET_TOP, INSET_LEFT, INSET_BOTTOM, INSET_RIGHT);
+    
+    return self;
+}
+
+/**
+ Iterate over every cell, produce a layouts attribute object for it, and then cache
+ it in the layoutInformation property by indexPath. 
+ REMEMBER: don't get confused between indexPath and 'layoutPath'. For this layout,
+ indexPath is used kept on only as necessary to work with the APIs. The cells
+ are to be laid out according to real-world thickness, however, which we track seperately.
+ */
+-(void)prepareLayout {
+    NSAssert([self.dataSource filledBookcaseModel], @"BookcaseModel not initialized.");
     
     NSMutableDictionary __block *booksDictByIndexPath = [NSMutableDictionary new];
     NSIndexPath __block *indexPath;
     
 //    Key each book to an indexPath
-    [self.filledBookcaseModel enumerateObjectsUsingBlock:^(NSArray<Volume *> * shelfModel, NSUInteger idx, BOOL * _Nonnull stop) {
+    [[self.dataSource filledBookcaseModel] enumerateObjectsUsingBlock:^(NSArray<Volume *> * shelfModel, NSUInteger idx, BOOL * _Nonnull stop) {
         for (NSUInteger bookIndex = 0; bookIndex < shelfModel.count; bookIndex++) {
             indexPath = [NSIndexPath indexPathForItem:bookIndex inSection:idx];
             [booksDictByIndexPath setObject:shelfModel[bookIndex] forKey:indexPath];

@@ -27,6 +27,7 @@
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSMutableArray *sectionChanges;
+@property (nonatomic, strong) NSMutableArray *itemChanges;
 @property (nonatomic, strong) LBR_BookcaseModel *bookcaseModel;
 
 

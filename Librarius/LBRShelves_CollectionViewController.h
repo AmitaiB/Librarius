@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
-@interface LBRShelvesViewController : UICollectionViewController <NSFetchedResultsControllerDelegate, NSFetchedResultsSectionInfo, UICollectionViewDelegateFlowLayout>
+@interface LBRShelves_CollectionViewController : UICollectionViewController <NSFetchedResultsControllerDelegate, NSFetchedResultsSectionInfo, UICollectionViewDelegateFlowLayout>
 
 
 @end
