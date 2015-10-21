@@ -32,14 +32,12 @@
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSMutableArray *sectionChanges;
 @property (nonatomic, strong) NSMutableArray *itemChanges;
-
+@property (nonatomic, strong) LBRDataManager *dataManager;
 
 
 @end
 
-@implementation LBR_BookcaseCollectionViewController {
-    LBRDataManager *dataManager;
-}
+@implementation LBR_BookcaseCollectionViewController
 
 static NSString * const reuseIdentifier = @"Cell";
 
@@ -47,7 +45,7 @@ static NSString * const reuseIdentifier = @"Cell";
     [super viewDidLoad];
     self.title = @"Bookshelves";
         //Rope in the singleton dataManger
-    dataManager = [LBRDataManager sharedDataManager];
+    self.dataManager = [LBRDataManager sharedDataManager];
 
         //Set custom layout with protocol
     LBR_BookcaseLayout *layout               = [LBR_BookcaseLayout new];
@@ -146,7 +144,7 @@ static NSString * const reuseIdentifier = @"Cell";
     if (_fetchedResultsController != nil)
         return _fetchedResultsController;
     
-    return [dataManager preconfiguredLBRFetchedResultsController:self];
+    return [self.dataManager preconfiguredLBRFetchedResultsController:self];
 }
 
 #pragma mark - === FetchedResultsControllerDelegate ===

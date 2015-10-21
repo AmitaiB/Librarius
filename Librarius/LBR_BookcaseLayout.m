@@ -50,6 +50,8 @@
     if (!(self = [super init])) return nil;
     
     self.insets = UIEdgeInsetsMake(INSET_TOP, INSET_LEFT, INSET_BOTTOM, INSET_RIGHT);
+    self.shelfCounter = 0;
+    self.bookOnShelfCounter = 0;
     
     return self;
 }
@@ -59,7 +61,7 @@
  -produce a layouts attribute object for each one
  --This is where we encapsulate and bury the confusing logic**
  -and then cache the info in the layoutInformation dictionary by indexPath.
- 
+
  **"Confusing Logic"
  === Iterate through each cell, increment through the bookcaseModel each time.
  
@@ -68,11 +70,17 @@
 -(LBR_BookcaseModel *)configuredBookcaseModel {
     LBR_BookcaseModel *bookcaseModel = [[LBR_BookcaseModel alloc] initWithWidth:58.0 shelvesCount:5];
     LBR_BookcaseCollectionViewController *collectionViewController = (LBR_BookcaseCollectionViewController *)self.collectionView.dataSource;
+
+// CLEAN:   NSLog(@"NSFRC:\n\n\n %@ \n\n ", collectionViewController.fetchedResultsController.fetchedObjects);
+
     [bookcaseModel shelveBooks:collectionViewController.fetchedResultsController.fetchedObjects];
     return bookcaseModel;
 }
 
+
+
 -(void)incrementBookcaseModelCounter {
+    
     NSArray *currentShelf = self.bookcaseModel.shelves[self.shelfCounter];
     NSUInteger maxShelves = self.bookcaseModel.shelves.count;
 

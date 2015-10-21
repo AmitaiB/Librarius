@@ -28,11 +28,6 @@
 
 @implementation BookCollection_TableViewController
 
-@dynamic name;
-@dynamic indexTitle;
-@dynamic numberOfObjects;
-@dynamic objects;
-
 -(BOOL)prefersStatusBarHidden {
     return YES;
 }

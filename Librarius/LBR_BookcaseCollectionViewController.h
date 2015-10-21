@@ -10,7 +10,9 @@
 #import <CoreData/CoreData.h>
 #import "LBR_BookcaseLayout.h"
 
-@interface LBR_BookcaseCollectionViewController : UICollectionViewController <NSFetchedResultsControllerDelegate, NSFetchedResultsSectionInfo>
+@interface LBR_BookcaseCollectionViewController : UICollectionViewController <NSFetchedResultsControllerDelegate
+//, NSFetchedResultsSectionInfo
+>
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 

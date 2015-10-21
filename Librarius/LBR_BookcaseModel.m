@@ -33,11 +33,11 @@
 
 -(instancetype)init {
     if (!(self = [super init])) return nil;
+    
     return [self initWithWidth:58.0 shelvesCount:5];
 }
 
 -(void)shelveBooks:(NSArray<Volume *> *)booksArray {
-    
 /**
     For each book, add its thickness to the x-position. If that takes us over 
  the shelf width, then we have a complete shelf: so add the appropriate substring
@@ -47,18 +47,19 @@
  current book's thickness, and <continue>.
     else (no more shelf space) substring the rest to unshelvedRemainder, and break/stop.
  */
-    NSMutableArray<NSArray *> *mutableShelves = [NSMutableArray array];
+    NSMutableArray<NSArray *> *mutableShelves = [NSMutableArray new];
     CGFloat    currentXPosition_cm            = 0.0f;
     NSUInteger idxOfFirstBookOnShelf          = 0;
     Volume *book;
-    DBLG
-    NSLog(@"BooksArray.count: %lu", booksArray.count);
+
+//CLEAN:    NSLog(@"BooksArray.count: %lu", booksArray.count);
     
     for (NSUInteger idx = 0; idx < booksArray.count; idx++) {
+        
         book = booksArray[idx];
         CGFloat thickness = [self bookThicknessOrDefault:book.thickness];
         currentXPosition_cm += thickness? thickness : 2.5f;
-    DBLG
+
         
         
         
@@ -70,30 +71,31 @@
             DBLG
             [mutableShelves addObject:temp];
             DBLG
-            
+
                 //If there are more shelves, then this book becomes the first on the next shelf.
             BOOL nextShelfExistsAndIsEmpty = mutableShelves.count < self.shelvesCount;
 
             
-            DBLG
+
             if (nextShelfExistsAndIsEmpty)
             { //CLEAN: just call 'thickness' again (D.R.Y.)
                 currentXPosition_cm = [self bookThicknessOrDefault:book.thickness];
                 idxOfFirstBookOnShelf = idx;
-                DBLG
+             
             }
             else
             {
-                DBLG
+               
                     //No more empty shelves. Add all remaining books to the unshelved.
                 NSUInteger numBooksRemaining = booksArray.count - (idx + offBy1);
                 self.unshelvedRemainder = [booksArray subarrayWithRange:NSMakeRange(idx, numBooksRemaining)];
-            } DBLG
-        }DBLG
+            }
+        }
     }
-    DBLG
+    
     self.shelves = [mutableShelves copy];
-    DBLG
+    
+//    NSLog(@"self.shelves[0] = %@\nself.shelves[1] = %@\nself.shelves[2] = %@\nself.shelves[3] = %@\nself.shelves[4] = %@\n", self.shelves[0], self.shelves[1], self.shelves[2], self.shelves[3], self.shelves[4]);
 }
 
 

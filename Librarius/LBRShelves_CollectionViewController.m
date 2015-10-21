@@ -35,13 +35,6 @@
 
 static NSString * const reuseIdentifier = @"bookCellID";
 
-@dynamic name;
-@dynamic indexTitle;
-@dynamic numberOfObjects;
-@dynamic objects;
-
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     

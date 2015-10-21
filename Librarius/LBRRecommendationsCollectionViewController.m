@@ -26,10 +26,6 @@
 
 @implementation LBRRecommendationsCollectionViewController
 
-@dynamic name;
-@dynamic indexTitle;
-@dynamic numberOfObjects;
-@dynamic objects;
 
 static NSString * const reuseIdentifier = @"Cell";
 
