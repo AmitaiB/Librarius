@@ -6,6 +6,8 @@
 //  Copyright © 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 
+#define kDefaultBookThickness 2.5f
+
 #import "LBR_BookcaseModel.h"
 #import "Volume.h"
 
@@ -49,7 +51,7 @@
     
     [booksArray enumerateObjectsUsingBlock:^(Volume *book, NSUInteger idx, BOOL * _Nonnull stop)
     {
-        CGFloat thickness = [book.thickness floatValue];
+        CGFloat thickness = [self bookThicknessOrDefault:book.thickness];
         currentXPosition_cm += thickness? thickness : 2.5f;
     
         if (currentXPosition_cm > self.width_cm)
@@ -62,14 +64,16 @@
             NSLog(@"mutableShelves.count = %lu", (unsigned long)mutableShelves.count);
             
                 //If there are more shelves, then this book becomes the first on the next shelf.
-            if (mutableShelves.count < self.shelvesCount)
+            BOOL nextShelfExistsAndIsEmpty = mutableShelves.count < self.shelvesCount;
+            
+            if (nextShelfExistsAndIsEmpty)
             {
-                currentXPosition_cm = [book.thickness floatValue];
+                currentXPosition_cm = [self bookThicknessOrDefault:book.thickness];
                 idxOfFirstBookOnShelf = idx;
             }
             else
             {
-                    //No more room. Add all remaining books to the unshelved.
+                    //No more empty shelves. Add all remaining books to the unshelved.
                 NSUInteger numBooksRemaining = booksArray.count - (idx + offBy1);
                 self.unshelvedRemainder = [booksArray subarrayWithRange:NSMakeRange(idx, numBooksRemaining)];
                 *stop = YES;
@@ -83,8 +87,9 @@
 
 #pragma mark - Helper methods
 
--(void)addBook:(Volume *)book toShelf:(NSUInteger)shelf {
-    
+-(CGFloat)bookThicknessOrDefault:(NSNumber*)thickness {
+    CGFloat downloadedThicknessValue = [thickness floatValue];
+    return downloadedThicknessValue? downloadedThicknessValue : kDefaultBookThickness;
 }
 
 @end
