@@ -15,7 +15,7 @@
 
 @interface LBR_BookcaseModel ()
 
-@property (nonatomic, assign) NSUInteger shelvesCount;
+@property (nonatomic, assign) NSUInteger totalNumOfShelves;
 @property (nonatomic, assign) CGFloat width_cm;
 @property (nonatomic, strong) NSMutableArray<NSArray *> *mutableShelves;
 @end
@@ -23,10 +23,10 @@
 
 @implementation LBR_BookcaseModel
 
--(instancetype)initWithWidth:(CGFloat)width shelvesCount:(NSUInteger)shelvesCount {
+-(instancetype)initWithWidth:(CGFloat)width shelvesCount:(NSUInteger)totalNumOfShelves {
     if (!(self = [super init])) return nil;
     
-    _shelvesCount = shelvesCount;
+    _totalNumOfShelves = totalNumOfShelves;
     _width_cm = width;
     
     return self;
@@ -53,24 +53,23 @@
     NSUInteger idxOfFirstBookOnShelf          = 0;
     Volume *book;
 
-//CLEAN:    NSLog(@"BooksArray.count: %lu", booksArray.count);
     
     for (NSUInteger idx = 0; idx < booksArray.count; idx++) {
         
         book = booksArray[idx];
         CGFloat thickness = [self bookThicknessOrDefault:book.thickness];
-        currentXPosition_cm += thickness? thickness : 2.5f;
+        currentXPosition_cm += thickness;
 
-        
         
         
         if (currentXPosition_cm > self.width_cm)
         {
                 //Add all the books up until this one (exclusive, hence "-1") as a shelf.
-            NSRange rangeForCurrentShelf = NSMakeRange(idxOfFirstBookOnShelf, (idx - 1) - idxOfFirstBookOnShelf);
+            NSRange rangeForCurrentShelf = NSMakeRange(idxOfFirstBookOnShelf, (idx + 1) - idxOfFirstBookOnShelf);
             NSArray *temp = [booksArray subarrayWithRange:rangeForCurrentShelf];
             DBLG
             [self.mutableShelves addObject:temp];
+
             DBLG
 
                 //If there are more shelves, then this book becomes the first on the next shelf.

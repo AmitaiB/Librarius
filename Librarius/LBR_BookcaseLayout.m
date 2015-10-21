@@ -31,7 +31,6 @@
 @property (nonatomic, strong) NSDictionary *layoutInformation;
 @property (nonatomic, assign) UIEdgeInsets insets;
 
-    ///!!!:ShelfCounter needs to be purged.
 @property (nonatomic, assign) NSUInteger shelfCounter;
 @property (nonatomic, assign) NSUInteger bookOnShelfCounter;
 @property (nonatomic, strong) LBR_BookcaseModel *bookcaseModel;
