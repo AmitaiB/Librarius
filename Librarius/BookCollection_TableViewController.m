@@ -82,7 +82,8 @@
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = [UIColor mySinColor];
     
-    [[UITableViewCell appearance] setBackgroundColor:[[UIColor mySinColor] triadicColors][0]];
+//    [[UITableViewCell appearance] setBackgroundColor:[[UIColor mySinColor] triadicColors][0]];
+    [[UITableViewCell appearance] setBackgroundColor:[UIColor greenSeaColor]];
 
     [self.tableView setClipsToBounds:YES];
 //    
@@ -185,12 +186,13 @@
     if (subtitle) {
         cell.textLabel.text = [NSString stringWithFormat:@"%@: %@", title, subtitle];
     }
+
     
     [cell configureFlatCellWithColor:[[UIColor mySinColor] triadicColors][0] selectedColor:[[UIColor mySinColor] triadicColors][1] roundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight];
     
 //    cell.textLabel.font = [UIFont boldFlatFontOfSize:20];
     cell.textLabel.font = [UIFont fontWithName:@"Avenir-Book" size:20];
-    cell.textLabel.textColor = [UIColor asbestosColor];
+    cell.textLabel.textColor = [UIColor midnightBlueColor];
 
 
     if (indexPath.row == 0) {
