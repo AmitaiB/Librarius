@@ -21,6 +21,9 @@
 -(instancetype)initWithWidth:(CGFloat)width shelvesCount:(NSUInteger)shelvesCount {
     if (!(self = [super init])) return nil;
     
+    _shelves = [NSArray array];
+    _unshelvedRemainder = [NSArray array];
+    
     _shelvesCount = shelvesCount;
     _width_cm = width;
     

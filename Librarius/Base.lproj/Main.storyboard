@@ -195,7 +195,7 @@
         <!--Shelve-->
         <scene sceneID="2EP-QO-Uby">
             <objects>
-                <collectionViewController id="ajh-Xd-CoJ" userLabel="Shelve" customClass="LBRShelves_CollectionViewController" sceneMemberID="viewController">
+                <collectionViewController id="ajh-Xd-CoJ" userLabel="Shelve" customClass="LBR_BookcaseCollectionViewController" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="XDD-g2-ajd">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

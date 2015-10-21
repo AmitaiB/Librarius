@@ -8,10 +8,10 @@
 #define kDefaulCellDimension 106.0
 #define kDefaultCellSize CGSizeMake(kDefaulCellDimension, kDefaulCellDimension)
 
-#define INSET_TOP 1.0
-#define INSET_LEFT 1.0
-#define INSET_BOTTOM 1.0
-#define INSET_RIGHT 1.0
+#define INSET_TOP      1.0
+#define INSET_LEFT     1.0
+#define INSET_BOTTOM   1.0
+#define INSET_RIGHT    1.0
 
 
 #import "LBR_BookcaseLayout.h"
@@ -105,14 +105,12 @@
 -(void)prepareLayout {
     
     NSMutableDictionary *layoutInformation = [NSMutableDictionary dictionary];
-//    NSMutableDictionary *cellInformation   = [NSMutableDictionary dictionary];
     NSIndexPath *indexPath;
     
     
     self.shelfCounter = 0;
     self.bookOnShelfCounter = 0;
     self.bookcaseModel = [self configuredBookcaseModel];
-    NSUInteger maxShelves = self.bookcaseModel.shelves.count;
     
     CGFloat xMax = 0;
     CGFloat yMax = 0;
@@ -122,6 +120,7 @@
     
     for (NSUInteger section = 0; section < numSections; section++) {
         NSUInteger numItems = [self.collectionView numberOfItemsInSection:section];
+        
         for (NSUInteger item = 0; item < numItems; item++) {
                 //Many things need to happen here:
             indexPath = [NSIndexPath indexPathForItem:item inSection:section];
