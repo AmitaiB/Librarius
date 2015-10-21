@@ -21,9 +21,6 @@
 -(instancetype)initWithWidth:(CGFloat)width shelvesCount:(NSUInteger)shelvesCount {
     if (!(self = [super init])) return nil;
     
-    _shelves = [NSArray array];
-    _unshelvedRemainder = [NSArray array];
-    
     _shelvesCount = shelvesCount;
     _width_cm = width;
     
@@ -46,7 +43,7 @@
  current book's thickness, and <continue>.
     else (no more shelf space) substring the rest to unshelvedRemainder, and break/stop.
  */
-    NSMutableArray<NSArray *> __block *mutableShelves = [NSMutableArray new];
+    NSMutableArray<NSArray *> __block *mutableShelves = [NSMutableArray array];
     CGFloat    __block currentXPosition_cm            = 0.0f;
     NSUInteger __block idxOfFirstBookOnShelf          = 0;
     
@@ -58,7 +55,10 @@
         {
                 //Add all the books up until this one (exclusive, hence "-1") as a shelf.
             NSRange rangeForCurrentShelf = NSMakeRange(idxOfFirstBookOnShelf, (idx - 1) - idxOfFirstBookOnShelf);
-            [mutableShelves addObject:[booksArray subarrayWithRange:rangeForCurrentShelf]];
+            NSArray *temp = [booksArray subarrayWithRange:rangeForCurrentShelf];
+            [mutableShelves addObject:temp];
+            
+            NSLog(@"mutableShelves.count = %lu", (unsigned long)mutableShelves.count);
             
                 //If there are more shelves, then this book becomes the first on the next shelf.
             if (mutableShelves.count < self.shelvesCount)
