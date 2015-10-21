@@ -11,14 +11,15 @@
 #import "LBR_BookcaseModel.h"
 #import "Volume.h"
 
-#define DBLG NSLog(@"<%@:%@:line %d, mutableShelves.count = %lu>", NSStringFromClass([self class]), NSStringFromSelector(_cmd), __LINE__, (unsigned long)mutableShelves.count);
+#define DBLG NSLog(@"<%@:%@:line %d, mutableShelves.count = %lu>", NSStringFromClass([self class]), NSStringFromSelector(_cmd), __LINE__, (unsigned long)self.mutableShelves.count);
 
 @interface LBR_BookcaseModel ()
 
 @property (nonatomic, assign) NSUInteger shelvesCount;
 @property (nonatomic, assign) CGFloat width_cm;
-
+@property (nonatomic, strong) NSMutableArray<NSArray *> *mutableShelves;
 @end
+
 
 @implementation LBR_BookcaseModel
 
@@ -47,7 +48,7 @@
  current book's thickness, and <continue>.
     else (no more shelf space) substring the rest to unshelvedRemainder, and break/stop.
  */
-    NSMutableArray<NSArray *> *mutableShelves = [NSMutableArray new];
+    self.mutableShelves = [NSMutableArray new];
     CGFloat    currentXPosition_cm            = 0.0f;
     NSUInteger idxOfFirstBookOnShelf          = 0;
     Volume *book;
@@ -69,11 +70,11 @@
             NSRange rangeForCurrentShelf = NSMakeRange(idxOfFirstBookOnShelf, (idx - 1) - idxOfFirstBookOnShelf);
             NSArray *temp = [booksArray subarrayWithRange:rangeForCurrentShelf];
             DBLG
-            [mutableShelves addObject:temp];
+            [self.mutableShelves addObject:temp];
             DBLG
 
                 //If there are more shelves, then this book becomes the first on the next shelf.
-            BOOL nextShelfExistsAndIsEmpty = mutableShelves.count < self.shelvesCount;
+            BOOL nextShelfExistsAndIsEmpty = self.mutableShelves.count < self.shelvesCount;
 
             
 
@@ -93,7 +94,7 @@
         }
     }
     
-    self.shelves = [mutableShelves copy];
+    self.shelves = [self.mutableShelves copy];
     
 //    NSLog(@"self.shelves[0] = %@\nself.shelves[1] = %@\nself.shelves[2] = %@\nself.shelves[3] = %@\nself.shelves[4] = %@\n", self.shelves[0], self.shelves[1], self.shelves[2], self.shelves[3], self.shelves[4]);
 }
