@@ -34,6 +34,12 @@
     AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
 }
 
+//-(void)uncaughtExceptionHandler:(NSException *)exception {
+//    NSLog(@"CRASH: %@", exception);
+//    NSLog(@"Stack Trace: %@", [exception callStackSymbols]);
+//        //Internal Error reporting
+//}
+
 #pragma mark
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -43,6 +49,7 @@
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
 
     [self setupAppearance];
+    
     
         //What is this? ↓ Why did I need those references...?
 //    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
@@ -106,6 +113,6 @@
     [dataManager saveContext];
 }
 
-#pragma mark
+
 
 @end
