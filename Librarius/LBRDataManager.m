@@ -89,12 +89,12 @@ static NSString * const kUnknown = @"kUnknown";
     NSLog(@"Fetched volumes from Core Data: %@", [results description]);
 }
 
-#pragma mark - helper methods
+//#pragma mark - helper methods
 
     // ===================== CoreData additions here
 
-#pragma mark - CoreData
-#pragma mark Fetch Data
+#pragma mark - === CoreData ===
+#pragma mark - ==Fetch Data==
 
 - (void)fetchData
 {
@@ -122,7 +122,7 @@ static NSString * const kUnknown = @"kUnknown";
 }
 
 
-#pragma mark - Core Data stack
+#pragma mark - ==Core Data stack==
 #pragma mark NSManagedObjectContext
 
     // Returns the managed object context for the application.

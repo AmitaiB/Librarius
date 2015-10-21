@@ -124,7 +124,8 @@
         for (NSUInteger item = 0; item < numItems; item++) {
                 //Many things need to happen here:
             indexPath = [NSIndexPath indexPathForItem:item inSection:section];
-            UICollectionViewLayoutAttributes *attributes = [self layoutAttributesForItemAtIndexPath:indexPath];
+            UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
+//            [self layoutAttributesForItemAtIndexPath:indexPath];
             
             CGPoint origin = [self originPointForBook:self.bookOnShelfCounter onShelf:self.shelfCounter];
             attributes.frame = CGRectMake(origin.x, origin.y, kDefaulCellDimension, kDefaulCellDimension);

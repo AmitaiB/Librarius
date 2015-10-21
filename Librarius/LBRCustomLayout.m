@@ -119,12 +119,14 @@ static NSString * const LBRShelvedBookCollectionViewCellKind = @"coverArtCell";
 #pragma mark -
 #pragma mark layout info caching (prepareLayout)
 /**
- *  Pre-caching will be done and calculated here.
+ *  Pre-caching will be done and calculated here. This method is to encapsulate
+ * the logic involved in conveying the bookcaseModel information to the layout
+ * object on the screen (that is, in terms of indexPaths).
  */
 - (void)prepareLayout
 {
     /**
-     * Note: "sections" are the @"categories" from our managedObjectContext (not shelves).
+     * Note: "sections" are the @"categories" from our managedObjectContext (not shelves from our model).
      */
     NSInteger sectionCount = [self.collectionView numberOfSections];
     
@@ -144,7 +146,7 @@ static NSString * const LBRShelvedBookCollectionViewCellKind = @"coverArtCell";
     NSMutableDictionary *cellLayoutInfo         = [NSMutableDictionary new];
         //    NSMutableDictionary *leadingPathsForShelves = [NSMutableDictionary new];
     
-    
+        ///For every item in each section, create a new attributes object
     for (NSUInteger section = 0; section < sectionCount; section++) {
         NSUInteger itemCount = [self.collectionView numberOfItemsInSection:section];
         
@@ -152,8 +154,8 @@ static NSString * const LBRShelvedBookCollectionViewCellKind = @"coverArtCell";
             indexPath = [NSIndexPath indexPathForItem:item inSection:section];
             
             UICollectionViewLayoutAttributes *itemAttributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
-            self.shelvesForCells[indexPath] = [self shelfForCellAtIndexPath:indexPath];
             itemAttributes.frame = [self frameForCoverArtImageAtIndexPath:indexPath];
+            self.shelvesForCells[indexPath] = [self shelfForCellAtIndexPath:indexPath];
             
             cellLayoutInfo[indexPath] = itemAttributes;
         }

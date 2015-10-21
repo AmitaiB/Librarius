@@ -14,27 +14,23 @@
 @class LBRParsedVolume;
 //@class LBRGoogleGTLClient;
 @class Library;
-@interface LBRDataManager : NSObject
 
-    // ScannerVC:GoogleBooksClient → VolumePresentationTVC
+
+@interface LBRDataManager : NSObject
 @property (nonatomic, strong) NSMutableArray *uniqueCodes;
-//@property (nonatomic, strong) LBRGoogleGTLClient *googleClient;
-/**
- *  CLEAN: consider changing "parsed_X" to "transient_X"
- */
 @property (nonatomic, strong) NSArray *parsedVolumesToEitherSaveOrDiscard;
 @property (nonatomic, strong) LBRParsedVolume *parsedVolumeFromLastBarcode; //<-- Use this to confirm user's selection, then enter it into Persistent Data.
 
-
 +(instancetype)sharedDataManager;
 
+    //FIXME: Transient or Parsed? Decide, and be consistent.
 -(void)updateWithNewTransientVolume:(LBRParsedVolume*)volumeToAdd;
 -(void)saveParsedVolumesToEitherSaveOrDiscardToPersistentStore;
-    //debug only
+    //CLEAN: debug only
 -(void)logCurrentLibrary;
 
 
-//============== CoreData functions here
+//============== CoreData @interface
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSManagedObjectModel *managedObjectModel;

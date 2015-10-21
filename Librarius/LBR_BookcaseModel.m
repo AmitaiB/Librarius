@@ -49,7 +49,8 @@
     
     [booksArray enumerateObjectsUsingBlock:^(Volume *book, NSUInteger idx, BOOL * _Nonnull stop)
     {
-        currentXPosition_cm += [book.thickness floatValue];
+        CGFloat thickness = [book.thickness floatValue];
+        currentXPosition_cm += thickness? thickness : 2.5f;
     
         if (currentXPosition_cm > self.width_cm)
         {
