@@ -59,6 +59,9 @@
         CGFloat thickness = [self bookThicknessOrDefault:book.thickness];
         currentXPosition_cm += thickness? thickness : 2.5f;
     DBLG
+        
+        
+        
         if (currentXPosition_cm > self.width_cm)
         {
                 //Add all the books up until this one (exclusive, hence "-1") as a shelf.
@@ -70,6 +73,8 @@
             
                 //If there are more shelves, then this book becomes the first on the next shelf.
             BOOL nextShelfExistsAndIsEmpty = mutableShelves.count < self.shelvesCount;
+
+            
             DBLG
             if (nextShelfExistsAndIsEmpty)
             { //CLEAN: just call 'thickness' again (D.R.Y.)
