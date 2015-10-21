@@ -31,7 +31,7 @@
 @property (nonatomic, strong) NSDictionary *layoutInformation;
 @property (nonatomic, assign) UIEdgeInsets insets;
 
-@property (nonatomic, assign) NSUInteger shelfCounter;
+@property (nonatomic, assign) NSUInteger currentShelf;
 @property (nonatomic, assign) NSUInteger bookOnShelfCounter;
 @property (nonatomic, strong) LBR_BookcaseModel *bookcaseModel;
 
@@ -67,56 +67,14 @@
  
  */
 
--(LBR_BookcaseModel *)configuredBookcaseModel {
-    LBR_BookcaseModel *bookcaseModel = [[LBR_BookcaseModel alloc] initWithWidth:58.0 shelvesCount:5];
-    LBR_BookcaseCollectionViewController *collectionViewController = (LBR_BookcaseCollectionViewController *)self.collectionView.dataSource;
-
-// CLEAN:   NSLog(@"NSFRC:\n\n\n %@ \n\n ", collectionViewController.fetchedResultsController.fetchedObjects);
-
-    [bookcaseModel shelveBooks:collectionViewController.fetchedResultsController.fetchedObjects];
-    return bookcaseModel;
-}
-
-
-
--(void)incrementBookcaseModelCounter {
-    
-    NSArray *currentShelf = self.bookcaseModel.shelves[self.shelfCounter];
-    NSUInteger maxShelves = self.bookcaseModel.shelves.count;
-
-        //No more shelves.
-    if (self.shelfCounter == maxShelves)
-        return;
-    
-        //If there are more books on this shelf.
-    if (self.bookOnShelfCounter < currentShelf.count)
-    {
-        self.bookOnShelfCounter++;
-        return;
-    }
-    
-        //If this book was the last book on the current shelf.
-    if (self.bookOnShelfCounter >= currentShelf.count && self.shelfCounter < maxShelves)
-    {
-        self.shelfCounter++;
-        self.bookOnShelfCounter = 0;
-        return;
-    }
-}
-
--(CGPoint)originPointForBook:(NSUInteger)bookCounter onShelf:(NSUInteger)shelfCounter {
-    CGFloat xPosition = INSET_LEFT + bookCounter  * (kDefaulCellDimension + self.interItemSpacing);
-    CGFloat yPosition = INSET_TOP  + shelfCounter * (kDefaulCellDimension + self.interShelfSpacing);
-    return CGPointMake(xPosition, yPosition);
-}
+#pragma mark - === Overridden Methods ===
 
 -(void)prepareLayout {
     
     NSMutableDictionary *layoutInformation = [NSMutableDictionary dictionary];
     NSIndexPath *indexPath;
     
-    
-    self.shelfCounter = 0;
+    self.currentShelf = 0;
     self.bookOnShelfCounter = 0;
     self.bookcaseModel = [self configuredBookcaseModel];
     
@@ -178,6 +136,51 @@
 
 -(UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
     return self.layoutInformation[indexPath];
+}
+
+#pragma mark - Helper methods
+
+-(LBR_BookcaseModel *)configuredBookcaseModel {
+    LBR_BookcaseModel *bookcaseModel = [[LBR_BookcaseModel alloc] initWithWidth:58.0 shelvesCount:5];
+    LBR_BookcaseCollectionViewController *collectionViewController = (LBR_BookcaseCollectionViewController *)self.collectionView.dataSource;
+    
+        // CLEAN:   NSLog(@"NSFRC:\n\n\n %@ \n\n ", collectionViewController.fetchedResultsController.fetchedObjects);
+    
+    [bookcaseModel shelveBooks:collectionViewController.fetchedResultsController.fetchedObjects];
+    return bookcaseModel;
+}
+
+
+
+-(void)incrementBookcaseModelCounter {
+    
+    NSArray *currentShelf = self.bookcaseModel.shelves[self.shelfCounter];
+    NSUInteger maxShelves = self.bookcaseModel.shelves.count;
+    
+        //No more shelves.
+    if (self.shelfCounter == maxShelves)
+        return;
+    
+        //If there are more books on this shelf.
+    if (self.bookOnShelfCounter < currentShelf.count)
+    {
+        self.bookOnShelfCounter++;
+        return;
+    }
+    
+        //If this book was the last book on the current shelf.
+    if (self.bookOnShelfCounter >= currentShelf.count && self.shelfCounter < maxShelves)
+    {
+        self.shelfCounter++;
+        self.bookOnShelfCounter = 0;
+        return;
+    }
+}
+
+-(CGPoint)originPointForBook:(NSUInteger)bookCounter onShelf:(NSUInteger)shelfCounter {
+    CGFloat xPosition = INSET_LEFT + bookCounter  * (kDefaulCellDimension + self.interItemSpacing);
+    CGFloat yPosition = INSET_TOP  + shelfCounter * (kDefaulCellDimension + self.interShelfSpacing);
+    return CGPointMake(xPosition, yPosition);
 }
 
 @end

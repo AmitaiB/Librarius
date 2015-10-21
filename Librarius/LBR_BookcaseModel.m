@@ -66,26 +66,21 @@
         {
                 //Add all the books up until this one (exclusive, hence "-1") as a shelf.
             NSRange rangeForCurrentShelf = NSMakeRange(idxOfFirstBookOnShelf, (idx + 1) - idxOfFirstBookOnShelf);
-            NSArray *temp = [booksArray subarrayWithRange:rangeForCurrentShelf];
-            DBLG
-            [self.mutableShelves addObject:temp];
-
-            DBLG
+            NSArray *thisShelf = [booksArray subarrayWithRange:rangeForCurrentShelf];
+            
+            [self.mutableShelves addObject:thisShelf];
 
                 //If there are more shelves, then this book becomes the first on the next shelf.
-            BOOL nextShelfExistsAndIsEmpty = self.mutableShelves.count < self.shelvesCount;
-
-            
+            BOOL nextShelfExistsAndIsEmpty = self.mutableShelves.count < self.totalNumOfShelves;
 
             if (nextShelfExistsAndIsEmpty)
-            { //CLEAN: just call 'thickness' again (D.R.Y.)
-                currentXPosition_cm = [self bookThicknessOrDefault:book.thickness];
+            {
+                currentXPosition_cm = thickness;
+//                [self bookThicknessOrDefault:book.thickness];
                 idxOfFirstBookOnShelf = idx;
-             
             }
             else
             {
-               
                     //No more empty shelves. Add all remaining books to the unshelved.
                 NSUInteger numBooksRemaining = booksArray.count - (idx + offBy1);
                 self.unshelvedRemainder = [booksArray subarrayWithRange:NSMakeRange(idx, numBooksRemaining)];
