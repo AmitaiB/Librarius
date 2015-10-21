@@ -47,13 +47,15 @@
  current book's thickness, and <continue>.
     else (no more shelf space) substring the rest to unshelvedRemainder, and break/stop.
  */
-    NSMutableArray<NSArray *> __block *mutableShelves = [NSMutableArray array];
-    CGFloat    __block currentXPosition_cm            = 0.0f;
-    NSUInteger __block idxOfFirstBookOnShelf          = 0;
+    NSMutableArray<NSArray *> *mutableShelves = [NSMutableArray array];
+    CGFloat    currentXPosition_cm            = 0.0f;
+    NSUInteger idxOfFirstBookOnShelf          = 0;
+    Volume *book;
     DBLG
     NSLog(@"BooksArray.count: %lu", booksArray.count);
-    [booksArray enumerateObjectsUsingBlock:^(Volume *book, NSUInteger idx, BOOL * _Nonnull stop)
-    {
+    
+    for (NSUInteger idx = 0; idx < booksArray.count; idx++) {
+        book = booksArray[idx];
         CGFloat thickness = [self bookThicknessOrDefault:book.thickness];
         currentXPosition_cm += thickness? thickness : 2.5f;
     DBLG
@@ -62,7 +64,7 @@
                 //Add all the books up until this one (exclusive, hence "-1") as a shelf.
             NSRange rangeForCurrentShelf = NSMakeRange(idxOfFirstBookOnShelf, (idx - 1) - idxOfFirstBookOnShelf);
             NSArray *temp = [booksArray subarrayWithRange:rangeForCurrentShelf];
-        DBLG
+            DBLG
             [mutableShelves addObject:temp];
             DBLG
             
@@ -70,7 +72,7 @@
             BOOL nextShelfExistsAndIsEmpty = mutableShelves.count < self.shelvesCount;
             DBLG
             if (nextShelfExistsAndIsEmpty)
-            {
+            { //CLEAN: just call 'thickness' again (D.R.Y.)
                 currentXPosition_cm = [self bookThicknessOrDefault:book.thickness];
                 idxOfFirstBookOnShelf = idx;
                 DBLG
@@ -81,10 +83,9 @@
                     //No more empty shelves. Add all remaining books to the unshelved.
                 NSUInteger numBooksRemaining = booksArray.count - (idx + offBy1);
                 self.unshelvedRemainder = [booksArray subarrayWithRange:NSMakeRange(idx, numBooksRemaining)];
-                *stop = YES;
             } DBLG
         }DBLG
-    }];DBLG
+    }
     DBLG
     self.shelves = [mutableShelves copy];
     DBLG
