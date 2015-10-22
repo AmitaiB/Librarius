@@ -6,13 +6,24 @@
 //  Copyright © 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 
+    //Controller
 #import "LBRRecommendationsCollectionViewController.h"
-#import <UIImageView+AFNetworking.h>
-#import "LBRDataManager.h"
+
+    //Views
 #import "LBRShelvedBook_CollectionViewCell.h"
+#import "LBRRecommendations_CollectionViewHeader.h"
+
+    //Models
 #import "Library.h"
 #import "Bookcase.h"
 #import "Volume.h"
+
+    //Data
+#import "LBRDataManager.h"
+#import <UIImageView+AFNetworking.h>
+
+    //UI
+#import "UIColor+FlatUI.h"
 
 @interface LBRRecommendationsCollectionViewController ()
 
@@ -28,20 +39,31 @@
 
 
 static NSString * const reuseIdentifier = @"Cell";
+static NSString * const headerReuseIdentifier = @"HeaderReuseID";
+
+-(instancetype)init {
+    if (!(self = [super init])) return nil;
+
+    _layout.estimatedItemSize = CGSizeMake(106.0, 106.0);
+    _layout.headerReferenceSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height * 0.1);
+
+    
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self configureBooksFlowLayout:self.layout];
-    self.collectionView.backgroundColor = [UIColor whiteColor];
+    self.collectionView.backgroundColor = [UIColor cloudsColor];
     
     self.title = @"Recommended Books";
     
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
     
-    // Register cell classes
+    // Register view classes
     [self.collectionView registerClass:[LBRShelvedBook_CollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
+    [self.collectionView registerClass:[LBRRecommendations_CollectionViewHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerReuseIdentifier];
     
     // Do any additional setup after loading the view.
 }
@@ -61,16 +83,8 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 */
 
-#pragma mark - UICollectionView FlowLayout configuration
 
-- (void)configureBooksFlowLayout:(UICollectionViewFlowLayout*)layout {
-    layout.minimumLineSpacing = 1.0;
-    layout.minimumInteritemSpacing = 1.0;
-    layout.estimatedItemSize = CGSizeMake(106.0, 106.0);
-    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-}
-
-#pragma mark <UICollectionViewDataSource>
+#pragma mark - === UICollectionViewDataSource ===
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return self.fetchedResultsController.sections.count;
@@ -96,7 +110,8 @@ static NSString * const reuseIdentifier = @"Cell";
     return cell;
 }
 
-#pragma mark <UICollectionViewDelegate>
+
+#pragma mark - === UICollectionViewDelegate ===
 
 /*
 // Uncomment this method to specify if the specified item should be highlighted during tracking
@@ -127,8 +142,26 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 */
 
-#pragma mark -
-#pragma mark - Fetched Results Controller configuration
+#pragma mark - Header
+    
+-(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+        //Provides a view for the headers in the collection view
+    
+    LBRRecommendations_CollectionViewHeader *headerView = (LBRRecommendations_CollectionViewHeader *)[self.collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:headerReuseIdentifier forIndexPath:indexPath];
+    
+    NSArray *sections = [self.fetchedResultsController sections];
+    NSObject <NSFetchedResultsSectionInfo> *currentSection = (NSObject <NSFetchedResultsSectionInfo> *)sections[indexPath.section];
+
+    if ([currentSection isKindOfClass:[NSString class]]) {
+        headerView.bookCategoryLabel.text = (NSString*)currentSection;
+    } else
+    {
+        headerView.bookCategoryLabel.text = @"Error displaying book category";
+    }
+    return headerView;
+}
+    
+#pragma mark Fetched Results Controller configuration
 
 -(NSFetchedResultsController *)fetchedResultsController {
     if (_fetchedResultsController != nil) {
@@ -138,8 +171,7 @@ static NSString * const reuseIdentifier = @"Cell";
     return [[LBRDataManager sharedDataManager] preconfiguredLBRFetchedResultsController:self];
 }
 
-#pragma mark -
-#pragma mark - FetchedResultsController Delegate methods
+#pragma mark - === FetchedResultsController Delegate methods ===
 
 -(void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
         // Instead of UITableView's '-beginUpdates' method.
