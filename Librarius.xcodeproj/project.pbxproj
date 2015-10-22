@@ -51,6 +51,7 @@
 		3855E2721BB10AA5004C5D11 /* UIView+ConfigureForAutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3855E2711BB10AA5004C5D11 /* UIView+ConfigureForAutoLayout.m */; settings = {ASSET_TAGS = (); }; };
 		38565D701B9A20B800349498 /* LBRParsedVolume.m in Sources */ = {isa = PBXBuildFile; fileRef = 38565D6F1B9A20B800349498 /* LBRParsedVolume.m */; };
 		386C23751BD934520065B46F /* LBRRecommendations_CollectionViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 386C23741BD934520065B46F /* LBRRecommendations_CollectionViewHeader.m */; settings = {ASSET_TAGS = (); }; };
+		386C23781BD968920065B46F /* LBRRecommendedBook_CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 386C23771BD968920065B46F /* LBRRecommendedBook_CollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		387039B81B9D23C900381007 /* SelectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 387039B71B9D23C900381007 /* SelectionView.xib */; };
 		388A1E151B9F940000C75825 /* To Do bookmark in Resources */ = {isa = PBXBuildFile; fileRef = 388A1E141B9F940000C75825 /* To Do bookmark */; };
 		388DBDF31BA9174A005C5125 /* THNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 388DBDF21BA9174A005C5125 /* THNavigationController.m */; };
@@ -174,6 +175,8 @@
 		38565D6F1B9A20B800349498 /* LBRParsedVolume.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRParsedVolume.m; sourceTree = "<group>"; };
 		386C23731BD934520065B46F /* LBRRecommendations_CollectionViewHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRRecommendations_CollectionViewHeader.h; sourceTree = "<group>"; };
 		386C23741BD934520065B46F /* LBRRecommendations_CollectionViewHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRRecommendations_CollectionViewHeader.m; sourceTree = "<group>"; };
+		386C23761BD968920065B46F /* LBRRecommendedBook_CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRRecommendedBook_CollectionViewCell.h; sourceTree = "<group>"; };
+		386C23771BD968920065B46F /* LBRRecommendedBook_CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRRecommendedBook_CollectionViewCell.m; sourceTree = "<group>"; };
 		387039B71B9D23C900381007 /* SelectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectionView.xib; sourceTree = "<group>"; };
 		388A1E141B9F940000C75825 /* To Do bookmark */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "To Do bookmark"; path = "Librarius/To Do bookmark"; sourceTree = "<group>"; };
 		388DBDF11BA9174A005C5125 /* THNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNavigationController.h; sourceTree = "<group>"; };
@@ -362,6 +365,8 @@
 		380375631B8BB711004C4ECE /* Views/Images/nibs */ = {
 			isa = PBXGroup;
 			children = (
+				386C23761BD968920065B46F /* LBRRecommendedBook_CollectionViewCell.h */,
+				386C23771BD968920065B46F /* LBRRecommendedBook_CollectionViewCell.m */,
 				386C23731BD934520065B46F /* LBRRecommendations_CollectionViewHeader.h */,
 				386C23741BD934520065B46F /* LBRRecommendations_CollectionViewHeader.m */,
 				3810DA0B1BD5E04C0093D5C2 /* ADVFlatUI (Tope) */,
@@ -792,6 +797,7 @@
 				382A83C11BB3D926008860CF /* DismissDetailTransition.m in Sources */,
 				380375721B8BF058004C4ECE /* UIImage+FromURL.m in Sources */,
 				38AAD71D1B901D35003062C1 /* Volume.m in Sources */,
+				386C23781BD968920065B46F /* LBRRecommendedBook_CollectionViewCell.m in Sources */,
 				38F57BBC1BB0707200CC2EE8 /* UIProgressView+FlatUI.m in Sources */,
 				388DBE301BAA0F60005C5125 /* LBRCustomLayout.m in Sources */,
 				386C23751BD934520065B46F /* LBRRecommendations_CollectionViewHeader.m in Sources */,

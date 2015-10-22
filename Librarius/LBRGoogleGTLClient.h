@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <GTLBooks.h>
 
-
+@class Volume;
 @class LBRDataManager;
 @class LBRParsedVolume;
 @interface LBRGoogleGTLClient : NSObject
@@ -26,5 +26,6 @@
 
 - (void)queryForVolumeWithString:(NSString *)queryString withCallback:(void (^)(GTLBooksVolume* responseVolume))block;
 
+- (void)queryForRecommendationsRelatedToString:(NSString *)queryString withCallback:(void (^)(GTLBooksVolumes *responseCollection))block;
 
 @end

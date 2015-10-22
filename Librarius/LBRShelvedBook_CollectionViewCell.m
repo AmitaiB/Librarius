@@ -7,6 +7,7 @@
 //
 
 #import "LBRShelvedBook_CollectionViewCell.h"
+#import "UIColor+FlatUI.h"
 
 
 @implementation LBRShelvedBook_CollectionViewCell
@@ -21,6 +22,8 @@
     [self.contentView addSubview:self.imageView];
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
 //    [self.imageView setImage:[UIImage imageNamed:@"placeholder"]];
+    
+    self.backgroundColor = [UIColor cloudsColor];
     
     return self;
 }

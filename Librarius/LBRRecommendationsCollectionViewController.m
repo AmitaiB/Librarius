@@ -11,12 +11,14 @@
 
     //Views
 #import "LBRShelvedBook_CollectionViewCell.h"
+#import "LBRRecommendedBook_CollectionViewCell.h"
 #import "LBRRecommendations_CollectionViewHeader.h"
 
     //Models
 #import "Library.h"
 #import "Bookcase.h"
 #import "Volume.h"
+#import "LBRParsedVolume.h"
 
     //Data
 #import "LBRDataManager.h"
@@ -41,7 +43,7 @@
 }
 
 
-static NSString * const reuseIdentifier = @"Cell";
+static NSString * const reuseIdentifier = @"RecommendationCellID";
 static NSString * const headerReuseIdentifier = @"HeaderReuseID";
 
 -(instancetype)init {
@@ -65,7 +67,7 @@ static NSString * const headerReuseIdentifier = @"HeaderReuseID";
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Register view classes
-    [self.collectionView registerClass:[LBRShelvedBook_CollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
+    [self.collectionView registerClass:[LBRRecommendedBook_CollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     [self.collectionView registerClass:[LBRRecommendations_CollectionViewHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerReuseIdentifier];
     
     // Do any additional setup after loading the view.
@@ -105,7 +107,7 @@ static NSString * const headerReuseIdentifier = @"HeaderReuseID";
 
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    LBRShelvedBook_CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    LBRRecommendedBook_CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
 //    NSArray *volumesArray = self.fetchedResultsController.fetchedObjects;
 //    Volume *volume = (Volume*)volumesArray[indexPath.row];
@@ -113,6 +115,18 @@ static NSString * const headerReuseIdentifier = @"HeaderReuseID";
 //    [cell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder"]];
     
     Volume *volume = (Volume*)[self.fetchedResultsController objectAtIndexPath:indexPath];
+    [googleClient queryForRecommendationsRelatedToString:[volume isbn] withCallback:^(GTLBooksVolumes *responseCollection) {
+        NSMutableArray <LBRParsedVolume*> *parsedRecommendationsArray = [NSMutableArray array];
+        
+            //The first object is the book itself, not the recommendations. We'll take 10.
+        for (NSUInteger i = 1; i < 11; i++)
+        {
+            LBRParsedVolume *parsedVolume = [[LBRParsedVolume alloc] initWithGoogleVolume:[responseCollection itemAtIndex:i]];
+            [parsedRecommendationsArray addObject:parsedVolume];
+        }
+        cell.recommendationsArray = [parsedRecommendationsArray copy];
+        
+    }];
 
     return cell;
 }

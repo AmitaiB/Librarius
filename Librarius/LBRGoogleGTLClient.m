@@ -13,6 +13,7 @@
 #import "LBRDataManager.h"
 #import "LBRConstants.h"
 
+
 @implementation LBRGoogleGTLClient
 
 #pragma mark - Lifecycle
@@ -43,17 +44,10 @@
     return self;
 }
 
+#pragma mark - API Query Methods
 
 - (void)queryForVolumeWithString:(NSString *)queryString withCallback:(void (^)(GTLBooksVolume* responseVolume))block {
-    NSLog(@"%lu", (unsigned long)self.debugCounter++);
-    GTLQueryBooks *booksQuery = [GTLQueryBooks queryForVolumesListWithQ:queryString];
-
-        // The Books API currently requires that search queries not have an
-        // authorization header (b/4445456)
-    booksQuery.shouldSkipAuthorization = YES;
-    
-        //"Fields" limits the response to the desired information, saving system resources - the syntax is in the *web* docs: https://developers.google.com/books/docs/v1/reference/volumes/list?hl=en
-    booksQuery.fields = @"items(id, volumeInfo)";
+    GTLQueryBooks *booksQuery = [self booksQueryForString:queryString];
     
     [self.service executeQuery:booksQuery completionHandler:^(GTLServiceTicket *ticket, id object, NSError *error) {
             // callback
@@ -69,7 +63,39 @@
     }];
 }
 
-#pragma mark - DataManager Interface
+- (void)queryForRecommendationsRelatedToString:(NSString *)queryString withCallback:(void (^)(GTLBooksVolumes *))block {
+    GTLQueryBooks *booksRecommendationQuery = [self booksQueryForString:queryString];
+ 
+    [self.service executeQuery:booksRecommendationQuery completionHandler:^(GTLServiceTicket *ticket, id object, NSError *error) {
+        if (error) {
+            NSLog(@"Error in booksRecommendationQuery: %@", error.localizedDescription);
+        }
+        else
+        {
+            GTLBooksVolumes *bookAndRecommendations = (GTLBooksVolumes *)object;
+            block(bookAndRecommendations);
+        }
+    }];
+}
+
+#pragma mark - Helper methods
+
+-(GTLQueryBooks*)booksQueryForString:(NSString*)queryString {
+        //CLEAN: not for shipping...
+    NSLog(@"%lu", (unsigned long)self.debugCounter++);
+    GTLQueryBooks *booksQuery = [GTLQueryBooks queryForVolumesListWithQ:queryString];
+    
+        // The Books API currently requires that search queries not have an
+        // authorization header (b/4445456)
+    booksQuery.shouldSkipAuthorization = YES;
+    
+        //"Fields" limits the response to the desired information, saving system resources - the syntax is in the *web* docs: https://developers.google.com/books/docs/v1/reference/volumes/list?hl=en
+    booksQuery.fields = @"items(id, volumeInfo)";
+    
+    return booksQuery;
+}
+
+//#pragma mark - DataManager Interface
 
 
 @end
