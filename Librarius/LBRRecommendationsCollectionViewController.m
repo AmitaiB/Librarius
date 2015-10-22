@@ -36,6 +36,8 @@
 @property (nonatomic, strong) NSMutableArray *sectionChanges;
 @property (nonatomic, strong) NSMutableArray *itemChanges;
 
+@property (nonatomic, strong) NSArray <NSString*> *coverArtURLs;
+
 @end
 
 @implementation LBRRecommendationsCollectionViewController {
@@ -60,6 +62,7 @@ static NSString * const headerReuseIdentifier = @"HeaderReuseID";
     [super viewDidLoad];
 
     self.collectionView.backgroundColor = [UIColor cloudsColor];
+    self.coverArtURLs = [NSArray array];
     
     self.title = @"Recommended Books";
     
@@ -72,6 +75,7 @@ static NSString * const headerReuseIdentifier = @"HeaderReuseID";
     
     // Do any additional setup after loading the view.
     googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
+    
     
 }
 
@@ -105,16 +109,23 @@ static NSString * const headerReuseIdentifier = @"HeaderReuseID";
     return MAX(3, numObjects - (numObjects %3));
 }
 
-
+/**
+ For each section, get 3 volumes. Prefer recommendations from different sourceVolumes.
+ */
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     LBRRecommendedBook_CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    NSIndexPath *mutableIndexPath = [indexPath copy];
+    NSUInteger lackOfOptionsAdjustment = 0;
     
-//    NSArray *volumesArray = self.fetchedResultsController.fetchedObjects;
-//    Volume *volume = (Volume*)volumesArray[indexPath.row];
-//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", volume.cover_art_large]];
-//    [cell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder"]];
+        //If a volume doesn't exist at that index path, back up one, and
+        //add a counter so that we traverse the recommendations array,
+        //rather than presenting multiple copies of the same recommendation.
+    while (![self.fetchedResultsController objectAtIndexPath:mutableIndexPath]) {
+        mutableIndexPath = [self indexPathByDecrementingItemFrom:mutableIndexPath];
+        lackOfOptionsAdjustment++; ///Possible not necessary, since it's random.
+    }
     
-    Volume *volume = (Volume*)[self.fetchedResultsController objectAtIndexPath:indexPath];
+    Volume *volume = (Volume*)[self.fetchedResultsController objectAtIndexPath:mutableIndexPath];
     [googleClient queryForRecommendationsRelatedToString:[volume isbn] withCallback:^(GTLBooksVolumes *responseCollection) {
         NSMutableArray <LBRParsedVolume*> *parsedRecommendationsArray = [NSMutableArray array];
         
@@ -125,11 +136,45 @@ static NSString * const headerReuseIdentifier = @"HeaderReuseID";
             [parsedRecommendationsArray addObject:parsedVolume];
         }
         cell.recommendationsArray = [parsedRecommendationsArray copy];
+            ///Check the volumes for the rest of the genre recommendations - if their are duplicates,
+            ///then call the function again.
         
+        BOOL isDuplicate;
+        do {
+            [cell displayRandomRecommendation];
+            isDuplicate       = [self.coverArtURLs containsObject:cell.selectedVolumeIdentifier];
+            self.coverArtURLs = [self.coverArtURLs arrayByAddingObject:cell.selectedVolumeIdentifier];
+        } while (isDuplicate);
     }];
 
     return cell;
 }
+
+/**
+ *  Retrieves the indexPath to the previous item by walking backwards one item (or if
+ *   this is the first item in the section, walking back to the **last** item of the
+ *   previous section).
+ */
+-(NSIndexPath*)indexPathByDecrementingItemFrom:(NSIndexPath*)indexPath {
+    NSUInteger previousItem        = 0;
+    NSUInteger previousSection     = 0;
+    NSIndexPath *previousIndexPath = nil;
+    
+    if (indexPath.item) {
+        previousItem = indexPath.item - 1;
+    } else if (indexPath.section) {
+        previousSection = indexPath.section - 1;
+        previousItem = [self.collectionView numberOfItemsInSection:previousSection] - offBy1;
+    }
+    
+    if (previousItem && previousSection)
+    {
+        previousIndexPath = [NSIndexPath indexPathForItem:previousItem inSection:previousSection];
+    }
+    
+    return previousIndexPath;
+}
+
 
 
 #pragma mark - === UICollectionViewDelegate ===
@@ -164,7 +209,7 @@ static NSString * const headerReuseIdentifier = @"HeaderReuseID";
 */
 
 #pragma mark - Header
-    
+
 -(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
         //Provides a view for the headers in the collection view
     

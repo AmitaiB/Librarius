@@ -11,6 +11,7 @@
 @interface LBRRecommendedBook_CollectionViewCell : LBRShelvedBook_CollectionViewCell
 
 @property (nonatomic, strong) NSArray <LBRParsedVolume *> *recommendationsArray;
+@property (nonatomic, assign) NSString *selectedVolumeIdentifier;
 
 -(void)displayRandomRecommendation;
 

@@ -22,6 +22,8 @@
     NSURL *randomRecURL           = [NSURL URLWithString:randomRecURLString];
 
     [self.imageView setImageWithURL:randomRecURL placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    
+    self.selectedVolumeIdentifier = randomRecURLString;
 }
 
 @end
