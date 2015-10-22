@@ -16,10 +16,10 @@
     if (!self.recommendationsArray.count)
         return;
     
-    NSUInteger randomIndex        = arc4random() % self.recommendationsArray.count;
+    NSUInteger       randomIndex  = arc4random() % self.recommendationsArray.count;
     LBRParsedVolume *randomVolume = self.recommendationsArray[randomIndex];
-    NSString *randomRecURLString  = randomVolume.cover_art_large;
-    NSURL *randomRecURL           = [NSURL URLWithString:randomRecURLString];
+    NSString  *randomRecURLString = randomVolume.cover_art_large;
+    NSURL           *randomRecURL = [NSURL URLWithString:randomRecURLString];
 
     [self.imageView setImageWithURL:randomRecURL placeholderImage:[UIImage imageNamed:@"placeholder"]];
     

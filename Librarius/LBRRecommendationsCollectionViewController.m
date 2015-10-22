@@ -120,7 +120,8 @@ static NSString * const headerReuseIdentifier = @"HeaderReuseID";
         //If a volume doesn't exist at that index path, back up one, and
         //add a counter so that we traverse the recommendations array,
         //rather than presenting multiple copies of the same recommendation.
-    while (![self.fetchedResultsController objectAtIndexPath:mutableIndexPath]) {
+    
+    while (nil == [self.fetchedResultsController objectAtIndexPath:mutableIndexPath]) {
         mutableIndexPath = [self indexPathByDecrementingItemFrom:mutableIndexPath];
         lackOfOptionsAdjustment++; ///Possible not necessary, since it's random.
     }
