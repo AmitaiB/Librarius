@@ -36,7 +36,6 @@
 @property (nonatomic, retain) NSNumber * avgRating;
 @property (nonatomic, retain) NSNumber * ratingsCount;
 
-
-
+-(NSString*)isbn;
 
 @end
