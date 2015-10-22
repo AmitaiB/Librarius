@@ -8,24 +8,20 @@
 
 #import "LBRRecommendedBook_CollectionViewCell.h"
 #import <UIImageView+AFNetworking.h>
+#import "LBRParsedVolume.h"
 
 @implementation LBRRecommendedBook_CollectionViewCell
 
 -(void)displayRandomRecommendation {
-    NSUInteger randomIndex = arc4random() % self.recommendationsArray.count;
-    NSString *randomRecURL = self.recommendationsArray[randomIndex];
+    if (!self.recommendationsArray.count)
+        return;
     
-    [self.imageView setImageWithURL:<#(nonnull NSURL *)#> placeholderImage:<#(nullable UIImage *)#>]
+    NSUInteger randomIndex        = arc4random() % self.recommendationsArray.count;
+    LBRParsedVolume *randomVolume = self.recommendationsArray[randomIndex];
+    NSString *randomRecURLString  = randomVolume.cover_art_large;
+    NSURL *randomRecURL           = [NSURL URLWithString:randomRecURLString];
+
+    [self.imageView setImageWithURL:randomRecURL placeholderImage:[UIImage imageNamed:@"placeholder"]];
 }
-
-
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 @end
