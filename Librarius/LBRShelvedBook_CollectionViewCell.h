@@ -13,4 +13,6 @@
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) NSString *coverArtURL;
 @property (nonatomic) CGFloat thickness;
+@property (nonatomic, strong) NSArray *recommendationsArray;
+
 @end

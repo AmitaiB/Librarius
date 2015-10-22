@@ -90,27 +90,29 @@ static NSString * const headerReuseIdentifier = @"HeaderReuseID";
 
 
 #pragma mark - === UICollectionViewDataSource ===
-
+    //A recommendation for each genre: good.
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return self.fetchedResultsController.sections.count;
 }
 
-
+    //Recommend at least 3 books.
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     NSArray *sections = [self.fetchedResultsController sections];
     id<NSFetchedResultsSectionInfo> currentSection = sections[section];
-    return [currentSection numberOfObjects];
+    NSUInteger numObjects = [currentSection numberOfObjects];
+    return MAX(3, numObjects - (numObjects %3));
 }
+
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     LBRShelvedBook_CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
-    NSArray *volumesArray = self.fetchedResultsController.fetchedObjects;
-    Volume *volume = (Volume*)volumesArray[indexPath.row];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", volume.cover_art_large]];
-    [cell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder"]];
+//    NSArray *volumesArray = self.fetchedResultsController.fetchedObjects;
+//    Volume *volume = (Volume*)volumesArray[indexPath.row];
+//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", volume.cover_art_large]];
+//    [cell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder"]];
     
-    // Configure the cell
+    Volume *volume = (Volume*)[self.fetchedResultsController objectAtIndexPath:indexPath];
 
     return cell;
 }
