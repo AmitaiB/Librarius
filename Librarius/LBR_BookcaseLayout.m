@@ -31,7 +31,7 @@
 @property (nonatomic, strong) NSDictionary *layoutInformation;
 @property (nonatomic, assign) UIEdgeInsets insets;
 
-@property (nonatomic, assign) NSUInteger currentShelf;
+@property (nonatomic, assign) NSUInteger currentShelfIndex;
 @property (nonatomic, assign) NSUInteger bookOnShelfCounter;
 @property (nonatomic, strong) LBR_BookcaseModel *bookcaseModel;
 
@@ -50,7 +50,7 @@
     if (!(self = [super init])) return nil;
     
     self.insets = UIEdgeInsetsMake(INSET_TOP, INSET_LEFT, INSET_BOTTOM, INSET_RIGHT);
-    self.shelfCounter = 0;
+    self.currentShelfIndex  = 0;
     self.bookOnShelfCounter = 0;
     
     return self;
@@ -74,9 +74,9 @@
     NSMutableDictionary *layoutInformation = [NSMutableDictionary dictionary];
     NSIndexPath *indexPath;
     
-    self.currentShelf = 0;
+    self.currentShelfIndex  = 0;
     self.bookOnShelfCounter = 0;
-    self.bookcaseModel = [self configuredBookcaseModel];
+    self.bookcaseModel      = [self configuredBookcaseModel];
     
     CGFloat xMax = 0;
     CGFloat yMax = 0;
@@ -93,9 +93,9 @@
             UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
 //            [self layoutAttributesForItemAtIndexPath:indexPath];
             
-            CGPoint origin = [self originPointForBook:self.bookOnShelfCounter onShelf:self.shelfCounter];
+            CGPoint origin = [self originPointForBook:self.bookOnShelfCounter onShelf:self.currentShelfIndex];
             attributes.frame = CGRectMake(origin.x, origin.y, kDefaulCellDimension, kDefaulCellDimension);
-            [self incrementBookcaseModelCounter];
+            [self incrementBookcaseModelByOneBook];
             
                 //Grab ContentSize while we're here.
             xMax = MAX(xMax, origin.x);
@@ -152,13 +152,23 @@
 
 
 
--(void)incrementBookcaseModelCounter {
-    
-    NSArray *currentShelf = self.bookcaseModel.shelves[self.shelfCounter];
-    NSUInteger maxShelves = self.bookcaseModel.shelves.count;
+-(void)incrementBookcaseModelByOneBook {
+    NSArray *currentShelf;
+    @try {
+        currentShelf = self.bookcaseModel.shelves[self.currentShelfIndex];
+    }
+    @catch (NSException *exception) {
+                NSLog(@"CRASH: %@", exception);
+                NSLog(@"Stack Trace: %@", [exception callStackSymbols]);
+                    //Internal Error reporting
+    }
+    @finally {
+        currentShelf = self.bookcaseModel.shelves[0];
+    }
+    NSUInteger maxShelvesCount = self.bookcaseModel.shelves.count;
     
         //No more shelves.
-    if (self.shelfCounter == maxShelves)
+    if (self.currentShelfIndex == maxShelvesCount)
         return;
     
         //If there are more books on this shelf.
@@ -169,17 +179,18 @@
     }
     
         //If this book was the last book on the current shelf.
-    if (self.bookOnShelfCounter >= currentShelf.count && self.shelfCounter < maxShelves)
+    if (self.bookOnShelfCounter >= currentShelf.count &&
+        self.currentShelfIndex + offBy1 < maxShelvesCount)
     {
-        self.shelfCounter++;
+        self.currentShelfIndex++;
         self.bookOnShelfCounter = 0;
         return;
     }
 }
 
--(CGPoint)originPointForBook:(NSUInteger)bookCounter onShelf:(NSUInteger)shelfCounter {
-    CGFloat xPosition = INSET_LEFT + bookCounter  * (kDefaulCellDimension + self.interItemSpacing);
-    CGFloat yPosition = INSET_TOP  + shelfCounter * (kDefaulCellDimension + self.interShelfSpacing);
+-(CGPoint)originPointForBook:(NSUInteger)bookCounter onShelf:(NSUInteger)shelfIndex {
+    CGFloat xPosition = INSET_LEFT + bookCounter * (kDefaulCellDimension + self.interItemSpacing);
+    CGFloat yPosition = INSET_TOP  + shelfIndex  * (kDefaulCellDimension + self.interShelfSpacing);
     return CGPointMake(xPosition, yPosition);
 }
 
