@@ -29,10 +29,8 @@ static NSString * const kUnknown = @"kUnknown";
 }
 
 -(instancetype)init {
-    self = [super init];
-    if (!self) {
-        return nil;
-    }
+    if (!(self = [super init])) return nil;
+    
     _uniqueCodes = [NSMutableArray new];
 //FIXME:    _googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
     _parsedVolumesToEitherSaveOrDiscard = [NSMutableArray new];

@@ -27,7 +27,7 @@
 
 @interface LBR_BookcaseCollectionViewController ()
 
-@property (nonatomic, strong) LBR_BookcaseLayout *layout;
+//@property (nonatomic, strong) LBR_BookcaseLayout *layout;
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSMutableArray *sectionChanges;
@@ -51,11 +51,7 @@ static NSString * const reuseIdentifier = @"Cell";
     LBR_BookcaseLayout *layout               = [LBR_BookcaseLayout new];
     self.collectionView.collectionViewLayout = layout;
 
-        //    layout.dataSource                        = self;
-
-        //Do I really need this as a property???
-    self.layout = layout;
-    
+    self.collectionView.backgroundColor = [UIColor cloudsColor];
     self.clearsSelectionOnViewWillAppear = NO;
     
     // Register cell classes
