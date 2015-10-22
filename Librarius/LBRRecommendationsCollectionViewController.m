@@ -120,11 +120,19 @@ static NSString * const headerReuseIdentifier = @"HeaderReuseID";
         //If a volume doesn't exist at that index path, back up one, and
         //add a counter so that we traverse the recommendations array,
         //rather than presenting multiple copies of the same recommendation.
-    
-    while (nil == [self.fetchedResultsController objectAtIndexPath:mutableIndexPath]) {
-        mutableIndexPath = [self indexPathByDecrementingItemFrom:mutableIndexPath];
-        lackOfOptionsAdjustment++; ///Possible not necessary, since it's random.
-    }
+    NSException *testException;
+    do {
+        @try {
+            testException = nil;
+            [self.fetchedResultsController objectAtIndexPath:mutableIndexPath];
+        }
+        @catch (NSException *exception) {
+            mutableIndexPath = [self indexPathByDecrementingItemFrom:mutableIndexPath];
+            lackOfOptionsAdjustment++; ///Possibly not necessary, since it's random.
+            testException = exception;
+        }
+    } while (testException || lackOfOptionsAdjustment <= 3);
+
     
     Volume *volume = (Volume*)[self.fetchedResultsController objectAtIndexPath:mutableIndexPath];
     [googleClient queryForRecommendationsRelatedToString:[volume isbn] withCallback:^(GTLBooksVolumes *responseCollection) {
