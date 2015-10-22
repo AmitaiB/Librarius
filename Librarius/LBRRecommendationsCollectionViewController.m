@@ -21,6 +21,7 @@
     //Data
 #import "LBRDataManager.h"
 #import <UIImageView+AFNetworking.h>
+#import "LBRGoogleGTLClient.h"
 
     //UI
 #import "UIColor+FlatUI.h"
@@ -35,7 +36,9 @@
 
 @end
 
-@implementation LBRRecommendationsCollectionViewController
+@implementation LBRRecommendationsCollectionViewController {
+    LBRGoogleGTLClient *googleClient;
+}
 
 
 static NSString * const reuseIdentifier = @"Cell";
@@ -66,6 +69,8 @@ static NSString * const headerReuseIdentifier = @"HeaderReuseID";
     [self.collectionView registerClass:[LBRRecommendations_CollectionViewHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerReuseIdentifier];
     
     // Do any additional setup after loading the view.
+    googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -158,6 +163,8 @@ static NSString * const headerReuseIdentifier = @"HeaderReuseID";
     {
         headerView.bookCategoryLabel.text = @"Error displaying book category";
     }
+    
+    headerView.bookCategoryLabel.textColor = [UIColor midnightBlueColor];
     return headerView;
 }
     

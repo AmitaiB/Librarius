@@ -37,4 +37,6 @@
 @property (nonatomic, retain) NSNumber * ratingsCount;
 
 
+
+
 @end
