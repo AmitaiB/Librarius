@@ -47,11 +47,24 @@ static NSString * const kUnknown = @"kUnknown";
         // 3. Save context.
         // 4. Test.
     for (LBRParsedVolume *transientVolumeToSave in self.parsedVolumesToEitherSaveOrDiscard) {
+        [self checkStoreForDuplicates:transientVolumeToSave];
         [self insertVolumeToContextFromTransientVolume:transientVolumeToSave];
     }
 
     [self saveContext];
         NSLog(@"Context's (new) volumes saved to current library.");
+}
+
+-(void)checkStoreForDuplicates:(LBRParsedVolume *)volume {
+//    http://www.theappcodeblog.com/?p=176#more-176
+        //search to see if the entity already exists
+    NSError *error = nil;
+    
+        //We use an NSPredicate combined with the fetchedResultsCntroller to perform
+        //the search.
+    if (volume.isbn) {
+        <#statements#>
+    }
 }
 
 -(void)insertVolumeToContextFromTransientVolume:(LBRParsedVolume*)volumeToInsert {

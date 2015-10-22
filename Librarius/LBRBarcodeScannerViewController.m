@@ -177,9 +177,8 @@ static NSString * const volumeNib          = @"volumePresentationView";
     [dataManager logCurrentLibrary];
 }
 
-#pragma mark -
 #pragma mark - === Scanning ===
-#pragma mark -
+
 
 /**
  *  Stop scanning, flip the button.

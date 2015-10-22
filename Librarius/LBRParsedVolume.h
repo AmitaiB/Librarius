@@ -36,4 +36,6 @@
 
 -(instancetype)initWithGoogleVolume:(GTLBooksVolume*)volumeToParse;
 
+-(NSString *)isbn;
+
 @end

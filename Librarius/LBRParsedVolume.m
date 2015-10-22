@@ -192,4 +192,8 @@
     return [self initWithGoogleVolume:nil];
 }
 
+-(NSString *)isbn {
+    return self.isbn13? self.isbn13 : self.isbn10? self.isbn10 : nil;
+}
+
 @end
