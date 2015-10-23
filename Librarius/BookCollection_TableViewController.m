@@ -58,9 +58,10 @@ static NSString * const bannerHeaderIdentifier = @"bannerHeaderIdentifier";
     bannerView = [[ADBannerView alloc] initWithAdType:ADAdTypeBanner];
     bannerView.delegate = self;
     [bannerView removeConstraints:bannerView.constraints];
-    bannerView.translatesAutoresizingMaskIntoConstraints = NO;
 
-    [bannerView.widthAnchor constraintEqualToAnchor:self.view.widthAnchor].active = YES;
+//    bannerView.translatesAutoresizingMaskIntoConstraints = NO;
+//    [bannerView.widthAnchor constraintEqualToAnchor:bannerView.superview.widthAnchor].active = YES;
+    bannerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [self.view addSubview:bannerView];
     
 //    headerView = [[UITableViewHeaderFooterView alloc] initWithReuseIdentifier:bannerHeaderIdentifier];
@@ -84,27 +85,51 @@ static NSString * const bannerHeaderIdentifier = @"bannerHeaderIdentifier";
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self autoLayoutAnimated:NO];
+    [self bannerCheck:NO];
 }
 
 -(void)viewDidLayoutSubviews {
-    [self autoLayoutAnimated:[UIView areAnimationsEnabled]];
+    [self bannerCheck:[UIView areAnimationsEnabled]];
 }
 
 #pragma mark - === iAd Delegate methods ===
 
 -(void)bannerViewDidLoadAd:(ADBannerView *)banner {
-    [self autoLayoutAnimated:YES];
+    [self bannerCheck:YES];
 }
 
--(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error {
-    NSLog(@"didFailToReceiveAdWithError %@", error.localizedDescription);
-    [self autoLayoutAnimated:YES];
-}
 
 -(BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner willLeaveApplication:(BOOL)willLeave {
     return YES;
 }
+
+
+-(void)bannerViewActionDidFinish:(ADBannerView *)banner
+{
+    NSLog(@"Continue game!");
+}
+
+-(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error {
+    NSLog(@"didFailToReceiveAdWithError %@", error.localizedDescription);
+    [self bannerCheck:YES];
+}
+
+#pragma mark - ===iAd Methods ===
+
+-(void)bannerCheck:(BOOL)animated
+{
+        //Get frames (frames??)
+    if (bannerView.bannerLoaded) {
+        [UIView animateWithDuration:animated? 0.20 : 0.0 animations:^{
+            [bannerView removeConstraints:bannerView.constraints];
+            [bannerView.widthAnchor constraintEqualToAnchor:self.view.widthAnchor].active = YES;
+            [bannerView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
+                //FIXME: Autolayout!!
+                //            [bannerView.bottomAnchor constraintEqualToAnchor:self.bottomLayoutGuide.topAnchor].active = YES;
+        }];
+    }
+}
+
 
 /**
  *  TODO: Change this method to "Manual Volume Entry" and fill in all the fields to add a new Volume to the Library, and save.
@@ -218,18 +243,6 @@ static NSString * const bannerHeaderIdentifier = @"bannerHeaderIdentifier";
         [tableView reloadData];
     }
 }
-
-//-(CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section
-//{
-//    return bannerView.intrinsicContentSize.height;
-//}
-//
-//-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-//{
-//    UITableViewHeaderFooterView *sectionHeaderView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:bannerHeaderIdentifier];
-//    
-//    return sectionHeaderView;
-//}
 
 
 #pragma mark private delegate helpers
@@ -352,48 +365,9 @@ static NSString * const bannerHeaderIdentifier = @"bannerHeaderIdentifier";
 
 //#pragma mark - Helper methods
 
-#pragma mark - ===iAd Methods ===
-
-- (void)autoLayoutAnimated:(BOOL)animated {
-
-        //X-axis constraints
-//    [bannerView.widthAnchor constraintEqualToAnchor:self.view.widthAnchor].active                     = YES;
-//    [bannerView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active                 = YES;
-//
-//        //Y-axis constraints
-//    [bannerView.heightAnchor constraintEqualToConstant:bannerView.intrinsicContentSize.height].active = YES;
-//    [bannerView.bottomAnchor constraintEqualToAnchor:self.bottomLayoutGuide.topAnchor].active         = YES;
-//    [bannerView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor].active         = YES;
-//
-    
-    
-//            [bannerView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor].active = YES;
-//            [bannerView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor].active = YES;
-//            [bannerView.heightAnchor constraintEqualToAnchor:self.view.heightAnchor].active = YES;
-//            [bannerView.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = YES;
-//            [bannerView.topAnchor constraintEqualToAnchor:self.topLayoutGuide.bottomAnchor].active = YES;
-    
-//    if (bannerView.bannerLoaded) {
-//        [self.view bringSubviewToFront:bannerView];
-//        [self.view layoutSubviews];
-//        bannerView.hidden = NO;
-//    }
-//    else //hide the banner
-//    {
-//        bannerView.hidden = YES;
-//    }
-    
-//    [UIView animateWithDuration:animated ? 0.25 : 0.0 animations:^{
-        [self.view layoutIfNeeded];
-//    }];
-}
-
 
 #pragma mark - === UISrollViewDelegate ===
 
-//-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
-//    [self autoLayoutAnimated:YES];
-//    [self.view layoutIfNeeded];
-//}
+
 
 @end
