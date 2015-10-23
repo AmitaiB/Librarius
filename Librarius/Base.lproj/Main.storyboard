@@ -305,12 +305,12 @@
                                         <exclude reference="dcH-IU-Ezd"/>
                                     </mask>
                                     <mask key="constraints">
+                                        <exclude reference="Dd2-f9-GCN"/>
+                                        <exclude reference="pMh-fs-Fpz"/>
                                         <exclude reference="8Kr-te-kPL"/>
                                         <exclude reference="Msh-6C-aIa"/>
                                         <exclude reference="prh-Dd-g0O"/>
                                         <exclude reference="yry-xh-jhU"/>
-                                        <exclude reference="Dd2-f9-GCN"/>
-                                        <exclude reference="pMh-fs-Fpz"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact">
@@ -319,12 +319,12 @@
                                         <include reference="dcH-IU-Ezd"/>
                                     </mask>
                                     <mask key="constraints">
+                                        <include reference="Dd2-f9-GCN"/>
+                                        <include reference="pMh-fs-Fpz"/>
                                         <include reference="8Kr-te-kPL"/>
                                         <include reference="Msh-6C-aIa"/>
                                         <include reference="prh-Dd-g0O"/>
                                         <include reference="yry-xh-jhU"/>
-                                        <include reference="Dd2-f9-GCN"/>
-                                        <include reference="pMh-fs-Fpz"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -394,23 +394,23 @@
                                 <exclude reference="3Bf-2Z-qmt"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="6GJ-PY-NTC"/>
-                                <exclude reference="LhZ-nn-Tyl"/>
-                                <exclude reference="zbd-Xs-5Qi"/>
-                                <exclude reference="6gy-Aq-WTI"/>
-                                <exclude reference="Hfy-fK-jcm"/>
-                                <exclude reference="InG-YO-5g7"/>
-                                <exclude reference="qYe-GA-K6e"/>
-                                <exclude reference="PcD-i9-BuZ"/>
-                                <exclude reference="ggc-yi-5yq"/>
-                                <exclude reference="wBy-c7-NWh"/>
-                                <exclude reference="UkK-rQ-266"/>
                                 <exclude reference="qZM-aJ-vWT"/>
                                 <exclude reference="rP8-QZ-uEC"/>
                                 <exclude reference="wsv-j0-ZNK"/>
                                 <exclude reference="1NF-jg-3Yb"/>
                                 <exclude reference="gCU-Rt-38K"/>
+                                <exclude reference="UkK-rQ-266"/>
+                                <exclude reference="6gy-Aq-WTI"/>
+                                <exclude reference="Hfy-fK-jcm"/>
+                                <exclude reference="InG-YO-5g7"/>
+                                <exclude reference="qYe-GA-K6e"/>
                                 <exclude reference="HdF-Et-bIC"/>
+                                <exclude reference="6GJ-PY-NTC"/>
+                                <exclude reference="LhZ-nn-Tyl"/>
+                                <exclude reference="zbd-Xs-5Qi"/>
+                                <exclude reference="PcD-i9-BuZ"/>
+                                <exclude reference="ggc-yi-5yq"/>
+                                <exclude reference="wBy-c7-NWh"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -422,23 +422,23 @@
                                 <include reference="3Bf-2Z-qmt"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="6GJ-PY-NTC"/>
-                                <include reference="LhZ-nn-Tyl"/>
-                                <include reference="zbd-Xs-5Qi"/>
-                                <include reference="6gy-Aq-WTI"/>
-                                <include reference="Hfy-fK-jcm"/>
-                                <include reference="InG-YO-5g7"/>
-                                <include reference="qYe-GA-K6e"/>
-                                <include reference="PcD-i9-BuZ"/>
-                                <include reference="ggc-yi-5yq"/>
-                                <include reference="wBy-c7-NWh"/>
-                                <exclude reference="UkK-rQ-266"/>
                                 <include reference="qZM-aJ-vWT"/>
                                 <include reference="rP8-QZ-uEC"/>
                                 <include reference="wsv-j0-ZNK"/>
                                 <include reference="1NF-jg-3Yb"/>
                                 <include reference="gCU-Rt-38K"/>
+                                <exclude reference="UkK-rQ-266"/>
+                                <include reference="6gy-Aq-WTI"/>
+                                <include reference="Hfy-fK-jcm"/>
+                                <include reference="InG-YO-5g7"/>
+                                <include reference="qYe-GA-K6e"/>
                                 <include reference="HdF-Et-bIC"/>
+                                <include reference="6GJ-PY-NTC"/>
+                                <include reference="LhZ-nn-Tyl"/>
+                                <include reference="zbd-Xs-5Qi"/>
+                                <include reference="PcD-i9-BuZ"/>
+                                <include reference="ggc-yi-5yq"/>
+                                <include reference="wBy-c7-NWh"/>
                             </mask>
                         </variation>
                     </view>

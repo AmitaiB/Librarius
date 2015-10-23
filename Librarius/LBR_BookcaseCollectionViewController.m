@@ -39,7 +39,8 @@
 
 @implementation LBR_BookcaseCollectionViewController
 
-static NSString * const reuseIdentifier = @"Cell";
+static NSString * const reuseIdentifier = @"bookCellID";
+static NSString * const customSectionHeaderID = @"customSectionHeaderID";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -50,12 +51,13 @@ static NSString * const reuseIdentifier = @"Cell";
         //Set custom layout with protocol
     LBR_BookcaseLayout *layout               = [LBR_BookcaseLayout new];
     self.collectionView.collectionViewLayout = layout;
-
+    
     self.collectionView.backgroundColor = [UIColor cloudsColor];
     self.clearsSelectionOnViewWillAppear = NO;
     
     // Register cell classes
     [self.collectionView registerClass:[LBR_ShelvedBookCell class] forCellWithReuseIdentifier:reuseIdentifier];
+    
 }
 
 - (void)didReceiveMemoryWarning {
