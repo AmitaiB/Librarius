@@ -6,9 +6,14 @@
 //  Copyright (c) 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 
+
+
+    //Controllers
 #import "BookCollection_TableViewController.h"
 #import "BookDetailViewController.h"
 #import "LBRDataManager.h"
+
+    //Models
 #import "Library.h"
 #import "Bookcase.h"
 #import "Volume.h"
@@ -26,9 +31,10 @@
 
 @end
 
-@implementation BookCollection_TableViewController {
+@implementation BookCollection_TableViewController
+{
     ADBannerView *bannerView;
-    UITableViewHeaderFooterView *headerView;
+//    UITableViewHeaderFooterView *headerView;
 }
 
 static NSString * const bannerHeaderIdentifier = @"bannerHeaderIdentifier";
@@ -49,16 +55,16 @@ static NSString * const bannerHeaderIdentifier = @"bannerHeaderIdentifier";
  //	BannerView configuration
  // -------------------------------------------------------------------------------
 
-    if ([ADBannerView instancesRespondToSelector:@selector(initWithAdType:)]) {
-        bannerView = [[ADBannerView alloc] initWithAdType:ADAdTypeBanner];
-    } else {
-        bannerView = [ADBannerView new];
-    }
+    bannerView = [[ADBannerView alloc] initWithAdType:ADAdTypeBanner];
     bannerView.delegate = self;
     [bannerView removeConstraints:bannerView.constraints];
     bannerView.translatesAutoresizingMaskIntoConstraints = NO;
-    headerView = [[UITableViewHeaderFooterView alloc] initWithReuseIdentifier:bannerHeaderIdentifier];
-    [headerView.contentView addSubview:bannerView];
+
+    [bannerView.widthAnchor constraintEqualToAnchor:self.view.widthAnchor].active = YES;
+    [self.view addSubview:bannerView];
+    
+//    headerView = [[UITableViewHeaderFooterView alloc] initWithReuseIdentifier:bannerHeaderIdentifier];
+//    [headerView.contentView addSubview:bannerView];
         ///Add constraints
     
         //    [headerView.widthAnchor constraintEqualToAnchor:headerView.contentView.widthAnchor].active = YES;
@@ -66,8 +72,8 @@ static NSString * const bannerHeaderIdentifier = @"bannerHeaderIdentifier";
 //    headerView
     
     
-    [self.tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:bannerHeaderIdentifier];
-    
+//    [self.tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:bannerHeaderIdentifier];
+//    
     
 /**
  *  TODO: Change the method called here to "Manual Volume Entry", details below.
@@ -367,61 +373,27 @@ static NSString * const bannerHeaderIdentifier = @"bannerHeaderIdentifier";
 //            [bannerView.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = YES;
 //            [bannerView.topAnchor constraintEqualToAnchor:self.topLayoutGuide.bottomAnchor].active = YES;
     
-    if (bannerView.bannerLoaded) {
-        [self.view bringSubviewToFront:bannerView];
-        [self.view layoutSubviews];
-        bannerView.hidden = NO;
-    }
-    else //hide the banner
-    {
-        bannerView.hidden = YES;
-    }
+//    if (bannerView.bannerLoaded) {
+//        [self.view bringSubviewToFront:bannerView];
+//        [self.view layoutSubviews];
+//        bannerView.hidden = NO;
+//    }
+//    else //hide the banner
+//    {
+//        bannerView.hidden = YES;
+//    }
     
 //    [UIView animateWithDuration:animated ? 0.25 : 0.0 animations:^{
         [self.view layoutIfNeeded];
 //    }];
 }
 
-- (void)manualLayoutAnimated:(BOOL)animated {
-    CGRect contentFrame = self.view.bounds;
-    
-        //Ask the banner for a size that will fit our layout area
-    CGSize sizeForBanner = [bannerView sizeThatFits:contentFrame.size];
-    
-        //Compute the ad banner frame
-    CGRect bannerFrame = bannerView.frame;
-    if (bannerView.bannerLoaded) {
-            //bring Ad into view (don't want an unloaded bannerView)
-        contentFrame.size.height -= sizeForBanner.height; //shrink down content frame to fit the banner below it
-        bannerFrame.origin.y    = contentFrame.size.height;
-        bannerFrame.size.height = sizeForBanner.height;
-        bannerFrame.size.width  = sizeForBanner.width;
-        
-            // If the ad is available and loaded, shrink down the content frame to
-            //fit the banner below it, by modifying the vertical-bottom constraint-constant:
-            //set it equal to the banner's height.
-        /** == This does not matter for me in this view, since it's a TableView ==
-         NSLayoutConstraint *verticalBottomConstraint = self.bottomConstraint;
-         verticalBottomConstraint.constant = sizeForBanner.height;
-         [self.view layoutSubviews];
-         */
-    }
-    else //hide the banner off screen
-    {
-        bannerFrame.origin.y = contentFrame.size.height;
-    }
-    
-    [UIView animateWithDuration:animated ? 0.25 : 0.0 animations:^{
-        [self.view layoutIfNeeded];
-        bannerView.frame = bannerFrame;
-    }];
-}
 
 #pragma mark - === UISrollViewDelegate ===
 
--(void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [self autoLayoutAnimated:YES];
-    [self.view layoutIfNeeded];
-}
+//-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    [self autoLayoutAnimated:YES];
+//    [self.view layoutIfNeeded];
+//}
 
 @end
