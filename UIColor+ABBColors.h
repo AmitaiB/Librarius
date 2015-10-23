@@ -23,6 +23,6 @@
 +(UIColor *)darkJungleGreenColor;
 +(UIColor *)outerSpaceColor;
 +(UIColor *)glitterColor;
-+(UIColor *)darkLavalColor;
++(UIColor *)darkLavaColor;
 
 @end

@@ -96,7 +96,7 @@
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
-    headerView.backgroundColor = [UIColor darkLavalColor];
+    headerView.backgroundColor = [UIColor darkLavaColor];
     
     UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(30, 20, 200, 40)];
     label.backgroundColor = [UIColor clearColor];

@@ -54,7 +54,7 @@
     return [UIColor colorWithRed:231.0/255 green:235.0/255 blue:238.0/255 alpha:1.0f];
 }
 
-+(UIColor *)darkLavalColor {
++(UIColor *)darkLavaColor {
     return [UIColor colorWithRed:51.0/255 green:55.0/255 blue:57.0/255 alpha:1.0];
 }
 @end

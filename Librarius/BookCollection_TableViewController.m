@@ -28,7 +28,10 @@
 
 @implementation BookCollection_TableViewController {
     ADBannerView *bannerView;
+    UITableViewHeaderFooterView *headerView;
 }
+
+static NSString * const bannerHeaderIdentifier = @"bannerHeaderIdentifier";
 
 -(BOOL)prefersStatusBarHidden {
     return YES;
@@ -36,11 +39,11 @@
 
 - (void)viewDidLoad {
 
-        [super viewDidLoad];
-        self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    [super viewDidLoad];
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
     [self flattenUI];
     
-#// -------------------------------------------------------------------------------
+ // -------------------------------------------------------------------------------
  //	BannerView configuration
  // -------------------------------------------------------------------------------
 
@@ -50,12 +53,18 @@
         bannerView = [ADBannerView new];
     }
     bannerView.delegate = self;
-    [self.view addSubview:bannerView];
-    
-//    self.tableView.tableFooterView = bannerView;
     [bannerView removeConstraints:bannerView.constraints];
     bannerView.translatesAutoresizingMaskIntoConstraints = NO;
-
+    headerView = [[UITableViewHeaderFooterView alloc] initWithReuseIdentifier:bannerHeaderIdentifier];
+    [headerView.contentView addSubview:bannerView];
+        ///Add constraints
+    
+        //    [headerView.widthAnchor constraintEqualToAnchor:headerView.contentView.widthAnchor].active = YES;
+//    [headerView.heightAnchor constraintEqualToConstant:bannerView.intrinsicContentSize.height];
+//    headerView
+    
+    
+    [self.tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:bannerHeaderIdentifier];
     
     
 /**
@@ -202,14 +211,18 @@
     }
 }
 
--(void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
-        //Background color
-//    view.tintColor = [UIColor shirazColor];
-    
-        //Text color
-    UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
-//    [header.textLabel setTextColor:[UIColor midnightBlueColor]];
+-(CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section
+{
+    return bannerView.intrinsicContentSize.height;
 }
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UITableViewHeaderFooterView *sectionHeaderView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:bannerHeaderIdentifier];
+    
+    return sectionHeaderView;
+}
+
 
 #pragma mark private delegate helpers
 
@@ -336,14 +349,14 @@
 - (void)autoLayoutAnimated:(BOOL)animated {
 
         //X-axis constraints
-    [bannerView.widthAnchor constraintEqualToAnchor:self.view.widthAnchor].active                     = YES;
-    [bannerView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active                 = YES;
-
-        //Y-axis constraints
-    [bannerView.heightAnchor constraintEqualToConstant:bannerView.intrinsicContentSize.height].active = YES;
-    [bannerView.bottomAnchor constraintEqualToAnchor:self.bottomLayoutGuide.topAnchor].active         = YES;
-    [bannerView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor].active         = YES;
-
+//    [bannerView.widthAnchor constraintEqualToAnchor:self.view.widthAnchor].active                     = YES;
+//    [bannerView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active                 = YES;
+//
+//        //Y-axis constraints
+//    [bannerView.heightAnchor constraintEqualToConstant:bannerView.intrinsicContentSize.height].active = YES;
+//    [bannerView.bottomAnchor constraintEqualToAnchor:self.bottomLayoutGuide.topAnchor].active         = YES;
+//    [bannerView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor].active         = YES;
+//
     
     
 //            [bannerView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor].active = YES;
