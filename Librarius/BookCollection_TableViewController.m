@@ -43,6 +43,8 @@ static NSString * const bannerHeaderIdentifier = @"bannerHeaderIdentifier";
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     [self flattenUI];
     
+//    self.canDisplayBannerAds = YES;
+    
  // -------------------------------------------------------------------------------
  //	BannerView configuration
  // -------------------------------------------------------------------------------
@@ -211,17 +213,17 @@ static NSString * const bannerHeaderIdentifier = @"bannerHeaderIdentifier";
     }
 }
 
--(CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section
-{
-    return bannerView.intrinsicContentSize.height;
-}
-
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    UITableViewHeaderFooterView *sectionHeaderView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:bannerHeaderIdentifier];
-    
-    return sectionHeaderView;
-}
+//-(CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section
+//{
+//    return bannerView.intrinsicContentSize.height;
+//}
+//
+//-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+//{
+//    UITableViewHeaderFooterView *sectionHeaderView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:bannerHeaderIdentifier];
+//    
+//    return sectionHeaderView;
+//}
 
 
 #pragma mark private delegate helpers
