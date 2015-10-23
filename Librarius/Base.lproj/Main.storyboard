@@ -39,6 +39,9 @@
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="20" width="400" height="44"/>
+                                </variation>
                             </navigationBar>
                         </subviews>
                         <animations/>
@@ -75,7 +78,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2427" y="-840"/>
+            <point key="canvasLocation" x="964.5" y="-1361"/>
         </scene>
         <!--Collections-->
         <scene sceneID="VIX-zl-8yQ">
@@ -103,7 +106,7 @@
                                 </tableViewCellContentView>
                                 <animations/>
                                 <connections>
-                                    <segue destination="9pv-A4-QxB" kind="showDetail" id="phb-kd-9Fy"/>
+                                    <segue destination="9pv-A4-QxB" kind="showDetail" identifier="bookDetailSegueID" id="phb-kd-9Fy"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -724,6 +727,7 @@
                     <tabBarItem key="tabBarItem" selectedImage="first" systemItem="featured" id="RCr-ea-gQx"/>
                     <connections>
                         <outlet property="layout" destination="YLL-v8-ZmJ" id="Dkn-er-gPm"/>
+                        <segue destination="9pv-A4-QxB" kind="show" identifier="BookDetailSegueID2" id="Bzc-ZK-D5c"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hVK-su-L0T" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -826,4 +830,7 @@
         <image name="search1" width="32" height="32"/>
         <image name="woodpanel04110095" width="624" height="452"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Bzc-ZK-D5c"/>
+    </inferredMetricsTieBreakers>
 </document>

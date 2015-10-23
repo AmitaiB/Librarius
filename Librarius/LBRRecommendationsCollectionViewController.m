@@ -8,6 +8,7 @@
 
     //Controller
 #import "LBRRecommendationsCollectionViewController.h"
+#import "BookDetailViewController.h"
 
     //Views
 #import "LBRShelvedBook_CollectionViewCell.h"
@@ -47,12 +48,13 @@
 
 static NSString * const reuseIdentifier = @"RecommendationCellID";
 static NSString * const headerReuseIdentifier = @"HeaderReuseID";
+static NSString * const bookDetailSegueID = @"BookSegueDetailID2";
 
 -(instancetype)init {
     if (!(self = [super init])) return nil;
 
     _layout.estimatedItemSize = CGSizeMake(106.0, 106.0);
-    _layout.headerReferenceSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height * 0.1);
+//    _layout.headerReferenceSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height * 0.1);
 
     
     return self;
@@ -85,15 +87,18 @@ static NSString * const headerReuseIdentifier = @"HeaderReuseID";
 
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
+    BookDetailViewController *destinationVC = segue.destinationViewController;
+    
+    
+        // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
-*/
+
 
 
 #pragma mark - === UICollectionViewDataSource ===
@@ -179,6 +184,11 @@ static NSString * const headerReuseIdentifier = @"HeaderReuseID";
 
 #pragma mark - === UICollectionViewDelegate ===
 
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self performSegueWithIdentifier:bookDetailSegueID sender:self];
+}
+
 /*
 // Uncomment this method to specify if the specified item should be highlighted during tracking
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -212,21 +222,23 @@ static NSString * const headerReuseIdentifier = @"HeaderReuseID";
 
 -(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
         //Provides a view for the headers in the collection view
+    UICollectionReusableView *reusableView;
     
-    LBRRecommendations_CollectionViewHeader *headerView = (LBRRecommendations_CollectionViewHeader *)[self.collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:headerReuseIdentifier forIndexPath:indexPath];
-    
-    NSArray *sections = [self.fetchedResultsController sections];
-    NSObject <NSFetchedResultsSectionInfo> *currentSection = (NSObject <NSFetchedResultsSectionInfo> *)sections[indexPath.section];
+    if (kind == UICollectionElementKindSectionHeader) {
+        LBRRecommendations_CollectionViewHeader *headerView = [self.collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:headerReuseIdentifier forIndexPath:indexPath];
+        
+        NSIndexPath *indexPathOfGenreLabel = [NSIndexPath indexPathForItem:0 inSection:indexPath.section];
+        
+        Volume *firstBookInSection = [self.fetchedResultsController objectAtIndexPath:indexPathOfGenreLabel];
 
-    if ([currentSection isKindOfClass:[NSString class]]) {
-        headerView.bookCategoryLabel.text = (NSString*)currentSection;
-    } else
-    {
-        headerView.bookCategoryLabel.text = @"Error displaying book category";
+        headerView.bookCategoryLabel.text = firstBookInSection.mainCategory;
+    
+        headerView.bookCategoryLabel.textColor = [UIColor midnightBlueColor];
+        
+        reusableView = headerView;
     }
     
-    headerView.bookCategoryLabel.textColor = [UIColor midnightBlueColor];
-    return headerView;
+    return reusableView;
 }
     
 #pragma mark Fetched Results Controller configuration
