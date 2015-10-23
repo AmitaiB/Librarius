@@ -656,18 +656,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="YLL-v8-ZmJ">
-                            <size key="itemSize" width="106" height="106"/>
-                            <size key="headerReferenceSize" width="50" height="50"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="1" id="YLL-v8-ZmJ" customClass="LBRRecommendations_FlowLayout">
+                            <size key="itemSize" width="90" height="90"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="sectionInset" minX="14" minY="10" maxX="14" maxY="10"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RecommendationCellID" id="FlX-Ty-Yll" customClass="LBRRecommendedBook_CollectionViewCell">
                                 <rect key="frame" x="0.0" y="114" width="106" height="106"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="106" height="106"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <animations/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -675,28 +675,6 @@
                                 <animations/>
                             </collectionViewCell>
                         </cells>
-                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HeaderReuseID" id="LFE-O7-U8S" customClass="LBRRecommendations_CollectionViewHeader">
-                            <rect key="frame" x="0.0" y="64" width="600" height="50"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZFG-AX-mfK">
-                                    <rect key="frame" x="58" y="15" width="534" height="20"/>
-                                    <animations/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
-                            <animations/>
-                            <constraints>
-                                <constraint firstItem="ZFG-AX-mfK" firstAttribute="centerY" secondItem="LFE-O7-U8S" secondAttribute="centerY" id="Jy1-3J-3Cl"/>
-                                <constraint firstAttribute="trailingMargin" secondItem="ZFG-AX-mfK" secondAttribute="trailing" id="ao3-HA-4RL"/>
-                                <constraint firstItem="ZFG-AX-mfK" firstAttribute="leading" secondItem="LFE-O7-U8S" secondAttribute="leadingMargin" constant="50" id="eZx-Km-GHU"/>
-                            </constraints>
-                            <connections>
-                                <outlet property="bookCategoryLabel" destination="ZFG-AX-mfK" id="K21-G0-8Pf"/>
-                            </connections>
-                        </collectionReusableView>
                         <connections>
                             <outlet property="dataSource" destination="9Mv-tj-U5P" id="smH-3t-Boj"/>
                             <outlet property="delegate" destination="9Mv-tj-U5P" id="AIg-iO-kbm"/>
@@ -809,6 +787,6 @@
         <image name="woodpanel04110095" width="624" height="452"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="phb-kd-9Fy"/>
+        <segue reference="Bzc-ZK-D5c"/>
     </inferredMetricsTieBreakers>
 </document>

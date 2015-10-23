@@ -7,6 +7,7 @@
 //
 
 #import "LBRRecommendations_FlowLayout.h"
+#import "LBRShelf_DecorationView.h"
 
 @implementation LBRRecommendations_FlowLayout
 
