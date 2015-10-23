@@ -73,4 +73,30 @@
     }
 }
 
+-(NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect
+{
+    NSArray *layoutAttributes = [super layoutAttributesForElementsInRect:rect];
+    
+    for (UICollectionViewLayoutAttributes *attributes in layoutAttributes) {
+        attributes.zIndex = 1;
+    }
+    
+    NSMutableArray *newLayoutAttributes = [layoutAttributes mutableCopy];
+    
+    [self.rowDecorationRects enumerateKeysAndObjectsUsingBlock:^(NSIndexPath *indexPath, NSValue *rowRectValue, BOOL * stop) {
+        
+        if (CGRectIntersectsRect([rowRectValue CGRectValue], rect)) {
+            UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForDecorationViewOfKind:[LBRShelf_DecorationView kind] withIndexPath:indexPath];
+            
+            attributes.frame = [rowRectValue CGRectValue];
+            attributes.zIndex = 0;
+            [newLayoutAttributes addObject:attributes];
+        }
+    }];
+    
+    layoutAttributes = [newLayoutAttributes copy];
+    
+    return layoutAttributes;
+}
+
 @end
