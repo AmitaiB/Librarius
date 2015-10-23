@@ -13,10 +13,8 @@
 @implementation LBRShelvedBook_CollectionViewCell
 
 -(instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (!self) {
-        return nil;
-    }
+    if (!(self = [super initWithFrame:frame])) return nil;
+    
         //custom initialization
     self.imageView = [UIImageView new];
     [self.contentView addSubview:self.imageView];

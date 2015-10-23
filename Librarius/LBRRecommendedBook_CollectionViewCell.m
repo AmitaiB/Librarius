@@ -13,8 +13,10 @@
 @implementation LBRRecommendedBook_CollectionViewCell
 
 -(void)displayRandomRecommendation {
-    if (!self.recommendationsArray.count)
-        return;
+    BOOL areNoRecommendations = !@(self.recommendationsArray.count).boolValue;
+    if (areNoRecommendations) return;
+    
+    if (self.imageView.image != nil) return;
     
     NSUInteger       randomIndex  = arc4random() % self.recommendationsArray.count;
     LBRParsedVolume *randomVolume = self.recommendationsArray[randomIndex];
