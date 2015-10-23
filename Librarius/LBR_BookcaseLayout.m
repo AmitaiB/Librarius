@@ -143,9 +143,7 @@
 -(LBR_BookcaseModel *)configuredBookcaseModel {
     LBR_BookcaseModel *bookcaseModel = [[LBR_BookcaseModel alloc] initWithWidth:58.0 shelvesCount:5];
     LBR_BookcaseCollectionViewController *collectionViewController = (LBR_BookcaseCollectionViewController *)self.collectionView.dataSource;
-    
-        // CLEAN:   NSLog(@"NSFRC:\n\n\n %@ \n\n ", collectionViewController.fetchedResultsController.fetchedObjects);
-    
+        
     [bookcaseModel shelveBooks:collectionViewController.fetchedResultsController.fetchedObjects];
     return bookcaseModel;
 }

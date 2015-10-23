@@ -16,7 +16,7 @@
 @class Library;
 
 
-@interface LBRDataManager : NSObject
+@interface LBRDataManager : NSObject <NSFetchedResultsControllerDelegate>
 @property (nonatomic, strong) NSMutableArray *uniqueCodes;
 @property (nonatomic, strong) NSArray *parsedVolumesToEitherSaveOrDiscard;
 @property (nonatomic, strong) LBRParsedVolume *parsedVolumeFromLastBarcode; //<-- Use this to confirm user's selection, then enter it into Persistent Data.

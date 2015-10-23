@@ -47,6 +47,8 @@ static NSString * const kUnknown = @"kUnknown";
         // 3. Save context.
         // 4. Test.
     for (LBRParsedVolume *transientVolumeToSave in self.parsedVolumesToEitherSaveOrDiscard) {
+
+            //CLEAN: We check before, in the ScannerViewController.
         [self checkStoreForDuplicates:transientVolumeToSave];
         [self insertVolumeToContextFromTransientVolume:transientVolumeToSave];
     }
@@ -62,8 +64,24 @@ static NSString * const kUnknown = @"kUnknown";
     
         //We use an NSPredicate combined with the fetchedResultsCntroller to perform
         //the search.
-    if (volume.isbn) {
-        <#statements#>
+    if (volume.isbn != nil) {
+        NSPredicate *predicate;
+        if (volume.isbn == volume.isbn10) {
+        predicate = [NSPredicate predicateWithFormat:@"isbn10 contains[cd] %@", volume.isbn];
+        }
+        if (volume.isbn == volume.isbn13) {
+            predicate = [NSPredicate predicateWithFormat:@"isbn13 contains[cd] %@", volume.isbn];
+        }
+        NSFetchRequest *duplicatesRequest = [NSFetchRequest fetchRequestWithEntityName:@"Volume"];
+        duplicatesRequest.predicate = predicate;
+        if(![self.managedObjectContext executeFetchRequest:duplicatesRequest error:&error])
+        {
+                //Handle error
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            exit(-1); //Fail
+        }
+        
+            ///Continue from "this array is just used...."
     }
 }
 

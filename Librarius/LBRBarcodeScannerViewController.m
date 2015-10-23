@@ -44,7 +44,7 @@
 
 - (IBAction)toggleScanningButtonTapped:(id)sender;
 - (IBAction)lightToggleButtonTapped:(id)sender;
-- (IBAction)saveScannedVolumesToLibraryButtonTapped:(id)sender;
+- (IBAction)saveScannedBooksToCoreDataButtonTapped:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *lightToggleButton;
 @property (weak, nonatomic) IBOutlet UIButton *saveScannedBooksToCoreDataButton;
 
@@ -54,6 +54,9 @@
 @property (nonatomic, strong) NSMutableArray *unsavedVolumes;
 @property (nonatomic, strong) MTBBarcodeScanner *scanner;
 @property (nonatomic, strong) LBRGoogleGTLClient *googleClient;
+
+@property (nonatomic, strong) NSArray *booksArray;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
 //@property (nonatomic, strong) MMMaterialDesignSpinner *spinnerView;
 
@@ -71,13 +74,11 @@
 
 @implementation LBRBarcodeScannerViewController
 
-#pragma mark - Constant Strings
 
 static NSString * const barcodeCellReuseID = @"barcodeCellReuseID";
 static NSString * const volumeNib          = @"volumePresentationView";
 
 #pragma mark - === Lifecycle ===
-#pragma mark
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -152,6 +153,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
     [super viewWillDisappear:animated];
 }
 
+
 #pragma mark - buttons
 
 - (IBAction)toggleScanningButtonTapped:(id)sender {
@@ -171,15 +173,37 @@ static NSString * const volumeNib          = @"volumePresentationView";
         DBLG
 }
 
-- (IBAction)saveScannedVolumesToLibraryButtonTapped:(id)sender {
+- (IBAction)saveScannedBooksToCoreDataButtonTapped:(id)sender
+{
     LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
     [dataManager saveParsedVolumesToEitherSaveOrDiscardToPersistentStore];
     [dataManager logCurrentLibrary];
 }
 
+
+-(BOOL)isNewUniqueObject:(LBRParsedVolume *)volumeToCheck
+{
+    NSArray *booksArray = self.fetchedResultsController.fetchedObjects;
+    
+    NSUInteger indexOfMatchingISBN = [booksArray indexOfObjectPassingTest:^BOOL(Volume *book, NSUInteger idx, BOOL * _Nonnull stop) {
+        return ([book.isbn isEqualToString:volumeToCheck.isbn]);
+    }];
+    BOOL isUniqueISBN = (indexOfMatchingISBN == NSNotFound);
+    
+    return isUniqueISBN;
+}
+
+- (NSFetchedResultsController *)fetchedResultsController
+{
+    if (_fetchedResultsController != nil) {
+        return _fetchedResultsController;
+    }
+    return [[LBRDataManager sharedDataManager]
+            preconfiguredLBRFetchedResultsController:self];
+}
+
+
 #pragma mark - === Scanning ===
-
-
 /**
  *  Stop scanning, flip the button.
  */
@@ -265,9 +289,8 @@ static NSString * const volumeNib          = @"volumePresentationView";
     return [@(yearComponent) stringValue];
 }
 
-#pragma mark -
+
 #pragma mark - == Confirmation Alert Controller (w/ Confirm/Cancel blocks) ==
-#pragma mark -
 
 -(NYAlertViewController*)confirmSelectionViewController {
     NYAlertViewController *alertViewController = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
@@ -348,9 +371,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
     }
 }
 
-#pragma mark -
 #pragma mark - === UITableViewDataSource methods ===
-#pragma mark -
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -367,7 +388,6 @@ static NSString * const volumeNib          = @"volumePresentationView";
     
 }
 
-#pragma mark -
 #pragma mark - Data Manager interface
 
 -(void)generateTestDataIfNeeded {
@@ -378,7 +398,10 @@ static NSString * const volumeNib          = @"volumePresentationView";
 -(void)updateDataManagerWithNewTransientVolume:(LBRParsedVolume*)volumeToAdd {
         // Preliminaries
     LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
-    [dataManager updateWithNewTransientVolume:volumeToAdd];
+    if ([self isNewUniqueObject:volumeToAdd])
+    {
+        [dataManager updateWithNewTransientVolume:volumeToAdd];
+    }
 }
 
 - (void)showMapViewAlertView {
@@ -413,7 +436,6 @@ DBLG
 }
 
 
-#pragma mark -
 #pragma mark - === UIScrollViewDelegate ===
 
 
