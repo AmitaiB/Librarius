@@ -9,6 +9,68 @@
 #import "LBRRecommendations_FlowLayout.h"
 #import "LBRShelf_DecorationView.h"
 
+#define kDecorationYAdjustment  13.0
+#define kDecorationHeight       25.0
+
+@interface LBRRecommendations_FlowLayout ()
+@property (nonatomic, strong) NSDictionary *rowDecorationRects;
+@end
+
 @implementation LBRRecommendations_FlowLayout
+
+-(instancetype)init
+{
+    if (!(self = [super init])) return nil;
+    
+    [self registerClass:[LBRShelf_DecorationView class] forDecorationViewOfKind:[LBRShelf_DecorationView kind]];
+    
+    return self;
+}
+
+-(void)prepareLayout
+{
+    [super prepareLayout];
+    
+    NSInteger sections = [self.collectionView numberOfSections];
+    
+    CGFloat availableWidth = self.collectionViewContentSize.width -
+    (self.sectionInset.left + self.sectionInset.right);
+    
+    NSInteger cellsPerRow = floorf((availableWidth + self.minimumInteritemSpacing) /
+                                   (self.itemSize.width + self.minimumInteritemSpacing));
+    
+    NSMutableDictionary *rowDecorationWork = [NSMutableDictionary dictionary];
+    
+    CGFloat yPosition = 0;
+    
+    for (NSUInteger sectionIndex = 0; sectionIndex < sections; sectionIndex++)
+    {
+        yPosition += self.headerReferenceSize.height;
+        yPosition += self.sectionInset.top;
+        
+        NSUInteger cellCount =
+        [self.collectionView numberOfItemsInSection:sectionIndex];
+        
+        NSUInteger rows = ceilf(cellCount/(CGFloat)cellsPerRow);
+        for (NSInteger row = 0; row < rows; row++) {
+            yPosition += self.itemSize.height;
+            
+            CGRect decorationFrame = CGRectMake(0, yPosition - kDecorationYAdjustment, self.collectionViewContentSize.width, kDecorationHeight);
+            
+            NSIndexPath *decIndexPath = [NSIndexPath indexPathForRow:row inSection:sectionIndex];
+            
+            rowDecorationWork[decIndexPath] = [NSValue valueWithCGRect:decorationFrame];
+            
+            if (row < rows - 1) {
+                yPosition += self.minimumLineSpacing;
+            }
+            
+            yPosition += self.sectionInset.bottom;
+            yPosition += self.footerReferenceSize.height;
+        }
+        
+        self.rowDecorationRects = [rowDecorationWork copy];
+    }
+}
 
 @end
