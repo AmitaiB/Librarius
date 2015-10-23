@@ -110,26 +110,19 @@ static NSString * const headerReuseIdentifier = @"HeaderReuseID";
 }
 
 /**
- For each section, get 3 volumes. Prefer recommendations from different sourceVolumes.
+ For each section, get 3 volumes. [Prefer recommendations from different sourceVolumes.]
  */
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     LBRRecommendedBook_CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    NSIndexPath *mutableIndexPath = [indexPath copy];
-    NSUInteger lackOfOptionsAdjustment = 0;
     
-        //If a volume doesn't exist at that index path, back up one, and
-        //add a counter so that we traverse the recommendations array,
-        //rather than presenting multiple copies of the same recommendation.
-//    do {
-//        if (null == [self.fetchedResultsController objectAtIndexPath:mutableIndexPath];
-//            
-//            ) {
-//            <#statements#>
-//        }
-//    mutableIndexPath = [self indexPathByDecrementingItemFrom:mutableIndexPath];
-//    lackOfOptionsAdjustment++; ///Possibly not necessary, since it's random.
-//    } while (<#condition#>);
-
+        //Get the indexPath, so long as the fetchedResultsController goes that far.
+        //If it doesn't, just hard-coded going back to 0. We'll get it in the next cycle.
+    NSIndexPath *mutableIndexPath;
+    NSArray *sections = [self.fetchedResultsController sections];
+    id<NSFetchedResultsSectionInfo> currentSection = sections[indexPath.section];
+    NSUInteger numObjects = [currentSection numberOfObjects];
+    NSUInteger itemIndex = (indexPath.item <= numObjects - 1)? indexPath.item : 0;
+    mutableIndexPath = [NSIndexPath indexPathForItem:itemIndex inSection:indexPath.section];
     
     Volume *volume = (Volume*)[self.fetchedResultsController objectAtIndexPath:mutableIndexPath];
     [googleClient queryForRecommendationsRelatedToString:[volume isbn] withCallback:^(GTLBooksVolumes *responseCollection) {

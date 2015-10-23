@@ -50,12 +50,12 @@
         bannerView = [ADBannerView new];
     }
     bannerView.delegate = self;
-    [self.navigationController.view addSubview:bannerView];
+    [self.view addSubview:bannerView];
     
 //    self.tableView.tableFooterView = bannerView;
     [bannerView removeConstraints:bannerView.constraints];
     bannerView.translatesAutoresizingMaskIntoConstraints = NO;
-//    [self.view addSubview:bannerView];
+
     
     
 /**
