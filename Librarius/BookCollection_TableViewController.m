@@ -50,7 +50,10 @@
         bannerView = [ADBannerView new];
     }
     bannerView.delegate = self;
-    [self.view addSubview:bannerView];
+    self.tableView.tableFooterView = bannerView;
+    [bannerView removeConstraints:bannerView.constraints];
+    bannerView.translatesAutoresizingMaskIntoConstraints = NO;
+//    [self.view addSubview:bannerView];
     
     
 /**
@@ -330,9 +333,14 @@
 
 - (void)autoLayoutAnimated:(BOOL)animated {
 
-    [bannerView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor];
-    [bannerView.widthAnchor constraintEqualToAnchor:self.view.widthAnchor];
-    [bannerView.bottomAnchor constraintEqualToAnchor:self.bottomLayoutGuide.bottomAnchor];
+    [bannerView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor].active = YES;
+    [bannerView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor].active = YES;
+    [bannerView.widthAnchor constraintEqualToAnchor:self.view.widthAnchor].active = YES;
+    [bannerView.heightAnchor constraintEqualToAnchor:self.view.heightAnchor].active = YES;
+    [bannerView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
+    [bannerView.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = YES;
+//    [bannerView.topAnchor constraintEqualToAnchor:self.topLayoutGuide.bottomAnchor].active = YES;
+//    [bannerView.bottomAnchor constraintEqualToAnchor:self.bottomLayoutGuide.topAnchor].active = YES;
     
     if (bannerView.bannerLoaded) {
         [self.view bringSubviewToFront:bannerView];
@@ -382,6 +390,12 @@
         [self.view layoutIfNeeded];
         bannerView.frame = bannerFrame;
     }];
+}
+
+#pragma mark - === UISrollViewDelegate ===
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
 }
 
 @end
