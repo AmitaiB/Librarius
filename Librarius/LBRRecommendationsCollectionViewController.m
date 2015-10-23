@@ -227,12 +227,15 @@ static NSString * const bookDetailSegueID = @"BookSegueDetailID2";
     if (kind == UICollectionElementKindSectionHeader) {
         LBRRecommendations_CollectionViewHeader *headerView = [self.collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:headerReuseIdentifier forIndexPath:indexPath];
         
-        NSIndexPath *indexPathOfGenreLabel = [NSIndexPath indexPathForItem:0 inSection:indexPath.section];
+        NSArray *sections = self.fetchedResultsController.sections;
+        id<NSFetchedResultsSectionInfo> currentSection = sections[indexPath.section];
+        headerView.bookCategoryLabel.text = [currentSection name];
         
-        Volume *firstBookInSection = [self.fetchedResultsController objectAtIndexPath:indexPathOfGenreLabel];
+//        NSIndexPath *indexPathOfGenreLabel = [NSIndexPath indexPathForItem:0 inSection:indexPath.section];
+//        
+//        Volume *firstBookInSection = [self.fetchedResultsController objectAtIndexPath:indexPathOfGenreLabel];
 
-        headerView.bookCategoryLabel.text = firstBookInSection.mainCategory;
-    
+//        headerView.bookCategoryLabel.text = firstBookInSection.mainCategory;
         headerView.bookCategoryLabel.textColor = [UIColor midnightBlueColor];
         
         reusableView = headerView;
