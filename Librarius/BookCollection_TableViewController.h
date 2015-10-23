@@ -7,8 +7,9 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#import <iAd/iAd.h>
 
-@interface BookCollection_TableViewController : UITableViewController <NSFetchedResultsControllerDelegate>
+@interface BookCollection_TableViewController : UITableViewController <NSFetchedResultsControllerDelegate, ADBannerViewDelegate>
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;

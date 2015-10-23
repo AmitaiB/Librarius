@@ -26,7 +26,9 @@
 
 @end
 
-@implementation BookCollection_TableViewController
+@implementation BookCollection_TableViewController {
+    ADBannerView *bannerView;
+}
 
 -(BOOL)prefersStatusBarHidden {
     return YES;
@@ -38,6 +40,19 @@
         self.navigationItem.leftBarButtonItem = self.editButtonItem;
     [self flattenUI];
     
+#// -------------------------------------------------------------------------------
+ //	BannerView configuration
+ // -------------------------------------------------------------------------------
+
+    if ([ADBannerView instancesRespondToSelector:@selector(initWithAdType:)]) {
+        bannerView = [[ADBannerView alloc] initWithAdType:ADAdTypeBanner];
+    } else {
+        bannerView = [ADBannerView new];
+    }
+    bannerView.delegate = self;
+    [self.view addSubview:bannerView];
+    
+    
 /**
  *  TODO: Change the method called here to "Manual Volume Entry", details below.
  */
@@ -45,6 +60,29 @@
 //    self.navigationItem.rightBarButtonItem = addButton;
 }
 
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self autoLayoutAnimated:NO];
+}
+
+-(void)viewDidLayoutSubviews {
+    [self autoLayoutAnimated:[UIView areAnimationsEnabled]];
+}
+
+#pragma mark - === iAd Delegate methods ===
+
+-(void)bannerViewDidLoadAd:(ADBannerView *)banner {
+    [self autoLayoutAnimated:YES];
+}
+
+-(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error {
+    NSLog(@"didFailToReceiveAdWithError %@", error.localizedDescription);
+    [self autoLayoutAnimated:YES];
+}
+
+-(BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner willLeaveApplication:(BOOL)willLeave {
+    return YES;
+}
 
 /**
  *  TODO: Change this method to "Manual Volume Entry" and fill in all the fields to add a new Volume to the Library, and save.
@@ -288,6 +326,62 @@
 
 //#pragma mark - Helper methods
 
+#pragma mark - ===iAd Methods ===
 
+- (void)autoLayoutAnimated:(BOOL)animated {
+
+    [bannerView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor];
+    [bannerView.widthAnchor constraintEqualToAnchor:self.view.widthAnchor];
+    [bannerView.bottomAnchor constraintEqualToAnchor:self.bottomLayoutGuide.bottomAnchor];
+    
+    if (bannerView.bannerLoaded) {
+        [self.view bringSubviewToFront:bannerView];
+        [self.view layoutSubviews];
+        bannerView.hidden = NO;
+    }
+    else //hide the banner
+    {
+        bannerView.hidden = YES;
+    }
+    
+    [UIView animateWithDuration:animated ? 0.25 : 0.0 animations:^{
+        [self.view layoutIfNeeded];
+    }];
+}
+
+- (void)manualLayoutAnimated:(BOOL)animated {
+    CGRect contentFrame = self.view.bounds;
+    
+        //Ask the banner for a size that will fit our layout area
+    CGSize sizeForBanner = [bannerView sizeThatFits:contentFrame.size];
+    
+        //Compute the ad banner frame
+    CGRect bannerFrame = bannerView.frame;
+    if (bannerView.bannerLoaded) {
+            //bring Ad into view (don't want an unloaded bannerView)
+        contentFrame.size.height -= sizeForBanner.height; //shrink down content frame to fit the banner below it
+        bannerFrame.origin.y    = contentFrame.size.height;
+        bannerFrame.size.height = sizeForBanner.height;
+        bannerFrame.size.width  = sizeForBanner.width;
+        
+            // If the ad is available and loaded, shrink down the content frame to
+            //fit the banner below it, by modifying the vertical-bottom constraint-constant:
+            //set it equal to the banner's height.
+        /** == This does not matter for me in this view, since it's a TableView ==
+         NSLayoutConstraint *verticalBottomConstraint = self.bottomConstraint;
+         verticalBottomConstraint.constant = sizeForBanner.height;
+         [self.view layoutSubviews];
+         */
+    }
+    else //hide the banner off screen
+    {
+        bannerFrame.origin.y = contentFrame.size.height;
+    }
+    
+    [UIView animateWithDuration:animated ? 0.25 : 0.0 animations:^{
+        [self.view layoutIfNeeded];
+        bannerView.frame = bannerFrame;
+    }];
+}
 
 @end
