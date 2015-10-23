@@ -130,7 +130,14 @@
      *  Author's Surname (for sorting purposes).
      */
     if (_author) {
-        _authorSurname = [_author componentsSeparatedByString:@" "][1];
+        NSArray *authorNameArray = [_author componentsSeparatedByString:@" "];
+        if (authorNameArray.count >= 2) {
+            _authorSurname = authorNameArray[1];
+        }
+        else
+        {
+            _authorSurname = @"Doe";
+        }
     }
     /**
      *  Categories - just in case -- for now we will only pass over the mainCategory to Volume(s).

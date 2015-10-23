@@ -142,7 +142,7 @@ static NSString * const headerReuseIdentifier = @"HeaderReuseID";
         do {
             [cell displayRandomRecommendation];
             isDuplicate       = [self.coverArtURLs containsObject:cell.selectedVolumeIdentifier];
-            self.coverArtURLs = [self.coverArtURLs arrayByAddingObject:cell.selectedVolumeIdentifier];
+            self.coverArtURLs = [self.coverArtURLs arrayByAddingObject:(cell.selectedVolumeIdentifier == nil)? @"http://www.google.com" : cell.selectedVolumeIdentifier];
         } while (isDuplicate);
     }];
 
