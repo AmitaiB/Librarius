@@ -9,11 +9,12 @@
 #define kSpinnerFrameRect CGRectMake(0, 0, 40, 40)
 #define kAppIconSize 48
 
+    //Frameworks
 #import <AVFoundation/AVFoundation.h>
-#import "LBRConstants.h"
-
+#import <iAd/iAd.h>
 
     //Data
+#import "LBRConstants.h"
 #import "LBRGoogleGTLClient.h"
 #import "LBRDataManager.h"
 
@@ -86,6 +87,8 @@ static NSString * const volumeNib          = @"volumePresentationView";
 
     if (!self.isConfigured) {
         [self configureProgrammaticProperties];}
+    
+    self.canDisplayBannerAds = YES;
     
 }
 

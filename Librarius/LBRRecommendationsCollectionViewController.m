@@ -63,6 +63,7 @@ static NSString * const bookDetailSegueID = @"BookSegueDetailID2";
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.canDisplayBannerAds = YES;
     self.collectionView.backgroundColor = [UIColor cloudsColor];
     self.coverArtURLs = [NSArray array];
     

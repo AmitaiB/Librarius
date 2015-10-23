@@ -7,6 +7,7 @@
 //
 
 #import "BookDetailViewController.h"
+#import <iAd/iAd.h>
 
 @interface BookDetailViewController ()
 - (IBAction)doneButtonTapped:(id)sender;
@@ -36,6 +37,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    self.canDisplayBannerAds = YES;
     [self configureView];
 }
 

@@ -49,32 +49,7 @@ static NSString * const bannerHeaderIdentifier = @"bannerHeaderIdentifier";
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     [self flattenUI];
     
-//    self.canDisplayBannerAds = YES;
-    
- // -------------------------------------------------------------------------------
- //	BannerView configuration
- // -------------------------------------------------------------------------------
-
-    bannerView = [[ADBannerView alloc] initWithAdType:ADAdTypeBanner];
-    bannerView.delegate = self;
-    [bannerView removeConstraints:bannerView.constraints];
-
-//    bannerView.translatesAutoresizingMaskIntoConstraints = NO;
-//    [bannerView.widthAnchor constraintEqualToAnchor:bannerView.superview.widthAnchor].active = YES;
-    bannerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    [self.view addSubview:bannerView];
-    
-//    headerView = [[UITableViewHeaderFooterView alloc] initWithReuseIdentifier:bannerHeaderIdentifier];
-//    [headerView.contentView addSubview:bannerView];
-        ///Add constraints
-    
-        //    [headerView.widthAnchor constraintEqualToAnchor:headerView.contentView.widthAnchor].active = YES;
-//    [headerView.heightAnchor constraintEqualToConstant:bannerView.intrinsicContentSize.height];
-//    headerView
-    
-    
-//    [self.tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:bannerHeaderIdentifier];
-//    
+    self.canDisplayBannerAds = YES;
     
 /**
  *  TODO: Change the method called here to "Manual Volume Entry", details below.
@@ -82,54 +57,6 @@ static NSString * const bannerHeaderIdentifier = @"bannerHeaderIdentifier";
 //    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
 //    self.navigationItem.rightBarButtonItem = addButton;
 }
-
--(void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    [self bannerCheck:NO];
-}
-
--(void)viewDidLayoutSubviews {
-    [self bannerCheck:[UIView areAnimationsEnabled]];
-}
-
-#pragma mark - === iAd Delegate methods ===
-
--(void)bannerViewDidLoadAd:(ADBannerView *)banner {
-    [self bannerCheck:YES];
-}
-
-
--(BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner willLeaveApplication:(BOOL)willLeave {
-    return YES;
-}
-
-
--(void)bannerViewActionDidFinish:(ADBannerView *)banner
-{
-    NSLog(@"Continue game!");
-}
-
--(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error {
-    NSLog(@"didFailToReceiveAdWithError %@", error.localizedDescription);
-    [self bannerCheck:YES];
-}
-
-#pragma mark - ===iAd Methods ===
-
--(void)bannerCheck:(BOOL)animated
-{
-        //Get frames (frames??)
-    if (bannerView.bannerLoaded) {
-        [UIView animateWithDuration:animated? 0.20 : 0.0 animations:^{
-            [bannerView removeConstraints:bannerView.constraints];
-            [bannerView.widthAnchor constraintEqualToAnchor:self.view.widthAnchor].active = YES;
-            [bannerView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
-                //FIXME: Autolayout!!
-                //            [bannerView.bottomAnchor constraintEqualToAnchor:self.bottomLayoutGuide.topAnchor].active = YES;
-        }];
-    }
-}
-
 
 /**
  *  TODO: Change this method to "Manual Volume Entry" and fill in all the fields to add a new Volume to the Library, and save.
@@ -166,8 +93,7 @@ static NSString * const bannerHeaderIdentifier = @"bannerHeaderIdentifier";
     [[UITableViewCell appearance] setBackgroundColor:[UIColor greenSeaColor]];
 
     [self.tableView setClipsToBounds:YES];
-//    
-//    [self.tableView.topAnchor constraintEqualToAnchor:self.topLayoutGuide.bottomAnchor].active = true;
+
     
 }
 

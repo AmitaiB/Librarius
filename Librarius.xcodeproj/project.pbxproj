@@ -24,60 +24,59 @@
 		3803757F1B8C17EB004C4ECE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 380375411B8AC9A8004C4ECE /* LaunchScreen.xib */; };
 		380375F71B8D4E90004C4ECE /* BookCollection_TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375F41B8D4E90004C4ECE /* BookCollection_TableViewController.m */; };
 		380375F81B8D4E90004C4ECE /* BookDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375F61B8D4E90004C4ECE /* BookDetailViewController.m */; };
-		38103B591BD033AE009F22E3 /* LBR_ShelvedBookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38103B581BD033AE009F22E3 /* LBR_ShelvedBookCell.m */; settings = {ASSET_TAGS = (); }; };
-		38103B5C1BD033E4009F22E3 /* LBR_BookcaseLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 38103B5B1BD033E4009F22E3 /* LBR_BookcaseLayout.m */; settings = {ASSET_TAGS = (); }; };
-		38103B601BD03452009F22E3 /* LBR_BookcaseLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 38103B5F1BD03452009F22E3 /* LBR_BookcaseLayoutAttributes.m */; settings = {ASSET_TAGS = (); }; };
-		3810D9F81BD585150093D5C2 /* UITableViewCell+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 3810D9F71BD585150093D5C2 /* UITableViewCell+FlatUI.m */; settings = {ASSET_TAGS = (); }; };
-		3810D9FB1BD585300093D5C2 /* FUICellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3810D9FA1BD585300093D5C2 /* FUICellBackgroundView.m */; settings = {ASSET_TAGS = (); }; };
-		3810D9FE1BD5BDE60093D5C2 /* UIColor-Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 3810D9FC1BD5BDE60093D5C2 /* UIColor-Expanded.m */; settings = {ASSET_TAGS = (); }; };
-		3810DA101BD5E0980093D5C2 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3810DA0D1BD5E0980093D5C2 /* Utils.m */; settings = {ASSET_TAGS = (); }; };
-		3810DA111BD5E0980093D5C2 /* FlatTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 3810DA0F1BD5E0980093D5C2 /* FlatTheme.m */; settings = {ASSET_TAGS = (); }; };
-		3810DA141BD5E0A90093D5C2 /* SettingsCell1.m in Sources */ = {isa = PBXBuildFile; fileRef = 3810DA131BD5E0A90093D5C2 /* SettingsCell1.m */; settings = {ASSET_TAGS = (); }; };
-		3810DA191BD5E0D60093D5C2 /* RCSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 3810DA161BD5E0D60093D5C2 /* RCSwitch.m */; settings = {ASSET_TAGS = (); }; };
-		3810DA1A1BD5E0D60093D5C2 /* RCSwitchOnOff.m in Sources */ = {isa = PBXBuildFile; fileRef = 3810DA181BD5E0D60093D5C2 /* RCSwitchOnOff.m */; settings = {ASSET_TAGS = (); }; };
-		3810DA1E1BD5E0ED0093D5C2 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3810DA1D1BD5E0ED0093D5C2 /* MBProgressHUD.m */; settings = {ASSET_TAGS = (); }; };
-		3810DA211BD5E1420093D5C2 /* ADVFlatUI-Resources.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3810DA201BD5E1420093D5C2 /* ADVFlatUI-Resources.xcassets */; settings = {ASSET_TAGS = (); }; };
+		38103B591BD033AE009F22E3 /* LBR_ShelvedBookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38103B581BD033AE009F22E3 /* LBR_ShelvedBookCell.m */; };
+		38103B5C1BD033E4009F22E3 /* LBR_BookcaseLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 38103B5B1BD033E4009F22E3 /* LBR_BookcaseLayout.m */; };
+		38103B601BD03452009F22E3 /* LBR_BookcaseLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 38103B5F1BD03452009F22E3 /* LBR_BookcaseLayoutAttributes.m */; };
+		3810D9F81BD585150093D5C2 /* UITableViewCell+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 3810D9F71BD585150093D5C2 /* UITableViewCell+FlatUI.m */; };
+		3810D9FB1BD585300093D5C2 /* FUICellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3810D9FA1BD585300093D5C2 /* FUICellBackgroundView.m */; };
+		3810D9FE1BD5BDE60093D5C2 /* UIColor-Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 3810D9FC1BD5BDE60093D5C2 /* UIColor-Expanded.m */; };
+		3810DA101BD5E0980093D5C2 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3810DA0D1BD5E0980093D5C2 /* Utils.m */; };
+		3810DA111BD5E0980093D5C2 /* FlatTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 3810DA0F1BD5E0980093D5C2 /* FlatTheme.m */; };
+		3810DA141BD5E0A90093D5C2 /* SettingsCell1.m in Sources */ = {isa = PBXBuildFile; fileRef = 3810DA131BD5E0A90093D5C2 /* SettingsCell1.m */; };
+		3810DA191BD5E0D60093D5C2 /* RCSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 3810DA161BD5E0D60093D5C2 /* RCSwitch.m */; };
+		3810DA1A1BD5E0D60093D5C2 /* RCSwitchOnOff.m in Sources */ = {isa = PBXBuildFile; fileRef = 3810DA181BD5E0D60093D5C2 /* RCSwitchOnOff.m */; };
+		3810DA1E1BD5E0ED0093D5C2 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3810DA1D1BD5E0ED0093D5C2 /* MBProgressHUD.m */; };
+		3810DA211BD5E1420093D5C2 /* ADVFlatUI-Resources.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3810DA201BD5E1420093D5C2 /* ADVFlatUI-Resources.xcassets */; };
 		381EBC051BA0FF63000D2FA4 /* LBRShelves_CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 381EBC041BA0FF63000D2FA4 /* LBRShelves_CollectionViewController.m */; };
-		381FC2951BD13A09003A3C52 /* LBR_BookcaseCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 381FC2941BD13A09003A3C52 /* LBR_BookcaseCollectionViewController.m */; settings = {ASSET_TAGS = (); }; };
-		381FC2BB1BD15D45003A3C52 /* LBR_BookcaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 381FC2BA1BD15D45003A3C52 /* LBR_BookcaseModel.m */; settings = {ASSET_TAGS = (); }; };
-		382A83BA1BB3BA94008860CF /* LBRRecommendationsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 382A83B91BB3BA94008860CF /* LBRRecommendationsCollectionViewController.m */; settings = {ASSET_TAGS = (); }; };
-		382A83BD1BB3D6E1008860CF /* PresentDetailTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 382A83BC1BB3D6E1008860CF /* PresentDetailTransition.m */; settings = {ASSET_TAGS = (); }; };
-		382A83C11BB3D926008860CF /* DismissDetailTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 382A83C01BB3D926008860CF /* DismissDetailTransition.m */; settings = {ASSET_TAGS = (); }; };
-		382A83ED1BB4AF98008860CF /* LBRBatchScanScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 382A83EC1BB4AF98008860CF /* LBRBatchScanScrollView.m */; settings = {ASSET_TAGS = (); }; };
+		381FC2951BD13A09003A3C52 /* LBR_BookcaseCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 381FC2941BD13A09003A3C52 /* LBR_BookcaseCollectionViewController.m */; };
+		381FC2BB1BD15D45003A3C52 /* LBR_BookcaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 381FC2BA1BD15D45003A3C52 /* LBR_BookcaseModel.m */; };
+		382A83BA1BB3BA94008860CF /* LBRRecommendationsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 382A83B91BB3BA94008860CF /* LBRRecommendationsCollectionViewController.m */; };
+		382A83BD1BB3D6E1008860CF /* PresentDetailTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 382A83BC1BB3D6E1008860CF /* PresentDetailTransition.m */; };
+		382A83C11BB3D926008860CF /* DismissDetailTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 382A83C01BB3D926008860CF /* DismissDetailTransition.m */; };
+		382A83ED1BB4AF98008860CF /* LBRBatchScanScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 382A83EC1BB4AF98008860CF /* LBRBatchScanScrollView.m */; };
 		38466D281B94F24400DD252E /* LBRGoogleGTLClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 38466D271B94F24400DD252E /* LBRGoogleGTLClient.m */; };
 		384E0CC01B97D24B007E7290 /* NSString+dateValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 384E0CBF1B97D24B007E7290 /* NSString+dateValue.m */; };
 		3851DBFD1B8E2E5A00E90B9F /* LBRDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3851DBFC1B8E2E5A00E90B9F /* LBRDataManager.m */; };
-		3855E26F1BB0DBD4004C5D11 /* LBRAlertContent_TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3855E26E1BB0DBD4004C5D11 /* LBRAlertContent_TableViewCell.m */; settings = {ASSET_TAGS = (); }; };
-		3855E2721BB10AA5004C5D11 /* UIView+ConfigureForAutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3855E2711BB10AA5004C5D11 /* UIView+ConfigureForAutoLayout.m */; settings = {ASSET_TAGS = (); }; };
+		3855E26F1BB0DBD4004C5D11 /* LBRAlertContent_TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3855E26E1BB0DBD4004C5D11 /* LBRAlertContent_TableViewCell.m */; };
+		3855E2721BB10AA5004C5D11 /* UIView+ConfigureForAutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3855E2711BB10AA5004C5D11 /* UIView+ConfigureForAutoLayout.m */; };
 		38565D701B9A20B800349498 /* LBRParsedVolume.m in Sources */ = {isa = PBXBuildFile; fileRef = 38565D6F1B9A20B800349498 /* LBRParsedVolume.m */; };
-		386C23751BD934520065B46F /* LBRRecommendations_CollectionViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 386C23741BD934520065B46F /* LBRRecommendations_CollectionViewHeader.m */; settings = {ASSET_TAGS = (); }; };
-		386C23781BD968920065B46F /* LBRRecommendedBook_CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 386C23771BD968920065B46F /* LBRRecommendedBook_CollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		386C23751BD934520065B46F /* LBRRecommendations_CollectionViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 386C23741BD934520065B46F /* LBRRecommendations_CollectionViewHeader.m */; };
+		386C23781BD968920065B46F /* LBRRecommendedBook_CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 386C23771BD968920065B46F /* LBRRecommendedBook_CollectionViewCell.m */; };
 		387039B81B9D23C900381007 /* SelectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 387039B71B9D23C900381007 /* SelectionView.xib */; };
-		388A1E151B9F940000C75825 /* To Do bookmark in Resources */ = {isa = PBXBuildFile; fileRef = 388A1E141B9F940000C75825 /* To Do bookmark */; };
 		388DBDF31BA9174A005C5125 /* THNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 388DBDF21BA9174A005C5125 /* THNavigationController.m */; };
 		388DBE301BAA0F60005C5125 /* LBRCustomLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 388DBE2F1BAA0F60005C5125 /* LBRCustomLayout.m */; };
 		388DBE331BAA54C8005C5125 /* UIImage+imageScaledToHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = 388DBE321BAA54C8005C5125 /* UIImage+imageScaledToHeight.m */; };
-		389168DD1BCA3A65007ED199 /* LBRBookshelfDecorationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 389168DC1BCA3A65007ED199 /* LBRBookshelfDecorationView.m */; settings = {ASSET_TAGS = (); }; };
+		389168DD1BCA3A65007ED199 /* LBRBookshelfDecorationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 389168DC1BCA3A65007ED199 /* LBRBookshelfDecorationView.m */; };
 		38AAD6F01B901175003062C1 /* Librarius.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 38AAD6EE1B901175003062C1 /* Librarius.xcdatamodeld */; };
 		38AAD71D1B901D35003062C1 /* Volume.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAD71C1B901D35003062C1 /* Volume.m */; };
 		38AAD7201B901D36003062C1 /* Library.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAD71F1B901D36003062C1 /* Library.m */; };
 		38AAD7231B901D36003062C1 /* Bookcase.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AAD7221B901D36003062C1 /* Bookcase.m */; };
-		38BA3CA51B9BDA1500B3B42F /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38BA3CA41B9BDA1500B3B42F /* CloudKit.framework */; };
 		38BE31E21B961F7000C46001 /* volumePresentationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38BE31E11B961F7000C46001 /* volumePresentationView.xib */; };
 		38CD5FD11B9DE78400963D2F /* VolumeDetailsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38CD5FD01B9DE78400963D2F /* VolumeDetailsCell.xib */; };
+		38D601981BDA95B100E3D60F /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38D601971BDA95B100E3D60F /* iAd.framework */; };
 		38E71DAF1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E71DAE1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.m */; };
-		38F57BB71BB0707200CC2EE8 /* UIToolbar+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F57B9D1BB0707200CC2EE8 /* UIToolbar+FlatUI.m */; settings = {ASSET_TAGS = (); }; };
-		38F57BB91BB0707200CC2EE8 /* UITabBar+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F57BA11BB0707200CC2EE8 /* UITabBar+FlatUI.m */; settings = {ASSET_TAGS = (); }; };
-		38F57BBA1BB0707200CC2EE8 /* UIStepper+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F57BA31BB0707200CC2EE8 /* UIStepper+FlatUI.m */; settings = {ASSET_TAGS = (); }; };
-		38F57BBB1BB0707200CC2EE8 /* UISlider+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F57BA51BB0707200CC2EE8 /* UISlider+FlatUI.m */; settings = {ASSET_TAGS = (); }; };
-		38F57BBC1BB0707200CC2EE8 /* UIProgressView+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F57BA71BB0707200CC2EE8 /* UIProgressView+FlatUI.m */; settings = {ASSET_TAGS = (); }; };
-		38F57BBE1BB0707200CC2EE8 /* UINavigationBar+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F57BAB1BB0707200CC2EE8 /* UINavigationBar+FlatUI.m */; settings = {ASSET_TAGS = (); }; };
-		38F57BBF1BB0707200CC2EE8 /* UIImage+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F57BAD1BB0707200CC2EE8 /* UIImage+FlatUI.m */; settings = {ASSET_TAGS = (); }; };
-		38F57BC01BB0707200CC2EE8 /* UIFont+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F57BAF1BB0707200CC2EE8 /* UIFont+FlatUI.m */; settings = {ASSET_TAGS = (); }; };
-		38F57BC11BB0707200CC2EE8 /* UIColor+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F57BB11BB0707200CC2EE8 /* UIColor+FlatUI.m */; settings = {ASSET_TAGS = (); }; };
-		38F57BC21BB0707200CC2EE8 /* UIBarButtonItem+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F57BB31BB0707200CC2EE8 /* UIBarButtonItem+FlatUI.m */; settings = {ASSET_TAGS = (); }; };
-		38F57BC31BB0707200CC2EE8 /* NSString+Icons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F57BB51BB0707200CC2EE8 /* NSString+Icons.m */; settings = {ASSET_TAGS = (); }; };
-		38FABE881BD49AE4009479E9 /* UIColor+ABBColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FABE871BD49AE4009479E9 /* UIColor+ABBColors.m */; settings = {ASSET_TAGS = (); }; };
+		38F57BB71BB0707200CC2EE8 /* UIToolbar+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F57B9D1BB0707200CC2EE8 /* UIToolbar+FlatUI.m */; };
+		38F57BB91BB0707200CC2EE8 /* UITabBar+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F57BA11BB0707200CC2EE8 /* UITabBar+FlatUI.m */; };
+		38F57BBA1BB0707200CC2EE8 /* UIStepper+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F57BA31BB0707200CC2EE8 /* UIStepper+FlatUI.m */; };
+		38F57BBB1BB0707200CC2EE8 /* UISlider+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F57BA51BB0707200CC2EE8 /* UISlider+FlatUI.m */; };
+		38F57BBC1BB0707200CC2EE8 /* UIProgressView+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F57BA71BB0707200CC2EE8 /* UIProgressView+FlatUI.m */; };
+		38F57BBE1BB0707200CC2EE8 /* UINavigationBar+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F57BAB1BB0707200CC2EE8 /* UINavigationBar+FlatUI.m */; };
+		38F57BBF1BB0707200CC2EE8 /* UIImage+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F57BAD1BB0707200CC2EE8 /* UIImage+FlatUI.m */; };
+		38F57BC01BB0707200CC2EE8 /* UIFont+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F57BAF1BB0707200CC2EE8 /* UIFont+FlatUI.m */; };
+		38F57BC11BB0707200CC2EE8 /* UIColor+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F57BB11BB0707200CC2EE8 /* UIColor+FlatUI.m */; };
+		38F57BC21BB0707200CC2EE8 /* UIBarButtonItem+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F57BB31BB0707200CC2EE8 /* UIBarButtonItem+FlatUI.m */; };
+		38F57BC31BB0707200CC2EE8 /* NSString+Icons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F57BB51BB0707200CC2EE8 /* NSString+Icons.m */; };
+		38FABE881BD49AE4009479E9 /* UIColor+ABBColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FABE871BD49AE4009479E9 /* UIColor+ABBColors.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -178,7 +177,6 @@
 		386C23761BD968920065B46F /* LBRRecommendedBook_CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRRecommendedBook_CollectionViewCell.h; sourceTree = "<group>"; };
 		386C23771BD968920065B46F /* LBRRecommendedBook_CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRRecommendedBook_CollectionViewCell.m; sourceTree = "<group>"; };
 		387039B71B9D23C900381007 /* SelectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectionView.xib; sourceTree = "<group>"; };
-		388A1E141B9F940000C75825 /* To Do bookmark */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "To Do bookmark"; path = "Librarius/To Do bookmark"; sourceTree = "<group>"; };
 		388DBDF11BA9174A005C5125 /* THNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNavigationController.h; sourceTree = "<group>"; };
 		388DBDF21BA9174A005C5125 /* THNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNavigationController.m; sourceTree = "<group>"; };
 		388DBE2E1BAA0F60005C5125 /* LBRCustomLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRCustomLayout.h; sourceTree = "<group>"; };
@@ -196,10 +194,10 @@
 		38AAD7211B901D36003062C1 /* Bookcase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bookcase.h; sourceTree = "<group>"; };
 		38AAD7221B901D36003062C1 /* Bookcase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bookcase.m; sourceTree = "<group>"; };
 		38AAD7241B90A1AC003062C1 /* Librarius.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Librarius.entitlements; sourceTree = "<group>"; };
-		38BA3CA41B9BDA1500B3B42F /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		38BE31E11B961F7000C46001 /* volumePresentationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = volumePresentationView.xib; sourceTree = "<group>"; };
 		38CD5FD01B9DE78400963D2F /* VolumeDetailsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VolumeDetailsCell.xib; sourceTree = "<group>"; };
 		38CF74301BAF51AF0070134E /* FlatUI+Categories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FlatUI+Categories.h"; sourceTree = "<group>"; };
+		38D601971BDA95B100E3D60F /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		38E71DAD1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRShelvedBook_CollectionViewCell.h; sourceTree = "<group>"; };
 		38E71DAE1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRShelvedBook_CollectionViewCell.m; sourceTree = "<group>"; };
 		38F57B9D1BB0707200CC2EE8 /* UIToolbar+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIToolbar+FlatUI.m"; sourceTree = "<group>"; };
@@ -241,7 +239,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38BA3CA51B9BDA1500B3B42F /* CloudKit.framework in Frameworks */,
+				38D601981BDA95B100E3D60F /* iAd.framework in Frameworks */,
 				2E6DA4DCEDA6FC0E68557D16 /* libPods-Librarius.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -268,7 +266,6 @@
 		380375231B8AC9A8004C4ECE = {
 			isa = PBXGroup;
 			children = (
-				388A1E141B9F940000C75825 /* To Do bookmark */,
 				3803752E1B8AC9A8004C4ECE /* Librarius */,
 				3803754B1B8AC9A8004C4ECE /* LibrariusTests */,
 				3803752D1B8AC9A8004C4ECE /* Products */,
@@ -583,7 +580,7 @@
 		8D3D60166B48602A9D5DE1B9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				38BA3CA41B9BDA1500B3B42F /* CloudKit.framework */,
+				38D601971BDA95B100E3D60F /* iAd.framework */,
 				38AAD6E91B90107F003062C1 /* libMagicalRecord.a */,
 				EBADCB9C83FA635A577697F9 /* libPods-Librarius.a */,
 			);
@@ -647,7 +644,7 @@
 						DevelopmentTeam = 8VC65F749H;
 						SystemCapabilities = {
 							com.apple.iCloud = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -686,7 +683,6 @@
 				3803757F1B8C17EB004C4ECE /* LaunchScreen.xib in Resources */,
 				3810DA211BD5E1420093D5C2 /* ADVFlatUI-Resources.xcassets in Resources */,
 				380375401B8AC9A8004C4ECE /* Images.xcassets in Resources */,
-				388A1E151B9F940000C75825 /* To Do bookmark in Resources */,
 				38CD5FD11B9DE78400963D2F /* VolumeDetailsCell.xib in Resources */,
 				387039B81B9D23C900381007 /* SelectionView.xib in Resources */,
 				38BE31E21B961F7000C46001 /* volumePresentationView.xib in Resources */,
@@ -955,7 +951,6 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Librarius/Librarius.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
@@ -963,6 +958,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Librarius/Librarius-Prefix.pch";
 				INFOPLIST_FILE = Librarius/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.objective-v.$(PRODUCT_NAME:rfc1034identifier)";
@@ -977,7 +973,6 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Librarius/Librarius.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
@@ -985,6 +980,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Librarius/Librarius-Prefix.pch";
 				INFOPLIST_FILE = Librarius/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.objective-v.$(PRODUCT_NAME:rfc1034identifier)";
