@@ -28,6 +28,9 @@ static NSString * const bookDetailsCellID = @"bookDetailsCellID";
 
 #pragma mark - Managing the detail item
 
+-(BOOL)prefersStatusBarHidden {
+    return YES;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -35,10 +38,18 @@ static NSString * const bookDetailsCellID = @"bookDetailsCellID";
     self.canDisplayBannerAds = YES;
     [self setTitleText];
     self.bookDetailsTypes = @[@"author", @"pub. date", @"genre"];
-    self.bookDetails = @[self.displayVolume.author,
-                         self.displayVolume.published,
-                         self.displayVolume.mainCategory];
-[self.imageView setImageWithURL:[NSURL URLWithString:self.displayVolume.cover_art_large] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    if (self.displayVolume) {
+        self.bookDetails = @[self.displayVolume.author,
+                             self.displayVolume.published,
+                             self.displayVolume.mainCategory];
+        [self.imageView setImageWithURL:[NSURL URLWithString:self.displayVolume.cover_art_large] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+
+    }
+    else
+    {
+        self.titleHeader.text = @"Error loading Volume!";
+        self.canDisplayBannerAds = NO;
+    }
     [self.detailsTableView sizeToFit];
 }
 
@@ -48,7 +59,19 @@ static NSString * const bookDetailsCellID = @"bookDetailsCellID";
 }
 
 - (IBAction)doneButtonTapped:(id)sender {
+    [self dismissSelf];
+}
+
+-(void)dismissSelf
+{
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+    //FIXME: Why doesn't this work?
+-(void)addGestureDismissal
+{
+    UITapGestureRecognizer *tapToDismiss = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissSelf)];
+    [self.titleHeader addGestureRecognizer:tapToDismiss];
 }
 
 #pragma mark = Helper methods
@@ -84,5 +107,6 @@ static NSString * const bookDetailsCellID = @"bookDetailsCellID";
 
 
 #pragma mark - === UITableView Delegate ===
+
 
 @end

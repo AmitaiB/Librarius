@@ -67,7 +67,7 @@ static NSString * const kUnknown = @"kUnknown";
     NSFetchRequest *duplicatesRequest = [NSFetchRequest fetchRequestWithEntityName:@"Volume"];
     duplicatesRequest.predicate = predicate;
     NSError *error = nil;
-    BOOL isDuplicate = [self.managedObjectContext countForFetchRequest:duplicatesRequest error:&error];
+    BOOL isDuplicate = @([self.managedObjectContext countForFetchRequest:duplicatesRequest error:&error]).boolValue;
     if (error) {
             //Handle error
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
