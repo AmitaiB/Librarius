@@ -39,6 +39,7 @@ static NSString * const bookDetailsCellID = @"bookDetailsCellID";
                          self.displayVolume.published,
                          self.displayVolume.mainCategory];
 [self.imageView setImageWithURL:[NSURL URLWithString:self.displayVolume.cover_art_large] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    [self.detailsTableView sizeToFit];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -72,7 +73,11 @@ static NSString * const bookDetailsCellID = @"bookDetailsCellID";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:bookDetailsCellID forIndexPath:indexPath];
     
     cell.detailTextLabel.text = self.bookDetailsTypes[indexPath.row];
-    cell.textLabel.text       = self.bookDetails[indexPath.row];
+    NSString *string =  self.bookDetails[indexPath.row];
+    if ([string class] == [NSString class]) {
+        cell.textLabel.text       = string;
+    }
+    
     
     return cell;
 }

@@ -57,32 +57,23 @@ static NSString * const kUnknown = @"kUnknown";
         NSLog(@"Context's (new) volumes saved to current library.");
 }
 
--(void)checkStoreForDuplicates:(LBRParsedVolume *)volume {
+-(BOOL)checkStoreForDuplicates:(LBRParsedVolume *)volume {
 //    http://www.theappcodeblog.com/?p=176#more-176
         //search to see if the entity already exists
-    NSError *error = nil;
     
         //We use an NSPredicate combined with the fetchedResultsCntroller to perform
         //the search.
-    if (volume.isbn != nil) {
-        NSPredicate *predicate;
-        if (volume.isbn == volume.isbn10) {
-        predicate = [NSPredicate predicateWithFormat:@"isbn10 contains[cd] %@", volume.isbn];
-        }
-        if (volume.isbn == volume.isbn13) {
-            predicate = [NSPredicate predicateWithFormat:@"isbn13 contains[cd] %@", volume.isbn];
-        }
-        NSFetchRequest *duplicatesRequest = [NSFetchRequest fetchRequestWithEntityName:@"Volume"];
-        duplicatesRequest.predicate = predicate;
-        if(![self.managedObjectContext executeFetchRequest:duplicatesRequest error:&error])
-        {
-                //Handle error
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isbn contains[cd] %@", volume.isbn];
+    NSFetchRequest *duplicatesRequest = [NSFetchRequest fetchRequestWithEntityName:@"Volume"];
+    duplicatesRequest.predicate = predicate;
+    NSError *error = nil;
+    BOOL isDuplicate = [self.managedObjectContext countForFetchRequest:duplicatesRequest error:&error];
+    if (error) {
+            //Handle error
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             exit(-1); //Fail
-        }
-        
-            ///Continue from "this array is just used...."
     }
+    return isDuplicate;
 }
 
 -(void)insertVolumeToContextFromTransientVolume:(LBRParsedVolume*)volumeToInsert {
