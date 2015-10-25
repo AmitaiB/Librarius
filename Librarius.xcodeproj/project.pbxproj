@@ -65,6 +65,7 @@
 		38D601981BDA95B100E3D60F /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38D601971BDA95B100E3D60F /* iAd.framework */; };
 		38D6019B1BDAAAC900E3D60F /* LBRShelf_DecorationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D6019A1BDAAAC900E3D60F /* LBRShelf_DecorationView.m */; };
 		38D6019E1BDAAEDE00E3D60F /* LBRRecommendations_FlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D6019D1BDAAEDE00E3D60F /* LBRRecommendations_FlowLayout.m */; };
+		38D601A11BDABE1E00E3D60F /* TODO-FIXME-list.md in Resources */ = {isa = PBXBuildFile; fileRef = 38D601A01BDABE1E00E3D60F /* TODO-FIXME-list.md */; };
 		38E71DAF1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E71DAE1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.m */; };
 		38F57BB71BB0707200CC2EE8 /* UIToolbar+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F57B9D1BB0707200CC2EE8 /* UIToolbar+FlatUI.m */; };
 		38F57BB91BB0707200CC2EE8 /* UITabBar+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F57BA11BB0707200CC2EE8 /* UITabBar+FlatUI.m */; };
@@ -201,6 +202,7 @@
 		38D6019A1BDAAAC900E3D60F /* LBRShelf_DecorationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRShelf_DecorationView.m; sourceTree = "<group>"; };
 		38D6019C1BDAAEDE00E3D60F /* LBRRecommendations_FlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRRecommendations_FlowLayout.h; sourceTree = "<group>"; };
 		38D6019D1BDAAEDE00E3D60F /* LBRRecommendations_FlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRRecommendations_FlowLayout.m; sourceTree = "<group>"; };
+		38D601A01BDABE1E00E3D60F /* TODO-FIXME-list.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "TODO-FIXME-list.md"; sourceTree = "<group>"; };
 		38E71DAD1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRShelvedBook_CollectionViewCell.h; sourceTree = "<group>"; };
 		38E71DAE1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRShelvedBook_CollectionViewCell.m; sourceTree = "<group>"; };
 		38F57B9D1BB0707200CC2EE8 /* UIToolbar+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIToolbar+FlatUI.m"; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 		380375231B8AC9A8004C4ECE = {
 			isa = PBXGroup;
 			children = (
+				38D601A01BDABE1E00E3D60F /* TODO-FIXME-list.md */,
 				3803752E1B8AC9A8004C4ECE /* Librarius */,
 				3803754B1B8AC9A8004C4ECE /* LibrariusTests */,
 				3803752D1B8AC9A8004C4ECE /* Products */,
@@ -693,6 +696,7 @@
 			files = (
 				3803753E1B8AC9A8004C4ECE /* Main.storyboard in Resources */,
 				3803757E1B8C16B3004C4ECE /* GoogleService-Info.plist in Resources */,
+				38D601A11BDABE1E00E3D60F /* TODO-FIXME-list.md in Resources */,
 				3803757F1B8C17EB004C4ECE /* LaunchScreen.xib in Resources */,
 				3810DA211BD5E1420093D5C2 /* ADVFlatUI-Resources.xcassets in Resources */,
 				380375401B8AC9A8004C4ECE /* Images.xcassets in Resources */,

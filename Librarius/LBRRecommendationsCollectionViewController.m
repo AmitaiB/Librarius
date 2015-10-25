@@ -14,6 +14,7 @@
 #import "LBRShelvedBook_CollectionViewCell.h"
 #import "LBRRecommendedBook_CollectionViewCell.h"
 #import "LBRRecommendations_CollectionViewHeader.h"
+#import "LBRShelf_DecorationView.h"
 
     //Models
 #import "Library.h"
@@ -46,9 +47,11 @@
 }
 
 
-static NSString * const reuseIdentifier = @"RecommendationCellID";
-static NSString * const headerReuseIdentifier = @"HeaderReuseID";
-static NSString * const bookDetailSegueID = @"BookSegueDetailID2";
+static NSString * const reuseIdentifier          = @"RecommendationCellID";
+static NSString * const headerReuseIdentifier    = @"HeaderReuseID";
+static NSString * const bookDetailSegueID        = @"BookSegueDetailID2";
+static NSString * const decorationViewIdentifier = @"decorationViewIdentifier";
+
 
 -(instancetype)init {
     if (!(self = [super init])) return nil;
@@ -75,6 +78,8 @@ static NSString * const bookDetailSegueID = @"BookSegueDetailID2";
     // Register view classes
     [self.collectionView registerClass:[LBRRecommendedBook_CollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
     [self.collectionView registerClass:[LBRRecommendations_CollectionViewHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerReuseIdentifier];
+    [self.collectionView registerClass:[LBRShelf_DecorationView class] forSupplementaryViewOfKind:[LBRShelf_DecorationView kind] withReuseIdentifier:decorationViewIdentifier];
+
     
     // Do any additional setup after loading the view.
     googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];

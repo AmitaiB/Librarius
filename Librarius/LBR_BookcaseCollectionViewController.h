@@ -6,9 +6,10 @@
 //  Copyright © 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 
+    //Frameworks
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-#import "LBR_BookcaseLayout.h"
+#import <iAd/iAd.h>
 
 @interface LBR_BookcaseCollectionViewController : UICollectionViewController <NSFetchedResultsControllerDelegate
 >

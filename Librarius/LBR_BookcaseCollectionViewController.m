@@ -8,12 +8,15 @@
 
 #define kNumberOfShelvesInBookcase 5
 
+
+    //Controllers
 #import "LBR_BookcaseCollectionViewController.h"
 #import "LBRDataManager.h"
+#import "LBR_BookcaseLayout.h"
 
 
     //Views
-#import "LBR_ShelvedBookCell.h"
+//#import "LBR_ShelvedBookCell.h"
 #import "LBRShelvedBook_CollectionViewCell.h"
 
     //Models
@@ -48,6 +51,8 @@ static NSString * const customSectionHeaderID = @"customSectionHeaderID";
         //Rope in the singleton dataManger
     self.dataManager = [LBRDataManager sharedDataManager];
 
+    self.canDisplayBannerAds = YES;
+    
         //Set custom layout with protocol
     LBR_BookcaseLayout *layout               = [LBR_BookcaseLayout new];
     self.collectionView.collectionViewLayout = layout;
@@ -55,9 +60,8 @@ static NSString * const customSectionHeaderID = @"customSectionHeaderID";
     self.collectionView.backgroundColor = [UIColor cloudsColor];
     self.clearsSelectionOnViewWillAppear = NO;
     
-    // Register cell classes
-    [self.collectionView registerClass:[LBR_ShelvedBookCell class] forCellWithReuseIdentifier:reuseIdentifier];
-    
+    // Register cell classes? No, prototyped in storyboard.
+
 }
 
 - (void)didReceiveMemoryWarning {
