@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" text="Book Title" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="KQZ-1w-vlD">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" text="Book Title" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="KQZ-1w-vlD">
                                 <rect key="frame" x="221" y="279" width="158" height="42"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -85,9 +85,11 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8Se-w9-vdZ" id="sll-bW-Nsl">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jyN-V5-oam">
+                                                    <rect key="frame" x="15" y="2" width="33.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -98,6 +100,7 @@
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jOk-AD-drL">
+                                                    <rect key="frame" x="15" y="22.5" width="44" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -157,13 +160,13 @@
                                 <exclude reference="tyU-gN-tbC"/>
                                 <exclude reference="DMQ-yf-y3e"/>
                                 <exclude reference="qkW-Mq-HUG"/>
-                                <exclude reference="SCK-xl-baa"/>
-                                <exclude reference="gMn-BQ-gSw"/>
-                                <exclude reference="uJz-AH-1bj"/>
                                 <exclude reference="Dut-vV-3uB"/>
                                 <exclude reference="MRF-fV-rgB"/>
                                 <exclude reference="kuJ-mA-HEH"/>
                                 <exclude reference="qHH-66-P0H"/>
+                                <exclude reference="SCK-xl-baa"/>
+                                <exclude reference="gMn-BQ-gSw"/>
+                                <exclude reference="uJz-AH-1bj"/>
                                 <exclude reference="OXI-hX-SgB"/>
                             </mask>
                         </variation>
@@ -178,13 +181,13 @@
                                 <include reference="tyU-gN-tbC"/>
                                 <include reference="DMQ-yf-y3e"/>
                                 <include reference="qkW-Mq-HUG"/>
-                                <include reference="SCK-xl-baa"/>
-                                <include reference="gMn-BQ-gSw"/>
-                                <include reference="uJz-AH-1bj"/>
                                 <include reference="Dut-vV-3uB"/>
                                 <include reference="MRF-fV-rgB"/>
                                 <include reference="kuJ-mA-HEH"/>
                                 <include reference="qHH-66-P0H"/>
+                                <include reference="SCK-xl-baa"/>
+                                <include reference="gMn-BQ-gSw"/>
+                                <include reference="uJz-AH-1bj"/>
                                 <include reference="OXI-hX-SgB"/>
                             </mask>
                         </variation>
@@ -310,27 +313,50 @@
         <scene sceneID="2EP-QO-Uby">
             <objects>
                 <collectionViewController id="ajh-Xd-CoJ" userLabel="Shelve" customClass="LBR_BookcaseCollectionViewController" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="XDD-g2-ajd">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" dataMode="prototypes" id="XDD-g2-ajd">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="TLp-nF-c8U">
-                            <size key="itemSize" width="50" height="50"/>
+                            <size key="itemSize" width="106" height="106"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" placeholderIntrinsicWidth="106" placeholderIntrinsicHeight="106" reuseIdentifier="bookCellID" id="md9-9c-w5A" customClass="LBRShelvedBook_CollectionViewCell">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="bookCellID" id="md9-9c-w5A" customClass="LBRShelvedBook_CollectionViewCell">
                                 <rect key="frame" x="0.0" y="64" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="106" height="106"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wue-A0-aVn">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                            <animations/>
+                                            <variation key="widthClass=compact" fixedFrame="YES">
+                                                <rect key="frame" x="0.0" y="0.0" width="106" height="106"/>
+                                            </variation>
+                                        </imageView>
+                                    </subviews>
                                     <animations/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <animations/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="wue-A0-aVn"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="subviews">
+                                        <include reference="wue-A0-aVn"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <outlet property="imageView" destination="wue-A0-aVn" id="dbd-uf-tJ6"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -787,7 +813,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RecommendationCellID" id="FlX-Ty-Yll" customClass="LBRRecommendedBook_CollectionViewCell">
-                                <rect key="frame" x="0.0" y="114" width="106" height="106"/>
+                                <rect key="frame" x="14" y="74" width="90" height="90"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>

@@ -10,7 +10,7 @@
 
 @interface LBRShelvedBook_CollectionViewCell : UICollectionViewCell
 
-@property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, strong) IBOutlet UIImageView *imageView;
 @property (nonatomic, strong) NSString *coverArtURL;
 @property (nonatomic) CGFloat thickness;
 

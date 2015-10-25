@@ -45,7 +45,7 @@ static NSString * const bannerHeaderIdentifier = @"bannerHeaderIdentifier";
 - (void)viewDidLoad {
 
     [super viewDidLoad];
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+//    self.navigationItem.leftBarButtonItem = self.editButtonItem;
     [self flattenUI];
     
     self.canDisplayBannerAds = YES;
@@ -84,24 +84,21 @@ static NSString * const bannerHeaderIdentifier = @"bannerHeaderIdentifier";
     self.tableView.separatorColor = [[UIColor mySinColor] contrastingColor];
     
         //Set the background color
-        ///"You must set this property to nil to set the background color of the table view." (Apple docs)
+        ///"You must set this property (tableView.backgroundView) to nil to set the background color of the table view." (Apple docs)
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = [UIColor mySinColor];
     
-//    [[UITableViewCell appearance] setBackgroundColor:[[UIColor mySinColor] triadicColors][0]];
     [[UITableViewCell appearance] setBackgroundColor:[UIColor greenSeaColor]];
 
     [self.tableView setClipsToBounds:YES];
-
-    
-}
-
-
--(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
     self.fetchedResultsController = [[LBRDataManager sharedDataManager] preconfiguredLBRFetchedResultsController:self];
 }
+
+
+//-(void)viewWillAppear:(BOOL)animated {
+//    [super viewWillAppear:animated];
+//    
+//}
 
 #pragma mark - Segues
 
@@ -110,13 +107,6 @@ static NSString * const bannerHeaderIdentifier = @"bannerHeaderIdentifier";
     
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
     destinationVC.displayVolume = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-    
-    
-    
-    
-    if ([[segue identifier] isEqualToString:@"showDetail"]) {
-//        [[segue destinationViewController] setDetailItem:object];
-    }
 }
 
 

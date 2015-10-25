@@ -12,24 +12,24 @@
 
 @implementation LBRShelvedBook_CollectionViewCell
 
--(instancetype)initWithFrame:(CGRect)frame {
-    if (!(self = [super initWithFrame:frame])) return nil;
-    
-        //custom initialization
-    self.imageView = [UIImageView new];
-    [self.contentView addSubview:self.imageView];
-    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
-//    [self.imageView setImage:[UIImage imageNamed:@"placeholder"]];
-    
-    self.backgroundColor = [UIColor cloudsColor];
-    
-    return self;
-}
+//-(instancetype)initWithFrame:(CGRect)frame {
+//    if (!(self = [super initWithFrame:frame])) return nil;
+//    
+//        //custom initialization
+//    self.imageView = [UIImageView new];
+//    [self.contentView addSubview:self.imageView];
+//    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+////    [self.imageView setImage:[UIImage imageNamed:@"placeholder"]];
+//    
+//    self.backgroundColor = [UIColor pomegranateColor];
+//    
+//    return self;
+//}
 
--(void)layoutSubviews {
-    [super layoutSubviews];
-    self.imageView.frame = self.contentView.bounds;
-}
+//-(void)layoutSubviews {
+//    [super layoutSubviews];
+//    self.imageView.frame = self.contentView.bounds;
+//}
 
 
 @end
