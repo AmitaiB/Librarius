@@ -76,8 +76,8 @@ static NSString * const decorationViewIdentifier = @"decorationViewIdentifier";
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Register view classes
-    [self.collectionView registerClass:[LBRRecommendedBook_CollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
-    [self.collectionView registerClass:[LBRRecommendations_CollectionViewHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerReuseIdentifier];
+//    [self.collectionView registerClass:[LBRRecommendedBook_CollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
+//    [self.collectionView registerClass:[LBRRecommendations_CollectionViewHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerReuseIdentifier];
     [self.collectionView registerClass:[LBRShelf_DecorationView class] forSupplementaryViewOfKind:[LBRShelf_DecorationView kind] withReuseIdentifier:decorationViewIdentifier];
 
     
