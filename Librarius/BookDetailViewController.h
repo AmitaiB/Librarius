@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface BookDetailViewController : UIViewController
-
-//@property (strong, nonatomic) id detailItem;
+@class Volume;
+@interface BookDetailViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@property (nonatomic, strong) Volume *displayVolume;
 
 @end
 

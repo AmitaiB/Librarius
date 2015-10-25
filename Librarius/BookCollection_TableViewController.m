@@ -28,7 +28,6 @@
 
 @interface BookCollection_TableViewController ()
 
-
 @end
 
 @implementation BookCollection_TableViewController
@@ -107,9 +106,15 @@ static NSString * const bannerHeaderIdentifier = @"bannerHeaderIdentifier";
 #pragma mark - Segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    BookDetailViewController *destinationVC = segue.destinationViewController;
+    
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+    destinationVC.displayVolume = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+    
+    
+    
+    
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
 //        [[segue destinationViewController] setDetailItem:object];
     }
 }
@@ -141,6 +146,7 @@ static NSString * const bannerHeaderIdentifier = @"bannerHeaderIdentifier";
 }
 
 #pragma mark - === Table View delegate ===
+
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the specified item to be editable.
