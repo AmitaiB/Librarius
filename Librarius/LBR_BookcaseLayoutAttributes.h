@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum : NSUInteger {
+    LBRCollectionViewLayoutModeBookcaseCustomLayout,
+    LBRCollectionViewLayoutModeBookcaseFlowLayout
+}LBRCollectionViewLayoutMode;
+
 @interface LBR_BookcaseLayoutAttributes : UICollectionViewLayoutAttributes
+
+@property (nonatomic, assign) LBRCollectionViewLayoutMode layoutMode;
 
 @end

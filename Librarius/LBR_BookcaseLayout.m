@@ -106,8 +106,8 @@
 
 -(CGSize)collectionViewContentSize
 {
-    return CGSizeMake(10000, 10000);
-//    return self.contentSize;
+//    return CGSizeMake(10000, 10000);
+    return self.contentSize;
 }
 
 

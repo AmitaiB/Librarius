@@ -10,4 +10,18 @@
 
 @implementation LBR_BookcaseLayoutAttributes
 
+-(id)copyWithZone:(NSZone *)zone
+{
+    LBR_BookcaseLayoutAttributes *attributes = [super copyWithZone:zone];
+    
+    attributes.layoutMode = self.layoutMode;
+
+    return attributes;
+}
+
+-(BOOL)isEqual:(id)object
+{
+    return [super isEqual:object] && (self.layoutMode == [object layoutMode]);
+}
+
 @end

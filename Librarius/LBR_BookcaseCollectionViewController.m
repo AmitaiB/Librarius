@@ -13,6 +13,7 @@
 #import "LBR_BookcaseCollectionViewController.h"
 #import "LBRDataManager.h"
 #import "LBR_BookcaseLayout.h"
+#import "LBR_TemporaryFlowLayout.h"
 
 
     //Views
@@ -41,12 +42,21 @@
 @end
 
 @implementation LBR_BookcaseCollectionViewController
+{
+    UISegmentedControl *layoutChangesSegmentedControl;
+    LBR_TemporaryFlowLayout *customFlowLayout;
+    UICollectionViewFlowLayout *standardFlowLayout;
+    LBR_BookcaseLayout *layout;
+}
 
 static NSString * const reuseIdentifier = @"bookCellID";
 static NSString * const customSectionHeaderID = @"customSectionHeaderID";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self layoutChangeSetup];
+    
     self.title = @"Bookshelves";
         //Rope in the singleton dataManger
     self.dataManager = [LBRDataManager sharedDataManager];
@@ -54,8 +64,8 @@ static NSString * const customSectionHeaderID = @"customSectionHeaderID";
     self.canDisplayBannerAds = YES;
     
         //Set custom layout with protocol
-    LBR_BookcaseLayout *layout               = [LBR_BookcaseLayout new];
-    self.collectionView.collectionViewLayout = layout;
+    layout = [LBR_BookcaseLayout new];
+    [self.collectionView setCollectionViewLayout:layout];
     
     self.collectionView.backgroundColor = [UIColor cloudsColor];
     self.clearsSelectionOnViewWillAppear = NO;
@@ -78,6 +88,35 @@ static NSString * const customSectionHeaderID = @"customSectionHeaderID";
     // Pass the selected object to the new view controller.
 }
 */
+#pragma mark - Layout change methods
+
+-(void)layoutChangeSetup
+{
+    customFlowLayout = [LBR_TemporaryFlowLayout new];
+    standardFlowLayout = [UICollectionViewFlowLayout new];
+    
+    standardFlowLayout.itemSize                = kMaxItemSize;
+    standardFlowLayout.sectionInset            = UIEdgeInsetsMake(1, 1, 1, 1);
+    standardFlowLayout.minimumInteritemSpacing = 1.0;
+    standardFlowLayout.minimumLineSpacing      = 1.0;
+    standardFlowLayout.scrollDirection         = UICollectionViewScrollDirectionHorizontal;
+
+    
+    layoutChangesSegmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"Csm. Bookcase Layout", @"Csm. Flow Layout"]];
+    layoutChangesSegmentedControl.selectedSegmentIndex = 0;
+    [layoutChangesSegmentedControl addTarget:self action:@selector(layoutChangesSegmentedControlDidChangeValue:) forControlEvents:UIControlEventValueChanged];
+    self.navigationItem.titleView = layoutChangesSegmentedControl;
+}
+
+-(void)layoutChangesSegmentedControlDidChangeValue:(id)sender
+{
+    if ([self.collectionViewLayout class] == [LBR_BookcaseLayout class]) {
+        [self.collectionView setCollectionViewLayout:standardFlowLayout animated:YES];
+    }
+    if ([self.collectionViewLayout class] == [UICollectionViewFlowLayout class]) {
+        self.collectionView setCollectionViewLayout: animated:<#(BOOL)#>
+    }
+}
 
 #pragma mark - === UICollectionViewDataSource ===
 
