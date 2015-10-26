@@ -13,7 +13,7 @@
 #import "LBR_BookcaseCollectionViewController.h"
 #import "LBRDataManager.h"
 #import "LBR_BookcaseLayout.h"
-#import "LBR_TemporaryFlowLayout.h"
+#import "LBR_EmptyFlowLayout.h"
 
 
     //Views
@@ -44,13 +44,17 @@
 @implementation LBR_BookcaseCollectionViewController
 {
     UISegmentedControl *layoutChangesSegmentedControl;
-    LBR_TemporaryFlowLayout *customFlowLayout;
+    
     UICollectionViewFlowLayout *standardFlowLayout;
     LBR_BookcaseLayout *layout;
+    NSArray <Volume*> *volumesArray;
+    NSArray <UIImage*> *coverArtArray;
+    
 }
 
 static NSString * const reuseIdentifier = @"bookCellID";
 static NSString * const customSectionHeaderID = @"customSectionHeaderID";
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -72,7 +76,22 @@ static NSString * const customSectionHeaderID = @"customSectionHeaderID";
     
     // Cell classes prototyped in storyboard.
 
+    volumesArray = self.fetchedResultsController.fetchedObjects;
+    [self configureCoverArtArray];
 }
+
+-(void)configureCoverArtArray
+{
+    NSMutableArray *tempImageViewArray = [NSMutableArray array];
+    for (Volume *volume in volumesArray) {
+        UIImageView *imageView = [[UIImageView alloc] init];
+        NSURL *url = [NSURL URLWithString:volume.cover_art_large];
+        [imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder"]];
+        [tempImageViewArray addObject:imageView];
+    }
+    coverArtArray = [tempImageViewArray copy];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -92,17 +111,16 @@ static NSString * const customSectionHeaderID = @"customSectionHeaderID";
 
 -(void)layoutChangeSetup
 {
-    customFlowLayout = [LBR_TemporaryFlowLayout new];
     standardFlowLayout = [UICollectionViewFlowLayout new];
     
-    standardFlowLayout.itemSize                = kMaxItemSize;
+    standardFlowLayout.itemSize                = CGSizeMake(106.0, 106.0);
     standardFlowLayout.sectionInset            = UIEdgeInsetsMake(1, 1, 1, 1);
     standardFlowLayout.minimumInteritemSpacing = 1.0;
     standardFlowLayout.minimumLineSpacing      = 1.0;
     standardFlowLayout.scrollDirection         = UICollectionViewScrollDirectionHorizontal;
 
     
-    layoutChangesSegmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"Csm. Bookcase Layout", @"Csm. Flow Layout"]];
+    layoutChangesSegmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"Bookcase Layout", @"Flow Layout"]];
     layoutChangesSegmentedControl.selectedSegmentIndex = 0;
     [layoutChangesSegmentedControl addTarget:self action:@selector(layoutChangesSegmentedControlDidChangeValue:) forControlEvents:UIControlEventValueChanged];
     self.navigationItem.titleView = layoutChangesSegmentedControl;
@@ -110,11 +128,15 @@ static NSString * const customSectionHeaderID = @"customSectionHeaderID";
 
 -(void)layoutChangesSegmentedControlDidChangeValue:(id)sender
 {
-    if ([self.collectionViewLayout class] == [LBR_BookcaseLayout class]) {
+    NSString *classString = NSStringFromClass([self.collectionViewLayout class]);
+    NSString *bkClassString = NSStringFromClass([LBR_BookcaseLayout class]);
+    NSString *flClassString = NSStringFromClass([LBR_EmptyFlowLayout class]);
+    
+    if ([classString isEqualToString:bkClassString]) {
         [self.collectionView setCollectionViewLayout:standardFlowLayout animated:YES];
     }
-    if ([self.collectionViewLayout class] == [UICollectionViewFlowLayout class]) {
-        self.collectionView setCollectionViewLayout: animated:<#(BOOL)#>
+    if ([classString isEqualToString:flClassString]) {
+        [self.collectionView setCollectionViewLayout:layout animated:YES];
     }
 }
 
@@ -139,11 +161,12 @@ static NSString * const customSectionHeaderID = @"customSectionHeaderID";
         //configure the cell
     cell.backgroundColor = [UIColor asbestosColor];
     
-    NSArray <Volume*> *volumesArray = self.fetchedResultsController.fetchedObjects;
     Volume *volume = volumesArray[indexPath.row];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", volume.cover_art_large]];
-    [cell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder"]];
+//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", volume.cover_art_large]];
+//    [cell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder"]];
     cell.thickness = [volume.thickness floatValue];
+    UIImage *coverArtImage = ((UIImageView*)coverArtArray[indexPath.item]).image;
+    [cell.imageView setImage:coverArtImage];
 
     return cell;
 }

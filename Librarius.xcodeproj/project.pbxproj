@@ -26,7 +26,6 @@
 		380375F81B8D4E90004C4ECE /* BookDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375F61B8D4E90004C4ECE /* BookDetailViewController.m */; };
 		38103B591BD033AE009F22E3 /* LBR_ShelvedBookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38103B581BD033AE009F22E3 /* LBR_ShelvedBookCell.m */; };
 		38103B5C1BD033E4009F22E3 /* LBR_BookcaseLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 38103B5B1BD033E4009F22E3 /* LBR_BookcaseLayout.m */; };
-		38103B601BD03452009F22E3 /* LBR_BookcaseLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 38103B5F1BD03452009F22E3 /* LBR_BookcaseLayoutAttributes.m */; };
 		3810D9F81BD585150093D5C2 /* UITableViewCell+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 3810D9F71BD585150093D5C2 /* UITableViewCell+FlatUI.m */; };
 		3810D9FB1BD585300093D5C2 /* FUICellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3810D9FA1BD585300093D5C2 /* FUICellBackgroundView.m */; };
 		3810D9FE1BD5BDE60093D5C2 /* UIColor-Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 3810D9FC1BD5BDE60093D5C2 /* UIColor-Expanded.m */; };
@@ -53,7 +52,7 @@
 		386C23751BD934520065B46F /* LBRRecommendations_CollectionViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 386C23741BD934520065B46F /* LBRRecommendations_CollectionViewHeader.m */; };
 		386C23781BD968920065B46F /* LBRRecommendedBook_CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 386C23771BD968920065B46F /* LBRRecommendedBook_CollectionViewCell.m */; };
 		387039B81B9D23C900381007 /* SelectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 387039B71B9D23C900381007 /* SelectionView.xib */; };
-		3882667D1BDEBE4C004B757F /* LBR_TemporaryFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3882667C1BDEBE4C004B757F /* LBR_TemporaryFlowLayout.m */; };
+		388266801BDEC70F004B757F /* LBR_EmptyFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3882667F1BDEC70F004B757F /* LBR_EmptyFlowLayout.m */; };
 		388DBDF31BA9174A005C5125 /* THNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 388DBDF21BA9174A005C5125 /* THNavigationController.m */; };
 		388DBE301BAA0F60005C5125 /* LBRCustomLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 388DBE2F1BAA0F60005C5125 /* LBRCustomLayout.m */; };
 		388DBE331BAA54C8005C5125 /* UIImage+imageScaledToHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = 388DBE321BAA54C8005C5125 /* UIImage+imageScaledToHeight.m */; };
@@ -127,8 +126,6 @@
 		38103B581BD033AE009F22E3 /* LBR_ShelvedBookCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBR_ShelvedBookCell.m; sourceTree = "<group>"; };
 		38103B5A1BD033E4009F22E3 /* LBR_BookcaseLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBR_BookcaseLayout.h; sourceTree = "<group>"; };
 		38103B5B1BD033E4009F22E3 /* LBR_BookcaseLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBR_BookcaseLayout.m; sourceTree = "<group>"; };
-		38103B5E1BD03452009F22E3 /* LBR_BookcaseLayoutAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBR_BookcaseLayoutAttributes.h; sourceTree = "<group>"; };
-		38103B5F1BD03452009F22E3 /* LBR_BookcaseLayoutAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBR_BookcaseLayoutAttributes.m; sourceTree = "<group>"; };
 		3810D9F61BD585150093D5C2 /* UITableViewCell+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+FlatUI.h"; sourceTree = "<group>"; };
 		3810D9F71BD585150093D5C2 /* UITableViewCell+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+FlatUI.m"; sourceTree = "<group>"; };
 		3810D9F91BD585300093D5C2 /* FUICellBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICellBackgroundView.h; sourceTree = "<group>"; };
@@ -180,8 +177,8 @@
 		386C23761BD968920065B46F /* LBRRecommendedBook_CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRRecommendedBook_CollectionViewCell.h; sourceTree = "<group>"; };
 		386C23771BD968920065B46F /* LBRRecommendedBook_CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRRecommendedBook_CollectionViewCell.m; sourceTree = "<group>"; };
 		387039B71B9D23C900381007 /* SelectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectionView.xib; sourceTree = "<group>"; };
-		3882667B1BDEBE4C004B757F /* LBR_TemporaryFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBR_TemporaryFlowLayout.h; sourceTree = "<group>"; };
-		3882667C1BDEBE4C004B757F /* LBR_TemporaryFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBR_TemporaryFlowLayout.m; sourceTree = "<group>"; };
+		3882667E1BDEC70F004B757F /* LBR_EmptyFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBR_EmptyFlowLayout.h; sourceTree = "<group>"; };
+		3882667F1BDEC70F004B757F /* LBR_EmptyFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBR_EmptyFlowLayout.m; sourceTree = "<group>"; };
 		388DBDF11BA9174A005C5125 /* THNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNavigationController.h; sourceTree = "<group>"; };
 		388DBDF21BA9174A005C5125 /* THNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNavigationController.m; sourceTree = "<group>"; };
 		388DBE2E1BAA0F60005C5125 /* LBRCustomLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRCustomLayout.h; sourceTree = "<group>"; };
@@ -417,12 +414,10 @@
 		38103B5D1BD033EC009F22E3 /* Bookcase Files */ = {
 			isa = PBXGroup;
 			children = (
-				38103B5E1BD03452009F22E3 /* LBR_BookcaseLayoutAttributes.h */,
-				38103B5F1BD03452009F22E3 /* LBR_BookcaseLayoutAttributes.m */,
-				3882667B1BDEBE4C004B757F /* LBR_TemporaryFlowLayout.h */,
-				3882667C1BDEBE4C004B757F /* LBR_TemporaryFlowLayout.m */,
 				381FC2931BD13A09003A3C52 /* LBR_BookcaseCollectionViewController.h */,
 				381FC2941BD13A09003A3C52 /* LBR_BookcaseCollectionViewController.m */,
+				3882667E1BDEC70F004B757F /* LBR_EmptyFlowLayout.h */,
+				3882667F1BDEC70F004B757F /* LBR_EmptyFlowLayout.m */,
 				38103B5A1BD033E4009F22E3 /* LBR_BookcaseLayout.h */,
 				38103B5B1BD033E4009F22E3 /* LBR_BookcaseLayout.m */,
 				381FC2B91BD15D45003A3C52 /* LBR_BookcaseModel.h */,
@@ -797,7 +792,6 @@
 				38F57BBF1BB0707200CC2EE8 /* UIImage+FlatUI.m in Sources */,
 				38E71DAF1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.m in Sources */,
 				38F57BC11BB0707200CC2EE8 /* UIColor+FlatUI.m in Sources */,
-				3882667D1BDEBE4C004B757F /* LBR_TemporaryFlowLayout.m in Sources */,
 				3855E26F1BB0DBD4004C5D11 /* LBRAlertContent_TableViewCell.m in Sources */,
 				38AAD7201B901D36003062C1 /* Library.m in Sources */,
 				380375F71B8D4E90004C4ECE /* BookCollection_TableViewController.m in Sources */,
@@ -807,6 +801,7 @@
 				38F57BB91BB0707200CC2EE8 /* UITabBar+FlatUI.m in Sources */,
 				38F57BBA1BB0707200CC2EE8 /* UIStepper+FlatUI.m in Sources */,
 				380375321B8AC9A8004C4ECE /* main.m in Sources */,
+				388266801BDEC70F004B757F /* LBR_EmptyFlowLayout.m in Sources */,
 				384E0CC01B97D24B007E7290 /* NSString+dateValue.m in Sources */,
 				3810DA141BD5E0A90093D5C2 /* SettingsCell1.m in Sources */,
 				381FC2951BD13A09003A3C52 /* LBR_BookcaseCollectionViewController.m in Sources */,
@@ -826,7 +821,6 @@
 				38FABE881BD49AE4009479E9 /* UIColor+ABBColors.m in Sources */,
 				380375621B8BB707004C4ECE /* LBRGoodReadsAPIClient.m in Sources */,
 				38103B591BD033AE009F22E3 /* LBR_ShelvedBookCell.m in Sources */,
-				38103B601BD03452009F22E3 /* LBR_BookcaseLayoutAttributes.m in Sources */,
 				388DBDF31BA9174A005C5125 /* THNavigationController.m in Sources */,
 				38103B5C1BD033E4009F22E3 /* LBR_BookcaseLayout.m in Sources */,
 				3810D9F81BD585150093D5C2 /* UITableViewCell+FlatUI.m in Sources */,

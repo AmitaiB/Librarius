@@ -129,6 +129,7 @@
     return self.layoutInformation[indexPath];
 }
 
+
 #pragma mark - Helper methods
 
 
