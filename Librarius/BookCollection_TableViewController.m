@@ -166,6 +166,13 @@ static NSString * const bannerHeaderIdentifier = @"bannerHeaderIdentifier";
     }
 }
 
+-(void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
+{
+    UITableViewHeaderFooterView *headerView   = (UITableViewHeaderFooterView *)view;
+    headerView.backgroundView.backgroundColor = [UIColor bleuDeFranceColor];
+    headerView.textLabel.backgroundColor      = [UIColor clearColor];
+    headerView.textLabel.textColor            = [UIColor darkLavaColor];
+}
 
 #pragma mark private delegate helpers
 

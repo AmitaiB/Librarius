@@ -78,9 +78,6 @@
     self.bookOnShelfCounter = 0;
     self.bookcaseModel      = [self configuredBookcaseModel];
     
-//    CGFloat xMax = 0;
-//    CGFloat yMax = 0;
-    
         ///First, create an attributes object for each cell (keyed to indexPath, provided by the collectionView's dataSource.
     NSInteger numSections = [self.collectionView numberOfSections];
     
@@ -91,43 +88,21 @@
                 //Many things need to happen here:
             indexPath = [NSIndexPath indexPathForItem:item inSection:section];
             UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
-//            [self layoutAttributesForItemAtIndexPath:indexPath];
             
             CGPoint origin = [self originPointForBook:self.bookOnShelfCounter onShelf:self.currentShelfIndex];
             attributes.frame = CGRectMake(origin.x, origin.y, kDefaulCellDimension, kDefaulCellDimension);
             [self incrementBookcaseModelByOneBook];
             
-//                //Grab ContentSize while we're here.
-//            xMax = MAX(xMax, origin.x);
-//            yMax = MAX(yMax, origin.y);
-            
             [layoutInformation setObject:attributes forKey:indexPath];
         }
     }
     
-        //A bit more tweaking is needed for the contentSize
-//    xMax += kDefaulCellDimension + INSET_RIGHT;
-//    yMax += kDefaulCellDimension + INSET_BOTTOM;
-//    self.contentSize = CGSizeMake(xMax, yMax);
-        ///At this point, we should have appropriate layout data for our cells per indexPath,
-        ///having fully encapsulated the dirty work of arranging it appropriately.
+    self.contentSize = [self extrapolatedContentSize];
 }
 
-    /// Essentially, this depends on how many cells are being shown, plus the spaces at the ends
-    ///  and the spaces in between.
 -(CGSize)contentSize
 {
-    CGFloat cellCountForLongestShelf = 0;
-    for (NSArray *shelf in self.bookcaseModel.shelves) {
-        cellCountForLongestShelf = MAX(cellCountForLongestShelf, shelf.count);
-    }
-        /// There is always one less interspace.
-        /// IL [cell#1]-#1-[cell#2]-#2-[cell#3] IR
-    CGFloat xMax = INSET_LEFT + (kDefaulCellDimension + self.interItemSpacing) * cellCountForLongestShelf - self.interItemSpacing + INSET_RIGHT;
-    CGFloat yMax = INSET_TOP + (kDefaulCellDimension + self.interShelfSpacing) * self.bookcaseModel.shelves.count - self.interShelfSpacing + INSET_BOTTOM;
-    
-    self.contentSize = CGSizeMake(xMax, yMax);
-    
+//    return CGSizeMake(10000, 1000);
     return self.contentSize;
 }
 
@@ -151,6 +126,24 @@
 }
 
 #pragma mark - Helper methods
+
+
+    /// Essentially, this depends on how many cells are being shown, plus the spaces at the ends
+    ///  and the spaces in between.
+-(CGSize)extrapolatedContentSize
+{
+    CGFloat cellCountForLongestShelf = 0;
+    for (NSArray *shelf in self.bookcaseModel.shelves) {
+        cellCountForLongestShelf = MAX(cellCountForLongestShelf, shelf.count);
+    }
+        /// There is always one fewer interspace than # of cells, e.g.:
+        /// InsetL-[cell#1]-#1-[cell#2]-#2-[cell#3]-InsetR
+        /// , so we subtract one inter_spacing.
+    CGFloat xMax = INSET_LEFT + (kDefaulCellDimension + self.interItemSpacing) * cellCountForLongestShelf - self.interItemSpacing + INSET_RIGHT;
+    CGFloat yMax = INSET_TOP + (kDefaulCellDimension + self.interShelfSpacing) * self.bookcaseModel.shelves.count - self.interShelfSpacing + INSET_BOTTOM;
+    
+    return CGSizeMake(xMax, yMax);
+}
 
 -(LBR_BookcaseModel *)configuredBookcaseModel {
     LBR_BookcaseModel *bookcaseModel = [[LBR_BookcaseModel alloc] initWithWidth:58.0 shelvesCount:5];
