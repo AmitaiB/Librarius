@@ -19,6 +19,8 @@
 
 @property (nonatomic, strong) NSArray<NSArray *> *shelves;
 @property (nonatomic, strong) NSArray<Volume  *> *unshelvedRemainder;
+@property (nonatomic) BOOL isFull;
+
 
 -(instancetype)initWithWidth:(CGFloat)width shelvesCount:(NSUInteger)numShelves;
 

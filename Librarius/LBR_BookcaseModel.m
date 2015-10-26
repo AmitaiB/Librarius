@@ -28,6 +28,7 @@
     
     _totalNumOfShelves = totalNumOfShelves;
     _width_cm = width;
+    _isFull = NO;
     
     return self;
 }
@@ -82,6 +83,7 @@
             else
             {
                     //No more empty shelves. Add all remaining books to the unshelved.
+                self.isFull = YES;
                 NSUInteger numBooksRemaining = booksArray.count - (idx + offBy1);
                 self.unshelvedRemainder = [booksArray subarrayWithRange:NSMakeRange(idx, numBooksRemaining)];
             }

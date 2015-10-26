@@ -151,18 +151,8 @@
 
 
 -(void)incrementBookcaseModelByOneBook {
-    NSArray *currentShelf;
-    @try {
-        currentShelf = self.bookcaseModel.shelves[self.currentShelfIndex];
-    }
-    @catch (NSException *exception) {
-                NSLog(@"CRASH: %@", exception);
-                NSLog(@"Stack Trace: %@", [exception callStackSymbols]);
-                    //Internal Error reporting
-    }
-    @finally {
-        currentShelf = self.bookcaseModel.shelves[0];
-    }
+    NSArray *currentShelf = self.bookcaseModel.shelves[self.currentShelfIndex];
+
     NSUInteger maxShelvesCount = self.bookcaseModel.shelves.count;
     
         //No more shelves.
