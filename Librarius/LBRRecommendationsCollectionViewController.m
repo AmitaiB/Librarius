@@ -75,10 +75,10 @@ static NSString * const decorationViewIdentifier = @"decorationViewIdentifier";
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
     
-    // Register view classes
+    // Register view classes - not needed for Storyboards
 //    [self.collectionView registerClass:[LBRRecommendedBook_CollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
 //    [self.collectionView registerClass:[LBRRecommendations_CollectionViewHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerReuseIdentifier];
-    [self.collectionView registerClass:[LBRShelf_DecorationView class] forSupplementaryViewOfKind:[LBRShelf_DecorationView kind] withReuseIdentifier:decorationViewIdentifier];
+//    [self.collectionView registerClass:[LBRShelf_DecorationView class] forSupplementaryViewOfKind:[LBRShelf_DecorationView kind] withReuseIdentifier:decorationViewIdentifier];
 
     
     // Do any additional setup after loading the view.
