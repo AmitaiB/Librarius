@@ -71,7 +71,7 @@
 
 -(void)prepareLayout {
     
-    NSMutableDictionary *layoutInformation = [NSMutableDictionary dictionary];
+    NSMutableDictionary *mutableLayoutInformation = [NSMutableDictionary dictionary];
     NSIndexPath *indexPath;
     
     self.currentShelfIndex  = 0;
@@ -93,10 +93,10 @@
             attributes.frame = CGRectMake(origin.x, origin.y, kDefaulCellDimension, kDefaulCellDimension);
             [self incrementBookcaseModelByOneBook];
             
-            [layoutInformation setObject:attributes forKey:indexPath];
+            [mutableLayoutInformation setObject:attributes forKey:indexPath];
         }
     }
-    
+    self.layoutInformation = [mutableLayoutInformation copy];
     self.contentSize = [self extrapolatedContentSize];
 }
 
@@ -112,7 +112,7 @@
         //to the array, which is then returned.
     NSMutableArray *attributeObjectsToReturn = [NSMutableArray array];
     
-    for (UICollectionViewLayoutAttributes *attributes in self.layoutInformation) {
+    for (UICollectionViewLayoutAttributes *attributes in [self.layoutInformation allValues]) {
         if (CGRectIntersectsRect(attributes.frame, rect)) {
             [attributeObjectsToReturn addObject:attributes];
         }
