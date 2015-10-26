@@ -61,7 +61,7 @@ static NSString * const kUnknown = @"kUnknown";
     
         //We use an NSPredicate combined with the fetchedResultsCntroller to perform
         //the search.
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isbn contains[cd] %@", volume.isbn];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isbn13 CONTAINS[cd] %@", volume.isbn];
     NSFetchRequest *duplicatesRequest = [NSFetchRequest fetchRequestWithEntityName:@"Volume"];
     duplicatesRequest.predicate = predicate;
     NSError *error = nil;

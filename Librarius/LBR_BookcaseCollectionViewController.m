@@ -161,12 +161,12 @@ static NSString * const customSectionHeaderID = @"customSectionHeaderID";
         //configure the cell
     cell.backgroundColor = [UIColor asbestosColor];
     
-    Volume *volume = volumesArray[indexPath.row];
-//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", volume.cover_art_large]];
-//    [cell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    Volume *volume = volumesArray[indexPath.item];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", volume.cover_art_large]];
+    [cell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder"]];
     cell.thickness = [volume.thickness floatValue];
-    UIImage *coverArtImage = ((UIImageView*)coverArtArray[indexPath.item]).image;
-    [cell.imageView setImage:coverArtImage];
+//    UIImage *coverArtImage = ((UIImageView*)coverArtArray[indexPath.item]).image;
+//    [cell.imageView setImage:coverArtImage];
 
     return cell;
 }
