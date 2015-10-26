@@ -53,6 +53,9 @@
     self.currentShelfIndex  = 0;
     self.bookOnShelfCounter = 0;
     
+    self.interItemSpacing  = 1.0;
+    self.interShelfSpacing = 1.0;
+    
     return self;
 }
 
@@ -78,7 +81,6 @@
     self.bookOnShelfCounter = 0;
     self.bookcaseModel      = [self configuredBookcaseModel];
     
-        ///First, create an attributes object for each cell (keyed to indexPath, provided by the collectionView's dataSource.
     NSInteger numSections = [self.collectionView numberOfSections];
     
     for (NSUInteger section = 0; section < numSections; section++) {
@@ -86,9 +88,11 @@
         
         for (NSUInteger item = 0; item < numItems; item++) {
                 //Many things need to happen here:
+                ///First, create an attributes object for each cell (keyed to indexPath, provided by the collectionView's dataSource.
             indexPath = [NSIndexPath indexPathForItem:item inSection:section];
             UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
             
+                ///Next, set the origin and size for each cell.
             CGPoint origin = [self originPointForBook:self.bookOnShelfCounter onShelf:self.currentShelfIndex];
             attributes.frame = CGRectMake(origin.x, origin.y, kDefaulCellDimension, kDefaulCellDimension);
             [self incrementBookcaseModelByOneBook];
@@ -102,8 +106,8 @@
 
 -(CGSize)collectionViewContentSize
 {
-//    return CGSizeMake(10000, 10000);
-    return self.contentSize;
+    return CGSizeMake(10000, 10000);
+//    return self.contentSize;
 }
 
 
@@ -146,7 +150,7 @@
 }
 
 -(LBR_BookcaseModel *)configuredBookcaseModel {
-    LBR_BookcaseModel *bookcaseModel = [[LBR_BookcaseModel alloc] initWithWidth:58.0 shelvesCount:5];
+    LBR_BookcaseModel *bookcaseModel = [[LBR_BookcaseModel alloc] initWithWidth:kDefaultBookcaseWidth_cm shelvesCount:kDefaultBookcaseShelvesCount];
     LBR_BookcaseCollectionViewController *collectionViewController = (LBR_BookcaseCollectionViewController *)self.collectionView.dataSource;
         
     [bookcaseModel shelveBooks:collectionViewController.fetchedResultsController.fetchedObjects];
@@ -160,18 +164,16 @@
 
     NSUInteger maxShelvesCount = self.bookcaseModel.shelves.count;
     
-        //No more shelves.
-    if (self.currentShelfIndex == maxShelvesCount)
-        return;
-    
-        //If there are more books on this shelf.
+        //If more books fit on this shelf, according to the model.
     if (self.bookOnShelfCounter < currentShelf.count)
     {
         self.bookOnShelfCounter++;
         return;
     }
-    
-        //If this book was the last book on the current shelf.
+
+        //If this book was the last book (or over?) on the current shelf,
+        //AND there are more empty shelves, then we know to make our book
+        //the first book on the next shelf (instead of the 'over-last' one on this shelf).
     if (self.bookOnShelfCounter >= currentShelf.count &&
         self.currentShelfIndex + offBy1 < maxShelvesCount)
     {
@@ -179,6 +181,11 @@
         self.bookOnShelfCounter = 0;
         return;
     }
+        //If all shelves are full - no more shelves.
+    if (self.currentShelfIndex + offBy1 >= maxShelvesCount)
+        return;
+    
+    
 }
 
 -(CGPoint)originPointForBook:(NSUInteger)bookCounter onShelf:(NSUInteger)shelfIndex {

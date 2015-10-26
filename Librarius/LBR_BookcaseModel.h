@@ -22,7 +22,7 @@
 @property (nonatomic) BOOL isFull;
 
 
--(instancetype)initWithWidth:(CGFloat)width shelvesCount:(NSUInteger)numShelves;
+-(instancetype)initWithWidth:(CGFloat)width shelvesCount:(NSUInteger)shelvesCount;
 
 -(void)shelveBooks:(NSArray <Volume *> *)booksArray;
 

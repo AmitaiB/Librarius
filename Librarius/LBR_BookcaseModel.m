@@ -11,11 +11,9 @@
 #import "LBR_BookcaseModel.h"
 #import "Volume.h"
 
-#define DBLG NSLog(@"<%@:%@:line %d, mutableShelves.count = %lu>", NSStringFromClass([self class]), NSStringFromSelector(_cmd), __LINE__, (unsigned long)self.mutableShelves.count);
-
 @interface LBR_BookcaseModel ()
 
-@property (nonatomic, assign) NSUInteger totalNumOfShelves;
+@property (nonatomic, assign) NSUInteger shelvesCount;
 @property (nonatomic, assign) CGFloat width_cm;
 @property (nonatomic, strong) NSMutableArray<NSArray *> *mutableShelves;
 @end
@@ -23,10 +21,10 @@
 
 @implementation LBR_BookcaseModel
 
--(instancetype)initWithWidth:(CGFloat)width shelvesCount:(NSUInteger)totalNumOfShelves {
+-(instancetype)initWithWidth:(CGFloat)width shelvesCount:(NSUInteger)shelvesCount {
     if (!(self = [super init])) return nil;
     
-    _totalNumOfShelves = totalNumOfShelves;
+    _shelvesCount = shelvesCount;
     _width_cm = width;
     _isFull = NO;
     
@@ -36,7 +34,7 @@
 -(instancetype)init {
     if (!(self = [super init])) return nil;
     
-    return [self initWithWidth:58.0 shelvesCount:5];
+    return [self initWithWidth:kDefaultBookcaseWidth_cm shelvesCount:kDefaultBookcaseShelvesCount];
 }
 
 -(void)shelveBooks:(NSArray<Volume *> *)booksArray {
@@ -72,7 +70,7 @@
             [self.mutableShelves addObject:thisShelf];
 
                 //If there are more shelves, then this book becomes the first on the next shelf.
-            BOOL nextShelfExistsAndIsEmpty = self.mutableShelves.count < self.totalNumOfShelves;
+            BOOL nextShelfExistsAndIsEmpty = self.mutableShelves.count < self.shelvesCount;
 
             if (nextShelfExistsAndIsEmpty)
             {

@@ -109,7 +109,7 @@ static NSString * const customSectionHeaderID = @"customSectionHeaderID";
     return cell;
 }
 
-#pragma mark <UICollectionViewDelegate>
+//#pragma mark - === UICollectionViewDelegate ===
 
 /*
 // Uncomment this method to specify if the specified item should be highlighted during tracking
@@ -247,5 +247,12 @@ static NSString * const customSectionHeaderID = @"customSectionHeaderID";
         _itemChanges = nil;
     }];
 }
+
+#pragma mark - === ScrollView Delegate ===
+
+//-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+//{
+//
+//}
 
 @end
