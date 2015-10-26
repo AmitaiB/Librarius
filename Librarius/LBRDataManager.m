@@ -13,8 +13,6 @@
 #import <GTLBooksVolume.h>
 #import "LBRGoogleGTLClient.h"
 
-#define DBLG NSLog(@"<%@:%@:line %d, reporting!>", NSStringFromClass([self class]), NSStringFromSelector(_cmd), __LINE__);
-
 @implementation LBRDataManager
 
 static NSString * const kUnknown = @"kUnknown";

@@ -28,6 +28,7 @@ static NSString * const bookDetailsCellID = @"bookDetailsCellID";
 
 #pragma mark - Managing the detail item
 
+
 -(BOOL)prefersStatusBarHidden {
     return YES;
 }
@@ -38,9 +39,9 @@ static NSString * const bookDetailsCellID = @"bookDetailsCellID";
     self.canDisplayBannerAds = YES;
     [self setTitleText];
     self.bookDetailsTypes = @[@"author", @"pub. date", @"genre"];
-    if (self.displayVolume) {
+    if (self.displayVolume && self.displayVolume.author && self.displayVolume.mainCategory) {
         self.bookDetails = @[self.displayVolume.author,
-                             self.displayVolume.published,
+                             (self.displayVolume.published)? self.displayVolume.published : @"",
                              self.displayVolume.mainCategory];
         [self.imageView setImageWithURL:[NSURL URLWithString:self.displayVolume.cover_art_large] placeholderImage:[UIImage imageNamed:@"placeholder"]];
 

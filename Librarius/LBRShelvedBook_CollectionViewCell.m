@@ -12,6 +12,18 @@
 
 @implementation LBRShelvedBook_CollectionViewCell
 
+-(instancetype)init
+{
+    if (!(self = [super init])) return nil;
+    
+        //???: Does this work?
+    NSLayoutConstraint *fallbackWidthConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:30];
+    NSLayoutConstraint *fallbackHeightConstraint = [NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:30];
+    fallbackWidthConstraint.priority  = 1.0;
+    fallbackHeightConstraint.priority = 1.0;
+    [self addConstraints:@[fallbackWidthConstraint, fallbackHeightConstraint]];
+    return self;
+}
 
 
 @end

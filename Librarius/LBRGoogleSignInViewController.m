@@ -6,9 +6,6 @@
 //  Copyright (c) 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 
-#define DBLG NSLog(@"<%@:%@:line %d, reporting!>", NSStringFromClass([self class]), NSStringFromSelector(_cmd), __LINE__);
-
-
 #import "LBRGoogleSignInViewController.h"
 #import <GoogleSignIn.h>
 #import "LBRConstants.h"

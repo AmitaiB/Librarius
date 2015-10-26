@@ -5,7 +5,6 @@
 //  Created by Amitai Blickstein on 8/31/15.
 //  Copyright (c) 2015 Amitai Blickstein, LLC. All rights reserved.
 //
-#define DBLG NSLog(@"<%@:%@:line %d, reporting!>", NSStringFromClass([self class]), NSStringFromSelector(_cmd), __LINE__);
 
 #import "LBRBarcodeScannerViewController.h"
 #import "LBRGoogleGTLClient.h"

@@ -100,9 +100,9 @@
     self.contentSize = [self extrapolatedContentSize];
 }
 
--(CGSize)contentSize
+-(CGSize)collectionViewContentSize
 {
-//    return CGSizeMake(10000, 1000);
+//    return CGSizeMake(10000, 10000);
     return self.contentSize;
 }
 

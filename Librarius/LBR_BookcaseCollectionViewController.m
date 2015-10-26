@@ -60,7 +60,7 @@ static NSString * const customSectionHeaderID = @"customSectionHeaderID";
     self.collectionView.backgroundColor = [UIColor cloudsColor];
     self.clearsSelectionOnViewWillAppear = NO;
     
-    // Register cell classes? No, prototyped in storyboard.
+    // Cell classes prototyped in storyboard.
 
 }
 

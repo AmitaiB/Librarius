@@ -10,7 +10,6 @@
 #import <GTLBooks.h>
 #import "NSString+dateValue.h"
 
-#define DBLG NSLog(@"<%@:%@:line %d, reporting!>", NSStringFromClass([self class]), NSStringFromSelector(_cmd), __LINE__);
 #define CALIPER [@"436" floatValue] //In pages per inch, ppi.
 /**
  Typical uncoated digital book paper calipers:

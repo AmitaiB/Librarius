@@ -7,7 +7,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Collection-->
+        <!--Title-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
                 <viewController id="9pv-A4-QxB" customClass="BookDetailViewController" sceneMemberID="viewController">
@@ -41,33 +41,6 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cN6-p7-ZJ0">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="HIy-fm-XGR"/>
-                                </constraints>
-                                <items>
-                                    <navigationItem title="Book Detail View" id="vG7-Zb-0RS">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="7cE-eD-knT">
-                                            <connections>
-                                                <action selector="doneButtonTapped:" destination="9pv-A4-QxB" id="Hja-tP-bvp"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="HIy-fm-XGR"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="-24" width="400" height="44"/>
-                                    <mask key="constraints">
-                                        <exclude reference="HIy-fm-XGR"/>
-                                    </mask>
-                                </variation>
-                            </navigationBar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dOy-7Y-f7Q">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <animations/>
@@ -79,8 +52,7 @@
                                         <exclude reference="dwa-eh-GVV"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="20" y="28" width="168" height="336"/>
+                                <variation key="widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="dwa-eh-GVV"/>
                                     </mask>
@@ -106,7 +78,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="widthClass=compact">
                                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -117,7 +89,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="widthClass=compact">
                                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
@@ -135,8 +107,8 @@
                                         <exclude reference="HYm-uH-1t1"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="394" width="400" height="152"/>
+                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="345" width="400" height="152"/>
                                     <mask key="constraints">
                                         <include reference="HYm-uH-1t1"/>
                                     </mask>
@@ -152,61 +124,54 @@
                         <constraints>
                             <constraint firstItem="dOy-7Y-f7Q" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" id="DMQ-yf-y3e"/>
                             <constraint firstItem="teT-h7-Oj1" firstAttribute="top" secondItem="dOy-7Y-f7Q" secondAttribute="bottom" constant="30" id="Dut-vV-3uB"/>
-                            <constraint firstItem="teT-h7-Oj1" firstAttribute="trailing" secondItem="cN6-p7-ZJ0" secondAttribute="trailing" id="MRF-fV-rgB"/>
                             <constraint firstItem="4ug-Mw-9AY" firstAttribute="top" secondItem="teT-h7-Oj1" secondAttribute="bottom" constant="54" id="OXI-hX-SgB"/>
                             <constraint firstItem="KQZ-1w-vlD" firstAttribute="leading" secondItem="dOy-7Y-f7Q" secondAttribute="trailing" constant="24" id="gFv-Rs-kjA"/>
                             <constraint firstItem="KQZ-1w-vlD" firstAttribute="trailing" secondItem="tsR-hK-woN" secondAttribute="trailingMargin" id="hL4-nc-372"/>
                             <constraint firstItem="KQZ-1w-vlD" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="65" id="hYg-qL-qz1"/>
-                            <constraint firstAttribute="trailing" secondItem="cN6-p7-ZJ0" secondAttribute="trailing" id="hsl-nT-chu"/>
-                            <constraint firstItem="teT-h7-Oj1" firstAttribute="leading" secondItem="cN6-p7-ZJ0" secondAttribute="leading" id="kuJ-mA-HEH"/>
                             <constraint firstItem="teT-h7-Oj1" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="qHH-66-P0H"/>
                             <constraint firstItem="dOy-7Y-f7Q" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="8" symbolic="YES" id="qkW-Mq-HUG"/>
-                            <constraint firstItem="cN6-p7-ZJ0" firstAttribute="bottom" secondItem="Ia1-K6-d13" secondAttribute="bottom" id="tyU-gN-tbC"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="cN6-p7-ZJ0"/>
                                 <exclude reference="dOy-7Y-f7Q"/>
                                 <exclude reference="teT-h7-Oj1"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="hsl-nT-chu"/>
-                                <exclude reference="tyU-gN-tbC"/>
                                 <exclude reference="DMQ-yf-y3e"/>
                                 <exclude reference="qkW-Mq-HUG"/>
+                                <exclude reference="Dut-vV-3uB"/>
+                                <exclude reference="qHH-66-P0H"/>
                                 <exclude reference="gFv-Rs-kjA"/>
                                 <exclude reference="hL4-nc-372"/>
                                 <exclude reference="hYg-qL-qz1"/>
-                                <exclude reference="Dut-vV-3uB"/>
-                                <exclude reference="MRF-fV-rgB"/>
-                                <exclude reference="kuJ-mA-HEH"/>
-                                <exclude reference="qHH-66-P0H"/>
                                 <exclude reference="OXI-hX-SgB"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
-                                <include reference="cN6-p7-ZJ0"/>
                                 <include reference="dOy-7Y-f7Q"/>
                                 <include reference="teT-h7-Oj1"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="hsl-nT-chu"/>
-                                <include reference="tyU-gN-tbC"/>
                                 <include reference="DMQ-yf-y3e"/>
                                 <include reference="qkW-Mq-HUG"/>
+                                <include reference="Dut-vV-3uB"/>
+                                <include reference="qHH-66-P0H"/>
                                 <include reference="gFv-Rs-kjA"/>
                                 <include reference="hL4-nc-372"/>
                                 <include reference="hYg-qL-qz1"/>
-                                <include reference="Dut-vV-3uB"/>
-                                <include reference="MRF-fV-rgB"/>
-                                <include reference="kuJ-mA-HEH"/>
-                                <include reference="qHH-66-P0H"/>
                                 <include reference="OXI-hX-SgB"/>
                             </mask>
                         </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Collection" image="search1" id="acW-dT-cKf"/>
+                    <navigationItem key="navigationItem" title="Title" id="enP-3w-Oe7">
+                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="Bhh-8z-ean">
+                            <connections>
+                                <action selector="doneButtonTapped:" destination="9pv-A4-QxB" id="u1y-hw-Dr1"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="detailsTableView" destination="teT-h7-Oj1" id="6So-Tc-fev"/>
                         <outlet property="imageView" destination="dOy-7Y-f7Q" id="ty2-p6-IfL"/>
@@ -237,7 +202,7 @@
                                 </tableViewCellContentView>
                                 <animations/>
                                 <connections>
-                                    <segue destination="9pv-A4-QxB" kind="showDetail" identifier="bookDetailSegueID" id="phb-kd-9Fy"/>
+                                    <segue destination="9pv-A4-QxB" kind="show" identifier="bookDetailSegueID" id="hkZ-A2-opz"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -251,7 +216,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Azg-4B-XOz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1729.5" y="-840"/>
+            <point key="canvasLocation" x="1759.5" y="-1361"/>
         </scene>
         <!--Settings Table View Controller-->
         <scene sceneID="cdc-Bu-pzL">
@@ -334,7 +299,7 @@
                         <collectionViewLayout key="collectionViewLayout" id="Gls-XI-Uoo" customClass="LBR_BookcaseLayout"/>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="bookCellID" id="md9-9c-w5A" customClass="LBRShelvedBook_CollectionViewCell">
-                                <rect key="frame" x="0.0" y="64" width="106" height="106"/>
+                                <rect key="frame" x="0.0" y="64" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -822,7 +787,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RecommendationCellID" id="FlX-Ty-Yll" customClass="LBRRecommendedBook_CollectionViewCell">
-                                <rect key="frame" x="14" y="74" width="90" height="90"/>
+                                <rect key="frame" x="14" y="124" width="90" height="90"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
@@ -834,13 +799,14 @@
                             </collectionViewCell>
                         </cells>
                         <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HeaderReuseID" id="kd3-hD-Hlb" customClass="LBRRecommendations_CollectionViewHeader">
+                            <rect key="frame" x="0.0" y="64" width="600" height="50"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SQW-cW-CEB">
                                     <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                     <animations/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                     <variation key="widthClass=compact" fixedFrame="YES">
                                         <rect key="frame" x="43" y="14" width="274" height="21"/>
@@ -974,6 +940,6 @@
         <image name="woodpanel04110095" width="624" height="452"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Bzc-ZK-D5c"/>
+        <segue reference="hkZ-A2-opz"/>
     </inferredMetricsTieBreakers>
 </document>

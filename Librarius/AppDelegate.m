@@ -18,8 +18,6 @@
 
 #import <AVFoundation/AVFoundation.h>
 
-#define DBLG NSLog(@"<%@:%@:line %d, reporting!>", NSStringFromClass([self class]), NSStringFromSelector(_cmd), __LINE__);
-
 @interface AppDelegate ()
 
 @end
