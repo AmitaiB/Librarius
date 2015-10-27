@@ -67,6 +67,7 @@
 		38D6019E1BDAAEDE00E3D60F /* LBRRecommendations_FlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D6019D1BDAAEDE00E3D60F /* LBRRecommendations_FlowLayout.m */; };
 		38D601A11BDABE1E00E3D60F /* TODO-FIXME-list.md in Resources */ = {isa = PBXBuildFile; fileRef = 38D601A01BDABE1E00E3D60F /* TODO-FIXME-list.md */; };
 		38E71DAF1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E71DAE1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.m */; };
+		38F3C0D91BDFE01F005AF2ED /* LBR_ResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F3C0D81BDFE01F005AF2ED /* LBR_ResultsTableViewController.m */; };
 		38F57BB71BB0707200CC2EE8 /* UIToolbar+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F57B9D1BB0707200CC2EE8 /* UIToolbar+FlatUI.m */; };
 		38F57BB91BB0707200CC2EE8 /* UITabBar+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F57BA11BB0707200CC2EE8 /* UITabBar+FlatUI.m */; };
 		38F57BBA1BB0707200CC2EE8 /* UIStepper+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F57BA31BB0707200CC2EE8 /* UIStepper+FlatUI.m */; };
@@ -205,6 +206,8 @@
 		38D601A01BDABE1E00E3D60F /* TODO-FIXME-list.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "TODO-FIXME-list.md"; sourceTree = "<group>"; };
 		38E71DAD1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRShelvedBook_CollectionViewCell.h; sourceTree = "<group>"; };
 		38E71DAE1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRShelvedBook_CollectionViewCell.m; sourceTree = "<group>"; };
+		38F3C0D71BDFE01F005AF2ED /* LBR_ResultsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBR_ResultsTableViewController.h; sourceTree = "<group>"; };
+		38F3C0D81BDFE01F005AF2ED /* LBR_ResultsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBR_ResultsTableViewController.m; sourceTree = "<group>"; };
 		38F57B9D1BB0707200CC2EE8 /* UIToolbar+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIToolbar+FlatUI.m"; sourceTree = "<group>"; };
 		38F57B9E1BB0707200CC2EE8 /* UIToolbar+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIToolbar+FlatUI.h"; sourceTree = "<group>"; };
 		38F57BA11BB0707200CC2EE8 /* UITabBar+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+FlatUI.m"; sourceTree = "<group>"; };
@@ -399,6 +402,8 @@
 				3803753A1B8AC9A8004C4ECE /* LBRBarcodeScannerViewController.m */,
 				380375F31B8D4E90004C4ECE /* BookCollection_TableViewController.h */,
 				380375F41B8D4E90004C4ECE /* BookCollection_TableViewController.m */,
+				38F3C0D71BDFE01F005AF2ED /* LBR_ResultsTableViewController.h */,
+				38F3C0D81BDFE01F005AF2ED /* LBR_ResultsTableViewController.m */,
 				381EBC031BA0FF63000D2FA4 /* LBRShelves_CollectionViewController.h */,
 				381EBC041BA0FF63000D2FA4 /* LBRShelves_CollectionViewController.m */,
 				380375F51B8D4E90004C4ECE /* BookDetailViewController.h */,
@@ -832,6 +837,7 @@
 				38D6019B1BDAAAC900E3D60F /* LBRShelf_DecorationView.m in Sources */,
 				3810D9FE1BD5BDE60093D5C2 /* UIColor-Expanded.m in Sources */,
 				38F57BBE1BB0707200CC2EE8 /* UINavigationBar+FlatUI.m in Sources */,
+				38F3C0D91BDFE01F005AF2ED /* LBR_ResultsTableViewController.m in Sources */,
 				382A83BA1BB3BA94008860CF /* LBRRecommendationsCollectionViewController.m in Sources */,
 				3803757A1B8C08E0004C4ECE /* LBRSettingsTableViewController.m in Sources */,
 				3810DA1A1BD5E0D60093D5C2 /* RCSwitchOnOff.m in Sources */,

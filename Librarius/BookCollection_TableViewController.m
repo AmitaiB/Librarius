@@ -26,7 +26,17 @@
 #import "UIColor-Expanded.h"
 
 
-@interface BookCollection_TableViewController ()
+@interface BookCollection_TableViewController () <UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating>
+
+@property (strong, nonatomic) UISearchController *searchController;
+
+    // Secondary search results TableView
+@property (strong, nonatomic) LBR_ResultsTableViewController *resultsTableController;
+
+    // For state restoration (???)
+@property (nonatomic) BOOL searchControllerWasActive;
+@property (nonatomic) BOOL searchControllerSearchFieldWasFirstResponder;
+
 
 @end
 
@@ -94,11 +104,99 @@ static NSString * const bannerHeaderIdentifier = @"bannerHeaderIdentifier";
     self.fetchedResultsController = [[LBRDataManager sharedDataManager] preconfiguredLBRFetchedResultsController:self];
 }
 
+-(void)configureSearchControllers
+{
+    self.resultsTableController = [LBR_ResultsTableViewController new];
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:self.resultsTableController];
+    self.searchController.searchResultsUpdater = self;
+    [self.searchController.searchBar sizeToFit];
+    self.tableView.tableHeaderView = self.searchController.searchBar;
+    
+    // We want to be the delegate for our filtered table, so didSelectRowAtIndexPath is called for both tables
+    self.resultsTableController.tableView.delegate = self;
+    self.searchController.delegate = self;
+    self.searchController.dimsBackgroundDuringPresentation = NO; //default is YES
+    self.searchController.searchBar.delegate = self; //To monitor text changes + others
+    
+    
+        // Search is now just presenting a view controller. As such, normal view controller
+        // presentation semantics apply. Namely that presentation will walk up the view controller
+        // hierarchy until it finds the root view controller or one that defines a presentation context.
+        //
+    self.definesPresentationContext = YES; // Know where you want UISearchController to be displayed.(?)
+}
 
-//-(void)viewWillAppear:(BOOL)animated {
-//    [super viewWillAppear:animated];
-//    
-//}
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+        //Restore the searchController's active state.
+    if (self.searchControllerWasActive) {
+        self.searchController.active = self.searchControllerWasActive;
+        self.searchControllerWasActive = NO;
+        
+        if (self.searchControllerSearchFieldWasFirstResponder) {
+            [self.searchController.searchBar becomeFirstResponder];
+            self.searchControllerSearchFieldWasFirstResponder = NO;
+        }
+    }
+    
+}
+
+#pragma mark - === UISearchBarDelegate ===
+
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
+}
+
+
+/*
+ #pragma mark - === UISearchControllerDelegate ===
+ 
+ Called after the search controller's searchbar has agreed to begin editing, or
+ when 'active' = YES. There is a default presentation to fall back on.
+ We'll implement these methods if the default presentation is inadequate.
+ 
+ -(void)presentSearchController:(UISearchController *)searchController
+ALSO
+ - (void)willPresentSearchController:(UISearchController *)searchController
+ - (void)didPresentSearchController:(UISearchController *)searchController
+ - (void)willDismissSearchController:(UISearchController *)searchController
+ - (void)didDismissSearchController:(UISearchController *)searchController 
+ */
+
+#pragma mark - === UISearchResultsUpdating ===
+
+-(void)updateSearchResultsForSearchController:(UISearchController *)searchController
+{
+        //Update the filtered array based on the search text
+    NSString *searchText = searchController.searchBar.text;
+    NSMutableArray *searchResults = [self.fetchedResultsController.fetchedObjects mutableCopy];
+    
+        // Strip out all the leading and trailing spaces
+    NSString *strippedString = [searchText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+        // Break up the search terms (seperated by spaces)
+    NSArray *searchItems = nil;
+    if (strippedString.length > 0) {
+        searchItems = [strippedString componentsSeparatedByString:@" "];
+    }
+    
+        // Build all the "AND" expressions for each value in the searchString
+        //
+    NSMutableArray *andMatchPredicates = [NSMutableArray array];
+    
+    for (NSString *searchString in searchItems) {
+            // each searchString creates an OR predicate for: name, yearIntroduced, introPrice
+            //
+            // example if searchItems contains "iphone 599 2007":
+            //      name CONTAINS[c] "iphone"
+            //      name CONTAINS[c] "599", yearIntroduced ==[c] 599, introPrice ==[c] 599
+            //      name CONTAINS[c] "2007", yearIntroduced ==[c] 2007, introPrice ==[c] 2007
+            //
+NSMutableArray
+    }
+}
 
 #pragma mark - Segues
 
@@ -137,6 +235,19 @@ static NSString * const bannerHeaderIdentifier = @"bannerHeaderIdentifier";
 
 #pragma mark - === Table View delegate ===
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (tableView != self.tableView) {
+        Volume *selectedVolume = self.resultsTableController.filteredBooks[indexPath.row];
+        BookDetailViewController *detailViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"bookDetailStoryboardID"];
+        detailViewController.displayVolume = selectedVolume;
+        
+        [self.navigationController pushViewController:detailViewController animated:YES];
+    }
+    
+        //???
+    [super tableView:tableView didSelectRowAtIndexPath:indexPath];
+}
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the specified item to be editable.
@@ -169,10 +280,12 @@ static NSString * const bannerHeaderIdentifier = @"bannerHeaderIdentifier";
 -(void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
 {
     UITableViewHeaderFooterView *headerView   = (UITableViewHeaderFooterView *)view;
-    headerView.backgroundView.backgroundColor = [UIColor bleuDeFranceColor];
+    headerView.backgroundView.backgroundColor = [UIColor pumpkinColor];
     headerView.textLabel.backgroundColor      = [UIColor clearColor];
-    headerView.textLabel.textColor            = [UIColor darkLavaColor];
+    headerView.textLabel.textColor            = [UIColor purpleColor];
 }
+
+
 
 #pragma mark private delegate helpers
 

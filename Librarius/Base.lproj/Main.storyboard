@@ -10,7 +10,7 @@
         <!--Title-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
-                <viewController id="9pv-A4-QxB" customClass="BookDetailViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="bookDetailStoryboardID" id="9pv-A4-QxB" customClass="BookDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ia1-K6-d13"/>
                         <viewControllerLayoutGuide type="bottom" id="4ug-Mw-9AY"/>
@@ -850,7 +850,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hVK-su-L0T" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="948" y="-702"/>
+            <point key="canvasLocation" x="949.5" y="-670"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -949,6 +949,6 @@
         <image name="woodpanel04110095" width="624" height="452"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Bzc-ZK-D5c"/>
+        <segue reference="hkZ-A2-opz"/>
     </inferredMetricsTieBreakers>
 </document>
