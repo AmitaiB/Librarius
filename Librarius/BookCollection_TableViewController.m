@@ -187,15 +187,48 @@ ALSO
     NSMutableArray *andMatchPredicates = [NSMutableArray array];
     
     for (NSString *searchString in searchItems) {
-            // each searchString creates an OR predicate for: name, yearIntroduced, introPrice
-            //
-            // example if searchItems contains "iphone 599 2007":
-            //      name CONTAINS[c] "iphone"
-            //      name CONTAINS[c] "599", yearIntroduced ==[c] 599, introPrice ==[c] 599
-            //      name CONTAINS[c] "2007", yearIntroduced ==[c] 2007, introPrice ==[c] 2007
-            //
-NSMutableArray
+        // each searchString creates an OR predicate for: name, yearIntroduced, introPrice
+        //
+        // example if searchItems contains "iphone 599 2007":
+        //      name CONTAINS[c] "iphone"
+        //      name CONTAINS[c] "599", yearIntroduced ==[c] 599, introPrice ==[c] 599
+        //      name CONTAINS[c] "2007", yearIntroduced ==[c] 2007, introPrice ==[c] 2007
+        //
+        NSMutableArray <NSPredicate*> *searchItemsPredicate = [NSMutableArray <NSPredicate*> array];
+
+            //Apple used formal, long-form predicate forming. We used string-predicates.
+
+        NSPredicate *finalPredicate;
+        finalPredicate = [NSComparisonPredicate predicateWithFormat:@"title CONTAINS[cd] %@", searchString];
+        [searchItemsPredicate addObject:finalPredicate];
+        
+        finalPredicate = [NSComparisonPredicate predicateWithFormat:@"title CONTAINS[cd] %@",searchString];
+        [searchItemsPredicate addObject:finalPredicate];
+        
+        finalPredicate = [NSComparisonPredicate predicateWithFormat:@"author CONTAINS[cd] %@", searchString];
+        [searchItemsPredicate addObject:finalPredicate];
+        
+            //yearPublished field matching
+        NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
+        numberFormatter.numberStyle = NSNumberFormatterNoStyle;
+        NSNumber *targetNumber = [numberFormatter numberFromString:searchString];
+        if (targetNumber != nil) { // searchString may not convert to a number.
+            finalPredicate = [NSComparisonPredicate predicateWithFormat:@"published CONTAINS[cd] %@", targetNumber];
+            [searchItemsPredicate addObject:finalPredicate];
+        }
+            // Add this OR predicate to our master AND predicate
+        NSCompoundPredicate *orMatchPredicates = [NSCompoundPredicate orPredicateWithSubpredicates:searchItemsPredicate];
+        [andMatchPredicates addObject:orMatchPredicates];
     }
+    
+        // Match up the fields of the Book object
+    NSCompoundPredicate *finalCompoundPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:andMatchPredicates];
+    searchResults = [[searchResults filteredArrayUsingPredicate:finalCompoundPredicate] mutableCopy];
+    
+        // Hand over the filtered results to our search results table.
+    LBR_ResultsTableViewController *tableController = (LBR_ResultsTableViewController *)self.searchController.searchResultsController;
+    tableController.filteredBooks = searchResults;
+    [tableController.tableView reloadData];
 }
 
 #pragma mark - Segues
