@@ -231,6 +231,48 @@ ALSO
     [tableController.tableView reloadData];
 }
 
+#pragma mark - === UIStateRestoration ===
+
+    //We restore several items for state restoration:
+    // 1) Search controller's active state,
+    // 2) search text,
+    // 3) first responder.
+
+NSString * const ViewControllerTitleKey = @"ViewControllerTitleKey";
+NSString * const SearchControllerIsActivKey = @"SearchControllerIsActivKey";
+NSString * const SearchBarTextKey = @"SearchBarTextKey";
+NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
+
+-(void)encodeRestorableStateWithCoder:(NSCoder *)coder
+{
+    [super encodeRestorableStateWithCoder:coder];
+    
+        // Encode the view state so that it can be restored later.
+    
+        // Encode the title
+    [coder encodeObject:self.title forKey:ViewControllerTitleKey];
+    
+    UISearchController *searchController = self.searchController;
+    
+        // Encode the search controller's active state.
+    BOOL searchDisplayControllerIsActive = searchController.isActive;
+    [coder encodeBool:searchDisplayControllerIsActive forKey:SearchControllerIsActivKey];
+    
+        // Encode the first responder status.
+    if (searchDisplayControllerIsActive) {
+        [coder encodeBool:[searchController.searchBar isFirstResponder] forKey:SearchBarIsFirstResponderKey];
+    }
+    
+        // Encode the search bar text.
+    [coder encodeObject:searchController.searchBar.text forKey:SearchBarTextKey];
+}
+
+-(void)decodeRestorableStateWithCoder:(NSCoder *)coder
+{
+    
+}
+
+
 #pragma mark - Segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
