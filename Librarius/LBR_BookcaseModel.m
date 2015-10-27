@@ -6,7 +6,7 @@
 //  Copyright © 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 
-#define kDefaultBookThickness 2.5f
+#define kDefaultBookThickness 2.50f
 
 #import "LBR_BookcaseModel.h"
 #import "Volume.h"
@@ -52,37 +52,35 @@
     NSUInteger idxOfFirstBookOnShelf          = 0;
     Volume *book;
 
-    
     for (NSUInteger idx = 0; idx < booksArray.count; idx++) {
         
         book = booksArray[idx];
         CGFloat thickness = [self bookThicknessOrDefault:book.thickness];
         currentXPosition_cm += thickness;
-
         
         
-        if (currentXPosition_cm > self.width_cm)
+        if (currentXPosition_cm < self.width_cm)
+            continue;
+        else
         {
-                //Add all the books up until this one (exclusive, hence "-1") as a shelf.
-            NSRange rangeForCurrentShelf = NSMakeRange(idxOfFirstBookOnShelf, (idx + 1) - idxOfFirstBookOnShelf);
+                //Include all the books up *until* this one --> a shelf.
+                //It's 'idx' NOT 'idx + 1', because the current book does not fit on this shelf.
+            NSRange rangeForCurrentShelf = NSMakeRange(idxOfFirstBookOnShelf, idx - idxOfFirstBookOnShelf);
             NSArray *thisShelf = [booksArray subarrayWithRange:rangeForCurrentShelf];
             
             [self.mutableShelves addObject:thisShelf];
 
                 //If there are more shelves, then this book becomes the first on the next shelf.
             BOOL nextShelfExistsAndIsEmpty = self.mutableShelves.count < self.shelvesCount;
-
             if (nextShelfExistsAndIsEmpty)
             {
-                currentXPosition_cm = thickness;
-//                [self bookThicknessOrDefault:book.thickness];
+                currentXPosition_cm   = thickness;
                 idxOfFirstBookOnShelf = idx;
             }
-            else
+            else //No more empty shelves. Add all remaining books to the unshelved.
             {
-                    //No more empty shelves. Add all remaining books to the unshelved.
                 self.isFull = YES;
-                NSUInteger numBooksRemaining = booksArray.count - (idx + offBy1);
+                NSUInteger numBooksRemaining = booksArray.count - (idx + offBy1); //+1 b/c it's the nth book
                 self.unshelvedRemainder = [booksArray subarrayWithRange:NSMakeRange(idx, numBooksRemaining)];
             }
         }
