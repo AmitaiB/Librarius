@@ -31,8 +31,9 @@
 @property (nonatomic, strong) NSDictionary *layoutInformation;
 @property (nonatomic, assign) UIEdgeInsets insets;
 
-@property (nonatomic, assign) NSUInteger currentShelfIndex;
-@property (nonatomic, assign) NSUInteger bookOnShelfCounter;
+    //???: Why did NSUIntegers suddenly go nil??
+@property (nonatomic, assign) CGFloat currentShelfIndex;
+@property (nonatomic, assign) CGFloat bookOnShelfCounter;
 @property (nonatomic, strong) LBR_BookcaseModel *bookcaseModel;
 
 
@@ -76,7 +77,7 @@
     
     NSMutableDictionary *mutableLayoutInformation = [NSMutableDictionary dictionary];
     NSIndexPath *indexPath;
-    
+
     self.currentShelfIndex  = 0;
     self.bookOnShelfCounter = 0;
     self.bookcaseModel      = [self configuredBookcaseModel];
@@ -161,7 +162,7 @@
 
 
 -(void)incrementBookcaseModelByOneBook {
-    NSArray *currentShelf = self.bookcaseModel.shelves[self.currentShelfIndex];
+    NSArray *currentShelf = self.bookcaseModel.shelves[@(self.currentShelfIndex).integerValue];
 
     NSUInteger maxShelvesCount = self.bookcaseModel.shelves.count;
     
