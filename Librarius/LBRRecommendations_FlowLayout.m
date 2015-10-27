@@ -18,10 +18,27 @@
 
 @implementation LBRRecommendations_FlowLayout
 
+-(instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    if (!(self = [super initWithCoder:aDecoder])) return nil;
+    
+    [self registerClass:[LBRShelf_DecorationView class] forDecorationViewOfKind:[LBRShelf_DecorationView kind]];
+    
+    return self;
+}
+
+//-(instancetype)init
+//{
+//    if (!(self = [super init])) return nil;
+//    
+//    [self registerClass:[LBRShelf_DecorationView class] forDecorationViewOfKind:[LBRShelf_DecorationView kind]];
+//
+//    return self;
+//}
+
 -(void)prepareLayout
 {
     [super prepareLayout];
-//    [self registerClass:[LBRShelf_DecorationView class] forDecorationViewOfKind:[LBRShelf_DecorationView kind]];
     
     NSInteger sections = [self.collectionView numberOfSections];
     
@@ -90,5 +107,7 @@
     
     return layoutAttributes;
 }
+
+
 
 @end

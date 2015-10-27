@@ -15,6 +15,7 @@
 #import "LBRRecommendedBook_CollectionViewCell.h"
 #import "LBRRecommendations_CollectionViewHeader.h"
 #import "LBRShelf_DecorationView.h"
+#import "LBRRecommendations_FlowLayout.h"
 
     //Models
 #import "Library.h"
@@ -32,7 +33,7 @@
 
 @interface LBRRecommendationsCollectionViewController ()
 
-@property (nonatomic, strong) IBOutlet UICollectionViewFlowLayout *layout;
+@property (nonatomic, strong) IBOutlet LBRRecommendations_FlowLayout *layout;
 
 @property (nonatomic, strong) LBRDataManager *dataManger;
 @property (nonatomic, strong) NSMutableArray *sectionChanges;
@@ -52,16 +53,6 @@ static NSString * const headerReuseIdentifier    = @"HeaderReuseID";
 static NSString * const bookDetailSegueID        = @"BookSegueDetailID2";
 static NSString * const decorationViewIdentifier = @"decorationViewIdentifier";
 
-
--(instancetype)init {
-    if (!(self = [super init])) return nil;
-
-    _layout.estimatedItemSize = CGSizeMake(106.0, 106.0);
-//    _layout.headerReferenceSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height * 0.1);
-
-    
-    return self;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

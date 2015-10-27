@@ -15,7 +15,7 @@
 
 @property (nonatomic, assign) NSUInteger shelvesCount;
 @property (nonatomic, assign) CGFloat width_cm;
-@property (nonatomic, strong) NSMutableArray<NSArray *> *mutableShelves;
+@property (nonatomic, strong) NSMutableArray <NSArray*> *mutableShelves;
 @end
 
 
@@ -25,8 +25,8 @@
     if (!(self = [super init])) return nil;
     
     _shelvesCount = shelvesCount;
-    _width_cm = width;
-    _isFull = NO;
+    _width_cm     = width;
+    _isFull       = NO;
     
     return self;
 }
@@ -47,9 +47,9 @@
  current book's thickness, and <continue>.
     else (no more shelf space) substring the rest to unshelvedRemainder, and break/stop.
  */
-    self.mutableShelves = [NSMutableArray new];
-    CGFloat    currentXPosition_cm            = 0.0f;
-    NSUInteger idxOfFirstBookOnShelf          = 0;
+    self.mutableShelves              = [NSMutableArray new];
+    CGFloat    currentXPosition_cm   = 0.0f;
+    NSUInteger idxOfFirstBookOnShelf = 0;
     Volume *book;
 
     for (NSUInteger idx = 0; idx < booksArray.count; idx++) {
@@ -57,7 +57,6 @@
         book = booksArray[idx];
         CGFloat thickness = [self bookThicknessOrDefault:book.thickness];
         currentXPosition_cm += thickness;
-        
         
         if (currentXPosition_cm < self.width_cm)
             continue;

@@ -10,7 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "UIColor+FlatUI.h"
 
-const NSString *LBRDecorationViewKind = @"LBRDecorationViewKind";
+const NSString *LBRDecorationViewKind = @"LBRShelf_DecorationView";
 
 @implementation LBRShelf_DecorationView
 

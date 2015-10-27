@@ -8,21 +8,19 @@
 #define kDefaulCellDimension 106.0
 #define kDefaultCellSize CGSizeMake(kDefaulCellDimension, kDefaulCellDimension)
 
-#define INSET_TOP      1.0
-#define INSET_LEFT     1.0
-#define INSET_BOTTOM   1.0
-#define INSET_RIGHT    1.0
-
+#define INSET_TOP    1.0
+#define INSET_LEFT   1.0
+#define INSET_BOTTOM 1.0
+#define INSET_RIGHT  1.0
 
 #import "LBR_BookcaseLayout.h"
 #import "LBR_BookcaseCollectionViewController.h"
 #import "LBR_BookcaseModel.h"
-
+#import "LBRShelf_DecorationView.h"
 
 @interface LBR_BookcaseLayout ()
 
 @property (nonatomic, strong) NSMutableDictionary *attributesForCells;
-
 
 @property (nonatomic, assign) NSUInteger widestShelfWidth;
 @property (nonatomic, assign) CGSize contentSize;
@@ -34,16 +32,9 @@
 @property (nonatomic, assign) NSUInteger currentShelfIndex;
 @property (nonatomic, assign) NSUInteger bookOnShelfCounter;
 @property (nonatomic, strong) LBR_BookcaseModel *bookcaseModel;
-
-
-
 @end
 
 @implementation LBR_BookcaseLayout
-
-/**
- 
- */
 
 -(instancetype)init
 {
@@ -59,6 +50,7 @@
     return self;
 }
 
+
 /**
  +Iterate over every cell,
  -produce a layouts attribute object for each one
@@ -69,11 +61,10 @@
  === Iterate through each cell, increment through the bookcaseModel each time.
  
  */
-
 #pragma mark - === Overridden Methods ===
 
--(void)prepareLayout {
-    
+-(void)prepareLayout
+{
     NSMutableDictionary *mutableLayoutInformation = [NSMutableDictionary dictionary];
     NSIndexPath *indexPath;
     
@@ -106,7 +97,6 @@
 
 -(CGSize)collectionViewContentSize
 {
-//    return CGSizeMake(10000, 10000);
     return self.contentSize;
 }
 
@@ -131,8 +121,6 @@
 
 
 #pragma mark - Helper methods
-
-
     /// Essentially, this depends on how many cells are being shown, plus the spaces at the ends
     ///  and the spaces in between.
 -(CGSize)extrapolatedContentSize
@@ -157,8 +145,6 @@
     [bookcaseModel shelveBooks:collectionViewController.fetchedResultsController.fetchedObjects];
     return bookcaseModel;
 }
-
-
 
 -(void)incrementBookcaseModelByOneBook {
     NSArray *currentShelf = self.bookcaseModel.shelves[self.currentShelfIndex];
@@ -185,9 +171,8 @@
         //If all shelves are full - no more shelves.
     if (self.currentShelfIndex + offBy1 >= maxShelvesCount)
         return;
-    
-    
 }
+
 
 -(CGPoint)originPointForBook:(NSUInteger)bookCounter onShelf:(NSUInteger)shelfIndex {
     CGFloat xPosition = INSET_LEFT + bookCounter * (kDefaulCellDimension + self.interItemSpacing);
