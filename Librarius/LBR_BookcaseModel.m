@@ -51,15 +51,18 @@
     CGFloat    currentXPosition_cm   = 0.0f;
     NSUInteger idxOfFirstBookOnShelf = 0;
     Volume *book;
-
+    CGFloat thickness;
+    BOOL currentShelfHasRoomForBook;
+    
     for (NSUInteger idx = 0; idx < booksArray.count; idx++) {
         
-        book = booksArray[idx];
-        CGFloat thickness = [self bookThicknessOrDefault:book.thickness];
-        currentXPosition_cm += thickness;
+        book                 = booksArray[idx];
+        thickness            = book.thickness.floatValue? book.thickness.floatValue : kDefaultBookThickness;
+        currentXPosition_cm  += thickness;
+        currentShelfHasRoomForBook = currentXPosition_cm < self.width_cm;
         
-        if (currentXPosition_cm < self.width_cm)
-            continue;
+        if (currentShelfHasRoomForBook)
+            continue; //Then go to the next book...
         else
         {
                 //Include all the books up *until* this one --> a shelf.
@@ -93,9 +96,5 @@
 
 #pragma mark - Helper methods
 
--(CGFloat)bookThicknessOrDefault:(NSNumber*)thickness {
-    CGFloat downloadedThicknessValue = [thickness floatValue];
-    return downloadedThicknessValue? downloadedThicknessValue : kDefaultBookThickness;
-}
 
 @end
