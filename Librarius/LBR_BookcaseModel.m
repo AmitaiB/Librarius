@@ -53,6 +53,7 @@
     Volume *book;
     CGFloat thickness;
     BOOL currentShelfHasRoomForBook;
+    BOOL thereAreMoreBooksToShelve;
     
     for (NSUInteger idx = 0; idx < booksArray.count; idx++) {
         
@@ -60,15 +61,20 @@
         thickness            = book.thickness.floatValue? book.thickness.floatValue : kDefaultBookThickness;
         currentXPosition_cm  += thickness;
         currentShelfHasRoomForBook = currentXPosition_cm < self.width_cm;
+        thereAreMoreBooksToShelve  = idx < booksArray.count - 1;
         
-        if (currentShelfHasRoomForBook)
-            continue; //Then go to the next book...
+        
+            //"Continue" = 'Shelve' the current book, then pick up the next book and repeat.
+            ///!!!: Need more conditions: 1) No more books, 2) no more room on this shelf 2b) No more room on any shelf 3) Perfect fit...
+        if (currentShelfHasRoomForBook &&
+            thereAreMoreBooksToShelve)
+            continue;
         else
         {
                 //Include all the books up *until* this one --> a shelf.
                 //It's 'idx' NOT 'idx + 1', because the current book does not fit on this shelf.
             NSRange rangeForCurrentShelf = NSMakeRange(idxOfFirstBookOnShelf, idx - idxOfFirstBookOnShelf);
-            NSArray *thisShelf = [booksArray subarrayWithRange:rangeForCurrentShelf];
+            NSArray *thisShelf           = [booksArray subarrayWithRange:rangeForCurrentShelf];
             
             [self.mutableShelves addObject:thisShelf];
 
