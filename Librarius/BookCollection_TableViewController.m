@@ -49,9 +49,9 @@
 static NSString * const bannerHeaderIdentifier = @"bannerHeaderIdentifier";
 static NSString * const searchResultsCellIdentifier = @"searchResultsCellIdentifier";
 
--(BOOL)prefersStatusBarHidden {
-    return YES;
-}
+//-(BOOL)prefersStatusBarHidden {
+//    return YES;
+//}
 
 #pragma mark - === View LifeCycle ===
 
@@ -68,6 +68,7 @@ static NSString * const searchResultsCellIdentifier = @"searchResultsCellIdentif
  */
 //    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
 //    self.navigationItem.rightBarButtonItem = addButton;
+    self.tableView.scrollsToTop = YES;
     NSIndexPath *firstItemIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self.tableView scrollToRowAtIndexPath:firstItemIndexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
 }
@@ -526,6 +527,10 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
 
 #pragma mark - === UISrollViewDelegate ===
 
-
+-(BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
+{
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    return NO;
+}
 
 @end
