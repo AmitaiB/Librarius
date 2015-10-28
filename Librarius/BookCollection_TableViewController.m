@@ -57,7 +57,7 @@ static NSString * const bannerHeaderIdentifier = @"bannerHeaderIdentifier";
     [super viewDidLoad];
 //    self.navigationItem.leftBarButtonItem = self.editButtonItem;
     [self flattenUI];
-    
+    [self configureSearchControllers];
     self.canDisplayBannerAds = YES;
     
 /**
@@ -269,7 +269,16 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
 
 -(void)decodeRestorableStateWithCoder:(NSCoder *)coder
 {
+    [super decodeRestorableStateWithCoder:coder];
     
+        // Restore the title.
+        // Apple: We cannot make the searchController active here, since it's
+        //  not part of the view heirarchy yet, instead we'll do it in viewWill Appear.
+    self.searchControllerWasActive = [coder decodeBoolForKey:SearchControllerIsActivKey];
+    
+        // Restore the active state. Again, searchController will become firstresponder
+        // in viewWillAppear.
+    self.searchControllerSearchFieldWasFirstResponder = [coder decodeBoolForKey:SearchBarTextKey];
 }
 
 
@@ -376,18 +385,32 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
         cell.textLabel.text = [NSString stringWithFormat:@"%@: %@", title, subtitle];
     }
 
+    NSUInteger lastRowInSection = [self tableView:self.tableView numberOfRowsInSection:indexPath.section] - 1;
     
-    [cell configureFlatCellWithColor:[[UIColor mySinColor] triadicColors][0] selectedColor:[[UIColor mySinColor] triadicColors][1] roundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight];
+    UIRectCorner cornersToRound = -1;
+    
+    if (indexPath.row == lastRowInSection) {
+        cornersToRound = UIRectCornerBottomLeft | UIRectCornerBottomRight;
+    }
+    if (indexPath.row == 0) {
+        cornersToRound = UIRectCornerTopLeft | UIRectCornerTopRight;
+    }
+    if (lastRowInSection == 0) {
+        cornersToRound = UIRectCornerAllCorners;
+    }
+    
+    [cell configureFlatCellWithColor:[[UIColor mySinColor] triadicColors][0] selectedColor:[[UIColor mySinColor] triadicColors][1] roundingCorners:cornersToRound];
     
 //    cell.textLabel.font = [UIFont boldFlatFontOfSize:20];
     cell.textLabel.font = [UIFont fontWithName:@"Avenir-Book" size:20];
     cell.textLabel.textColor = [UIColor midnightBlueColor];
 
-
-    if (indexPath.row == 0) {
+    if (indexPath.row == 0 || indexPath.row == lastRowInSection) {
         [cell setCornerRadius:10];
     }
-    
+    else{
+        [cell setCornerRadius:0];
+    }
 }
 
 
