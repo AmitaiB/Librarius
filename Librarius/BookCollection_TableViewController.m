@@ -47,10 +47,13 @@
 }
 
 static NSString * const bannerHeaderIdentifier = @"bannerHeaderIdentifier";
+static NSString * const searchResultsCellIdentifier = @"searchResultsCellIdentifier";
 
 -(BOOL)prefersStatusBarHidden {
     return YES;
 }
+
+#pragma mark - === View LifeCycle ===
 
 - (void)viewDidLoad {
 
@@ -65,6 +68,8 @@ static NSString * const bannerHeaderIdentifier = @"bannerHeaderIdentifier";
  */
 //    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
 //    self.navigationItem.rightBarButtonItem = addButton;
+    NSIndexPath *firstItemIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    [self.tableView scrollToRowAtIndexPath:firstItemIndexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
 }
 
 /**
@@ -308,7 +313,13 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 //    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-    [self configureCell:cell atIndexPath:indexPath];
+//    if (tableView == self.tableView) {
+        [self configureCell:cell atIndexPath:indexPath];
+//    }
+//    if (tableView == self.resultsTableController.tableView) {
+//        
+//    }
+    
     return cell;
 }
 
@@ -375,6 +386,7 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
 #pragma mark private delegate helpers
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+        //Grabbing the text and context.
     NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
     NSString *title         = [object valueForKey:@"title"];
     NSString *subtitle      = [object valueForKey:@"subtitle"];
@@ -385,9 +397,13 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
     if (subtitle) {
         cell.textLabel.text = [NSString stringWithFormat:@"%@: %@", title, subtitle];
     }
-
-    NSUInteger lastRowInSection = [self tableView:self.tableView numberOfRowsInSection:indexPath.section] - 1;
     
+    cell.textLabel.font = [UIFont fontWithName:@"Avenir-Book" size:20];
+    cell.textLabel.textColor = [UIColor midnightBlueColor];
+
+    
+        // Rounding the upper and lower corners of the cells in each group.
+    NSUInteger lastRowInSection = [self tableView:self.tableView numberOfRowsInSection:indexPath.section] - 1;
     UIRectCorner cornersToRound = -1;
     
     if (indexPath.row == lastRowInSection) {
@@ -402,9 +418,6 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
     
     [cell configureFlatCellWithColor:[[UIColor mySinColor] triadicColors][0] selectedColor:[[UIColor mySinColor] triadicColors][1] roundingCorners:cornersToRound];
     
-//    cell.textLabel.font = [UIFont boldFlatFontOfSize:20];
-    cell.textLabel.font = [UIFont fontWithName:@"Avenir-Book" size:20];
-    cell.textLabel.textColor = [UIColor midnightBlueColor];
 
     if (indexPath.row == 0 || indexPath.row == lastRowInSection) {
         [cell setCornerRadius:10];
@@ -414,6 +427,10 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
     }
 }
 
+-(void)configureCell:(UITableViewCell *)cell forVolume:(Volume *)volume
+{
+    
+}
 
 - (void)makeTitleCase:(NSString*)string {
     NSArray *words = [string componentsSeparatedByString:@" "];
