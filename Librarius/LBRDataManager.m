@@ -50,11 +50,12 @@ static NSString * const kUnknown = @"kUnknown";
         [self checkStoreForDuplicates:transientVolumeToSave];
         [self insertVolumeToContextFromTransientVolume:transientVolumeToSave];
     }
-
+    self.parsedVolumesToEitherSaveOrDiscard = @[];
     [self saveContext];
         NSLog(@"Context's (new) volumes saved to current library.");
 }
 
+    //FIXME: Doesn't work!
 -(BOOL)checkStoreForDuplicates:(LBRParsedVolume *)volume {
 //    http://www.theappcodeblog.com/?p=176#more-176
         //search to see if the entity already exists
@@ -73,6 +74,22 @@ static NSString * const kUnknown = @"kUnknown";
     }
     return isDuplicate;
 }
+
+-(void)updateWithNewTransientVolume:(LBRParsedVolume*)volumeToAdd {
+        // Logic
+    self.parsedVolumesToEitherSaveOrDiscard = [self.parsedVolumesToEitherSaveOrDiscard arrayByAddingObject:volumeToAdd];
+    NSLog(@"%@", [self.parsedVolumesToEitherSaveOrDiscard description]);
+    DBLG
+}
+
+-(NSArray *)parsedVolumesToEitherSaveOrDiscard
+{
+    if (!_parsedVolumesToEitherSaveOrDiscard)
+        _parsedVolumesToEitherSaveOrDiscard = @[];
+    
+    return _parsedVolumesToEitherSaveOrDiscard;
+}
+
 
 -(void)insertVolumeToContextFromTransientVolume:(LBRParsedVolume*)volumeToInsert {
     Volume *persistentVolume = [NSEntityDescription insertNewObjectForEntityForName:@"Volume" inManagedObjectContext:self.managedObjectContext];
@@ -304,17 +321,5 @@ static NSString * const kUnknown = @"kUnknown";
         [self saveContext];
     }
 }
-
--(void)updateWithNewTransientVolume:(LBRParsedVolume*)volumeToAdd {
-        // Preliminaries
-    if (!self.parsedVolumesToEitherSaveOrDiscard) {
-        self.parsedVolumesToEitherSaveOrDiscard = @[];
-    }
-        // Logic
-    self.parsedVolumesToEitherSaveOrDiscard = [self.parsedVolumesToEitherSaveOrDiscard arrayByAddingObject:volumeToAdd];
-    NSLog(@"%@", [self.parsedVolumesToEitherSaveOrDiscard description]);
-    DBLG
-}
-
 
 @end

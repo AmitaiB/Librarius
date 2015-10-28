@@ -182,7 +182,8 @@ static NSString * const volumeNib          = @"volumePresentationView";
     [dataManager logCurrentLibrary];
 }
 
-
+    //Supposed to check the DataStore to see if this volume exists in storage yet, or not.
+    //FIXME: Doesn't work.
 -(BOOL)isNewUniqueObject:(LBRParsedVolume *)volumeToCheck
 {
     NSArray *booksArray = self.fetchedResultsController.fetchedObjects;
