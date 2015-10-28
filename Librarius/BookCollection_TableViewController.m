@@ -106,6 +106,7 @@ static NSString * const bannerHeaderIdentifier = @"bannerHeaderIdentifier";
 
 -(void)configureSearchControllers
 {
+    
     self.resultsTableController = [LBR_ResultsTableViewController new];
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:self.resultsTableController];
     self.searchController.searchResultsUpdater = self;

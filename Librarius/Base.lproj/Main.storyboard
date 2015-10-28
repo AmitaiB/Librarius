@@ -389,6 +389,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fga-cM-GId">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="woodpanel04110095" translatesAutoresizingMaskIntoConstraints="NO" id="Iy8-FC-gUc">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <animations/>
@@ -499,6 +504,9 @@
                         <animations/>
                         <color key="backgroundColor" red="1" green="0.85555930989999995" blue="0.4797239472" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="Djb-ko-YwX" firstAttribute="top" secondItem="fga-cM-GId" secondAttribute="bottom" constant="50" id="07D-Ww-sLJ">
+                                <variation key="widthClass=compact" constant="0.0"/>
+                            </constraint>
                             <constraint firstAttribute="trailingMargin" secondItem="IOe-eD-XQW" secondAttribute="trailing" constant="-3" id="1NF-jg-3Yb"/>
                             <constraint firstItem="Iy8-FC-gUc" firstAttribute="leading" secondItem="gMM-L9-IT3" secondAttribute="leading" id="3cd-nb-HTZ"/>
                             <constraint firstItem="gMM-L9-IT3" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leading" id="6gy-Aq-WTI"/>
@@ -506,9 +514,17 @@
                             <constraint firstItem="Iy8-FC-gUc" firstAttribute="top" secondItem="gMM-L9-IT3" secondAttribute="top" id="DYl-aQ-KWY"/>
                             <constraint firstItem="Djb-ko-YwX" firstAttribute="top" secondItem="3Bf-2Z-qmt" secondAttribute="bottom" constant="20" id="HdF-Et-bIC"/>
                             <constraint firstItem="gMM-L9-IT3" firstAttribute="bottom" secondItem="L7p-HK-0SC" secondAttribute="bottom" id="InG-YO-5g7"/>
+                            <constraint firstItem="3Bf-2Z-qmt" firstAttribute="top" secondItem="fga-cM-GId" secondAttribute="bottom" id="JlK-1i-BKj"/>
                             <constraint firstItem="whR-df-RYp" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="57" id="PcD-i9-BuZ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="fga-cM-GId" secondAttribute="trailing" id="R9H-KW-fZ1">
+                                <variation key="widthClass=compact" constant="-20"/>
+                            </constraint>
                             <constraint firstItem="dcH-IU-Ezd" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="82" id="UkK-rQ-266"/>
+                            <constraint firstItem="fga-cM-GId" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" id="VNf-OM-H45">
+                                <variation key="widthClass=compact" constant="-20"/>
+                            </constraint>
                             <constraint firstItem="Iy8-FC-gUc" firstAttribute="trailing" secondItem="gMM-L9-IT3" secondAttribute="trailing" id="czw-hd-Xcf"/>
+                            <constraint firstItem="fga-cM-GId" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" id="fHU-2I-rol"/>
                             <constraint firstItem="IOe-eD-XQW" firstAttribute="leading" secondItem="3Bf-2Z-qmt" secondAttribute="trailing" constant="22" id="gCU-Rt-38K"/>
                             <constraint firstItem="whR-df-RYp" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" id="ggc-yi-5yq"/>
                             <constraint firstAttribute="trailing" secondItem="gMM-L9-IT3" secondAttribute="trailing" id="qYe-GA-K6e"/>
@@ -519,6 +535,7 @@
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
+                                <exclude reference="fga-cM-GId"/>
                                 <exclude reference="Iy8-FC-gUc"/>
                                 <exclude reference="gMM-L9-IT3"/>
                                 <exclude reference="whR-df-RYp"/>
@@ -526,27 +543,33 @@
                                 <exclude reference="3Bf-2Z-qmt"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="3cd-nb-HTZ"/>
+                                <exclude reference="70W-1q-MOt"/>
+                                <exclude reference="DYl-aQ-KWY"/>
+                                <exclude reference="czw-hd-Xcf"/>
+                                <exclude reference="6gy-Aq-WTI"/>
+                                <exclude reference="InG-YO-5g7"/>
+                                <exclude reference="qYe-GA-K6e"/>
+                                <exclude reference="R9H-KW-fZ1"/>
+                                <exclude reference="VNf-OM-H45"/>
+                                <exclude reference="fHU-2I-rol"/>
+                                <exclude reference="PcD-i9-BuZ"/>
+                                <exclude reference="ggc-yi-5yq"/>
+                                <exclude reference="wBy-c7-NWh"/>
+                                <exclude reference="UkK-rQ-266"/>
+                                <exclude reference="JlK-1i-BKj"/>
                                 <exclude reference="qZM-aJ-vWT"/>
                                 <exclude reference="rP8-QZ-uEC"/>
                                 <exclude reference="wsv-j0-ZNK"/>
                                 <exclude reference="1NF-jg-3Yb"/>
                                 <exclude reference="gCU-Rt-38K"/>
-                                <exclude reference="UkK-rQ-266"/>
-                                <exclude reference="6gy-Aq-WTI"/>
-                                <exclude reference="InG-YO-5g7"/>
-                                <exclude reference="qYe-GA-K6e"/>
+                                <exclude reference="07D-Ww-sLJ"/>
                                 <exclude reference="HdF-Et-bIC"/>
-                                <exclude reference="3cd-nb-HTZ"/>
-                                <exclude reference="70W-1q-MOt"/>
-                                <exclude reference="DYl-aQ-KWY"/>
-                                <exclude reference="czw-hd-Xcf"/>
-                                <exclude reference="PcD-i9-BuZ"/>
-                                <exclude reference="ggc-yi-5yq"/>
-                                <exclude reference="wBy-c7-NWh"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
+                                <include reference="fga-cM-GId"/>
                                 <include reference="Iy8-FC-gUc"/>
                                 <include reference="gMM-L9-IT3"/>
                                 <include reference="whR-df-RYp"/>
@@ -554,23 +577,28 @@
                                 <include reference="3Bf-2Z-qmt"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="3cd-nb-HTZ"/>
+                                <include reference="70W-1q-MOt"/>
+                                <include reference="DYl-aQ-KWY"/>
+                                <include reference="czw-hd-Xcf"/>
+                                <include reference="6gy-Aq-WTI"/>
+                                <include reference="InG-YO-5g7"/>
+                                <include reference="qYe-GA-K6e"/>
+                                <include reference="R9H-KW-fZ1"/>
+                                <include reference="VNf-OM-H45"/>
+                                <include reference="fHU-2I-rol"/>
+                                <include reference="PcD-i9-BuZ"/>
+                                <include reference="ggc-yi-5yq"/>
+                                <include reference="wBy-c7-NWh"/>
+                                <exclude reference="UkK-rQ-266"/>
+                                <exclude reference="JlK-1i-BKj"/>
                                 <include reference="qZM-aJ-vWT"/>
                                 <include reference="rP8-QZ-uEC"/>
                                 <include reference="wsv-j0-ZNK"/>
                                 <include reference="1NF-jg-3Yb"/>
                                 <include reference="gCU-Rt-38K"/>
-                                <exclude reference="UkK-rQ-266"/>
-                                <include reference="6gy-Aq-WTI"/>
-                                <include reference="InG-YO-5g7"/>
-                                <include reference="qYe-GA-K6e"/>
+                                <include reference="07D-Ww-sLJ"/>
                                 <include reference="HdF-Et-bIC"/>
-                                <include reference="3cd-nb-HTZ"/>
-                                <include reference="70W-1q-MOt"/>
-                                <include reference="DYl-aQ-KWY"/>
-                                <include reference="czw-hd-Xcf"/>
-                                <include reference="PcD-i9-BuZ"/>
-                                <include reference="ggc-yi-5yq"/>
-                                <include reference="wBy-c7-NWh"/>
                             </mask>
                         </variation>
                     </view>
@@ -949,6 +977,6 @@
         <image name="woodpanel04110095" width="624" height="452"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hkZ-A2-opz"/>
+        <segue reference="Bzc-ZK-D5c"/>
     </inferredMetricsTieBreakers>
 </document>
