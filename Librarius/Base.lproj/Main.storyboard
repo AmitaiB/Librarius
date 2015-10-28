@@ -430,17 +430,21 @@
                                 </accessibility>
                                 <constraints>
                                     <constraint firstItem="Iy8-FC-gUc" firstAttribute="width" secondItem="whR-df-RYp" secondAttribute="width" id="1Se-fM-SVr"/>
-                                    <constraint firstItem="3Px-hT-9Zr" firstAttribute="top" secondItem="whR-df-RYp" secondAttribute="top" constant="-13" id="8Kr-te-kPL"/>
+                                    <constraint firstItem="3Px-hT-9Zr" firstAttribute="top" secondItem="whR-df-RYp" secondAttribute="top" constant="-13" id="8Kr-te-kPL">
+                                        <variation key="widthClass=compact" constant="8"/>
+                                    </constraint>
                                     <constraint firstAttribute="trailing" secondItem="dcH-IU-Ezd" secondAttribute="trailing" constant="22" id="Dd2-f9-GCN"/>
                                     <constraint firstItem="Iy8-FC-gUc" firstAttribute="centerX" secondItem="whR-df-RYp" secondAttribute="centerX" id="GC6-Gh-f5r"/>
                                     <constraint firstItem="Iy8-FC-gUc" firstAttribute="height" secondItem="whR-df-RYp" secondAttribute="height" id="Kud-Pc-VcF"/>
                                     <constraint firstItem="3Px-hT-9Zr" firstAttribute="leading" secondItem="whR-df-RYp" secondAttribute="leading" constant="4" id="Msh-6C-aIa">
-                                        <variation key="widthClass=compact" constant="0.0"/>
+                                        <variation key="widthClass=compact" constant="20"/>
                                     </constraint>
                                     <constraint firstItem="Iy8-FC-gUc" firstAttribute="centerY" secondItem="whR-df-RYp" secondAttribute="centerY" id="k8g-gU-ict"/>
                                     <constraint firstItem="dcH-IU-Ezd" firstAttribute="top" secondItem="whR-df-RYp" secondAttribute="top" constant="25" id="pMh-fs-Fpz"/>
                                     <constraint firstItem="3Px-hT-9Zr" firstAttribute="centerX" secondItem="whR-df-RYp" secondAttribute="centerX" id="prh-Dd-g0O"/>
-                                    <constraint firstAttribute="bottom" secondItem="3Px-hT-9Zr" secondAttribute="bottom" id="yry-xh-jhU"/>
+                                    <constraint firstAttribute="bottom" secondItem="3Px-hT-9Zr" secondAttribute="bottom" id="yry-xh-jhU">
+                                        <variation key="widthClass=compact" constant="40"/>
+                                    </constraint>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="subviews">
@@ -526,7 +530,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="IOe-eD-XQW" secondAttribute="trailing" constant="-3" id="1NF-jg-3Yb"/>
                             <constraint firstItem="gMM-L9-IT3" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leading" id="6gy-Aq-WTI"/>
                             <constraint firstItem="Djb-ko-YwX" firstAttribute="top" secondItem="3Bf-2Z-qmt" secondAttribute="bottom" constant="20" id="HdF-Et-bIC">
-                                <variation key="widthClass=compact" constant="0.0"/>
+                                <variation key="widthClass=compact" constant="8"/>
                             </constraint>
                             <constraint firstItem="gMM-L9-IT3" firstAttribute="bottom" secondItem="L7p-HK-0SC" secondAttribute="bottom" id="InG-YO-5g7"/>
                             <constraint firstItem="3Bf-2Z-qmt" firstAttribute="top" secondItem="fga-cM-GId" secondAttribute="bottom" id="JlK-1i-BKj"/>
