@@ -11,8 +11,7 @@
 #import <CoreData/CoreData.h>
 #import <iAd/iAd.h>
 
-@interface LBR_BookcaseCollectionViewController : UICollectionViewController <NSFetchedResultsControllerDelegate, UIScrollViewDelegate
->
+@interface LBR_BookcaseCollectionViewController : UICollectionViewController <NSFetchedResultsControllerDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 

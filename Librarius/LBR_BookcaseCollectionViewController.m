@@ -38,6 +38,10 @@
 @property (nonatomic, strong) NSMutableArray *itemChanges;
 @property (nonatomic, strong) LBRDataManager *dataManager;
 
+    //Debug
+@property (nonatomic, strong) NSMutableDictionary *debugDictionary;
+@property (nonatomic, strong) NSMutableSet *debugCellSet;
+
 
 @end
 
@@ -49,7 +53,6 @@
     LBR_BookcaseLayout *layout;
     NSArray <Volume*> *volumesArray;
     NSArray <UIImage*> *coverArtArray;
-    
 }
 
 static NSString * const reuseIdentifier = @"bookCellID";
@@ -80,6 +83,13 @@ static NSString * const customSectionHeaderID = @"customSectionHeaderID";
     [self configureCoverArtArray];
 }
 
+-(void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+    [self cellTest];
+}
+
 -(void)configureCoverArtArray
 {
     NSMutableArray *tempImageViewArray = [NSMutableArray array];
@@ -107,38 +117,6 @@ static NSString * const customSectionHeaderID = @"customSectionHeaderID";
     // Pass the selected object to the new view controller.
 }
 */
-#pragma mark - Layout change methods
-
--(void)layoutChangeSetup
-{
-    standardFlowLayout = [UICollectionViewFlowLayout new];
-    
-    standardFlowLayout.itemSize                = CGSizeMake(106.0, 106.0);
-    standardFlowLayout.sectionInset            = UIEdgeInsetsMake(1, 1, 1, 1);
-    standardFlowLayout.minimumInteritemSpacing = 1.0;
-    standardFlowLayout.minimumLineSpacing      = 1.0;
-    standardFlowLayout.scrollDirection         = UICollectionViewScrollDirectionHorizontal;
-
-    
-    layoutChangesSegmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"Bookcase Layout", @"Flow Layout"]];
-    layoutChangesSegmentedControl.selectedSegmentIndex = 0;
-    [layoutChangesSegmentedControl addTarget:self action:@selector(layoutChangesSegmentedControlDidChangeValue:) forControlEvents:UIControlEventValueChanged];
-    self.navigationItem.titleView = layoutChangesSegmentedControl;
-}
-
--(void)layoutChangesSegmentedControlDidChangeValue:(id)sender
-{
-    NSString *classString = NSStringFromClass([self.collectionViewLayout class]);
-    NSString *bkClassString = NSStringFromClass([LBR_BookcaseLayout class]);
-    NSString *flClassString = NSStringFromClass([LBR_EmptyFlowLayout class]);
-    
-    if ([classString isEqualToString:bkClassString]) {
-        [self.collectionView setCollectionViewLayout:standardFlowLayout animated:YES];
-    }
-    if ([classString isEqualToString:flClassString]) {
-        [self.collectionView setCollectionViewLayout:layout animated:YES];
-    }
-}
 
 #pragma mark - === UICollectionViewDataSource ===
 
@@ -164,11 +142,52 @@ static NSString * const customSectionHeaderID = @"customSectionHeaderID";
     Volume *volume = volumesArray[indexPath.item];
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", volume.cover_art_large]];
     [cell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    cell.coverArtURLString = volume.cover_art_large;
+    
+    
     cell.thickness = [volume.thickness floatValue];
 //    UIImage *coverArtImage = ((UIImageView*)coverArtArray[indexPath.item]).image;
 //    [cell.imageView setImage:coverArtImage];
 
+        //CLEAN: delete this before shipping
+    NSData *imageData = UIImagePNGRepresentation(cell.imageView.image);
+    [self.debugDictionary setObject:imageData forKey:cell.coverArtURLString];
+    [self.debugCellSet addObject:cell];
     return cell;
+}
+
+-(void)cellTest
+{
+    NSArray *visibleCells = [self.collectionView visibleCells];
+    NSUInteger counter = 0;
+    NSData *debugImageData;
+    NSData *visibleCellImageData;
+        //For each cell, check the cell's actual image against its URL.
+    for (LBRShelvedBook_CollectionViewCell *cell in visibleCells) {
+        visibleCellImageData = UIImagePNGRepresentation(cell.imageView.image);
+        debugImageData = self.debugDictionary[cell.coverArtURLString];
+        counter += @([visibleCellImageData isEqual:debugImageData]).integerValue;
+    }
+    
+    NSLog(@"There are %@ visible cells, and %@ of them have the correct image.", @(visibleCells.count), @(counter));
+}
+
+
+-(NSMutableDictionary *)debugDictionary
+{
+    if (_debugDictionary == nil)
+        _debugDictionary= [NSMutableDictionary dictionary];
+    
+    return _debugDictionary;
+}
+
+-(NSMutableSet *)debugCellSet
+{
+    if (_debugCellSet == nil) {
+        _debugCellSet = [NSMutableSet set];
+    }
+    
+    return _debugCellSet;
 }
 
 //#pragma mark - === UICollectionViewDelegate ===
@@ -309,6 +328,40 @@ static NSString * const customSectionHeaderID = @"customSectionHeaderID";
         _itemChanges = nil;
     }];
 }
+
+#pragma mark - ++Layout change methods (Delete before Shipping?)
+
+-(void)layoutChangeSetup
+{
+    standardFlowLayout = [UICollectionViewFlowLayout new];
+    
+    standardFlowLayout.itemSize                = CGSizeMake(106.0, 106.0);
+    standardFlowLayout.sectionInset            = UIEdgeInsetsMake(1, 1, 1, 1);
+    standardFlowLayout.minimumInteritemSpacing = 1.0;
+    standardFlowLayout.minimumLineSpacing      = 1.0;
+    standardFlowLayout.scrollDirection         = UICollectionViewScrollDirectionHorizontal;
+    
+    
+    layoutChangesSegmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"Bookcase Layout", @"Flow Layout"]];
+    layoutChangesSegmentedControl.selectedSegmentIndex = 0;
+    [layoutChangesSegmentedControl addTarget:self action:@selector(layoutChangesSegmentedControlDidChangeValue:) forControlEvents:UIControlEventValueChanged];
+    self.navigationItem.titleView = layoutChangesSegmentedControl;
+}
+
+-(void)layoutChangesSegmentedControlDidChangeValue:(id)sender
+{
+    NSString *classString = NSStringFromClass([self.collectionViewLayout class]);
+    NSString *bkClassString = NSStringFromClass([LBR_BookcaseLayout class]);
+    NSString *flClassString = NSStringFromClass([LBR_EmptyFlowLayout class]);
+    
+    if ([classString isEqualToString:bkClassString]) {
+        [self.collectionView setCollectionViewLayout:standardFlowLayout animated:YES];
+    }
+    if ([classString isEqualToString:flClassString]) {
+        [self.collectionView setCollectionViewLayout:layout animated:YES];
+    }
+}
+
 
 #pragma mark - === ScrollView Delegate ===
 

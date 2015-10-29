@@ -12,7 +12,6 @@
 
 +(UIColor *)irisBlueColor;
 +(UIColor *)mySinColor;
-+(UIColor *)asparagusColor;
 +(UIColor *)deepCarrotOrangeColor;
 +(UIColor *)crayonOrangeColor;
 +(UIColor *)shirazColor;

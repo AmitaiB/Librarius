@@ -68,7 +68,7 @@ static NSString * const searchResultsCellIdentifier = @"searchResultsCellIdentif
  */
 //    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
 //    self.navigationItem.rightBarButtonItem = addButton;
-
+    self.navigationController.navigationBar.translucent = NO;
     self.tableView.scrollsToTop = YES;
     NSIndexPath *firstItemIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self.tableView scrollToRowAtIndexPath:firstItemIndexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
@@ -96,21 +96,15 @@ static NSString * const searchResultsCellIdentifier = @"searchResultsCellIdentif
 //    }
 //}
 
--(UIStatusBarStyle)preferredStatusBarStyle
-{
-    return UIStatusBarStyleBlackOpaque;
-}
-
 -(void)flattenUI {
-        //Set the separator color
-    self.tableView.separatorColor = [[UIColor mySinColor] contrastingColor];
     
         //Set the background color
         ///"You must set this property (tableView.backgroundView) to nil to set the background color of the table view." (Apple docs)
     self.tableView.backgroundView = nil;
-    self.tableView.backgroundColor = [UIColor mySinColor];
-    
-    [[UITableViewCell appearance] setBackgroundColor:[UIColor greenSeaColor]];
+//    self.tableView.backgroundColor = [UIColor cloudsColor];
+    [[UITableView appearance] setSeparatorColor :[UIColor midnightBlueColor]];
+    [[UITableView appearance] setBackgroundColor:[UIColor cloudsColor]];
+    [[UITableViewCell appearance] setBackgroundColor:[UIColor cloudsColor]];
 
     [self.tableView setClipsToBounds:YES];
     self.fetchedResultsController = [[LBRDataManager sharedDataManager] preconfiguredLBRFetchedResultsController:self];
@@ -383,9 +377,9 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
 -(void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
 {
     UITableViewHeaderFooterView *headerView   = (UITableViewHeaderFooterView *)view;
-    headerView.backgroundView.backgroundColor = [UIColor pumpkinColor];
+    headerView.backgroundView.backgroundColor = [UIColor shirazColor];
     headerView.textLabel.backgroundColor      = [UIColor clearColor];
-    headerView.textLabel.textColor            = [UIColor purpleColor];
+    headerView.textLabel.textColor            = [UIColor whiteColor];
 }
 
 
@@ -423,7 +417,7 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
         cornersToRound = UIRectCornerAllCorners;
     }
     
-    [cell configureFlatCellWithColor:[[UIColor mySinColor] triadicColors][0] selectedColor:[[UIColor mySinColor] triadicColors][1] roundingCorners:cornersToRound];
+    [cell configureFlatCellWithColor:[UIColor crayonOrangeColor] selectedColor:[UIColor pumpkinColor] roundingCorners:cornersToRound];
     
 
     if (indexPath.row == 0 || indexPath.row == lastRowInSection) {

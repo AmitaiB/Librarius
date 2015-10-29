@@ -18,10 +18,6 @@
     return [UIColor colorWithRed:0.97 green:0.7 blue:0.13 alpha:1];
 }
 
-+(UIColor *)asparagusColor {
-    return [UIColor colorWithRed:0.52 green:0.69 blue:0.4 alpha:1];
-}
-
 +(UIColor *)deepCarrotOrangeColor {
     return [UIColor colorWithRed:0.95 green:0.42 blue:0.18 alpha:1];
 }

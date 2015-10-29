@@ -11,7 +11,7 @@
 @interface LBRShelvedBook_CollectionViewCell : UICollectionViewCell
 
 @property (nonatomic, strong) IBOutlet UIImageView *imageView;
-@property (nonatomic, strong) NSString *coverArtURL;
+@property (nonatomic, strong) NSString *coverArtURLString;
 @property (nonatomic) CGFloat thickness;
 
 
