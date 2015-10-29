@@ -29,6 +29,8 @@
 @interface BookCollection_TableViewController () <UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating>
 
 @property (strong, nonatomic) UISearchController *searchController;
+@property (nonatomic, strong) UIToolbar *bufferToolbar;
+
 
     // Secondary search results TableView
 @property (strong, nonatomic) LBR_ResultsTableViewController *resultsTableController;
@@ -72,6 +74,7 @@ static NSString * const searchResultsCellIdentifier = @"searchResultsCellIdentif
     self.tableView.scrollsToTop = YES;
     NSIndexPath *firstItemIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self.tableView scrollToRowAtIndexPath:firstItemIndexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    [self configureBufferToolbar];
 }
 
 /**
@@ -132,6 +135,26 @@ static NSString * const searchResultsCellIdentifier = @"searchResultsCellIdentif
         // hierarchy until it finds the root view controller or one that defines a presentation context.
         //
     self.definesPresentationContext = YES; // Know where you want UISearchController to be displayed.(?)
+}
+
+    //BLOGPOST???:
+-(void)configureBufferToolbar
+{
+    UIToolbar *toolbar = [UIToolbar new];
+    self.bufferToolbar = toolbar;
+    [self.view addSubview:self.bufferToolbar];
+
+    toolbar.tintColor = [UIColor clearColor];
+    toolbar.backgroundColor = [UIColor clearColor];
+    
+    [toolbar removeConstraints:toolbar.constraints];
+    toolbar.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    [toolbar.topAnchor constraintEqualToAnchor:self.topLayoutGuide.topAnchor].active = YES;
+    [toolbar.bottomAnchor constraintEqualToAnchor:self.topLayoutGuide.bottomAnchor].active = YES;
+    [toolbar.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = YES;
+    [toolbar.widthAnchor constraintEqualToAnchor:self.view.widthAnchor].active = YES;
+        //remember to call this in viewDidLoad!
 }
 
 -(void)viewWillAppear:(BOOL)animated {

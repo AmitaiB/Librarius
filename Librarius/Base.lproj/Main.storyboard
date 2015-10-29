@@ -36,7 +36,8 @@
                                         <exclude reference="nnA-YW-t2j"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact">
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="212" y="85" width="168" height="185"/>
                                     <mask key="constraints">
                                         <include reference="nnA-YW-t2j"/>
                                     </mask>
@@ -112,7 +113,8 @@
                                         <exclude reference="dwa-eh-GVV"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact">
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="110" width="168" height="185"/>
                                     <mask key="constraints">
                                         <include reference="dwa-eh-GVV"/>
                                     </mask>
@@ -1015,6 +1017,6 @@
         <image name="woodpanel04110095" width="624" height="452"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Bzc-ZK-D5c"/>
+        <segue reference="hkZ-A2-opz"/>
     </inferredMetricsTieBreakers>
 </document>
