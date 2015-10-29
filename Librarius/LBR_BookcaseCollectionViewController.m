@@ -121,6 +121,7 @@ static NSString * const decorationViewIdentifier = @"decorationViewIdentifier";
         UIImageView *imageView = [[UIImageView alloc] init];
         NSURL *url = [NSURL URLWithString:volume.cover_art_large];
         
+            //!!!: Why not working?
         [imageView sd_setImageWithURL:url usingProgressView:self.progressView];
         
 //        [imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder"]];

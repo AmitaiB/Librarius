@@ -115,6 +115,8 @@
     }
     self.layoutInformation = [mutableLayoutInformation copy];
     self.contentSize = [self extrapolatedContentSize];
+    
+    [self prepareLayoutOfDecorationViews];
 }
 
 -(CGSize)collectionViewContentSize
