@@ -56,6 +56,11 @@ PODS:
   - MMMaterialDesignSpinner (0.2.0)
   - MTBBarcodeScanner (1.6.1)
   - NYAlertViewController (1.2.0)
+  - SDWebImage (3.7.3):
+    - SDWebImage/Core (= 3.7.3)
+  - SDWebImage-ProgressView (0.4.0):
+    - SDWebImage (~> 3.7.0)
+  - SDWebImage/Core (3.7.3)
 
 DEPENDENCIES:
   - AFNetworking
@@ -65,6 +70,8 @@ DEPENDENCIES:
   - MMMaterialDesignSpinner
   - MTBBarcodeScanner
   - NYAlertViewController
+  - SDWebImage (~> 3.7)
+  - SDWebImage-ProgressView (~> 0.4)
 
 SPEC CHECKSUMS:
   AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
@@ -82,5 +89,7 @@ SPEC CHECKSUMS:
   MMMaterialDesignSpinner: 8f1a50270b789c76ec500957e518fc3e05e55b9d
   MTBBarcodeScanner: beda75d4c1e2750405f62ee53f7a7ee40bf6825b
   NYAlertViewController: 9198f367c2726184e20ace87f7b6dd2655d42d79
+  SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
+  SDWebImage-ProgressView: cdc29091ec0d53fd6dab3df65039a4f308e0a5ae
 
 COCOAPODS: 0.39.0

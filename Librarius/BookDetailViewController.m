@@ -11,6 +11,7 @@
 #import <iAd/iAd.h>
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
+
 @interface BookDetailViewController ()
 @property (nonatomic, strong) NSArray *bookDetailsTypes;
 @property (nonatomic, strong) NSArray *bookDetails;
@@ -43,8 +44,8 @@ static NSString * const bookDetailsCellID = @"bookDetailsCellID";
         self.bookDetails = @[self.displayVolume.author,
                              (self.displayVolume.published)? self.displayVolume.published : @"",
                              self.displayVolume.mainCategory];
-        [self.imageView setImageWithURL:[NSURL URLWithString:self.displayVolume.cover_art_large] placeholderImage:[UIImage imageNamed:@"placeholder"]];
 
+        [self.imageView setImageWithURL:[NSURL URLWithString:self.displayVolume.cover_art_large] placeholderImage:[UIImage imageNamed:@"placeholder"]];
     }
     else
     {

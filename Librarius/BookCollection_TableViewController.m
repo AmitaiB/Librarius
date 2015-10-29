@@ -105,6 +105,7 @@ static NSString * const searchResultsCellIdentifier = @"searchResultsCellIdentif
     [[UITableView appearance] setSeparatorColor :[UIColor midnightBlueColor]];
     [[UITableView appearance] setBackgroundColor:[UIColor cloudsColor]];
     [[UITableViewCell appearance] setBackgroundColor:[UIColor cloudsColor]];
+    [UITableViewCell appearance].textLabel.textColor = [UIColor midnightBlueColor];
 
     [self.tableView setClipsToBounds:YES];
     self.fetchedResultsController = [[LBRDataManager sharedDataManager] preconfiguredLBRFetchedResultsController:self];

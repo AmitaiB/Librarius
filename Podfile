@@ -12,6 +12,10 @@ pod 'NYAlertViewController'
 
 pod 'LARSTorch', '~> 1.1'
 
+pod 'SDWebImage', '~> 3.7'
+pod 'SDWebImage-ProgressView', '~> 0.4'
+
+
 
 #pod 'UICollectionView-ARDynamicHeightLayoutCell_Bell'
 #pod 'SAMCache'

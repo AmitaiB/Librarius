@@ -26,7 +26,8 @@
 
     //Categories
 #import "UIColor+FlatUI.h"
-#import <UIImageView+AFNetworking.h>
+//#import <UIImageView+AFNetworking.h>
+#import "UIImageView+ProgressView.h"
 
 
 @interface LBR_BookcaseCollectionViewController ()
@@ -37,6 +38,7 @@
 @property (nonatomic, strong) NSMutableArray *sectionChanges;
 @property (nonatomic, strong) NSMutableArray *itemChanges;
 @property (nonatomic, strong) LBRDataManager *dataManager;
+@property (nonatomic, strong) UIProgressView *progressView;
 
     //Debug
 @property (nonatomic, strong) NSMutableDictionary *debugDictionary;
@@ -85,6 +87,23 @@ static NSString * const customSectionHeaderID = @"customSectionHeaderID";
     [self configureCoverArtArray];
 }
 
+-(void)setupProgressView
+{
+    UIProgressView *progressView;
+    progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
+    progressView.progressTintColor = [UIColor colorWithRed:187.0/255 green:160.0/255 blue:209.0/255 alpha:1.0];
+    [[progressView layer]setCornerRadius:10.0f];
+    [[progressView layer]setBorderWidth:2.0f];
+    [[progressView layer]setMasksToBounds:TRUE];
+    progressView.clipsToBounds = YES;
+    progressView.layer.frame = CGRectMake(30, 295, 260, 25);
+    progressView.layer.borderColor = (__bridge CGColorRef _Nullable)([UIColor whiteColor]);
+    progressView.trackTintColor = [UIColor clearColor];
+//    [progressView setProgress: (float)count/15 animated:YES];
+    self.progressView = progressView;
+}
+
+
     //Debug override
 -(void)viewDidLayoutSubviews
 {
@@ -99,7 +118,10 @@ static NSString * const customSectionHeaderID = @"customSectionHeaderID";
     for (Volume *volume in volumesArray) {
         UIImageView *imageView = [[UIImageView alloc] init];
         NSURL *url = [NSURL URLWithString:volume.cover_art_large];
-        [imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder"]];
+        
+        [imageView sd_setImageWithURL:url usingProgressView:self.progressView];
+        
+//        [imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder"]];
         [tempImageViewArray addObject:imageView];
     }
     coverArtArray = [tempImageViewArray copy];
