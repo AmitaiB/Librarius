@@ -24,14 +24,23 @@
 @interface LBR_BookcaseLayout ()
 
 @property (nonatomic, strong) NSMutableDictionary *attributesForCells;
-@property (nonatomic, strong) NSDictionary *rowDecorationRects;
 
 @property (nonatomic, assign) NSUInteger widestShelfWidth;
+@property (nonatomic, assign) NSUInteger cellCountForLongestRow;
+
 @property (nonatomic, assign) CGSize contentSize;
 //@property (nonatomic, strong) NSArray <NSArray <Volume *> *> *filledBookcaseModel;
 
 @property (nonatomic, strong) NSDictionary *layoutInformation;
 @property (nonatomic, assign) UIEdgeInsets insets;
+
+
+    //DecorationView
+@property (nonatomic, strong) NSDictionary *rowDecorationRects;
+@property (nonatomic) CGSize headerReferenceSize;
+@property (nonatomic) CGSize footerReferenceSize;
+@property (nonatomic) UIEdgeInsets sectionInset;
+
 
 @property (nonatomic, assign) NSUInteger currentShelfIndex;
 @property (nonatomic, assign) NSUInteger bookOnShelfCounter;
@@ -54,6 +63,8 @@
     self.interShelfSpacing = 1.0;
     
     [self registerClass:[LBRShelf_DecorationView class] forDecorationViewOfKind:[LBRShelf_DecorationView kind]];
+    
+    self.cellCountForLongestShelf = 0;
     
     return self;
 }
@@ -112,6 +123,8 @@
 -(NSArray<UICollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(CGRect)rect {
         //Check for all elements that are in the rect, and add the corresponding attributes
         //to the array, which is then returned.
+    
+        //First, Cell elements...
     NSMutableArray *attributeObjectsToReturn = [NSMutableArray array];
     
     for (UICollectionViewLayoutAttributes *attributes in [self.layoutInformation allValues]) {
@@ -120,7 +133,22 @@
         }
     }
     
-    return [attributeObjectsToReturn copy];
+    NSMutableArray *decorationLayoutElements = [NSMutableArray array];
+        //Next, decoration view elements...
+    [self.rowDecorationRects enumerateKeysAndObjectsUsingBlock:^(NSIndexPath *indexPath, NSValue *rowRectValue, BOOL * stop) {
+        
+        if (CGRectIntersectsRect([rowRectValue CGRectValue], rect)) {
+            UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForDecorationViewOfKind:[LBRShelf_DecorationView kind] withIndexPath:indexPath];
+            
+            attributes.frame = [rowRectValue CGRectValue];
+            attributes.zIndex = 0;
+            [decorationLayoutElements addObject:attributes];
+        }
+    }];
+    
+    
+    return [attributeObjectsToReturn arrayByAddingObjectsFromArray:decorationLayoutElements];
+//    return [attributeObjectsToReturn copy];
 }
 
 -(UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -133,17 +161,25 @@
     ///  and the spaces in between.
 -(CGSize)extrapolatedContentSize
 {
-    CGFloat cellCountForLongestShelf = 0;
-    for (NSArray *shelf in self.bookcaseModel.shelves) {
-        cellCountForLongestShelf = MAX(cellCountForLongestShelf, shelf.count);
-    }
+    NSUInteger cellCountForLongestRow = [self extrapolatedCellCountForLongestRow];
         /// There is always one fewer interspace than # of cells, e.g.:
         /// InsetL-[cell#1]-#1-[cell#2]-#2-[cell#3]-InsetR
         /// , so we subtract one inter_spacing.
-    CGFloat xMax = INSET_LEFT + (kDefaulCellDimension + self.interItemSpacing) * cellCountForLongestShelf - self.interItemSpacing + INSET_RIGHT;
+    CGFloat xMax = INSET_LEFT + (kDefaulCellDimension + self.interItemSpacing) *cellCountForLongestRow - self.interItemSpacing + INSET_RIGHT;
     CGFloat yMax = INSET_TOP + (kDefaulCellDimension + self.interShelfSpacing) * self.bookcaseModel.shelves.count - self.interShelfSpacing + INSET_BOTTOM;
     
     return CGSizeMake(xMax, yMax);
+}
+
+-(NSUInteger)extrapolatedCellCountForLongestRow
+{
+    if (self.cellCountForLongestRow == 0) {
+        for (NSArray *shelf in self.bookcaseModel.shelves) {
+            self.cellCountForLongestRow = MAX(self.cellCountForLongestRow, shelf.count);
+        }
+    }
+    
+    return self.cellCountForLongestRow;
 }
 
 -(LBR_BookcaseModel *)configuredBookcaseModel {
@@ -186,6 +222,52 @@
     CGFloat xPosition = INSET_LEFT + bookCounter * (kDefaulCellDimension + self.interItemSpacing);
     CGFloat yPosition = INSET_TOP  + shelfIndex  * (kDefaulCellDimension + self.interShelfSpacing);
     return CGPointMake(xPosition, yPosition);
+}
+
+-(void)prepareLayoutOfDecorationViews
+{
+    NSInteger numSections = [self.collectionView numberOfSections];
+    
+    CGFloat availableWidth = self.collectionViewContentSize.width -
+    (self.sectionInset.left + self.sectionInset.right);
+    
+    NSInteger cellsPerRow = floorf((availableWidth + self.minimumInteritemSpacing) /
+                                   (self.itemSize.width + self.minimumInteritemSpacing));
+    NSUInteger cellCountForLongestRow
+        ///    NSUInteger cellsPerMaxRow;
+    
+    NSMutableDictionary *rowDecorationWork = [NSMutableDictionary dictionary];
+    
+    CGFloat yPosition = 0;
+    
+    for (NSUInteger sectionIndex = 0; sectionIndex < numSections; sectionIndex++)
+    {
+        yPosition += self.headerReferenceSize.height;
+        yPosition += self.sectionInset.top;
+        
+        NSUInteger cellCount =
+        [self.collectionView numberOfItemsInSection:sectionIndex];
+        
+        NSUInteger rows = ceilf(cellCount/(CGFloat)cellsPerRow);
+        for (NSInteger row = 0; row < rows; row++) {
+            yPosition += self.itemSize.height;
+            
+            CGRect decorationFrame = CGRectMake(0, yPosition - kDecorationYAdjustment, self.collectionViewContentSize.width, kDecorationHeight);
+            
+            NSIndexPath *decIndexPath = [NSIndexPath indexPathForRow:row inSection:sectionIndex];
+            
+            rowDecorationWork[decIndexPath] = [NSValue valueWithCGRect:decorationFrame];
+            
+            if (row < rows - 1) {
+                yPosition += self.minimumLineSpacing;
+            }
+            
+            yPosition += self.sectionInset.bottom;
+            yPosition += self.footerReferenceSize.height;
+        }
+        
+        self.rowDecorationRects = [rowDecorationWork copy];
+    }
 }
 
 @end
