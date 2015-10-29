@@ -13,6 +13,9 @@
 #define INSET_BOTTOM 1.0
 #define INSET_RIGHT  1.0
 
+#define kDecorationYadjustment  13.0
+#define kDecorationHeight       25.0
+
 #import "LBR_BookcaseLayout.h"
 #import "LBR_BookcaseCollectionViewController.h"
 #import "LBR_BookcaseModel.h"
@@ -21,6 +24,7 @@
 @interface LBR_BookcaseLayout ()
 
 @property (nonatomic, strong) NSMutableDictionary *attributesForCells;
+@property (nonatomic, strong) NSDictionary *rowDecorationRects;
 
 @property (nonatomic, assign) NSUInteger widestShelfWidth;
 @property (nonatomic, assign) CGSize contentSize;
@@ -48,6 +52,8 @@
     
     self.interItemSpacing  = 1.0;
     self.interShelfSpacing = 1.0;
+    
+    [self registerClass:[LBRShelf_DecorationView class] forDecorationViewOfKind:[LBRShelf_DecorationView kind]];
     
     return self;
 }

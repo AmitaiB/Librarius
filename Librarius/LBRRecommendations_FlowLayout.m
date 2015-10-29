@@ -18,6 +18,7 @@
 
 @implementation LBRRecommendations_FlowLayout
 
+    //Prototpyed in storyboard, so this in place of `init`
 -(instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if (!(self = [super initWithCoder:aDecoder])) return nil;
@@ -27,20 +28,11 @@
     return self;
 }
 
-//-(instancetype)init
-//{
-//    if (!(self = [super init])) return nil;
-//    
-//    [self registerClass:[LBRShelf_DecorationView class] forDecorationViewOfKind:[LBRShelf_DecorationView kind]];
-//
-//    return self;
-//}
-
 -(void)prepareLayout
 {
     [super prepareLayout];
     
-    NSInteger sections = [self.collectionView numberOfSections];
+    NSInteger numSections = [self.collectionView numberOfSections];
     
     CGFloat availableWidth = self.collectionViewContentSize.width -
     (self.sectionInset.left + self.sectionInset.right);
@@ -52,7 +44,7 @@
     
     CGFloat yPosition = 0;
     
-    for (NSUInteger sectionIndex = 0; sectionIndex < sections; sectionIndex++)
+    for (NSUInteger sectionIndex = 0; sectionIndex < numSections; sectionIndex++)
     {
         yPosition += self.headerReferenceSize.height;
         yPosition += self.sectionInset.top;

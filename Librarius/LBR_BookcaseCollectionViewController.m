@@ -19,6 +19,7 @@
     //Views
 //#import "LBR_ShelvedBookCell.h"
 #import "LBRShelvedBook_CollectionViewCell.h"
+#import "LBRShelf_DecorationView.h"
 
     //Models
 #import "Volume.h"
@@ -61,6 +62,7 @@
 
 static NSString * const reuseIdentifier = @"bookCellID";
 static NSString * const customSectionHeaderID = @"customSectionHeaderID";
+static NSString * const decorationViewIdentifier = @"decorationViewIdentifier";
 
 
 - (void)viewDidLoad {
