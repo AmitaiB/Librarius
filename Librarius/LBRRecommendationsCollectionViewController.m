@@ -67,28 +67,11 @@ static NSString * const decorationViewIdentifier = @"decorationViewIdentifier";
     self.title = @"Recommended Books";
     
     self.bufferToolbar = [[ABB_BufferToolbar alloc] initWithController:self];
+    googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
     
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Register view classes - not needed for Storyboards
-//    [self.collectionView registerClass:[LBRRecommendedBook_CollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
-//    [self.collectionView registerClass:[LBRRecommendations_CollectionViewHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerReuseIdentifier];
-//    [self.collectionView registerClass:[LBRShelf_DecorationView class] forSupplementaryViewOfKind:[LBRShelf_DecorationView kind] withReuseIdentifier:decorationViewIdentifier];
-
-    
-    // Do any additional setup after loading the view.
-    googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
-    
-    
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-
-}
-
 
 #pragma mark - Navigation
 
