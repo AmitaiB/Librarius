@@ -97,11 +97,32 @@
     self.shelves = [self.mutableShelves copy];
     
 //    NSLog(@"self.shelves[0] = %@\nself.shelves[1] = %@\nself.shelves[2] = %@\nself.shelves[3] = %@\nself.shelves[4] = %@\n", self.shelves[0], self.shelves[1], self.shelves[2], self.shelves[3], self.shelves[4]);
-    
 }
 
 
-#pragma mark - Helper methods
+#pragma mark - Overriden methods
+
+    //Return the nested NSArrays of the model:
+-(NSString *)description
+{
+    NSMutableString __block *finalString = [NSMutableString string];
+    [finalString appendFormat:@"\n\n<%@>", NSStringFromClass([self class])];
+    
+    if (self.shelves.count) {
+        [self.shelves enumerateObjectsUsingBlock:^(NSArray * _Nonnull shelf, NSUInteger idx, BOOL * _Nonnull stop) {
+            [finalString appendFormat:@"\n\nShelf #%@:\n", @(idx)];
+            for (NSUInteger i = 0; i < shelf.count; i++) {
+                [finalString appendFormat:@"\nVolume #%@ on shelf %@: \"%@\"", @(i), @(idx), ((Volume *)shelf[i]).title];
+            }
+        }];
+        [finalString appendString:@"\n\n === END DESCRIPTION ===\n\n\n\n"];
+    }
+    else
+        [finalString appendString:@"Empty bookcase."];
+    
+    return finalString;
+}
+
 
 
 @end
