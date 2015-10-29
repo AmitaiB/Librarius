@@ -10,8 +10,6 @@
 
 @interface ABB_BufferToolbar : UIToolbar
 
-@property (nonatomic, weak) UIView *superView;
-
 -initWithController:(UIViewController*)superViewController;
 
 @end

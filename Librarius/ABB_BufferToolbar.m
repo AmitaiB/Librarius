@@ -25,10 +25,10 @@
     [toolbar removeConstraints:toolbar.constraints];
     toolbar.translatesAutoresizingMaskIntoConstraints = NO;
     
-    [toolbar.topAnchor constraintEqualToAnchor:superViewController.topLayoutGuide.topAnchor].active = YES;
+    [toolbar.topAnchor constraintEqualToAnchor:superViewController.topLayoutGuide.topAnchor].active       = YES;
     [toolbar.bottomAnchor constraintEqualToAnchor:superViewController.topLayoutGuide.bottomAnchor].active = YES;
-    [toolbar.centerXAnchor constraintEqualToAnchor:superViewController.view.centerXAnchor].active = YES;
-    [toolbar.widthAnchor constraintEqualToAnchor:superViewController.view.widthAnchor].active = YES;
+    [toolbar.centerXAnchor constraintEqualToAnchor:superViewController.view.centerXAnchor].active         = YES;
+    [toolbar.widthAnchor constraintEqualToAnchor:superViewController.view.widthAnchor].active             = YES;
         //remember to call this in viewDidLoad!
     
     return self;

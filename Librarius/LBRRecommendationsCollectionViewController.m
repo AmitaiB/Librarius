@@ -16,6 +16,7 @@
 #import "LBRRecommendations_CollectionViewHeader.h"
 #import "LBRShelf_DecorationView.h"
 #import "LBRRecommendations_FlowLayout.h"
+#import "ABB_BufferToolbar.h"
 
     //Models
 #import "Library.h"
@@ -41,6 +42,8 @@
 
 @property (nonatomic, strong) NSArray <NSString*> *coverArtURLs;
 
+@property (nonatomic, strong) ABB_BufferToolbar *bufferToolbar;
+
 @end
 
 @implementation LBRRecommendationsCollectionViewController {
@@ -62,6 +65,8 @@ static NSString * const decorationViewIdentifier = @"decorationViewIdentifier";
     self.coverArtURLs = [NSArray array];
     
     self.title = @"Recommended Books";
+    
+    self.bufferToolbar = [[ABB_BufferToolbar alloc] initWithController:self];
     
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
