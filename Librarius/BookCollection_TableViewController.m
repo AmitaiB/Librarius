@@ -124,15 +124,8 @@ static NSString * const searchResultsCellIdentifier = @"searchResultsCellIdentif
     self.resultsTableController = [LBR_ResultsTableViewController new];
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:self.resultsTableController];
     self.searchController.searchResultsUpdater = self;
-    
-        //Configure SearchBar and placement
-    UISearchBar *searchBar = self.searchController.searchBar;
-    [searchBar removeConstraints:searchBar.constraints];
-    searchBar.translatesAutoresizingMaskIntoConstraints = NO;
-    [searchBar sizeToFit];
-    [self.view addSubview:self.searchController.searchBar];
-    [self.searchController.searchBar.topAnchor constraintEqualToAnchor:self.topLayoutGuide.bottomAnchor].active = YES;
-//    self.tableView.tableHeaderView = self.searchController.searchBar;
+    [self.searchController.searchBar sizeToFit];
+    self.tableView.tableHeaderView = self.searchController.searchBar;
     
     // We want to be the delegate for our filtered table, so didSelectRowAtIndexPath is called for both tables
     self.resultsTableController.tableView.delegate = self;
