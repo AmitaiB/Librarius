@@ -36,6 +36,8 @@
 
 @implementation LBR_BookcaseLayout
 
+#pragma mark - == Lifecycle ==
+
 -(instancetype)init
 {
     if (!(self = [super init])) return nil;

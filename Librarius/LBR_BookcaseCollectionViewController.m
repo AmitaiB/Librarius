@@ -40,6 +40,8 @@
 
     //Debug
 @property (nonatomic, strong) NSMutableDictionary *debugDictionary;
+@property (nonatomic, strong) NSMutableDictionary *debugDictionary2;
+@property (nonatomic, strong) NSMutableArray <Volume*> *debugVolumeList;
 @property (nonatomic, strong) NSMutableSet *debugCellSet;
 
 
@@ -83,6 +85,7 @@ static NSString * const customSectionHeaderID = @"customSectionHeaderID";
     [self configureCoverArtArray];
 }
 
+    //Debug override
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
@@ -149,13 +152,18 @@ static NSString * const customSectionHeaderID = @"customSectionHeaderID";
 //    UIImage *coverArtImage = ((UIImageView*)coverArtArray[indexPath.item]).image;
 //    [cell.imageView setImage:coverArtImage];
 
-        //CLEAN: delete this before shipping
+        //Debug
     NSData *imageData = UIImagePNGRepresentation(cell.imageView.image);
     [self.debugDictionary setObject:imageData forKey:cell.coverArtURLString];
     [self.debugCellSet addObject:cell];
+    
+    [self.debugVolumeList addObject:volume];
+    
+    [self.debugDictionary2 setObject:volume forKey:indexPath];
     return cell;
 }
 
+    //Debug
 -(void)cellTest
 {
     NSArray *visibleCells = [self.collectionView visibleCells];
@@ -169,10 +177,23 @@ static NSString * const customSectionHeaderID = @"customSectionHeaderID";
         counter += @([visibleCellImageData isEqual:debugImageData]).integerValue;
     }
     
-    NSLog(@"There are %@ visible cells, and %@ of them have the correct image.", @(visibleCells.count), @(counter));
+    
+    NSLog(@"Test #1: There are %@ visible cells, and %@ of them have the correct image. [%d]", @(visibleCells.count), @(counter), visibleCells.count == counter);
+    
+    NSArray *visibleURLs = [self.debugDictionary allKeys];
+    NSArray *uniquifiedVisibleURLs = [[NSSet setWithArray:visibleURLs] allObjects];
+    
+    NSLog(@"Test #2: There are %@ visible cells, and %@ unique visible cells (by URL). [%d]", @(visibleURLs.count), @(uniquifiedVisibleURLs.count), visibleURLs.count == uniquifiedVisibleURLs.count);
+    
+    [self.debugDictionary2 description];
+    [self.debugDictionary2 enumerateKeysAndObjectsUsingBlock:^(NSIndexPath *key, Volume *obj, BOOL * _Nonnull stop) {
+        NSLog(@"Key: %@ ||| Object: %@", key, obj.title);
+    }];
 }
 
+#pragma mark Debug-related Lifecycle
 
+    //Debug
 -(NSMutableDictionary *)debugDictionary
 {
     if (_debugDictionary == nil)
@@ -181,6 +202,26 @@ static NSString * const customSectionHeaderID = @"customSectionHeaderID";
     return _debugDictionary;
 }
 
+    //Debug
+-(NSMutableDictionary *)debugDictionary2
+{
+    if (_debugDictionary2 == nil)
+        _debugDictionary2= [NSMutableDictionary dictionary];
+    
+    return _debugDictionary2;
+}
+
+
+    //Debug
+-(NSMutableArray <Volume*> *)debugVolumeList
+{
+    if (_debugVolumeList == nil) {
+        _debugVolumeList = [NSMutableArray array];
+    }
+    return _debugVolumeList;
+}
+
+    //Debug
 -(NSMutableSet *)debugCellSet
 {
     if (_debugCellSet == nil) {
