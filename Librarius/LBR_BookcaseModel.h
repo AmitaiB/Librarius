@@ -17,6 +17,7 @@
 @class Volume;
 @interface LBR_BookcaseModel : NSObject
 
+@property (nonatomic, assign) NSUInteger shelvesCount;
 @property (nonatomic, strong) NSArray<NSArray *> *shelves;
 @property (nonatomic, strong) NSArray<Volume  *> *unshelvedRemainder;
 @property (nonatomic) BOOL isFull;

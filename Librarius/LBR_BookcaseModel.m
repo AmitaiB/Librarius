@@ -13,7 +13,6 @@
 
 @interface LBR_BookcaseModel ()
 
-@property (nonatomic, assign) NSUInteger shelvesCount;
 @property (nonatomic, assign) CGFloat width_cm;
 @property (nonatomic, strong) NSMutableArray <NSArray*> *mutableShelves;
 @end

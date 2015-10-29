@@ -13,6 +13,9 @@
 #define INSET_BOTTOM 1.0
 #define INSET_RIGHT  1.0
 
+#define kMinimumLineSpacing 1.0
+#define kMinimumItemSpacing 1.0
+
 #define kDecorationYadjustment  13.0
 #define kDecorationHeight       25.0
 
@@ -37,9 +40,9 @@
 
     //DecorationView
 @property (nonatomic, strong) NSDictionary *rowDecorationRects;
-@property (nonatomic) CGSize headerReferenceSize;
-@property (nonatomic) CGSize footerReferenceSize;
-@property (nonatomic) UIEdgeInsets sectionInset;
+//@property (nonatomic) CGSize headerReferenceSize;
+//@property (nonatomic) CGSize footerReferenceSize;
+//@property (nonatomic) UIEdgeInsets sectionInset;
 
 
 @property (nonatomic, assign) NSUInteger currentShelfIndex;
@@ -64,7 +67,7 @@
     
     [self registerClass:[LBRShelf_DecorationView class] forDecorationViewOfKind:[LBRShelf_DecorationView kind]];
     
-    self.cellCountForLongestShelf = 0;
+    self.cellCountForLongestRow = 0;
     
     return self;
 }
@@ -227,14 +230,14 @@
 -(void)prepareLayoutOfDecorationViews
 {
     NSInteger numSections = [self.collectionView numberOfSections];
-    
-    CGFloat availableWidth = self.collectionViewContentSize.width -
-    (self.sectionInset.left + self.sectionInset.right);
-    
-    NSInteger cellsPerRow = floorf((availableWidth + self.minimumInteritemSpacing) /
-                                   (self.itemSize.width + self.minimumInteritemSpacing));
-    NSUInteger cellCountForLongestRow
-        ///    NSUInteger cellsPerMaxRow;
+//
+//    CGFloat availableWidth = self.collectionViewContentSize.width -
+//    (self.sectionInset.left + self.sectionInset.right);
+//    
+//    NSInteger cellsPerRow = floorf((availableWidth + self.minimumInteritemSpacing) /
+//                                   (self.itemSize.width + self.minimumInteritemSpacing));
+
+    NSUInteger cellCountForLongestRow = [self extrapolatedCellCountForLongestRow];
     
     NSMutableDictionary *rowDecorationWork = [NSMutableDictionary dictionary];
     
@@ -242,28 +245,29 @@
     
     for (NSUInteger sectionIndex = 0; sectionIndex < numSections; sectionIndex++)
     {
-        yPosition += self.headerReferenceSize.height;
-        yPosition += self.sectionInset.top;
+        yPosition += INSET_TOP;
+//        yPosition += self.sectionInset.top;
         
-        NSUInteger cellCount =
-        [self.collectionView numberOfItemsInSection:sectionIndex];
+//        NSUInteger cellCount = [self.collectionView numberOfItemsInSection:sectionIndex];
         
-        NSUInteger rows = ceilf(cellCount/(CGFloat)cellsPerRow);
+//        NSUInteger rows = ceilf(cellCount/(CGFloat)cellsPerRow);
+        NSUInteger rows = self.bookcaseModel.shelvesCount;
+        
         for (NSInteger row = 0; row < rows; row++) {
-            yPosition += self.itemSize.height;
+            yPosition += kDefaulCellDimension;
             
-            CGRect decorationFrame = CGRectMake(0, yPosition - kDecorationYAdjustment, self.collectionViewContentSize.width, kDecorationHeight);
+            CGRect decorationFrame = CGRectMake(0, yPosition - kDecorationYadjustment, self.collectionViewContentSize.width, kDecorationHeight);
             
-            NSIndexPath *decIndexPath = [NSIndexPath indexPathForRow:row inSection:sectionIndex];
+            NSIndexPath *decorationIndexPath = [NSIndexPath indexPathForRow:row inSection:sectionIndex];
             
-            rowDecorationWork[decIndexPath] = [NSValue valueWithCGRect:decorationFrame];
+            rowDecorationWork[decorationIndexPath] = [NSValue valueWithCGRect:decorationFrame];
             
             if (row < rows - 1) {
-                yPosition += self.minimumLineSpacing;
+                yPosition += kMinimumLineSpacing;
             }
             
-            yPosition += self.sectionInset.bottom;
-            yPosition += self.footerReferenceSize.height;
+//            yPosition += self.sectionInset.bottom;
+            yPosition += INSET_BOTTOM;
         }
         
         self.rowDecorationRects = [rowDecorationWork copy];
