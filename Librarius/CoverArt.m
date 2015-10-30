@@ -23,8 +23,12 @@ typedef NS_ENUM (NSUInteger, ABCoverArtImageSize) {
 
 -(void)setCorrespondingVolume:(Volume *)correspondingVolume
 {
+    NSString *correspondingVolumeKey = @"correspondingVolume";
         //Standard: Set the relationship.
-    self.correspondingVolume = correspondingVolume;
+//    self.correspondingVolume = correspondingVolume;
+    [self willChangeValueForKey:correspondingVolumeKey];
+    [self setPrimitiveValue:correspondingVolume forKey:correspondingVolumeKey];
+    [self didChangeValueForKey:correspondingVolumeKey];
     correspondingVolume.correspondingImageData = self;
     
         //Extra logic: Make sure the images exist, and agree with the volume.

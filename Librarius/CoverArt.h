@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(UIImage *)preferredImageLarge;
 -(UIImage *)preferredImageSmall;
 
+
 -(BOOL)hasNoImages;
 
 @end

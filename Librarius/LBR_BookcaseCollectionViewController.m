@@ -175,7 +175,7 @@ static NSString * const decorationViewIdentifier = @"decorationViewIdentifier";
 //    Volume *volumeModel = volumesArray[indexPath.item];
     Volume *volumeModel = [self.fetchedResultsController objectAtIndexPath:indexPath];
     CoverArt *coverArtModel = volumeModel.correspondingImageData;
-    cell.imageView setImage:
+    [cell.imageView setImage:coverArtModel.preferredImageLarge];
 //    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", volume.cover_art_large]];
 //    [cell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder"]];
     cell.coverArtURLString = volumeModel.cover_art_large ? volumeModel.cover_art_large : volumeModel.cover_art ? volumeModel.cover_art: nil;
@@ -194,8 +194,8 @@ static NSString * const decorationViewIdentifier = @"decorationViewIdentifier";
     [self.debugVolumeList addObject:volumeModel];
     
     [self.debugDictionary2 setObject:volumeModel forKey:indexPath];
-    return cell;
      */
+    return cell;
 }
 
     //Debug
