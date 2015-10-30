@@ -75,13 +75,22 @@ static NSString * const searchResultsCellIdentifier = @"searchResultsCellIdentif
 //    self.navigationItem.rightBarButtonItem = addButton;
     self.navigationController.navigationBar.translucent = NO;
     self.tableView.scrollsToTop = YES;
+    self.bufferToolbar = [[ABB_BufferToolbar alloc] initWithController:self];
 
+    CGFloat statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+    self.tableView.contentInset = UIEdgeInsetsMake(statusBarHeight, 0, 0, 0);
+    
+    
         ///Apple Docs: "NSNotFound is a valid row index for scrolling to a section with zero rows."
     BOOL section0hasAtLeastOneRow = [self.tableView numberOfRowsInSection:0];
-    NSIndexPath *firstItemIndexPath = [NSIndexPath indexPathForRow: (section0hasAtLeastOneRow) ? 0 : NSNotFound inSection:0];
-    [self.tableView scrollToRowAtIndexPath:firstItemIndexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
-    
-    self.bufferToolbar = [[ABB_BufferToolbar alloc] initWithController:self];
+    NSIndexPath *firstItemIndexPath = [NSIndexPath indexPathForRow: 0 inSection:0];
+    if (section0hasAtLeastOneRow) {
+        [self.tableView scrollToRowAtIndexPath:firstItemIndexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    }
+    else
+    {
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:NSNotFound inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    }
 }
 
 /**
@@ -542,10 +551,14 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
 
 #pragma mark - === UISrollViewDelegate ===
 
+    //Might not be good enough.
 -(BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
 {
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
     return NO;
 }
+
+
+
 
 @end
