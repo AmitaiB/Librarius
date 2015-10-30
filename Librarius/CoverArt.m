@@ -21,22 +21,13 @@ typedef NS_ENUM (NSUInteger, ABCoverArtImageSize) {
 // Insert code here to add functionality to your managed object subclass
 #pragma mark - Accessors (overridden)
 
--(void)setCorrespondingVolume:(Volume *)correspondingVolume
+-(void)downloadImagesIfNeeded
 {
-    NSString *correspondingVolumeKey = @"correspondingVolume";
-        //Standard: Set the relationship.
-//    self.correspondingVolume = correspondingVolume;
-    [self willChangeValueForKey:correspondingVolumeKey];
-    [self setPrimitiveValue:correspondingVolume forKey:correspondingVolumeKey];
-    [self didChangeValueForKey:correspondingVolumeKey];
-    correspondingVolume.correspondingImageData = self;
-    
-        //Extra logic: Make sure the images exist, and agree with the volume.
-    BOOL storedImageCorrespondsToVolume = ([self.coverArtURLSizeLarge isEqualToString:correspondingVolume.cover_art_large] ||
-                                           [self.coverArtURLSizeSmall isEqualToString:correspondingVolume.cover_art]);
+//Make sure the images exist, and agree with the volume.
+    BOOL storedImageCorrespondsToVolume = ([self.coverArtURLSizeLarge isEqualToString:self.correspondingVolume.cover_art_large] || [self.coverArtURLSizeSmall isEqualToString:self.correspondingVolume.cover_art]);
     
     if ([self hasNoImages] || !storedImageCorrespondsToVolume) {
-        [self downloadImagesForCorrespondingVolume:correspondingVolume];
+        [self downloadImagesForCorrespondingVolume:self.correspondingVolume];
     }
 }
 

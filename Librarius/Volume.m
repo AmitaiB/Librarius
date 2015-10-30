@@ -19,10 +19,10 @@
 }
 
     ///Not sure if this is neccesary to trigger the loading of images in the CoverArt setter.
--(void)setCorrespondingImageData:(CoverArt *)correspondingImageData
+-(void)updateCoverArtModelIfNeeded
 {
-    self.correspondingImageData = correspondingImageData;
-    correspondingImageData.correspondingVolume = self;
+    if (self.correspondingImageData)
+        [self.correspondingImageData downloadImagesIfNeeded];
 }
 
 
