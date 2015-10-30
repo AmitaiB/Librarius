@@ -75,7 +75,10 @@ static NSString * const searchResultsCellIdentifier = @"searchResultsCellIdentif
 //    self.navigationItem.rightBarButtonItem = addButton;
     self.navigationController.navigationBar.translucent = NO;
     self.tableView.scrollsToTop = YES;
-    NSIndexPath *firstItemIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+
+        ///Apple Docs: "NSNotFound is a valid row index for scrolling to a section with zero rows."
+    BOOL section0hasAtLeastOneRow = [self.tableView numberOfRowsInSection:0];
+    NSIndexPath *firstItemIndexPath = [NSIndexPath indexPathForRow: (section0hasAtLeastOneRow) ? 0 : NSNotFound inSection:0];
     [self.tableView scrollToRowAtIndexPath:firstItemIndexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
     
     self.bufferToolbar = [[ABB_BufferToolbar alloc] initWithController:self];
@@ -315,8 +318,11 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSArray *sections = [self.fetchedResultsController sections];
-    id <NSFetchedResultsSectionInfo> currentSection = (sections.count)? sections[section] : nil;
-    return MAX(1, currentSection.numberOfObjects);
+    if (sections.count) {
+        id <NSFetchedResultsSectionInfo> currentSection = sections[section];
+        return currentSection.numberOfObjects;
+    }
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

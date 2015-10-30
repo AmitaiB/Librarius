@@ -325,6 +325,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
         // The content view that will contain our custom view.
         ///Working on this now...
     UITableViewCell *confirmationCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@""];
+    [confirmationCell configureForAutolayout];
     NSURL *url = [NSURL URLWithString:self.volumeToConfirm.cover_art_large];
     [confirmationCell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder"]];
     confirmationCell.textLabel.text = @"";
