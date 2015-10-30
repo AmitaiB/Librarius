@@ -81,15 +81,18 @@ static NSString * const searchResultsCellIdentifier = @"searchResultsCellIdentif
     self.tableView.contentInset = UIEdgeInsetsMake(statusBarHeight, 0, 0, 0);
     
     
-        ///Apple Docs: "NSNotFound is a valid row index for scrolling to a section with zero rows."
     BOOL section0hasAtLeastOneRow = [self.tableView numberOfRowsInSection:0];
     NSIndexPath *firstItemIndexPath = [NSIndexPath indexPathForRow: 0 inSection:0];
-    if (section0hasAtLeastOneRow) {
-        [self.tableView scrollToRowAtIndexPath:firstItemIndexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
-    }
-    else
-    {
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:NSNotFound inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+
+        //Scroll to the first section
+    if ([self.tableView numberOfSections] > 0) {
+        if (section0hasAtLeastOneRow) {
+            [self.tableView scrollToRowAtIndexPath:firstItemIndexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
+        }
+        else
+        {  ///Apple Docs: "NSNotFound is a valid row index for scrolling to a section with zero rows."
+            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:NSNotFound inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+        }
     }
 }
 
@@ -322,7 +325,8 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
 #pragma mark - === TableView DataSource ===
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return MAX(1, [[self.fetchedResultsController sections] count]);
+//    return MAX(1, [[self.fetchedResultsController sections] count]);
+    return [[self.fetchedResultsController sections] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
