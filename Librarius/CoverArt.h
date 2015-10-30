@@ -1,5 +1,5 @@
 //
-//  Bookcase.h
+//  CoverArt.h
 //  Librarius
 //
 //  Created by Amitai Blickstein on 10/29/15.
@@ -9,11 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Library, Volume;
+@class Volume;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Bookcase : NSManagedObject
+@interface CoverArt : NSManagedObject
 
 // Insert code here to declare functionality of your managed object subclass
 
@@ -21,4 +21,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
-#import "Bookcase+CoreDataProperties.h"
+#import "CoverArt+CoreDataProperties.h"

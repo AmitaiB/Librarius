@@ -1,21 +1,17 @@
 //
 //  Library.m
-//  
+//  Librarius
 //
-//  Created by Amitai Blickstein on 9/3/15.
-//
+//  Created by Amitai Blickstein on 10/29/15.
+//  Copyright © 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 
 #import "Library.h"
 #import "Bookcase.h"
 #import "Volume.h"
 
-
 @implementation Library
 
-@dynamic name;
-@dynamic orderWhenListed;
-@dynamic bookcases;
-@dynamic volumes;
+// Insert code here to add functionality to your managed object subclass
 
 @end

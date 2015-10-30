@@ -113,8 +113,7 @@
                                         <exclude reference="dwa-eh-GVV"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="20" y="110" width="168" height="185"/>
+                                <variation key="widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="dwa-eh-GVV"/>
                                     </mask>

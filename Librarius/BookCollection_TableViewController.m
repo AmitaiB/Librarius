@@ -307,16 +307,16 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
 }
 
 
-#pragma mark - === Table View data source ===
+#pragma mark - === TableView DataSource ===
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [[self.fetchedResultsController sections] count];
+    return MAX(1, [[self.fetchedResultsController sections] count]);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSArray *sections = [self.fetchedResultsController sections];
-    id <NSFetchedResultsSectionInfo> currentSection = sections[section];
-    return currentSection.numberOfObjects;
+    id <NSFetchedResultsSectionInfo> currentSection = (sections.count)? sections[section] : nil;
+    return MAX(1, currentSection.numberOfObjects);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -334,8 +334,8 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     NSArray *sections = self.fetchedResultsController.sections;
-    id<NSFetchedResultsSectionInfo> currentSection = sections[section];
-    return [currentSection name];
+    id<NSFetchedResultsSectionInfo> currentSection = (sections.count)? sections[section] : nil;
+    return (currentSection)? [currentSection name] : @"Empty Library. Me Sad.";
 }
 
 #pragma mark - === Table View delegate ===
@@ -396,7 +396,8 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
         //Grabbing the text and context.
-    NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    BOOL arrayIsEmptyOrNil = !@(self.fetchedResultsController.fetchedObjects.count).boolValue;
+    NSManagedObject *object = (arrayIsEmptyOrNil)? nil : [self.fetchedResultsController objectAtIndexPath:indexPath];
     NSString *title         = [object valueForKey:@"title"];
     NSString *subtitle      = [object valueForKey:@"subtitle"];
     [self makeTitleCase:title];
