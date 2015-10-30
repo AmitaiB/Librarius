@@ -27,7 +27,7 @@
 
     //Categories
 #import "UIColor+FlatUI.h"
-//#import <UIImageView+AFNetworking.h>
+#import <UIImageView+AFNetworking.h>
 #import "UIImageView+ProgressView.h"
 #import "CoverArt.h"
 
@@ -174,10 +174,10 @@ static NSString * const decorationViewIdentifier = @"decorationViewIdentifier";
     
 //    Volume *volumeModel = volumesArray[indexPath.item];
     Volume *volumeModel = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    CoverArt *coverArtModel = volumeModel.correspondingImageData;
-    [cell.imageView setImage:coverArtModel.preferredImageLarge];
-//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", volume.cover_art_large]];
-//    [cell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder"]];
+//    CoverArt *coverArtModel = volumeModel.correspondingImageData;
+//    [cell.imageView setImage:coverArtModel.preferredImageLarge];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", volumeModel.cover_art_large]];
+    [cell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder"]];
     cell.coverArtURLString = volumeModel.cover_art_large ? volumeModel.cover_art_large : volumeModel.cover_art ? volumeModel.cover_art: nil;
     
     
