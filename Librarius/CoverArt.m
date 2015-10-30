@@ -59,4 +59,24 @@ typedef NS_ENUM (NSUInteger, ABCoverArtImageSize) {
                               }];
 }
 
+-(BOOL)hasNoImages
+{
+    return !(self.coverArtImageDataSizeLarge || self.coverArtURLSizeSmall);
+}
+
+-(void)setCorrespondingVolume:(Volume *)correspondingVolume
+{
+        //Standard: Set the relationship.
+    self.correspondingVolume = correspondingVolume;
+    correspondingVolume.correspondingImageData = self;
+    
+        //Extra logic: Make sure the images exist, and agree with the volume.
+    BOOL storedImageCorrespondsToVolume = ([self.coverArtURLSizeLarge isEqualToString:correspondingVolume.cover_art_large] ||
+                                           [self.coverArtURLSizeSmall isEqualToString:correspondingVolume.cover_art]);
+    
+    if ([self hasNoImages] || !storedImageCorrespondsToVolume) {
+        [self downloadImagesForCorrespondingVolume:correspondingVolume];
+    }
+}
+
 @end

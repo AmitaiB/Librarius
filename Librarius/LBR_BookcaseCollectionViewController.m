@@ -29,6 +29,7 @@
 #import "UIColor+FlatUI.h"
 //#import <UIImageView+AFNetworking.h>
 #import "UIImageView+ProgressView.h"
+#import "CoverArt.h"
 
 
 @interface LBR_BookcaseCollectionViewController ()
@@ -40,6 +41,7 @@
 @property (nonatomic, strong) NSMutableArray *itemChanges;
 @property (nonatomic, strong) LBRDataManager *dataManager;
 @property (nonatomic, strong) UIProgressView *progressView;
+
 
     //Debug
 @property (nonatomic, strong) NSMutableDictionary *debugDictionary;
@@ -57,11 +59,13 @@
     UICollectionViewFlowLayout *standardFlowLayout;
     LBR_BookcaseLayout *layout;
     NSArray <Volume*> *volumesArray;
-    NSArray <UIImage*> *coverArtArray;
+    
+        ///THIS MIGHT WORK with a Dictionary instead of an array:
+    NSDictionary <NSIndexPath*,  NSData*> *precachedImageData;
 }
 
-static NSString * const reuseIdentifier = @"bookCellID";
-static NSString * const customSectionHeaderID = @"customSectionHeaderID";
+static NSString * const reuseIdentifier          = @"bookCellID";
+static NSString * const customSectionHeaderID    = @"customSectionHeaderID";
 static NSString * const decorationViewIdentifier = @"decorationViewIdentifier";
 
 
@@ -86,7 +90,7 @@ static NSString * const decorationViewIdentifier = @"decorationViewIdentifier";
     // Cell classes prototyped in storyboard.
 
     volumesArray = self.fetchedResultsController.fetchedObjects;
-    [self configureCoverArtArray];
+        ///    [self precacheImages];
 }
 
 -(void)setupProgressView
@@ -114,21 +118,22 @@ static NSString * const decorationViewIdentifier = @"decorationViewIdentifier";
     [self cellTest];
 }
 
--(void)configureCoverArtArray
-{
-    NSMutableArray *tempImageViewArray = [NSMutableArray array];
-    for (Volume *volume in volumesArray) {
-        UIImageView *imageView = [[UIImageView alloc] init];
-        NSURL *url = [NSURL URLWithString:volume.cover_art_large];
-        
-            //!!!: Why not working?
-        [imageView sd_setImageWithURL:url usingProgressView:self.progressView];
-        
-//        [imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder"]];
-        [tempImageViewArray addObject:imageView];
-    }
-    coverArtArray = [tempImageViewArray copy];
-}
+    ///May not be needed, now that the images are in CoreData.
+//-(void)precacheImages
+//{
+//    NSMutableArray *tempImageViewArray = [NSMutableArray array];
+//    for (Volume *volume in volumesArray) {
+//        UIImageView *imageView = [[UIImageView alloc] init];
+//        NSURL *url = [NSURL URLWithString:volume.cover_art_large];
+//        
+//            //!!!: Why not working?
+//        [imageView sd_setImageWithURL:url usingProgressView:self.progressView];
+//        
+////        [imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder"]];
+//        [tempImageViewArray addObject:imageView];
+//    }
+//    coverArtArray = [tempImageViewArray copy];
+//}
 
 
 - (void)didReceiveMemoryWarning {
@@ -167,9 +172,12 @@ static NSString * const decorationViewIdentifier = @"decorationViewIdentifier";
         //configure the cell
     cell.backgroundColor = [UIColor asbestosColor];
     
-    Volume *volume = volumesArray[indexPath.item];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", volume.cover_art_large]];
-    [cell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder"]];
+//    Volume *volumeModel = volumesArray[indexPath.item];
+    
+CoverArt *coverArtModel = 
+    
+//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", volume.cover_art_large]];
+//    [cell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder"]];
     cell.coverArtURLString = volume.cover_art_large;
     
     

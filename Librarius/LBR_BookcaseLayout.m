@@ -74,14 +74,11 @@
 
 
 /**
+ *** The Critical Business Logic ***
  +Iterate over every cell,
  -produce a layouts attribute object for each one
  --This is where we encapsulate and bury the confusing logic**
  -and then cache the info in the layoutInformation dictionary by indexPath.
-
- **"Confusing Logic"
- === Iterate through each cell, increment through the bookcaseModel each time.
- 
  */
 #pragma mark - === Overridden Methods ===
 
