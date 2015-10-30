@@ -22,6 +22,11 @@ typedef NS_ENUM (NSUInteger, ABCoverArtImageSize) {
 
 
 // Insert code here to add functionality to your managed object subclass
+/**
+ Downloads the images of the volume, and associates itself with the volume with a
+ relationship in the database. Initialize the Volume object first, specifically
+ with a non-null URL for cover_art or cover_art_large.
+ */
 -(void)downloadImagesForCorrespondingVolume:(Volume *)volume
 {
     self.correspondingVolume = volume;

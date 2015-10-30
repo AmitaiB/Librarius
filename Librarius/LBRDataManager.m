@@ -119,8 +119,7 @@ static NSString * const kUnknown = @"kUnknown";
     persistentVolume.library         = self.currentLibrary;
     
     CoverArt *associatedCoverArt = [NSEntityDescription insertNewObjectForEntityForName:@"CoverArt" inManagedObjectContext:self.managedObjectContext];
-    associatedCoverArt
-    
+    [associatedCoverArt downloadImagesForCorrespondingVolume:persistentVolume];
 }
 
 
