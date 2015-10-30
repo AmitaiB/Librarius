@@ -1,24 +1,36 @@
-#1) BookCollection_TableViewController
-
---> BookDetailViewController:
-NavigationBar gets pushed up (sometimes halfway, sometimes all the way).
-
-#2) LBR_BookcaseCollectionViewController
-
-a)
-```2015-10-26 11:59:48.251 Librarius[2767:692879] _BSMachError: (os/kern) invalid capability (20)
-   2015-10-26 11:59:48.259 Librarius[2767:692879] _BSMachError: (os/kern) invalid name (15)```
-b)
-self.collectionView.contentSize = (0, 0)!
-
-✅
-#3) LBRBarCodeScannerViewController
-There is a gap of whitespace when the AdBannerView appears.
-
-✅✅
-#4) LBRRecommendationsCollectionViewController
-
-    ```*** Assertion failure in -[LBRRecommendations_FlowLayout _decorationViewForLayoutAttributes:], /BuildRoot/Library/Caches/com.apple.xbs/Sources/UIKit/UIKit-3512.29.5/UICollectionViewLayout.m:1281 could not dequeue a decoration view of kind: LBRDecorationViewKind - must register as a class or nib or connect a prototype in a storyboard```
-!!!:But I DID register the class!
+#Librarius (App)
+##FixMe/ToDo
+#####Collections_TableViewController
+* **F:** SearchBar Crashes
+* T: Need beautiful colors
+* T: Genres should be displayed
 
 
+#####ShelveBooks_CollectionViewController
+* T: Layout switcher: junk or fix (conditional logic?).
+* T: Cells shouldn't overlap decorationView. (estimatedItemSize --> itemSize ?)
+* T: cell background NOT red. (Done)
+* T: Implement Scroll DirectionLock. (SO)
+* T: PhotoBombers-style interactivity.
+* T: DecorationView is cut off at the far end.
+
+#####BarcodeScannerView
+* **F:** Torchbutton is blocked.
+* T: Make buttons pretty and UI compliant.
+* T: Colors need theme. ([UIButton appearance])
+
+#####Recommendation_CollectionViewController
+* **F:** Cells have no images.
+* **F:** DecorationView textfield collision (estimatedItemSize --> itemSize)
+
+#####SettingsView
+* **F:** Just look pretty, for now, implement it later.
+
+##Version 1.1
+* Settings page.
+* Add custom bookcases.
+* Multiple, custom Libraries.
+* Drag and Drop functionality.
+
+
+##Version 2.0

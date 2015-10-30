@@ -12,6 +12,9 @@
 #import <AVFoundation/AVFoundation.h>
 #import <iAd/iAd.h>
 
+    //Network Monitoring
+#import "Reachability.h"
+
     //Data
 #import "LBRConstants.h"
 #import "LBRGoogleGTLClient.h"
@@ -162,7 +165,21 @@ static NSString * const volumeNib          = @"volumePresentationView";
     if (self.isScanning) {
         [self stopScanningOps];}
     else {
-        [self startScanningOps];}
+        if ([self deviceIsNetConnected])
+            [self startScanningOps];
+        else
+            [self alertUserNoInternetConnection];
+    }
+}
+
+-(void)alertUserNoInternetConnection
+{
+    UIAlertController *noInternetAlertController = [UIAlertController alertControllerWithTitle:@"No Internet Detected" message:@"An internet connection is required to look up book data and images." preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:noInternetAlertController animated:YES completion:^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self dismissViewControllerAnimated:YES completion:nil];
+        });
+    }];
 }
 
 - (IBAction)lightToggleButtonTapped:(id)sender {
@@ -205,6 +222,28 @@ static NSString * const volumeNib          = @"volumePresentationView";
             preconfiguredLBRFetchedResultsController:self];
 }
 
+#pragma mark - === Network Connectivity ===
+
+-(BOOL)deviceIsNetConnected
+{
+id internetReachability = [Reachability reachabilityForInternetConnection];
+    [internetReachability startNotifier];
+    NetworkStatus netStatus = [internetReachability currentReachabilityStatus];
+    switch (netStatus) {
+        case NotReachable:
+            return NO;
+            break;
+        case ReachableViaWWAN:
+            return YES;
+            break;
+        case ReachableViaWiFi:
+            return YES;
+            break;
+        default:
+            return NO;
+            break;
+    }
+}
 
 #pragma mark - === Scanning ===
 /**

@@ -64,6 +64,7 @@
 		388DBDF31BA9174A005C5125 /* THNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 388DBDF21BA9174A005C5125 /* THNavigationController.m */; };
 		388DBE301BAA0F60005C5125 /* LBRCustomLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 388DBE2F1BAA0F60005C5125 /* LBRCustomLayout.m */; };
 		388DBE331BAA54C8005C5125 /* UIImage+imageScaledToHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = 388DBE321BAA54C8005C5125 /* UIImage+imageScaledToHeight.m */; };
+		38A329071BE3F24F0060E9D5 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A329061BE3F24F0060E9D5 /* Reachability.m */; };
 		38AAD6F01B901175003062C1 /* Librarius.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 38AAD6EE1B901175003062C1 /* Librarius.xcdatamodeld */; };
 		38BE31E21B961F7000C46001 /* volumePresentationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38BE31E11B961F7000C46001 /* volumePresentationView.xib */; };
 		38CD5FD11B9DE78400963D2F /* VolumeDetailsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38CD5FD01B9DE78400963D2F /* VolumeDetailsCell.xib */; };
@@ -208,6 +209,8 @@
 		388DBE2F1BAA0F60005C5125 /* LBRCustomLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRCustomLayout.m; sourceTree = "<group>"; };
 		388DBE311BAA54C8005C5125 /* UIImage+imageScaledToHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+imageScaledToHeight.h"; sourceTree = "<group>"; };
 		388DBE321BAA54C8005C5125 /* UIImage+imageScaledToHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+imageScaledToHeight.m"; sourceTree = "<group>"; };
+		38A329051BE3F24F0060E9D5 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		38A329061BE3F24F0060E9D5 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		38AAD6E91B90107F003062C1 /* libMagicalRecord.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMagicalRecord.a; path = "Pods/../build/Debug-iphoneos/libMagicalRecord.a"; sourceTree = "<group>"; };
 		38AAD6EF1B901175003062C1 /* Librarius.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Librarius.xcdatamodel; sourceTree = "<group>"; };
 		38AAD7241B90A1AC003062C1 /* Librarius.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Librarius.entitlements; sourceTree = "<group>"; };
@@ -333,6 +336,7 @@
 		3803752F1B8AC9A8004C4ECE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				38A329041BE3F22A0060E9D5 /* Network */,
 				38DC81C91BCB3E66002A3B80 /* Constants */,
 				382A83BE1BB3D6EB008860CF /* Transitions/Animations */,
 				384E0CBD1B97D231007E7290 /* Categories */,
@@ -547,6 +551,15 @@
 				388DBE321BAA54C8005C5125 /* UIImage+imageScaledToHeight.m */,
 			);
 			name = Categories;
+			sourceTree = "<group>";
+		};
+		38A329041BE3F22A0060E9D5 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				38A329051BE3F24F0060E9D5 /* Reachability.h */,
+				38A329061BE3F24F0060E9D5 /* Reachability.m */,
+			);
+			name = Network;
 			sourceTree = "<group>";
 		};
 		38CF73FD1BAF51130070134E /* FlatUIKit Categories */ = {
@@ -866,6 +879,7 @@
 				3810D9F81BD585150093D5C2 /* UITableViewCell+FlatUI.m in Sources */,
 				38F57BC21BB0707200CC2EE8 /* UIBarButtonItem+FlatUI.m in Sources */,
 				3810D9FB1BD585300093D5C2 /* FUICellBackgroundView.m in Sources */,
+				38A329071BE3F24F0060E9D5 /* Reachability.m in Sources */,
 				380375671B8BC758004C4ECE /* LBRGoogleAPIClient.m in Sources */,
 				38466D281B94F24400DD252E /* LBRGoogleGTLClient.m in Sources */,
 				3803756A1B8BC89D004C4ECE /* LBRGoogleSignInViewController.m in Sources */,
