@@ -18,6 +18,12 @@
     return self.isbn13? self.isbn13 : self.isbn10? self.isbn10 : nil;
 }
 
+    ///Not sure if this is neccesary to trigger the loading of images in the CoverArt setter.
+-(void)setCorrespondingImageData:(CoverArt *)correspondingImageData
+{
+    self.correspondingImageData = correspondingImageData;
+    correspondingImageData.correspondingVolume = self;
+}
 
 
 @end

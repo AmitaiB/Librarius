@@ -173,27 +173,29 @@ static NSString * const decorationViewIdentifier = @"decorationViewIdentifier";
     cell.backgroundColor = [UIColor asbestosColor];
     
 //    Volume *volumeModel = volumesArray[indexPath.item];
-    
-CoverArt *coverArtModel = 
-    
+    Volume *volumeModel = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    CoverArt *coverArtModel = volumeModel.correspondingImageData;
+    cell.imageView setImage:
 //    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", volume.cover_art_large]];
 //    [cell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder"]];
-    cell.coverArtURLString = volume.cover_art_large;
+    cell.coverArtURLString = volumeModel.cover_art_large ? volumeModel.cover_art_large : volumeModel.cover_art ? volumeModel.cover_art: nil;
     
     
-    cell.thickness = [volume.thickness floatValue];
+    cell.thickness = [volumeModel.thickness floatValue];
 //    UIImage *coverArtImage = ((UIImageView*)coverArtArray[indexPath.item]).image;
 //    [cell.imageView setImage:coverArtImage];
 
-        //Debug
+    /**
+     //Debug
     NSData *imageData = UIImagePNGRepresentation(cell.imageView.image);
     [self.debugDictionary setObject:imageData forKey:cell.coverArtURLString];
     [self.debugCellSet addObject:cell];
     
-    [self.debugVolumeList addObject:volume];
+    [self.debugVolumeList addObject:volumeModel];
     
-    [self.debugDictionary2 setObject:volume forKey:indexPath];
+    [self.debugDictionary2 setObject:volumeModel forKey:indexPath];
     return cell;
+     */
 }
 
     //Debug
