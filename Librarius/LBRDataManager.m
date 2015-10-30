@@ -6,12 +6,15 @@
 ////
 
 #import "LBRDataManager.h"
+#import "LBRGoogleGTLClient.h"
+
+    //Models
 #import "Library.h"
 #import "Bookcase.h"
 #import "Volume.h"
+#import "CoverArt.h"
 #import "LBRParsedVolume.h"
 #import <GTLBooksVolume.h>
-#import "LBRGoogleGTLClient.h"
 
 @implementation LBRDataManager
 
@@ -114,6 +117,10 @@ static NSString * const kUnknown = @"kUnknown";
     persistentVolume.ratingsCount    = volumeToInsert.ratingsCount;
 
     persistentVolume.library         = self.currentLibrary;
+    
+    CoverArt *associatedCoverArt = [NSEntityDescription insertNewObjectForEntityForName:@"CoverArt" inManagedObjectContext:self.managedObjectContext];
+    associatedCoverArt
+    
 }
 
 
@@ -128,8 +135,8 @@ static NSString * const kUnknown = @"kUnknown";
 
     // ===================== CoreData additions here
 
-#pragma mark - === CoreData ===
-#pragma mark - ==Fetch Data==
+#pragma mark - ***** CoreData *****
+#pragma mark  Fetch Data
 
 - (void)fetchData
 {
@@ -157,7 +164,7 @@ static NSString * const kUnknown = @"kUnknown";
 }
 
 
-#pragma mark - ==Core Data stack==
+#pragma mark - *Core Data stack*
 #pragma mark NSManagedObjectContext
 
     // Returns the managed object context for the application.
