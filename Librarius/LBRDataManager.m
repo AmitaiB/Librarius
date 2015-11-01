@@ -263,7 +263,7 @@ static NSString * const kUnknown = @"kUnknown";
     
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
-    NSFetchedResultsController *frc = [[NSFetchedResultsController alloc] initWithFetchRequest:volumesRequest managedObjectContext:managedObjectContext sectionNameKeyPath:@"mainCategory" cacheName:nil];
+    NSFetchedResultsController *frc = [[NSFetchedResultsController alloc] initWithFetchRequest:volumesRequest managedObjectContext:managedObjectContext sectionNameKeyPath:@"mainCategory" cacheName:@"LBRLayoutSchemeGenreAuthorDate"];
     
     frc.delegate = sender;
     

@@ -23,6 +23,8 @@
 #import "LBR_BookcaseCollectionViewController.h"
 #import "LBR_BookcaseModel.h"
 #import "LBRShelf_DecorationView.h"
+#import "LBRDataManager.h"
+
 
 @interface LBR_BookcaseLayout ()
 
@@ -48,7 +50,11 @@
 @property (nonatomic, assign) NSUInteger currentShelfIndex;
 @property (nonatomic, assign) NSUInteger bookOnShelfCounter;
 @property (nonatomic, strong) LBR_BookcaseModel *bookcaseModel;
+
+    //Required for Switching
 @property (nonatomic, assign) LBRLayoutScheme layoutScheme;
+@property (nonatomic, strong) NSFetchedResultsController *localFetchedResultsController;
+
 @end
 
 @implementation LBR_BookcaseLayout
@@ -194,9 +200,11 @@
 
 -(LBR_BookcaseModel *)configuredBookcaseModel {
     LBR_BookcaseModel *bookcaseModel = [[LBR_BookcaseModel alloc] initWithWidth:kDefaultBookcaseWidth_cm shelvesCount:kDefaultBookcaseShelvesCount];
-    LBR_BookcaseCollectionViewController *collectionViewController = (LBR_BookcaseCollectionViewController *)self.collectionView.dataSource;
-        
-    [bookcaseModel shelveBooks:collectionViewController.fetchedResultsController.fetchedObjects];
+//    LBR_BookcaseCollectionViewController *collectionViewController = (LBR_BookcaseCollectionViewController *)self.collectionView.dataSource;
+//    
+//        [bookcaseModel shelveBooks:collectionViewController.fetchedResultsController.fetchedObjects];
+    [bookcaseModel shelveBooks:self.localFetchedResultsController.fetchedObjects];
+
     return bookcaseModel;
 }
 
@@ -279,6 +287,69 @@
         
         self.rowDecorationRects = [rowDecorationWork copy];
     }
+}
+
+    /**
+     This method aligns the fetchedResultsController (FRC) with the chosen layout scheme - which uses the controller to shelve the BookModel's books. This implementation does not disturb the default code in the datamanager, nor wipes the FRC's cache.
+     To customize the new FRC, we need to change:
+       1) The cache (set to new unique name for the layout scheme).
+       2) The sectionNameKeyPath (usually set to nil).
+       3) The sort descriptors (where the magic happens!).
+       4) The NSFetchRequest's predicate (rare: usually, just leave this as "current library").
+     */
+-(NSFetchedResultsController *)localFetchedResultsController
+{
+    if (_localFetchedResultsController == nil) {
+        LBR_BookcaseCollectionViewController *collectionViewController = (LBR_BookcaseCollectionViewController *)self.collectionView.dataSource;
+        
+            //The default.
+        if (self.layoutScheme == LBRLayoutSchemeGenreAuthorDate)
+        {
+            _localFetchedResultsController = [collectionViewController.fetchedResultsController copy];
+        }
+        
+            //Built with extensibility in mind, for future layout customizations.
+        else {
+            NSFetchedResultsController *globalFRC = collectionViewController.fetchedResultsController;
+            
+                //            LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
+            
+                //The default predicate is for "current library". In most forseeable cases, that shouldn't need to change.
+            NSFetchRequest *localRequestByScheme = globalFRC.fetchRequest;
+            NSString *localCacheNameByScheme;
+            
+            if (self.layoutScheme == LBRLayoutSchemeAuthorDate)
+            {
+                localCacheNameByScheme = [self formatTypeToString:LBRLayoutSchemeAuthorDate];
+                localRequestByScheme.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"authorSurname" ascending:YES]];
+                
+                return [[NSFetchedResultsController alloc]
+                        initWithFetchRequest:localRequestByScheme
+                        managedObjectContext:globalFRC.managedObjectContext
+                        sectionNameKeyPath:nil
+                        cacheName:localCacheNameByScheme];
+            }
+        }
+    }
+    return _localFetchedResultsController;
+}
+
+
+- (NSString*)formatTypeToString:(LBRLayoutScheme)formatType {
+    NSString *result = nil;
+    
+    switch(formatType) {
+        case LBRLayoutSchemeGenreAuthorDate:
+            result = @"LBRLayoutSchemeGenreAuthorDate";
+            break;
+        case LBRLayoutSchemeAuthorDate:
+            result = @"LBRLayoutSchemeAuthorDate";
+            break;
+        default:
+            [NSException raise:NSGenericException format:@"Unexpected FormatType (LBRLayoutScheme)."];
+    }
+    
+    return result;
 }
 
 @end
