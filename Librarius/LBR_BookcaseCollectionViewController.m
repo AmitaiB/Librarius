@@ -77,7 +77,7 @@ static NSString * const decorationViewIdentifier = @"decorationViewIdentifier";
     self.title = @"Bookshelves";
         //Rope in the singleton dataManger
     self.dataManager = [LBRDataManager sharedDataManager];
-
+    self.collectionView.directionalLockEnabled = YES;
     self.canDisplayBannerAds = YES;
     
         //Set custom layout with protocol
@@ -210,23 +210,6 @@ static NSString * const decorationViewIdentifier = @"decorationViewIdentifier";
         visibleCellImageData = UIImagePNGRepresentation(cell.imageView.image);
         debugImageData = self.debugDictionary[cell.coverArtURLString];
         counter += @([visibleCellImageData isEqual:debugImageData]).integerValue;
-    }
-    
-    
-    BOOL test = NO;
-    if (test) {
-        
-        NSLog(@"Test #1: There are %@ visible cells, and %@ of them have the correct image. [%d]", @(visibleCells.count), @(counter), visibleCells.count == counter);
-        
-        NSArray *visibleURLs = [self.debugDictionary allKeys];
-        NSArray *uniquifiedVisibleURLs = [[NSSet setWithArray:visibleURLs] allObjects];
-        
-        NSLog(@"Test #2: There are %@ visible cells, and %@ unique visible cells (by URL). [%d]", @(visibleURLs.count), @(uniquifiedVisibleURLs.count), visibleURLs.count == uniquifiedVisibleURLs.count);
-        
-        [self.debugDictionary2 description];
-        [self.debugDictionary2 enumerateKeysAndObjectsUsingBlock:^(NSIndexPath *key, Volume *obj, BOOL * _Nonnull stop) {
-            NSLog(@"Key: %@ ||| Object: %@", key, obj.title);
-        }];
     }
 }
 
@@ -429,7 +412,7 @@ static NSString * const decorationViewIdentifier = @"decorationViewIdentifier";
 }
 
 -(void)layoutChangesSegmentedControlDidChangeValue:(id)sender
-{    
+{
     if (layoutChangesSegmentedControl.selectedSegmentIndex == 0) {
         [self.collectionView setCollectionViewLayout:layout animated:YES];
     }

@@ -36,8 +36,7 @@
                                         <exclude reference="nnA-YW-t2j"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="212" y="85" width="168" height="185"/>
+                                <variation key="widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="nnA-YW-t2j"/>
                                     </mask>
@@ -113,7 +112,8 @@
                                         <exclude reference="dwa-eh-GVV"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact">
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="66" width="168" height="229"/>
                                     <mask key="constraints">
                                         <include reference="dwa-eh-GVV"/>
                                     </mask>
@@ -298,11 +298,11 @@
             </objects>
             <point key="canvasLocation" x="1737" y="703"/>
         </scene>
-        <!--Shelve-->
+        <!--Shelves (CollectionViewController)-->
         <scene sceneID="2EP-QO-Uby">
             <objects>
-                <collectionViewController id="ajh-Xd-CoJ" userLabel="Shelve" customClass="LBR_BookcaseCollectionViewController" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" dataMode="prototypes" id="XDD-g2-ajd">
+                <collectionViewController id="ajh-Xd-CoJ" userLabel="Shelves (CollectionViewController)" customClass="LBR_BookcaseCollectionViewController" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" bounces="NO" alwaysBounceVertical="YES" dataMode="prototypes" id="XDD-g2-ajd">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
@@ -318,7 +318,6 @@
                                         <imageView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="wue-A0-aVn">
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                             <animations/>
-                                            <color key="backgroundColor" red="0.98431372549999996" green="0.0" blue="0.019607843140000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <variation key="widthClass=compact" fixedFrame="YES">
                                                 <rect key="frame" x="0.0" y="0.0" width="106" height="106"/>
                                             </variation>
@@ -1016,6 +1015,6 @@
         <image name="woodpanel04110095" width="624" height="452"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hkZ-A2-opz"/>
+        <segue reference="Bzc-ZK-D5c"/>
     </inferredMetricsTieBreakers>
 </document>

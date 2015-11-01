@@ -57,7 +57,7 @@
             GTLBooksVolumes *responceObject = object;
             GTLBooksVolume *mostLikelyObject = [responceObject.items firstObject];
             block(mostLikelyObject); //<--Passes it back.
-            NSLog(@"Job's done, because now the caller has the GTLVolume callback.");
+            NSLog(@"mostLikelyObject: %@", mostLikelyObject.volumeInfo.title);
         }
     }];
 }

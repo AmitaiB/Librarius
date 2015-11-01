@@ -94,8 +94,6 @@
     }
     
     self.shelves = [self.mutableShelves copy];
-    
-//    NSLog(@"self.shelves[0] = %@\nself.shelves[1] = %@\nself.shelves[2] = %@\nself.shelves[3] = %@\nself.shelves[4] = %@\n", self.shelves[0], self.shelves[1], self.shelves[2], self.shelves[3], self.shelves[4]);
 }
 
 

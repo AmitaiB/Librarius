@@ -404,7 +404,7 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
 -(void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
 {
     UITableViewHeaderFooterView *headerView   = (UITableViewHeaderFooterView *)view;
-    headerView.backgroundView.backgroundColor = [UIColor shirazColor];
+    headerView.backgroundView.backgroundColor = [UIColor cloudsColor];
     headerView.textLabel.backgroundColor      = [UIColor clearColor];
     headerView.textLabel.textColor            = [UIColor whiteColor];
 }

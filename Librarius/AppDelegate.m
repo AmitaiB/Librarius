@@ -32,12 +32,6 @@
     AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
 }
 
-    //CLEAN:
-//-(void)uncaughtExceptionHandler:(NSException *)exception {
-//    NSLog(@"CRASH: %@", exception);
-//    NSLog(@"Stack Trace: %@", [exception callStackSymbols]);
-//        //Internal Error reporting
-//}
 
 #pragma mark
 

@@ -81,8 +81,8 @@ static NSString * const kUnknown = @"kUnknown";
 -(void)updateWithNewTransientVolume:(LBRParsedVolume*)volumeToAdd {
         // Logic
     self.parsedVolumesToEitherSaveOrDiscard = [self.parsedVolumesToEitherSaveOrDiscard arrayByAddingObject:volumeToAdd];
-    NSLog(@"%@", [self.parsedVolumesToEitherSaveOrDiscard description]);
-    DBLG
+        //CLEAN: Necessary?
+    NSLog(@"%@", [self.parsedVolumesToEitherSaveOrDiscard filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"title"]]);
 }
 
 -(NSArray *)parsedVolumesToEitherSaveOrDiscard
