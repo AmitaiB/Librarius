@@ -1,13 +1,12 @@
 #Librarius (App)
 ##FixMe/ToDo
+
+
 #####Collections_TableViewController
-* T: SearchBar Does not work
 * T: Need beautiful colors
 * T: Genres should be displayed
 
-
 #####ShelveBooks_CollectionViewController
-* T: Layout switcher: junk or fix (conditional logic?).
 * T: Cells shouldn't overlap decorationView. (estimatedItemSize --> itemSize ?)
 * T: cell background NOT red. (Done)
 * T: Implement Scroll DirectionLock. (SO)
@@ -26,7 +25,13 @@
 #####SettingsView
 * **F:** Just look pretty, for now, implement it later.
 
+####Solved Problems
+* **F:** SearchBar Crashes
+* **F:** didSelectCellAtRow crashes
+* T: Layout switcher: junk or fix (conditional logic?).
+
 ##Version 1.1
+* Acknowledgments page.
 * Settings page.
 * Add custom bookcases.
 * Multiple, custom Libraries.

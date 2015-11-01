@@ -72,6 +72,8 @@
 		38D6019B1BDAAAC900E3D60F /* LBRShelf_DecorationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D6019A1BDAAAC900E3D60F /* LBRShelf_DecorationView.m */; };
 		38D6019E1BDAAEDE00E3D60F /* LBRRecommendations_FlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 38D6019D1BDAAEDE00E3D60F /* LBRRecommendations_FlowLayout.m */; };
 		38D601A11BDABE1E00E3D60F /* TODO-FIXME-list.md in Resources */ = {isa = PBXBuildFile; fileRef = 38D601A01BDABE1E00E3D60F /* TODO-FIXME-list.md */; };
+		38DA43D01BE66F2B00FEFD16 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 38DA43CF1BE66F2B00FEFD16 /* README.md */; };
+		38DA43D31BE66FD200FEFD16 /* LBR_BookcaseLayout_AuthorOnly.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DA43D21BE66FD200FEFD16 /* LBR_BookcaseLayout_AuthorOnly.m */; };
 		38E2497F1BE2AEEC0047EBF7 /* ABB_BufferToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E2497E1BE2AEEC0047EBF7 /* ABB_BufferToolbar.m */; };
 		38E71DAF1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E71DAE1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.m */; };
 		38F3C0D91BDFE01F005AF2ED /* LBR_ResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F3C0D81BDFE01F005AF2ED /* LBR_ResultsTableViewController.m */; };
@@ -223,6 +225,9 @@
 		38D6019C1BDAAEDE00E3D60F /* LBRRecommendations_FlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRRecommendations_FlowLayout.h; sourceTree = "<group>"; };
 		38D6019D1BDAAEDE00E3D60F /* LBRRecommendations_FlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRRecommendations_FlowLayout.m; sourceTree = "<group>"; };
 		38D601A01BDABE1E00E3D60F /* TODO-FIXME-list.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = "TODO-FIXME-list.md"; sourceTree = "<group>"; };
+		38DA43CF1BE66F2B00FEFD16 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		38DA43D11BE66FD200FEFD16 /* LBR_BookcaseLayout_AuthorOnly.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBR_BookcaseLayout_AuthorOnly.h; sourceTree = "<group>"; };
+		38DA43D21BE66FD200FEFD16 /* LBR_BookcaseLayout_AuthorOnly.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBR_BookcaseLayout_AuthorOnly.m; sourceTree = "<group>"; };
 		38E2497D1BE2AEEC0047EBF7 /* ABB_BufferToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABB_BufferToolbar.h; sourceTree = "<group>"; };
 		38E2497E1BE2AEEC0047EBF7 /* ABB_BufferToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABB_BufferToolbar.m; sourceTree = "<group>"; };
 		38E71DAD1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRShelvedBook_CollectionViewCell.h; sourceTree = "<group>"; };
@@ -296,6 +301,7 @@
 			isa = PBXGroup;
 			children = (
 				38D601A01BDABE1E00E3D60F /* TODO-FIXME-list.md */,
+				38DA43CF1BE66F2B00FEFD16 /* README.md */,
 				3803752E1B8AC9A8004C4ECE /* Librarius */,
 				3803754B1B8AC9A8004C4ECE /* LibrariusTests */,
 				3803752D1B8AC9A8004C4ECE /* Products */,
@@ -459,6 +465,8 @@
 				3882667F1BDEC70F004B757F /* LBR_EmptyFlowLayout.m */,
 				38103B5A1BD033E4009F22E3 /* LBR_BookcaseLayout.h */,
 				38103B5B1BD033E4009F22E3 /* LBR_BookcaseLayout.m */,
+				38DA43D11BE66FD200FEFD16 /* LBR_BookcaseLayout_AuthorOnly.h */,
+				38DA43D21BE66FD200FEFD16 /* LBR_BookcaseLayout_AuthorOnly.m */,
 				381FC2B91BD15D45003A3C52 /* LBR_BookcaseModel.h */,
 				381FC2BA1BD15D45003A3C52 /* LBR_BookcaseModel.m */,
 				38E71DAD1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.h */,
@@ -875,6 +883,7 @@
 				38103B591BD033AE009F22E3 /* LBR_ShelvedBookCell.m in Sources */,
 				3837F2C41BE2F1B200170FF6 /* CoverArt.m in Sources */,
 				388DBDF31BA9174A005C5125 /* THNavigationController.m in Sources */,
+				38DA43D31BE66FD200FEFD16 /* LBR_BookcaseLayout_AuthorOnly.m in Sources */,
 				38103B5C1BD033E4009F22E3 /* LBR_BookcaseLayout.m in Sources */,
 				3810D9F81BD585150093D5C2 /* UITableViewCell+FlatUI.m in Sources */,
 				38F57BC21BB0707200CC2EE8 /* UIBarButtonItem+FlatUI.m in Sources */,
@@ -883,6 +892,7 @@
 				380375671B8BC758004C4ECE /* LBRGoogleAPIClient.m in Sources */,
 				38466D281B94F24400DD252E /* LBRGoogleGTLClient.m in Sources */,
 				3803756A1B8BC89D004C4ECE /* LBRGoogleSignInViewController.m in Sources */,
+				38DA43D01BE66F2B00FEFD16 /* README.md in Sources */,
 				38D6019B1BDAAAC900E3D60F /* LBRShelf_DecorationView.m in Sources */,
 				3810D9FE1BD5BDE60093D5C2 /* UIColor-Expanded.m in Sources */,
 				38F57BBE1BB0707200CC2EE8 /* UINavigationBar+FlatUI.m in Sources */,

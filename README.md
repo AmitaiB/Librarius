@@ -1,8 +1,5 @@
-# Librarius
+# Librarius (working title)
 A home-library inventory and shelving utility app
-
-## UX Case...
-Under construction...
 
 ##Features/Technologies Used
 1. UITabView (UIKit)
@@ -12,8 +9,48 @@ Under construction...
 
 ##TODO:
 * Scanning batches: a "History" tableview like Amazon's. 
-* Arranged Book Collections (sort of the point of the app) use a Custom CollectionView Layout.
-  * Switch between organization schemes: Library of Congress, Subject Headings, or Dewey Decimal System. 
 * Polish the UI:
   * Use my newfound Sketch skills to import a cool UI template.
   * Ideally, get it to look like a bookcase.
+
+#Librarius (App)
+##FixMe/ToDo
+
+
+#####Collections_TableViewController
+* T: Need beautiful colors
+* T: Genres should be displayed
+
+#####ShelveBooks_CollectionViewController
+* T: Cells shouldn't overlap decorationView. (estimatedItemSize --> itemSize ?)
+* T: cell background NOT red. (Done)
+* T: Implement Scroll DirectionLock. (SO)
+* T: PhotoBombers-style interactivity.
+* T: DecorationView is cut off at the far end.
+
+#####BarcodeScannerView
+* **F:** Torchbutton is blocked.
+* T: Make buttons pretty and UI compliant.
+* T: Colors need theme. ([UIButton appearance])
+
+#####Recommendation_CollectionViewController
+* **F:** Cells have no images.
+* **F:** DecorationView textfield collision (estimatedItemSize --> itemSize)
+
+#####SettingsView
+* **F:** Just look pretty, for now, implement it later.
+
+####Solved Problems
+* **F:** SearchBar Crashes
+* **F:** didSelectCellAtRow crashes
+* T: Layout switcher: junk or fix (conditional logic?).
+
+##Version 1.1
+* Acknowledgments page.
+* Settings page.
+* Add custom bookcases.
+* Multiple, custom Libraries.
+* Drag and Drop functionality.
+
+
+##Version 2.0

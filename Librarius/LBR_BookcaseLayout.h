@@ -17,6 +17,12 @@
 //
 //@end
 
+typedef NS_ENUM(NSUInteger, LBRLayoutScheme) {
+    LBRLayoutSchemeGenreAuthorDate, //default
+    LBRLayoutSchemeAuthorDate
+//    ,LBRLayoutSchemeLOC  not implemented yet
+//    ,LBRLayoutSchemeDDS
+};
 
 @interface LBR_BookcaseLayout : UICollectionViewLayout
 
@@ -24,5 +30,8 @@
 @property (nonatomic, assign) CGFloat interShelfSpacing;
 
 //@property (nonatomic, weak) id <LBRBookLayoutDataSource> dataSource;
+
+
+-(instancetype)initWithScheme:(LBRLayoutScheme)layoutScheme;
 
 @end

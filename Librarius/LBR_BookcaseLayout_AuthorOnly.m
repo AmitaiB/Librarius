@@ -1,10 +1,11 @@
 //
-//  LBR_BookcaseLayout.m
+//  LBR_BookcaseLayout_AuthorOnly.m
 //  Librarius
 //
-//  Created by Amitai Blickstein on 10/15/15.
+//  Created by Amitai Blickstein on 11/1/15.
 //  Copyright © 2015 Amitai Blickstein, LLC. All rights reserved.
 //
+
 #define kDefaulCellDimension 106.0
 #define kDefaultCellSize CGSizeMake(kDefaulCellDimension, kDefaulCellDimension)
 
@@ -19,12 +20,13 @@
 #define kDecorationYadjustment  13.0
 #define kDecorationHeight       25.0
 
-#import "LBR_BookcaseLayout.h"
+#import "LBR_BookcaseLayout_AuthorOnly.h"
+
 #import "LBR_BookcaseCollectionViewController.h"
 #import "LBR_BookcaseModel.h"
 #import "LBRShelf_DecorationView.h"
 
-@interface LBR_BookcaseLayout ()
+@interface LBR_BookcaseLayout_AuthorOnly ()
 
 @property (nonatomic, strong) NSMutableDictionary *attributesForCells;
 
@@ -32,7 +34,7 @@
 @property (nonatomic, assign) NSUInteger cellCountForLongestRow;
 
 @property (nonatomic, assign) CGSize contentSize;
-//@property (nonatomic, strong) NSArray <NSArray <Volume *> *> *filledBookcaseModel;
+    //@property (nonatomic, strong) NSArray <NSArray <Volume *> *> *filledBookcaseModel;
 
 @property (nonatomic, strong) NSDictionary *layoutInformation;
 @property (nonatomic, assign) UIEdgeInsets insets;
@@ -40,46 +42,38 @@
 
     //DecorationView
 @property (nonatomic, strong) NSDictionary *rowDecorationRects;
-//@property (nonatomic) CGSize headerReferenceSize;
-//@property (nonatomic) CGSize footerReferenceSize;
-//@property (nonatomic) UIEdgeInsets sectionInset;
+    //@property (nonatomic) CGSize headerReferenceSize;
+    //@property (nonatomic) CGSize footerReferenceSize;
+    //@property (nonatomic) UIEdgeInsets sectionInset;
 
 
 @property (nonatomic, assign) NSUInteger currentShelfIndex;
 @property (nonatomic, assign) NSUInteger bookOnShelfCounter;
 @property (nonatomic, strong) LBR_BookcaseModel *bookcaseModel;
-@property (nonatomic, assign) LBRLayoutScheme layoutScheme;
 @end
 
-@implementation LBR_BookcaseLayout
+@implementation LBR_BookcaseLayout_AuthorOnly
 
 #pragma mark - == Lifecycle ==
 
--(instancetype)initWithScheme:(LBRLayoutScheme)layoutScheme
+-(instancetype)init
 {
     if (!(self = [super init])) return nil;
     
-    _layoutScheme = layoutScheme;
+    self.insets = UIEdgeInsetsMake(INSET_TOP, INSET_LEFT, INSET_BOTTOM, INSET_RIGHT);
+    self.currentShelfIndex  = 0;
+    self.bookOnShelfCounter = 0;
     
-    _insets = UIEdgeInsetsMake(INSET_TOP, INSET_LEFT, INSET_BOTTOM, INSET_RIGHT);
-    _currentShelfIndex  = 0;
-    _bookOnShelfCounter = 0;
+    self.interItemSpacing  = 1.0;
+    self.interShelfSpacing = 1.0;
     
-    _interItemSpacing  = 1.0;
-    _interShelfSpacing = 1.0;
+    [self registerClass:[LBRShelf_DecorationView class] forDecorationViewOfKind:[LBRShelf_DecorationView kind]];
     
-    
-    _cellCountForLongestRow = 0;
-    
-    [super registerClass:[LBRShelf_DecorationView class] forDecorationViewOfKind:[LBRShelf_DecorationView kind]];
+    self.cellCountForLongestRow = 0;
     
     return self;
 }
 
--(instancetype)init
-{
-    return [self initWithScheme:LBRLayoutSchemeGenreAuthorDate];
-}
 
 /**
  *** The Critical Business Logic ***
@@ -158,7 +152,7 @@
     
     
     return [attributeObjectsToReturn arrayByAddingObjectsFromArray:decorationLayoutElements];
-//    return [attributeObjectsToReturn copy];
+        //    return [attributeObjectsToReturn copy];
 }
 
 -(UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -195,14 +189,14 @@
 -(LBR_BookcaseModel *)configuredBookcaseModel {
     LBR_BookcaseModel *bookcaseModel = [[LBR_BookcaseModel alloc] initWithWidth:kDefaultBookcaseWidth_cm shelvesCount:kDefaultBookcaseShelvesCount];
     LBR_BookcaseCollectionViewController *collectionViewController = (LBR_BookcaseCollectionViewController *)self.collectionView.dataSource;
-        
+    
     [bookcaseModel shelveBooks:collectionViewController.fetchedResultsController.fetchedObjects];
     return bookcaseModel;
 }
 
 -(void)incrementBookcaseModelByOneBook {
     NSArray *currentShelf = self.bookcaseModel.shelves[self.currentShelfIndex];
-
+    
     NSUInteger maxShelvesCount = self.bookcaseModel.shelves.count;
     
         //If more books fit on this shelf, according to the model.
@@ -211,7 +205,7 @@
         self.bookOnShelfCounter++;
         return;
     }
-
+    
         //If this book was the last book (or over?) on the current shelf,
         //AND there are more empty shelves, then we know to make our book
         //the first book on the next shelf (instead of the 'over-last' one on this shelf).
@@ -237,13 +231,13 @@
 -(void)prepareLayoutOfDecorationViews
 {
     NSInteger numSections = [self.collectionView numberOfSections];
-//
-//    CGFloat availableWidth = self.collectionViewContentSize.width -
-//    (self.sectionInset.left + self.sectionInset.right);
-//    
-//    NSInteger cellsPerRow = floorf((availableWidth + self.minimumInteritemSpacing) /
-//                                   (self.itemSize.width + self.minimumInteritemSpacing));
-
+        //
+        //    CGFloat availableWidth = self.collectionViewContentSize.width -
+        //    (self.sectionInset.left + self.sectionInset.right);
+        //
+        //    NSInteger cellsPerRow = floorf((availableWidth + self.minimumInteritemSpacing) /
+        //                                   (self.itemSize.width + self.minimumInteritemSpacing));
+    
     NSUInteger cellCountForLongestRow = [self extrapolatedCellCountForLongestRow];
     
     NSMutableDictionary *rowDecorationWork = [NSMutableDictionary dictionary];
@@ -253,11 +247,11 @@
     for (NSUInteger sectionIndex = 0; sectionIndex < numSections; sectionIndex++)
     {
         yPosition += INSET_TOP;
-//        yPosition += self.sectionInset.top;
+            //        yPosition += self.sectionInset.top;
         
-//        NSUInteger cellCount = [self.collectionView numberOfItemsInSection:sectionIndex];
+            //        NSUInteger cellCount = [self.collectionView numberOfItemsInSection:sectionIndex];
         
-//        NSUInteger rows = ceilf(cellCount/(CGFloat)cellsPerRow);
+            //        NSUInteger rows = ceilf(cellCount/(CGFloat)cellsPerRow);
         NSUInteger rows = self.bookcaseModel.shelvesCount;
         
         for (NSInteger row = 0; row < rows; row++) {
@@ -273,7 +267,7 @@
                 yPosition += kMinimumLineSpacing;
             }
             
-//            yPosition += self.sectionInset.bottom;
+                //            yPosition += self.sectionInset.bottom;
             yPosition += INSET_BOTTOM;
         }
         
