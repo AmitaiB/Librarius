@@ -233,13 +233,14 @@ ALSO
 
         NSPredicate *finalPredicate;
         finalPredicate = [NSComparisonPredicate predicateWithFormat:@"title CONTAINS[cd] %@", searchString];
-        [searchItemsPredicate addObject:finalPredicate];
-        
-        finalPredicate = [NSComparisonPredicate predicateWithFormat:@"title CONTAINS[cd] %@",searchString];
-        [searchItemsPredicate addObject:finalPredicate];
+        [searchItemsPredicate addObject:[finalPredicate copy]];
+
+//       Accidental repeat, or necessary?
+//        finalPredicate = [NSComparisonPredicate predicateWithFormat:@"title CONTAINS[cd] %@",searchString];
+//        [searchItemsPredicate addObject:[finalPredicate copy]];
         
         finalPredicate = [NSComparisonPredicate predicateWithFormat:@"author CONTAINS[cd] %@", searchString];
-        [searchItemsPredicate addObject:finalPredicate];
+        [searchItemsPredicate addObject:[finalPredicate copy]];
         
             //yearPublished field matching
         NSNumberFormatter *numberFormatter = [NSNumberFormatter new];

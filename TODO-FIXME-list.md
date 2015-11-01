@@ -1,8 +1,7 @@
 #Librarius (App)
 ##FixMe/ToDo
 #####Collections_TableViewController
-* **F:** SearchBar Crashes
-* **F:** didSelectCellAtRow crashes
+* T: SearchBar Does not work
 * T: Need beautiful colors
 * T: Genres should be displayed
 
