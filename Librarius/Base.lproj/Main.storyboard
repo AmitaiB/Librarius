@@ -405,6 +405,12 @@
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                         <animations/>
                                     </imageView>
+                                    <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Px-hT-9Zr" userLabel="Scanner View (new)">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                        <animations/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcH-IU-Ezd" userLabel="Flashlight Toggle Button">
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                         <animations/>
@@ -416,12 +422,6 @@
                                             <action selector="lightToggleButtonTapped:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="BQI-I4-0Xp"/>
                                         </connections>
                                     </button>
-                                    <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Px-hT-9Zr" userLabel="Scanner View (new)">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                        <animations/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </view>
                                 </subviews>
                                 <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -449,8 +449,8 @@
                                 <variation key="default">
                                     <mask key="subviews">
                                         <exclude reference="Iy8-FC-gUc"/>
-                                        <exclude reference="dcH-IU-Ezd"/>
                                         <exclude reference="3Px-hT-9Zr"/>
+                                        <exclude reference="dcH-IU-Ezd"/>
                                     </mask>
                                     <mask key="constraints">
                                         <exclude reference="Dd2-f9-GCN"/>
@@ -468,8 +468,8 @@
                                 <variation key="widthClass=compact">
                                     <mask key="subviews">
                                         <include reference="Iy8-FC-gUc"/>
-                                        <include reference="dcH-IU-Ezd"/>
                                         <include reference="3Px-hT-9Zr"/>
+                                        <include reference="dcH-IU-Ezd"/>
                                     </mask>
                                     <mask key="constraints">
                                         <include reference="Dd2-f9-GCN"/>

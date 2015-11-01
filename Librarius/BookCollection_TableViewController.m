@@ -6,8 +6,6 @@
 //  Copyright (c) 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 
-
-
     //Controllers
 #import "BookCollection_TableViewController.h"
 #import "BookDetailViewController.h"
@@ -325,8 +323,13 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
 #pragma mark - === TableView DataSource ===
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//    return MAX(1, [[self.fetchedResultsController sections] count]);
-    return [[self.fetchedResultsController sections] count];
+    NSInteger numSections;
+    if (tableView == self.tableView) {
+        numSections = [[self.fetchedResultsController sections] count];
+    }
+    if
+    
+    return numSections;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
