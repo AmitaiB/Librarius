@@ -68,6 +68,9 @@ static NSString * const reuseIdentifier          = @"bookCellID";
 static NSString * const customSectionHeaderID    = @"customSectionHeaderID";
 static NSString * const decorationViewIdentifier = @"decorationViewIdentifier";
 
+    //Layout Scheme strings
+static NSString * const GenreAuthorDateLayoutSchemeID = @"By Genre-Author";
+static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -405,7 +408,7 @@ static NSString * const decorationViewIdentifier = @"decorationViewIdentifier";
     standardFlowLayout.scrollDirection         = UICollectionViewScrollDirectionHorizontal;
     
     
-    layoutChangesSegmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"Bookcase Layout", @"Flow Layout"]];
+    layoutChangesSegmentedControl = [[UISegmentedControl alloc] initWithItems:@[GenreAuthorDateLayoutSchemeID, AuthorOnlyLayoutSchemeID, @"Flow (delete)"]];
     layoutChangesSegmentedControl.selectedSegmentIndex = 0;
     [layoutChangesSegmentedControl addTarget:self action:@selector(layoutChangesSegmentedControlDidChangeValue:) forControlEvents:UIControlEventValueChanged];
     self.navigationItem.titleView = layoutChangesSegmentedControl;
@@ -413,10 +416,16 @@ static NSString * const decorationViewIdentifier = @"decorationViewIdentifier";
 
 -(void)layoutChangesSegmentedControlDidChangeValue:(id)sender
 {
-    if (layoutChangesSegmentedControl.selectedSegmentIndex == 0) {
+    NSString *selectedLayout = [layoutChangesSegmentedControl titleForSegmentAtIndex:layoutChangesSegmentedControl.selectedSegmentIndex];
+    
+    if ([selectedLayout isEqualToString:GenreAuthorDateLayoutSchemeID]) {
         [self.collectionView setCollectionViewLayout:layout animated:YES];
     }
-    if (layoutChangesSegmentedControl.selectedSegmentIndex == 1) {
+    
+    
+    
+        //CLEAN: delete when "flow (delete)" is removed.
+    else if ([selectedLayout isEqualToString:@"Flow (delete)"]) {
         [self.collectionView setCollectionViewLayout:standardFlowLayout animated:YES];
     }
 }

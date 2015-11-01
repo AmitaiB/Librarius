@@ -198,6 +198,9 @@
     return self.cellCountForLongestRow;
 }
 
+    /**
+     This value changes depending on the scheme, which alters the fetchedResultsController's fetchRequest to match it.
+     */
 -(LBR_BookcaseModel *)configuredBookcaseModel {
     LBR_BookcaseModel *bookcaseModel = [[LBR_BookcaseModel alloc] initWithWidth:kDefaultBookcaseWidth_cm shelvesCount:kDefaultBookcaseShelvesCount];
 //    LBR_BookcaseCollectionViewController *collectionViewController = (LBR_BookcaseCollectionViewController *)self.collectionView.dataSource;
@@ -305,7 +308,7 @@
             //The default.
         if (self.layoutScheme == LBRLayoutSchemeGenreAuthorDate)
         {
-            _localFetchedResultsController = [collectionViewController.fetchedResultsController copy];
+            _localFetchedResultsController = collectionViewController.fetchedResultsController;
         }
         
             //Built with extensibility in mind, for future layout customizations.
@@ -333,6 +336,13 @@
     }
     return _localFetchedResultsController;
 }
+
+//-(void)setLayoutScheme:(LBRLayoutScheme)layoutScheme
+//{
+//    _layoutScheme = layoutScheme;
+//    
+//    [self.bookcaseModel shelveBooks:self.localFetchedResultsController.fetchedObjects];
+//}
 
 
 - (NSString*)formatTypeToString:(LBRLayoutScheme)formatType {
