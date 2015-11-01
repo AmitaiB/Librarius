@@ -131,10 +131,15 @@ static NSString * const searchResultsCellIdentifier = @"searchResultsCellIdentif
     self.fetchedResultsController = [[LBRDataManager sharedDataManager] preconfiguredLBRFetchedResultsController:self];
 }
 
+-(void)viewWillLayoutSubviews
+{
+    self.resultsTableController = [LBR_ResultsTableViewController new];
+    [super viewWillLayoutSubviews];
+}
+
 -(void)configureSearchControllers
 {
     
-    self.resultsTableController = [LBR_ResultsTableViewController new];
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:self.resultsTableController];
     self.searchController.searchResultsUpdater = self;
     [self.searchController.searchBar sizeToFit];
@@ -327,7 +332,10 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
     if (tableView == self.tableView) {
         numSections = [[self.fetchedResultsController sections] count];
     }
-    if
+    if (tableView == self.resultsTableController.tableView) {
+        NSLog(@"Results TableView");
+        numSections = 0;
+    }
     
     return numSections;
 }
@@ -343,7 +351,7 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 //    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
 //    if (tableView == self.tableView) {
         [self configureCell:cell atIndexPath:indexPath];
 //    }
@@ -409,7 +417,7 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
     UITableViewHeaderFooterView *headerView   = (UITableViewHeaderFooterView *)view;
     headerView.backgroundView.backgroundColor = [UIColor cloudsColor];
     headerView.textLabel.backgroundColor      = [UIColor clearColor];
-    headerView.textLabel.textColor            = [UIColor whiteColor];
+    headerView.textLabel.textColor            = [UIColor midnightBlueColor];
 }
 
 
@@ -430,6 +438,7 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
         cell.textLabel.text = [NSString stringWithFormat:@"%@: %@", title, subtitle];
     }
     
+        //TODO: Try using the Appearance system
     cell.textLabel.font = [UIFont fontWithName:@"Avenir-Book" size:20];
     cell.textLabel.textColor = [UIColor midnightBlueColor];
 
@@ -448,7 +457,9 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
         cornersToRound = UIRectCornerAllCorners;
     }
     
-    [cell configureFlatCellWithColor:[UIColor crayonOrangeColor] selectedColor:[UIColor pumpkinColor] roundingCorners:cornersToRound];
+    
+        ///AHA!
+    [cell configureFlatCellWithColor:[UIColor shirazColor] selectedColor:[UIColor mySinColor] roundingCorners:cornersToRound];
     
 
     if (indexPath.row == 0 || indexPath.row == lastRowInSection) {

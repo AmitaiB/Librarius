@@ -2,6 +2,7 @@
 ##FixMe/ToDo
 #####Collections_TableViewController
 * **F:** SearchBar Crashes
+* **F:** didSelectCellAtRow crashes
 * T: Need beautiful colors
 * T: Genres should be displayed
 
