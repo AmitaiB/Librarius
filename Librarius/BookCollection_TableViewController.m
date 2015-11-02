@@ -25,6 +25,7 @@
 #import "UIFont+FlatUI.h"
 #import "UITableViewCell+FlatUI.h"
 #import "UIColor-Expanded.h"
+#import "UIView+ConfigureForAutoLayout.h"
 
 
 @interface BookCollection_TableViewController () <UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating>
@@ -36,6 +37,7 @@
 
     //Cosmetic view that prevents text collisions with statusBar.
 @property (nonatomic, strong) ABB_BufferToolbar *bufferToolbar;
+@property (nonatomic, strong) UIVisualEffectView *statusBarBlur;
 
     // search results TableView
 @property (strong, nonatomic) LBR_ResultsTableViewController *resultsTableViewController;
@@ -79,6 +81,20 @@ static NSString * const altSearchResultsCellID = @"altSearchResultsCellID";
     self.navigationController.navigationBar.translucent = NO;
     self.tableView.scrollsToTop = YES;
     self.bufferToolbar = [[ABB_BufferToolbar alloc] initWithController:self];
+    self.statusBarBlur = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]];
+    [self.view addSubview:self.statusBarBlur];
+    [self.statusBarBlur configureForAutolayout];
+    [self.statusBarBlur.topAnchor constraintEqualToAnchor:self.topLayoutGuide.topAnchor].active       = YES;
+    [self.statusBarBlur.bottomAnchor constraintEqualToAnchor:self.topLayoutGuide.bottomAnchor].active = YES;
+    [self.statusBarBlur.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active         = YES;
+    [self.statusBarBlur.widthAnchor constraintEqualToAnchor:self.view.widthAnchor].active             = YES;
+
+    /*
+     [toolbar.topAnchor constraintEqualToAnchor:superViewController.topLayoutGuide.topAnchor].active       = YES;
+     [toolbar.bottomAnchor constraintEqualToAnchor:superViewController.topLayoutGuide.bottomAnchor].active = YES;
+     [toolbar.centerXAnchor constraintEqualToAnchor:superViewController.view.centerXAnchor].active         = YES;
+     [toolbar.widthAnchor constraintEqualToAnchor:superViewController.view.widthAnchor].active             = YES;
+     */
 
     CGFloat statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
     self.tableView.contentInset = UIEdgeInsetsMake(statusBarHeight, 0, 0, 0);
