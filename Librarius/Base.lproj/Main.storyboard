@@ -299,6 +299,7 @@
                         <viewControllerLayoutGuide type="bottom" id="GKt-7X-JvM"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="SLW-LM-gcK">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="PwO-C6-yiD">
@@ -323,10 +324,10 @@
                                 <exclude reference="PwO-C6-yiD"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="P3P-gt-0Hn"/>
                                 <exclude reference="MWj-UO-0vh"/>
                                 <exclude reference="QtE-PS-1jx"/>
                                 <exclude reference="qyo-dA-yER"/>
-                                <exclude reference="P3P-gt-0Hn"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -334,10 +335,10 @@
                                 <include reference="PwO-C6-yiD"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="P3P-gt-0Hn"/>
                                 <include reference="MWj-UO-0vh"/>
                                 <include reference="QtE-PS-1jx"/>
                                 <include reference="qyo-dA-yER"/>
-                                <include reference="P3P-gt-0Hn"/>
                             </mask>
                         </variation>
                     </view>
@@ -936,7 +937,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RecommendationCellID" id="FlX-Ty-Yll" customClass="LBRRecommendedBook_CollectionViewCell">
-                                <rect key="frame" x="14" y="124" width="90" height="90"/>
+                                <rect key="frame" x="14" y="60" width="90" height="90"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
@@ -948,7 +949,7 @@
                             </collectionViewCell>
                         </cells>
                         <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HeaderReuseID" id="kd3-hD-Hlb" customClass="LBRRecommendations_CollectionViewHeader">
-                            <rect key="frame" x="0.0" y="64" width="600" height="50"/>
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SQW-cW-CEB">

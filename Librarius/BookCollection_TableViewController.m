@@ -154,7 +154,7 @@ static NSString * const altSearchResultsCellID = @"altSearchResultsCellID";
     self.searchController.searchResultsUpdater = self;
     [self.searchController.searchBar sizeToFit];
 
-//TODO:    self.tableView.tableHeaderView             = self.searchController.searchBar;
+    self.tableView.tableHeaderView             = self.searchController.searchBar;
 
     // We want to be the delegate for our filtered table, so didSelectRowAtIndexPath is called for both tables
     self.resultsTableViewController.tableView.delegate         = self;
