@@ -197,7 +197,7 @@
             <objects>
                 <tableViewController title="Books (TableViewController)" id="bTL-zk-y1V" customClass="BookCollection_TableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="k2i-k3-jNX">
-                        <rect key="frame" x="0.0" y="64" width="600" height="551"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
@@ -239,7 +239,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingsCell1" rowHeight="58" id="wyh-PM-9Ce" customClass="SettingsCell1">
-                                <rect key="frame" x="0.0" y="92" width="600" height="58"/>
+                                <rect key="frame" x="0.0" y="28" width="600" height="58"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wyh-PM-9Ce" id="g7J-PM-ea7">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="57.5"/>
@@ -303,13 +303,16 @@
             <objects>
                 <tableViewController title="Settings (New)" id="SBH-hI-Rjh" customClass="LBRSettings_TableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="158" sectionHeaderHeight="28" sectionFooterHeight="28" id="Iqe-yy-jvV">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="158" id="EUU-vl-uLn" customClass="LBRSettingsCell">
+                                <rect key="frame" x="0.0" y="92" width="600" height="158"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EUU-vl-uLn" id="3jW-Pf-Geo">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="157.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="njE-xP-w9q" userLabel="SettingDetailsCreationView">
@@ -324,9 +327,6 @@
                                                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                                     <animations/>
                                                     <state key="normal" title="▼"/>
-                                                    <connections>
-                                                        <action selector="expansionButton:" destination="EUU-vl-uLn" eventType="touchUpInside" id="fNP-X6-ewz"/>
-                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <animations/>
@@ -424,9 +424,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="iEj-cc-uNb"/>
-                    <connections>
-                        <outlet property="expansionButton" destination="1pB-tw-M8K" id="3bS-7h-0Rm"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rg7-y5-ZuK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

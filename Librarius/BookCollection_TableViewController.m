@@ -35,16 +35,16 @@
     //Cosmetic view that prevents text collisions with statusBar.
 @property (nonatomic, strong) ABB_BufferToolbar *bufferToolbar;
 
-    // Secondary search results TableView
-@property (strong, nonatomic) LBR_ResultsTableViewController *resultsTableController;
+    // search results TableView
+@property (strong, nonatomic) LBR_ResultsTableViewController *resultsTableViewController;
 
     // For state restoration (???)
 @property (nonatomic) BOOL searchControllerWasActive;
 @property (nonatomic) BOOL searchControllerSearchFieldWasFirstResponder;
 
 
-    //Alternative SearchBar implementation
-@property (nonatomic, strong) UITableView *altSearchResultsTableView;
+//    //Alternative SearchBar implementation
+//@property (nonatomic, strong) UITableView *altSearchResultsTableView;
 
 @end
 
@@ -145,19 +145,19 @@ static NSString * const altSearchResultsCellID = @"altSearchResultsCellID";
 
 -(void)viewWillLayoutSubviews
 {
-    self.resultsTableController = [LBR_ResultsTableViewController new];
+    self.resultsTableViewController = [LBR_ResultsTableViewController new];
     [super viewWillLayoutSubviews];
 }
 
 -(void)configureSearchControllers
 {
-    self.searchController                      = [[UISearchController alloc] initWithSearchResultsController:self.resultsTableController];
+    self.searchController                      = [[UISearchController alloc] initWithSearchResultsController:self.resultsTableViewController];
     self.searchController.searchResultsUpdater = self;
     [self.searchController.searchBar sizeToFit];
     self.tableView.tableHeaderView             = self.searchController.searchBar;
 
     // We want to be the delegate for our filtered table, so didSelectRowAtIndexPath is called for both tables
-    self.resultsTableController.tableView.delegate         = self;
+    self.resultsTableViewController.tableView.delegate         = self;
     self.searchController.delegate                         = self;
     self.searchController.dimsBackgroundDuringPresentation = NO;//default is YES
     self.searchController.searchBar.delegate               = self;//To monitor text changes + others
@@ -346,7 +346,7 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
     if (tableView == self.tableView) {
         numSections = [[self.fetchedResultsController sections] count];
     }
-    if (tableView == self.resultsTableController.tableView) {
+    if (tableView == self.resultsTableViewController.tableView) {
         NSLog(@"Results TableView");
         numSections = 0;
     }
@@ -387,7 +387,7 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView != self.tableView) {
-        Volume *selectedVolume = self.resultsTableController.filteredBooks[indexPath.row];
+        Volume *selectedVolume = self.resultsTableViewController.filteredBooks[indexPath.row];
         BookDetailViewController *detailViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"bookDetailStoryboardID"];
         detailViewController.displayVolume = selectedVolume;
         
@@ -446,7 +446,7 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
     NSString *subtitle      = [object valueForKey:@"subtitle"];
     [self makeTitleCase:title];
     [self makeTitleCase:subtitle];
-    NSString *formattedSubtitle = [@": " stringByAppendingString:subtitle];
+    NSString *formattedSubtitle = [@": " stringByAppendingString:subtitle ? subtitle : @""];
     
     cell.textLabel.text = [NSString stringWithFormat:@"%@%@", title, subtitle ?  formattedSubtitle : @""];
 
