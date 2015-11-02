@@ -13,8 +13,8 @@
 #define INSET_BOTTOM 1.0
 #define INSET_RIGHT  1.0
 
-#define kMinimumLineSpacing 1.0
-#define kMinimumItemSpacing 1.0
+//#define kMinimumLineSpacing 1.0
+//#define kMinimumItemSpacing 1.0
 
 #define kDecorationYadjustment  13.0
 #define kDecorationHeight       25.0
@@ -71,8 +71,8 @@
     _currentShelfIndex  = 0;
     _bookOnShelfCounter = 0;
     
-    _interItemSpacing  = 1.0;
-    _interShelfSpacing = 1.0;
+    _interItemSpacing  = 3.0;
+    _interShelfSpacing = 30.0;
     
     
     _cellCountForLongestRow = 0;
@@ -145,6 +145,7 @@
     
     for (UICollectionViewLayoutAttributes *attributes in [self.layoutInformation allValues]) {
         if (CGRectIntersectsRect(attributes.frame, rect)) {
+            attributes.zIndex = 1;
             [attributeObjectsToReturn addObject:attributes];
         }
     }
@@ -281,7 +282,7 @@
             rowDecorationWork[decorationIndexPath] = [NSValue valueWithCGRect:decorationFrame];
             
             if (row < rows - 1) {
-                yPosition += kMinimumLineSpacing;
+                yPosition += self.interShelfSpacing;
             }
             
 //            yPosition += self.sectionInset.bottom;

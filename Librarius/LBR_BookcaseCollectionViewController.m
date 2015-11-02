@@ -172,7 +172,7 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     LBRShelvedBook_CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
         //configure the cell
-    cell.backgroundColor = [UIColor asbestosColor];
+    cell.backgroundColor = [UIColor clearColor];
     
 //    Volume *volumeModel = volumesArray[indexPath.item];
     Volume *volumeModel = [self.fetchedResultsController objectAtIndexPath:indexPath];

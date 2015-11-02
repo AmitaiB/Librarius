@@ -22,6 +22,9 @@
     fallbackWidthConstraint.priority  = 1.0;
     fallbackHeightConstraint.priority = 1.0;
     [self addConstraints:@[fallbackWidthConstraint, fallbackHeightConstraint]];
+    
+    
+    self.backgroundView.backgroundColor = [UIColor clearColor];
     return self;
 }
 

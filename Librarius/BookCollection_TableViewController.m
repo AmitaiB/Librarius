@@ -136,6 +136,7 @@ static NSString * const altSearchResultsCellID = @"altSearchResultsCellID";
     [[UITableViewCell appearance] setBackgroundColor:[UIColor cloudsColor]];
     [UITableViewCell appearance].textLabel.textColor = [UIColor midnightBlueColor];
     [UITableViewCell appearance].textLabel.font = [UIFont fontWithName:@"Avenir-Book" size:20];
+//    [UICollectionViewCell appearance].backgroundColor = [UIColor clearColor];
     
     [self.tableView setClipsToBounds:YES];
     self.fetchedResultsController = [[LBRDataManager sharedDataManager] preconfiguredLBRFetchedResultsController:self];
@@ -152,7 +153,8 @@ static NSString * const altSearchResultsCellID = @"altSearchResultsCellID";
     self.searchController                      = [[UISearchController alloc] initWithSearchResultsController:self.resultsTableViewController];
     self.searchController.searchResultsUpdater = self;
     [self.searchController.searchBar sizeToFit];
-    self.tableView.tableHeaderView             = self.searchController.searchBar;
+
+//TODO:    self.tableView.tableHeaderView             = self.searchController.searchBar;
 
     // We want to be the delegate for our filtered table, so didSelectRowAtIndexPath is called for both tables
     self.resultsTableViewController.tableView.delegate         = self;
