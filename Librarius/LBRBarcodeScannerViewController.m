@@ -32,8 +32,6 @@
 #import "LBRBatchScanScrollView.h"
 #import <MTBBarcodeScanner.h>
 #import "FlatUI+Categories.h"
-    //#import <MMMaterialDesignSpinner.h>
-
 
     //Controllers
 #import "LBRBarcodeScannerViewController.h"
@@ -60,8 +58,6 @@
 
 @property (nonatomic, strong) NSArray *booksArray;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
-
-//@property (nonatomic, strong) MMMaterialDesignSpinner *spinnerView;
 
 @property (nonatomic) BOOL isConfigured;
 
@@ -137,16 +133,6 @@ static NSString * const volumeNib          = @"volumePresentationView";
 
     self.scannerView.layer.cornerRadius = 5.0f;
 }
-
-//-(void)initializeSpinner {
-//        //TODO: place this view somewhere, and give it a size somehow.
-//    self.spinnerView                  = [MMMaterialDesignSpinner new];
-//    self.spinnerView.lineWidth        = 1.5f;
-//    self.spinnerView.tintColor        = [UIColor cyanColor];
-//    self.spinnerView.hidesWhenStopped = YES;
-//    [self.view addSubview:self.spinnerView];
-//}
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

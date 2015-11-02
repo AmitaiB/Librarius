@@ -79,6 +79,7 @@
 		38DA43DD1BE705EF00FEFD16 /* LBRSettingsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38DA43DC1BE705EF00FEFD16 /* LBRSettingsCell.xib */; };
 		38E2497F1BE2AEEC0047EBF7 /* ABB_BufferToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E2497E1BE2AEEC0047EBF7 /* ABB_BufferToolbar.m */; };
 		38E71DAF1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E71DAE1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.m */; };
+		38EBB9B81BE7EB420063B789 /* LBRAcknowledgements_TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EBB9B71BE7EB420063B789 /* LBRAcknowledgements_TableViewController.m */; };
 		38F3C0D91BDFE01F005AF2ED /* LBR_ResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F3C0D81BDFE01F005AF2ED /* LBR_ResultsTableViewController.m */; };
 		38F57BB71BB0707200CC2EE8 /* UIToolbar+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F57B9D1BB0707200CC2EE8 /* UIToolbar+FlatUI.m */; };
 		38F57BB91BB0707200CC2EE8 /* UITabBar+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F57BA11BB0707200CC2EE8 /* UITabBar+FlatUI.m */; };
@@ -240,6 +241,8 @@
 		38E2497E1BE2AEEC0047EBF7 /* ABB_BufferToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABB_BufferToolbar.m; sourceTree = "<group>"; };
 		38E71DAD1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRShelvedBook_CollectionViewCell.h; sourceTree = "<group>"; };
 		38E71DAE1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRShelvedBook_CollectionViewCell.m; sourceTree = "<group>"; };
+		38EBB9B61BE7EB420063B789 /* LBRAcknowledgements_TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRAcknowledgements_TableViewController.h; sourceTree = "<group>"; };
+		38EBB9B71BE7EB420063B789 /* LBRAcknowledgements_TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRAcknowledgements_TableViewController.m; sourceTree = "<group>"; };
 		38F3C0D71BDFE01F005AF2ED /* LBR_ResultsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBR_ResultsTableViewController.h; sourceTree = "<group>"; };
 		38F3C0D81BDFE01F005AF2ED /* LBR_ResultsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBR_ResultsTableViewController.m; sourceTree = "<group>"; };
 		38F57B9D1BB0707200CC2EE8 /* UIToolbar+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIToolbar+FlatUI.m"; sourceTree = "<group>"; };
@@ -447,6 +450,8 @@
 		380375641B8BB71D004C4ECE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				38EBB9B61BE7EB420063B789 /* LBRAcknowledgements_TableViewController.h */,
+				38EBB9B71BE7EB420063B789 /* LBRAcknowledgements_TableViewController.m */,
 				38DA43D61BE6F07D00FEFD16 /* LBRSettings_TableViewController.h */,
 				38DA43D71BE6F07D00FEFD16 /* LBRSettings_TableViewController.m */,
 				380375681B8BC89D004C4ECE /* LBRGoogleSignInViewController.h */,
@@ -898,6 +903,7 @@
 				38103B591BD033AE009F22E3 /* LBR_ShelvedBookCell.m in Sources */,
 				3837F2C41BE2F1B200170FF6 /* CoverArt.m in Sources */,
 				388DBDF31BA9174A005C5125 /* THNavigationController.m in Sources */,
+				38EBB9B81BE7EB420063B789 /* LBRAcknowledgements_TableViewController.m in Sources */,
 				38DA43D31BE66FD200FEFD16 /* LBR_BookcaseLayout_AuthorOnly.m in Sources */,
 				38103B5C1BD033E4009F22E3 /* LBR_BookcaseLayout.m in Sources */,
 				3810D9F81BD585150093D5C2 /* UITableViewCell+FlatUI.m in Sources */,

@@ -2,29 +2,27 @@
 # platform :ios, '6.0'
 
 target 'Librarius' do
+
 # Implemented
 pod 'Google/SignIn'
 pod 'Google-API-Client/Books'
 pod 'MTBBarcodeScanner'
-pod "MMMaterialDesignSpinner"
 pod 'AFNetworking'
 pod 'NYAlertViewController'
 pod 'LARSTorch', '~> 1.1'
 
 
+#pod "MMMaterialDesignSpinner"
 #pod 'SDWebImage', '~> 3.7'
 #pod 'SDWebImage-ProgressView', '~> 0.4'
 
-pod 'InAppSettingsKit', '~> 2.6'
+#pod 'InAppSettingsKit', '~> 2.6'
 
 #pod 'ABMenuTableViewCell', '~> 2.0'
 #pod 'ASOXScrollTableViewCell', '~> 0.1'
 
-
-
 #pod 'UICollectionView-ARDynamicHeightLayoutCell_Bell'
 #pod 'SAMCache'
-
 
 #Not Yet Implemented
 #pod 'AMRatingControl'
