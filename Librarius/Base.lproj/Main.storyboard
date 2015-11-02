@@ -147,12 +147,12 @@
                             <mask key="constraints">
                                 <exclude reference="DMQ-yf-y3e"/>
                                 <exclude reference="qkW-Mq-HUG"/>
-                                <exclude reference="gFv-Rs-kjA"/>
-                                <exclude reference="hL4-nc-372"/>
-                                <exclude reference="hYg-qL-qz1"/>
                                 <exclude reference="Dut-vV-3uB"/>
                                 <exclude reference="qBC-DH-6BI"/>
                                 <exclude reference="qHH-66-P0H"/>
+                                <exclude reference="gFv-Rs-kjA"/>
+                                <exclude reference="hL4-nc-372"/>
+                                <exclude reference="hYg-qL-qz1"/>
                                 <exclude reference="OXI-hX-SgB"/>
                             </mask>
                         </variation>
@@ -164,12 +164,12 @@
                             <mask key="constraints">
                                 <include reference="DMQ-yf-y3e"/>
                                 <include reference="qkW-Mq-HUG"/>
-                                <include reference="gFv-Rs-kjA"/>
-                                <include reference="hL4-nc-372"/>
-                                <include reference="hYg-qL-qz1"/>
                                 <include reference="Dut-vV-3uB"/>
                                 <include reference="qBC-DH-6BI"/>
                                 <include reference="qHH-66-P0H"/>
+                                <include reference="gFv-Rs-kjA"/>
+                                <include reference="hL4-nc-372"/>
+                                <include reference="hYg-qL-qz1"/>
                                 <include reference="OXI-hX-SgB"/>
                             </mask>
                         </variation>

@@ -61,10 +61,6 @@ static NSString * const searchResultsCellID    = @"searchResultsCellIdentifier";
 static NSString * const altSearchResultsCellID = @"altSearchResultsCellID";
 
 
-//-(BOOL)prefersStatusBarHidden {
-//    return YES;
-//}
-
 #pragma mark - === LifeCycle ===
 
 - (void)viewDidLoad {
@@ -74,7 +70,7 @@ static NSString * const altSearchResultsCellID = @"altSearchResultsCellID";
     [self flattenUI];
     [self configureSearchControllers];
     self.canDisplayBannerAds = YES;
-    
+    self.preferIndexHidden = YES;
 /**
  *  TODO: Change the method called here to "Manual Volume Entry", details below.
  */
@@ -195,7 +191,6 @@ static NSString * const altSearchResultsCellID = @"altSearchResultsCellID";
 -(void)setPreferIndexHidden:(BOOL)preferIndexHidden
 {
     _preferIndexHidden = preferIndexHidden;
-    
     [self.tableView reloadSectionIndexTitles];
 }
 
@@ -379,12 +374,7 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-//    if (tableView == self.tableView) {
-        [self configureCell:cell forIndexPath:indexPath];
-//    }
-//    if (tableView == self.resultsTableController.tableView) {
-//        
-//    }
+    [self configureCell:cell forIndexPath:indexPath];
     
     return cell;
 }
@@ -411,7 +401,7 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
     return [indexTitles copy];
 }
 
-#pragma mark - === Table View delegate ===
+#pragma mark - === TableView Delegate ===
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -619,16 +609,7 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
     return NO;
 }
 
-    //TODO: Fix Scrolling/Index UX !!!:
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    self.preferIndexHidden = YES;
-}
 
--(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
-    self.preferIndexHidden = NO;
-}
 
 
 @end
