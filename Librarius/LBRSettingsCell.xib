@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l2s-Ea-Ywf" userLabel="SettingTitleView">
+                    <rect key="frame" x="0.0" y="19" width="600" height="46"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hsu-ZZ-SYl">
+                            <rect key="frame" x="8" y="8" width="46" height="30"/>
+                            <animations/>
+                            <state key="normal" title="Button"/>
+                        </button>
+                    </subviews>
+                    <animations/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="hsu-ZZ-SYl" firstAttribute="top" secondItem="l2s-Ea-Ywf" secondAttribute="top" constant="8" id="e6e-uS-UH0"/>
+                        <constraint firstAttribute="bottom" secondItem="hsu-ZZ-SYl" secondAttribute="bottom" constant="8" id="jJZ-Tb-zIN"/>
+                        <constraint firstItem="hsu-ZZ-SYl" firstAttribute="centerY" secondItem="l2s-Ea-Ywf" secondAttribute="centerY" id="kTL-U2-wOg"/>
+                        <constraint firstItem="hsu-ZZ-SYl" firstAttribute="leading" secondItem="l2s-Ea-Ywf" secondAttribute="leading" constant="8" id="pK8-mV-4dr"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zGd-XS-v2X" userLabel="SettingDetailView">
+                    <rect key="frame" x="0.0" y="65" width="600" height="535"/>
+                    <animations/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="l2s-Ea-Ywf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="19" id="7S6-H0-UAW"/>
+                <constraint firstItem="zGd-XS-v2X" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="Fdj-Zc-KLG"/>
+                <constraint firstItem="zGd-XS-v2X" firstAttribute="top" secondItem="l2s-Ea-Ywf" secondAttribute="bottom" id="Q9u-Ok-X0F"/>
+                <constraint firstItem="l2s-Ea-Ywf" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="klj-3N-Bsk"/>
+                <constraint firstAttribute="bottom" secondItem="zGd-XS-v2X" secondAttribute="bottom" id="nBx-jq-Jvh"/>
+                <constraint firstItem="l2s-Ea-Ywf" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ngB-Mv-ySs"/>
+                <constraint firstItem="zGd-XS-v2X" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="wgk-iq-p9N"/>
+            </constraints>
+            <point key="canvasLocation" x="388" y="358"/>
+        </view>
+    </objects>
+</document>

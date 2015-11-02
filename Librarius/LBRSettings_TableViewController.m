@@ -12,6 +12,7 @@
 
 @interface LBRSettings_TableViewController ()
 
+
 @end
 
 @implementation LBRSettings_TableViewController

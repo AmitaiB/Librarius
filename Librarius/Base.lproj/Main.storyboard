@@ -302,44 +302,115 @@
         <scene sceneID="tmm-em-7sy">
             <objects>
                 <tableViewController title="Settings (New)" id="SBH-hI-Rjh" customClass="LBRSettings_TableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="158" sectionHeaderHeight="28" sectionFooterHeight="28" id="Iqe-yy-jvV">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="158" sectionHeaderHeight="28" sectionFooterHeight="28" id="Iqe-yy-jvV">
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="158" id="EUU-vl-uLn">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="158" id="EUU-vl-uLn" customClass="LBRSettingsCell">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EUU-vl-uLn" id="3jW-Pf-Geo">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VQU-Wp-WfQ">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="njE-xP-w9q" userLabel="SettingDetailsCreationView">
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                             <animations/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <variation key="widthClass=compact" fixedFrame="YES">
-                                                <rect key="frame" x="45" y="-26" width="240" height="128"/>
-                                            </variation>
                                         </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="njE-xP-w9q">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VQU-Wp-WfQ" userLabel="SettingTitleView">
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1pB-tw-M8K">
+                                                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                                    <animations/>
+                                                    <state key="normal" title="▼"/>
+                                                    <connections>
+                                                        <action selector="expansionButton:" destination="EUU-vl-uLn" eventType="touchUpInside" id="fNP-X6-ewz"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
                                             <animations/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <variation key="widthClass=compact" fixedFrame="YES">
-                                                <rect key="frame" x="105" y="74" width="240" height="128"/>
+                                            <constraints>
+                                                <constraint firstItem="1pB-tw-M8K" firstAttribute="centerY" secondItem="VQU-Wp-WfQ" secondAttribute="centerY" id="HF1-is-AFR"/>
+                                                <constraint firstAttribute="bottom" secondItem="1pB-tw-M8K" secondAttribute="bottom" constant="-15" id="bcE-bS-HDy">
+                                                    <variation key="widthClass=compact" constant="8"/>
+                                                </constraint>
+                                                <constraint firstItem="1pB-tw-M8K" firstAttribute="top" secondItem="VQU-Wp-WfQ" secondAttribute="top" constant="-15" id="dfC-yr-bmu">
+                                                    <variation key="widthClass=compact" constant="8"/>
+                                                </constraint>
+                                                <constraint firstItem="1pB-tw-M8K" firstAttribute="leading" secondItem="VQU-Wp-WfQ" secondAttribute="leading" constant="177" id="nFu-cC-9o3">
+                                                    <variation key="widthClass=compact" constant="20"/>
+                                                </constraint>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="subviews">
+                                                    <exclude reference="1pB-tw-M8K"/>
+                                                </mask>
+                                                <mask key="constraints">
+                                                    <exclude reference="HF1-is-AFR"/>
+                                                    <exclude reference="bcE-bS-HDy"/>
+                                                    <exclude reference="dfC-yr-bmu"/>
+                                                    <exclude reference="nFu-cC-9o3"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="widthClass=compact">
+                                                <mask key="subviews">
+                                                    <include reference="1pB-tw-M8K"/>
+                                                </mask>
+                                                <mask key="constraints">
+                                                    <include reference="HF1-is-AFR"/>
+                                                    <include reference="bcE-bS-HDy"/>
+                                                    <include reference="dfC-yr-bmu"/>
+                                                    <include reference="nFu-cC-9o3"/>
+                                                </mask>
                                             </variation>
                                         </view>
                                     </subviews>
                                     <animations/>
+                                    <constraints>
+                                        <constraint firstItem="VQU-Wp-WfQ" firstAttribute="centerX" secondItem="3jW-Pf-Geo" secondAttribute="centerX" id="KUp-Yh-yA2"/>
+                                        <constraint firstItem="VQU-Wp-WfQ" firstAttribute="width" secondItem="3jW-Pf-Geo" secondAttribute="width" id="KbF-Rq-UgQ"/>
+                                        <constraint firstItem="VQU-Wp-WfQ" firstAttribute="top" secondItem="3jW-Pf-Geo" secondAttribute="topMargin" constant="-33" id="TxZ-7a-QnT">
+                                            <variation key="widthClass=compact" constant="0.0"/>
+                                        </constraint>
+                                        <constraint firstItem="njE-xP-w9q" firstAttribute="width" secondItem="3jW-Pf-Geo" secondAttribute="width" id="ZfJ-bK-hvZ"/>
+                                        <constraint firstItem="njE-xP-w9q" firstAttribute="centerX" secondItem="3jW-Pf-Geo" secondAttribute="centerX" id="bYs-FO-3mO"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="njE-xP-w9q" secondAttribute="bottom" constant="-52.5" id="fmY-O8-q4v">
+                                            <variation key="widthClass=compact" constant="0.0"/>
+                                        </constraint>
+                                        <constraint firstItem="njE-xP-w9q" firstAttribute="top" secondItem="VQU-Wp-WfQ" secondAttribute="bottom" id="svh-FT-3QA">
+                                            <variation key="widthClass=compact" constant="0.0"/>
+                                        </constraint>
+                                    </constraints>
                                     <variation key="default">
                                         <mask key="subviews">
-                                            <exclude reference="VQU-Wp-WfQ"/>
                                             <exclude reference="njE-xP-w9q"/>
+                                            <exclude reference="VQU-Wp-WfQ"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <exclude reference="KUp-Yh-yA2"/>
+                                            <exclude reference="KbF-Rq-UgQ"/>
+                                            <exclude reference="TxZ-7a-QnT"/>
+                                            <exclude reference="ZfJ-bK-hvZ"/>
+                                            <exclude reference="bYs-FO-3mO"/>
+                                            <exclude reference="fmY-O8-q4v"/>
+                                            <exclude reference="svh-FT-3QA"/>
                                         </mask>
                                     </variation>
                                     <variation key="widthClass=compact">
                                         <mask key="subviews">
-                                            <include reference="VQU-Wp-WfQ"/>
                                             <include reference="njE-xP-w9q"/>
+                                            <include reference="VQU-Wp-WfQ"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <include reference="KUp-Yh-yA2"/>
+                                            <include reference="KbF-Rq-UgQ"/>
+                                            <include reference="TxZ-7a-QnT"/>
+                                            <include reference="ZfJ-bK-hvZ"/>
+                                            <include reference="bYs-FO-3mO"/>
+                                            <include reference="fmY-O8-q4v"/>
+                                            <include reference="svh-FT-3QA"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -353,6 +424,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="iEj-cc-uNb"/>
+                    <connections>
+                        <outlet property="expansionButton" destination="1pB-tw-M8K" id="3bS-7h-0Rm"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rg7-y5-ZuK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
