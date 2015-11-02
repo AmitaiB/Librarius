@@ -9,15 +9,16 @@ pod 'MTBBarcodeScanner'
 pod "MMMaterialDesignSpinner"
 pod 'AFNetworking'
 pod 'NYAlertViewController'
-
 pod 'LARSTorch', '~> 1.1'
 
-pod 'SDWebImage', '~> 3.7'
-pod 'SDWebImage-ProgressView', '~> 0.4'
 
+#pod 'SDWebImage', '~> 3.7'
+#pod 'SDWebImage-ProgressView', '~> 0.4'
 
-pod 'ABMenuTableViewCell', '~> 2.0'
-pod 'ASOXScrollTableViewCell', '~> 0.1'
+pod 'InAppSettingsKit', '~> 2.6'
+
+#pod 'ABMenuTableViewCell', '~> 2.0'
+#pod 'ASOXScrollTableViewCell', '~> 0.1'
 
 
 

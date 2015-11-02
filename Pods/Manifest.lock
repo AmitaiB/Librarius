@@ -52,26 +52,21 @@ PODS:
   - gtm-http-fetcher (1.0.141)
   - gtm-oauth2 (1.0.126):
     - gtm-http-fetcher (~> 1.0.141)
+  - InAppSettingsKit (2.6)
   - LARSTorch (1.1.0)
   - MMMaterialDesignSpinner (0.2.0)
   - MTBBarcodeScanner (1.6.1)
   - NYAlertViewController (1.2.0)
-  - SDWebImage (3.7.3):
-    - SDWebImage/Core (= 3.7.3)
-  - SDWebImage-ProgressView (0.4.0):
-    - SDWebImage (~> 3.7.0)
-  - SDWebImage/Core (3.7.3)
 
 DEPENDENCIES:
   - AFNetworking
   - Google-API-Client/Books
   - Google/SignIn
+  - InAppSettingsKit (~> 2.6)
   - LARSTorch (~> 1.1)
   - MMMaterialDesignSpinner
   - MTBBarcodeScanner
   - NYAlertViewController
-  - SDWebImage (~> 3.7)
-  - SDWebImage-ProgressView (~> 0.4)
 
 SPEC CHECKSUMS:
   AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
@@ -85,11 +80,10 @@ SPEC CHECKSUMS:
   GoogleUtilities: e3475cd4d45134221d2f3f3626095a1c49b62041
   gtm-http-fetcher: 6d4617e7d343b6e4c082b777541c334eb6f5d81e
   gtm-oauth2: 2a18b824e4f8a02df6cfe987beb59ae9d9697f9d
+  InAppSettingsKit: cc56d3ec45f11352a16d5b210da8a3fa1b9d05ed
   LARSTorch: 6ea3c3447dd15c143026ae0e7a67d8851db72170
   MMMaterialDesignSpinner: 8f1a50270b789c76ec500957e518fc3e05e55b9d
   MTBBarcodeScanner: beda75d4c1e2750405f62ee53f7a7ee40bf6825b
   NYAlertViewController: 9198f367c2726184e20ace87f7b6dd2655d42d79
-  SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
-  SDWebImage-ProgressView: cdc29091ec0d53fd6dab3df65039a4f308e0a5ae
 
 COCOAPODS: 0.39.0
