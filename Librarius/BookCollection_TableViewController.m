@@ -29,6 +29,8 @@
 
 @interface BookCollection_TableViewController () <UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating>
 
+@property (nonatomic, setter=setPreferIndexHidden:) BOOL preferIndexHidden;
+
 @property (strong, nonatomic) UISearchController *searchController;
 //@property (nonatomic, strong) UIToolbar *bufferToolbar;
 
@@ -63,7 +65,7 @@ static NSString * const altSearchResultsCellID = @"altSearchResultsCellID";
 //    return YES;
 //}
 
-#pragma mark - === View LifeCycle ===
+#pragma mark - === LifeCycle ===
 
 - (void)viewDidLoad {
 
@@ -188,13 +190,22 @@ static NSString * const altSearchResultsCellID = @"altSearchResultsCellID";
     
 }
 
+#pragma mark - == Section Index methods ==
+
+-(void)setPreferIndexHidden:(BOOL)preferIndexHidden
+{
+    _preferIndexHidden = preferIndexHidden;
+    
+    [self.tableView reloadSectionIndexTitles];
+}
+
 #pragma mark - === UISearchBarDelegate ===
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
+//    self.resultsTableViewController.filteredBooks = @[];
     [searchBar resignFirstResponder];
 }
-
 
 /*
  #pragma mark - === UISearchControllerDelegate ===
@@ -202,8 +213,10 @@ static NSString * const altSearchResultsCellID = @"altSearchResultsCellID";
  Called after the search controller's searchbar has agreed to begin editing, or
  when 'active' = YES. There is a default presentation to fall back on.
  We'll implement these methods if the default presentation is inadequate.
- 
  -(void)presentSearchController:(UISearchController *)searchController
+ */
+
+/*
 ALSO
  - (void)willPresentSearchController:(UISearchController *)searchController
  - (void)didPresentSearchController:(UISearchController *)searchController
@@ -213,20 +226,20 @@ ALSO
 
 #pragma mark - === UISearchResultsUpdating ===
 
+/**
+ 0) The SB has been presented (it's a 0-row array).
+ 1) Search the dataset for the search text, update the results array, redraw.
+ */
 -(void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
         //Update the filtered array based on the search text
-    NSString *searchText = searchController.searchBar.text;
-    NSMutableArray *searchResults = [self.fetchedResultsController.fetchedObjects mutableCopy];
-    
-        // Strip out all the leading and trailing spaces
-    NSString *strippedString = [searchText stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    NSString *searchText = [searchController.searchBar.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]; // Trimmed
     
         // Break up the search terms (seperated by spaces)
-    NSArray *searchItems = nil;
-    if (strippedString.length > 0) {
-        searchItems = [strippedString componentsSeparatedByString:@" "];
-    }
+    NSArray *searchItems = (searchText.length > 0) ? [searchText componentsSeparatedByString:@" "] : nil;
+    
+    NSMutableArray *mutableSearchResults = [self.fetchedResultsController.fetchedObjects mutableCopy];
+    
     
         // Build all the "AND" expressions for each value in the searchString
         //
@@ -270,11 +283,11 @@ ALSO
     
         // Match up the fields of the Book object
     NSCompoundPredicate *finalCompoundPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:andMatchPredicates];
-    searchResults = [[searchResults filteredArrayUsingPredicate:finalCompoundPredicate] mutableCopy];
+    mutableSearchResults = [[mutableSearchResults filteredArrayUsingPredicate:finalCompoundPredicate] mutableCopy];
     
         // Hand over the filtered results to our search results table.
     LBR_ResultsTableViewController *tableController = (LBR_ResultsTableViewController *)self.searchController.searchResultsController;
-    tableController.filteredBooks = searchResults;
+    tableController.filteredBooks = mutableSearchResults;
     [tableController.tableView reloadData];
 }
 
@@ -285,9 +298,9 @@ ALSO
     // 2) search text,
     // 3) first responder.
 
-NSString * const ViewControllerTitleKey = @"ViewControllerTitleKey";
-NSString * const SearchControllerIsActivKey = @"SearchControllerIsActivKey";
-NSString * const SearchBarTextKey = @"SearchBarTextKey";
+NSString * const ViewControllerTitleKey       = @"ViewControllerTitleKey";
+NSString * const SearchControllerIsActivKey   = @"SearchControllerIsActivKey";
+NSString * const SearchBarTextKey             = @"SearchBarTextKey";
 NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
 
 -(void)encodeRestorableStateWithCoder:(NSCoder *)coder
@@ -342,13 +355,13 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
 #pragma mark - === TableView DataSource ===
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    NSInteger numSections;
+    NSInteger numSections = -1; //Crash if
     if (tableView == self.tableView) {
         numSections = [[self.fetchedResultsController sections] count];
     }
     if (tableView == self.resultsTableViewController.tableView) {
         NSLog(@"Results TableView");
-        numSections = 0;
+        numSections = 1;
     }
     
     return numSections;
@@ -382,6 +395,22 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
     return (currentSection)? [currentSection name] : @"Empty Library. Me Sad.";
 }
 
+
+-(NSArray<NSString *> *)sectionIndexTitlesForTableView:(UITableView *)tableView
+{
+    if (self.preferIndexHidden)
+        return nil;
+    
+    
+    __block NSMutableArray <NSString *> *indexTitles = [NSMutableArray array];
+    [self.fetchedResultsController.sections enumerateObjectsUsingBlock:^(id<NSFetchedResultsSectionInfo>  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSString *abbreviatedGenreTitle = [obj.name stringByReplacingCharactersInRange:NSMakeRange(5, obj.name.length - 5) withString:@".."];
+        [indexTitles addObject:abbreviatedGenreTitle];
+    }];
+
+    return [indexTitles copy];
+}
+
 #pragma mark - === Table View delegate ===
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -395,7 +424,7 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
     }
     
         //???
-    [super tableView:tableView didSelectRowAtIndexPath:indexPath];
+//    [super tableView:tableView didSelectRowAtIndexPath:indexPath];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -586,10 +615,20 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
 -(BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
 {
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+
     return NO;
 }
 
+    //TODO: Fix Scrolling/Index UX !!!:
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    self.preferIndexHidden = YES;
+}
 
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    self.preferIndexHidden = NO;
+}
 
 
 @end
