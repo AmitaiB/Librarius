@@ -10,7 +10,7 @@
 #import <iAd/iAd.h>
 #import "LBR_ResultsTableViewController.h"
 
-@interface BookCollection_TableViewController : UITableViewController <NSFetchedResultsControllerDelegate, UIScrollViewDelegate>
+@interface BookCollection_TableViewController : UITableViewController <NSFetchedResultsControllerDelegate, UIScrollViewDelegate, UISearchResultsUpdating>
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;

@@ -11,8 +11,9 @@
 #import <UIKit/UIKit.h>
 #import "BookCollection_TableViewController.h"
 
+@class Volume;
 @interface LBR_ResultsTableViewController : UITableViewController
 
-@property (strong, nonatomic) NSArray *filteredBooks;
+@property (strong, nonatomic) NSArray <Volume*> *filteredBooks;
 
 @end

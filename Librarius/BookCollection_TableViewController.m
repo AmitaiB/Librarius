@@ -43,6 +43,9 @@
 @property (nonatomic) BOOL searchControllerSearchFieldWasFirstResponder;
 
 
+    //Alternative SearchBar implementation
+@property (nonatomic, strong) UITableView *altSearchResultsTableView;
+
 @end
 
 @implementation BookCollection_TableViewController
@@ -51,8 +54,10 @@
 //    UITableViewHeaderFooterView *headerView;
 }
 
-static NSString * const bannerHeaderIdentifier = @"bannerHeaderIdentifier";
-static NSString * const searchResultsCellIdentifier = @"searchResultsCellIdentifier";
+static NSString * const bannerHeaderID         = @"bannerHeaderIdentifier";
+static NSString * const searchResultsCellID    = @"searchResultsCellIdentifier";
+static NSString * const altSearchResultsCellID = @"altSearchResultsCellID";
+
 
 //-(BOOL)prefersStatusBarHidden {
 //    return YES;
@@ -79,11 +84,14 @@ static NSString * const searchResultsCellIdentifier = @"searchResultsCellIdentif
 
     CGFloat statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
     self.tableView.contentInset = UIEdgeInsetsMake(statusBarHeight, 0, 0, 0);
-    
-    
+    [self scrollToFirstCellOnLoad];
+}
+
+-(void)scrollToFirstCellOnLoad
+{
     BOOL section0hasAtLeastOneRow = [self.tableView numberOfRowsInSection:0];
     NSIndexPath *firstItemIndexPath = [NSIndexPath indexPathForRow: 0 inSection:0];
-
+    
         //Scroll to the first section
     if ([self.tableView numberOfSections] > 0) {
         if (section0hasAtLeastOneRow) {
@@ -126,9 +134,11 @@ static NSString * const searchResultsCellIdentifier = @"searchResultsCellIdentif
 //    self.tableView.backgroundColor = [UIColor cloudsColor];
     [[UITableView appearance] setSeparatorColor :[UIColor midnightBlueColor]];
     [[UITableView appearance] setBackgroundColor:[UIColor cloudsColor]];
+
     [[UITableViewCell appearance] setBackgroundColor:[UIColor cloudsColor]];
     [UITableViewCell appearance].textLabel.textColor = [UIColor midnightBlueColor];
-
+    [UITableViewCell appearance].textLabel.font = [UIFont fontWithName:@"Avenir-Book" size:20];
+    
     [self.tableView setClipsToBounds:YES];
     self.fetchedResultsController = [[LBRDataManager sharedDataManager] preconfiguredLBRFetchedResultsController:self];
 }
@@ -141,25 +151,26 @@ static NSString * const searchResultsCellIdentifier = @"searchResultsCellIdentif
 
 -(void)configureSearchControllers
 {
-    
-    self.searchController = [[UISearchController alloc] initWithSearchResultsController:self.resultsTableController];
+    self.searchController                      = [[UISearchController alloc] initWithSearchResultsController:self.resultsTableController];
     self.searchController.searchResultsUpdater = self;
     [self.searchController.searchBar sizeToFit];
-    self.tableView.tableHeaderView = self.searchController.searchBar;
-    
+    self.tableView.tableHeaderView             = self.searchController.searchBar;
+
     // We want to be the delegate for our filtered table, so didSelectRowAtIndexPath is called for both tables
-    self.resultsTableController.tableView.delegate = self;
-    self.searchController.delegate = self;
-    self.searchController.dimsBackgroundDuringPresentation = NO; //default is YES
-    self.searchController.searchBar.delegate = self; //To monitor text changes + others
-    
-    
+    self.resultsTableController.tableView.delegate         = self;
+    self.searchController.delegate                         = self;
+    self.searchController.dimsBackgroundDuringPresentation = NO;//default is YES
+    self.searchController.searchBar.delegate               = self;//To monitor text changes + others
+
+
         // Search is now just presenting a view controller. As such, normal view controller
         // presentation semantics apply. Namely that presentation will walk up the view controller
         // hierarchy until it finds the root view controller or one that defines a presentation context.
         //
-    self.definesPresentationContext = YES; // Know where you want UISearchController to be displayed.(?)
+    self.definesPresentationContext                        = YES;// Know where you want UISearchController to be displayed.(?)
 }
+
+
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -352,11 +363,11 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
     return 0;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
 //    if (tableView == self.tableView) {
-        [self configureCell:cell atIndexPath:indexPath];
+        [self configureCell:cell forIndexPath:indexPath];
 //    }
 //    if (tableView == self.resultsTableController.tableView) {
 //        
@@ -427,7 +438,7 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
 
 #pragma mark private delegate helpers
 
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+- (void)configureCell:(UITableViewCell *)cell forIndexPath:(NSIndexPath *)indexPath {
         //Grabbing the text and context.
     BOOL arrayIsEmptyOrNil = !@(self.fetchedResultsController.fetchedObjects.count).boolValue;
     NSManagedObject *object = (arrayIsEmptyOrNil)? nil : [self.fetchedResultsController objectAtIndexPath:indexPath];
@@ -435,15 +446,13 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
     NSString *subtitle      = [object valueForKey:@"subtitle"];
     [self makeTitleCase:title];
     [self makeTitleCase:subtitle];
+    NSString *formattedSubtitle = [@": " stringByAppendingString:subtitle];
     
-    cell.textLabel.text = title;
-    if (subtitle) {
-        cell.textLabel.text = [NSString stringWithFormat:@"%@: %@", title, subtitle];
-    }
-    
-        //TODO: Try using the Appearance system
-    cell.textLabel.font = [UIFont fontWithName:@"Avenir-Book" size:20];
-    cell.textLabel.textColor = [UIColor midnightBlueColor];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@%@", title, subtitle ?  formattedSubtitle : @""];
+
+        //CLEAN: Trying the Appearance system
+//    cell.textLabel.font = [UIFont fontWithName:@"Avenir-Book" size:20];
+//    cell.textLabel.textColor = [UIColor midnightBlueColor];
 
     
         // Rounding the upper and lower corners of the cells in each group.
@@ -473,10 +482,11 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
     }
 }
 
--(void)configureCell:(UITableViewCell *)cell forVolume:(Volume *)volume
-{
-    
-}
+    //CLEAN:
+//-(void)configureCell:(UITableViewCell *)cell forVolume:(Volume *)volume
+//{
+//    
+//}
 
 - (void)makeTitleCase:(NSString*)string {
     NSArray *words = [string componentsSeparatedByString:@" "];
@@ -542,7 +552,7 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
             break;
             
         case NSFetchedResultsChangeUpdate:
-            [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            [self configureCell:[tableView cellForRowAtIndexPath:indexPath] forIndexPath:indexPath];
             break;
             
         case NSFetchedResultsChangeMove:
