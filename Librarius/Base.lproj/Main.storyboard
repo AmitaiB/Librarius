@@ -112,8 +112,7 @@
                                         <exclude reference="dwa-eh-GVV"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="20" y="66" width="168" height="229"/>
+                                <variation key="widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="dwa-eh-GVV"/>
                                     </mask>
@@ -291,6 +290,66 @@
             </objects>
             <point key="canvasLocation" x="-484.5" y="2394"/>
         </scene>
+        <!--Acknowledgments-->
+        <scene sceneID="Xbd-9C-Xwy">
+            <objects>
+                <viewController title="Acknowledgments" id="zWq-la-HZq" customClass="LBRAcknowledgements_ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CCL-oM-f2w"/>
+                        <viewControllerLayoutGuide type="bottom" id="GKt-7X-JvM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="SLW-LM-gcK">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="PwO-C6-yiD">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                            </textView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="PwO-C6-yiD" firstAttribute="leading" secondItem="SLW-LM-gcK" secondAttribute="leadingMargin" id="MWj-UO-0vh"/>
+                            <constraint firstItem="GKt-7X-JvM" firstAttribute="top" secondItem="PwO-C6-yiD" secondAttribute="bottom" id="P3P-gt-0Hn"/>
+                            <constraint firstItem="PwO-C6-yiD" firstAttribute="top" secondItem="CCL-oM-f2w" secondAttribute="bottom" id="QtE-PS-1jx"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="PwO-C6-yiD" secondAttribute="trailing" id="qyo-dA-yER"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="PwO-C6-yiD"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="MWj-UO-0vh"/>
+                                <exclude reference="QtE-PS-1jx"/>
+                                <exclude reference="qyo-dA-yER"/>
+                                <exclude reference="P3P-gt-0Hn"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="PwO-C6-yiD"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="MWj-UO-0vh"/>
+                                <include reference="QtE-PS-1jx"/>
+                                <include reference="qyo-dA-yER"/>
+                                <include reference="P3P-gt-0Hn"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" id="p3R-qZ-tNV"/>
+                    <connections>
+                        <outlet property="acknowledgmentsTextView" destination="PwO-C6-yiD" id="dRS-Gl-T78"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p7l-rI-2j6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1225.5" y="1657"/>
+        </scene>
         <!--Settings (New)-->
         <scene sceneID="tmm-em-7sy">
             <objects>
@@ -302,7 +361,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="158" id="EUU-vl-uLn" customClass="LBRSettingsCell">
-                                <rect key="frame" x="0.0" y="92" width="600" height="158"/>
+                                <rect key="frame" x="0.0" y="28" width="600" height="158"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EUU-vl-uLn" id="3jW-Pf-Geo">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="157.5"/>
@@ -1015,35 +1074,6 @@
             </objects>
             <point key="canvasLocation" x="205.5" y="897"/>
         </scene>
-        <!--Acknowledgements TableView-->
-        <scene sceneID="jsH-cK-OYa">
-            <objects>
-                <tableViewController title="Acknowledgements TableView" id="jky-UT-7pc" customClass="LBRAcknowledgements_TableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="VNc-cO-JG9">
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KPo-LH-6WK">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KPo-LH-6WK" id="EJb-Xv-sSR">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <animations/>
-                                </tableViewCellContentView>
-                                <animations/>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="jky-UT-7pc" id="JXe-3g-N1K"/>
-                            <outlet property="delegate" destination="jky-UT-7pc" id="odH-63-XCH"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="psd-S8-Jzp"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pRW-QY-rp3" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1248" y="1657"/>
-        </scene>
         <!--Settings-->
         <scene sceneID="cC4-u1-Syw">
             <objects>
@@ -1057,7 +1087,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="jky-UT-7pc" kind="relationship" relationship="rootViewController" id="1ug-mH-pkN"/>
+                        <segue destination="zWq-la-HZq" kind="relationship" relationship="rootViewController" id="8v2-Nu-Mp6"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0rg-wq-VPp" userLabel="First Responder" sceneMemberID="firstResponder"/>
