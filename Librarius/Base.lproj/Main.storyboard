@@ -7,10 +7,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Title-->
+        <!--Book Details-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
-                <viewController storyboardIdentifier="bookDetailStoryboardID" id="9pv-A4-QxB" customClass="BookDetailViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="bookDetailStoryboardID" title="Book Details" id="9pv-A4-QxB" customClass="BookDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ia1-K6-d13"/>
                         <viewControllerLayoutGuide type="bottom" id="4ug-Mw-9AY"/>
@@ -147,12 +147,12 @@
                             <mask key="constraints">
                                 <exclude reference="DMQ-yf-y3e"/>
                                 <exclude reference="qkW-Mq-HUG"/>
-                                <exclude reference="Dut-vV-3uB"/>
-                                <exclude reference="qBC-DH-6BI"/>
-                                <exclude reference="qHH-66-P0H"/>
                                 <exclude reference="gFv-Rs-kjA"/>
                                 <exclude reference="hL4-nc-372"/>
                                 <exclude reference="hYg-qL-qz1"/>
+                                <exclude reference="Dut-vV-3uB"/>
+                                <exclude reference="qBC-DH-6BI"/>
+                                <exclude reference="qHH-66-P0H"/>
                                 <exclude reference="OXI-hX-SgB"/>
                             </mask>
                         </variation>
@@ -164,24 +164,17 @@
                             <mask key="constraints">
                                 <include reference="DMQ-yf-y3e"/>
                                 <include reference="qkW-Mq-HUG"/>
-                                <include reference="Dut-vV-3uB"/>
-                                <include reference="qBC-DH-6BI"/>
-                                <include reference="qHH-66-P0H"/>
                                 <include reference="gFv-Rs-kjA"/>
                                 <include reference="hL4-nc-372"/>
                                 <include reference="hYg-qL-qz1"/>
+                                <include reference="Dut-vV-3uB"/>
+                                <include reference="qBC-DH-6BI"/>
+                                <include reference="qHH-66-P0H"/>
                                 <include reference="OXI-hX-SgB"/>
                             </mask>
                         </variation>
                     </view>
                     <tabBarItem key="tabBarItem" title="Collection" image="search1" id="acW-dT-cKf"/>
-                    <navigationItem key="navigationItem" title="Title" id="enP-3w-Oe7">
-                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="Bhh-8z-ean">
-                            <connections>
-                                <action selector="doneButtonTapped:" destination="9pv-A4-QxB" id="u1y-hw-Dr1"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
                     <connections>
                         <outlet property="detailsTableView" destination="teT-h7-Oj1" id="6So-Tc-fev"/>
                         <outlet property="imageView" destination="dOy-7Y-f7Q" id="ty2-p6-IfL"/>
