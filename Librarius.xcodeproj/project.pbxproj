@@ -74,6 +74,7 @@
 		38D601A11BDABE1E00E3D60F /* TODO-FIXME-list.md in Resources */ = {isa = PBXBuildFile; fileRef = 38D601A01BDABE1E00E3D60F /* TODO-FIXME-list.md */; };
 		38DA43D01BE66F2B00FEFD16 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 38DA43CF1BE66F2B00FEFD16 /* README.md */; };
 		38DA43D31BE66FD200FEFD16 /* LBR_BookcaseLayout_AuthorOnly.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DA43D21BE66FD200FEFD16 /* LBR_BookcaseLayout_AuthorOnly.m */; };
+		38DA43D51BE6BE9200FEFD16 /* LibraryCreation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38DA43D41BE6BE9200FEFD16 /* LibraryCreation.storyboard */; };
 		38E2497F1BE2AEEC0047EBF7 /* ABB_BufferToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E2497E1BE2AEEC0047EBF7 /* ABB_BufferToolbar.m */; };
 		38E71DAF1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E71DAE1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.m */; };
 		38F3C0D91BDFE01F005AF2ED /* LBR_ResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F3C0D81BDFE01F005AF2ED /* LBR_ResultsTableViewController.m */; };
@@ -228,6 +229,7 @@
 		38DA43CF1BE66F2B00FEFD16 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		38DA43D11BE66FD200FEFD16 /* LBR_BookcaseLayout_AuthorOnly.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBR_BookcaseLayout_AuthorOnly.h; sourceTree = "<group>"; };
 		38DA43D21BE66FD200FEFD16 /* LBR_BookcaseLayout_AuthorOnly.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBR_BookcaseLayout_AuthorOnly.m; sourceTree = "<group>"; };
+		38DA43D41BE6BE9200FEFD16 /* LibraryCreation.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LibraryCreation.storyboard; sourceTree = "<group>"; };
 		38E2497D1BE2AEEC0047EBF7 /* ABB_BufferToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABB_BufferToolbar.h; sourceTree = "<group>"; };
 		38E2497E1BE2AEEC0047EBF7 /* ABB_BufferToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABB_BufferToolbar.m; sourceTree = "<group>"; };
 		38E71DAD1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRShelvedBook_CollectionViewCell.h; sourceTree = "<group>"; };
@@ -327,6 +329,7 @@
 				380375331B8AC9A8004C4ECE /* AppDelegate.h */,
 				380375341B8AC9A8004C4ECE /* AppDelegate.m */,
 				3803753C1B8AC9A8004C4ECE /* Main.storyboard */,
+				38DA43D41BE6BE9200FEFD16 /* LibraryCreation.storyboard */,
 				3803755F1B8BB6C3004C4ECE /* Data */,
 				380375641B8BB71D004C4ECE /* Controllers */,
 				38D6019F1BDAAEE400E3D60F /* Layouts */,
@@ -753,6 +756,7 @@
 				3803753E1B8AC9A8004C4ECE /* Main.storyboard in Resources */,
 				3803757E1B8C16B3004C4ECE /* GoogleService-Info.plist in Resources */,
 				38D601A11BDABE1E00E3D60F /* TODO-FIXME-list.md in Resources */,
+				38DA43D51BE6BE9200FEFD16 /* LibraryCreation.storyboard in Resources */,
 				3803757F1B8C17EB004C4ECE /* LaunchScreen.xib in Resources */,
 				3810DA211BD5E1420093D5C2 /* ADVFlatUI-Resources.xcassets in Resources */,
 				380375401B8AC9A8004C4ECE /* Images.xcassets in Resources */,

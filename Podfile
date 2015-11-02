@@ -16,6 +16,10 @@ pod 'SDWebImage', '~> 3.7'
 pod 'SDWebImage-ProgressView', '~> 0.4'
 
 
+pod 'ABMenuTableViewCell', '~> 2.0'
+pod 'ASOXScrollTableViewCell', '~> 0.1'
+
+
 
 #pod 'UICollectionView-ARDynamicHeightLayoutCell_Bell'
 #pod 'SAMCache'
