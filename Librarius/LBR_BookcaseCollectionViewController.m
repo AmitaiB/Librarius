@@ -80,7 +80,7 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
         //Rope in the singleton dataManger
     self.dataManager = [LBRDataManager sharedDataManager];
     self.collectionView.directionalLockEnabled = YES;
-    self.canDisplayBannerAds = YES;
+//    self.canDisplayBannerAds = YES;
     
         //Set custom layout with protocol
     layout = [LBR_BookcaseLayout new];
@@ -410,7 +410,8 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     layoutChangesSegmentedControl = [[UISegmentedControl alloc] initWithItems:@[GenreAuthorDateLayoutSchemeID, AuthorOnlyLayoutSchemeID, @"Flow (delete)"]];
     layoutChangesSegmentedControl.selectedSegmentIndex = 0;
     [layoutChangesSegmentedControl addTarget:self action:@selector(layoutChangesSegmentedControlDidChangeValue:) forControlEvents:UIControlEventValueChanged];
-    self.navigationItem.titleView = layoutChangesSegmentedControl;
+        //TODO: replace this, and make it work.
+        //    self.navigationItem.titleView = layoutChangesSegmentedControl;
 }
 
 -(void)layoutChangesSegmentedControlDidChangeValue:(id)sender

@@ -640,7 +640,7 @@
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.80000000000000004" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Save Books to Collection">
+                                <state key="normal" title="Add Books">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -1009,7 +1009,6 @@
                         <segue destination="Yvy-lH-Qcb" kind="relationship" relationship="viewControllers" id="9MK-7n-nPt"/>
                         <segue destination="BK5-aT-ift" kind="relationship" relationship="viewControllers" id="wTu-ac-h8U"/>
                         <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
-                        <segue destination="9Mv-tj-U5P" kind="relationship" relationship="viewControllers" id="TBB-3r-H23"/>
                         <segue destination="a1o-lg-1yo" kind="relationship" relationship="viewControllers" id="kRc-jj-rCf"/>
                     </connections>
                 </tabBarController>

@@ -69,7 +69,7 @@ static NSString * const altSearchResultsCellID = @"altSearchResultsCellID";
 //    self.navigationItem.leftBarButtonItem = self.editButtonItem;
     [self flattenUI];
     [self configureSearchControllers];
-    self.canDisplayBannerAds = YES;
+//    self.canDisplayBannerAds = YES;
     self.preferIndexHidden = YES;
 /**
  *  TODO: Change the method called here to "Manual Volume Entry", details below.
@@ -129,7 +129,7 @@ static NSString * const altSearchResultsCellID = @"altSearchResultsCellID";
         //Set the background color
         ///"You must set this property (tableView.backgroundView) to nil to set the background color of the table view." (Apple docs)
     self.tableView.backgroundView = nil;
-//    self.tableView.backgroundColor = [UIColor cloudsColor];
+    self.tableView.backgroundColor = [UIColor emerlandColor];
     [[UITableView appearance] setSeparatorColor :[UIColor midnightBlueColor]];
     [[UITableView appearance] setBackgroundColor:[UIColor cloudsColor]];
 
@@ -492,7 +492,8 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
     
     
         ///AHA!
-    [cell configureFlatCellWithColor:[UIColor shirazColor] selectedColor:[UIColor mySinColor] roundingCorners:cornersToRound];
+    [cell configureFlatCellWithColor:[UIColor pomegranateColor] selectedColor:[UIColor mySinColor] roundingCorners:cornersToRound];
+//    [cell configureFlatCellWithColor:[UIColor shirazColor] selectedColor:[UIColor mySinColor] roundingCorners:cornersToRound];
     
 
     if (indexPath.row == 0 || indexPath.row == lastRowInSection) {

@@ -86,7 +86,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
     if (!self.isConfigured) {
         [self configureProgrammaticProperties];}
     
-    self.canDisplayBannerAds = YES;
+//    self.canDisplayBannerAds = YES;
     
 }
 
@@ -344,8 +344,8 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
     
     [alertViewController addAction: confirmAction];
     [alertViewController addAction: cancelAction];
-    alertViewController.title = NSLocalizedString(@"Content View", nil);
-    alertViewController.message = NSLocalizedString(@"Set the alertViewContentView property to add custom views to the alert view", nil);
+    alertViewController.title = NSLocalizedString(@"Verify Book", nil);
+    alertViewController.message = NSLocalizedString(@"Is this the book you scanned?", nil);
     
         // The content view that will contain our custom view.
         ///Working on this now...

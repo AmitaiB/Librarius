@@ -60,7 +60,7 @@ static NSString * const decorationViewIdentifier = @"decorationViewIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.canDisplayBannerAds = YES;
+//    self.canDisplayBannerAds = YES;
     self.collectionView.backgroundColor = [UIColor cloudsColor];
     self.coverArtURLs = [NSArray array];
     

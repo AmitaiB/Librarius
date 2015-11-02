@@ -37,7 +37,7 @@ static NSString * const bookDetailsCellID = @"bookDetailsCellID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    self.canDisplayBannerAds = YES;
+//    self.canDisplayBannerAds = YES;
     [self setTitleText];
     self.bookDetailsTypes = @[@"author", @"pub. date", @"genre"];
     if (self.displayVolume && self.displayVolume.author && self.displayVolume.mainCategory) {

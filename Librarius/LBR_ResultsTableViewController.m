@@ -23,8 +23,8 @@ static NSString * const resultsCellReuseID = @"resultsCellReuseID";
 
 -(void)loadView
 {
-    self.cellPrototype = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:resultsCellReuseID];
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:resultsCellReuseID];
+//    self.cellPrototype = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:resultsCellReuseID];
+//    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:resultsCellReuseID];
 }
 
 - (void)viewDidLoad {
