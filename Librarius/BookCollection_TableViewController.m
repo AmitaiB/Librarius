@@ -31,6 +31,8 @@
 
 @property (strong, nonatomic) UISearchController *searchController;
 //@property (nonatomic, strong) UIToolbar *bufferToolbar;
+
+    //Cosmetic view that prevents text collisions with statusBar.
 @property (nonatomic, strong) ABB_BufferToolbar *bufferToolbar;
 
     // Secondary search results TableView
