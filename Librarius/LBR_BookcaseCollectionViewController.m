@@ -28,7 +28,6 @@
     //Categories
 #import "UIColor+FlatUI.h"
 #import <UIImageView+AFNetworking.h>
-#import "UIImageView+ProgressView.h"
 #import "CoverArt.h"
 
 

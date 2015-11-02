@@ -298,6 +298,35 @@
             </objects>
             <point key="canvasLocation" x="1737" y="703"/>
         </scene>
+        <!--Table View Controller-->
+        <scene sceneID="tmm-em-7sy">
+            <objects>
+                <tableViewController id="SBH-hI-Rjh" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Iqe-yy-jvV">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="EUU-vl-uLn">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EUU-vl-uLn" id="3jW-Pf-Geo">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <animations/>
+                                </tableViewCellContentView>
+                                <animations/>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="SBH-hI-Rjh" id="vyU-Eo-sW7"/>
+                            <outlet property="delegate" destination="SBH-hI-Rjh" id="Fl9-7A-I4F"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="iEj-cc-uNb"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rg7-y5-ZuK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1729.5" y="1384"/>
+        </scene>
         <!--Shelves (CollectionViewController)-->
         <scene sceneID="2EP-QO-Uby">
             <objects>
@@ -916,7 +945,6 @@
                         <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
                         <segue destination="9Mv-tj-U5P" kind="relationship" relationship="viewControllers" id="TBB-3r-H23"/>
                         <segue destination="a1o-lg-1yo" kind="relationship" relationship="viewControllers" id="kRc-jj-rCf"/>
-                        <segue destination="uXB-LQ-cOX" kind="relationship" relationship="viewControllers" id="WaP-NH-9pU"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
@@ -962,16 +990,6 @@
             </objects>
             <point key="canvasLocation" x="2655" y="505"/>
         </scene>
-        <!--Storyboard Reference-->
-        <scene sceneID="Bfb-hC-zZY">
-            <objects>
-                <viewControllerPlaceholder id="uXB-LQ-cOX" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="sg1-w9-92s"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JS2-Aq-OIe" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="287.25" y="494"/>
-        </scene>
         <!--Settings-->
         <scene sceneID="cC4-u1-Syw">
             <objects>
@@ -985,7 +1003,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="oJK-od-ZUi" kind="relationship" relationship="rootViewController" id="CMM-lm-5k2"/>
+                        <segue destination="SBH-hI-Rjh" kind="relationship" relationship="rootViewController" id="E7L-Q3-mRH"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0rg-wq-VPp" userLabel="First Responder" sceneMemberID="firstResponder"/>
