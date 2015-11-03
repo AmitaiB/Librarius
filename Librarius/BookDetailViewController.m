@@ -141,17 +141,28 @@ static NSString * const bookDetailsCellID = @"bookDetailsCellID";
 
     if ([self.detailCategories[indexPath.row] isEqualToString:@"Rating"])
     {
-        self.simpleRatingControl = [[AMRatingControl alloc] initWithLocation:CGPointMake(8, 8) emptyColor:[UIColor asbestosColor] solidColor:[UIColor sunflowerColor] andMaxRating:5];
+        self.simpleRatingControl  = [[AMRatingControl alloc] initWithLocation:CGPointMake(8, 8) emptyColor:[UIColor asbestosColor] solidColor:[UIColor sunflowerColor] andMaxRating:5];
+        [self.simpleRatingControl configureForAutolayout];
+        [cell.detailTextLabel configureForAutolayout];
         [cell.contentView addSubview:self.simpleRatingControl];
-        cell.detailTextLabel.text = nil;
-        cell.textLabel.text = nil;
+        
+        NSDictionary *views = @{@"ratingControl" : self.simpleRatingControl,
+                                @"detailLabel"   : cell.detailTextLabel
+                                };
+        
+        [cell addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[ratingControl(44)]-[detailLabel]-|" options:0 metrics:nil views:views]];
+        [cell addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[ratingControl]-|" options:0 metrics:nil views:views]];
+        [cell addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[detailLabel]-|" options:0 metrics:nil views:views]];
+        
+        cell.detailTextLabel.text = self.detailCategories[indexPath.row];
+        cell.textLabel.text       = nil;
     }
     else
     {
-        NSString *category = self.detailCategories[indexPath.row];
-        NSString *detail = self.detailsArray[indexPath.row];
+        NSString *category        = self.detailCategories[indexPath.row];
+        NSString *detail          = self.detailsArray[indexPath.row];
+        cell.textLabel.text       = detail ? detail : nil;
         cell.detailTextLabel.text = category;
-        cell.textLabel.text = detail ? detail : nil;
     }
     
         //    NSString *string =  self.bookDetails[indexPath.row];
