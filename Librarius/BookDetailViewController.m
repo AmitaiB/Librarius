@@ -17,6 +17,10 @@
 #import <AFNetworking/UIImageView+AFNetworking.h>
 #import "UIView+ConfigureForAutoLayout.h"
 
+    //Pods
+#import <AMRatingControl.h>
+#import "UIColor+FlatUI.h"
+#import "UIColor+ABBColors.h"
 
 @interface BookDetailViewController ()
 @property (nonatomic, strong) NSArray *detailCategories;
@@ -25,6 +29,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *detailsTableView;
 @property (nonatomic, weak) IBOutlet UITextView *descriptionTextView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+
+@property (nonatomic, strong) AMRatingControl *simpleRatingControl;
 
 - (IBAction)doneButtonTapped:(id)sender;
 
@@ -45,6 +51,7 @@ static NSString * const bookDetailsCellID = @"bookDetailsCellID";
     [super viewDidLoad];
     
     self.canDisplayBannerAds = YES;
+    
     
         //???: Why doesn't this display the title?
     self.title =[NSString stringWithFormat:@"%@ - Details", self.displayVolume.title];
@@ -125,17 +132,27 @@ static NSString * const bookDetailsCellID = @"bookDetailsCellID";
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.detailCategories.count - 1;
+    return self.detailCategories.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:bookDetailsCellID forIndexPath:indexPath];
-    
-    NSString *category = self.detailCategories[indexPath.row];
-    NSString *detail = self.detailsArray[indexPath.row];
-    cell.detailTextLabel.text = category;
-    cell.textLabel.text = detail ? detail : nil;
+
+    if ([self.detailCategories[indexPath.row] isEqualToString:@"Rating"])
+    {
+        self.simpleRatingControl = [[AMRatingControl alloc] initWithLocation:CGPointMake(8, 8) emptyColor:[UIColor asbestosColor] solidColor:[UIColor sunflowerColor] andMaxRating:5];
+        [cell.contentView addSubview:self.simpleRatingControl];
+        cell.detailTextLabel.text = nil;
+        cell.textLabel.text = nil;
+    }
+    else
+    {
+        NSString *category = self.detailCategories[indexPath.row];
+        NSString *detail = self.detailsArray[indexPath.row];
+        cell.detailTextLabel.text = category;
+        cell.textLabel.text = detail ? detail : nil;
+    }
     
         //    NSString *string =  self.bookDetails[indexPath.row];
 //    if ([string class] == [NSString class]) {
