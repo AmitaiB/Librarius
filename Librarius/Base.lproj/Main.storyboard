@@ -113,7 +113,12 @@
                                 <animations/>
                                 <items>
                                     <navigationItem title="Title" id="bTG-fO-seA">
-                                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="done" id="Iyl-Ap-Io6"/>
+                                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="done" id="Iyl-Ap-Io6">
+                                            <connections>
+                                                <action selector="doneButtonTapped:" destination="9pv-A4-QxB" id="QAS-ah-dAk"/>
+                                                <segue destination="0v3-DQ-bEP" kind="unwind" unwindAction="prepareForUnwind:" id="sNb-eg-946"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -185,6 +190,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
+                <exit id="0v3-DQ-bEP" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1747.5" y="1657"/>
         </scene>
@@ -1114,6 +1120,6 @@
         <image name="woodpanel04110095" width="624" height="452"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Bzc-ZK-D5c"/>
+        <segue reference="hkZ-A2-opz"/>
     </inferredMetricsTieBreakers>
 </document>
