@@ -81,13 +81,11 @@ static NSString * const kUnknown = @"kUnknown";
 -(void)updateWithNewTransientVolume:(LBRParsedVolume*)volumeToAdd {
         // Logic
     self.parsedVolumesToEitherSaveOrDiscard = [self.parsedVolumesToEitherSaveOrDiscard arrayByAddingObject:volumeToAdd];
-        //CLEAN: Necessary?
-    NSLog(@"%@", [self.parsedVolumesToEitherSaveOrDiscard filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"title"]]);
 }
 
 -(NSArray *)parsedVolumesToEitherSaveOrDiscard
 {
-    if (!_parsedVolumesToEitherSaveOrDiscard)
+    if (_parsedVolumesToEitherSaveOrDiscard == nil)
         _parsedVolumesToEitherSaveOrDiscard = @[];
     
     return _parsedVolumesToEitherSaveOrDiscard;
