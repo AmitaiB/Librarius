@@ -6,17 +6,24 @@
 //  Copyright (c) 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 
-#import "BookDetailViewController.h"
+    //Models
 #import "Volume.h"
+
+    //Controllers
+#import "BookDetailViewController.h"
+
+    //Frameworks
 #import <iAd/iAd.h>
 #import <AFNetworking/UIImageView+AFNetworking.h>
+#import "UIView+ConfigureForAutoLayout.h"
 
 
 @interface BookDetailViewController ()
-@property (nonatomic, strong) NSArray *bookDetailsTypes;
-@property (nonatomic, strong) NSArray *bookDetails;
-@property (weak, nonatomic) IBOutlet UILabel *titleHeader;
+@property (nonatomic, strong) NSArray *detailCategories;
+@property (nonatomic, strong) NSArray *detailsArray;
+
 @property (weak, nonatomic) IBOutlet UITableView *detailsTableView;
+@property (nonatomic, weak) IBOutlet UITextView *descriptionTextView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 - (IBAction)doneButtonTapped:(id)sender;
@@ -36,23 +43,52 @@ static NSString * const bookDetailsCellID = @"bookDetailsCellID";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-//    self.canDisplayBannerAds = YES;
-    [self setTitleText];
-    self.bookDetailsTypes = @[@"author", @"pub. date", @"genre"];
-    if (self.displayVolume && self.displayVolume.author && self.displayVolume.mainCategory) {
-        self.bookDetails = @[self.displayVolume.author,
-                             (self.displayVolume.published)? self.displayVolume.published : @"",
-                             self.displayVolume.mainCategory];
-
-        [self.imageView setImageWithURL:[NSURL URLWithString:self.displayVolume.cover_art_large] placeholderImage:[UIImage imageNamed:@"placeholder"]];
-    }
-    else
-    {
-        self.titleHeader.text = @"Error loading Volume!";
-        self.canDisplayBannerAds = NO;
-    }
+    
+    self.canDisplayBannerAds = YES;
+    
+        //???: Why doesn't this display the title?
+    self.title =[NSString stringWithFormat:@"%@ - Details", self.displayVolume.title];
+//    UINavigationItem *titleItem = [[UINavigationItem alloc] initWithTitle:
+    
+//    UINavigationBar *navBar = [UINavigationBar new];
+//    [navBar pushNavigationItem:titleItem animated:NO];
+//    UINavigationController *navController = [UINavigationController alloc] initWithNavigationBarClass:<#(nullable Class)#> toolbarClass:<#(nullable Class)#>
+    
+    
+//    [self.navigationController.navigationBar pushNavigationItem:titleItem animated:NO];
+//    
+//    self.navigationItem.titleView.backgroundColor = [UIColor blackColor];
+    self.detailCategories = @[@"Author", @"Publication Date", @"Genre", @"Rating"];
+    
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    dateFormatter.dateFormat = @"MM/dd/yyyy";
+    NSString *dateString = [dateFormatter stringFromDate:self.displayVolume.published];
+    
+    self.detailsArray = @[self.displayVolume.author ? self.displayVolume.author : @"No Title Found",
+                          dateString ? dateString : @"No Date Found",
+                          self.displayVolume.mainCategory ? self.displayVolume.mainCategory : @"No Genre Found",
+                          [self.displayVolume.rating stringValue] ? [self.displayVolume.rating stringValue] : @"N/A",
+                          self.displayVolume.publDescription ? self.displayVolume.publDescription : @"No Description Found"
+                          ];
+    
+    self.descriptionTextView.text = [self.detailsArray lastObject];
+//    author      = self.detailsArray[0];
+//    date        = self.detailsArray[1];
+//    genre       = self.detailsArray[2];
+//    rating      = self.detailsArray[3];
+//    description = self.detailsArray[4];
+//    
+//    self.detailsDictionary = @{self.detailsDictionary[0] : author,
+//                               self.detailsDictionary[1] : date,
+//                               self.detailsDictionary[2] : genre,
+//                               self.detailsDictionary[3] : rating,
+//                               @"description"            : description
+//                               };
+    
+    [self.imageView setImageWithURL:[NSURL URLWithString:self.displayVolume.cover_art_large] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    
     [self.detailsTableView sizeToFit];
+//    [self.detailsTableView sizeToFit];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,48 +96,51 @@ static NSString * const bookDetailsCellID = @"bookDetailsCellID";
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - == Constraints ==
+-(void)autolayoutSubviews
+{
+    [UIView configureViewsForAutolayout:@[self.imageView, self.detailsTableView, self.descriptionTextView]];
+    
+        //ImageView
+    [self.imageView.topAnchor constraintEqualToAnchor:self.topLayoutGuide.bottomAnchor constant:8].active = YES;
+    
+    
+}
+
+#pragma mark - === IBActions ===
+    //???: Isn't this now an unwind segue via storyboard??
 - (IBAction)doneButtonTapped:(id)sender {
     [self dismissSelf];
 }
+
+#pragma mark - Helper methods
 
 -(void)dismissSelf
 {
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
-    //FIXME: Why doesn't this work?
--(void)addGestureDismissal
-{
-    UITapGestureRecognizer *tapToDismiss = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissSelf)];
-    [self.titleHeader addGestureRecognizer:tapToDismiss];
-}
-
-#pragma mark = Helper methods
-
--(void)setTitleText
-{
-    self.titleHeader.text = self.displayVolume.title;
-    if (self.displayVolume.subtitle) {
-        self.titleHeader.text = [NSString stringWithFormat:@"%@: %@", self.displayVolume.title, self.displayVolume.subtitle];
-    }
-}
 
 #pragma mark - === UITableView DataSource ===
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.bookDetails.count;
+    return self.detailCategories.count - 1;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:bookDetailsCellID forIndexPath:indexPath];
     
-    cell.detailTextLabel.text = self.bookDetailsTypes[indexPath.row];
-    NSString *string =  self.bookDetails[indexPath.row];
-    if ([string class] == [NSString class]) {
-        cell.textLabel.text       = string;
-    }
+    NSString *category = self.detailCategories[indexPath.row];
+    NSString *detail = self.detailsArray[indexPath.row];
+    cell.detailTextLabel.text = category;
+    cell.textLabel.text = detail ? detail : nil;
+    
+        //    NSString *string =  self.bookDetails[indexPath.row];
+//    if ([string class] == [NSString class]) {
+//        cell.textLabel.text       = string;
+//    }
     
     
     return cell;

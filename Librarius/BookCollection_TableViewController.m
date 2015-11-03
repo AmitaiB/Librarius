@@ -70,7 +70,7 @@ static NSString * const altSearchResultsCellID = @"altSearchResultsCellID";
 //    self.navigationItem.leftBarButtonItem = self.editButtonItem;
     [self flattenUI];
     [self configureSearchControllers];
-//    self.canDisplayBannerAds = YES;
+    self.canDisplayBannerAds = YES;
     self.preferIndexHidden = YES;
 /**
  *  TODO: Change the method called here to "Manual Volume Entry", details below.

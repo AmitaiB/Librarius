@@ -27,15 +27,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *mainCategory;
 @property (nullable, nonatomic, retain) NSNumber *pageCount;
 @property (nullable, nonatomic, retain) NSString *publDescription;
-@property (nullable, nonatomic, retain) NSDate *published;
+@property (nullable, nonatomic, retain) NSDate   *published;
 @property (nullable, nonatomic, retain) NSString *publisher;
 @property (nullable, nonatomic, retain) NSNumber *rating;
 @property (nullable, nonatomic, retain) NSNumber *ratingsCount;
 @property (nullable, nonatomic, retain) NSString *subtitle;
 @property (nullable, nonatomic, retain) NSNumber *thickness;
 @property (nullable, nonatomic, retain) NSString *title;
+
 @property (nullable, nonatomic, retain) Bookcase *bookcase;
-@property (nullable, nonatomic, retain) Library *library;
+@property (nullable, nonatomic, retain) Library  *library;
 @property (nullable, nonatomic, retain) CoverArt *correspondingImageData;
 
 @end

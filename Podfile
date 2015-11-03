@@ -11,6 +11,7 @@ pod 'AFNetworking'
 pod 'NYAlertViewController'
 pod 'LARSTorch', '~> 1.1'
 
+pod 'AMRatingControl'
 
 #pod "MMMaterialDesignSpinner"
 #pod 'SDWebImage', '~> 3.7'
@@ -25,7 +26,6 @@ pod 'LARSTorch', '~> 1.1'
 #pod 'SAMCache'
 
 #Not Yet Implemented
-#pod 'AMRatingControl'
 #pod 'SCLAlertView-Objective-C'
 #pod 'AFOAuth2Manager'
 #pod 'XNGOAuth1Client', '~> 2.0'

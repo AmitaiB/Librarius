@@ -80,7 +80,7 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
         //Rope in the singleton dataManger
     self.dataManager = [LBRDataManager sharedDataManager];
     self.collectionView.directionalLockEnabled = YES;
-//    self.canDisplayBannerAds = YES;
+    self.canDisplayBannerAds = YES;
     
         //Set custom layout with protocol
     layout = [LBR_BookcaseLayout new];

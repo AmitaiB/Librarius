@@ -12,5 +12,6 @@
 
 -(void)configureForAutolayout;
 
++(void)configureViewsForAutolayout:(NSArray <UIView*> *)views;
 
 @end

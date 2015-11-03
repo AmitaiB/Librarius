@@ -86,7 +86,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
     if (!self.isConfigured) {
         [self configureProgrammaticProperties];}
     
-//    self.canDisplayBannerAds = YES;
+    self.canDisplayBannerAds = YES;
     
 }
 
