@@ -125,7 +125,6 @@
                                     <navigationItem id="bTG-fO-seA">
                                         <barButtonItem key="leftBarButtonItem" style="done" systemItem="done" id="Iyl-Ap-Io6">
                                             <connections>
-                                                <action selector="doneButtonTapped:" destination="9pv-A4-QxB" id="QAS-ah-dAk"/>
                                                 <segue destination="0v3-DQ-bEP" kind="unwind" unwindAction="prepareForUnwind:" id="sNb-eg-946"/>
                                             </connections>
                                         </barButtonItem>

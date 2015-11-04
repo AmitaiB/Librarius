@@ -62,10 +62,10 @@ static NSString * const bookDetailsCellID = @"bookDetailsCellID";
 //    [navBar pushNavigationItem:titleItem animated:NO];
 //    UINavigationController *navController = [UINavigationController alloc] initWithNavigationBarClass:<#(nullable Class)#> toolbarClass:<#(nullable Class)#>
     
-    
 //    [self.navigationController.navigationBar pushNavigationItem:titleItem animated:NO];
 //    
 //    self.navigationItem.titleView.backgroundColor = [UIColor blackColor];
+
     self.detailCategories = @[@"Author", @"Publication Date", @"Genre", @"Rating"];
     
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
@@ -80,29 +80,12 @@ static NSString * const bookDetailsCellID = @"bookDetailsCellID";
                           ];
     
     self.descriptionTextView.text = [self.detailsArray lastObject];
-//    author      = self.detailsArray[0];
-//    date        = self.detailsArray[1];
-//    genre       = self.detailsArray[2];
-//    rating      = self.detailsArray[3];
-//    description = self.detailsArray[4];
-//    
-//    self.detailsDictionary = @{self.detailsDictionary[0] : author,
-//                               self.detailsDictionary[1] : date,
-//                               self.detailsDictionary[2] : genre,
-//                               self.detailsDictionary[3] : rating,
-//                               @"description"            : description
-//                               };
     
     [self.imageView setImageWithURL:[NSURL URLWithString:self.displayVolume.cover_art_large] placeholderImage:[UIImage imageNamed:@"placeholder"]];
     
     [self.detailsTableView sizeToFit];
-//    [self.detailsTableView sizeToFit];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 #pragma mark - == Constraints ==
     //CLEAN: Not called! Not finished!!
@@ -118,23 +101,8 @@ static NSString * const bookDetailsCellID = @"bookDetailsCellID";
     
         //DescriptionTextView
         //[...]
-    
-    
 }
 
-#pragma mark - === IBActions ===
-    //???: Isn't this now an unwind segue via storyboard??
-- (IBAction)doneButtonTapped:(id)sender {
-    [self dismissSelf];
-}
-
-#pragma mark - Helper methods
-
--(void)dismissSelf
-{
-    NSLog(@"Saving rating:%ld for title:%@ to CoreData", (long)self.ratingCtrl.rating, self.displayVolume.title);
-    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-}
 
 
 #pragma mark - === UITableView DataSource ===
@@ -204,16 +172,6 @@ static NSString * const bookDetailsCellID = @"bookDetailsCellID";
 {
     return 44;
 }
-
-/*
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.row == 5) {
-        return [UITableViewCell new].detailTextLabel.frame.size.height;
-    }
-    return self.detailsTableView.rowHeight;
-}
-*/
 
 #pragma mark - === UITableView Delegate ===
 
