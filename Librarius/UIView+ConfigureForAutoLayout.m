@@ -24,4 +24,9 @@
     }
 }
 
+-(void)removeAllConstraints
+{
+    [self removeConstraints:self.constraints];
+}
+
 @end

@@ -14,4 +14,7 @@
 
 +(void)configureViewsForAutolayout:(NSArray <UIView*> *)views;
 
+-(void)removeAllConstraints;
+
+
 @end

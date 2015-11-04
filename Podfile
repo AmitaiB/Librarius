@@ -13,6 +13,9 @@ pod 'LARSTorch', '~> 1.1'
 
 pod 'AMRatingControl'
 
+pod 'UIView+FDCollapsibleConstraints', '~> 1.1'
+
+
 #pod "MMMaterialDesignSpinner"
 #pod 'SDWebImage', '~> 3.7'
 #pod 'SDWebImage-ProgressView', '~> 0.4'

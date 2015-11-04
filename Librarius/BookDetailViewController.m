@@ -21,6 +21,7 @@
 #import <AMRatingControl.h>
 #import "UIColor+FlatUI.h"
 #import "UIColor+ABBColors.h"
+#import "Utility.h"
 
 @interface BookDetailViewController ()
 @property (nonatomic, strong) NSArray *detailCategories;
@@ -30,7 +31,7 @@
 @property (nonatomic, weak) IBOutlet UITextView *descriptionTextView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
-@property (nonatomic, strong) AMRatingControl *simpleRatingControl;
+@property (nonatomic, strong) AMRatingControl *ratingCtrl;
 
 - (IBAction)doneButtonTapped:(id)sender;
 
@@ -104,12 +105,19 @@ static NSString * const bookDetailsCellID = @"bookDetailsCellID";
 }
 
 #pragma mark - == Constraints ==
+    //CLEAN: Not called! Not finished!!
 -(void)autolayoutSubviews
 {
     [UIView configureViewsForAutolayout:@[self.imageView, self.detailsTableView, self.descriptionTextView]];
     
         //ImageView
     [self.imageView.topAnchor constraintEqualToAnchor:self.topLayoutGuide.bottomAnchor constant:8].active = YES;
+    
+        //DetailsTableView
+        //[...]
+    
+        //DescriptionTextView
+        //[...]
     
     
 }
@@ -124,6 +132,7 @@ static NSString * const bookDetailsCellID = @"bookDetailsCellID";
 
 -(void)dismissSelf
 {
+    NSLog(@"Saving rating:%ld for title:%@ to CoreData", (long)self.ratingCtrl.rating, self.displayVolume.title);
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -141,21 +150,38 @@ static NSString * const bookDetailsCellID = @"bookDetailsCellID";
 
     if ([self.detailCategories[indexPath.row] isEqualToString:@"Rating"])
     {
-        self.simpleRatingControl  = [[AMRatingControl alloc] initWithLocation:CGPointMake(8, 8) emptyColor:[UIColor asbestosColor] solidColor:[UIColor sunflowerColor] andMaxRating:5];
-        [self.simpleRatingControl configureForAutolayout];
-        [cell.detailTextLabel configureForAutolayout];
-        [cell.contentView addSubview:self.simpleRatingControl];
+        self.ratingCtrl  = [[AMRatingControl alloc] initWithLocation:CGPointMake(8, 8) emptyColor:[UIColor silverColor] solidColor:[UIColor sunflowerColor] andMaxRating:5];
+//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"New"];
+        [UIView configureViewsForAutolayout:@[self.ratingCtrl, cell.detailTextLabel]];
+        [cell.contentView addSubview:self.ratingCtrl];
+        [cell.detailTextLabel removeAllConstraints];
+        UILabel *dtlb = cell.detailTextLabel;
+        AMRatingControl *ratingCtrl = self.ratingCtrl;
         
-        NSDictionary *views = @{@"ratingControl" : self.simpleRatingControl,
+            //Now both detail label and ratings are ready to be placed.
+
+        /*
+            //Horizontal
+        [dtlb.leadingAnchor constraintEqualToAnchor:dtlb.superview.leadingAnchor constant:8];
+        [dtlb.trailingAnchor constraintEqualToAnchor:ratingCtrl.leadingAnchor constant:8];
+        [ratingCtrl.trailingAnchor constraintEqualToAnchor:cell.contentView.trailingAnchor constant:8];
+        
+        */
+
+        NSDictionary *views = @{@"ratingControl" : self.ratingCtrl,
                                 @"detailLabel"   : cell.detailTextLabel
                                 };
+
+        [dtlb.heightAnchor constraintEqualToAnchor:ratingCtrl.heightAnchor multiplier:1].active = YES;
+        [cell addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[detailLabel]-[ratingControl]-|" options:0 metrics:nil views:views]];
         
-        [cell addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[ratingControl(44)]-[detailLabel]-|" options:0 metrics:nil views:views]];
-        [cell addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[ratingControl]-|" options:0 metrics:nil views:views]];
-        [cell addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[detailLabel]-|" options:0 metrics:nil views:views]];
+        [cell addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[ratingControl]-|" options:0 metrics:nil views:views]];
+        [cell addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[detailLabel]-|" options:0 metrics:nil views:views]];
         
-        cell.detailTextLabel.text = self.detailCategories[indexPath.row];
-        cell.textLabel.text       = nil;
+//        cell.detailTextLabel.text = self.detailCategories[indexPath.row];
+        cell.detailTextLabel.text = @"Rating";
+//        [cell.textLabel removeFromSuperview];
+        cell.textLabel.text = nil;
     }
     else
     {
@@ -174,6 +200,20 @@ static NSString * const bookDetailsCellID = @"bookDetailsCellID";
     return cell;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 44;
+}
+
+/*
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 5) {
+        return [UITableViewCell new].detailTextLabel.frame.size.height;
+    }
+    return self.detailsTableView.rowHeight;
+}
+*/
 
 #pragma mark - === UITableView Delegate ===
 
