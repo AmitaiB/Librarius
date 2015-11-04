@@ -9,6 +9,15 @@
 #import <QuartzCore/QuartzCore.h>
 #import "MTBBarcodeScanner.h"
 
+CGFloat const kFocalPointOfInterestX = 0.5;
+CGFloat const kFocalPointOfInterestY = 0.5;
+
+static NSString *kErrorDomain = @"MTBBarcodeScannerError";
+
+// Error Codes
+static const NSInteger kErrorCodeStillImageCaptureInProgress = 1000;
+static const NSInteger kErrorCodeSessionIsClosed = 1001;
+
 @interface MTBBarcodeScanner () <AVCaptureMetadataOutputObjectsDelegate>
 /*!
  @property session
@@ -32,6 +41,13 @@
  to reset the camera to its initial properties when scanning stops.
  */
 @property (nonatomic, strong) AVCaptureDeviceInput *currentCaptureDeviceInput;
+
+/*
+ @property captureDeviceOnput
+ @abstract
+ The capture device output for capturing video.
+ */
+@property (nonatomic, strong) AVCaptureMetadataOutput *captureOutput;
 
 /*!
  @property metaDataObjectTypes
@@ -57,17 +73,6 @@
 @property (nonatomic, weak) UIView *previewView;
 
 /*!
- @property resultBlock
- @abstract
- Block that's called for every barcode captured. Returns an array of AVMetadataMachineReadableCodeObjects.
- 
- @discussion
- The resultBlock is called once for every frame that at least one valid barcode is found.
- The returned array consists of AVMetadataMachineReadableCodeObject objects.
- */
-@property (nonatomic, copy) void (^resultBlock)(NSArray *codes);
-
-/*!
  @property hasExistingSession
  @abstract
  BOOL that is set to YES when a new valid session is created and set to NO when stopScanning
@@ -88,7 +93,7 @@
  The auto focus range restriction the AVCaptureDevice was initially configured for when scanning started.
  
  @discussion
- Then startScanning is called, the auto focus range restriction of the default AVCaptureDevice
+ When startScanning is called, the auto focus range restriction of the default AVCaptureDevice
  is stored. When stopScanning is called, the AVCaptureDevice is reset to the initial range restriction
  to prevent a bug in the AVFoundation framework.
  */
@@ -100,16 +105,20 @@
  The focus point the AVCaptureDevice was initially configured for when scanning started.
  
  @discussion
- Then startScanning is called, the focus point of the default AVCaptureDevice
+ When startScanning is called, the focus point of the default AVCaptureDevice
  is stored. When stopScanning is called, the AVCaptureDevice is reset to the initial focal point
  to prevent a bug in the AVFoundation framework.
  */
 @property (nonatomic, assign) CGPoint initialFocusPoint;
 
-@end
+/*!
+ @property stillImageOutput
+ @abstract
+ Used for still image capture
+ */
+@property (strong, nonatomic) AVCaptureStillImageOutput *stillImageOutput;
 
-CGFloat const kFocalPointOfInterestX = 0.5;
-CGFloat const kFocalPointOfInterestY = 0.5;
+@end
 
 @implementation MTBBarcodeScanner
 
@@ -201,6 +210,10 @@ CGFloat const kFocalPointOfInterestY = 0.5;
     }
 }
 
+- (void)startScanning {
+    [self startScanningWithResultBlock:self.resultBlock];
+}
+
 - (void)startScanningWithResultBlock:(void (^)(NSArray *codes))resultBlock {
     NSAssert([MTBBarcodeScanner cameraIsPresent], @"Attempted to start scanning on a device with no camera. Check requestCameraPermissionWithSuccess: method before calling startScanningWithResultBlock:");
     NSAssert(![MTBBarcodeScanner scanningIsProhibited], @"Scanning is prohibited on this device. \
@@ -215,13 +228,25 @@ CGFloat const kFocalPointOfInterestY = 0.5;
     }
     
     [self.session startRunning];
+    
     self.capturePreviewLayer.cornerRadius = self.previewView.layer.cornerRadius;
-    [self.previewView.layer addSublayer:self.capturePreviewLayer];
+    
+    if (!CGRectIsEmpty(self.scanRect)) {
+        self.captureOutput.rectOfInterest = [self.capturePreviewLayer metadataOutputRectOfInterestForRect:self.scanRect];
+    }
+    
+    [self.previewView.layer insertSublayer:self.capturePreviewLayer atIndex:0];
     [self refreshVideoOrientation];
+    
+    if (self.didStartScanningBlock) {
+        self.didStartScanningBlock();
+    }
 }
 
 - (void)stopScanning {
     if (self.hasExistingSession) {
+        
+        self.torchMode = MTBTorchModeOff;
         
         self.hasExistingSession = NO;
         [self.capturePreviewLayer removeFromSuperlayer];
@@ -316,10 +341,28 @@ CGFloat const kFocalPointOfInterestY = 0.5;
     // Set an optimized preset for barcode scanning
     [newSession setSessionPreset:AVCaptureSessionPresetHigh];
     
-    AVCaptureMetadataOutput *captureOutput = [[AVCaptureMetadataOutput alloc] init];
-    [captureOutput setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
-    [newSession addOutput:captureOutput];
-    captureOutput.metadataObjectTypes = self.metaDataObjectTypes;
+    self.captureOutput = [[AVCaptureMetadataOutput alloc] init];
+    [self.captureOutput setMetadataObjectsDelegate:self queue:dispatch_get_main_queue()];
+    [newSession addOutput:self.captureOutput];
+    self.captureOutput.metadataObjectTypes = self.metaDataObjectTypes;
+    
+    // Still image capture configuration
+    self.stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
+    self.stillImageOutput.outputSettings = @{AVVideoCodecKey: AVVideoCodecJPEG};
+    
+    if ([self.stillImageOutput isStillImageStabilizationSupported]) {
+        self.stillImageOutput.automaticallyEnablesStillImageStabilizationWhenAvailable = YES;
+    }
+    
+    if ([self.stillImageOutput respondsToSelector:@selector(isHighResolutionStillImageOutputEnabled)]) {
+        self.stillImageOutput.highResolutionStillImageOutputEnabled = YES;
+    }
+    
+    [newSession addOutput:self.stillImageOutput];
+    
+    if (!CGRectIsEmpty(self.scanRect)) {
+        self.captureOutput.rectOfInterest = self.scanRect;
+    }
     
     self.capturePreviewLayer = nil;
     self.capturePreviewLayer = [AVCaptureVideoPreviewLayer layerWithSession:newSession];
@@ -427,6 +470,8 @@ CGFloat const kFocalPointOfInterestY = 0.5;
             deviceInput.device.focusPointOfInterest = CGPointMake(kFocalPointOfInterestX, kFocalPointOfInterestY);
         }
         
+        [self updateTorchModeForCurrentSettings];
+        
         [deviceInput.device unlockForConfiguration];
     }
     
@@ -456,6 +501,123 @@ CGFloat const kFocalPointOfInterestY = 0.5;
     self.currentCaptureDeviceInput = nil;
 }
 
+#pragma mark - Torch Control
+
+- (void)setTorchMode:(MTBTorchMode)torchMode {
+    _torchMode = torchMode;
+    [self updateTorchModeForCurrentSettings];
+}
+
+- (void)toggleTorch {
+    if (self.torchMode == MTBTorchModeAuto || self.torchMode == MTBTorchModeOff) {
+        self.torchMode = MTBTorchModeOn;
+    } else {
+        self.torchMode = MTBTorchModeOff;
+    }
+}
+
+- (void)updateTorchModeForCurrentSettings {
+
+    AVCaptureDevice *backCamera = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    if ([backCamera isTorchAvailable] && [backCamera isTorchModeSupported:AVCaptureTorchModeOn]) {
+        
+        BOOL success = [backCamera lockForConfiguration:nil];
+        if (success) {
+            
+            AVCaptureTorchMode mode = [self avTorchModeForMTBTorchMode:self.torchMode];
+            
+            NSLog(@"Setting torch mode: %zd", mode);
+            
+            [backCamera setTorchMode:mode];
+            [backCamera unlockForConfiguration];
+            
+        }
+    }
+}
+
+- (BOOL)hasTorch {
+    AVCaptureDevice *captureDevice = [self newCaptureDeviceWithCamera:self.camera];
+    AVCaptureDeviceInput *input = [self deviceInputForCaptureDevice:captureDevice];
+    return input.device.hasTorch;
+}
+
+- (AVCaptureTorchMode)avTorchModeForMTBTorchMode:(MTBTorchMode)torchMode {
+    AVCaptureTorchMode mode = AVCaptureTorchModeOff;
+    
+    if (torchMode == MTBTorchModeOn) {
+        mode = AVCaptureTorchModeOn;
+    } else if (torchMode == MTBTorchModeAuto) {
+        mode = AVCaptureTorchModeAuto;
+    }
+    
+    return mode;
+}
+
+#pragma mark - Capture
+
+- (void)freezeCapture {
+    self.capturePreviewLayer.connection.enabled = NO;
+    
+    if (self.hasExistingSession) {
+        [self.session stopRunning];
+    }
+}
+
+- (void)unfreezeCapture {
+    self.capturePreviewLayer.connection.enabled = YES;
+    
+    if (self.hasExistingSession && !self.session.isRunning) {
+        [self setDeviceInput:self.currentCaptureDeviceInput session:self.session];
+        [self.session startRunning];
+    }
+}
+
+
+- (void)captureStillImage:(void (^)(UIImage *image, NSError *error))captureBlock {
+    
+    if ([self isCapturingStillImage]) {
+        if (captureBlock) {
+            NSError *error = [NSError errorWithDomain:kErrorDomain
+                                                 code:kErrorCodeStillImageCaptureInProgress
+                                             userInfo:@{NSLocalizedDescriptionKey : @"Still image capture is already in progress. Check with isCapturingStillImage"}];
+            captureBlock(nil, error);
+        }
+        return;
+    }
+    
+    AVCaptureConnection *stillConnection = [self.stillImageOutput connectionWithMediaType:AVMediaTypeVideo];
+    
+    if (stillConnection == nil) {
+        if (captureBlock) {
+            NSError *error = [NSError errorWithDomain:kErrorDomain
+                                                 code:kErrorCodeSessionIsClosed
+                                             userInfo:@{NSLocalizedDescriptionKey : @"AVCaptureConnection is closed"}];
+            captureBlock(nil, error);
+        }
+        return;
+    }
+    
+    [self.stillImageOutput captureStillImageAsynchronouslyFromConnection:stillConnection
+                                                       completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
+        if (error) {
+            captureBlock(nil, error);
+            return;
+        }
+        
+        NSData *jpegData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
+        UIImage *image = [UIImage imageWithData:jpegData];
+        if (captureBlock) {
+            captureBlock(image, nil);
+        }
+        
+    }];
+    
+}
+
+- (BOOL)isCapturingStillImage {
+    return self.stillImageOutput.isCapturingStillImage;
+}
+
 #pragma mark - Setters
 
 - (void)setCamera:(MTBCamera)camera {
@@ -467,6 +629,21 @@ CGFloat const kFocalPointOfInterestY = 0.5;
     }
     
     _camera = camera;
+}
+
+#pragma mark - Getters
+
+- (CALayer *)previewLayer {
+    return self.capturePreviewLayer;
+}
+
+- (void)setScanRect:(CGRect)scanRect {
+    NSAssert(!CGRectIsEmpty(scanRect), @"Unable to set an empty rectangle as the scanRect of MTBBarcodeScanner");
+    
+    [self refreshVideoOrientation];
+    
+    _scanRect = scanRect;
+    self.captureOutput.rectOfInterest = [self.capturePreviewLayer metadataOutputRectOfInterestForRect:_scanRect];
 }
 
 @end

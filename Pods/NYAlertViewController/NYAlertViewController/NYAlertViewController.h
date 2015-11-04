@@ -14,6 +14,7 @@
 @property (nonatomic) NSString *title;
 @property (nonatomic) UIAlertActionStyle style;
 @property (nonatomic, strong) void (^handler)(NYAlertAction *action);
+@property (nonatomic) BOOL enabled;
 
 @end
 
@@ -21,7 +22,9 @@ typedef NS_ENUM(NSInteger, NYAlertViewControllerTransitionStyle) {
     /** Fade in the alert view */
     NYAlertViewControllerTransitionStyleFade,
     /** Slide the alert view from the top of the view */
-    NYAlertViewControllerTransitionStyleSlideFromTop
+    NYAlertViewControllerTransitionStyleSlideFromTop,
+    /** Slide the alert view from the bottom of the view */
+    NYAlertViewControllerTransitionStyleSlideFromBottom
 };
 
 @interface NYAlertViewController : UIViewController
@@ -38,8 +41,6 @@ typedef NS_ENUM(NSInteger, NYAlertViewControllerTransitionStyle) {
 
 /**
  A Boolean value that determines whether the status bar is visible when the alert view is presented
- 
- @discussion The default value is YES
  */
 @property (nonatomic) BOOL showsStatusBar;
 
@@ -51,7 +52,9 @@ typedef NS_ENUM(NSInteger, NYAlertViewControllerTransitionStyle) {
 @property (nonatomic) UIView *alertViewContentView;
 
 /**
- The transition style used to animate the alert view's presentation/dismissal transitions. The default value is NYAlertViewControllerTransitionStyleSlideFromTop.
+ The transition style used to animate the alert view's presentation/dismissal transitions.
+ 
+ @discussion The default value is NYAlertViewControllerTransitionStyleSlideFromTop.
  */
 @property (nonatomic) NYAlertViewControllerTransitionStyle transitionStyle;
 
@@ -138,6 +141,11 @@ typedef NS_ENUM(NSInteger, NYAlertViewControllerTransitionStyle) {
 @property (nonatomic) UIColor *destructiveButtonColor;
 
 /**
+ The background color for the alert view's buttons corresponsing to disabled actions
+ */
+@property (nonatomic) UIColor *disabledButtonColor;
+
+/**
  The color used to display the title for buttons corresponsing to default style actions
  */
 @property (nonatomic) UIColor *buttonTitleColor;
@@ -151,6 +159,11 @@ typedef NS_ENUM(NSInteger, NYAlertViewControllerTransitionStyle) {
  The color used to display the title for buttons corresponsing to destructive style actions
  */
 @property (nonatomic) UIColor *destructiveButtonTitleColor;
+
+/**
+ The color used to display the title for buttons corresponsing to disabled actions
+ */
+@property (nonatomic) UIColor *disabledButtonTitleColor;
 
 /**
  The radius of the displayed alert view's corners

@@ -1,23 +1,23 @@
 PODS:
-  - AFNetworking (2.6.0):
-    - AFNetworking/NSURLConnection (= 2.6.0)
-    - AFNetworking/NSURLSession (= 2.6.0)
-    - AFNetworking/Reachability (= 2.6.0)
-    - AFNetworking/Security (= 2.6.0)
-    - AFNetworking/Serialization (= 2.6.0)
-    - AFNetworking/UIKit (= 2.6.0)
-  - AFNetworking/NSURLConnection (2.6.0):
+  - AFNetworking (2.6.1):
+    - AFNetworking/NSURLConnection (= 2.6.1)
+    - AFNetworking/NSURLSession (= 2.6.1)
+    - AFNetworking/Reachability (= 2.6.1)
+    - AFNetworking/Security (= 2.6.1)
+    - AFNetworking/Serialization (= 2.6.1)
+    - AFNetworking/UIKit (= 2.6.1)
+  - AFNetworking/NSURLConnection (2.6.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.6.0):
+  - AFNetworking/NSURLSession (2.6.1):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/Reachability (2.6.0)
-  - AFNetworking/Security (2.6.0)
-  - AFNetworking/Serialization (2.6.0)
-  - AFNetworking/UIKit (2.6.0):
+  - AFNetworking/Reachability (2.6.1)
+  - AFNetworking/Security (2.6.1)
+  - AFNetworking/Serialization (2.6.1)
+  - AFNetworking/UIKit (2.6.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - AMRatingControl (1.3.0)
@@ -28,11 +28,12 @@ PODS:
   - Google-API-Client/Common (1.0.422):
     - gtm-http-fetcher (~> 1.0.141)
     - gtm-oauth2 (~> 1.0.125)
-  - Google/Core (1.0.7):
+  - Google/Core (1.1.1):
+    - GoogleInterchangeUtilities (~> 1.0)
     - GoogleNetworkingUtilities (~> 1.0)
     - GoogleSymbolUtilities (~> 1.0)
-    - GoogleUtilities (~> 1.0)
-  - Google/SignIn (1.0.7):
+    - GoogleUtilities (~> 1.1)
+  - Google/SignIn (1.1.1):
     - Google/Core
     - GoogleSignIn (~> 2.0)
   - GoogleAppUtilities (1.0.0):
@@ -40,22 +41,25 @@ PODS:
   - GoogleAuthUtilities (1.0.1):
     - GoogleNetworkingUtilities (~> 1.0)
     - GoogleSymbolUtilities (~> 1.0)
+  - GoogleInterchangeUtilities (1.0.0):
+    - GoogleSymbolUtilities (~> 1.0)
   - GoogleNetworkingUtilities (1.0.0):
     - GoogleSymbolUtilities (~> 1.0)
-  - GoogleSignIn (2.2.0):
-    - GoogleAppUtilities (~> 1)
-    - GoogleAuthUtilities (~> 1)
-    - GoogleNetworkingUtilities (~> 1)
-    - GoogleUtilities (~> 1)
+  - GoogleSignIn (2.4.0):
+    - GoogleAppUtilities (~> 1.0)
+    - GoogleAuthUtilities (~> 1.0)
+    - GoogleNetworkingUtilities (~> 1.0)
+    - GoogleUtilities (~> 1.0)
   - GoogleSymbolUtilities (1.0.0)
-  - GoogleUtilities (1.0.1):
-    - GoogleSymbolUtilities (~> 1.0)
+  - GoogleUtilities (1.1.0):
+    - GoogleSymbolUtilities (~> 1.0.0)
   - gtm-http-fetcher (1.0.141)
   - gtm-oauth2 (1.0.126):
     - gtm-http-fetcher (~> 1.0.141)
   - LARSTorch (1.1.0)
-  - MTBBarcodeScanner (1.6.1)
-  - NYAlertViewController (1.2.0)
+  - MTBBarcodeScanner (1.8.9)
+  - NYAlertViewController (1.3.0)
+  - UIView+FDCollapsibleConstraints (1.1)
 
 DEPENDENCIES:
   - AFNetworking
@@ -65,22 +69,25 @@ DEPENDENCIES:
   - LARSTorch (~> 1.1)
   - MTBBarcodeScanner
   - NYAlertViewController
+  - UIView+FDCollapsibleConstraints (~> 1.1)
 
 SPEC CHECKSUMS:
-  AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
+  AFNetworking: 8e4e60500beb8bec644cf575beee72990a76d399
   AMRatingControl: f209fd394188ba48a818f2df091db438123db362
-  Google: 875f5a8ade86dd02e36586e4a54814843938c7f6
+  Google: 529a5d8719dff90ea2e7cba5f45302cd359b5456
   Google-API-Client: cb712cf122f1d7fda966de4c2bc551324573366c
   GoogleAppUtilities: c01c6a5671e9da8b9d690fdaec5959d6c2aac699
   GoogleAuthUtilities: 049ffd3a297cdffd271451b82fd4e75304f15ef3
+  GoogleInterchangeUtilities: fe088bea8c936218e52324a004d279c4491b9d65
   GoogleNetworkingUtilities: 292992ab31b7b4ba32809a0e8b40e324cdfb2c0c
-  GoogleSignIn: c45d8d1a873784a3283b4f47f331dc06d8a727b6
+  GoogleSignIn: 79929b51e6299c69f1197bbd9c7a1367d523ecd8
   GoogleSymbolUtilities: a7b0feed1fe667c8d5e647177938d0ecd62d6948
-  GoogleUtilities: e3475cd4d45134221d2f3f3626095a1c49b62041
+  GoogleUtilities: 8ed9134debe11719097881711464752900668f10
   gtm-http-fetcher: 6d4617e7d343b6e4c082b777541c334eb6f5d81e
   gtm-oauth2: 2a18b824e4f8a02df6cfe987beb59ae9d9697f9d
   LARSTorch: 6ea3c3447dd15c143026ae0e7a67d8851db72170
-  MTBBarcodeScanner: beda75d4c1e2750405f62ee53f7a7ee40bf6825b
-  NYAlertViewController: 9198f367c2726184e20ace87f7b6dd2655d42d79
+  MTBBarcodeScanner: 0b44de527064dc1e7af33bf4ee3a43cde7306849
+  NYAlertViewController: b93f82e2c1fc6d5e9485512ddbe7b481f463a074
+  UIView+FDCollapsibleConstraints: 9357eaf03b4e088263ab74a3b86a382a64ce38dd
 
 COCOAPODS: 0.39.0
