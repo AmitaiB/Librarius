@@ -22,6 +22,7 @@
 #import "UIColor+FlatUI.h"
 #import "UIColor+ABBColors.h"
 #import "Utility.h"
+#import "LBRDataManager.h"
 
 @interface BookDetailViewController ()
 @property (nonatomic, strong) NSArray *detailCategories;
@@ -125,6 +126,7 @@ static NSString * const bookDetailsCellID = @"bookDetailsCellID";
         [cell.detailTextLabel removeAllConstraints];
         UILabel *dtlb = cell.detailTextLabel;
         AMRatingControl *ratingCtrl = self.ratingCtrl;
+        ratingCtrl.rating = [self.displayVolume.rating integerValue];
         
             //Now both detail label and ratings are ready to be placed.
 
@@ -150,6 +152,13 @@ static NSString * const bookDetailsCellID = @"bookDetailsCellID";
         cell.detailTextLabel.text = @"Rating";
 //        [cell.textLabel removeFromSuperview];
         cell.textLabel.text = nil;
+        [cell updateConstraints];
+        
+        ratingCtrl.editingDidEndBlock = ^(NSUInteger rating)
+        {
+            self.displayVolume.rating = @(rating);
+            [[LBRDataManager sharedDataManager] saveContext];
+        };
     }
     else
     {
