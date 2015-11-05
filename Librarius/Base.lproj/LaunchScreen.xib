@@ -27,7 +27,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="43" id="foA-sj-eZT"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
+                    <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Bold" family="Bodoni 72" pointSize="36"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
