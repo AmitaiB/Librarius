@@ -69,7 +69,9 @@ static NSString * const altSearchResultsCellID = @"altSearchResultsCellID";
     [super viewDidLoad];
 //    self.navigationItem.leftBarButtonItem = self.editButtonItem;
     [self flattenUI];
-    [self configureSearchControllers];
+
+        //Uncomment when ready to add and debug searchBar
+//    [self configureSearchControllers];
     self.canDisplayBannerAds = YES;
     self.preferIndexHidden = YES;
 /**
@@ -85,6 +87,7 @@ static NSString * const altSearchResultsCellID = @"altSearchResultsCellID";
     CGFloat statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
     self.tableView.contentInset = UIEdgeInsetsMake(statusBarHeight, 0, 0, 0);
     [self scrollToFirstCellOnLoad];
+    [self configureColorScheme];
 }
 
 -(void)scrollToFirstCellOnLoad
@@ -126,18 +129,27 @@ static NSString * const altSearchResultsCellID = @"altSearchResultsCellID";
 //    }
 //}
 
--(void)flattenUI {
-    
+-(void)configureColorScheme
+{
         //Set the background color
         ///"You must set this property (tableView.backgroundView) to nil to set the background color of the table view." (Apple docs)
-    self.tableView.backgroundView = nil;
-    self.tableView.backgroundColor = [UIColor emerlandColor];
-    [[UITableView appearance] setSeparatorColor :[UIColor midnightBlueColor]];
-    [[UITableView appearance] setBackgroundColor:[UIColor cloudsColor]];
-
+    [UITableView appearance].backgroundView = nil;
+//    [UITableView appearance].backgroundColor = [UIColor wellReadColor];
+    [[UITableView appearance] setSeparatorColor :[UIColor wellReadColor]];
+    [[UITableView appearance] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLineEtched];
+    
+    [[UITableView appearance] setBackgroundColor:[UIColor casalColor]];
+    
     [[UITableViewCell appearance] setBackgroundColor:[UIColor cloudsColor]];
     [UITableViewCell appearance].textLabel.textColor = [UIColor midnightBlueColor];
     [UITableViewCell appearance].textLabel.font = [UIFont fontWithName:@"Avenir-Book" size:20];
+
+        //        Crashes:
+        //    [[UITableViewCell appearance] setSeparatorHeight:5];
+}
+
+-(void)flattenUI {
+    
 //    [UICollectionViewCell appearance].backgroundColor = [UIColor clearColor];
     
     [self.tableView setClipsToBounds:YES];
@@ -452,14 +464,15 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
     }
 }
 
+
 -(void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
 {
     UITableViewHeaderFooterView *headerView   = (UITableViewHeaderFooterView *)view;
     headerView.backgroundView.backgroundColor = [UIColor cloudsColor];
     headerView.textLabel.backgroundColor      = [UIColor clearColor];
-    headerView.textLabel.textColor            = [UIColor midnightBlueColor];
+    headerView.textLabel.textColor            = [UIColor wellReadColor];
+    headerView.textLabel.font                 = [UIFont fontWithName:@"Avenir-Book" size:16];
 }
-
 
 
 #pragma mark private delegate helpers
@@ -494,10 +507,17 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
     if (lastRowInSection == 0) {
         cornersToRound = UIRectCornerAllCorners;
     }
-    
+
+    /*
+     casalColor; //Dark Green
+     wellReadColor; //Red
+     tulipTreeColor; //Yellow
+     charcoalColor; //Grey
+     */
+
     
         ///AHA!
-    [cell configureFlatCellWithColor:[UIColor pomegranateColor] selectedColor:[UIColor mySinColor] roundingCorners:cornersToRound];
+    [cell configureFlatCellWithColor:[UIColor casalColor] selectedColor:[UIColor tulipTreeColor] roundingCorners:cornersToRound];
 //    [cell configureFlatCellWithColor:[UIColor shirazColor] selectedColor:[UIColor mySinColor] roundingCorners:cornersToRound];
     
 

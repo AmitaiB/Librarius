@@ -15,42 +15,52 @@
                     <rect key="frame" x="20" y="439" width="441" height="21"/>
                     <animations/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="21" id="ark-Pz-PRy"/>
+                        <constraint firstAttribute="height" constant="21" id="FR7-cf-tSi"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Librarius" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="kId-c2-rCX">
                     <rect key="frame" x="20" y="93" width="441" height="43"/>
                     <animations/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="43" id="foA-sj-eZT"/>
-                    </constraints>
                     <fontDescription key="fontDescription" name="BodoniSvtyTwoITCTT-Bold" family="Bodoni 72" pointSize="36"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LibraryLogo" translatesAutoresizingMaskIntoConstraints="NO" id="T8y-7p-KAi">
                     <rect key="frame" x="120" y="176" width="240" height="128"/>
                     <animations/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="240" id="lCO-0W-ksY"/>
+                        <constraint firstAttribute="width" constant="240" id="oQB-Ct-7gs"/>
                     </constraints>
                 </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&quot;Do it right the first time.&quot;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pve-Gn-BRz">
+                    <rect key="frame" x="154" y="339" width="173" height="21"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="wtW-Aa-SlB"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="BodoniSvtyTwoOSITCTT-Book" family="Bodoni 72 Oldstyle" pointSize="17"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="kId-c2-rCX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="De1-Du-Pq9"/>
-                <constraint firstItem="kId-c2-rCX" firstAttribute="trailing" secondItem="8ie-xW-0ye" secondAttribute="trailing" id="VrI-9m-hMI"/>
-                <constraint firstItem="kId-c2-rCX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="93" id="XAX-E8-I2m"/>
-                <constraint firstItem="kId-c2-rCX" firstAttribute="centerX" secondItem="T8y-7p-KAi" secondAttribute="centerX" id="YRZ-Q0-7I7"/>
-                <constraint firstItem="T8y-7p-KAi" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="aGS-Xe-F1E"/>
-                <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="aYb-pe-uqI"/>
-                <constraint firstItem="T8y-7p-KAi" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="fSM-fO-Fr0"/>
-                <constraint firstItem="T8y-7p-KAi" firstAttribute="top" secondItem="kId-c2-rCX" secondAttribute="bottom" constant="40" id="r1v-2z-wHl"/>
-                <constraint firstItem="kId-c2-rCX" firstAttribute="leading" secondItem="8ie-xW-0ye" secondAttribute="leading" id="uTH-86-ygM"/>
+                <constraint firstItem="T8y-7p-KAi" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="7pY-3K-dG2"/>
+                <constraint firstItem="Pve-Gn-BRz" firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="9l0-IM-xBg"/>
+                <constraint firstItem="kId-c2-rCX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="EFr-0w-Mnv"/>
+                <constraint firstItem="T8y-7p-KAi" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="QHY-aB-NfP"/>
+                <constraint firstItem="8ie-xW-0ye" firstAttribute="top" secondItem="Pve-Gn-BRz" secondAttribute="bottom" constant="79" id="RrY-2B-tPz"/>
+                <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="Ser-8r-EMp"/>
+                <constraint firstItem="8ie-xW-0ye" firstAttribute="trailing" secondItem="kId-c2-rCX" secondAttribute="trailing" id="TA1-g1-Uz4"/>
+                <constraint firstItem="Pve-Gn-BRz" firstAttribute="top" secondItem="T8y-7p-KAi" secondAttribute="bottom" constant="35" id="d4F-9S-OqC"/>
+                <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="kId-c2-rCX" secondAttribute="leading" id="lmj-Af-new"/>
+                <constraint firstItem="kId-c2-rCX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="93" id="p7C-vg-f1e"/>
+                <constraint firstItem="T8y-7p-KAi" firstAttribute="top" secondItem="kId-c2-rCX" secondAttribute="bottom" constant="40" id="qEL-K9-7cd"/>
+                <constraint firstItem="T8y-7p-KAi" firstAttribute="centerX" secondItem="Pve-Gn-BRz" secondAttribute="centerX" id="td2-g0-dvI"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
