@@ -24,4 +24,10 @@
 +(UIColor *)glitterColor;
 +(UIColor *)darkLavaColor;
 
+    //SpongeBrain Colors
++(UIColor *)casalColor; //Dark Green
++(UIColor *)wellReadColor; //Red
++(UIColor *)tulipTreeColor; //Yellow
++(UIColor *)charcoalColor; //Grey
+
 @end

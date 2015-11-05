@@ -53,4 +53,21 @@
 +(UIColor *)darkLavaColor {
     return [UIColor colorWithRed:51.0/255 green:55.0/255 blue:57.0/255 alpha:1.0];
 }
+
++(UIColor *)casalColor {
+    return [UIColor colorWithRed:0.15 green:0.4 blue:0.4 alpha:1];
+}
+
++(UIColor *)wellReadColor {
+    return [UIColor colorWithRed:0.67 green:0.22 blue:0.17 alpha:1];
+}
+
++(UIColor *)tulipTreeColor {
+    return [UIColor colorWithRed:0.9 green:0.69 blue:0.22 alpha:1];
+}
+
++(UIColor *)charcoalColor {
+    return [UIColor colorWithRed:0.25 green:0.25 blue:0.25 alpha:1];
+}
+
 @end

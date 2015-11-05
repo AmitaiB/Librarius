@@ -16,7 +16,6 @@
 		3803754F1B8AC9A8004C4ECE /* LibrariusTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3803754E1B8AC9A8004C4ECE /* LibrariusTests.m */; };
 		3803755B1B8B9F5E004C4ECE /* LBRConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 3803755A1B8B9F5E004C4ECE /* LBRConstants.m */; };
 		380375621B8BB707004C4ECE /* LBRGoodReadsAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375611B8BB707004C4ECE /* LBRGoodReadsAPIClient.m */; };
-		380375671B8BC758004C4ECE /* LBRGoogleAPIClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375661B8BC758004C4ECE /* LBRGoogleAPIClient.m */; };
 		3803756A1B8BC89D004C4ECE /* LBRGoogleSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375691B8BC89D004C4ECE /* LBRGoogleSignInViewController.m */; };
 		380375721B8BF058004C4ECE /* UIImage+FromURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375711B8BF058004C4ECE /* UIImage+FromURL.m */; };
 		3803757A1B8C08E0004C4ECE /* LBRSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375791B8C08E0004C4ECE /* LBRSettingsTableViewController.m */; };
@@ -130,8 +129,6 @@
 		3803755A1B8B9F5E004C4ECE /* LBRConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRConstants.m; sourceTree = "<group>"; };
 		380375601B8BB707004C4ECE /* LBRGoodReadsAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRGoodReadsAPIClient.h; sourceTree = "<group>"; };
 		380375611B8BB707004C4ECE /* LBRGoodReadsAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRGoodReadsAPIClient.m; sourceTree = "<group>"; };
-		380375651B8BC758004C4ECE /* LBRGoogleAPIClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRGoogleAPIClient.h; sourceTree = "<group>"; };
-		380375661B8BC758004C4ECE /* LBRGoogleAPIClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRGoogleAPIClient.m; sourceTree = "<group>"; };
 		380375681B8BC89D004C4ECE /* LBRGoogleSignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRGoogleSignInViewController.h; sourceTree = "<group>"; };
 		380375691B8BC89D004C4ECE /* LBRGoogleSignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRGoogleSignInViewController.m; sourceTree = "<group>"; };
 		380375701B8BF058004C4ECE /* UIImage+FromURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FromURL.h"; sourceTree = "<group>"; };
@@ -579,8 +576,6 @@
 		38466D5C1B94FDDF00DD252E /* Cutting Floor */ = {
 			isa = PBXGroup;
 			children = (
-				380375651B8BC758004C4ECE /* LBRGoogleAPIClient.h */,
-				380375661B8BC758004C4ECE /* LBRGoogleAPIClient.m */,
 			);
 			name = "Cutting Floor";
 			sourceTree = "<group>";
@@ -1001,7 +996,6 @@
 				38F57BC21BB0707200CC2EE8 /* UIBarButtonItem+FlatUI.m in Sources */,
 				3810D9FB1BD585300093D5C2 /* FUICellBackgroundView.m in Sources */,
 				38A329071BE3F24F0060E9D5 /* Reachability.m in Sources */,
-				380375671B8BC758004C4ECE /* LBRGoogleAPIClient.m in Sources */,
 				38466D281B94F24400DD252E /* LBRGoogleGTLClient.m in Sources */,
 				3803756A1B8BC89D004C4ECE /* LBRGoogleSignInViewController.m in Sources */,
 				38DA43D01BE66F2B00FEFD16 /* README.md in Sources */,
