@@ -51,6 +51,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *mainContentView;
 @property (weak, nonatomic) IBOutlet UIView *scannerView;
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
 @property (weak, nonatomic) IBOutlet UIButton *toggleScanningButton;
 @property (nonatomic, strong) NSMutableArray *unsavedVolumes;
 @property (nonatomic, strong) MTBBarcodeScanner *scanner;
@@ -63,6 +64,8 @@
 
 @property (nonatomic) BOOL isScanning;
 
+
+    //TODO: Implement this.
 @property (weak, nonatomic) IBOutlet LBRBatchScanScrollView *unsavedVolumesScrollView;
 
 
@@ -114,10 +117,26 @@ static NSString * const volumeNib          = @"volumePresentationView";
     
     [self.mainContentView bringSubviewToFront:self.unsavedVolumesScrollView];
     
+    [self anchorBackgroundImage];
+    
         // So we don't repeat ourselves.
     self.isConfigured = YES;
 }
--(void)configureUnsavedVolumesScrollView {
+
+-(void)anchorBackgroundImage
+{
+    UIImageView *imageView = self.backgroundImageView;
+    [imageView removeConstraints:imageView.constraints];
+    [self.mainContentView addSubview:imageView];
+    UIView *superView = imageView.superview;
+    [imageView.topAnchor constraintEqualToAnchor:superView.topAnchor constant:0].active    = YES;
+    [imageView.bottomAnchor constraintEqualToAnchor:superView.bottomAnchor constant:0].active = YES;
+    [imageView.leadingAnchor constraintEqualToAnchor:superView.leadingAnchor constant:0].active         = YES;
+    [imageView.trailingAnchor constraintEqualToAnchor:superView.trailingAnchor constant:0].active       = YES;
+}
+
+-(void)configureUnsavedVolumesScrollView
+{
     self.unsavedVolumesScrollView.delegate                     = self;
     self.unsavedVolumesScrollView.pagingEnabled                = NO;
     self.unsavedVolumesScrollView.alwaysBounceVertical         = YES;
@@ -127,7 +146,8 @@ static NSString * const volumeNib          = @"volumePresentationView";
 }
 
 
--(void)initializeScannerView {
+-(void)initializeScannerView
+{
     self.scanner         = [[MTBBarcodeScanner alloc] initWithMetadataObjectTypes:@[AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeEAN13Code] previewView:self.scannerView];
         ///Alternative: self.scanner = [[MTBBarcodeScanner alloc] initWithPreviewView:self.scannerView];
 
