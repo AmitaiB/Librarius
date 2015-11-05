@@ -171,7 +171,7 @@ static NSString * const altSearchResultsCellID = @"altSearchResultsCellID";
     self.tableView.tableHeaderView             = self.searchController.searchBar;
 
     // We want to be the delegate for our filtered table, so didSelectRowAtIndexPath is called for both tables
-    self.resultsTableViewController.tableView.delegate         = self;
+    self.resultsTableViewController.tableView.delegate     = self;
     self.searchController.delegate                         = self;
     self.searchController.dimsBackgroundDuringPresentation = NO;//default is YES
     self.searchController.searchBar.delegate               = self;//To monitor text changes + others
@@ -471,7 +471,7 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
     headerView.backgroundView.backgroundColor = [UIColor cloudsColor];
     headerView.textLabel.backgroundColor      = [UIColor clearColor];
     headerView.textLabel.textColor            = [UIColor wellReadColor];
-    headerView.textLabel.font                 = [UIFont fontWithName:@"Avenir-Book" size:16];
+    headerView.textLabel.font                 = [UIFont fontWithName:@"Avenir-HeavyOblique" size:16];
 }
 
 
@@ -488,11 +488,6 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
     NSString *formattedSubtitle = [@": " stringByAppendingString:subtitle ? subtitle : @""];
     
     cell.textLabel.text = [NSString stringWithFormat:@"%@%@", title, subtitle ?  formattedSubtitle : @""];
-
-        //CLEAN: Trying the Appearance system
-//    cell.textLabel.font = [UIFont fontWithName:@"Avenir-Book" size:20];
-//    cell.textLabel.textColor = [UIColor midnightBlueColor];
-
     
         // Rounding the upper and lower corners of the cells in each group.
     NSUInteger lastRowInSection = [self tableView:self.tableView numberOfRowsInSection:indexPath.section] - 1;

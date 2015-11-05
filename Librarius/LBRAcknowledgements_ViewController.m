@@ -19,7 +19,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setupLicensesDictionary];
-    self.title = @"Acknowledgments";
+//    self.title = @"Acknowledgments";
+    self.title = @"Credits";
 }
 
 #pragma mark - === Licenses ===
