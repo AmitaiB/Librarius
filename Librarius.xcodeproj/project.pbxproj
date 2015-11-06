@@ -24,7 +24,7 @@
 		380375F71B8D4E90004C4ECE /* BookCollection_TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375F41B8D4E90004C4ECE /* BookCollection_TableViewController.m */; };
 		380375F81B8D4E90004C4ECE /* BookDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375F61B8D4E90004C4ECE /* BookDetailViewController.m */; };
 		380DBB991BEC527A003BE27D /* UIView+ABB_Categories.m in Sources */ = {isa = PBXBuildFile; fileRef = 380DBB981BEC527A003BE27D /* UIView+ABB_Categories.m */; };
-		380DBB9C1BEC53FA003BE27D /* LBR_BookcasePopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 380DBB9B1BEC53FA003BE27D /* LBR_BookcasePopoverView.m */; };
+		380DBB9C1BEC53FA003BE27D /* LBR_BookcasePopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380DBB9B1BEC53FA003BE27D /* LBR_BookcasePopoverViewController.m */; };
 		38103B591BD033AE009F22E3 /* LBR_ShelvedBookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38103B581BD033AE009F22E3 /* LBR_ShelvedBookCell.m */; };
 		38103B5C1BD033E4009F22E3 /* LBR_BookcaseLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 38103B5B1BD033E4009F22E3 /* LBR_BookcaseLayout.m */; };
 		3810D9F81BD585150093D5C2 /* UITableViewCell+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 3810D9F71BD585150093D5C2 /* UITableViewCell+FlatUI.m */; };
@@ -138,8 +138,8 @@
 		380375F61B8D4E90004C4ECE /* BookDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookDetailViewController.m; sourceTree = "<group>"; };
 		380DBB971BEC527A003BE27D /* UIView+ABB_Categories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ABB_Categories.h"; sourceTree = "<group>"; };
 		380DBB981BEC527A003BE27D /* UIView+ABB_Categories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ABB_Categories.m"; sourceTree = "<group>"; };
-		380DBB9A1BEC53FA003BE27D /* LBR_BookcasePopoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBR_BookcasePopoverView.h; sourceTree = "<group>"; };
-		380DBB9B1BEC53FA003BE27D /* LBR_BookcasePopoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBR_BookcasePopoverView.m; sourceTree = "<group>"; };
+		380DBB9A1BEC53FA003BE27D /* LBR_BookcasePopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBR_BookcasePopoverViewController.h; sourceTree = "<group>"; };
+		380DBB9B1BEC53FA003BE27D /* LBR_BookcasePopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBR_BookcasePopoverViewController.m; sourceTree = "<group>"; };
 		38103B571BD033AE009F22E3 /* LBR_ShelvedBookCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBR_ShelvedBookCell.h; sourceTree = "<group>"; };
 		38103B581BD033AE009F22E3 /* LBR_ShelvedBookCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBR_ShelvedBookCell.m; sourceTree = "<group>"; };
 		38103B5A1BD033E4009F22E3 /* LBR_BookcaseLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBR_BookcaseLayout.h; sourceTree = "<group>"; };
@@ -427,8 +427,6 @@
 		380375631B8BB711004C4ECE /* Views/Images/nibs */ = {
 			isa = PBXGroup;
 			children = (
-				380DBB9A1BEC53FA003BE27D /* LBR_BookcasePopoverView.h */,
-				380DBB9B1BEC53FA003BE27D /* LBR_BookcasePopoverView.m */,
 				38DA43D91BE7056900FEFD16 /* LBRSettingsCell.h */,
 				38DA43DC1BE705EF00FEFD16 /* LBRSettingsCell.xib */,
 				38DA43DA1BE7056900FEFD16 /* LBRSettingsCell.m */,
@@ -485,6 +483,8 @@
 		38103B5D1BD033EC009F22E3 /* Bookcase Files */ = {
 			isa = PBXGroup;
 			children = (
+				380DBB9A1BEC53FA003BE27D /* LBR_BookcasePopoverViewController.h */,
+				380DBB9B1BEC53FA003BE27D /* LBR_BookcasePopoverViewController.m */,
 				381FC2931BD13A09003A3C52 /* LBR_BookcaseCollectionViewController.h */,
 				381FC2941BD13A09003A3C52 /* LBR_BookcaseCollectionViewController.m */,
 				3882667E1BDEC70F004B757F /* LBR_EmptyFlowLayout.h */,
@@ -890,7 +890,7 @@
 				388266801BDEC70F004B757F /* LBR_EmptyFlowLayout.m in Sources */,
 				384E0CC01B97D24B007E7290 /* NSString+dateValue.m in Sources */,
 				3810DA141BD5E0A90093D5C2 /* SettingsCell1.m in Sources */,
-				380DBB9C1BEC53FA003BE27D /* LBR_BookcasePopoverView.m in Sources */,
+				380DBB9C1BEC53FA003BE27D /* LBR_BookcasePopoverViewController.m in Sources */,
 				381FC2951BD13A09003A3C52 /* LBR_BookcaseCollectionViewController.m in Sources */,
 				381EBC051BA0FF63000D2FA4 /* LBRShelves_CollectionViewController.m in Sources */,
 				382A83BD1BB3D6E1008860CF /* PresentDetailTransition.m in Sources */,

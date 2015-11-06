@@ -65,6 +65,9 @@ static NSString * const reuseIdentifier = @"bookCellID";
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - UIPopoverPresentationController
+
 #pragma mark - UICollectionView FlowLayout configuration
 
 - (void)configureBooksFlowLayout:(UICollectionViewFlowLayout*)layout {

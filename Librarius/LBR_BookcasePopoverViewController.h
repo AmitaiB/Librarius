@@ -1,5 +1,5 @@
 //
-//  LBR_BookcasePopoverView.h
+//  LBR_BookcasePopoverViewController.h
 //  Librarius
 //
 //  Created by Amitai Blickstein on 11/5/15.
@@ -8,13 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LBR_BookcasePopoverView : UIView
+@interface LBR_BookcasePopoverViewController : UIViewController
 
 @property (nonatomic, strong) UITextField *numShelvesTxField;
 @property (nonatomic, strong) UITextField *shelfWidth_cmTxField;
 @property (nonatomic, strong) UIStepper *numShelvesStepper;
 @property (nonatomic, strong) UIStepper *shelfWidthStepper;
-
-
 
 @end
