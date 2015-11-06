@@ -30,6 +30,8 @@
 #import <UIImageView+AFNetworking.h>
 #import "CoverArt.h"
 #import "UIStepper+FlatUI.h"
+#import "UIView+ABB_Categories.h"
+#import "LBR_BookcasePopoverView.h"
 
 
 @interface LBR_BookcaseCollectionViewController ()
@@ -441,26 +443,27 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
 
     /// [#shelvesField][stepper] +==+ [widthField][stepper]
 
--(UIView *)adjustBookcaseAttributesControl
+-(LBR_BookcasePopoverView *)adjustBookcaseAttributesControl
 {
-    UIView *contentView = [UIView new];
+        ///FIXME:
+    
+    LBR_BookcasePopoverView *contentView = [UIView new];
     
     UITextField *numShelvesTxField    = [UITextField new];
-    [contentView addSubview:numShelvesTxField];
     numShelvesTxField.placeholder     = @"# of Shelves";
 
     UITextField *shelfWidth_cmTxField = [UITextField new];
-    [contentView addSubview:shelfWidth_cmTxField];
     shelfWidth_cmTxField.placeholder  = @"width (cm)";
     
     UIStepper *numShelvesStepper = [UIStepper new];
 
-    
-    
     UIStepper *shelfWidthStepper = [UIStepper new];
     
     
-    contentView addSubview
+    [contentView addSubviews:[NSSet setWithArray:@[numShelvesTxField,
+                                                   numShelvesStepper,
+                                                   shelfWidth_cmTxField,
+                                                   shelfWidthStepper]]];
     
     return contentView;
 }
