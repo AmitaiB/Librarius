@@ -155,15 +155,27 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     // Dispose of any resources that can be recreated.
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"bookcasePopoverSegueID"])
+    {
+        LBR_BookcasePopoverViewController *popoverVC = segue.destinationViewController;
+        
+        popoverVC.popoverPresentationController.delegate = self;
+        
+    }
 }
-*/
+
+    //Read-only property, can only be set via this delegate method. `..None` stops it from being a full-screen view.
+-(UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller
+{
+    return UIModalPresentationNone;
+}
+
 
 #pragma mark - === UICollectionViewDataSource ===
 
@@ -267,10 +279,10 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     return _debugCellSet;
 }
 
-- (IBAction)accessBookcaseAttributesButtonTapped:(id)sender {
-    LBR_BookcasePopoverViewController *popoverController = [self buildAttributesAdjustmentPopoverController];
-    [self presentViewController:popoverController animated:YES completion:nil];
-}
+//- (IBAction)accessBookcaseAttributesButtonTapped:(id)sender {
+//    LBR_BookcasePopoverViewController *popoverController = [self buildAttributesAdjustmentPopoverController];
+//    [self presentViewController:popoverController animated:YES completion:nil];
+//}
 
 //#pragma mark - === UICollectionViewDelegate ===
 
@@ -450,22 +462,6 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
 
 #pragma mark - === UIPopoverPresentationController Delegate ===
 
--(LBR_BookcasePopoverViewController *)buildAttributesAdjustmentPopoverController
-{
-    LBR_BookcasePopoverViewController *viewController = [LBR_BookcasePopoverViewController new];
-    
-    viewController.modalPresentationStyle                                 = UIModalPresentationPopover;
-    viewController.popoverPresentationController.barButtonItem            = self.navigationItem.rightBarButtonItem;
-    viewController.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
-    viewController.popoverPresentationController.delegate                 = self;
-    viewController.preferredContentSize = CGSizeMake(200, 200);
-    return viewController;
-}
-
--(UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller
-{
-    return UIModalPresentationNone;
-}
 
 //-(UIViewController *)buildAttributesAdjustmentPopoverController
 //{
