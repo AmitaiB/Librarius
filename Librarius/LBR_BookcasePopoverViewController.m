@@ -16,51 +16,52 @@
 
 @implementation LBR_BookcasePopoverViewController
 
--(instancetype)init
+-(instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    if (!(self = [super init])) return nil;
-    
+    if (!(self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) return nil;
     _contentView = [UIView new];
-    [self addSubview:_contentView];
-    
+    [self.view addSubview:_contentView];
     _numShelvesTxField = [UITextField new];
     _numShelvesTxField.placeholder     = @"# of Shelves";
-    
     _shelfWidth_cmTxField = [UITextField new];
     _shelfWidth_cmTxField.placeholder  = @"width (cm)";
-    
     _numShelvesStepper = [UIStepper new];
-    
     _shelfWidthStepper = [UIStepper new];
     
-    NSDictionary <NSString *, UIView*> *subViews = @{@"numField"    : _numShelvesTxField,
-                                                     @"numStepper"  : _numShelvesStepper,
-                                                     @"widthField"  : _shelfWidth_cmTxField,
-                                                     @"widthStepper": _shelfWidthStepper
+    return self;
+}
+
+-(void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+        //For both View Heirarchy and AutoLayout constraints
+    NSDictionary <NSString *, UIView*> *subViews = @{@"numField"    : self.numShelvesTxField,
+                                                     @"numStepper"  : self.numShelvesStepper,
+                                                     @"widthField"  : self.shelfWidth_cmTxField,
+                                                     @"widthStepper": self.shelfWidthStepper
                                                      };
     
         //UIView Categories
     [self.contentView addSubviews:[NSSet setWithArray:[subViews allValues]]];
-    [UIView configureViewsForAutolayout:@[_contentView]];
+    [UIView configureViewsForAutolayout:@[self.contentView]];
     [UIView configureViewsForAutolayout:[subViews allValues]];
     
-    
         //Maybe unneeded. Just do self: sizetofit.
-    [_contentView.topAnchor    constraintEqualToAnchor:self.topAnchor].   active = YES;
-    [_contentView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor].active = YES;
-    [_contentView.leftAnchor   constraintEqualToAnchor:self.leftAnchor].  active = YES;
-    [_contentView.rightAnchor  constraintEqualToAnchor:self.rightAnchor]. active = YES;
+    [self.contentView.topAnchor    constraintEqualToAnchor:self.view.topAnchor].   active = YES;
+    [self.contentView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor].active = YES;
+    [self.contentView.leftAnchor   constraintEqualToAnchor:self.view.leftAnchor].  active = YES;
+    [self.contentView.rightAnchor  constraintEqualToAnchor:self.view.rightAnchor]. active = YES;
     
-    [_contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[numField]-[numStepper]-16-[widthField]-[widthStepper]-|" options:0 metrics:nil views:subViews]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[numField]-[numStepper]-16-[widthField]-[widthStepper]-|" options:0 metrics:nil views:subViews]];
     
     [subViews enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, UIView * _Nonnull obj, BOOL * _Nonnull stop) {
         NSString *constraintString = [NSString stringWithFormat:@"V:|-%@-|", key];
-        [_contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:constraintString options:0 metrics:nil views:@{key : obj}]];
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:constraintString options:0 metrics:nil views:@{key : obj}]];
     }];
     
-    [self sizeToFit];
+    [self.view sizeToFit];
 
-    return self;
 }
 
 

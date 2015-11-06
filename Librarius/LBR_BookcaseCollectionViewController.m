@@ -32,6 +32,7 @@
 #import "UIStepper+FlatUI.h"
 #import "UIView+ABB_Categories.h"
 #import "LBR_BookcasePopoverViewController.h"
+#import "UIView+ConfigureForAutoLayout.h"
 
 
 @interface LBR_BookcaseCollectionViewController ()
@@ -43,6 +44,7 @@
 @property (nonatomic, strong) NSMutableArray *itemChanges;
 @property (nonatomic, strong) LBRDataManager *dataManager;
 @property (nonatomic, strong) UIProgressView *progressView;
+//@property (nonatomic, strong) LBR_BookcasePopoverViewController *adjustBookcaseVC;
 
 
     //Debug
@@ -75,6 +77,8 @@ static NSString * const decorationViewIdentifier = @"decorationViewIdentifier";
 static NSString * const GenreAuthorDateLayoutSchemeID = @"By Genre-Author";
 static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
 
+#pragma mark - === Lifecycle ===
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -97,7 +101,10 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
 
     volumesArray = self.fetchedResultsController.fetchedObjects;
         ///    [self precacheImages];
+    
+//    self.adjustBookcaseVC = [self buildAttributesAdjustmentPopoverController];
 }
+
 
 
 -(void)setupProgressView
@@ -261,6 +268,7 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
 }
 
 - (IBAction)accessBookcaseAttributesButtonTapped:(id)sender {
+    [self presentViewController:[self buildAttributesAdjustmentPopoverController] animated:YES completion:nil];
 }
 
 //#pragma mark - === UICollectionViewDelegate ===
@@ -441,31 +449,65 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
 
 #pragma mark - === UIPopoverPresentationController Delegate ===
 
-    /// [#shelvesField][stepper] +==+ [widthField][stepper]
+//-(LBR_BookcasePopoverViewController *)buildAttributesAdjustmentPopoverController
+//{
+//        ///FIXME:
+//    
+//    LBR_BookcasePopoverViewController *viewController = [LBR_BookcasePopoverViewController new];
+//    
+//    viewController.modalPresentationStyle = UIModalPresentationPopover;
+//    viewController.popoverPresentationController.barButtonItem = self.navigationItem.rightBarButtonItem;
+//    viewController.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+//    viewController.popoverPresentationController.delegate = self;
+//    return viewController;
+//}
 
--(LBR_BookcasePopoverViewController *)adjustBookcaseAttributesControl
+-(UIViewController *)buildAttributesAdjustmentPopoverController
 {
         ///FIXME:
     
-    LBR_BookcasePopoverViewController *contentView = [UIView new];
+    UIViewController *viewController = [UIViewController new];
     
-    UITextField *numShelvesTxField    = [UITextField new];
+    UIView *contentView = viewController.view;
+    UITextField *numShelvesTxField = [UITextField new];
     numShelvesTxField.placeholder     = @"# of Shelves";
-
     UITextField *shelfWidth_cmTxField = [UITextField new];
     shelfWidth_cmTxField.placeholder  = @"width (cm)";
-    
     UIStepper *numShelvesStepper = [UIStepper new];
-
     UIStepper *shelfWidthStepper = [UIStepper new];
     
+        //For both View Heirarchy and AutoLayout constraints
+    NSDictionary <NSString *, UIView*> *subViews = @{@"numField"    : numShelvesTxField,
+                                                     @"numStepper"  : numShelvesStepper,
+                                                     @"widthField"  : shelfWidth_cmTxField,
+                                                     @"widthStepper": shelfWidthStepper
+                                                     };
     
-    [contentView addSubviews:[NSSet setWithArray:@[numShelvesTxField,
-                                                   numShelvesStepper,
-                                                   shelfWidth_cmTxField,
-                                                   shelfWidthStepper]]];
+        //UIView Categories
+    [contentView addSubviews:[NSSet setWithArray:[subViews allValues]]];
+    [UIView configureViewsForAutolayout:[subViews allValues]];
     
-    return contentView;
+    [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[numField]-[numStepper]-16-[widthField]-[widthStepper]-|"
+                                                                        options:0
+                                                                        metrics:nil
+                                                                          views:subViews]];
+    
+    [subViews enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, UIView * _Nonnull obj, BOOL * _Nonnull stop) {
+        NSString *constraintString = [NSString stringWithFormat:@"V:|-[%@]-|", key];
+        [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:constraintString
+                                                                            options:0
+                                                                            metrics:nil
+                                                                              views:@{key : obj}]];
+    }];
+    
+    [contentView sizeToFit];
+    
+    viewController.modalPresentationStyle = UIModalPresentationPopover;
+    viewController.popoverPresentationController.barButtonItem = self.navigationItem.rightBarButtonItem;
+    viewController.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+    viewController.popoverPresentationController.delegate = self;
+    return viewController;
 }
+
 
 @end
