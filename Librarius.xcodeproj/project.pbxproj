@@ -23,6 +23,7 @@
 		3803757F1B8C17EB004C4ECE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 380375411B8AC9A8004C4ECE /* LaunchScreen.xib */; };
 		380375F71B8D4E90004C4ECE /* BookCollection_TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375F41B8D4E90004C4ECE /* BookCollection_TableViewController.m */; };
 		380375F81B8D4E90004C4ECE /* BookDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380375F61B8D4E90004C4ECE /* BookDetailViewController.m */; };
+		380DBB991BEC527A003BE27D /* UIView+ABB_Categories.m in Sources */ = {isa = PBXBuildFile; fileRef = 380DBB981BEC527A003BE27D /* UIView+ABB_Categories.m */; };
 		38103B591BD033AE009F22E3 /* LBR_ShelvedBookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38103B581BD033AE009F22E3 /* LBR_ShelvedBookCell.m */; };
 		38103B5C1BD033E4009F22E3 /* LBR_BookcaseLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 38103B5B1BD033E4009F22E3 /* LBR_BookcaseLayout.m */; };
 		3810D9F81BD585150093D5C2 /* UITableViewCell+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 3810D9F71BD585150093D5C2 /* UITableViewCell+FlatUI.m */; };
@@ -140,6 +141,8 @@
 		380375F41B8D4E90004C4ECE /* BookCollection_TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookCollection_TableViewController.m; sourceTree = "<group>"; };
 		380375F51B8D4E90004C4ECE /* BookDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookDetailViewController.h; sourceTree = "<group>"; };
 		380375F61B8D4E90004C4ECE /* BookDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookDetailViewController.m; sourceTree = "<group>"; };
+		380DBB971BEC527A003BE27D /* UIView+ABB_Categories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ABB_Categories.h"; sourceTree = "<group>"; };
+		380DBB981BEC527A003BE27D /* UIView+ABB_Categories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ABB_Categories.m"; sourceTree = "<group>"; };
 		38103B571BD033AE009F22E3 /* LBR_ShelvedBookCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBR_ShelvedBookCell.h; sourceTree = "<group>"; };
 		38103B581BD033AE009F22E3 /* LBR_ShelvedBookCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBR_ShelvedBookCell.m; sourceTree = "<group>"; };
 		38103B5A1BD033E4009F22E3 /* LBR_BookcaseLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBR_BookcaseLayout.h; sourceTree = "<group>"; };
@@ -583,6 +586,8 @@
 		384E0CBD1B97D231007E7290 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				380DBB971BEC527A003BE27D /* UIView+ABB_Categories.h */,
+				380DBB981BEC527A003BE27D /* UIView+ABB_Categories.m */,
 				38E8F22A1BEA4CBB00A0DFA1 /* Constraint Helpers (Categories) */,
 				38DF003B1BE7FFE900D4BCE3 /* NSString+ArrayWriter.h */,
 				38DF003C1BE7FFE900D4BCE3 /* NSString+ArrayWriter.m */,
@@ -940,6 +945,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				380DBB991BEC527A003BE27D /* UIView+ABB_Categories.m in Sources */,
 				38F57BC31BB0707200CC2EE8 /* NSString+Icons.m in Sources */,
 				380375351B8AC9A8004C4ECE /* AppDelegate.m in Sources */,
 				3810DA101BD5E0980093D5C2 /* Utils.m in Sources */,

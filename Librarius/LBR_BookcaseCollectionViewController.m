@@ -29,6 +29,7 @@
 #import "UIColor+FlatUI.h"
 #import <UIImageView+AFNetworking.h>
 #import "CoverArt.h"
+#import "UIStepper+FlatUI.h"
 
 
 @interface LBR_BookcaseCollectionViewController ()
@@ -438,12 +439,28 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
 
 #pragma mark - === UIPopoverPresentationController Delegate ===
 
+    /// [#shelvesField][stepper] +==+ [widthField][stepper]
+
 -(UIView *)adjustBookcaseAttributesControl
 {
     UIView *contentView = [UIView new];
     
-    UITextField *numShelvesTxField = [UITextField new];
+    UITextField *numShelvesTxField    = [UITextField new];
+    [contentView addSubview:numShelvesTxField];
+    numShelvesTxField.placeholder     = @"# of Shelves";
+
     UITextField *shelfWidth_cmTxField = [UITextField new];
+    [contentView addSubview:shelfWidth_cmTxField];
+    shelfWidth_cmTxField.placeholder  = @"width (cm)";
+    
+    UIStepper *numShelvesStepper = [UIStepper new];
+
+    
+    
+    UIStepper *shelfWidthStepper = [UIStepper new];
+    
+    
+    contentView addSubview
     
     return contentView;
 }
