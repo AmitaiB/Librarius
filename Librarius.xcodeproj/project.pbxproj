@@ -82,12 +82,6 @@
 		38DF003D1BE7FFE900D4BCE3 /* NSString+ArrayWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 38DF003C1BE7FFE900D4BCE3 /* NSString+ArrayWriter.m */; };
 		38E2497F1BE2AEEC0047EBF7 /* ABB_BufferToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E2497E1BE2AEEC0047EBF7 /* ABB_BufferToolbar.m */; };
 		38E71DAF1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E71DAE1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.m */; };
-		38E8F23F1BEA4CDF00A0DFA1 /* ConstraintUtilities-Description.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E8F22E1BEA4CDF00A0DFA1 /* ConstraintUtilities-Description.m */; };
-		38E8F2401BEA4CDF00A0DFA1 /* NSObject-Description.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E8F2301BEA4CDF00A0DFA1 /* NSObject-Description.m */; };
-		38E8F2411BEA4CDF00A0DFA1 /* ConstraintUtilities-Install.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E8F2331BEA4CDF00A0DFA1 /* ConstraintUtilities-Install.m */; };
-		38E8F2421BEA4CDF00A0DFA1 /* ConstraintUtilities-Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E8F2361BEA4CDF00A0DFA1 /* ConstraintUtilities-Layout.m */; };
-		38E8F2431BEA4CDF00A0DFA1 /* ConstraintUtilities-Matching.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E8F2391BEA4CDF00A0DFA1 /* ConstraintUtilities-Matching.m */; };
-		38E8F2441BEA4CDF00A0DFA1 /* NSObject-Nametag.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E8F23B1BEA4CDF00A0DFA1 /* NSObject-Nametag.m */; };
 		38F3C0D91BDFE01F005AF2ED /* LBR_ResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F3C0D81BDFE01F005AF2ED /* LBR_ResultsTableViewController.m */; };
 		38F57BB71BB0707200CC2EE8 /* UIToolbar+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F57B9D1BB0707200CC2EE8 /* UIToolbar+FlatUI.m */; };
 		38F57BB91BB0707200CC2EE8 /* UITabBar+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F57BA11BB0707200CC2EE8 /* UITabBar+FlatUI.m */; };
@@ -255,21 +249,6 @@
 		38E2497E1BE2AEEC0047EBF7 /* ABB_BufferToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABB_BufferToolbar.m; sourceTree = "<group>"; };
 		38E71DAD1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRShelvedBook_CollectionViewCell.h; sourceTree = "<group>"; };
 		38E71DAE1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRShelvedBook_CollectionViewCell.m; sourceTree = "<group>"; };
-		38E8F22D1BEA4CDF00A0DFA1 /* ConstraintUtilities-Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ConstraintUtilities-Description.h"; sourceTree = "<group>"; };
-		38E8F22E1BEA4CDF00A0DFA1 /* ConstraintUtilities-Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ConstraintUtilities-Description.m"; sourceTree = "<group>"; };
-		38E8F22F1BEA4CDF00A0DFA1 /* NSObject-Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject-Description.h"; sourceTree = "<group>"; };
-		38E8F2301BEA4CDF00A0DFA1 /* NSObject-Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject-Description.m"; sourceTree = "<group>"; };
-		38E8F2321BEA4CDF00A0DFA1 /* ConstraintUtilities-Install.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ConstraintUtilities-Install.h"; sourceTree = "<group>"; };
-		38E8F2331BEA4CDF00A0DFA1 /* ConstraintUtilities-Install.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ConstraintUtilities-Install.m"; sourceTree = "<group>"; };
-		38E8F2351BEA4CDF00A0DFA1 /* ConstraintUtilities-Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ConstraintUtilities-Layout.h"; sourceTree = "<group>"; };
-		38E8F2361BEA4CDF00A0DFA1 /* ConstraintUtilities-Layout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ConstraintUtilities-Layout.m"; sourceTree = "<group>"; };
-		38E8F2381BEA4CDF00A0DFA1 /* ConstraintUtilities-Matching.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ConstraintUtilities-Matching.h"; sourceTree = "<group>"; };
-		38E8F2391BEA4CDF00A0DFA1 /* ConstraintUtilities-Matching.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ConstraintUtilities-Matching.m"; sourceTree = "<group>"; };
-		38E8F23A1BEA4CDF00A0DFA1 /* NSObject-Nametag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject-Nametag.h"; sourceTree = "<group>"; };
-		38E8F23B1BEA4CDF00A0DFA1 /* NSObject-Nametag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject-Nametag.m"; sourceTree = "<group>"; };
-		38E8F23C1BEA4CDF00A0DFA1 /* Constraints-CreationMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Constraints-CreationMacros.h"; sourceTree = "<group>"; };
-		38E8F23D1BEA4CDF00A0DFA1 /* Constraints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constraints.h; sourceTree = "<group>"; };
-		38E8F23E1BEA4CDF00A0DFA1 /* Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
 		38F3C0D71BDFE01F005AF2ED /* LBR_ResultsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBR_ResultsTableViewController.h; sourceTree = "<group>"; };
 		38F3C0D81BDFE01F005AF2ED /* LBR_ResultsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBR_ResultsTableViewController.m; sourceTree = "<group>"; };
 		38F57B9D1BB0707200CC2EE8 /* UIToolbar+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIToolbar+FlatUI.m"; sourceTree = "<group>"; };
@@ -593,7 +572,6 @@
 			children = (
 				380DBB971BEC527A003BE27D /* UIView+ABB_Categories.h */,
 				380DBB981BEC527A003BE27D /* UIView+ABB_Categories.m */,
-				38E8F22A1BEA4CBB00A0DFA1 /* Constraint Helpers (Categories) */,
 				38DF003B1BE7FFE900D4BCE3 /* NSString+ArrayWriter.h */,
 				38DF003C1BE7FFE900D4BCE3 /* NSString+ArrayWriter.m */,
 				38CF73FD1BAF51130070134E /* FlatUIKit Categories */,
@@ -697,68 +675,6 @@
 				3803755A1B8B9F5E004C4ECE /* LBRConstants.m */,
 			);
 			name = Constants;
-			sourceTree = "<group>";
-		};
-		38E8F22A1BEA4CBB00A0DFA1 /* Constraint Helpers (Categories) */ = {
-			isa = PBXGroup;
-			children = (
-				38E8F22B1BEA4CDF00A0DFA1 /* Constraints */,
-				38E8F23E1BEA4CDF00A0DFA1 /* Utility.h */,
-			);
-			name = "Constraint Helpers (Categories)";
-			sourceTree = "<group>";
-		};
-		38E8F22B1BEA4CDF00A0DFA1 /* Constraints */ = {
-			isa = PBXGroup;
-			children = (
-				38E8F22C1BEA4CDF00A0DFA1 /* Constraint Description */,
-				38E8F2311BEA4CDF00A0DFA1 /* Constraint Install */,
-				38E8F2341BEA4CDF00A0DFA1 /* Constraint Layout */,
-				38E8F2371BEA4CDF00A0DFA1 /* Constraint Matching */,
-				38E8F23C1BEA4CDF00A0DFA1 /* Constraints-CreationMacros.h */,
-				38E8F23D1BEA4CDF00A0DFA1 /* Constraints.h */,
-			);
-			path = Constraints;
-			sourceTree = "<group>";
-		};
-		38E8F22C1BEA4CDF00A0DFA1 /* Constraint Description */ = {
-			isa = PBXGroup;
-			children = (
-				38E8F22D1BEA4CDF00A0DFA1 /* ConstraintUtilities-Description.h */,
-				38E8F22E1BEA4CDF00A0DFA1 /* ConstraintUtilities-Description.m */,
-				38E8F22F1BEA4CDF00A0DFA1 /* NSObject-Description.h */,
-				38E8F2301BEA4CDF00A0DFA1 /* NSObject-Description.m */,
-			);
-			path = "Constraint Description";
-			sourceTree = "<group>";
-		};
-		38E8F2311BEA4CDF00A0DFA1 /* Constraint Install */ = {
-			isa = PBXGroup;
-			children = (
-				38E8F2321BEA4CDF00A0DFA1 /* ConstraintUtilities-Install.h */,
-				38E8F2331BEA4CDF00A0DFA1 /* ConstraintUtilities-Install.m */,
-			);
-			path = "Constraint Install";
-			sourceTree = "<group>";
-		};
-		38E8F2341BEA4CDF00A0DFA1 /* Constraint Layout */ = {
-			isa = PBXGroup;
-			children = (
-				38E8F2351BEA4CDF00A0DFA1 /* ConstraintUtilities-Layout.h */,
-				38E8F2361BEA4CDF00A0DFA1 /* ConstraintUtilities-Layout.m */,
-			);
-			path = "Constraint Layout";
-			sourceTree = "<group>";
-		};
-		38E8F2371BEA4CDF00A0DFA1 /* Constraint Matching */ = {
-			isa = PBXGroup;
-			children = (
-				38E8F2381BEA4CDF00A0DFA1 /* ConstraintUtilities-Matching.h */,
-				38E8F2391BEA4CDF00A0DFA1 /* ConstraintUtilities-Matching.m */,
-				38E8F23A1BEA4CDF00A0DFA1 /* NSObject-Nametag.h */,
-				38E8F23B1BEA4CDF00A0DFA1 /* NSObject-Nametag.m */,
-			);
-			path = "Constraint Matching";
 			sourceTree = "<group>";
 		};
 		8D3D60166B48602A9D5DE1B9 /* Frameworks */ = {
@@ -955,14 +871,12 @@
 				380375351B8AC9A8004C4ECE /* AppDelegate.m in Sources */,
 				3810DA101BD5E0980093D5C2 /* Utils.m in Sources */,
 				3810DA111BD5E0980093D5C2 /* FlatTheme.m in Sources */,
-				38E8F2421BEA4CDF00A0DFA1 /* ConstraintUtilities-Layout.m in Sources */,
 				380375F81B8D4E90004C4ECE /* BookDetailViewController.m in Sources */,
 				38DA43DB1BE7056900FEFD16 /* LBRSettingsCell.m in Sources */,
 				38AAD6F01B901175003062C1 /* Librarius.xcdatamodeld in Sources */,
 				3810DA1E1BD5E0ED0093D5C2 /* MBProgressHUD.m in Sources */,
 				3837F2C51BE2F1B200170FF6 /* Volume+CoreDataProperties.m in Sources */,
 				38F57BBF1BB0707200CC2EE8 /* UIImage+FlatUI.m in Sources */,
-				38E8F23F1BEA4CDF00A0DFA1 /* ConstraintUtilities-Description.m in Sources */,
 				38E71DAF1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.m in Sources */,
 				38F57BC11BB0707200CC2EE8 /* UIColor+FlatUI.m in Sources */,
 				3855E26F1BB0DBD4004C5D11 /* LBRAlertContent_TableViewCell.m in Sources */,
@@ -1001,7 +915,6 @@
 				38103B591BD033AE009F22E3 /* LBR_ShelvedBookCell.m in Sources */,
 				3837F2C41BE2F1B200170FF6 /* CoverArt.m in Sources */,
 				388DBDF31BA9174A005C5125 /* THNavigationController.m in Sources */,
-				38E8F2431BEA4CDF00A0DFA1 /* ConstraintUtilities-Matching.m in Sources */,
 				38DA43D31BE66FD200FEFD16 /* LBR_BookcaseLayout_AuthorOnly.m in Sources */,
 				38103B5C1BD033E4009F22E3 /* LBR_BookcaseLayout.m in Sources */,
 				3810D9F81BD585150093D5C2 /* UITableViewCell+FlatUI.m in Sources */,
@@ -1014,7 +927,6 @@
 				38D6019B1BDAAAC900E3D60F /* LBRShelf_DecorationView.m in Sources */,
 				3810D9FE1BD5BDE60093D5C2 /* UIColor-Expanded.m in Sources */,
 				38F57BBE1BB0707200CC2EE8 /* UINavigationBar+FlatUI.m in Sources */,
-				38E8F2401BEA4CDF00A0DFA1 /* NSObject-Description.m in Sources */,
 				38F3C0D91BDFE01F005AF2ED /* LBR_ResultsTableViewController.m in Sources */,
 				382A83BA1BB3BA94008860CF /* LBRRecommendationsCollectionViewController.m in Sources */,
 				38DF003A1BE7F9C800D4BCE3 /* LBRAcknowledgements_ViewController.m in Sources */,
@@ -1027,10 +939,8 @@
 				38565D701B9A20B800349498 /* LBRParsedVolume.m in Sources */,
 				38F57BC01BB0707200CC2EE8 /* UIFont+FlatUI.m in Sources */,
 				3837F2CF1BE2F33A00170FF6 /* Library.m in Sources */,
-				38E8F2441BEA4CDF00A0DFA1 /* NSObject-Nametag.m in Sources */,
 				382A83ED1BB4AF98008860CF /* LBRBatchScanScrollView.m in Sources */,
 				3855E2721BB10AA5004C5D11 /* UIView+ConfigureForAutoLayout.m in Sources */,
-				38E8F2411BEA4CDF00A0DFA1 /* ConstraintUtilities-Install.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

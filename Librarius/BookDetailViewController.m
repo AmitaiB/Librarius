@@ -21,7 +21,7 @@
 #import <AMRatingControl.h>
 #import "UIColor+FlatUI.h"
 #import "UIColor+ABBColors.h"
-#import "Utility.h"
+
 #import "LBRDataManager.h"
 
 @interface BookDetailViewController ()
