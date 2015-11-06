@@ -75,7 +75,7 @@
                                         <exclude reference="yMS-TV-yst"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                                <variation key="widthClass=compact" ambiguous="YES">
                                     <rect key="frame" x="173" y="72" width="207" height="363"/>
                                     <mask key="constraints">
                                         <include reference="dSQ-kY-5Lf"/>
@@ -90,7 +90,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dOy-7Y-f7Q">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <animations/>
-                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                                <variation key="widthClass=compact" ambiguous="YES">
                                     <rect key="frame" x="20" y="72" width="134" height="363"/>
                                 </variation>
                             </imageView>
@@ -567,9 +567,6 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="woodpanel04110095" translatesAutoresizingMaskIntoConstraints="NO" id="Iy8-FC-gUc">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                         <animations/>
-                                        <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
-                                            <rect key="frame" x="0.0" y="0.0" width="380" height="537"/>
-                                        </variation>
                                     </imageView>
                                     <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Px-hT-9Zr" userLabel="Scanner View (new)">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -597,11 +594,14 @@
                                 <constraints>
                                     <constraint firstItem="dcH-IU-Ezd" firstAttribute="top" secondItem="whR-df-RYp" secondAttribute="top" constant="25" id="1gq-3B-vA1"/>
                                     <constraint firstAttribute="bottom" secondItem="3Px-hT-9Zr" secondAttribute="bottom" constant="40" id="Bf4-sI-sDz"/>
+                                    <constraint firstItem="Iy8-FC-gUc" firstAttribute="leading" secondItem="whR-df-RYp" secondAttribute="leading" id="BtY-s8-OFU"/>
                                     <constraint firstItem="3Px-hT-9Zr" firstAttribute="centerX" secondItem="Iy8-FC-gUc" secondAttribute="centerX" id="Fhh-cw-dCp"/>
                                     <constraint firstItem="3Px-hT-9Zr" firstAttribute="centerX" secondItem="whR-df-RYp" secondAttribute="centerX" id="QYc-wT-77w"/>
                                     <constraint firstItem="3Px-hT-9Zr" firstAttribute="top" secondItem="whR-df-RYp" secondAttribute="topMargin" id="T8r-4o-z5X"/>
+                                    <constraint firstAttribute="bottom" secondItem="Iy8-FC-gUc" secondAttribute="bottom" id="eqs-RO-79K"/>
                                     <constraint firstItem="3Px-hT-9Zr" firstAttribute="leading" secondItem="whR-df-RYp" secondAttribute="leading" constant="20" id="oao-bn-RY1"/>
                                     <constraint firstAttribute="trailing" secondItem="dcH-IU-Ezd" secondAttribute="trailing" constant="22" id="yPc-5X-kFI"/>
+                                    <constraint firstItem="Iy8-FC-gUc" firstAttribute="top" secondItem="whR-df-RYp" secondAttribute="top" id="zsL-wZ-0rO"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="subviews">
@@ -610,6 +610,9 @@
                                         <exclude reference="dcH-IU-Ezd"/>
                                     </mask>
                                     <mask key="constraints">
+                                        <exclude reference="BtY-s8-OFU"/>
+                                        <exclude reference="eqs-RO-79K"/>
+                                        <exclude reference="zsL-wZ-0rO"/>
                                         <exclude reference="Bf4-sI-sDz"/>
                                         <exclude reference="Fhh-cw-dCp"/>
                                         <exclude reference="QYc-wT-77w"/>
@@ -626,6 +629,9 @@
                                         <include reference="dcH-IU-Ezd"/>
                                     </mask>
                                     <mask key="constraints">
+                                        <include reference="BtY-s8-OFU"/>
+                                        <include reference="eqs-RO-79K"/>
+                                        <include reference="zsL-wZ-0rO"/>
                                         <include reference="Bf4-sI-sDz"/>
                                         <include reference="Fhh-cw-dCp"/>
                                         <include reference="QYc-wT-77w"/>
@@ -717,8 +723,17 @@
                                 <exclude reference="3Bf-2Z-qmt"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="JlK-1i-BKj"/>
+                                <exclude reference="QkR-bJ-6CW"/>
+                                <exclude reference="wsv-j0-ZNK"/>
+                                <exclude reference="9p9-r2-nih"/>
+                                <exclude reference="MIq-fE-NEt"/>
+                                <exclude reference="qad-oL-Cr1"/>
+                                <exclude reference="UkK-rQ-266"/>
                                 <exclude reference="aVQ-V0-xrZ"/>
                                 <exclude reference="myN-Ig-IaA"/>
+                                <exclude reference="dzG-CR-tFx"/>
+                                <exclude reference="yHV-Sj-rmc"/>
                                 <exclude reference="EDK-Dt-ZGB"/>
                                 <exclude reference="GS4-hu-yg1"/>
                                 <exclude reference="LHn-tr-leg"/>
@@ -728,15 +743,6 @@
                                 <exclude reference="eXl-FU-kbO"/>
                                 <exclude reference="txL-mS-TEa"/>
                                 <exclude reference="zF5-UW-GRF"/>
-                                <exclude reference="UkK-rQ-266"/>
-                                <exclude reference="JlK-1i-BKj"/>
-                                <exclude reference="QkR-bJ-6CW"/>
-                                <exclude reference="wsv-j0-ZNK"/>
-                                <exclude reference="9p9-r2-nih"/>
-                                <exclude reference="MIq-fE-NEt"/>
-                                <exclude reference="qad-oL-Cr1"/>
-                                <exclude reference="dzG-CR-tFx"/>
-                                <exclude reference="yHV-Sj-rmc"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -748,8 +754,17 @@
                                 <include reference="3Bf-2Z-qmt"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="JlK-1i-BKj"/>
+                                <include reference="QkR-bJ-6CW"/>
+                                <exclude reference="wsv-j0-ZNK"/>
+                                <include reference="9p9-r2-nih"/>
+                                <include reference="MIq-fE-NEt"/>
+                                <include reference="qad-oL-Cr1"/>
+                                <exclude reference="UkK-rQ-266"/>
                                 <include reference="aVQ-V0-xrZ"/>
                                 <include reference="myN-Ig-IaA"/>
+                                <include reference="dzG-CR-tFx"/>
+                                <include reference="yHV-Sj-rmc"/>
                                 <include reference="EDK-Dt-ZGB"/>
                                 <include reference="GS4-hu-yg1"/>
                                 <include reference="LHn-tr-leg"/>
@@ -759,15 +774,6 @@
                                 <include reference="eXl-FU-kbO"/>
                                 <include reference="txL-mS-TEa"/>
                                 <include reference="zF5-UW-GRF"/>
-                                <exclude reference="UkK-rQ-266"/>
-                                <exclude reference="JlK-1i-BKj"/>
-                                <include reference="QkR-bJ-6CW"/>
-                                <exclude reference="wsv-j0-ZNK"/>
-                                <include reference="9p9-r2-nih"/>
-                                <include reference="MIq-fE-NEt"/>
-                                <include reference="qad-oL-Cr1"/>
-                                <include reference="dzG-CR-tFx"/>
-                                <include reference="yHV-Sj-rmc"/>
                             </mask>
                         </variation>
                     </view>
@@ -1065,7 +1071,7 @@
         <scene sceneID="qEv-u9-RKR">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BK5-aT-ift" customClass="THNavigationController" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Shelve." image="books49" id="ohJ-iw-xie"/>
+                    <tabBarItem key="tabBarItem" title="Shelve." image="bookshelf1" id="ohJ-iw-xie"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="w3I-at-wo4">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1127,7 +1133,7 @@
         <image name="BarcodeScanner-Color" width="50" height="50"/>
         <image name="DownloadBooks-Color" width="50" height="50"/>
         <image name="FlashLight-lightning" width="29" height="29"/>
-        <image name="books49" width="32" height="32"/>
+        <image name="bookshelf1" width="32" height="32"/>
         <image name="collections" width="29" height="29"/>
         <image name="first" width="30" height="30"/>
         <image name="gears6-60@2x-29" width="29" height="29"/>
