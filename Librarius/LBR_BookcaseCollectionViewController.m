@@ -47,6 +47,7 @@
 @property (nonatomic, strong) NSMutableDictionary *debugDictionary2;
 @property (nonatomic, strong) NSMutableArray <Volume*> *debugVolumeList;
 @property (nonatomic, strong) NSMutableSet *debugCellSet;
+- (IBAction)accessBookcaseAttributesButtonTapped:(id)sender;
 
 
 @end
@@ -94,6 +95,7 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     volumesArray = self.fetchedResultsController.fetchedObjects;
         ///    [self precacheImages];
 }
+
 
 -(void)setupProgressView
 {
@@ -253,6 +255,9 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     }
     
     return _debugCellSet;
+}
+
+- (IBAction)accessBookcaseAttributesButtonTapped:(id)sender {
 }
 
 //#pragma mark - === UICollectionViewDelegate ===
@@ -431,11 +436,16 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
 }
 
 
-#pragma mark - === ScrollView Delegate ===
+#pragma mark - === UIPopoverPresentationController Delegate ===
 
-//-(void)scrollViewDidScroll:(UIScrollView *)scrollView
-//{
-//
-//}
+-(UIView *)adjustBookcaseAttributesControl
+{
+    UIView *contentView = [UIView new];
+    
+    UITextField *numShelvesTxField = [UITextField new];
+    UITextField *shelfWidth_cmTxField = [UITextField new];
+    
+    return contentView;
+}
 
 @end

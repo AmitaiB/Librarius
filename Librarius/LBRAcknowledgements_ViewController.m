@@ -74,6 +74,12 @@
     
     [mutableAckString appendString:pod];
     [mutableAckString appendString:license];
+    
+    pod = @"FlatIcon.com";
+    license = @"A number of icons used in this app are with used with permission from www.FlatIcon.com; those icons are designed by 'FreePik.'";
+
+    [mutableAckString appendString:pod];
+    [mutableAckString appendString:license];
 
     self.acknowledgmentsTextView.textContainerInset = UIEdgeInsetsZero;
     self.acknowledgmentsTextView.text = [mutableAckString copy];
