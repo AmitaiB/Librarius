@@ -30,7 +30,8 @@
 
 @property (nonatomic, strong) NSMutableDictionary *attributesForCells;
 
-@property (nonatomic, assign, readwrite) NSUInteger widestShelfWidth;
+@property (nonatomic, assign, readwrite) CGFloat shelfWidth_cm;
+@property (nonatomic, assign) NSUInteger maxShelvesCount;
 @property (nonatomic, assign) NSUInteger cellCountForLongestRow;
 
 @property (nonatomic, assign) CGSize contentSize;
@@ -61,25 +62,28 @@
 
 #pragma mark - == Lifecycle ==
 
--(instancetype)initWithScheme:(LBRLayoutScheme)layoutScheme
+-(instancetype)initWithScheme:(LBRLayoutScheme)layoutScheme maxShelves:(NSUInteger)maxShelves shelfWidth_cm:(CGFloat)width_cm
 {
     if (!(self = [super init])) return nil;
     
-    _layoutScheme = layoutScheme;
-    
-    _insets = UIEdgeInsetsMake(INSET_TOP, INSET_LEFT, INSET_BOTTOM, INSET_RIGHT);
+    _maxShelvesCount    = maxShelves;
+    _shelfWidth_cm      = width_cm;
+    _layoutScheme       = layoutScheme;
+    _insets             = UIEdgeInsetsMake(INSET_TOP, INSET_LEFT, INSET_BOTTOM, INSET_RIGHT);
     _currentShelfIndex  = 0;
     _bookOnShelfCounter = 0;
-    
-    _interItemSpacing  = 3.0;
-    _interShelfSpacing = 30.0;
-    
-    
+    _interItemSpacing   = 3.0;
+    _interShelfSpacing  = 30.0;
     _cellCountForLongestRow = 0;
     
     [super registerClass:[LBRShelf_DecorationView class] forDecorationViewOfKind:[LBRShelf_DecorationView kind]];
     
     return self;
+}
+
+-(instancetype)initWithScheme:(LBRLayoutScheme)layoutScheme
+{
+    return [self initWithScheme:layoutScheme maxShelves:kDefaultBookcaseShelvesCount shelfWidth_cm:kDefaultBookcaseWidth_cm];
 }
 
 -(instancetype)init
@@ -202,11 +206,9 @@
     /**
      This value changes depending on the scheme, which alters the fetchedResultsController's fetchRequest to match it.
      */
--(LBR_BookcaseModel *)configuredBookcaseModel {
-    LBR_BookcaseModel *bookcaseModel = [[LBR_BookcaseModel alloc] initWithWidth:kDefaultBookcaseWidth_cm shelvesCount:kDefaultBookcaseShelvesCount];
-//    LBR_BookcaseCollectionViewController *collectionViewController = (LBR_BookcaseCollectionViewController *)self.collectionView.dataSource;
-//    
-//        [bookcaseModel shelveBooks:collectionViewController.fetchedResultsController.fetchedObjects];
+-(LBR_BookcaseModel *)configuredBookcaseModel
+{
+    LBR_BookcaseModel *bookcaseModel = [[LBR_BookcaseModel alloc] initWithWidth:self.shelfWidth_cm shelvesCount:self.maxShelvesCount];
     [bookcaseModel shelveBooks:self.localFetchedResultsController.fetchedObjects];
 
     return bookcaseModel;
@@ -215,7 +217,9 @@
 -(void)incrementBookcaseModelByOneBook {
     NSArray *currentShelf = self.bookcaseModel.shelves[self.currentShelfIndex];
 
-    NSUInteger maxShelvesCount = self.bookcaseModel.shelves.count;
+    
+//    CLEAN: No longer necessary, methinks:
+//    self.maxShelvesCount = self.bookcaseModel.shelves.count;
     
         //If more books fit on this shelf, according to the model.
     if (self.bookOnShelfCounter < currentShelf.count)
@@ -228,14 +232,14 @@
         //AND there are more empty shelves, then we know to make our book
         //the first book on the next shelf (instead of the 'over-last' one on this shelf).
     if (self.bookOnShelfCounter >= currentShelf.count &&
-        self.currentShelfIndex + offBy1 < maxShelvesCount)
+        self.currentShelfIndex + offBy1 < self.maxShelvesCount)
     {
         self.currentShelfIndex++;
         self.bookOnShelfCounter = 0;
         return;
     }
         //If all shelves are full - no more shelves.
-    if (self.currentShelfIndex + offBy1 >= maxShelvesCount)
+    if (self.currentShelfIndex + offBy1 >= self.maxShelvesCount)
         return;
 }
 

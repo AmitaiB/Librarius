@@ -190,6 +190,18 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     }
 }
 
+-(void)prepareForPopoverPresentation:(UIPopoverPresentationController *)popoverPresentationController
+{
+
+}
+
+    //
+-(void)popoverPresentationControllerDidDismissPopover:(UIPopoverPresentationController *)popoverPresentationController
+{
+    LBR_BookcaseLayout *newLayout = [[LBR_BookcaseLayout alloc] initWithScheme:LBRLayoutSchemeGenreAuthorDate];
+    
+}
+
     //Read-only property, can only be set via this delegate method. `..None` stops it from being a full-screen view.
 -(UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller
 {
