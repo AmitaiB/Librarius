@@ -30,7 +30,7 @@
 
 @property (nonatomic, strong) NSMutableDictionary *attributesForCells;
 
-@property (nonatomic, assign) NSUInteger widestShelfWidth;
+@property (nonatomic, assign, readwrite) NSUInteger widestShelfWidth;
 @property (nonatomic, assign) NSUInteger cellCountForLongestRow;
 
 @property (nonatomic, assign) CGSize contentSize;
@@ -49,7 +49,7 @@
 
 @property (nonatomic, assign) NSUInteger currentShelfIndex;
 @property (nonatomic, assign) NSUInteger bookOnShelfCounter;
-@property (nonatomic, strong) LBR_BookcaseModel *bookcaseModel;
+@property (nonatomic, strong, readwrite) LBR_BookcaseModel *bookcaseModel;
 
     //Required for Switching
 @property (nonatomic, assign) LBRLayoutScheme layoutScheme;

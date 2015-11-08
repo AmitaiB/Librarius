@@ -173,10 +173,12 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
         popoverVC.numShelvesTxField.delegate = self;
         popoverVC.shelfWidth_cmTxField.delegate = self;
         
+        popoverVC.numShelvesTxField.text = [@(layout.bookcaseModel.shelvesCount) stringValue];
+        popoverVC.shelfWidth_cmTxField.text = [@(layout.bookcaseModel.width_cm) stringValue];
         
         
         
-            //???: Why is this so ugly?!
+            //???: Why popoverBackgroundView so ugly?!
 //        popoverVC.popoverPresentationController.popoverBackgroundViewClass = [LBR_PopoverBackgroundView class];
         
     }
@@ -188,6 +190,14 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     return UIModalPresentationNone;
 }
 
+#pragma mark - === UITextField Delegate (for popover) ===
+
+-(void)textFieldDidEndEditing:(UITextField *)textField
+{
+    textField.text = [NSString stringWithFormat:@"%@ %@", textField.text,
+                      ([textField.accessibilityIdentifier isEqualToString:@"numShelvesTxField"]) ?
+                      @"shelves" : @"cm"];
+}
 
 #pragma mark - === UICollectionViewDataSource ===
 

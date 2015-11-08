@@ -14,7 +14,5 @@
 
 @property (nonatomic, strong) IBOutlet UITextField *numShelvesTxField;
 @property (nonatomic, strong) IBOutlet UITextField *shelfWidth_cmTxField;
-@property (nonatomic, strong) IBOutlet UIStepper *numShelvesStepper;
-@property (nonatomic, strong) IBOutlet UIStepper *shelfWidthStepper;
 
 @end

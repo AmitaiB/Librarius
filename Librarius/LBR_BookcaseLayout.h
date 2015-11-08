@@ -28,6 +28,9 @@ typedef NS_ENUM(NSUInteger, LBRLayoutScheme) {
 
 @property (nonatomic, assign) CGFloat interItemSpacing;
 @property (nonatomic, assign) CGFloat interShelfSpacing;
+@property (nonatomic, strong, readonly) LBR_BookcaseModel *bookcaseModel;
+@property (nonatomic, assign, readonly) NSUInteger widestShelfWidth;
+
 
 //@property (nonatomic, weak) id <LBRBookLayoutDataSource> dataSource;
 

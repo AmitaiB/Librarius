@@ -339,46 +339,43 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FI5-zS-xoN" userLabel="convenienceView">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="02K-y3-DAh" userLabel="#Shelves Text Field">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="02K-y3-DAh" userLabel="#Shelves Text Field">
                                         <rect key="frame" x="-25" y="-30" width="97" height="30"/>
                                         <animations/>
+                                        <accessibility key="accessibilityConfiguration" identifier="numShelvesTxField"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="97" id="026-q6-6kM">
-                                                <variation key="widthClass=compact" constant="43"/>
-                                            </constraint>
-                                            <constraint firstAttribute="height" constant="29" id="TWa-IE-Goh"/>
+                                            <constraint firstAttribute="height" constant="29" id="RVd-pG-Mw2"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="026-q6-6kM"/>
-                                                <exclude reference="TWa-IE-Goh"/>
+                                                <exclude reference="RVd-pG-Mw2"/>
                                             </mask>
                                         </variation>
                                         <variation key="widthClass=compact">
                                             <mask key="constraints">
-                                                <include reference="026-q6-6kM"/>
-                                                <include reference="TWa-IE-Goh"/>
+                                                <include reference="RVd-pG-Mw2"/>
                                             </mask>
                                         </variation>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wvF-KI-cY1" userLabel="Shelf Width (cm) Text Field">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wvF-KI-cY1" userLabel="Shelf Width (cm) Text Field">
                                         <rect key="frame" x="-25" y="-30" width="97" height="30"/>
                                         <animations/>
+                                        <accessibility key="accessibilityConfiguration" identifier="shelfWidthTxField"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="29" id="KfL-PK-EMt"/>
+                                            <constraint firstAttribute="height" constant="29" id="Q3Z-51-RXs"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="KfL-PK-EMt"/>
+                                                <exclude reference="Q3Z-51-RXs"/>
                                             </mask>
                                         </variation>
                                         <variation key="widthClass=compact">
                                             <mask key="constraints">
-                                                <include reference="KfL-PK-EMt"/>
+                                                <include reference="Q3Z-51-RXs"/>
                                             </mask>
                                         </variation>
                                     </textField>
@@ -390,23 +387,32 @@
                                         <rect key="frame" x="-47" y="-14" width="94" height="29"/>
                                         <animations/>
                                     </stepper>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ckp-Nw-fIS">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <animations/>
+                                        <state key="normal" title="Apply/Undo Changes"/>
+                                        <connections>
+                                            <action selector="applyUndoChangesButtonTapped:" destination="qmf-HU-rzV" eventType="touchUpInside" id="Rkx-HT-cYc"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <animations/>
                                 <color key="backgroundColor" red="0.95142845174262736" green="0.95142845174262736" blue="0.95142845174262736" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="eGE-Le-ZF4" secondAttribute="trailing" id="3PY-Lo-5WU"/>
-                                    <constraint firstItem="eGE-Le-ZF4" firstAttribute="leading" secondItem="cKu-g8-efx" secondAttribute="leading" id="5QY-xL-e4k"/>
-                                    <constraint firstItem="02K-y3-DAh" firstAttribute="leading" secondItem="wvF-KI-cY1" secondAttribute="leading" id="9fw-Rj-ecE"/>
-                                    <constraint firstItem="02K-y3-DAh" firstAttribute="top" secondItem="FI5-zS-xoN" secondAttribute="top" id="LPN-Gb-4lY"/>
-                                    <constraint firstItem="eGE-Le-ZF4" firstAttribute="top" secondItem="cKu-g8-efx" secondAttribute="bottom" constant="8" symbolic="YES" id="Lgn-hl-PIQ"/>
-                                    <constraint firstItem="wvF-KI-cY1" firstAttribute="top" secondItem="02K-y3-DAh" secondAttribute="bottom" constant="9" id="OZt-1Y-rPg"/>
-                                    <constraint firstAttribute="bottom" secondItem="eGE-Le-ZF4" secondAttribute="bottom" id="XeF-OS-wiL"/>
-                                    <constraint firstItem="cKu-g8-efx" firstAttribute="leading" secondItem="02K-y3-DAh" secondAttribute="trailing" constant="8" symbolic="YES" id="XtY-Kf-fI8"/>
-                                    <constraint firstItem="wvF-KI-cY1" firstAttribute="leading" secondItem="FI5-zS-xoN" secondAttribute="leading" id="k5s-3P-nbY"/>
-                                    <constraint firstItem="eGE-Le-ZF4" firstAttribute="leading" secondItem="wvF-KI-cY1" secondAttribute="trailing" constant="8" symbolic="YES" id="nOX-eb-jyu"/>
-                                    <constraint firstItem="cKu-g8-efx" firstAttribute="top" secondItem="FI5-zS-xoN" secondAttribute="top" constant="2" id="rx8-vH-GCV">
-                                        <variation key="widthClass=compact" constant="0.0"/>
-                                    </constraint>
+                                    <constraint firstItem="cKu-g8-efx" firstAttribute="top" secondItem="02K-y3-DAh" secondAttribute="top" id="2nW-kH-AaQ"/>
+                                    <constraint firstItem="wvF-KI-cY1" firstAttribute="top" secondItem="02K-y3-DAh" secondAttribute="bottom" constant="9" id="3bA-pe-XRH"/>
+                                    <constraint firstItem="eGE-Le-ZF4" firstAttribute="leading" secondItem="wvF-KI-cY1" secondAttribute="trailing" constant="8" symbolic="YES" id="7WJ-ND-umr"/>
+                                    <constraint firstItem="cKu-g8-efx" firstAttribute="top" secondItem="FI5-zS-xoN" secondAttribute="top" id="HtG-Wb-MBH"/>
+                                    <constraint firstItem="cKu-g8-efx" firstAttribute="leading" secondItem="02K-y3-DAh" secondAttribute="trailing" constant="8" symbolic="YES" id="JPh-Tb-cf4"/>
+                                    <constraint firstItem="cKu-g8-efx" firstAttribute="leading" secondItem="eGE-Le-ZF4" secondAttribute="leading" id="Mux-Wx-CKP"/>
+                                    <constraint firstItem="Ckp-Nw-fIS" firstAttribute="leading" secondItem="FI5-zS-xoN" secondAttribute="leadingMargin" id="P49-PH-3Aq"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ckp-Nw-fIS" secondAttribute="bottom" id="cZP-qm-GfT"/>
+                                    <constraint firstItem="eGE-Le-ZF4" firstAttribute="top" secondItem="cKu-g8-efx" secondAttribute="bottom" constant="8" symbolic="YES" id="ckw-pD-ndu"/>
+                                    <constraint firstItem="02K-y3-DAh" firstAttribute="leading" secondItem="FI5-zS-xoN" secondAttribute="leading" id="nQD-pn-TAX"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ckp-Nw-fIS" secondAttribute="trailing" constant="13" id="pyt-dn-buB"/>
+                                    <constraint firstAttribute="trailing" secondItem="eGE-Le-ZF4" secondAttribute="trailing" id="ruz-f2-ztR"/>
+                                    <constraint firstItem="02K-y3-DAh" firstAttribute="leading" secondItem="wvF-KI-cY1" secondAttribute="leading" id="vhB-fk-3O0"/>
+                                    <constraint firstItem="Ckp-Nw-fIS" firstAttribute="top" secondItem="eGE-Le-ZF4" secondAttribute="bottom" id="xaR-aw-XIt"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="subviews">
@@ -414,19 +420,23 @@
                                         <exclude reference="wvF-KI-cY1"/>
                                         <exclude reference="cKu-g8-efx"/>
                                         <exclude reference="eGE-Le-ZF4"/>
+                                        <exclude reference="Ckp-Nw-fIS"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <exclude reference="9fw-Rj-ecE"/>
-                                        <exclude reference="LPN-Gb-4lY"/>
-                                        <exclude reference="OZt-1Y-rPg"/>
-                                        <exclude reference="k5s-3P-nbY"/>
-                                        <exclude reference="XtY-Kf-fI8"/>
-                                        <exclude reference="rx8-vH-GCV"/>
-                                        <exclude reference="3PY-Lo-5WU"/>
-                                        <exclude reference="5QY-xL-e4k"/>
-                                        <exclude reference="Lgn-hl-PIQ"/>
-                                        <exclude reference="XeF-OS-wiL"/>
-                                        <exclude reference="nOX-eb-jyu"/>
+                                        <exclude reference="nQD-pn-TAX"/>
+                                        <exclude reference="vhB-fk-3O0"/>
+                                        <exclude reference="3bA-pe-XRH"/>
+                                        <exclude reference="P49-PH-3Aq"/>
+                                        <exclude reference="cZP-qm-GfT"/>
+                                        <exclude reference="pyt-dn-buB"/>
+                                        <exclude reference="xaR-aw-XIt"/>
+                                        <exclude reference="2nW-kH-AaQ"/>
+                                        <exclude reference="HtG-Wb-MBH"/>
+                                        <exclude reference="JPh-Tb-cf4"/>
+                                        <exclude reference="Mux-Wx-CKP"/>
+                                        <exclude reference="7WJ-ND-umr"/>
+                                        <exclude reference="ckw-pD-ndu"/>
+                                        <exclude reference="ruz-f2-ztR"/>
                                     </mask>
                                 </variation>
                                 <variation key="widthClass=compact">
@@ -435,19 +445,23 @@
                                         <include reference="wvF-KI-cY1"/>
                                         <include reference="cKu-g8-efx"/>
                                         <include reference="eGE-Le-ZF4"/>
+                                        <include reference="Ckp-Nw-fIS"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <include reference="9fw-Rj-ecE"/>
-                                        <include reference="LPN-Gb-4lY"/>
-                                        <include reference="OZt-1Y-rPg"/>
-                                        <include reference="k5s-3P-nbY"/>
-                                        <include reference="XtY-Kf-fI8"/>
-                                        <include reference="rx8-vH-GCV"/>
-                                        <include reference="3PY-Lo-5WU"/>
-                                        <include reference="5QY-xL-e4k"/>
-                                        <include reference="Lgn-hl-PIQ"/>
-                                        <include reference="XeF-OS-wiL"/>
-                                        <include reference="nOX-eb-jyu"/>
+                                        <include reference="nQD-pn-TAX"/>
+                                        <include reference="vhB-fk-3O0"/>
+                                        <include reference="3bA-pe-XRH"/>
+                                        <include reference="P49-PH-3Aq"/>
+                                        <include reference="cZP-qm-GfT"/>
+                                        <include reference="pyt-dn-buB"/>
+                                        <include reference="xaR-aw-XIt"/>
+                                        <include reference="2nW-kH-AaQ"/>
+                                        <include reference="HtG-Wb-MBH"/>
+                                        <include reference="JPh-Tb-cf4"/>
+                                        <include reference="Mux-Wx-CKP"/>
+                                        <include reference="7WJ-ND-umr"/>
+                                        <include reference="ckw-pD-ndu"/>
+                                        <include reference="ruz-f2-ztR"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -498,6 +512,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="applyUndoChangesButton" destination="Ckp-Nw-fIS" id="8TG-ln-Kuu"/>
                         <outlet property="contentView" destination="FI5-zS-xoN" id="37C-kR-Z7A"/>
                         <outlet property="numShelvesStepper" destination="cKu-g8-efx" id="hBa-bA-bFF"/>
                         <outlet property="numShelvesTxField" destination="02K-y3-DAh" id="l8g-O7-f8H"/>
