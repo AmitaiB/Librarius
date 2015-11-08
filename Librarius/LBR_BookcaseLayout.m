@@ -186,7 +186,7 @@
         /// There is always one fewer interspace than # of cells, e.g.:
         /// InsetL-[cell#1]-#1-[cell#2]-#2-[cell#3]-InsetR
         /// , so we subtract one inter_spacing.
-    CGFloat xMax = INSET_LEFT + (kDefaulCellDimension + self.interItemSpacing) *cellCountForLongestRow - self.interItemSpacing + INSET_RIGHT;
+    CGFloat xMax = INSET_LEFT + (kDefaulCellDimension + self.interItemSpacing) * cellCountForLongestRow - self.interItemSpacing + INSET_RIGHT; // - (self.collectionView.contentInset.left + self.collectionView.contentInset.right);
     CGFloat yMax = INSET_TOP + (kDefaulCellDimension + self.interShelfSpacing) * self.bookcaseModel.shelves.count - self.interShelfSpacing + INSET_BOTTOM;
     
     return CGSizeMake(xMax, yMax);
@@ -194,11 +194,11 @@
 
 -(NSUInteger)extrapolatedCellCountForLongestRow
 {
-    if (self.cellCountForLongestRow == 0) {
+//    if (self.cellCountForLongestRow == 0) {
         for (NSArray *shelf in self.bookcaseModel.shelves) {
             self.cellCountForLongestRow = MAX(self.cellCountForLongestRow, shelf.count);
         }
-    }
+//    }
     
     return self.cellCountForLongestRow;
 }
