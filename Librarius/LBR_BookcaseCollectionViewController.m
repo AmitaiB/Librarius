@@ -68,6 +68,9 @@
     
         ///THIS MIGHT WORK with a Dictionary instead of an array:
     NSDictionary <NSIndexPath*,  NSData*> *precachedImageData;
+    
+    
+    LBR_BookcasePopoverViewController *popoverVC;
 }
 
 static NSString * const reuseIdentifier          = @"bookCellID";
@@ -164,16 +167,22 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
 {
     if ([segue.identifier isEqualToString:@"bookcasePopoverSegueID"])
     {
-        LBR_BookcasePopoverViewController *popoverVC = segue.destinationViewController;
+        popoverVC = segue.destinationViewController;
         
         [popoverVC view];
         
-        popoverVC.preferredContentSize = popoverVC.contentView.frame.size;
-        popoverVC.popoverPresentationController.delegate = self;
+        popoverVC.popoverPresentationController.delegate = self; //Needed for adaptivePres...None, below.
         
-        popoverVC.numFieldText = [@(layout.bookcaseModel.shelvesCount) stringValue];
-        popoverVC.widthFieldText = [@(layout.bookcaseModel.width_cm) stringValue];
+
+        popoverVC.popoverNumShelves       = [@(layout.bookcaseModel.shelvesCount) integerValue];
+        popoverVC.numShelvesStepper.value = [@(layout.bookcaseModel.shelvesCount) integerValue];
+
+        popoverVC.popoverShelfWidth       = [@(layout.bookcaseModel.width_cm) floatValue];
+        popoverVC.shelfWidthStepper.value = [@(layout.bookcaseModel.width_cm) floatValue];
         
+        
+        [popoverVC.numShelvesStepper addTarget:self action:@selector(numShelvesStepperValueDidChange) forControlEvents:UIControlEventValueChanged];
+        [popoverVC.shelfWidthStepper addTarget:self action:@selector(shelfWidthStepperValueDidChange) forControlEvents:UIControlEventValueChanged];
         
             //???: Why popoverBackgroundView so ugly?!
 //        popoverVC.popoverPresentationController.popoverBackgroundViewClass = [LBR_PopoverBackgroundView class];
@@ -187,6 +196,15 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     return UIModalPresentationNone;
 }
 
+-(void)numShelvesStepperValueDidChange
+{
+    popoverVC.popoverNumShelves = popoverVC.numShelvesStepper.value;
+}
+
+-(void)shelfWidthStepperValueDidChange
+{
+    popoverVC.popoverShelfWidth = popoverVC.shelfWidthStepper.value;
+}
 
 #pragma mark - === UICollectionViewDataSource ===
 

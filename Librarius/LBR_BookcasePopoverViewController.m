@@ -14,8 +14,6 @@
 
 @property (nonatomic, weak) IBOutlet UITextField *numShelvesTxField;
 @property (nonatomic, weak) IBOutlet UITextField *shelfWidth_cmTxField;
-@property (nonatomic, weak) IBOutlet UIStepper *numShelvesStepper;
-@property (nonatomic, weak) IBOutlet UIStepper *shelfWidthStepper;
 @property (weak, nonatomic) IBOutlet UIButton *applyUndoChangesButton;
 - (IBAction)applyUndoChangesButtonTapped:(id)sender;
 @end
@@ -25,28 +23,30 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    self.preferredContentSize = self.contentView.frame.size;
 
 }
 
--(void)setNumFieldText:(NSString *)numFieldText
+-(void)setPopoverNumShelves:(NSUInteger)popoverNumShelves
 {
-    if ([numFieldText isEqualToString:@"1"])
+    _popoverNumShelves = popoverNumShelves;
+    
+    
+if (popoverNumShelves == 1)
     {
-        _numFieldText = [NSString stringWithFormat:@"%@ shelf", numFieldText];
+        self.numShelvesTxField.text = [NSString stringWithFormat:@"%lu shelf", popoverNumShelves];
     }
     else
     {
-        _numFieldText = [NSString stringWithFormat:@"%@ shelves", numFieldText];
+        self.numShelvesTxField.text = [NSString stringWithFormat:@"%lu shelves", popoverNumShelves];
     }
-    
-    self.numShelvesTxField.text = _numFieldText;
 }
 
--(void)setWidthFieldText:(NSString *)widthFieldText
+-(void)setPopoverShelfWidth:(CGFloat)popoverShelfWidth
 {
-    _widthFieldText = [NSString stringWithFormat:@"%@ cm", widthFieldText];
+    _popoverShelfWidth = popoverShelfWidth;
     
-    self.shelfWidth_cmTxField.text = _widthFieldText;
+    self.shelfWidth_cmTxField.text = [NSString stringWithFormat:@"%.01f cm", popoverShelfWidth];
 }
 
 
