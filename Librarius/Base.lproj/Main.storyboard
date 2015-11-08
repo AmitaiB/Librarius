@@ -343,7 +343,9 @@
                                         <rect key="frame" x="-25" y="-30" width="97" height="30"/>
                                         <animations/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="97" id="026-q6-6kM"/>
+                                            <constraint firstAttribute="width" constant="97" id="026-q6-6kM">
+                                                <variation key="widthClass=compact" constant="43"/>
+                                            </constraint>
                                             <constraint firstAttribute="height" constant="29" id="TWa-IE-Goh"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -402,7 +404,9 @@
                                     <constraint firstItem="cKu-g8-efx" firstAttribute="leading" secondItem="02K-y3-DAh" secondAttribute="trailing" constant="8" symbolic="YES" id="XtY-Kf-fI8"/>
                                     <constraint firstItem="wvF-KI-cY1" firstAttribute="leading" secondItem="FI5-zS-xoN" secondAttribute="leading" id="k5s-3P-nbY"/>
                                     <constraint firstItem="eGE-Le-ZF4" firstAttribute="leading" secondItem="wvF-KI-cY1" secondAttribute="trailing" constant="8" symbolic="YES" id="nOX-eb-jyu"/>
-                                    <constraint firstItem="cKu-g8-efx" firstAttribute="top" secondItem="FI5-zS-xoN" secondAttribute="top" constant="2" id="rx8-vH-GCV"/>
+                                    <constraint firstItem="cKu-g8-efx" firstAttribute="top" secondItem="FI5-zS-xoN" secondAttribute="top" constant="2" id="rx8-vH-GCV">
+                                        <variation key="widthClass=compact" constant="0.0"/>
+                                    </constraint>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="subviews">

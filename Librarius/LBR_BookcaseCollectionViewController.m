@@ -169,6 +169,7 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
         
         popoverVC.popoverPresentationController.delegate = self;
         popoverVC.preferredContentSize = popoverVC.contentView.frame.size;
+
         
     }
 }
