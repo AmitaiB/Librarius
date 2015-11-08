@@ -14,10 +14,7 @@
 
 -(void)viewDidLoad
 {
-    [super viewDidLoad];
-    
-    [self.view sizeToFit];
-    
+    [super viewDidLoad];    
     
 //        //For both View Heirarchy and AutoLayout constraints
 //    NSDictionary <NSString *, UIView*> *subViews = @{@"numField"    : self.numShelvesTxField,

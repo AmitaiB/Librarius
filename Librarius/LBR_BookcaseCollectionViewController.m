@@ -156,7 +156,7 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
 }
 
 
-#pragma mark - Navigation
+#pragma mark - === Navigation (UIPopoverPresentationController) ===
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -165,7 +165,10 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     {
         LBR_BookcasePopoverViewController *popoverVC = segue.destinationViewController;
         
+        [popoverVC view];
+        
         popoverVC.popoverPresentationController.delegate = self;
+        popoverVC.preferredContentSize = popoverVC.contentView.frame.size;
         
     }
 }
