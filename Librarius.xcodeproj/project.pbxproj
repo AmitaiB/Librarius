@@ -52,6 +52,7 @@
 		3837F2CE1BE2F33A00170FF6 /* Volume.m in Sources */ = {isa = PBXBuildFile; fileRef = 3837F2C91BE2F33A00170FF6 /* Volume.m */; };
 		3837F2CF1BE2F33A00170FF6 /* Library.m in Sources */ = {isa = PBXBuildFile; fileRef = 3837F2CB1BE2F33A00170FF6 /* Library.m */; };
 		3837F2D01BE2F33A00170FF6 /* Bookcase.m in Sources */ = {isa = PBXBuildFile; fileRef = 3837F2CD1BE2F33A00170FF6 /* Bookcase.m */; };
+		383A2F961BEEE42A006D115F /* LBR_PopoverBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 383A2F951BEEE42A006D115F /* LBR_PopoverBackgroundView.m */; };
 		38466D281B94F24400DD252E /* LBRGoogleGTLClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 38466D271B94F24400DD252E /* LBRGoogleGTLClient.m */; };
 		384E0CC01B97D24B007E7290 /* NSString+dateValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 384E0CBF1B97D24B007E7290 /* NSString+dateValue.m */; };
 		3851DBFD1B8E2E5A00E90B9F /* LBRDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3851DBFC1B8E2E5A00E90B9F /* LBRDataManager.m */; };
@@ -194,6 +195,8 @@
 		3837F2CB1BE2F33A00170FF6 /* Library.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Library.m; sourceTree = "<group>"; };
 		3837F2CC1BE2F33A00170FF6 /* Bookcase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bookcase.h; sourceTree = "<group>"; };
 		3837F2CD1BE2F33A00170FF6 /* Bookcase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bookcase.m; sourceTree = "<group>"; };
+		383A2F941BEEE42A006D115F /* LBR_PopoverBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBR_PopoverBackgroundView.h; sourceTree = "<group>"; };
+		383A2F951BEEE42A006D115F /* LBR_PopoverBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBR_PopoverBackgroundView.m; sourceTree = "<group>"; };
 		38466D261B94F24400DD252E /* LBRGoogleGTLClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRGoogleGTLClient.h; sourceTree = "<group>"; };
 		38466D271B94F24400DD252E /* LBRGoogleGTLClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRGoogleGTLClient.m; sourceTree = "<group>"; };
 		384E0CBE1B97D24B007E7290 /* NSString+dateValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+dateValue.h"; sourceTree = "<group>"; };
@@ -483,8 +486,7 @@
 		38103B5D1BD033EC009F22E3 /* Bookcase Files */ = {
 			isa = PBXGroup;
 			children = (
-				380DBB9A1BEC53FA003BE27D /* LBR_BookcasePopoverViewController.h */,
-				380DBB9B1BEC53FA003BE27D /* LBR_BookcasePopoverViewController.m */,
+				383A2F971BEEE58B006D115F /* Popover */,
 				381FC2931BD13A09003A3C52 /* LBR_BookcaseCollectionViewController.h */,
 				381FC2941BD13A09003A3C52 /* LBR_BookcaseCollectionViewController.m */,
 				3882667E1BDEC70F004B757F /* LBR_EmptyFlowLayout.h */,
@@ -545,6 +547,17 @@
 				382A83C01BB3D926008860CF /* DismissDetailTransition.m */,
 			);
 			name = Transitions/Animations;
+			sourceTree = "<group>";
+		};
+		383A2F971BEEE58B006D115F /* Popover */ = {
+			isa = PBXGroup;
+			children = (
+				380DBB9A1BEC53FA003BE27D /* LBR_BookcasePopoverViewController.h */,
+				380DBB9B1BEC53FA003BE27D /* LBR_BookcasePopoverViewController.m */,
+				383A2F941BEEE42A006D115F /* LBR_PopoverBackgroundView.h */,
+				383A2F951BEEE42A006D115F /* LBR_PopoverBackgroundView.m */,
+			);
+			name = Popover;
 			sourceTree = "<group>";
 		};
 		38466D5B1B94FDD400DD252E /* Not Yet Implemented */ = {
@@ -913,6 +926,7 @@
 				3837F2C71BE2F1B200170FF6 /* Library+CoreDataProperties.m in Sources */,
 				380375621B8BB707004C4ECE /* LBRGoodReadsAPIClient.m in Sources */,
 				38103B591BD033AE009F22E3 /* LBR_ShelvedBookCell.m in Sources */,
+				383A2F961BEEE42A006D115F /* LBR_PopoverBackgroundView.m in Sources */,
 				3837F2C41BE2F1B200170FF6 /* CoverArt.m in Sources */,
 				388DBDF31BA9174A005C5125 /* THNavigationController.m in Sources */,
 				38DA43D31BE66FD200FEFD16 /* LBR_BookcaseLayout_AuthorOnly.m in Sources */,

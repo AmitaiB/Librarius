@@ -33,6 +33,7 @@
 #import "UIView+ABB_Categories.h"
 #import "LBR_BookcasePopoverViewController.h"
 #import "UIView+ConfigureForAutoLayout.h"
+#import "LBR_PopoverBackgroundView.h"
 
 
 @interface LBR_BookcaseCollectionViewController ()
@@ -169,7 +170,7 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
         
         popoverVC.popoverPresentationController.delegate = self;
         popoverVC.preferredContentSize = popoverVC.contentView.frame.size;
-
+        popoverVC.popoverPresentationController.popoverBackgroundViewClass = [LBR_PopoverBackgroundView class];
         
     }
 }
