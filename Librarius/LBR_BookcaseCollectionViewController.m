@@ -190,6 +190,8 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     }
 }
 
+#pragma mark - === UIPopoverPresentationController Delegate ===
+
 -(void)prepareForPopoverPresentation:(UIPopoverPresentationController *)popoverPresentationController
 {
 
@@ -198,8 +200,8 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     //
 -(void)popoverPresentationControllerDidDismissPopover:(UIPopoverPresentationController *)popoverPresentationController
 {
-    LBR_BookcaseLayout *newLayout = [[LBR_BookcaseLayout alloc] initWithScheme:LBRLayoutSchemeGenreAuthorDate];
-    
+    LBR_BookcaseLayout *newLayout = [[LBR_BookcaseLayout alloc] initWithScheme:LBRLayoutSchemeGenreAuthorDate maxShelves:popoverVC.numShelvesStepper.value shelfWidth_cm:popoverVC.shelfWidthStepper.value];
+    [self.collectionView setCollectionViewLayout:newLayout animated:YES];
 }
 
     //Read-only property, can only be set via this delegate method. `..None` stops it from being a full-screen view.
@@ -499,9 +501,6 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
         [self.collectionView setCollectionViewLayout:standardFlowLayout animated:YES];
     }
 }
-
-
-#pragma mark - === UIPopoverPresentationController Delegate ===
 
 
 //-(UIViewController *)buildAttributesAdjustmentPopoverController
