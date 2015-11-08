@@ -12,6 +12,8 @@
 
 @interface LBR_BookcasePopoverViewController ()
 
+@property (nonatomic, strong) IBOutlet UITextField *numShelvesTxField;
+@property (nonatomic, strong) IBOutlet UITextField *shelfWidth_cmTxField;
 @property (nonatomic, strong) IBOutlet UIStepper *numShelvesStepper;
 @property (nonatomic, strong) IBOutlet UIStepper *shelfWidthStepper;
 @property (weak, nonatomic) IBOutlet UIButton *applyUndoChangesButton;
@@ -25,6 +27,28 @@
     [super viewDidLoad];
 
 }
+
+-(void)setNumFieldText:(NSString *)numFieldText
+{
+    if ([numFieldText isEqualToString:@"1"])
+    {
+        _numFieldText = [NSString stringWithFormat:@"%@ shelf", numFieldText];
+    }
+    else
+    {
+        _numFieldText = [NSString stringWithFormat:@"%@ shelves", numFieldText];
+    }
+    
+    self.numShelvesTxField.text = _numFieldText;
+}
+
+-(void)setWidthFieldText:(NSString *)widthFieldText
+{
+    _widthFieldText = [NSString stringWithFormat:@"%@ cm", widthFieldText];
+    
+    self.shelfWidth_cmTxField.text = _widthFieldText;
+}
+
 
 - (IBAction)applyUndoChangesButtonTapped:(id)sender {
 }

@@ -12,7 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 
-@property (nonatomic, strong) IBOutlet UITextField *numShelvesTxField;
-@property (nonatomic, strong) IBOutlet UITextField *shelfWidth_cmTxField;
+@property (nonatomic, strong) NSString *numFieldText;
+@property (nonatomic, strong) NSString *widthFieldText;
 
 @end
