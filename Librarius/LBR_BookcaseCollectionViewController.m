@@ -170,7 +170,8 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
         
         popoverVC.popoverPresentationController.delegate = self;
         popoverVC.preferredContentSize = popoverVC.contentView.frame.size;
-        popoverVC.popoverPresentationController.popoverBackgroundViewClass = [LBR_PopoverBackgroundView class];
+            //???: Why is this so ugly?!
+//        popoverVC.popoverPresentationController.popoverBackgroundViewClass = [LBR_PopoverBackgroundView class];
         
     }
 }
