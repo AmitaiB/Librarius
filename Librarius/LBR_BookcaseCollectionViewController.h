@@ -11,7 +11,7 @@
 #import <CoreData/CoreData.h>
 #import <iAd/iAd.h>
 
-@interface LBR_BookcaseCollectionViewController : UICollectionViewController <NSFetchedResultsControllerDelegate, UIPopoverPresentationControllerDelegate, UIAdaptivePresentationControllerDelegate>
+@interface LBR_BookcaseCollectionViewController : UICollectionViewController <NSFetchedResultsControllerDelegate, UIPopoverPresentationControllerDelegate, UIAdaptivePresentationControllerDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 

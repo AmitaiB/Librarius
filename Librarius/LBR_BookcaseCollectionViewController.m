@@ -168,8 +168,14 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
         
         [popoverVC view];
         
-        popoverVC.popoverPresentationController.delegate = self;
         popoverVC.preferredContentSize = popoverVC.contentView.frame.size;
+        popoverVC.popoverPresentationController.delegate = self;
+        popoverVC.numShelvesTxField.delegate = self;
+        popoverVC.shelfWidth_cmTxField.delegate = self;
+        
+        
+        
+        
             //???: Why is this so ugly?!
 //        popoverVC.popoverPresentationController.popoverBackgroundViewClass = [LBR_PopoverBackgroundView class];
         
