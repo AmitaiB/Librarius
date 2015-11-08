@@ -12,10 +12,10 @@
 
 @interface LBR_BookcasePopoverViewController ()
 
-@property (nonatomic, strong) IBOutlet UITextField *numShelvesTxField;
-@property (nonatomic, strong) IBOutlet UITextField *shelfWidth_cmTxField;
-@property (nonatomic, strong) IBOutlet UIStepper *numShelvesStepper;
-@property (nonatomic, strong) IBOutlet UIStepper *shelfWidthStepper;
+@property (nonatomic, weak) IBOutlet UITextField *numShelvesTxField;
+@property (nonatomic, weak) IBOutlet UITextField *shelfWidth_cmTxField;
+@property (nonatomic, weak) IBOutlet UIStepper *numShelvesStepper;
+@property (nonatomic, weak) IBOutlet UIStepper *shelfWidthStepper;
 @property (weak, nonatomic) IBOutlet UIButton *applyUndoChangesButton;
 - (IBAction)applyUndoChangesButtonTapped:(id)sender;
 @end
