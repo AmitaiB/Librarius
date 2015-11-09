@@ -75,7 +75,7 @@
                                         <exclude reference="yMS-TV-yst"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                                <variation key="widthClass=compact" ambiguous="YES">
                                     <rect key="frame" x="173" y="72" width="207" height="363"/>
                                     <mask key="constraints">
                                         <include reference="dSQ-kY-5Lf"/>
@@ -90,7 +90,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dOy-7Y-f7Q">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <animations/>
-                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                                <variation key="widthClass=compact" ambiguous="YES">
                                     <rect key="frame" x="20" y="72" width="134" height="363"/>
                                 </variation>
                             </imageView>
@@ -344,18 +344,18 @@
                                         <animations/>
                                         <accessibility key="accessibilityConfiguration" identifier="numShelvesTxField"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="29" id="RVd-pG-Mw2"/>
+                                            <constraint firstAttribute="height" constant="29" id="4Iw-L4-Sq1"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="RVd-pG-Mw2"/>
+                                                <exclude reference="4Iw-L4-Sq1"/>
                                             </mask>
                                         </variation>
                                         <variation key="widthClass=compact">
                                             <mask key="constraints">
-                                                <include reference="RVd-pG-Mw2"/>
+                                                <include reference="4Iw-L4-Sq1"/>
                                             </mask>
                                         </variation>
                                     </textField>
@@ -364,25 +364,21 @@
                                         <animations/>
                                         <accessibility key="accessibilityConfiguration" identifier="shelfWidthTxField"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="29" id="Q3Z-51-RXs"/>
+                                            <constraint firstAttribute="height" constant="29" id="iVS-c3-Nhe"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="Q3Z-51-RXs"/>
+                                                <exclude reference="iVS-c3-Nhe"/>
                                             </mask>
                                         </variation>
                                         <variation key="widthClass=compact">
                                             <mask key="constraints">
-                                                <include reference="Q3Z-51-RXs"/>
+                                                <include reference="iVS-c3-Nhe"/>
                                             </mask>
                                         </variation>
                                     </textField>
-                                    <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="cKu-g8-efx" userLabel="#Shelves Stepper">
-                                        <rect key="frame" x="-47" y="-14" width="94" height="29"/>
-                                        <animations/>
-                                    </stepper>
                                     <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="eGE-Le-ZF4" userLabel="Shelf Width (cm) Stepper">
                                         <rect key="frame" x="-47" y="-14" width="94" height="29"/>
                                         <animations/>
@@ -395,47 +391,63 @@
                                             <action selector="applyUndoChangesButtonTapped:" destination="qmf-HU-rzV" eventType="touchUpInside" id="Rkx-HT-cYc"/>
                                         </connections>
                                     </button>
+                                    <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="cKu-g8-efx" userLabel="#Shelves Stepper">
+                                        <rect key="frame" x="-47" y="-14" width="94" height="29"/>
+                                        <animations/>
+                                    </stepper>
                                 </subviews>
                                 <animations/>
                                 <color key="backgroundColor" red="0.95142845174262736" green="0.95142845174262736" blue="0.95142845174262736" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="cKu-g8-efx" firstAttribute="top" secondItem="02K-y3-DAh" secondAttribute="top" id="2nW-kH-AaQ"/>
-                                    <constraint firstItem="wvF-KI-cY1" firstAttribute="top" secondItem="02K-y3-DAh" secondAttribute="bottom" constant="9" id="3bA-pe-XRH"/>
-                                    <constraint firstItem="eGE-Le-ZF4" firstAttribute="leading" secondItem="wvF-KI-cY1" secondAttribute="trailing" constant="8" symbolic="YES" id="7WJ-ND-umr"/>
-                                    <constraint firstItem="cKu-g8-efx" firstAttribute="top" secondItem="FI5-zS-xoN" secondAttribute="top" id="HtG-Wb-MBH"/>
-                                    <constraint firstItem="cKu-g8-efx" firstAttribute="leading" secondItem="02K-y3-DAh" secondAttribute="trailing" constant="8" symbolic="YES" id="JPh-Tb-cf4"/>
+                                    <constraint firstItem="02K-y3-DAh" firstAttribute="leading" secondItem="FI5-zS-xoN" secondAttribute="leading" constant="2" id="5eR-cS-GMS"/>
+                                    <constraint firstItem="02K-y3-DAh" firstAttribute="top" secondItem="cKu-g8-efx" secondAttribute="top" id="7wP-Qx-drg"/>
+                                    <constraint firstItem="02K-y3-DAh" firstAttribute="leading" secondItem="FI5-zS-xoN" secondAttribute="leading" constant="-2" id="F9t-jU-jbe">
+                                        <variation key="widthClass=compact" constant="2"/>
+                                    </constraint>
+                                    <constraint firstItem="cKu-g8-efx" firstAttribute="leading" secondItem="02K-y3-DAh" secondAttribute="trailing" constant="8" symbolic="YES" id="FNe-Fk-bhA"/>
+                                    <constraint firstItem="cKu-g8-efx" firstAttribute="top" secondItem="FI5-zS-xoN" secondAttribute="top" id="HtG-Wb-MBH">
+                                        <variation key="widthClass=compact" constant="2"/>
+                                    </constraint>
                                     <constraint firstItem="cKu-g8-efx" firstAttribute="leading" secondItem="eGE-Le-ZF4" secondAttribute="leading" id="Mux-Wx-CKP"/>
-                                    <constraint firstItem="Ckp-Nw-fIS" firstAttribute="leading" secondItem="FI5-zS-xoN" secondAttribute="leadingMargin" id="P49-PH-3Aq"/>
-                                    <constraint firstAttribute="bottom" secondItem="Ckp-Nw-fIS" secondAttribute="bottom" id="cZP-qm-GfT"/>
+                                    <constraint firstItem="wvF-KI-cY1" firstAttribute="top" secondItem="02K-y3-DAh" secondAttribute="bottom" constant="9" id="OmU-IP-s31"/>
+                                    <constraint firstItem="Ckp-Nw-fIS" firstAttribute="leading" secondItem="FI5-zS-xoN" secondAttribute="leadingMargin" id="P49-PH-3Aq">
+                                        <variation key="widthClass=compact" constant="2"/>
+                                    </constraint>
+                                    <constraint firstAttribute="bottom" secondItem="Ckp-Nw-fIS" secondAttribute="bottom" id="cZP-qm-GfT">
+                                        <variation key="widthClass=compact" constant="2"/>
+                                    </constraint>
                                     <constraint firstItem="eGE-Le-ZF4" firstAttribute="top" secondItem="cKu-g8-efx" secondAttribute="bottom" constant="8" symbolic="YES" id="ckw-pD-ndu"/>
-                                    <constraint firstItem="02K-y3-DAh" firstAttribute="leading" secondItem="FI5-zS-xoN" secondAttribute="leading" id="nQD-pn-TAX"/>
+                                    <constraint firstItem="eGE-Le-ZF4" firstAttribute="leading" secondItem="wvF-KI-cY1" secondAttribute="trailing" constant="8" symbolic="YES" id="lfs-xI-GjL"/>
                                     <constraint firstAttribute="trailing" secondItem="Ckp-Nw-fIS" secondAttribute="trailing" constant="13" id="pyt-dn-buB"/>
-                                    <constraint firstAttribute="trailing" secondItem="eGE-Le-ZF4" secondAttribute="trailing" id="ruz-f2-ztR"/>
-                                    <constraint firstItem="02K-y3-DAh" firstAttribute="leading" secondItem="wvF-KI-cY1" secondAttribute="leading" id="vhB-fk-3O0"/>
+                                    <constraint firstAttribute="trailing" secondItem="eGE-Le-ZF4" secondAttribute="trailing" id="ruz-f2-ztR">
+                                        <variation key="widthClass=compact" constant="2"/>
+                                    </constraint>
+                                    <constraint firstItem="02K-y3-DAh" firstAttribute="leading" secondItem="wvF-KI-cY1" secondAttribute="leading" id="w3F-wJ-5Cf"/>
                                     <constraint firstItem="Ckp-Nw-fIS" firstAttribute="top" secondItem="eGE-Le-ZF4" secondAttribute="bottom" id="xaR-aw-XIt"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="subviews">
                                         <exclude reference="02K-y3-DAh"/>
                                         <exclude reference="wvF-KI-cY1"/>
-                                        <exclude reference="cKu-g8-efx"/>
                                         <exclude reference="eGE-Le-ZF4"/>
                                         <exclude reference="Ckp-Nw-fIS"/>
+                                        <exclude reference="cKu-g8-efx"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <exclude reference="nQD-pn-TAX"/>
-                                        <exclude reference="vhB-fk-3O0"/>
-                                        <exclude reference="3bA-pe-XRH"/>
+                                        <exclude reference="5eR-cS-GMS"/>
+                                        <exclude reference="7wP-Qx-drg"/>
+                                        <exclude reference="F9t-jU-jbe"/>
+                                        <exclude reference="w3F-wJ-5Cf"/>
+                                        <exclude reference="OmU-IP-s31"/>
                                         <exclude reference="P49-PH-3Aq"/>
                                         <exclude reference="cZP-qm-GfT"/>
                                         <exclude reference="pyt-dn-buB"/>
                                         <exclude reference="xaR-aw-XIt"/>
-                                        <exclude reference="2nW-kH-AaQ"/>
+                                        <exclude reference="FNe-Fk-bhA"/>
                                         <exclude reference="HtG-Wb-MBH"/>
-                                        <exclude reference="JPh-Tb-cf4"/>
                                         <exclude reference="Mux-Wx-CKP"/>
-                                        <exclude reference="7WJ-ND-umr"/>
                                         <exclude reference="ckw-pD-ndu"/>
+                                        <exclude reference="lfs-xI-GjL"/>
                                         <exclude reference="ruz-f2-ztR"/>
                                     </mask>
                                 </variation>
@@ -443,24 +455,25 @@
                                     <mask key="subviews">
                                         <include reference="02K-y3-DAh"/>
                                         <include reference="wvF-KI-cY1"/>
-                                        <include reference="cKu-g8-efx"/>
                                         <include reference="eGE-Le-ZF4"/>
                                         <include reference="Ckp-Nw-fIS"/>
+                                        <include reference="cKu-g8-efx"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <include reference="nQD-pn-TAX"/>
-                                        <include reference="vhB-fk-3O0"/>
-                                        <include reference="3bA-pe-XRH"/>
+                                        <include reference="5eR-cS-GMS"/>
+                                        <include reference="7wP-Qx-drg"/>
+                                        <exclude reference="F9t-jU-jbe"/>
+                                        <include reference="w3F-wJ-5Cf"/>
+                                        <include reference="OmU-IP-s31"/>
                                         <include reference="P49-PH-3Aq"/>
                                         <include reference="cZP-qm-GfT"/>
                                         <include reference="pyt-dn-buB"/>
                                         <include reference="xaR-aw-XIt"/>
-                                        <include reference="2nW-kH-AaQ"/>
+                                        <include reference="FNe-Fk-bhA"/>
                                         <include reference="HtG-Wb-MBH"/>
-                                        <include reference="JPh-Tb-cf4"/>
                                         <include reference="Mux-Wx-CKP"/>
-                                        <include reference="7WJ-ND-umr"/>
                                         <include reference="ckw-pD-ndu"/>
+                                        <include reference="lfs-xI-GjL"/>
                                         <include reference="ruz-f2-ztR"/>
                                     </mask>
                                 </variation>

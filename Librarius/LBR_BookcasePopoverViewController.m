@@ -25,7 +25,11 @@
 {
     [super viewDidLoad];
     self.preferredContentSize = self.contentView.frame.size;
-
+    self.view.layer.cornerRadius = 15;
+    self.view.clipsToBounds = YES;
+    
+    self.contentView.layer.cornerRadius = 5;
+    self.contentView.clipsToBounds = YES;
 }
 
 -(void)setPopoverNumShelves:(NSUInteger)popoverNumShelves

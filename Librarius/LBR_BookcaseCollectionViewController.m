@@ -155,7 +155,9 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     {
         popoverVC = segue.destinationViewController;
         popoverVC.popoverPresentationController.delegate = self; //Needed for adaptivePres...None, below.
-
+        [popoverVC.popoverPresentationController setPopoverBackgroundViewClass:[LBR_PopoverBackgroundView class]];
+        
+            //Necessary to get the view to initialize the properties we want to reference.
         [popoverVC view];
         
         popoverVC.popoverNumShelves       = [@(layout.bookcaseModel.shelvesCount) integerValue];
@@ -179,7 +181,7 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
 
 -(void)prepareForPopoverPresentation:(UIPopoverPresentationController *)popoverPresentationController
 {
-
+    
 }
 
 -(void)popoverPresentationControllerDidDismissPopover:(UIPopoverPresentationController *)popoverPresentationController
