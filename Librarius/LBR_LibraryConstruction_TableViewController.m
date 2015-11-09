@@ -7,12 +7,18 @@
 //
 
 #import "LBR_LibraryConstruction_TableViewController.h"
+#import "LBRDataManager.h"
 
 @interface LBR_LibraryConstruction_TableViewController ()
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+
+
 
 @end
 
-@implementation LBR_LibraryConstruction_TableViewController
+@implementation LBR_LibraryConstruction_TableViewController {
+    LBRDataManager *dataManager;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -94,5 +100,7 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - === NSFetchedResultsController ===
 
 @end
