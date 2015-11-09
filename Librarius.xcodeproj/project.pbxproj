@@ -59,6 +59,7 @@
 		3855E26F1BB0DBD4004C5D11 /* LBRAlertContent_TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3855E26E1BB0DBD4004C5D11 /* LBRAlertContent_TableViewCell.m */; };
 		3855E2721BB10AA5004C5D11 /* UIView+ConfigureForAutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3855E2711BB10AA5004C5D11 /* UIView+ConfigureForAutoLayout.m */; };
 		38565D701B9A20B800349498 /* LBRParsedVolume.m in Sources */ = {isa = PBXBuildFile; fileRef = 38565D6F1B9A20B800349498 /* LBRParsedVolume.m */; };
+		386B7D0F1BF154AD004A1DF8 /* LBR_LibraryConstruction_TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 386B7D0E1BF154AD004A1DF8 /* LBR_LibraryConstruction_TableViewController.m */; };
 		386C23751BD934520065B46F /* LBRRecommendations_CollectionViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 386C23741BD934520065B46F /* LBRRecommendations_CollectionViewHeader.m */; };
 		386C23781BD968920065B46F /* LBRRecommendedBook_CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 386C23771BD968920065B46F /* LBRRecommendedBook_CollectionViewCell.m */; };
 		387039B81B9D23C900381007 /* SelectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 387039B71B9D23C900381007 /* SelectionView.xib */; };
@@ -209,6 +210,8 @@
 		3855E2711BB10AA5004C5D11 /* UIView+ConfigureForAutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ConfigureForAutoLayout.m"; sourceTree = "<group>"; };
 		38565D6E1B9A20B800349498 /* LBRParsedVolume.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRParsedVolume.h; sourceTree = "<group>"; };
 		38565D6F1B9A20B800349498 /* LBRParsedVolume.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRParsedVolume.m; sourceTree = "<group>"; };
+		386B7D0D1BF154AD004A1DF8 /* LBR_LibraryConstruction_TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBR_LibraryConstruction_TableViewController.h; sourceTree = "<group>"; };
+		386B7D0E1BF154AD004A1DF8 /* LBR_LibraryConstruction_TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBR_LibraryConstruction_TableViewController.m; sourceTree = "<group>"; };
 		386C23731BD934520065B46F /* LBRRecommendations_CollectionViewHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRRecommendations_CollectionViewHeader.h; sourceTree = "<group>"; };
 		386C23741BD934520065B46F /* LBRRecommendations_CollectionViewHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRRecommendations_CollectionViewHeader.m; sourceTree = "<group>"; };
 		386C23761BD968920065B46F /* LBRRecommendedBook_CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRRecommendedBook_CollectionViewCell.h; sourceTree = "<group>"; };
@@ -479,6 +482,8 @@
 				382A83B91BB3BA94008860CF /* LBRRecommendationsCollectionViewController.m */,
 				38DF00381BE7F9C800D4BCE3 /* LBRAcknowledgements_ViewController.h */,
 				38DF00391BE7F9C800D4BCE3 /* LBRAcknowledgements_ViewController.m */,
+				386B7D0D1BF154AD004A1DF8 /* LBR_LibraryConstruction_TableViewController.h */,
+				386B7D0E1BF154AD004A1DF8 /* LBR_LibraryConstruction_TableViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -944,6 +949,7 @@
 				38F3C0D91BDFE01F005AF2ED /* LBR_ResultsTableViewController.m in Sources */,
 				382A83BA1BB3BA94008860CF /* LBRRecommendationsCollectionViewController.m in Sources */,
 				38DF003A1BE7F9C800D4BCE3 /* LBRAcknowledgements_ViewController.m in Sources */,
+				386B7D0F1BF154AD004A1DF8 /* LBR_LibraryConstruction_TableViewController.m in Sources */,
 				3803757A1B8C08E0004C4ECE /* LBRSettingsTableViewController.m in Sources */,
 				3810DA1A1BD5E0D60093D5C2 /* RCSwitchOnOff.m in Sources */,
 				38DA43D81BE6F07D00FEFD16 /* LBRSettings_TableViewController.m in Sources */,
