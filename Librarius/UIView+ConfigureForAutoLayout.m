@@ -10,13 +10,7 @@
 
 @implementation UIView (ConfigureForAutoLayout)
 
--(void)configureForAutolayout
-{
-    self.translatesAutoresizingMaskIntoConstraints = NO;
-    [self removeConstraints:self.constraints];
-}
-
-
+    //Very clean.
 +(void)configureViewsForAutolayout:(NSArray<UIView *> *)views
 {
     for (UIView *view in views) {
@@ -24,6 +18,13 @@
     }
 }
 
+-(void)configureForAutolayout
+{
+    self.translatesAutoresizingMaskIntoConstraints = NO;
+    [self removeConstraints:self.constraints];
+}
+
+    //Cannot remember why I broke this out by itself.
 -(void)removeAllConstraints
 {
     [self removeConstraints:self.constraints];

@@ -14,7 +14,6 @@
 
 @property (nonatomic, strong) UITextField *numShelvesTxField;
 @property (nonatomic, strong) UITextField *shelfWidth_cmTxField;
-@property (nonatomic, strong) UIButton *applyUndoChangesButton;
 @end
 
 @implementation LBR_ProgrammaticPopoverViewController
@@ -22,11 +21,42 @@
 -(instancetype)init
 {
     if (!(self = [super init])) return nil;
+ 
+        //Initialize views
+    _contentView = [UIView new];
+    _numShelvesStepper = [UIStepper new];
+    _shelfWidthStepper = [UIStepper new];
+    _numShelvesTxField = [UITextField new];
+    _shelfWidth_cmTxField = [UITextField new];
+    
+    return nil;
+}
 
 
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    NSDictionary <NSString*, UIView*> *subViewsDict = @{@"shelvesStepper" : self.numShelvesStepper,
+                                                        @"shelvesField" : self.numShelvesTxField,
+                                                        @"widthStepper" : self.shelfWidthStepper,
+                                                        @"widthField"   : self.shelfWidth_cmTxField
+                                                        };
+//    @"contentView" : self.contentView
+        //View heirarchy
+    [self.view addSubview:self.contentView];
+    [self.contentView addSubviews:[NSSet setWithArray:[subViewsDict allValues]]];
+    
+        //Auto Layout
+    NSArray *allViews = [[subViewsDict allValues] arrayByAddingObject:self.contentView];
+    [UIView configureViewsForAutolayout:allViews];
+    
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[shelvesField]-[shelvesStepper]-|" options:0 metrics:nil views:subViewsDict]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[widthField]-[widthStepper]-|" options:0 metrics:nil views:subViewsDict]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[shelvesField]-[widthField]-|" options:0 metrics:nil views:subViewsDict]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[shelvesStepper]-[widthStepper]-|" options:0 metrics:nil views:subViewsDict]];
+    
+    
     self.preferredContentSize = self.contentView.frame.size;
     
 }
@@ -53,7 +83,4 @@
     self.shelfWidth_cmTxField.text = [NSString stringWithFormat:@"%.01f cm", popoverShelfWidth];
 }
 
-
-- (IBAction)applyUndoChangesButtonTapped:(id)sender {
-}
 @end
