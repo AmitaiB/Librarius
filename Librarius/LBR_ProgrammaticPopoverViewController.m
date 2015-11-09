@@ -7,31 +7,53 @@
 //
 
 #import "LBR_ProgrammaticPopoverViewController.h"
+#import "UIView+ABB_Categories.h"
+#import "UIView+ConfigureForAutoLayout.h"
 
 @interface LBR_ProgrammaticPopoverViewController ()
 
+@property (nonatomic, strong) UITextField *numShelvesTxField;
+@property (nonatomic, strong) UITextField *shelfWidth_cmTxField;
+@property (nonatomic, strong) UIButton *applyUndoChangesButton;
 @end
 
 @implementation LBR_ProgrammaticPopoverViewController
 
-- (void)viewDidLoad {
+-(instancetype)init
+{
+    if (!(self = [super init])) return nil;
+
+
+-(void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.preferredContentSize = self.contentView.frame.size;
+    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)setPopoverNumShelves:(NSUInteger)popoverNumShelves
+{
+    _popoverNumShelves = popoverNumShelves;
+    
+    
+    if (popoverNumShelves == 1)
+    {
+        self.numShelvesTxField.text = [NSString stringWithFormat:@"%lu shelf", popoverNumShelves];
+    }
+    else
+    {
+        self.numShelvesTxField.text = [NSString stringWithFormat:@"%lu shelves", popoverNumShelves];
+    }
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)setPopoverShelfWidth:(CGFloat)popoverShelfWidth
+{
+    _popoverShelfWidth = popoverShelfWidth;
+    
+    self.shelfWidth_cmTxField.text = [NSString stringWithFormat:@"%.01f cm", popoverShelfWidth];
 }
-*/
 
+
+- (IBAction)applyUndoChangesButtonTapped:(id)sender {
+}
 @end
