@@ -14,26 +14,26 @@
 #import "LBRDataManager.h"
 #import "LBR_BookcaseLayout.h"
 #import "LBR_EmptyFlowLayout.h"
+//#import "LBR_ProgrammaticPopoverViewController.h"
+#import "LBR_BookcasePopoverViewController.h"
 
     //Views
 //#import "LBR_ShelvedBookCell.h"
 #import "LBRShelvedBook_CollectionViewCell.h"
 #import "LBRShelf_DecorationView.h"
+#import "LBR_PopoverBackgroundView.h"
 
     //Models
 #import "Volume.h"
 #import "LBR_BookcaseModel.h"
+#import "CoverArt.h"
 
     //Categories
 #import "UIColor+FlatUI.h"
 #import <UIImageView+AFNetworking.h>
-#import "CoverArt.h"
+#import "UIView+ConfigureForAutoLayout.h"
 #import "UIStepper+FlatUI.h"
 #import "UIView+ABB_Categories.h"
-#import "LBR_BookcasePopoverViewController.h"
-#import "UIView+ConfigureForAutoLayout.h"
-#import "LBR_PopoverBackgroundView.h"
-#import "LBR_ProgrammaticPopoverViewController.h"
 
 
 @interface LBR_BookcaseCollectionViewController ()
@@ -72,7 +72,7 @@
     
     
     LBR_BookcasePopoverViewController *popoverVC;
-    LBR_ProgrammaticPopoverViewController *programmaticPopVC;
+//    LBR_ProgrammaticPopoverViewController *programmaticPopVC;
 }
 
 static NSString * const reuseIdentifier          = @"bookCellID";
@@ -108,9 +108,6 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     volumesArray = self.fetchedResultsController.fetchedObjects;
         ///    [self precacheImages];
     
-//    self.adjustBookcaseVC = [self buildAttributesAdjustmentPopoverController];
-    
-    programmaticPopVC = [LBR_ProgrammaticPopoverViewController new];
 }
 
 
@@ -140,22 +137,6 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     [self cellTest];
 }
 
-    ///May not be needed, now that the images are in CoreData.
-//-(void)precacheImages
-//{
-//    NSMutableArray *tempImageViewArray = [NSMutableArray array];
-//    for (Volume *volume in volumesArray) {
-//        UIImageView *imageView = [[UIImageView alloc] init];
-//        NSURL *url = [NSURL URLWithString:volume.cover_art_large];
-//        
-//            //!!!: Why not working?
-//        [imageView sd_setImageWithURL:url usingProgressView:self.progressView];
-//        
-////        [imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder"]];
-//        [tempImageViewArray addObject:imageView];
-//    }
-//    coverArtArray = [tempImageViewArray copy];
-//}
 
 
 - (void)didReceiveMemoryWarning {
@@ -197,24 +178,9 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
 
 -(void)prepareForPopoverPresentation:(UIPopoverPresentationController *)popoverPresentationController
 {
-    if ([popoverPresentationController class] == [LBR_ProgrammaticPopoverViewController class]) {
-        [programmaticPopVC view];
-        programmaticPopVC.popoverPresentationController.delegate = self;
-        
-        programmaticPopVC.popoverNumShelves       = [@(layout.bookcaseModel.shelvesCount) integerValue];
-        programmaticPopVC.numShelvesStepper.value = [@(layout.bookcaseModel.shelvesCount) integerValue];
-        
-        programmaticPopVC.popoverShelfWidth       = [@(layout.bookcaseModel.width_cm) floatValue];
-        programmaticPopVC.shelfWidthStepper.value = [@(layout.bookcaseModel.width_cm) floatValue];
-        
-        
-        [programmaticPopVC.numShelvesStepper addTarget:self action:@selector(numShelvesStepperValueDidChange) forControlEvents:UIControlEventValueChanged];
-        [programmaticPopVC.shelfWidthStepper addTarget:self action:@selector(shelfWidthStepperValueDidChange) forControlEvents:UIControlEventValueChanged];
-
-    }
+    DBLG
 }
 
-    //
 -(void)popoverPresentationControllerDidDismissPopover:(UIPopoverPresentationController *)popoverPresentationController
 {
     LBR_BookcaseLayout *newLayout = [[LBR_BookcaseLayout alloc] initWithScheme:LBRLayoutSchemeGenreAuthorDate maxShelves:popoverVC.numShelvesStepper.value shelfWidth_cm:popoverVC.shelfWidthStepper.value];
@@ -229,14 +195,6 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
 
 
 #pragma mark - Popover private methods
-
-- (IBAction)accessBookcaseAttributesButtonTapped:(id)sender
-{
-    if (!programmaticPopVC)
-        programmaticPopVC = [LBR_ProgrammaticPopoverViewController new];
-    programmaticPopVC.popoverPresentationController.delegate = self;
-    [self presentViewController:programmaticPopVC animated:YES completion:nil];
-}
 
 
 -(void)numShelvesStepperValueDidChange
@@ -270,18 +228,14 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
         //configure the cell
     cell.backgroundColor = [UIColor clearColor];
     
-//    Volume *volumeModel = volumesArray[indexPath.item];
+
     Volume *volumeModel = [self.fetchedResultsController objectAtIndexPath:indexPath];
-//    CoverArt *coverArtModel = volumeModel.correspondingImageData;
-//    [cell.imageView setImage:coverArtModel.preferredImageLarge];
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", volumeModel.cover_art_large]];
     [cell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder"]];
     cell.coverArtURLString = volumeModel.cover_art_large ? volumeModel.cover_art_large : volumeModel.cover_art ? volumeModel.cover_art: nil;
     
     
     cell.thickness = [volumeModel.thickness floatValue];
-//    UIImage *coverArtImage = ((UIImageView*)coverArtArray[indexPath.item]).image;
-//    [cell.imageView setImage:coverArtImage];
 
     /*
      //Debug
@@ -351,28 +305,22 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     return _debugCellSet;
 }
 
-//- (IBAction)accessBookcaseAttributesButtonTapped:(id)sender {
-//    LBR_BookcasePopoverViewController *popoverController = [self buildAttributesAdjustmentPopoverController];
-//    [self presentViewController:popoverController animated:YES completion:nil];
-//}
-
 //#pragma mark - === UICollectionViewDelegate ===
-
 /*
 // Uncomment this method to specify if the specified item should be highlighted during tracking
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
 	return YES;
 }
-*/
 
-/*
+
+
 // Uncomment this method to specify if the specified item should be selected
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
-*/
 
-/*
+
+
 // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath {
 	return NO;
