@@ -33,6 +33,7 @@
 #import "LBR_BookcasePopoverViewController.h"
 #import "UIView+ConfigureForAutoLayout.h"
 #import "LBR_PopoverBackgroundView.h"
+#import "LBR_ProgrammaticPopoverViewController.h"
 
 
 @interface LBR_BookcaseCollectionViewController ()
@@ -71,6 +72,7 @@
     
     
     LBR_BookcasePopoverViewController *popoverVC;
+    LBR_ProgrammaticPopoverViewController *programmaticPopVC;
 }
 
 static NSString * const reuseIdentifier          = @"bookCellID";
@@ -107,6 +109,8 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
         ///    [self precacheImages];
     
 //    self.adjustBookcaseVC = [self buildAttributesAdjustmentPopoverController];
+    
+    programmaticPopVC = [LBR_ProgrammaticPopoverViewController new];
 }
 
 
@@ -168,15 +172,14 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     if ([segue.identifier isEqualToString:@"bookcasePopoverSegueID"])
     {
         popoverVC = segue.destinationViewController;
-        
         [popoverVC view];
         
         popoverVC.popoverPresentationController.delegate = self; //Needed for adaptivePres...None, below.
         
-
+        
         popoverVC.popoverNumShelves       = [@(layout.bookcaseModel.shelvesCount) integerValue];
         popoverVC.numShelvesStepper.value = [@(layout.bookcaseModel.shelvesCount) integerValue];
-
+        
         popoverVC.popoverShelfWidth       = [@(layout.bookcaseModel.width_cm) floatValue];
         popoverVC.shelfWidthStepper.value = [@(layout.bookcaseModel.width_cm) floatValue];
         
@@ -190,11 +193,34 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     }
 }
 
+
 #pragma mark - === UIPopoverPresentationController Delegate ===
+
+- (IBAction)accessBookcaseAttributesButtonTapped:(id)sender
+{
+    if (!programmaticPopVC)
+        programmaticPopVC = [LBR_ProgrammaticPopoverViewController new];
+    [self presentViewController:pr ogrammaticPopVC animated:YES completion:nil];
+}
+
 
 -(void)prepareForPopoverPresentation:(UIPopoverPresentationController *)popoverPresentationController
 {
+    if ([popoverPresentationController class] == [LBR_ProgrammaticPopoverViewController class]) {
+        [programmaticPopVC view];
+        programmaticPopVC.popoverPresentationController.delegate = self;
+        
+        programmaticPopVC.popoverNumShelves       = [@(layout.bookcaseModel.shelvesCount) integerValue];
+        programmaticPopVC.numShelvesStepper.value = [@(layout.bookcaseModel.shelvesCount) integerValue];
+        
+        programmaticPopVC.popoverShelfWidth       = [@(layout.bookcaseModel.width_cm) floatValue];
+        programmaticPopVC.shelfWidthStepper.value = [@(layout.bookcaseModel.width_cm) floatValue];
+        
+        
+        [programmaticPopVC.numShelvesStepper addTarget:self action:@selector(numShelvesStepperValueDidChange) forControlEvents:UIControlEventValueChanged];
+        [programmaticPopVC.shelfWidthStepper addTarget:self action:@selector(shelfWidthStepperValueDidChange) forControlEvents:UIControlEventValueChanged];
 
+    }
 }
 
     //
@@ -254,7 +280,7 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
 //    UIImage *coverArtImage = ((UIImageView*)coverArtArray[indexPath.item]).image;
 //    [cell.imageView setImage:coverArtImage];
 
-    /**
+    /*
      //Debug
     NSData *imageData = UIImagePNGRepresentation(cell.imageView.image);
     [self.debugDictionary setObject:imageData forKey:cell.coverArtURLString];
@@ -267,6 +293,8 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     return cell;
 }
 
+
+#pragma mark Debug-related Lifecycle
     //Debug
 -(void)cellTest
 {
@@ -281,8 +309,6 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
         counter += @([visibleCellImageData isEqual:debugImageData]).integerValue;
     }
 }
-
-#pragma mark Debug-related Lifecycle
 
     //Debug
 -(NSMutableDictionary *)debugDictionary

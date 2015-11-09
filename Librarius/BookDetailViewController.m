@@ -34,7 +34,7 @@
 
 @property (nonatomic, strong) AMRatingControl *ratingCtrl;
 
-- (IBAction)doneButtonTapped:(id)sender;
+//- (IBAction)doneButtonTapped:(id)sender;
 
 @end
 
