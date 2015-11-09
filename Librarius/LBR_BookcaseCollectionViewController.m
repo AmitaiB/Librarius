@@ -6,8 +6,10 @@
 //  Copyright © 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 
-#define kNumberOfShelvesInBookcase 5
+//#define kNumberOfShelvesInBookcase 5
 
+    //Frameworks
+#import <AVFoundation/AVFoundation.h>
 
     //Controllers
 #import "LBR_BookcaseCollectionViewController.h"
@@ -47,15 +49,15 @@
 @property (nonatomic, strong) UIProgressView *progressView;
 //@property (nonatomic, strong) LBR_BookcasePopoverViewController *adjustBookcaseVC;
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *accessBookcaseAttributesButton;
+- (IBAction)accessBookcaseAttributesButtonTapped:(id)sender;
+
 
     //Debug
 @property (nonatomic, strong) NSMutableDictionary *debugDictionary;
 @property (nonatomic, strong) NSMutableDictionary *debugDictionary2;
 @property (nonatomic, strong) NSMutableArray <Volume*> *debugVolumeList;
 @property (nonatomic, strong) NSMutableSet *debugCellSet;
-    ///Where did the view go?????:
-- (IBAction)accessBookcaseAttributesButtonTapped:(id)sender;
-
 
 @end
 
@@ -109,7 +111,6 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
         ///    [self precacheImages];
     
 }
-
 
 
 -(void)setupProgressView
@@ -178,12 +179,14 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
 
 -(void)prepareForPopoverPresentation:(UIPopoverPresentationController *)popoverPresentationController
 {
-    DBLG
+
 }
 
 -(void)popoverPresentationControllerDidDismissPopover:(UIPopoverPresentationController *)popoverPresentationController
 {
     LBR_BookcaseLayout *newLayout = [[LBR_BookcaseLayout alloc] initWithScheme:LBRLayoutSchemeGenreAuthorDate maxShelves:popoverVC.numShelvesStepper.value shelfWidth_cm:popoverVC.shelfWidthStepper.value];
+        //???:
+    layout = newLayout;
     [self.collectionView setCollectionViewLayout:newLayout animated:YES];
 }
 
@@ -480,52 +483,55 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
 }
 
 
-//-(UIViewController *)buildAttributesAdjustmentPopoverController
-//{
-//        ///FIXME:
-//    
-//    UIViewController *viewController = [UIViewController new];
-//    
-//    UIView *contentView = viewController.view;
-//    UITextField *numShelvesTxField = [UITextField new];
-//    numShelvesTxField.placeholder     = @"# of Shelves";
-//    UITextField *shelfWidth_cmTxField = [UITextField new];
-//    shelfWidth_cmTxField.placeholder  = @"width (cm)";
-//    UIStepper *numShelvesStepper = [UIStepper new];
-//    UIStepper *shelfWidthStepper = [UIStepper new];
-//    
-//        //For both View Heirarchy and AutoLayout constraints
-//    NSDictionary <NSString *, UIView*> *subViews = @{@"numField"    : numShelvesTxField,
-//                                                     @"numStepper"  : numShelvesStepper,
-//                                                     @"widthField"  : shelfWidth_cmTxField,
-//                                                     @"widthStepper": shelfWidthStepper
-//                                                     };
-//    
-//        //UIView Categories
-//    [contentView addSubviews:[NSSet setWithArray:[subViews allValues]]];
-//    [UIView configureViewsForAutolayout:[subViews allValues]];
-//    
-//    [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[numField]-[numStepper]-16-[widthField]-[widthStepper]-|"
-//                                                                        options:0
-//                                                                        metrics:nil
-//                                                                          views:subViews]];
-//    
-//    [subViews enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, UIView * _Nonnull obj, BOOL * _Nonnull stop) {
-//        NSString *constraintString = [NSString stringWithFormat:@"V:|-[%@]-|", key];
-//        [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:constraintString
-//                                                                            options:0
-//                                                                            metrics:nil
-//                                                                              views:@{key : obj}]];
-//    }];
-//    
-//    [contentView sizeToFit];
-//    
-//    viewController.modalPresentationStyle = UIModalPresentationPopover;
-//    viewController.popoverPresentationController.barButtonItem = self.navigationItem.rightBarButtonItem;
-//    viewController.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
-//    viewController.popoverPresentationController.delegate = self;
-//    return viewController;
-//}
+//CLEAN:
+/*
+-(UIViewController *)buildAttributesAdjustmentPopoverController
+{
+        ///FIXME:
+    
+    UIViewController *viewController = [UIViewController new];
+    
+    UIView *contentView = viewController.view;
+    UITextField *numShelvesTxField = [UITextField new];
+    numShelvesTxField.placeholder     = @"# of Shelves";
+    UITextField *shelfWidth_cmTxField = [UITextField new];
+    shelfWidth_cmTxField.placeholder  = @"width (cm)";
+    UIStepper *numShelvesStepper = [UIStepper new];
+    UIStepper *shelfWidthStepper = [UIStepper new];
+    
+        //For both View Heirarchy and AutoLayout constraints
+    NSDictionary <NSString *, UIView*> *subViews = @{@"numField"    : numShelvesTxField,
+                                                     @"numStepper"  : numShelvesStepper,
+                                                     @"widthField"  : shelfWidth_cmTxField,
+                                                     @"widthStepper": shelfWidthStepper
+                                                     };
+    
+        //UIView Categories
+    [contentView addSubviews:[NSSet setWithArray:[subViews allValues]]];
+    [UIView configureViewsForAutolayout:[subViews allValues]];
+    
+    [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[numField]-[numStepper]-16-[widthField]-[widthStepper]-|"
+                                                                        options:0
+                                                                        metrics:nil
+                                                                          views:subViews]];
+    
+    [subViews enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, UIView * _Nonnull obj, BOOL * _Nonnull stop) {
+        NSString *constraintString = [NSString stringWithFormat:@"V:|-[%@]-|", key];
+        [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:constraintString
+                                                                            options:0
+                                                                            metrics:nil
+                                                                              views:@{key : obj}]];
+    }];
+    
+    [contentView sizeToFit];
+    
+    viewController.modalPresentationStyle = UIModalPresentationPopover;
+    viewController.popoverPresentationController.barButtonItem = self.navigationItem.rightBarButtonItem;
+    viewController.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
+    viewController.popoverPresentationController.delegate = self;
+    return viewController;
+}
+*/
 
 
 @end

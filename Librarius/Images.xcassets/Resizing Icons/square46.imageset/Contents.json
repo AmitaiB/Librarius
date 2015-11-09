@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "square46.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Adjust-Bookcase_icon.png",
       "scale" : "2x"
     },
     {

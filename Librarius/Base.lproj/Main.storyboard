@@ -734,10 +734,10 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="U43-k0-844">
-                        <barButtonItem key="rightBarButtonItem" image="Adjust-Bookcase_icon" id="2Hp-BS-AX8">
+                        <barButtonItem key="rightBarButtonItem" image="square46-64px" id="Lg9-Zu-A1Q">
                             <connections>
-                                <segue destination="qmf-HU-rzV" kind="popoverPresentation" identifier="bookcasePopoverSegueID" popoverAnchorBarButtonItem="2Hp-BS-AX8" id="7KB-Vc-2JR">
-                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                <segue destination="qmf-HU-rzV" kind="popoverPresentation" identifier="bookcasePopoverSegueID" popoverAnchorBarButtonItem="Lg9-Zu-A1Q" id="mqH-KC-iNj">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES"/>
                                 </segue>
                             </connections>
                         </barButtonItem>
@@ -1337,7 +1337,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Adjust-Bookcase_icon" width="30" height="37"/>
         <image name="BarcodeScanner-Color" width="50" height="50"/>
         <image name="DownloadBooks-Color" width="50" height="50"/>
         <image name="FlashLight-lightning" width="29" height="29"/>
@@ -1348,6 +1347,7 @@
         <image name="placeholder" width="48" height="48"/>
         <image name="scanTarget" width="32" height="32"/>
         <image name="search1" width="32" height="32"/>
+        <image name="square46-64px" width="64" height="64"/>
         <image name="woodpanel04110095" width="624" height="452"/>
     </resources>
     <inferredMetricsTieBreakers>
