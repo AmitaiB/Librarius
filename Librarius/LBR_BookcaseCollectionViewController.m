@@ -172,10 +172,9 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     if ([segue.identifier isEqualToString:@"bookcasePopoverSegueID"])
     {
         popoverVC = segue.destinationViewController;
-        [popoverVC view];
-        
         popoverVC.popoverPresentationController.delegate = self; //Needed for adaptivePres...None, below.
-        
+
+        [popoverVC view];
         
         popoverVC.popoverNumShelves       = [@(layout.bookcaseModel.shelvesCount) integerValue];
         popoverVC.numShelvesStepper.value = [@(layout.bookcaseModel.shelvesCount) integerValue];
@@ -195,14 +194,6 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
 
 
 #pragma mark - === UIPopoverPresentationController Delegate ===
-
-- (IBAction)accessBookcaseAttributesButtonTapped:(id)sender
-{
-    if (!programmaticPopVC)
-        programmaticPopVC = [LBR_ProgrammaticPopoverViewController new];
-    [self presentViewController:pr ogrammaticPopVC animated:YES completion:nil];
-}
-
 
 -(void)prepareForPopoverPresentation:(UIPopoverPresentationController *)popoverPresentationController
 {
@@ -235,6 +226,18 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
 {
     return UIModalPresentationNone;
 }
+
+
+#pragma mark - Popover private methods
+
+- (IBAction)accessBookcaseAttributesButtonTapped:(id)sender
+{
+    if (!programmaticPopVC)
+        programmaticPopVC = [LBR_ProgrammaticPopoverViewController new];
+    programmaticPopVC.popoverPresentationController.delegate = self;
+    [self presentViewController:programmaticPopVC animated:YES completion:nil];
+}
+
 
 -(void)numShelvesStepperValueDidChange
 {
