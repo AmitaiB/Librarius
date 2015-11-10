@@ -111,8 +111,7 @@ static NSString * const reuseIdentifier = @"bookCellID";
     return cell;
 }
 
-#pragma mark
-#pragma mark <UICollectionViewDelegate>
+#pragma mark - === UICollectionViewDelegate> ===
 
 /*
 // Uncomment this method to specify if the specified item should be highlighted during tracking

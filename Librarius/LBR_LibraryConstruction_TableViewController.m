@@ -59,7 +59,10 @@ static NSString * const bookcaseCellReuseID = @"bookcaseCellReuseID";
     // Dispose of any resources that can be recreated.
 }
 
-    ///Each section is a Library, as per the Fetch request, PLUS the First Section (is a collectionView), and the Last Section is the 'addBookcase' cell.
+    ///*Logic encapsulated here.*
+    ///
+    ///Each section is a Library, as per the Fetch request, PLUS the First Section (is a collectionView).
+    ///Each section has its bookcases, a row for each, PLUS the last one is the 'add Bookcase' cell.
 -(NSArray *)tableRowsPerSection
 {
     if (_tableRowsPerSection != nil) {
@@ -72,16 +75,16 @@ static NSString * const bookcaseCellReuseID = @"bookcaseCellReuseID";
         __block NSMutableArray <NSNumber*> *mutableTableSections = [NSMutableArray new];
         
         [dataSourceSections enumerateObjectsUsingBlock:^(id<NSFetchedResultsSectionInfo>  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [mutableTableSections addObject:@(obj.numberOfObjects)];
+            [mutableTableSections addObject:@(obj.numberOfObjects + 1)]; //Last Row in each Section is the 'addBookcase' cell.
         }];
         [mutableTableSections insertObject:@(1) atIndex:0]; //For the collectionView
-        [mutableTableSections addObject:@(1)]; //For the 'addBookcase' cell
         
         return [mutableTableSections copy];
     }
 }
 
 #pragma mark - === UITableView DataSource ===
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.tableRowsPerSection.count;
 }
@@ -127,11 +130,10 @@ static NSString * const bookcaseCellReuseID = @"bookcaseCellReuseID";
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0) {
-        <#statements#> //I WANT TO CHANGE MY PLANS: YES, THE COLLECTION VIEW GETS ITS OWN
-                       //SECTION, BUT THE ADD BOOKCASE CELL SHOULD BE THE LAST OBJECT OF THE
-                       //CURRENT LIBRARY !!!:
-    }
+    if (indexPath.section == 0)
+        return 106.0;
+    else if
+        return 44.0;
 }
 
 
@@ -205,6 +207,37 @@ static NSString * const bookcaseCellReuseID = @"bookcaseCellReuseID";
     textView.textContainer.lineBreakMode = NSLineBreakByWordWrapping;
     textView.text = [NSString stringWithFormat:@"This cell represents Library \"%@\", at indexPath: %@", librariesArray[indexPath.item].name, indexPath];
 }
+
+#pragma mark - === UICollectionViewDelegate ===
+
+/*
+ // Uncomment this method to specify if the specified item should be highlighted during tracking
+ - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+	return YES;
+ }
+ */
+
+/*
+ // Uncomment this method to specify if the specified item should be selected
+ - (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+ return YES;
+ }
+ */
+
+/*
+ // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
+ - (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath {
+	return NO;
+ }
+ 
+ - (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
+	return NO;
+ }
+ 
+ - (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
+	
+ }
+ */
 
 #pragma mark - === UIScrollViewDelegate ===
 
