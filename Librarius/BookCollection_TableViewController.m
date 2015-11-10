@@ -70,6 +70,8 @@ static NSString * const altSearchResultsCellID = @"altSearchResultsCellID";
 //    self.navigationItem.leftBarButtonItem = self.editButtonItem;
     [self flattenUI];
 
+//    [self performMigrationRelatedTasks];
+    
         //Uncomment when ready to add and debug searchBar
 //    [self configureSearchControllers];
     self.canDisplayBannerAds = YES;
@@ -630,6 +632,19 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 
     return NO;
+}
+
+
+#pragma mark - migration related (limited use)
+
+    //2015-11-10 12:04pm
+-(void)performMigrationRelatedTasks
+{
+    for (Volume *volume in self.fetchedResultsController.fetchedObjects) {
+        [[LBRDataManager sharedDataManager] giveVolumeADateIfNeeded:volume];
+    }
+    
+    [[LBRDataManager sharedDataManager] giveCurrentLibraryADateIfNeeded];
 }
 
 

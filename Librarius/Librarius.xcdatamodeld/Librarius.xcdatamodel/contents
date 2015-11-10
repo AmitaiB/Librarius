@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="15B42" minimumToolsVersion="Xcode 4.3">
     <entity name="Bookcase" representedClassName="Bookcase" syncable="YES">
+        <attribute name="dateCreated" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="dateModified" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="shelf_height" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="shelves" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="width" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -15,6 +17,8 @@
         <relationship name="correspondingVolume" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Volume" inverseName="correspondingImageData" inverseEntity="Volume" syncable="YES"/>
     </entity>
     <entity name="Library" representedClassName="Library" syncable="YES">
+        <attribute name="dateCreated" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="dateModified" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="orderWhenListed" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="bookcases" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bookcase" inverseName="library" inverseEntity="Bookcase" syncable="YES"/>
@@ -26,6 +30,8 @@
         <attribute name="avgRating" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="cover_art" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="cover_art_large" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dateCreated" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="dateModified" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="google_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="height" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="isbn10" optional="YES" attributeType="String" syncable="YES"/>
@@ -45,9 +51,9 @@
         <relationship name="library" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Library" inverseName="volumes" inverseEntity="Library" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Bookcase" positionX="-47" positionY="-27" width="128" height="120"/>
+        <element name="Bookcase" positionX="-47" positionY="-27" width="128" height="150"/>
         <element name="CoverArt" positionX="117" positionY="63" width="128" height="118"/>
-        <element name="Library" positionX="-36" positionY="219" width="128" height="105"/>
-        <element name="Volume" positionX="-216" positionY="-36" width="128" height="373"/>
+        <element name="Library" positionX="-36" positionY="219" width="128" height="135"/>
+        <element name="Volume" positionX="-216" positionY="-36" width="128" height="405"/>
     </elements>
 </model>

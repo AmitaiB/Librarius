@@ -122,6 +122,8 @@ static NSString * const kUnknown = @"kUnknown";
     persistentVolume.ratingsCount    = volumeToInsert.ratingsCount;
 
     persistentVolume.library         = self.currentLibrary;
+    persistentVolume.dateCreated     = [NSDate date];
+    persistentVolume.dateModified    = [NSDate date];
     
     CoverArt *associatedCoverArt = [NSEntityDescription insertNewObjectForEntityForName:@"CoverArt" inManagedObjectContext:self.managedObjectContext];
     [associatedCoverArt downloadImagesForCorrespondingVolume:persistentVolume];
@@ -331,10 +333,31 @@ static NSString * const kUnknown = @"kUnknown";
         self.currentLibrary = [[self.managedObjectContext executeFetchRequest:libraryRequest error:nil] firstObject];
     } else {
         Library *newDefaultLibrary = [NSEntityDescription insertNewObjectForEntityForName:@"Library" inManagedObjectContext:self.managedObjectContext];
-        newDefaultLibrary.name = @"Home Library";
+        newDefaultLibrary.name = @"Default Library (set name in options)";
         newDefaultLibrary.orderWhenListed = @1;
+        newDefaultLibrary.dateCreated = [NSDate date];
+        newDefaultLibrary.dateModified = [NSDate date];
         self.currentLibrary = newDefaultLibrary;
         [self saveContext];
+    }
+}
+
+#pragma mark - data migration related (limited use)
+
+-(void)giveCurrentLibraryADateIfNeeded
+{
+    if (!self.currentLibrary.dateCreated) {
+        self.currentLibrary.dateCreated = [NSDate date];
+        self.currentLibrary.dateModified = [NSDate date];
+    }
+}
+
+
+-(void)giveVolumeADateIfNeeded:(Volume*)volume
+{
+    if (!volume.dateCreated) {
+        volume.dateCreated = [NSDate date];
+        volume.dateModified = [NSDate date];
     }
 }
 

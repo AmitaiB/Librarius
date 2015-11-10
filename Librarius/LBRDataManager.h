@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class Volume;
 @class GTLBooksVolume;
 @class GTLBooksVolumes;
 @class LBRParsedVolume;
@@ -48,5 +49,9 @@
 -(void) generateDefaultLibraryIfNeeded;
 -(void) fetchData;
 
+
+    //=============== migration related
+-(void)giveCurrentLibraryADateIfNeeded;
+-(void)giveVolumeADateIfNeeded:(Volume*)volume;
 
 @end

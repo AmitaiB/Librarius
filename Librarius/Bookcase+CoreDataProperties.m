@@ -16,6 +16,8 @@
 @dynamic shelf_height;
 @dynamic shelves;
 @dynamic width;
+@dynamic dateCreated;
+@dynamic dateModified;
 @dynamic library;
 @dynamic volumes;
 

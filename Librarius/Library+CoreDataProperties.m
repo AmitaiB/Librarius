@@ -15,6 +15,8 @@
 
 @dynamic name;
 @dynamic orderWhenListed;
+@dynamic dateCreated;
+@dynamic dateModified;
 @dynamic bookcases;
 @dynamic volumes;
 

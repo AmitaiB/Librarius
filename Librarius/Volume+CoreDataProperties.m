@@ -32,6 +32,8 @@
 @dynamic subtitle;
 @dynamic thickness;
 @dynamic title;
+@dynamic dateCreated;
+@dynamic dateModified;
 @dynamic bookcase;
 @dynamic correspondingImageData;
 @dynamic library;
