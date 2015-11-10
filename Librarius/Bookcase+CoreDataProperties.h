@@ -15,11 +15,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Bookcase (CoreDataProperties)
 
+@property (nullable, nonatomic, retain) NSDate *dateCreated;
+@property (nullable, nonatomic, retain) NSDate *dateModified;
 @property (nullable, nonatomic, retain) NSNumber *shelf_height;
 @property (nullable, nonatomic, retain) NSNumber *shelves;
 @property (nullable, nonatomic, retain) NSNumber *width;
-@property (nullable, nonatomic, retain) NSDate *dateCreated;
-@property (nullable, nonatomic, retain) NSDate *dateModified;
+@property (nullable, nonatomic, retain) NSNumber *orderWhenListed;
 @property (nullable, nonatomic, retain) Library *library;
 @property (nullable, nonatomic, retain) Volume *volumes;
 

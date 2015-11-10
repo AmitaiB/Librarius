@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSNumber *avgRating;
 @property (nullable, nonatomic, retain) NSString *cover_art;
 @property (nullable, nonatomic, retain) NSString *cover_art_large;
+@property (nullable, nonatomic, retain) NSDate *dateCreated;
+@property (nullable, nonatomic, retain) NSDate *dateModified;
 @property (nullable, nonatomic, retain) NSString *google_id;
 @property (nullable, nonatomic, retain) NSNumber *height;
 @property (nullable, nonatomic, retain) NSString *isbn10;
@@ -34,8 +36,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *subtitle;
 @property (nullable, nonatomic, retain) NSNumber *thickness;
 @property (nullable, nonatomic, retain) NSString *title;
-@property (nullable, nonatomic, retain) NSDate *dateCreated;
-@property (nullable, nonatomic, retain) NSDate *dateModified;
 @property (nullable, nonatomic, retain) Bookcase *bookcase;
 @property (nullable, nonatomic, retain) CoverArt *correspondingImageData;
 @property (nullable, nonatomic, retain) Library *library;

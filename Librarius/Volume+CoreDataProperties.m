@@ -18,6 +18,8 @@
 @dynamic avgRating;
 @dynamic cover_art;
 @dynamic cover_art_large;
+@dynamic dateCreated;
+@dynamic dateModified;
 @dynamic google_id;
 @dynamic height;
 @dynamic isbn10;
@@ -32,8 +34,6 @@
 @dynamic subtitle;
 @dynamic thickness;
 @dynamic title;
-@dynamic dateCreated;
-@dynamic dateModified;
 @dynamic bookcase;
 @dynamic correspondingImageData;
 @dynamic library;

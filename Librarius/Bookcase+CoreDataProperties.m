@@ -13,11 +13,12 @@
 
 @implementation Bookcase (CoreDataProperties)
 
+@dynamic dateCreated;
+@dynamic dateModified;
 @dynamic shelf_height;
 @dynamic shelves;
 @dynamic width;
-@dynamic dateCreated;
-@dynamic dateModified;
+@dynamic orderWhenListed;
 @dynamic library;
 @dynamic volumes;
 

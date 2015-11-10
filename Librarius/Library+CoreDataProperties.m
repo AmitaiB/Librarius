@@ -13,10 +13,10 @@
 
 @implementation Library (CoreDataProperties)
 
-@dynamic name;
-@dynamic orderWhenListed;
 @dynamic dateCreated;
 @dynamic dateModified;
+@dynamic name;
+@dynamic orderWhenListed;
 @dynamic bookcases;
 @dynamic volumes;
 

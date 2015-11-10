@@ -318,12 +318,12 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
 
 -(void)flipScanButtonAppearance {
     if (self.isScanning) {
-        [self.toggleScanningButton setTitle:@"Stop Scanning" forState:UIControlStateNormal];
+        [self.toggleScanningButton setTitle:@"Stop" forState:UIControlStateNormal];
         [self.toggleScanningButton setTitleColor:[UIColor midnightBlueColor] forState:UIControlStateNormal];
         self.toggleScanningButton.backgroundColor = [UIColor pomegranateColor];
         [self.toggleScanningButton setTitleColor:[UIColor amethystColor] forState:UIControlStateNormal];
     } else {
-        [self.toggleScanningButton setTitle:@"Start Scanning" forState:UIControlStateNormal];
+        [self.toggleScanningButton setTitle:@"Scan" forState:UIControlStateNormal];
         [self.toggleScanningButton setTitleColor:[UIColor belizeHoleColor] forState:UIControlStateNormal];
         self.toggleScanningButton.backgroundColor = [UIColor greenSeaColor];
         [self.toggleScanningButton setTitleColor:[UIColor carrotColor] forState:UIControlStateNormal];

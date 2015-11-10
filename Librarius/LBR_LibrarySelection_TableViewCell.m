@@ -8,9 +8,12 @@
 
 #import "LBR_LibrarySelection_TableViewCell.h"
 
-@implementation LBR_LibrarySelection_TableViewCell
+@implementation LBRIndexedCollectionView
+@end
 
-static NSString * const collectionViewCellReuseID = @"collectionViewCellReuseID";
+
+
+@implementation LBR_LibrarySelection_TableViewCell
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -20,7 +23,7 @@ static NSString * const collectionViewCellReuseID = @"collectionViewCellReuseID"
     layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
     layout.itemSize = CGSizeMake(44, 44);
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    self.collectionView = [[LBR_LibrarySelection_CollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
+    self.collectionView = [[LBRIndexedCollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:collectionViewCellReuseID];
     self.collectionView.backgroundColor = [UIColor purpleColor];
     self.collectionView.showsHorizontalScrollIndicator = NO;
@@ -30,21 +33,32 @@ static NSString * const collectionViewCellReuseID = @"collectionViewCellReuseID"
     return self;
 }
 
-- (void)awakeFromNib {
-    // Initialization code
-}
+//- (void)awakeFromNib {
+//    // Initialization code
+//}
 
+/*
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
 }
+*/
 
 -(void)layoutSubviews
 {
     [super layoutSubviews];
     
     self.collectionView.frame = self.contentView.bounds;
+}
+
+-(void)setCollectionViewDataSourceDelegate:(id<UICollectionViewDataSource,UICollectionViewDelegate>)dataSourceDelegate indexPath:(NSIndexPath *)indexPath
+{
+    self.collectionView.dataSource = dataSourceDelegate;
+    self.collectionView.delegate = dataSourceDelegate;
+    self.collectionView.indexPath = indexPath;
+    
+    [self.collectionView reloadData];
 }
 
     //If performance stinks, consider doing something about it here:

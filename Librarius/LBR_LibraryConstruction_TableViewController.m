@@ -6,14 +6,25 @@
 //  Copyright © 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 
-#import "LBR_LibraryConstruction_TableViewController.h"
-#import "LBRDataManager.h"
+    //Models
 #import "Library.h"
 
+    //Views
+#import "LBR_LibrarySelection_TableViewCell.h"
+
+    //Controllers
+#import "LBR_LibraryConstruction_TableViewController.h"
+
+    //Data
+#import "LBRDataManager.h"
+
+
 @interface LBR_LibraryConstruction_TableViewController ()
-@property (nonatomic, strong) NSFetchedResultsController *librariesFetchedResultsController; //To get the libraries
+//@property (nonatomic, strong) NSFetchedResultsController *librariesFetchedResultsController;
+@property (nonatomic, strong) NSFetchedResultsController *bookcasesFetchedResultsController;
 
-
+@property (nonatomic, strong) NSMutableDictionary *contentOffsetDictionary;
+@property (nonatomic, strong) NSArray *tableRowsPerSection;
 
 @end
 
@@ -21,13 +32,20 @@
     LBRDataManager *dataManager;
 }
 
-static NSString * const collectionViewCellReuseID = @"collectionViewCellReuseID";
+static NSString * const bookcaseCellReuseID = @"bookcaseCellReuseID";
+//static NSString * const collectionViewCellReuseID = @"collectionViewCellReuseID";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.librariesFetchedResultsController.delegate = self;
+    
+    self.contentOffsetDictionary = [NSMutableDictionary new];
+    
+    self.bookcasesFetchedResultsController.delegate = self;
+//    self.collectionView.delegate = self;
+//    self.collectionView.dataSource = self;
     
     dataManager = [LBRDataManager sharedDataManager];
+
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -41,20 +59,31 @@ static NSString * const collectionViewCellReuseID = @"collectionViewCellReuseID"
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - === Table view data source ===
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    ///Each section is a Library, as per the Fetch request, PLUS the First Section (is a collectionView), and the Last Section is the 'addBookcase' cell.
+-(NSArray *)tableRowsPerSection
+{
+    if (_tableRowsPerSection != nil) {
+        return _tableRowsPerSection;
+    }
+    else
+    {
+        NSArray <id<NSFetchedResultsSectionInfo> > *dataSourceSections = self.bookcasesFetchedResultsController.sections;
+        
+        __block NSMutableArray <NSNumber*> *mutableTableSections = [NSMutableArray new];
+        
+        [dataSourceSections enumerateObjectsUsingBlock:^(id<NSFetchedResultsSectionInfo>  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [mutableTableSections addObject:@(obj.numberOfObjects)];
+        }];
+        [mutableTableSections insertObject:@(1) atIndex:0]; //For the collectionView
+        [mutableTableSections addObject:@(1)]; //For the 'addBookcase' cell
+        
+        return [mutableTableSections copy];
+    }
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSArray *sections = [self.librariesFetchedResultsController sections];
-    if (sections.count) {
-        id <NSFetchedResultsSectionInfo> currentSection = sections[section];
-        return currentSection.numberOfObjects;
-    }
-    return 0;
-
+#pragma mark - === UITableView DataSource ===
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return self.tableRowsPerSection.count;
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -62,17 +91,49 @@ static NSString * const collectionViewCellReuseID = @"collectionViewCellReuseID"
     return [NSString stringWithFormat:@"Current Library: %@", dataManager.currentLibrary.name];
 }
 
+    ///Each row is a bookcase.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)tableSection
+{
+    NSNumber *rowsInSection = self.tableRowsPerSection[tableSection];
+    return rowsInSection.integerValue;
+}
 
-
-/*
+    //
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    LBR_LibrarySelection_TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:bookcaseCellReuseID forIndexPath:indexPath];
     
     // Configure the cell...
+    /**
+     FirstRow - CollectionView
+     [...] - TableView (what do I want the bookcase cell to look like?
+     LastRow - Add Bookcase cell.
+     */
     
     return cell;
 }
-*/
+
+
+    ///Really not sure about this one here.
+-(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(LBR_LibrarySelection_TableViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    [cell setCollectionViewDataSourceDelegate:self indexPath:indexPath];
+    NSInteger index = cell.collectionView.tag;
+    
+    CGFloat horizontalOffset = [self.contentOffsetDictionary[@(index).stringValue] floatValue];
+    [cell.collectionView setContentOffset:CGPointMake(horizontalOffset, 0)];
+}
+
+#pragma mark - === UITableView Delegate methods ===
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0) {
+        <#statements#> //I WANT TO CHANGE MY PLANS: YES, THE COLLECTION VIEW GETS ITS OWN
+                       //SECTION, BUT THE ADD BOOKCASE CELL SHOULD BE THE LAST OBJECT OF THE
+                       //CURRENT LIBRARY !!!:
+    }
+}
+
 
 /*
 // Override to support conditional editing of the table view.
@@ -120,9 +181,10 @@ static NSString * const collectionViewCellReuseID = @"collectionViewCellReuseID"
 
 #pragma mark - === UICollectionView DataSource ===
 
+    ///CollectionView will display the libraries, so #items = #libraries, which are the sections of the FetchRequest.
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.librariesFetchedResultsController.fetchedObjects.count;
+    return self.bookcasesFetchedResultsController.sections.count;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -137,10 +199,24 @@ static NSString * const collectionViewCellReuseID = @"collectionViewCellReuseID"
 
 -(void)configureCollectionViewCell:(UICollectionViewCell*)cell forItemAtIndexPath:(NSIndexPath*)indexPath
 {
+    NSArray <id <NSFetchedResultsSectionInfo>> *librariesArray = self.bookcasesFetchedResultsController.sections;
     UITextView *textView = [[UITextView alloc] initWithFrame:cell.frame];
     [cell addSubview:textView];
     textView.textContainer.lineBreakMode = NSLineBreakByWordWrapping;
-    textView.text = [NSString stringWithFormat:@"This cell represents Library \"%@\", at indexPath: %@", self.librariesFetchedResultsController.fetchedObjects[indexPath.item], indexPath];
+    textView.text = [NSString stringWithFormat:@"This cell represents Library \"%@\", at indexPath: %@", librariesArray[indexPath.item].name, indexPath];
+}
+
+#pragma mark - === UIScrollViewDelegate ===
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (![scrollView isKindOfClass:[UICollectionView class]]) return;
+    
+    CGFloat horizontalOffset = scrollView.contentOffset.x;
+    
+    UICollectionView *collectionView = (UICollectionView*)scrollView;
+    NSInteger index = collectionView.tag;
+    self.contentOffsetDictionary[@(index).stringValue] = @(horizontalOffset);
 }
 
 
@@ -148,33 +224,49 @@ static NSString * const collectionViewCellReuseID = @"collectionViewCellReuseID"
 
 #pragma mark Fetched Results Controller configuration
 
--(NSFetchedResultsController *)librariesFetchedResultsController
+//-(NSFetchedResultsController *)librariesFetchedResultsController
+//{
+//    if (_librariesFetchedResultsController != nil) {
+//        return _librariesFetchedResultsController;
+//    }
+//    
+//    NSFetchedResultsController *frc;
+//    [self configureFetchedResultsController:frc ForEntityName:@"Library"];
+//    
+//    return frc;
+//}
+
+-(NSFetchedResultsController *)bookcasesFetchedResultsController
 {
-    if (_librariesFetchedResultsController != nil) {
-        return _librariesFetchedResultsController;
+    if (_bookcasesFetchedResultsController != nil) {
+        return _bookcasesFetchedResultsController;
     }
-            /**
-             *  1) The set of all LIBRARIES
-             *  2) ...arranged by userOrder,
-             *  4) ...then author,
-             *  5) ...then year.
-             */
+    
+    NSFetchedResultsController *frc;
+    /**
+     *  1) The set of all [Entity Name]
+     *  2) ...arranged by userOrder,
+     *  3) ...then date created.
+     */
     dataManager = dataManager ? dataManager : [LBRDataManager sharedDataManager];
     NSManagedObjectContext *managedObjectContext = dataManager.managedObjectContext;
     [dataManager generateDefaultLibraryIfNeeded];
     
-    NSFetchRequest *librariesRequest = [NSFetchRequest fetchRequestWithEntityName:@"Library"]; //(1)
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Bookcase"]; //(1)
     
         // Edit the sort key as appropriate.
     NSSortDescriptor *orderSorter       = [NSSortDescriptor sortDescriptorWithKey:@"orderWhenListed" ascending:YES];
     NSSortDescriptor *dateCreatedSorter = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES];
     
-    librariesRequest.fetchBatchSize = 20;
-    librariesRequest.sortDescriptors = @[orderSorter, dateCreatedSorter];
+    request.fetchBatchSize = 20;
+    request.sortDescriptors = @[orderSorter, dateCreatedSorter];
     
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
-    NSFetchedResultsController *frc = [[NSFetchedResultsController alloc] initWithFetchRequest:librariesRequest managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:@"LBR_Libraries_CacheName"];
+    frc = [[NSFetchedResultsController alloc] initWithFetchRequest:request
+                                              managedObjectContext:managedObjectContext
+                                                sectionNameKeyPath:@"library"
+                                                         cacheName:@"LBR_Bookcase_CacheName"];
     
     NSError *error = nil;
     if (![frc performFetch:&error]) {
@@ -186,7 +278,40 @@ static NSString * const collectionViewCellReuseID = @"collectionViewCellReuseID"
     
     return frc;
 }
- 
+
+-(void)configureFetchedResultsController:(NSFetchedResultsController*)frc ForEntityName:(NSString*)entityName
+{
+    /**
+     *  1) The set of all [Entity Name]
+     *  2) ...arranged by userOrder,
+     *  3) ...then date created.
+     */
+    dataManager = dataManager ? dataManager : [LBRDataManager sharedDataManager];
+    NSManagedObjectContext *managedObjectContext = dataManager.managedObjectContext;
+    [dataManager generateDefaultLibraryIfNeeded];
+    
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:entityName]; //(1)
+    
+        // Edit the sort key as appropriate.
+    NSSortDescriptor *orderSorter       = [NSSortDescriptor sortDescriptorWithKey:@"orderWhenListed" ascending:YES];
+    NSSortDescriptor *dateCreatedSorter = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES];
+    
+    request.fetchBatchSize = 20;
+    request.sortDescriptors = @[orderSorter, dateCreatedSorter];
+    
+        // Edit the section name key path and cache name if appropriate.
+        // nil for section name key path means "no sections".
+    frc = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:[NSString stringWithFormat:@"LBR_LibrarySelection-%@-CacheName", entityName]];
+    
+    NSError *error = nil;
+    if (![frc performFetch:&error]) {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. !!!:You should not use this function in a shipping application, although it may be useful during development.
+            //        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+}
+
 #pragma mark - === Fetched Results Controller Delegate methods ===
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
