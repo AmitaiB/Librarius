@@ -10,7 +10,7 @@
 #import "LBRDataManager.h"
 
 @interface LBR_LibraryConstruction_TableViewController ()
-@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController; //To get the libraries
 
 
 

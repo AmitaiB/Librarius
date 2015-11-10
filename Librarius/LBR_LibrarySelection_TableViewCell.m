@@ -40,4 +40,11 @@ static NSString * const collectionViewCellReuseID = @"collectionViewCellReuseID"
     // Configure the view for the selected state
 }
 
+-(void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    self.collectionView.frame = self.contentView.bounds;
+}
+
 @end
