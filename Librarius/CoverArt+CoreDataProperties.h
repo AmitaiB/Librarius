@@ -2,7 +2,7 @@
 //  CoverArt+CoreDataProperties.h
 //  Librarius
 //
-//  Created by Amitai Blickstein on 10/29/15.
+//  Created by Amitai Blickstein on 11/10/15.
 //  Copyright © 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -15,10 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CoverArt (CoreDataProperties)
 
-@property (nullable, nonatomic, retain) NSData *coverArtImageDataSizeSmall;
-@property (nullable, nonatomic, retain) NSString *coverArtURLSizeSmall;
 @property (nullable, nonatomic, retain) NSData *coverArtImageDataSizeLarge;
+@property (nullable, nonatomic, retain) NSData *coverArtImageDataSizeSmall;
 @property (nullable, nonatomic, retain) NSString *coverArtURLSizeLarge;
+@property (nullable, nonatomic, retain) NSString *coverArtURLSizeSmall;
 @property (nullable, nonatomic, retain) Volume *correspondingVolume;
 
 @end

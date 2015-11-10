@@ -44,7 +44,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
+    return 0;
 }
 
 
@@ -106,7 +106,7 @@
 #pragma mark - === NSFetchedResultsController ===
 
 #pragma mark Fetched Results Controller configuration
-
+/**
 - (NSFetchedResultsController *)fetchedResultsController
 {
     if (_fetchedResultsController != nil) {
@@ -117,7 +117,7 @@
              *  2) ...arranged by userOrder,
              *  4) ...then author,
              *  5) ...then year.
-             */
+             * /
     dataManager = dataManager ? dataManager : [LBRDataManager sharedDataManager];
     NSManagedObjectContext *managedObjectContext = dataManager.managedObjectContext;
     NSFetchRequest *volumesRequest = [NSFetchRequest fetchRequestWithEntityName:@"Library"]; //(1)
@@ -154,7 +154,7 @@
             
             
 }
-
+ 
 #pragma mark - === Fetched Results Controller Delegate methods ===
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller

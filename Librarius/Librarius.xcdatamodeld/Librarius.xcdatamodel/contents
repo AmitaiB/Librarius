@@ -46,8 +46,8 @@
     </entity>
     <elements>
         <element name="Bookcase" positionX="-47" positionY="-27" width="128" height="120"/>
+        <element name="CoverArt" positionX="117" positionY="63" width="128" height="118"/>
         <element name="Library" positionX="-36" positionY="219" width="128" height="105"/>
         <element name="Volume" positionX="-216" positionY="-36" width="128" height="373"/>
-        <element name="CoverArt" positionX="117" positionY="63" width="128" height="118"/>
     </elements>
 </model>

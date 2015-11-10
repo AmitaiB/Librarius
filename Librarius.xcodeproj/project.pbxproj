@@ -44,15 +44,15 @@
 		382A83BD1BB3D6E1008860CF /* PresentDetailTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 382A83BC1BB3D6E1008860CF /* PresentDetailTransition.m */; };
 		382A83C11BB3D926008860CF /* DismissDetailTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 382A83C01BB3D926008860CF /* DismissDetailTransition.m */; };
 		382A83ED1BB4AF98008860CF /* LBRBatchScanScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 382A83EC1BB4AF98008860CF /* LBRBatchScanScrollView.m */; };
-		3837F2C31BE2F1B200170FF6 /* CoverArt+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 3837F2BA1BE2F1B200170FF6 /* CoverArt+CoreDataProperties.m */; };
 		3837F2C41BE2F1B200170FF6 /* CoverArt.m in Sources */ = {isa = PBXBuildFile; fileRef = 3837F2BC1BE2F1B200170FF6 /* CoverArt.m */; };
-		3837F2C51BE2F1B200170FF6 /* Volume+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 3837F2BE1BE2F1B200170FF6 /* Volume+CoreDataProperties.m */; };
-		3837F2C61BE2F1B200170FF6 /* Bookcase+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 3837F2C01BE2F1B200170FF6 /* Bookcase+CoreDataProperties.m */; };
-		3837F2C71BE2F1B200170FF6 /* Library+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 3837F2C21BE2F1B200170FF6 /* Library+CoreDataProperties.m */; };
 		3837F2CE1BE2F33A00170FF6 /* Volume.m in Sources */ = {isa = PBXBuildFile; fileRef = 3837F2C91BE2F33A00170FF6 /* Volume.m */; };
 		3837F2CF1BE2F33A00170FF6 /* Library.m in Sources */ = {isa = PBXBuildFile; fileRef = 3837F2CB1BE2F33A00170FF6 /* Library.m */; };
 		3837F2D01BE2F33A00170FF6 /* Bookcase.m in Sources */ = {isa = PBXBuildFile; fileRef = 3837F2CD1BE2F33A00170FF6 /* Bookcase.m */; };
 		383A2F961BEEE42A006D115F /* LBR_PopoverBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 383A2F951BEEE42A006D115F /* LBR_PopoverBackgroundView.m */; };
+		383E18E21BF256BE0002F9DE /* Bookcase+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 383E18DB1BF256BE0002F9DE /* Bookcase+CoreDataProperties.m */; };
+		383E18E31BF256BE0002F9DE /* CoverArt+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 383E18DD1BF256BE0002F9DE /* CoverArt+CoreDataProperties.m */; };
+		383E18E41BF256BE0002F9DE /* Volume+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 383E18DF1BF256BE0002F9DE /* Volume+CoreDataProperties.m */; };
+		383E18E51BF256BE0002F9DE /* Library+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 383E18E11BF256BE0002F9DE /* Library+CoreDataProperties.m */; };
 		38466D281B94F24400DD252E /* LBRGoogleGTLClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 38466D271B94F24400DD252E /* LBRGoogleGTLClient.m */; };
 		384E0CC01B97D24B007E7290 /* NSString+dateValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 384E0CBF1B97D24B007E7290 /* NSString+dateValue.m */; };
 		3851DBFD1B8E2E5A00E90B9F /* LBRDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3851DBFC1B8E2E5A00E90B9F /* LBRDataManager.m */; };
@@ -182,16 +182,8 @@
 		382A83EB1BB4AF98008860CF /* LBRBatchScanScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRBatchScanScrollView.h; sourceTree = "<group>"; };
 		382A83EC1BB4AF98008860CF /* LBRBatchScanScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRBatchScanScrollView.m; sourceTree = "<group>"; };
 		382CE7FB1B9E09ED000A9701 /* Librarius-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Librarius-Prefix.pch"; sourceTree = "<group>"; };
-		3837F2B91BE2F1B200170FF6 /* CoverArt+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoverArt+CoreDataProperties.h"; sourceTree = "<group>"; };
-		3837F2BA1BE2F1B200170FF6 /* CoverArt+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CoverArt+CoreDataProperties.m"; sourceTree = "<group>"; };
 		3837F2BB1BE2F1B200170FF6 /* CoverArt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoverArt.h; sourceTree = "<group>"; };
 		3837F2BC1BE2F1B200170FF6 /* CoverArt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoverArt.m; sourceTree = "<group>"; };
-		3837F2BD1BE2F1B200170FF6 /* Volume+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Volume+CoreDataProperties.h"; sourceTree = "<group>"; };
-		3837F2BE1BE2F1B200170FF6 /* Volume+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Volume+CoreDataProperties.m"; sourceTree = "<group>"; };
-		3837F2BF1BE2F1B200170FF6 /* Bookcase+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bookcase+CoreDataProperties.h"; sourceTree = "<group>"; };
-		3837F2C01BE2F1B200170FF6 /* Bookcase+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Bookcase+CoreDataProperties.m"; sourceTree = "<group>"; };
-		3837F2C11BE2F1B200170FF6 /* Library+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Library+CoreDataProperties.h"; sourceTree = "<group>"; };
-		3837F2C21BE2F1B200170FF6 /* Library+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Library+CoreDataProperties.m"; sourceTree = "<group>"; };
 		3837F2C81BE2F33A00170FF6 /* Volume.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Volume.h; sourceTree = "<group>"; };
 		3837F2C91BE2F33A00170FF6 /* Volume.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Volume.m; sourceTree = "<group>"; };
 		3837F2CA1BE2F33A00170FF6 /* Library.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Library.h; sourceTree = "<group>"; };
@@ -200,6 +192,14 @@
 		3837F2CD1BE2F33A00170FF6 /* Bookcase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bookcase.m; sourceTree = "<group>"; };
 		383A2F941BEEE42A006D115F /* LBR_PopoverBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBR_PopoverBackgroundView.h; sourceTree = "<group>"; };
 		383A2F951BEEE42A006D115F /* LBR_PopoverBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBR_PopoverBackgroundView.m; sourceTree = "<group>"; };
+		383E18DA1BF256BE0002F9DE /* Bookcase+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bookcase+CoreDataProperties.h"; sourceTree = "<group>"; };
+		383E18DB1BF256BE0002F9DE /* Bookcase+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Bookcase+CoreDataProperties.m"; sourceTree = "<group>"; };
+		383E18DC1BF256BE0002F9DE /* CoverArt+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoverArt+CoreDataProperties.h"; sourceTree = "<group>"; };
+		383E18DD1BF256BE0002F9DE /* CoverArt+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CoverArt+CoreDataProperties.m"; sourceTree = "<group>"; };
+		383E18DE1BF256BE0002F9DE /* Volume+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Volume+CoreDataProperties.h"; sourceTree = "<group>"; };
+		383E18DF1BF256BE0002F9DE /* Volume+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Volume+CoreDataProperties.m"; sourceTree = "<group>"; };
+		383E18E01BF256BE0002F9DE /* Library+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Library+CoreDataProperties.h"; sourceTree = "<group>"; };
+		383E18E11BF256BE0002F9DE /* Library+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Library+CoreDataProperties.m"; sourceTree = "<group>"; };
 		38466D261B94F24400DD252E /* LBRGoogleGTLClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRGoogleGTLClient.h; sourceTree = "<group>"; };
 		38466D271B94F24400DD252E /* LBRGoogleGTLClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRGoogleGTLClient.m; sourceTree = "<group>"; };
 		384E0CBE1B97D24B007E7290 /* NSString+dateValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+dateValue.h"; sourceTree = "<group>"; };
@@ -401,22 +401,22 @@
 		380375581B8B9F11004C4ECE /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				383E18DA1BF256BE0002F9DE /* Bookcase+CoreDataProperties.h */,
+				383E18DB1BF256BE0002F9DE /* Bookcase+CoreDataProperties.m */,
+				383E18DC1BF256BE0002F9DE /* CoverArt+CoreDataProperties.h */,
+				383E18DD1BF256BE0002F9DE /* CoverArt+CoreDataProperties.m */,
+				383E18DE1BF256BE0002F9DE /* Volume+CoreDataProperties.h */,
+				383E18DF1BF256BE0002F9DE /* Volume+CoreDataProperties.m */,
+				383E18E01BF256BE0002F9DE /* Library+CoreDataProperties.h */,
+				383E18E11BF256BE0002F9DE /* Library+CoreDataProperties.m */,
 				3837F2C81BE2F33A00170FF6 /* Volume.h */,
 				3837F2C91BE2F33A00170FF6 /* Volume.m */,
 				3837F2CA1BE2F33A00170FF6 /* Library.h */,
 				3837F2CB1BE2F33A00170FF6 /* Library.m */,
 				3837F2CC1BE2F33A00170FF6 /* Bookcase.h */,
 				3837F2CD1BE2F33A00170FF6 /* Bookcase.m */,
-				3837F2B91BE2F1B200170FF6 /* CoverArt+CoreDataProperties.h */,
-				3837F2BA1BE2F1B200170FF6 /* CoverArt+CoreDataProperties.m */,
 				3837F2BB1BE2F1B200170FF6 /* CoverArt.h */,
 				3837F2BC1BE2F1B200170FF6 /* CoverArt.m */,
-				3837F2BD1BE2F1B200170FF6 /* Volume+CoreDataProperties.h */,
-				3837F2BE1BE2F1B200170FF6 /* Volume+CoreDataProperties.m */,
-				3837F2BF1BE2F1B200170FF6 /* Bookcase+CoreDataProperties.h */,
-				3837F2C01BE2F1B200170FF6 /* Bookcase+CoreDataProperties.m */,
-				3837F2C11BE2F1B200170FF6 /* Library+CoreDataProperties.h */,
-				3837F2C21BE2F1B200170FF6 /* Library+CoreDataProperties.m */,
 				38565D6E1B9A20B800349498 /* LBRParsedVolume.h */,
 				38565D6F1B9A20B800349498 /* LBRParsedVolume.m */,
 			);
@@ -908,14 +908,15 @@
 				3810DA101BD5E0980093D5C2 /* Utils.m in Sources */,
 				3810DA111BD5E0980093D5C2 /* FlatTheme.m in Sources */,
 				380375F81B8D4E90004C4ECE /* BookDetailViewController.m in Sources */,
+				383E18E51BF256BE0002F9DE /* Library+CoreDataProperties.m in Sources */,
 				38DA43DB1BE7056900FEFD16 /* LBRSettingsCell.m in Sources */,
 				38AAD6F01B901175003062C1 /* Librarius.xcdatamodeld in Sources */,
 				386B7D131BF15ABA004A1DF8 /* LBR_LibrarySelection_CollectionView.m in Sources */,
 				3810DA1E1BD5E0ED0093D5C2 /* MBProgressHUD.m in Sources */,
-				3837F2C51BE2F1B200170FF6 /* Volume+CoreDataProperties.m in Sources */,
 				38F57BBF1BB0707200CC2EE8 /* UIImage+FlatUI.m in Sources */,
 				38E71DAF1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.m in Sources */,
 				38F57BC11BB0707200CC2EE8 /* UIColor+FlatUI.m in Sources */,
+				383E18E41BF256BE0002F9DE /* Volume+CoreDataProperties.m in Sources */,
 				3855E26F1BB0DBD4004C5D11 /* LBRAlertContent_TableViewCell.m in Sources */,
 				380375F71B8D4E90004C4ECE /* BookCollection_TableViewController.m in Sources */,
 				38F57BB71BB0707200CC2EE8 /* UIToolbar+FlatUI.m in Sources */,
@@ -937,7 +938,6 @@
 				386C23781BD968920065B46F /* LBRRecommendedBook_CollectionViewCell.m in Sources */,
 				38F57BBC1BB0707200CC2EE8 /* UIProgressView+FlatUI.m in Sources */,
 				38E2497F1BE2AEEC0047EBF7 /* ABB_BufferToolbar.m in Sources */,
-				3837F2C31BE2F1B200170FF6 /* CoverArt+CoreDataProperties.m in Sources */,
 				38D6019E1BDAAEDE00E3D60F /* LBRRecommendations_FlowLayout.m in Sources */,
 				388DBE301BAA0F60005C5125 /* LBRCustomLayout.m in Sources */,
 				386C23751BD934520065B46F /* LBRRecommendations_CollectionViewHeader.m in Sources */,
@@ -946,8 +946,6 @@
 				3851DBFD1B8E2E5A00E90B9F /* LBRDataManager.m in Sources */,
 				38FABE881BD49AE4009479E9 /* UIColor+ABBColors.m in Sources */,
 				3837F2CE1BE2F33A00170FF6 /* Volume.m in Sources */,
-				3837F2C61BE2F1B200170FF6 /* Bookcase+CoreDataProperties.m in Sources */,
-				3837F2C71BE2F1B200170FF6 /* Library+CoreDataProperties.m in Sources */,
 				380375621B8BB707004C4ECE /* LBRGoodReadsAPIClient.m in Sources */,
 				38103B591BD033AE009F22E3 /* LBR_ShelvedBookCell.m in Sources */,
 				383A2F961BEEE42A006D115F /* LBR_PopoverBackgroundView.m in Sources */,
@@ -963,11 +961,13 @@
 				3803756A1B8BC89D004C4ECE /* LBRGoogleSignInViewController.m in Sources */,
 				38DA43D01BE66F2B00FEFD16 /* README.md in Sources */,
 				38D6019B1BDAAAC900E3D60F /* LBRShelf_DecorationView.m in Sources */,
+				383E18E31BF256BE0002F9DE /* CoverArt+CoreDataProperties.m in Sources */,
 				3810D9FE1BD5BDE60093D5C2 /* UIColor-Expanded.m in Sources */,
 				38F57BBE1BB0707200CC2EE8 /* UINavigationBar+FlatUI.m in Sources */,
 				38F3C0D91BDFE01F005AF2ED /* LBR_ResultsTableViewController.m in Sources */,
 				382A83BA1BB3BA94008860CF /* LBRRecommendationsCollectionViewController.m in Sources */,
 				38DF003A1BE7F9C800D4BCE3 /* LBRAcknowledgements_ViewController.m in Sources */,
+				383E18E21BF256BE0002F9DE /* Bookcase+CoreDataProperties.m in Sources */,
 				386B7D161BF15BC2004A1DF8 /* LBR_LibrarySelection_TableViewCell.m in Sources */,
 				386B7D0F1BF154AD004A1DF8 /* LBR_LibraryConstruction_TableViewController.m in Sources */,
 				3803757A1B8C08E0004C4ECE /* LBRSettingsTableViewController.m in Sources */,

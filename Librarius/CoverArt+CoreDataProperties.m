@@ -2,7 +2,7 @@
 //  CoverArt+CoreDataProperties.m
 //  Librarius
 //
-//  Created by Amitai Blickstein on 10/29/15.
+//  Created by Amitai Blickstein on 11/10/15.
 //  Copyright © 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -13,10 +13,10 @@
 
 @implementation CoverArt (CoreDataProperties)
 
-@dynamic coverArtImageDataSizeSmall;
 @dynamic coverArtImageDataSizeLarge;
-@dynamic coverArtURLSizeSmall;
+@dynamic coverArtImageDataSizeSmall;
 @dynamic coverArtURLSizeLarge;
+@dynamic coverArtURLSizeSmall;
 @dynamic correspondingVolume;
 
 @end
