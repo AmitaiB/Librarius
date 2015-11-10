@@ -8,9 +8,10 @@
 
 #import "LBR_LibraryConstruction_TableViewController.h"
 #import "LBRDataManager.h"
+#import "Library.h"
 
 @interface LBR_LibraryConstruction_TableViewController ()
-@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController; //To get the libraries
+@property (nonatomic, strong) NSFetchedResultsController *librariesFetchedResultsController; //To get the libraries
 
 
 
@@ -20,8 +21,11 @@
     LBRDataManager *dataManager;
 }
 
+static NSString * const collectionViewCellReuseID = @"collectionViewCellReuseID";
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.librariesFetchedResultsController.delegate = self;
     
     dataManager = [LBRDataManager sharedDataManager];
     
@@ -44,7 +48,18 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    NSArray *sections = [self.librariesFetchedResultsController sections];
+    if (sections.count) {
+        id <NSFetchedResultsSectionInfo> currentSection = sections[section];
+        return currentSection.numberOfObjects;
+    }
     return 0;
+
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return [NSString stringWithFormat:@"Current Library: %@", dataManager.currentLibrary.name];
 }
 
 
@@ -103,14 +118,40 @@
 }
 */
 
+#pragma mark - === UICollectionView DataSource ===
+
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.librariesFetchedResultsController.fetchedObjects.count;
+}
+
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewCellReuseID forIndexPath:indexPath];
+    
+        //configure cell here
+    [self configureCollectionViewCell:cell forItemAtIndexPath:indexPath];
+    
+    return cell;
+}
+
+-(void)configureCollectionViewCell:(UICollectionViewCell*)cell forItemAtIndexPath:(NSIndexPath*)indexPath
+{
+    UITextView *textView = [[UITextView alloc] initWithFrame:cell.frame];
+    [cell addSubview:textView];
+    textView.textContainer.lineBreakMode = NSLineBreakByWordWrapping;
+    textView.text = [NSString stringWithFormat:@"This cell represents Library \"%@\", at indexPath: %@", self.librariesFetchedResultsController.fetchedObjects[indexPath.item], indexPath];
+}
+
+
 #pragma mark - === NSFetchedResultsController ===
 
 #pragma mark Fetched Results Controller configuration
 
-- (NSFetchedResultsController *)fetchedResultsController
+-(NSFetchedResultsController *)librariesFetchedResultsController
 {
-    if (_fetchedResultsController != nil) {
-        return _fetchedResultsController;
+    if (_librariesFetchedResultsController != nil) {
+        return _librariesFetchedResultsController;
     }
             /**
              *  1) The set of all LIBRARIES

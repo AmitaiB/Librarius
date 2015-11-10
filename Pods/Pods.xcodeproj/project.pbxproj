@@ -296,7 +296,7 @@
 		01500389AC443B60414208F654F0A969 /* GIDAuthentication.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GIDAuthentication.h; path = Headers/Public/GIDAuthentication.h; sourceTree = "<group>"; };
 		01C99086EDE32128EA62D0C16C413C7E /* AFURLSessionManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLSessionManager.h; path = AFNetworking/AFURLSessionManager.h; sourceTree = "<group>"; };
 		025B1D431F9A57582DFCDB07554B1094 /* GIDSignInButton.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GIDSignInButton.h; path = Headers/Public/GIDSignInButton.h; sourceTree = "<group>"; };
-		02F89F1CE09375D8D381434EEE1AA307 /* SignIn.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SignIn.h; path = Headers/GGLSignIn/Public/SignIn.h; sourceTree = "<group>"; };
+		028B9E3F2575F11E030ACBA1FCE9DAC9 /* GGLContext.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GGLContext.h; path = Headers/GGLCore/Public/GGLContext.h; sourceTree = "<group>"; };
 		0312AB6483D15889775990361BECE55A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		035AECD3B73DCF1F782F79BA7F7BE87B /* GoogleSignIn.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GoogleSignIn.bundle; path = Resources/GoogleSignIn.bundle; sourceTree = "<group>"; };
 		03863F018E3785C277874280E536C1F7 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFHTTPSessionManager.h; path = AFNetworking/AFHTTPSessionManager.h; sourceTree = "<group>"; };
@@ -321,7 +321,6 @@
 		13CCA111B09AD32BB73875BB1D3FB4C2 /* UIView+FDCollapsibleConstraints.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "UIView+FDCollapsibleConstraints.xcconfig"; sourceTree = "<group>"; };
 		14F993E658987EEBAE2312BC74E51870 /* GTLBooksVolumesRecommendedRateResponse.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GTLBooksVolumesRecommendedRateResponse.m; path = Source/Services/Books/Generated/GTLBooksVolumesRecommendedRateResponse.m; sourceTree = "<group>"; };
 		15DFAEF42A318B45D7BC34DA827847CC /* libLARSTorch.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLARSTorch.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		15F28D9CC887CE756D92E70AC95FFFF2 /* GGLErrorCode.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GGLErrorCode.h; path = Headers/GGLCore/Public/GGLErrorCode.h; sourceTree = "<group>"; };
 		162C13C7C69918A81EC2302042210C2B /* Pods-Librarius-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Librarius-frameworks.sh"; sourceTree = "<group>"; };
 		17BFC8118039E0AE6C8747CA745CE469 /* LARSTorch.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LARSTorch.h; sourceTree = "<group>"; };
 		1923F865010D77F6CCA771799B28A76E /* MTBBarcodeScanner.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MTBBarcodeScanner.xcconfig; sourceTree = "<group>"; };
@@ -334,7 +333,6 @@
 		27BB6517119BC15A63F544AE94BCD632 /* NYAlertViewController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NYAlertViewController.xcconfig; sourceTree = "<group>"; };
 		28FD87B202D1C1F29530C53819ED6781 /* GTLBooksCloudloadingResource.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GTLBooksCloudloadingResource.h; path = Source/Services/Books/Generated/GTLBooksCloudloadingResource.h; sourceTree = "<group>"; };
 		2A41F2103965CE1929B25042C5DF0BEC /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
-		2AD143153A044C68633693D859E180D6 /* CloudMessaging-Module.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "CloudMessaging-Module.h"; path = "Headers/ModuleHeaders/CloudMessaging-Module.h"; sourceTree = "<group>"; };
 		2B752FF644BBA816CDAADF7811E79682 /* Google-API-Client-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Google-API-Client-prefix.pch"; sourceTree = "<group>"; };
 		2BB82BFDC13B7ECAF03AB1471BFD5197 /* GTLBooksBookshelf.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GTLBooksBookshelf.m; path = Source/Services/Books/Generated/GTLBooksBookshelf.m; sourceTree = "<group>"; };
 		2BBBEF5458390064D909738F6297D787 /* GTLTargetNamespace.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GTLTargetNamespace.h; path = Source/Utilities/GTLTargetNamespace.h; sourceTree = "<group>"; };
@@ -371,17 +369,15 @@
 		4AFECA05B6AA4B2D07F6BCD9F3CC9952 /* GTLBooksOffers.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GTLBooksOffers.h; path = Source/Services/Books/Generated/GTLBooksOffers.h; sourceTree = "<group>"; };
 		4C4D6368B62E72958F8B24009E1D58FB /* GTLBooksUsersettings.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GTLBooksUsersettings.m; path = Source/Services/Books/Generated/GTLBooksUsersettings.m; sourceTree = "<group>"; };
 		4CE2D53302A997037516A25B8A1AEB91 /* Google-API-Client-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Google-API-Client-dummy.m"; sourceTree = "<group>"; };
-		506B2DB27547F7641DD7EC1C7059D709 /* GGLContext+SignIn.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "GGLContext+SignIn.h"; path = "Headers/GGLSignIn/Public/GGLContext+SignIn.h"; sourceTree = "<group>"; };
 		50B336968ACA0B75E7F5BCF77EC2B196 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFHTTPRequestOperation.m; path = AFNetworking/AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		50D2F1B9699E47BAB742EDEF83476D8F /* NYAlertViewController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NYAlertViewController-dummy.m"; sourceTree = "<group>"; };
 		5102994BA61140262EACAE3F6384B8A8 /* GTLBooksAnnotationsdata.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GTLBooksAnnotationsdata.h; path = Source/Services/Books/Generated/GTLBooksAnnotationsdata.h; sourceTree = "<group>"; };
-		515C098E6265C72998A48FC9DEEDF6B6 /* GGLContext.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GGLContext.h; path = Headers/GGLCore/Public/GGLContext.h; sourceTree = "<group>"; };
 		520DB2CBBBE3890C25C8380A961CA66B /* MTBBarcodeScanner.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MTBBarcodeScanner.m; path = Classes/ios/Scanners/MTBBarcodeScanner.m; sourceTree = "<group>"; };
 		5226C669D1A2F339E5E60E491C6EC403 /* GTMHTTPFetcher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GTMHTTPFetcher.h; path = Source/GTMHTTPFetcher.h; sourceTree = "<group>"; };
 		5232E82A5B450845773CC6BF1ACD4118 /* GTLQueryBooks.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GTLQueryBooks.h; path = Source/Services/Books/Generated/GTLQueryBooks.h; sourceTree = "<group>"; };
-		52CE144800B8AC5693F957F889BD38BA /* Analytics-Module.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Analytics-Module.h"; path = "Headers/ModuleHeaders/Analytics-Module.h"; sourceTree = "<group>"; };
 		5488A1C6A15DE1F4F5F16A5C3DA41B94 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+AFNetworking.m"; path = "UIKit+AFNetworking/UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
 		55B015BF06A97F4302B242BB1C1FD966 /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLConnectionOperation.h; path = AFNetworking/AFURLConnectionOperation.h; sourceTree = "<group>"; };
+		570A3EEE80B3E43C957D3A74B2AC920C /* libGGLCore.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGGLCore.a; path = Libraries/libGGLCore.a; sourceTree = "<group>"; };
 		575B62D578D4AFE3286B5050D8455C8D /* libGTM_DebugUtils.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_DebugUtils.a; path = Libraries/libGTM_DebugUtils.a; sourceTree = "<group>"; };
 		5A4EAF9D7FA8DEB9768725D4F7F3398F /* LARSTorch.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LARSTorch.xcconfig; sourceTree = "<group>"; };
 		5C4735F3002581566F3D4F26678AA2C6 /* GTMHTTPFetchHistory.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GTMHTTPFetchHistory.m; path = Source/GTMHTTPFetchHistory.m; sourceTree = "<group>"; };
@@ -389,6 +385,7 @@
 		5F7234BF457767288CE3DFA3225DA317 /* libMTBBarcodeScanner.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMTBBarcodeScanner.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F85AA38374AC6CCFF8CDFA894BEC9BD /* libGTM_UIFont+LineHeight.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = "libGTM_UIFont+LineHeight.a"; path = "Libraries/libGTM_UIFont+LineHeight.a"; sourceTree = "<group>"; };
 		5FEDDA3FF4569FC8A70B58D1E1114EED /* UIButton+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIButton+AFNetworking.h"; path = "UIKit+AFNetworking/UIButton+AFNetworking.h"; sourceTree = "<group>"; };
+		60B2221C75F6F21A0A5A775999D52638 /* AdMob-Module.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "AdMob-Module.h"; path = "Headers/ModuleHeaders/AdMob-Module.h"; sourceTree = "<group>"; };
 		60F73794F8804D4151C725D3122D1A88 /* GTMOAuth2ViewControllerTouch.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GTMOAuth2ViewControllerTouch.h; path = Source/Touch/GTMOAuth2ViewControllerTouch.h; sourceTree = "<group>"; };
 		6109C294D4114421268008BBC8913F1C /* GTLBooksLayersummary.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GTLBooksLayersummary.h; path = Source/Services/Books/Generated/GTLBooksLayersummary.h; sourceTree = "<group>"; };
 		620F9652952D0BF4FBD72DA00F04D87C /* GTMReadMonitorInputStream.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GTMReadMonitorInputStream.m; path = Source/GTMReadMonitorInputStream.m; sourceTree = "<group>"; };
@@ -396,23 +393,22 @@
 		64C04DB24DF0D6CFC0DE1EED5201702E /* GTLDateTime.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GTLDateTime.m; path = Source/Objects/GTLDateTime.m; sourceTree = "<group>"; };
 		6587B1F5A256FB0A189D816E870AC120 /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFNetworkReachabilityManager.h; path = AFNetworking/AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
 		6592EFE9CA9C490305DDA8271EDEE522 /* dot.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = dot.png; sourceTree = "<group>"; };
-		6628707DF993ECE1EBA5DD367A0F4948 /* GGLConfiguration.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GGLConfiguration.h; path = Headers/GGLCore/Public/GGLConfiguration.h; sourceTree = "<group>"; };
 		67308D1E508ED87C8F83932813B9FF15 /* AFURLSessionManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFURLSessionManager.m; path = AFNetworking/AFURLSessionManager.m; sourceTree = "<group>"; };
 		6826804DE1BA4A6F8F02EE88F78447FD /* NYAlertViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NYAlertViewController.h; path = NYAlertViewController/NYAlertViewController.h; sourceTree = "<group>"; };
 		6893DE02BEE43D3C35F4A50E37F1E46E /* GTMOAuth2SignIn.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GTMOAuth2SignIn.m; path = Source/GTMOAuth2SignIn.m; sourceTree = "<group>"; };
-		68B321E65EE40A9D2A9F0878CBB5A9D8 /* AdMob-Module.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "AdMob-Module.h"; path = "Headers/ModuleHeaders/AdMob-Module.h"; sourceTree = "<group>"; };
 		69FBA6994AEF5DEA9A75A5EDA469DDD2 /* libNYAlertViewController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libNYAlertViewController.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AE2C122FA887F028B6B57FAF35C035B /* GTLQuery.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GTLQuery.h; path = Source/Objects/GTLQuery.h; sourceTree = "<group>"; };
 		6BB2DBEE8C4434E4CC96C15E586E3688 /* GTLBooksUsersettings.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GTLBooksUsersettings.h; path = Source/Services/Books/Generated/GTLBooksUsersettings.h; sourceTree = "<group>"; };
 		6BDC28A0F3EBF3E4031F51C98DD02937 /* GTLBooksVolume2.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GTLBooksVolume2.m; path = Source/Services/Books/Generated/GTLBooksVolume2.m; sourceTree = "<group>"; };
+		6DCA0E53A7F85A22A58F8756A9F447BD /* SignIn-Module.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "SignIn-Module.h"; path = "Headers/ModuleHeaders/SignIn-Module.h"; sourceTree = "<group>"; };
 		6EDC97BEBEA3EED1098FE832EA6C56F9 /* gtm-http-fetcher-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "gtm-http-fetcher-dummy.m"; sourceTree = "<group>"; };
 		6F23465B6CB4F51D74F94E2E2A98D795 /* GTLBooksVolume.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GTLBooksVolume.h; path = Source/Services/Books/Generated/GTLBooksVolume.h; sourceTree = "<group>"; };
 		7026E71F34FBB6C1B834810AE4071432 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIWebView+AFNetworking.m"; path = "UIKit+AFNetworking/UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
+		70F357DFD287F062A3BBD33307A1815C /* CloudMessaging-Module.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "CloudMessaging-Module.h"; path = "Headers/ModuleHeaders/CloudMessaging-Module.h"; sourceTree = "<group>"; };
 		717D786FFB5D96BC2B3AB5B4617B12FD /* UIActivityIndicatorView+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIActivityIndicatorView+AFNetworking.h"; path = "UIKit+AFNetworking/UIActivityIndicatorView+AFNetworking.h"; sourceTree = "<group>"; };
 		72A232E1BE209647B96EA8731E7EC483 /* GTLBooksVolumeannotation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GTLBooksVolumeannotation.m; path = Source/Services/Books/Generated/GTLBooksVolumeannotation.m; sourceTree = "<group>"; };
 		73B86C3AEF773E5068D764E65AC7785E /* GTLUploadParameters.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GTLUploadParameters.h; path = Source/Objects/GTLUploadParameters.h; sourceTree = "<group>"; };
 		73D5839615FC322D385B9EC0D9F9EE73 /* Pods-Librarius-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Librarius-acknowledgements.markdown"; sourceTree = "<group>"; };
-		7559CB00BF7A8FA283AF12406B84799A /* AppInvite-Module.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "AppInvite-Module.h"; path = "Headers/ModuleHeaders/AppInvite-Module.h"; sourceTree = "<group>"; };
 		7605F7EF8E5B6A7C2C09825E0FA4C890 /* GTMMIMEDocument.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GTMMIMEDocument.h; path = Source/GTMMIMEDocument.h; sourceTree = "<group>"; };
 		7607C5F2761B6EE2F88DE36A3AEB6C9A /* GTLBooksAnnotationsSummary.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GTLBooksAnnotationsSummary.h; path = Source/Services/Books/Generated/GTLBooksAnnotationsSummary.h; sourceTree = "<group>"; };
 		773326EA9F3AF6778FD6499F309FAC6F /* UIView+FDCollapsibleConstraints.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+FDCollapsibleConstraints.h"; path = "Classes/UIView+FDCollapsibleConstraints.h"; sourceTree = "<group>"; };
@@ -471,12 +467,12 @@
 		A3A387D3344E4E0B606D6AAB86153927 /* UIView+FDCollapsibleConstraints-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIView+FDCollapsibleConstraints-prefix.pch"; sourceTree = "<group>"; };
 		A3C47176B226924AAA744EB53A2457D7 /* AMRatingControl-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "AMRatingControl-dummy.m"; sourceTree = "<group>"; };
 		A4EE59BDEC75A8E5795CC785D79D335E /* GTLObject.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GTLObject.h; path = Source/Objects/GTLObject.h; sourceTree = "<group>"; };
-		A51D8FB9A60D6BD2FB3EE2D96739E869 /* Core-Module.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Core-Module.h"; path = "Headers/ModuleHeaders/Core-Module.h"; sourceTree = "<group>"; };
 		A69A40805E4FC0E2F3B5ECB1D05DBBC9 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperationManager.h; path = AFNetworking/AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
 		A8B78EEFD16545D0978919CD281B82B6 /* UIProgressView+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIProgressView+AFNetworking.h"; path = "UIKit+AFNetworking/UIProgressView+AFNetworking.h"; sourceTree = "<group>"; };
 		A941BD0961474AC4F9A07DD5D5771603 /* libUIView+FDCollapsibleConstraints.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libUIView+FDCollapsibleConstraints.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A95D57577D9829DBBAB989406BF90B3D /* Core.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Core.h; path = Headers/GGLCore/Public/Core.h; sourceTree = "<group>"; };
+		A9534BC8801CF3A0E6846EB65B4B55A8 /* libGGLSignIn.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGGLSignIn.a; path = Libraries/libGGLSignIn.a; sourceTree = "<group>"; };
 		A99EA93C4AAE7D9BBAE537BD7D9D26AB /* GTMHTTPUploadFetcher.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GTMHTTPUploadFetcher.h; path = Source/GTMHTTPUploadFetcher.h; sourceTree = "<group>"; };
+		AADAED2F8A08B728AF941F11EF3EF992 /* GMRConfiguration.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GMRConfiguration.h; path = Headers/GGLCore/Public/GMRConfiguration.h; sourceTree = "<group>"; };
 		AC62CE7AC104A59B8D00D118F238CB3C /* GTLBooksVolumes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GTLBooksVolumes.h; path = Source/Services/Books/Generated/GTLBooksVolumes.h; sourceTree = "<group>"; };
 		ACCCC512B2EED5931037260D2F03F201 /* GTLBooksDownloadAccessRestriction.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GTLBooksDownloadAccessRestriction.m; path = Source/Services/Books/Generated/GTLBooksDownloadAccessRestriction.m; sourceTree = "<group>"; };
 		AD19FA884AA16D99CAD00B34023CD24B /* GTLService.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GTLService.m; path = Source/Objects/GTLService.m; sourceTree = "<group>"; };
@@ -484,9 +480,11 @@
 		AE1BEC48DA2E41D6FD10340A5251167C /* GTLBooksMetadata.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GTLBooksMetadata.m; path = Source/Services/Books/Generated/GTLBooksMetadata.m; sourceTree = "<group>"; };
 		AE7C55CF601D776766BABEB9F318BDC0 /* GTMHTTPFetcherLogViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GTMHTTPFetcherLogViewController.h; path = Source/GTMHTTPFetcherLogViewController.h; sourceTree = "<group>"; };
 		AFE737E423250B44936EF6BE57CB31F5 /* GTLBooksRequestAccess.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GTLBooksRequestAccess.h; path = Source/Services/Books/Generated/GTLBooksRequestAccess.h; sourceTree = "<group>"; };
+		B025D4280D07B755142C58F4B610341C /* Analytics-Module.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Analytics-Module.h"; path = "Headers/ModuleHeaders/Analytics-Module.h"; sourceTree = "<group>"; };
 		B130A7B48CA68EDB4663DAAE83B89B95 /* GTLBooksCategory.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GTLBooksCategory.h; path = Source/Services/Books/Generated/GTLBooksCategory.h; sourceTree = "<group>"; };
 		B143CABB83857BE01E4D1344EE68CA5F /* GTLBooksVolume.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GTLBooksVolume.m; path = Source/Services/Books/Generated/GTLBooksVolume.m; sourceTree = "<group>"; };
 		B3EF0FA26FF6A523221B7D20B69421A4 /* UIView+FDCollapsibleConstraints-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIView+FDCollapsibleConstraints-dummy.m"; sourceTree = "<group>"; };
+		B487696736144F044669E037BD2BECF7 /* GGLContext+SignIn.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "GGLContext+SignIn.h"; path = "Headers/GGLSignIn/Public/GGLContext+SignIn.h"; sourceTree = "<group>"; };
 		B4CA97F131B8EA3F92B87D475CC704A1 /* GTLBooksAnnotations.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GTLBooksAnnotations.m; path = Source/Services/Books/Generated/GTLBooksAnnotations.m; sourceTree = "<group>"; };
 		B5700F57591F2A42C00A05FDBB185ACD /* GTMReadMonitorInputStream.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GTMReadMonitorInputStream.h; path = Source/GTMReadMonitorInputStream.h; sourceTree = "<group>"; };
 		B5D1CBE3D545753453556980C7CE05B0 /* AFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFNetworkActivityIndicatorManager.m; path = "UIKit+AFNetworking/AFNetworkActivityIndicatorManager.m"; sourceTree = "<group>"; };
@@ -504,13 +502,11 @@
 		C3F7193EF1A313EDDEA65A13DCA31628 /* NYAlertViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NYAlertViewController.m; path = NYAlertViewController/NYAlertViewController.m; sourceTree = "<group>"; };
 		C4AF842D43F57D9631C137CEDC1DE234 /* libSignIn.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libSignIn.a; path = Libraries/libSignIn.a; sourceTree = "<group>"; };
 		C639A59DA6446FB9E0134A4742989E92 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperation.h; path = AFNetworking/AFHTTPRequestOperation.h; sourceTree = "<group>"; };
-		C78E0DB6E2DD42D26714F545C5763884 /* SignIn-Module.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "SignIn-Module.h"; path = "Headers/ModuleHeaders/SignIn-Module.h"; sourceTree = "<group>"; };
 		C7E43AE0C787DEBAEF0BC542B4E3F0CC /* libGTM_NSScannerJSON.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_NSScannerJSON.a; path = Libraries/libGTM_NSScannerJSON.a; sourceTree = "<group>"; };
 		C95AE027BE0E7DCC983567992F96F5AF /* GTLBooksReadingPosition.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GTLBooksReadingPosition.h; path = Source/Services/Books/Generated/GTLBooksReadingPosition.h; sourceTree = "<group>"; };
 		CA09913B330182C515CE1AF03829F7A1 /* libGTMOAuth2_external.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTMOAuth2_external.a; path = Libraries/libGTMOAuth2_external.a; sourceTree = "<group>"; };
 		CC2D5A601AF5A0BFF56CB9F8454AED22 /* AFNetworking-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "AFNetworking-dummy.m"; sourceTree = "<group>"; };
 		CD2DB50F7DB88B3BE67C96DFE0FF63C3 /* GIDSignIn.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GIDSignIn.h; path = Headers/Public/GIDSignIn.h; sourceTree = "<group>"; };
-		CDDB71454387DE8B09A753C501E4CA48 /* libGGLCore.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGGLCore.a; path = Libraries/libGGLCore.a; sourceTree = "<group>"; };
 		CE12B66973E3CE478C076A454B745E66 /* UIRefreshControl+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIRefreshControl+AFNetworking.h"; path = "UIKit+AFNetworking/UIRefreshControl+AFNetworking.h"; sourceTree = "<group>"; };
 		CF6353FF5C2D0F8DB5868692B439A1E5 /* libGTM_StringEncoding.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_StringEncoding.a; path = Libraries/libGTM_StringEncoding.a; sourceTree = "<group>"; };
 		D07BF7BD242190EBA963AC8FD2D1BC8B /* GTLBooksAnnotation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GTLBooksAnnotation.h; path = Source/Services/Books/Generated/GTLBooksAnnotation.h; sourceTree = "<group>"; };
@@ -522,7 +518,9 @@
 		D597EB0A3A17F314400BC13D0B32A20A /* GTLDateTime.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GTLDateTime.h; path = Source/Objects/GTLDateTime.h; sourceTree = "<group>"; };
 		D611C1B06A100325281B087536AEB375 /* libGTMStackTrace.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTMStackTrace.a; path = Libraries/libGTMStackTrace.a; sourceTree = "<group>"; };
 		D613AD305C31663EF3C52B31CCF3E644 /* UIAlertView+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIAlertView+AFNetworking.h"; path = "UIKit+AFNetworking/UIAlertView+AFNetworking.h"; sourceTree = "<group>"; };
+		D991E1E514F04CB823672BDB60092F6B /* GGLConfiguration.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GGLConfiguration.h; path = Headers/GGLCore/Public/GGLConfiguration.h; sourceTree = "<group>"; };
 		DA0C6A5F65988B6A5382DA93ED076C3C /* GTLBooksBookshelves.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GTLBooksBookshelves.h; path = Source/Services/Books/Generated/GTLBooksBookshelves.h; sourceTree = "<group>"; };
+		DB2EAF7D032E7DEDDB48D31834F22145 /* Core.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Core.h; path = Headers/GGLCore/Public/Core.h; sourceTree = "<group>"; };
 		DBD9F94D645E1F1094375722C438D993 /* LARSTorch.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = LARSTorch.m; sourceTree = "<group>"; };
 		DC1344EF7AFE4D6DF4D9889EB33BA99D /* UIViewController+SignIn.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIViewController+SignIn.h"; path = "Headers/Public/UIViewController+SignIn.h"; sourceTree = "<group>"; };
 		DE84EDB6A8C1FB7FA944FCECC567005B /* GTLQueryBooks.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GTLQueryBooks.m; path = Source/Services/Books/Generated/GTLQueryBooks.m; sourceTree = "<group>"; };
@@ -530,13 +528,14 @@
 		DF0A31A86D669606D69C68095AB960DF /* libGSDK_Overload.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGSDK_Overload.a; path = Libraries/libGSDK_Overload.a; sourceTree = "<group>"; };
 		DF3228DF77E687C17ACF599C5319E83B /* libGTM_NSData+zlib.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = "libGTM_NSData+zlib.a"; path = "Libraries/libGTM_NSData+zlib.a"; sourceTree = "<group>"; };
 		DFD5672409A1BACEA547A47FE61B2631 /* libGTM_NSStringXML.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_NSStringXML.a; path = Libraries/libGTM_NSStringXML.a; sourceTree = "<group>"; };
-		E0C8F3D92D593B01A74C767E30638EA3 /* libGGLSignIn.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGGLSignIn.a; path = Libraries/libGGLSignIn.a; sourceTree = "<group>"; };
 		E2CDDE4EA4E2E7D59BFEE64969CC039E /* GTLService.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GTLService.h; path = Source/Objects/GTLService.h; sourceTree = "<group>"; };
 		E2DC20CF1DBE30E34014CABFFFE99016 /* UIImage+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+AFNetworking.h"; path = "UIKit+AFNetworking/UIImage+AFNetworking.h"; sourceTree = "<group>"; };
 		E3CD269A009C23D7F654176ECFE6CEB1 /* GTMOAuth2SignIn.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GTMOAuth2SignIn.h; path = Source/GTMOAuth2SignIn.h; sourceTree = "<group>"; };
 		E3D2C2AF39A7BBE9D295D9F6CE11E6E1 /* AMRatingControl.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AMRatingControl.m; path = Classes/AMRatingControl.m; sourceTree = "<group>"; };
 		E5583695FDF28F00F8FDDFF2D8BD1697 /* GTLBatchQuery.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GTLBatchQuery.h; path = Source/Objects/GTLBatchQuery.h; sourceTree = "<group>"; };
+		E665CB36C1FD427ED75BF17ED5FFB322 /* GGLErrorCode.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GGLErrorCode.h; path = Headers/GGLCore/Public/GGLErrorCode.h; sourceTree = "<group>"; };
 		E7708706AF350BA812E2B1361A992ABA /* GIDProfileData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GIDProfileData.h; path = Headers/Public/GIDProfileData.h; sourceTree = "<group>"; };
+		E7C1F935AA228952A411E3D3A22AE79A /* AppInvite-Module.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "AppInvite-Module.h"; path = "Headers/ModuleHeaders/AppInvite-Module.h"; sourceTree = "<group>"; };
 		E7D403285064E0389772AF6DF60F7D64 /* libGoogle-API-Client.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libGoogle-API-Client.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E839B32846246969262487C1B1FE1353 /* UIProgressView+AFNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIProgressView+AFNetworking.m"; path = "UIKit+AFNetworking/UIProgressView+AFNetworking.m"; sourceTree = "<group>"; };
 		E85C3CD098135DE46EFDF93A5A4133C5 /* libGTM_core.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_core.a; path = Libraries/libGTM_core.a; sourceTree = "<group>"; };
@@ -548,6 +547,7 @@
 		EB3BC35B55F9C99BF84FDB7C82F2BD34 /* GTMHTTPFetcher.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GTMHTTPFetcher.m; path = Source/GTMHTTPFetcher.m; sourceTree = "<group>"; };
 		EB7F589D3B8CE9A236ADE4143D91B620 /* GTLBatchResult.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GTLBatchResult.m; path = Source/Objects/GTLBatchResult.m; sourceTree = "<group>"; };
 		ED860B697BDABE05F50D899F3D23926C /* GTLRuntimeCommon.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GTLRuntimeCommon.m; path = Source/Objects/GTLRuntimeCommon.m; sourceTree = "<group>"; };
+		ED9FFEE6538478E8B433D1354988363C /* SignIn.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SignIn.h; path = Headers/GGLSignIn/Public/SignIn.h; sourceTree = "<group>"; };
 		EDA6ADFA49AD13CAA6C6FA8C5CD28823 /* gtm-oauth2-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "gtm-oauth2-prefix.pch"; sourceTree = "<group>"; };
 		EDDEF5B0EF8F67C7D3EDDAF30432DDC2 /* libGTM_Regex.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_Regex.a; path = Libraries/libGTM_Regex.a; sourceTree = "<group>"; };
 		EF07A0E5FA38599FB2D1E9AE36249D73 /* GTLBooksOffers.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GTLBooksOffers.m; path = Source/Services/Books/Generated/GTLBooksOffers.m; sourceTree = "<group>"; };
@@ -560,6 +560,7 @@
 		F605428534DE83417BC5CED3AF508F86 /* GTLBooksLayersummary.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GTLBooksLayersummary.m; path = Source/Services/Books/Generated/GTLBooksLayersummary.m; sourceTree = "<group>"; };
 		F790726AF2BA1A6E390ABCF53F907D38 /* GTLBooksVolumeannotations.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GTLBooksVolumeannotations.h; path = Source/Services/Books/Generated/GTLBooksVolumeannotations.h; sourceTree = "<group>"; };
 		F806B8CB5745C8B094AE40A2AF9AFB4D /* GTLBooksCategory.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GTLBooksCategory.m; path = Source/Services/Books/Generated/GTLBooksCategory.m; sourceTree = "<group>"; };
+		F97A6EF36DA93233880A331FEFDDFD6E /* Core-Module.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Core-Module.h"; path = "Headers/ModuleHeaders/Core-Module.h"; sourceTree = "<group>"; };
 		F9AC6FD7BABBBA4A5206A723D03551D7 /* GTMHTTPFetcherLogging.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GTMHTTPFetcherLogging.m; path = Source/GTMHTTPFetcherLogging.m; sourceTree = "<group>"; };
 		F9D98C6883F0BAFD0A2477E3BE53857B /* GTLBooksDictlayerdata.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GTLBooksDictlayerdata.h; path = Source/Services/Books/Generated/GTLBooksDictlayerdata.h; sourceTree = "<group>"; };
 		FB92BFC7D11513C614CA96EA15959C90 /* GTMHTTPFetcherService.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GTMHTTPFetcherService.m; path = Source/GTMHTTPFetcherService.m; sourceTree = "<group>"; };
@@ -681,6 +682,14 @@
 			path = "../Target Support Files/LARSTorch";
 			sourceTree = "<group>";
 		};
+		0F647390E93D66EEA73C5420CFD87299 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A9534BC8801CF3A0E6846EB65B4B55A8 /* libGGLSignIn.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		1D99F23A35074F1068A43A8483E4ACBF /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
@@ -694,6 +703,14 @@
 				EBB78E0B1BC89359F919BF9A668FB080 /* UIKit */,
 			);
 			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		1F59032EE120194850C3FDA0D4550836 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				570A3EEE80B3E43C957D3A74B2AC920C /* libGGLCore.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		26FA066773BEBCA7558FB551317725A1 /* Frameworks */ = {
@@ -715,6 +732,16 @@
 				88994E9968F938080B7CA1B052274058 /* Support Files */,
 			);
 			path = NYAlertViewController;
+			sourceTree = "<group>";
+		};
+		2EDBDB00EAA74086CD2A39C04BE4D4AB /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				B487696736144F044669E037BD2BECF7 /* GGLContext+SignIn.h */,
+				ED9FFEE6538478E8B433D1354988363C /* SignIn.h */,
+				0F647390E93D66EEA73C5420CFD87299 /* Frameworks */,
+			);
+			name = SignIn;
 			sourceTree = "<group>";
 		};
 		2F39861B4603708ED9C7E4DED2C6ED1C /* NSURLConnection */ = {
@@ -802,14 +829,6 @@
 			name = Books;
 			sourceTree = "<group>";
 		};
-		361241D01132D36F7E3FE9C8FC79987B /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				CDDB71454387DE8B09A753C501E4CA48 /* libGGLCore.a */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		3AC9228690F43B6CF615715D411371E5 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -819,6 +838,15 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/gtm-oauth2";
+			sourceTree = "<group>";
+		};
+		3F22118CE8F291A639BE62D41615B4E6 /* Google */ = {
+			isa = PBXGroup;
+			children = (
+				755C14E55198CAFAFDEF3863E4DF720A /* Core */,
+				2EDBDB00EAA74086CD2A39C04BE4D4AB /* SignIn */,
+			);
+			path = Google;
 			sourceTree = "<group>";
 		};
 		408733B8C7D723217ACFD331DF19DDAE /* GoogleAuthUtilities */ = {
@@ -931,6 +959,25 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
+		755C14E55198CAFAFDEF3863E4DF720A /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				60B2221C75F6F21A0A5A775999D52638 /* AdMob-Module.h */,
+				B025D4280D07B755142C58F4B610341C /* Analytics-Module.h */,
+				E7C1F935AA228952A411E3D3A22AE79A /* AppInvite-Module.h */,
+				70F357DFD287F062A3BBD33307A1815C /* CloudMessaging-Module.h */,
+				DB2EAF7D032E7DEDDB48D31834F22145 /* Core.h */,
+				F97A6EF36DA93233880A331FEFDDFD6E /* Core-Module.h */,
+				D991E1E514F04CB823672BDB60092F6B /* GGLConfiguration.h */,
+				028B9E3F2575F11E030ACBA1FCE9DAC9 /* GGLContext.h */,
+				E665CB36C1FD427ED75BF17ED5FFB322 /* GGLErrorCode.h */,
+				AADAED2F8A08B728AF941F11EF3EF992 /* GMRConfiguration.h */,
+				6DCA0E53A7F85A22A58F8756A9F447BD /* SignIn-Module.h */,
+				1F59032EE120194850C3FDA0D4550836 /* Frameworks */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
 		785553737B06AFC3DA711DDEB7D56194 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -967,24 +1014,6 @@
 				AE1D1E1CDDD0BD35B4FB380985613FB9 /* Support Files */,
 			);
 			path = "Google-API-Client";
-			sourceTree = "<group>";
-		};
-		7F3A094989A8DB8910059C4AFA3BCB90 /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				68B321E65EE40A9D2A9F0878CBB5A9D8 /* AdMob-Module.h */,
-				52CE144800B8AC5693F957F889BD38BA /* Analytics-Module.h */,
-				7559CB00BF7A8FA283AF12406B84799A /* AppInvite-Module.h */,
-				2AD143153A044C68633693D859E180D6 /* CloudMessaging-Module.h */,
-				A95D57577D9829DBBAB989406BF90B3D /* Core.h */,
-				A51D8FB9A60D6BD2FB3EE2D96739E869 /* Core-Module.h */,
-				6628707DF993ECE1EBA5DD367A0F4948 /* GGLConfiguration.h */,
-				515C098E6265C72998A48FC9DEEDF6B6 /* GGLContext.h */,
-				15F28D9CC887CE756D92E70AC95FFFF2 /* GGLErrorCode.h */,
-				C78E0DB6E2DD42D26714F545C5763884 /* SignIn-Module.h */,
-				361241D01132D36F7E3FE9C8FC79987B /* Frameworks */,
-			);
-			name = Core;
 			sourceTree = "<group>";
 		};
 		88994E9968F938080B7CA1B052274058 /* Support Files */ = {
@@ -1037,15 +1066,6 @@
 			path = MTBBarcodeScanner;
 			sourceTree = "<group>";
 		};
-		9B74CA7B91D0D1F83216C25707354DFF /* Google */ = {
-			isa = PBXGroup;
-			children = (
-				7F3A094989A8DB8910059C4AFA3BCB90 /* Core */,
-				D87CB3E3FE404057E6EEAD015E5C1E6C /* SignIn */,
-			);
-			path = Google;
-			sourceTree = "<group>";
-		};
 		9C4446C0E119869D00F8B056C2751616 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -1093,7 +1113,7 @@
 			children = (
 				1D99F23A35074F1068A43A8483E4ACBF /* AFNetworking */,
 				985B9F0D114B0CD0C8E938074A6467AA /* AMRatingControl */,
-				9B74CA7B91D0D1F83216C25707354DFF /* Google */,
+				3F22118CE8F291A639BE62D41615B4E6 /* Google */,
 				7EA017F985B7273EE879B9698E28940E /* Google-API-Client */,
 				DD12876A9127D98ACFF4A82C9E2BD19F /* GoogleAppUtilities */,
 				408733B8C7D723217ACFD331DF19DDAE /* GoogleAuthUtilities */,
@@ -1196,14 +1216,6 @@
 			name = Serialization;
 			sourceTree = "<group>";
 		};
-		C3A4072EA5166B5855C64F4BE47B99AC /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				E0C8F3D92D593B01A74C767E30638EA3 /* libGGLSignIn.a */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		C82B651EC40300C53029027FD096A5C0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -1277,16 +1289,6 @@
 				D611C1B06A100325281B087536AEB375 /* libGTMStackTrace.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		D87CB3E3FE404057E6EEAD015E5C1E6C /* SignIn */ = {
-			isa = PBXGroup;
-			children = (
-				506B2DB27547F7641DD7EC1C7059D709 /* GGLContext+SignIn.h */,
-				02F89F1CE09375D8D381434EEE1AA307 /* SignIn.h */,
-				C3A4072EA5166B5855C64F4BE47B99AC /* Frameworks */,
-			);
-			name = SignIn;
 			sourceTree = "<group>";
 		};
 		DD12876A9127D98ACFF4A82C9E2BD19F /* GoogleAppUtilities */ = {
