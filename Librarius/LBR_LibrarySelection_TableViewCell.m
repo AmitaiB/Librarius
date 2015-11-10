@@ -47,4 +47,10 @@ static NSString * const collectionViewCellReuseID = @"collectionViewCellReuseID"
     self.collectionView.frame = self.contentView.bounds;
 }
 
+    //If performance stinks, consider doing something about it here:
+//-(void)prepareForReuse
+//{
+//    
+//}
+
 @end

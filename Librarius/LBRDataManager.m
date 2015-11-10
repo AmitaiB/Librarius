@@ -3,7 +3,14 @@
 //
 //  Created by Amitai Blickstein on 8/26/15.
 //  Copyright (c) 2015 Amitai Blickstein, LLC. All rights reserved.
-////
+/**
+ Abstract: This class is the central clearinghouse for data in the app.
+ It manages the reception of data from the API calls, and maps them to 
+ the apps internal models. It also is responsible for the CoreData stack,
+ and any other matters of persistence that may come up.
+ */
+
+#define kLightweightMigration TRUE
 
 #import "LBRDataManager.h"
 #import "LBRGoogleGTLClient.h"
@@ -207,8 +214,13 @@ static NSString * const kUnknown = @"kUnknown";
     NSError *error              = nil;
     NSString *failureReason     = @"There was an error creating or loading the application's saved data.";
     
+    NSDictionary *lightweightMigrationOptions = nil;
+    if (kLightweightMigration) lightweightMigrationOptions = @{NSMigratePersistentStoresAutomaticallyOption : @(YES),
+                                                               NSInferMappingModelAutomaticallyOption       : @(YES)
+                                                               };
+    
         //This error reporting is not strictly necessary.
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:lightweightMigrationOptions error:&error]) {
             // Report any error we got.
         NSMutableDictionary *dict              = [NSMutableDictionary dictionary];
         dict[NSLocalizedDescriptionKey]        = @"Failed to initialize the application's saved data";
