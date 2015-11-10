@@ -185,7 +185,7 @@ static NSString * const kUnknown = @"kUnknown";
         return nil;}
     
         //alt: initWithConcurrencyType:NSMainQueueConcurrencyType
-    _managedObjectContext = [[NSManagedObjectContext alloc] init];
+    _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     [_managedObjectContext setPersistentStoreCoordinator:coordinator];
     return _managedObjectContext;
 }
