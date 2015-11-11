@@ -9,6 +9,10 @@
 //
 //
 
+/**
+ Abstract: 1st try: Should contain the logic for looking like a regular cell, and once, having a collectionView
+ */
+
 #import <UIKit/UIKit.h>
 
 @interface LBRIndexedCollectionView : UICollectionView

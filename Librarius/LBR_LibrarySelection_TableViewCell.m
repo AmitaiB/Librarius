@@ -29,7 +29,6 @@
     self.collectionView.showsHorizontalScrollIndicator = NO;
     [self.contentView addSubview:self.collectionView];
     
-    
     return self;
 }
 

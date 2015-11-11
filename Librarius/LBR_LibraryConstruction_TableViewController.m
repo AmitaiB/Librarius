@@ -20,11 +20,11 @@
 
 
 @interface LBR_LibraryConstruction_TableViewController ()
-//@property (nonatomic, strong) NSFetchedResultsController *librariesFetchedResultsController;
 @property (nonatomic, strong) NSFetchedResultsController *bookcasesFetchedResultsController;
 
 @property (nonatomic, strong) NSMutableDictionary *contentOffsetDictionary;
 @property (nonatomic, strong) NSArray *tableRowsPerSection;
+@property (nonatomic, assign) NSIndexPath *selectedLibraryIndexPath;
 
 @end
 
@@ -37,6 +37,7 @@ static NSString * const bookcaseCellReuseID = @"bookcaseCellReuseID";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     
     self.contentOffsetDictionary = [NSMutableDictionary new];
     
@@ -63,6 +64,8 @@ static NSString * const bookcaseCellReuseID = @"bookcaseCellReuseID";
     ///
     ///Each section is a Library, as per the Fetch request, PLUS the First Section (is a collectionView).
     ///Each section has its bookcases, a row for each, PLUS the last one is the 'add Bookcase' cell.
+
+
 -(NSArray *)tableRowsPerSection
 {
     if (_tableRowsPerSection != nil) {
@@ -85,8 +88,9 @@ static NSString * const bookcaseCellReuseID = @"bookcaseCellReuseID";
 
 #pragma mark - === UITableView DataSource ===
 
+    ///First section for the collectionView, then a section for each library.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.tableRowsPerSection.count;
+    return self.bookcasesFetchedResultsController.sections.count + 1;
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -106,8 +110,13 @@ static NSString * const bookcaseCellReuseID = @"bookcaseCellReuseID";
     LBR_LibrarySelection_TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:bookcaseCellReuseID forIndexPath:indexPath];
     
     // Configure the cell...
+    if (indexPath.section == 0) {
+        [self addCollectionViewToTableViewCell:cell];
+    }
+    
+    
     /**
-     FirstRow - CollectionView
+     FirstSection - CollectionView
      [...] - TableView (what do I want the bookcase cell to look like?
      LastRow - Add Bookcase cell.
      */
@@ -126,14 +135,37 @@ static NSString * const bookcaseCellReuseID = @"bookcaseCellReuseID";
     [cell.collectionView setContentOffset:CGPointMake(horizontalOffset, 0)];
 }
 
+#pragma mark private method
+-(void)addCollectionViewToTableViewCell:(UITableViewCell*)cell
+{
+    UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
+    layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
+    layout.itemSize = CGSizeMake(44, 44);
+    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
+    [collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:collectionViewCellReuseID];
+    collectionView.backgroundColor = [UIColor purpleColor];
+    collectionView.showsHorizontalScrollIndicator = NO;
+    
+    [cell.contentView addSubview:collectionView];
+    collectionView.frame = cell.bounds;
+}
+
+
 #pragma mark - === UITableView Delegate methods ===
 
+    //Hides unselected libraries, by setting the unselected rows to 0 or close to it.
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0)
+    NSIndexPath *tableIndexPath = indexPath;
+    NSIndexPath *collectionIndexPath = self.selectedLibraryIndexPath ? self.selectedLibraryIndexPath : [NSIndexPath indexPathForItem:0 inSection:0];
+    
+    if (tableIndexPath.section == 0)
         return 106.0;
-    else if
+    else if (tableIndexPath.section == collectionIndexPath.item + 1)
         return 44.0;
+    else
+        return 1;
 }
 
 
@@ -199,6 +231,8 @@ static NSString * const bookcaseCellReuseID = @"bookcaseCellReuseID";
     return cell;
 }
 
+
+    ///Each collectionViewCell represents a Library.
 -(void)configureCollectionViewCell:(UICollectionViewCell*)cell forItemAtIndexPath:(NSIndexPath*)indexPath
 {
     NSArray <id <NSFetchedResultsSectionInfo>> *librariesArray = self.bookcasesFetchedResultsController.sections;
@@ -217,12 +251,15 @@ static NSString * const bookcaseCellReuseID = @"bookcaseCellReuseID";
  }
  */
 
-/*
- // Uncomment this method to specify if the specified item should be selected
+
+    ///Selects the current library.
  - (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+     self.selectedLibraryIndexPath = indexPath;
+         ///!!!:     dataManager.currentLibrary = {grab the library indicate}
+     
  return YES;
  }
- */
+ 
 
 /*
  // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item

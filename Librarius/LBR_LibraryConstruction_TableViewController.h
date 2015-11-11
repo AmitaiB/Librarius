@@ -34,9 +34,4 @@
 
 @interface LBR_LibraryConstruction_TableViewController : UITableViewController <UICollectionViewDataSource, UICollectionViewDelegate, NSFetchedResultsControllerDelegate, NSFetchedResultsSectionInfo>
 
-    //Probably not needed
-//@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-//@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-
-
 @end
