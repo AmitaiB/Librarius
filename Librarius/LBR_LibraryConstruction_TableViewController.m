@@ -32,6 +32,8 @@
 
     //Reboot
 @property (weak, nonatomic) IBOutlet UICollectionView *librariesCollectionView;
+- (IBAction)addButtonTapped:(id)sender;
+
 
 
 
@@ -61,7 +63,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-     self.navigationItem.rightBarButtonItem = self.editButtonItem;
+     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -468,4 +470,6 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
  */
 
 
+- (IBAction)addButtonTapped:(id)sender {
+}
 @end
