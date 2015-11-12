@@ -30,6 +30,13 @@
     NSMutableString *mutableAckString = [NSMutableString string];
     NSString *pod;
     NSString *license;
+
+    pod = @"Special Thanks To:";
+    license = @"My instructors Tim Clem and Joe Burgess, and TAs Jim, Tom, and Mark, and all my fellow students at The Flatiron School!\n\n******************";
+
+    
+    [mutableAckString appendString:pod];
+    [mutableAckString appendString:license];
     
     pod = @"tl;dr\n";
     license = @"This software, as well as all the 3rd-party software under the hood, is under the MIT License, save Google, whose software is coverd by the Apache 2.0 license.\n==================================================\n\n\n";

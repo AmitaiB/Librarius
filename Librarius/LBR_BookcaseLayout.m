@@ -392,8 +392,16 @@
     if (self.dataManager.currentBookcase) {
         return _currentBookcase = self.dataManager.currentBookcase;
     }
+    else
+    {
+        [self.dataManager generateDefaultBookcaseIfNeeded];
+        if (self.dataManager.currentBookcase) {
+            return _currentBookcase = self.dataManager.currentBookcase;
+        }
+    }
     
-    
+    DDLogWarn(@"No default Bookcase detected.");
+    return nil;
 }
 
 @end
