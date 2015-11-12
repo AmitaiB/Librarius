@@ -73,7 +73,7 @@ static NSString * const kUnknown = @"kUnknown";
         //We use an NSPredicate combined with the fetchedResultsCntroller to perform
         //the search.
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isbn13 CONTAINS[cd] %@", volume.isbn];
-    NSFetchRequest *duplicatesRequest = [NSFetchRequest fetchRequestWithEntityName:@"Volume"];
+    NSFetchRequest *duplicatesRequest = [NSFetchRequest fetchRequestWithEntityName:[Volume entityName]];
     duplicatesRequest.predicate = predicate;
     NSError *error = nil;
     BOOL isDuplicate = @([self.managedObjectContext countForFetchRequest:duplicatesRequest error:&error]).boolValue;
@@ -132,7 +132,7 @@ static NSString * const kUnknown = @"kUnknown";
 
     //debug-related
 -(void)logCurrentLibrary {
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Volume"];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[Volume entityName]];
     NSArray *results = [self.managedObjectContext executeFetchRequest:request error:nil];
     DDLogVerbose(@"Fetched volumes from Core Data: %@", [results description]);
 }
@@ -147,7 +147,7 @@ static NSString * const kUnknown = @"kUnknown";
 - (void)fetchData
 {
     [self generateDefaultLibraryIfNeeded];
-    NSFetchRequest *librariesFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Library"];
+    NSFetchRequest *librariesFetchRequest = [NSFetchRequest fetchRequestWithEntityName:[Library entityName]];
     NSSortDescriptor *orderSorter = [NSSortDescriptor sortDescriptorWithKey:@"orderWhenListed" ascending:YES];
     librariesFetchRequest.sortDescriptors = @[orderSorter];
     NSError *error = nil;
@@ -257,7 +257,7 @@ static NSString * const kUnknown = @"kUnknown";
      *  5) ...then year.
      */
     NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
-    NSFetchRequest *volumesRequest = [NSFetchRequest fetchRequestWithEntityName:@"Volume"]; //(1)
+    NSFetchRequest *volumesRequest = [NSFetchRequest fetchRequestWithEntityName:[Volume entityName]]; //(1)
     
         // Set the batch size to a suitable number.
     [volumesRequest setFetchBatchSize:20];
@@ -369,7 +369,7 @@ static NSString * const kUnknown = @"kUnknown";
         //First, check "if needed":
     BOOL currentLibraryHasAtLeastOneBookcase;
     
-    NSFetchRequest *bookcaseRequest = [NSFetchRequest fetchRequestWithEntityName:@"Bookcase"];
+    NSFetchRequest *bookcaseRequest = [NSFetchRequest fetchRequestWithEntityName:[Bookcase entityName]];
     NSError *error = nil;
     
     NSString *attributeName = @"library.name";
@@ -391,7 +391,7 @@ static NSString * const kUnknown = @"kUnknown";
         Bookcase *newDefaultBookcase       = [Bookcase insertNewObjectIntoContext:self.managedObjectContext];
         newDefaultBookcase.orderWhenListed = @1;
         newDefaultBookcase.dateCreated     = [NSDate date];
-        newDefaultBookcase.dateModified    = [NSDate date];;
+        newDefaultBookcase.dateModified    = [newDefaultBookcase.dateCreated copy];
         newDefaultBookcase.shelves         = @(kDefaultBookcaseShelvesCount);
         newDefaultBookcase.width           = @(kDefaultBookcaseWidth_cm);
         newDefaultBookcase.library         = self.currentLibrary;
@@ -401,14 +401,33 @@ static NSString * const kUnknown = @"kUnknown";
 }
 
 
+    /**
+     The keys are # of shelves, the objects are the widths.
+     */
+- (void)generateBookcasesForLibrary:(Library *)library withDimensions:(NSDictionary <NSNumber*, NSNumber*> *)dimensions
+{
+   __block NSNumber *idx = @(library.bookcases.count);
+    [dimensions enumerateKeysAndObjectsUsingBlock:^(NSNumber * _Nonnull numShelves, NSNumber * _Nonnull shelfWidth, BOOL * _Nonnull stop) {
+        
+        Bookcase *bookcase = [Bookcase insertNewObjectIntoContext:self.managedObjectContext];
+
+        idx = @(idx.integerValue +1);
+        bookcase.orderWhenListed = idx;
+        bookcase.shelves = numShelves;
+        bookcase.width   = shelfWidth;
+        bookcase.library = library;
+        bookcase.dateCreated = [NSDate date];
+        bookcase.dateModified = [bookcase.dateCreated copy];
+    }];
+}
 
 #pragma mark - data migration related (limited use)
 
 -(void)giveCurrentLibraryADateIfNeeded
 {
     if (!self.currentLibrary.dateCreated) {
-        self.currentLibrary.dateCreated = [NSDate date];
-        self.currentLibrary.dateModified = [NSDate date];
+        self.currentLibrary.dateCreated  = [NSDate date];
+        self.currentLibrary.dateModified = [self.currentLibrary.dateCreated copy];
     }
 }
 
@@ -416,8 +435,8 @@ static NSString * const kUnknown = @"kUnknown";
 -(void)giveVolumeADateIfNeeded:(Volume*)volume
 {
     if (!volume.dateCreated) {
-        volume.dateCreated = [NSDate date];
-        volume.dateModified = [NSDate date];
+        volume.dateCreated  = [NSDate date];
+        volume.dateModified = [volume.dateCreated copy];
     }
 }
 

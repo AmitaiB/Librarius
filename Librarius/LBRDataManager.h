@@ -51,6 +51,7 @@
 -(void) generateTestDataIfNeeded;
 -(void) generateDefaultLibraryIfNeeded;
 -(void) generateDefaultBookcaseIfNeeded;
+-(void) generateBookcasesForLibrary:(Library *)library withDimensions:(NSDictionary <NSNumber*, NSNumber*> *)dimensions;
 -(void) fetchData;
 
 
