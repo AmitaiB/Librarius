@@ -47,6 +47,7 @@
 -(void) saveContext;
 -(void) generateTestDataIfNeeded;
 -(void) generateDefaultLibraryIfNeeded;
+-(void) generateDefaultBookcaseIfNeeded;
 -(void) fetchData;
 
 

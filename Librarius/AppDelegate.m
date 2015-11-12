@@ -17,6 +17,8 @@
     //#import "Library.h"
 
 #import <AVFoundation/AVFoundation.h>
+#import "UIColor+ABBColors.h"
+#import "UIColor+FlatUI.h"
 
 @interface AppDelegate ()
 
@@ -39,15 +41,10 @@
         // Override point for customization after application launch.
     [self awakeFromNap];
     
-    [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
-
     [self setupAppearance];
+    [self setupCocoaLumberjack];
+    [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
     
-    
-        ///CocoaLumberjack Initialization files.
-    [DDLog addLogger:[DDASLLogger sharedInstance]];
-    [DDLog addLogger:[DDTTYLogger sharedInstance]];
-
     
         //What is this? ↓ Why did I need those references...?
 //    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
@@ -59,10 +56,35 @@
 //    NSError* configureError = nil;
 //    [[GGLContext sharedInstance] configureWithError:&configureError];
 //    NSAssert(!configureError, @"Error configuring Google services: %@", configureError.localizedDescription);
-//    
+//
 //    [GIDSignIn sharedInstance].delegate = self;
 
     return YES;
+}
+
+#pragma mark - === private setup methods ===
+
+- (void)setupCocoaLumberjack
+{
+        ///CocoaLumberjack Initialization files.
+    [DDLog addLogger:[DDASLLogger sharedInstance]];
+    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+    
+    [[DDTTYLogger sharedInstance] setColorsEnabled:YES];
+    
+    [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor alizarinColor] backgroundColor:nil forFlag:DDLogFlagError];
+    [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor carrotColor] backgroundColor:nil forFlag:DDLogFlagWarning];
+    [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor peterRiverColor] backgroundColor:nil forFlag:DDLogFlagInfo];
+    [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor wisteriaColor] backgroundColor:nil forFlag:DDLogFlagDebug];
+    [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor emerlandColor] backgroundColor:nil forFlag:DDLogFlagVerbose];
+
+    /*
+     DDLogError(@"Error");
+     DDLogWarn(@"Warn");
+     DDLogInfo(@"Info");
+     DDLogDebug(@"Debug");
+     DDLogVerbose(@"Verbose");
+     */
 }
 
 - (void)setupAppearance {

@@ -32,24 +32,20 @@
     LBRDataManager *dataManager;
 }
 
+
+//static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 static NSString * const bookcaseCellReuseID = @"bookcaseCellReuseID";
 //static NSString * const collectionViewCellReuseID = @"collectionViewCellReuseID";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    DDLogError(@"This is an error.");
-    DDLogWarn(@"This is a warning.");
-    DDLogInfo(@"This is just a message.");
-    DDLogVerbose(@"This is a verbose message.");
-    
-    
     self.contentOffsetDictionary = [NSMutableDictionary new];
     
     self.bookcasesFetchedResultsController.delegate = self;
 //    self.collectionView.delegate = self;
 //    self.collectionView.dataSource = self;
-    
+
     dataManager = [LBRDataManager sharedDataManager];
 
     
@@ -347,17 +343,24 @@ static NSString * const bookcaseCellReuseID = @"bookcaseCellReuseID";
         DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
+    DBLG
+    DDLogDebug(@"frc.fetchedObjects = %@", frc.fetchedObjects);
+    DDLogDebug(@"frc.fetchedObjects.count = %lu", frc.fetchedObjects.count);
+    
     
     return frc;
 }
 
+
+    //What was this for again??
+/*
 -(void)configureFetchedResultsController:(NSFetchedResultsController*)frc ForEntityName:(NSString*)entityName
 {
     /**
      *  1) The set of all [Entity Name]
      *  2) ...arranged by userOrder,
      *  3) ...then date created.
-     */
+     * /
     dataManager = dataManager ? dataManager : [LBRDataManager sharedDataManager];
     NSManagedObjectContext *managedObjectContext = dataManager.managedObjectContext;
     [dataManager generateDefaultLibraryIfNeeded];
@@ -383,6 +386,7 @@ static NSString * const bookcaseCellReuseID = @"bookcaseCellReuseID";
         abort();
     }
 }
+*/
 
 #pragma mark - === Fetched Results Controller Delegate methods ===
 

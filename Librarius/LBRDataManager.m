@@ -338,7 +338,42 @@ static NSString * const kUnknown = @"kUnknown";
         newDefaultLibrary.dateCreated = [NSDate date];
         newDefaultLibrary.dateModified = [NSDate date];
         self.currentLibrary = newDefaultLibrary;
+        
+            //Does this work???
+        [self generateDefaultBookcaseIfNeeded];
+        
         [self saveContext];
+    }
+}
+
+-(void)generateDefaultBookcaseIfNeeded
+{
+    NSFetchRequest *bookcaseRequest = [NSFetchRequest fetchRequestWithEntityName:@"Bookcase"];
+    NSError *error = nil;
+    
+    NSString *attributeName = @"library.name";
+    NSString *attributeValue = [NSString stringWithFormat:@"%@", self.currentLibrary.name];
+    
+    NSPredicate *limitResultsToCurrentLibrary_Predicate = [NSPredicate predicateWithFormat:@"%K like %@", attributeName, attributeValue];
+    bookcaseRequest.predicate = limitResultsToCurrentLibrary_Predicate;
+    
+    BOOL currentLibraryHasAtLeastOneBookcase = [self.managedObjectContext countForFetchRequest:bookcaseRequest error:&error] >= 1;
+    
+    if (currentLibraryHasAtLeastOneBookcase) {
+        return;
+    }
+    else
+    {
+        Bookcase *newDefaultBookcase = [NSEntityDescription insertNewObjectForEntityForName:@"Bookcase" inManagedObjectContext:self.managedObjectContext];
+        
+        newDefaultBookcase.orderWhenListed = @1;
+        newDefaultBookcase.dateCreated = [NSDate date];
+        newDefaultBookcase.dateModified = [NSDate date];;
+        newDefaultBookcase.shelves = @(kDefaultBookcaseShelvesCount);
+        newDefaultBookcase.width = @(kDefaultBookcaseWidth_cm);
+        newDefaultBookcase.library = self.currentLibrary;
+//        newDefaultBookcase.volumes = [NSSet set];
+        
     }
 }
 
