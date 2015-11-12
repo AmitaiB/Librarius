@@ -16,6 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface Bookcase : NSManagedObject
 
 // Insert code here to declare functionality of your managed object subclass
++(NSString *)entityName;
++(instancetype)insertNewObjectIntoContext:(NSManagedObjectContext *)context;
+
 
 @end
 

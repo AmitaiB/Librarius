@@ -18,6 +18,7 @@
     //Data
 #import "LBRDataManager.h"
 #import "LBR_LibraryConstruction_CollectionViewCell.h"
+#import "Bookcase.h"
 /**
  Abstract: The HeaderView will have a collectionView in it, displaying a cell for each Library.
  
@@ -72,7 +73,12 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     // Dispose of any resources that can be recreated.
 }
 
-
+-(void)viewWillLayoutSubviews
+{
+    [self.bookcasesFetchedResultsController performFetch:nil];
+    DBLG
+    DDLogInfo(@"FRC Fetched Objects: %@", self.bookcasesFetchedResultsController.fetchedObjects);
+}
 
 #pragma mark - = Private Method here =
 
@@ -345,20 +351,21 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     NSManagedObjectContext *managedObjectContext = dataManager.managedObjectContext;
     [dataManager generateDefaultLibraryIfNeeded];
     
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Bookcase"]; //(1)
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[Bookcase entityName]]; //(1)
     
         // Edit the sort key as appropriate.
     NSSortDescriptor *orderSorter       = [NSSortDescriptor sortDescriptorWithKey:@"orderWhenListed" ascending:YES];
     NSSortDescriptor *dateCreatedSorter = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES];
     
-    request.fetchBatchSize = 20;
+    request.fetchBatchSize = 200;
     request.sortDescriptors = @[orderSorter, dateCreatedSorter];
+    request.returnsObjectsAsFaults = NO;
     
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
     frc = [[NSFetchedResultsController alloc] initWithFetchRequest:request
                                               managedObjectContext:managedObjectContext
-                                                sectionNameKeyPath:@"library"
+                                                sectionNameKeyPath:@"library.name"
                                                          cacheName:@"LBR_Bookcase_CacheName"];
     
     NSError *error = nil;
@@ -369,6 +376,11 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
         abort();
     }
     DDLogDebug(@"frc.fetchedObjects = %@ (count: %lu)", frc.fetchedObjects, frc.fetchedObjects.count);
+    
+    NSArray *bookcasesMaybe = [frc.managedObjectContext executeFetchRequest:request error:nil];
+    
+    DDLogInfo(@"bookcases via direct fetchRequest: %@", bookcasesMaybe);
+    
     return frc;
 }
 

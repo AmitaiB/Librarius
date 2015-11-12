@@ -3,20 +3,14 @@
 
 
 #####Collections_TableViewController
-* T: Need beautiful colors
-* T: Genres should be displayed
 
 #####ShelveBooks_CollectionViewController
 * T: Cells shouldn't overlap decorationView. (estimatedItemSize --> itemSize ?)
-* T: cell background NOT red. (Done)
 * T: Implement Scroll DirectionLock. (SO)
 * T: PhotoBombers-style interactivity.
 * T: DecorationView is cut off at the far end.
 
 #####BarcodeScannerView
-* **F:** Torchbutton is blocked.
-* T: Make buttons pretty and UI compliant.
-* T: Colors need theme. ([UIButton appearance])
 
 #####Recommendation_CollectionViewController
 * **F:** Cells have no images.
@@ -26,16 +20,28 @@
 * **F:** Just look pretty, for now, implement it later.
 
 ####Solved Problems
+* T: cell background NOT red. (Done)
+* T: Colors need theme. ([UIButton appearance])
+* T: Make buttons pretty and UI compliant.
+* **F:** Torchbutton is blocked.
 * **F:** SearchBar Crashes
 * **F:** didSelectCellAtRow crashes
 * T: Layout switcher: junk or fix (conditional logic?).
-
-##Version 1.1
 * Acknowledgments page.
-* Settings page.
-* Add custom bookcases.
-* Multiple, custom Libraries.
-* Drag and Drop functionality.
+* T: Need beautiful colors
+* T: Genres should be displayed
+
+
+##Version 1.0
 
 
 ##Version 2.0
+* Multiple, custom Libraries.
+* Add custom bookcases.
+* Settings page.
+
+#WishList
+* Drag and Drop functionality on Shelves collectionView.
+* PERFORMANCE: https://www.objc.io/issues/4-core-data/core-data-overview/#getting-to-objects
+  * NSUserDefaults to store the objectID of pre-existing stuff, avoid fetches.
+

@@ -19,6 +19,17 @@ typedef NS_ENUM (NSUInteger, ABCoverArtImageSize) {
 
 
 // Insert code here to add functionality to your managed object subclass
++(NSString *)entityName
+{
+    return @"CoverArt";
+}
+
++(instancetype)insertNewObjectIntoContext:(NSManagedObjectContext *)context
+{
+    return [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:context];
+}
+
+
 #pragma mark - Accessors (overridden)
 
 -(void)downloadImagesIfNeeded

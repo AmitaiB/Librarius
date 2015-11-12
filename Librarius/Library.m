@@ -13,5 +13,14 @@
 @implementation Library
 
 // Insert code here to add functionality to your managed object subclass
++(NSString *)entityName
+{
+    return @"Library";
+}
+
++(instancetype)insertNewObjectIntoContext:(NSManagedObjectContext *)context
+{
+    return [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:context];
+}
 
 @end

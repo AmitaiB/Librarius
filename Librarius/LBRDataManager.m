@@ -100,7 +100,7 @@ static NSString * const kUnknown = @"kUnknown";
 
 
 -(void)insertVolumeToContextFromTransientVolume:(LBRParsedVolume*)volumeToInsert {
-    Volume *persistentVolume = [NSEntityDescription insertNewObjectForEntityForName:@"Volume" inManagedObjectContext:self.managedObjectContext];
+    Volume *persistentVolume = [Volume insertNewObjectIntoContext:self.managedObjectContext];
     persistentVolume.isbn10          = volumeToInsert.isbn10;
     persistentVolume.isbn13          = volumeToInsert.isbn13;
     persistentVolume.title           = volumeToInsert.title;
@@ -125,7 +125,7 @@ static NSString * const kUnknown = @"kUnknown";
     persistentVolume.dateCreated     = [NSDate date];
     persistentVolume.dateModified    = [NSDate date];
     
-    CoverArt *associatedCoverArt = [NSEntityDescription insertNewObjectForEntityForName:@"CoverArt" inManagedObjectContext:self.managedObjectContext];
+    CoverArt *associatedCoverArt = [CoverArt insertNewObjectIntoContext:self.managedObjectContext];
     [associatedCoverArt downloadImagesForCorrespondingVolume:persistentVolume];
 }
 
@@ -296,8 +296,11 @@ static NSString * const kUnknown = @"kUnknown";
 {
     LBRGoogleGTLClient *googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
     [self generateDefaultLibraryIfNeeded];
-//    Only if the library is non-empty, we're not "needed".
-    if (self.currentLibrary.volumes.count) {return;}
+
+//            Only if the library is non-empty, we're not "needed".
+    BOOL libraryAlreadyHasBooks = @(self.currentLibrary.volumes.count).boolValue;
+    if (libraryAlreadyHasBooks)
+        return;
     
     /**
      *  Given an array of ISBNs, populate the DB.
@@ -324,7 +327,7 @@ static NSString * const kUnknown = @"kUnknown";
  *  Seeds the dataManager's currentLibrary property.
  */
 -(void)generateDefaultLibraryIfNeeded {
-    NSFetchRequest *libraryRequest = [NSFetchRequest fetchRequestWithEntityName:@"Library"];
+    NSFetchRequest *libraryRequest = [NSFetchRequest fetchRequestWithEntityName:[Library entityName]];
     NSError *error = nil;
     
     BOOL datastoreHasAtLeastOneLibrary = [self.managedObjectContext countForFetchRequest:libraryRequest error:&error] >= 1;
@@ -332,7 +335,7 @@ static NSString * const kUnknown = @"kUnknown";
     if (datastoreHasAtLeastOneLibrary) {
         self.currentLibrary = [[self.managedObjectContext executeFetchRequest:libraryRequest error:nil] firstObject];
     } else {
-        Library *newDefaultLibrary = [NSEntityDescription insertNewObjectForEntityForName:@"Library" inManagedObjectContext:self.managedObjectContext];
+        Library *newDefaultLibrary = [Library insertNewObjectIntoContext:self.managedObjectContext];
         newDefaultLibrary.name = @"Default Library (set name in options)";
         newDefaultLibrary.orderWhenListed = @1;
         newDefaultLibrary.dateCreated = [NSDate date];
@@ -385,8 +388,7 @@ static NSString * const kUnknown = @"kUnknown";
     }
     else
     {
-        Bookcase *newDefaultBookcase       = [NSEntityDescription insertNewObjectForEntityForName:@"Bookcase" inManagedObjectContext:self.managedObjectContext];
-
+        Bookcase *newDefaultBookcase       = [Bookcase insertNewObjectIntoContext:self.managedObjectContext];
         newDefaultBookcase.orderWhenListed = @1;
         newDefaultBookcase.dateCreated     = [NSDate date];
         newDefaultBookcase.dateModified    = [NSDate date];;
@@ -397,6 +399,8 @@ static NSString * const kUnknown = @"kUnknown";
         self.currentBookcase = newDefaultBookcase;
     }
 }
+
+
 
 #pragma mark - data migration related (limited use)
 
