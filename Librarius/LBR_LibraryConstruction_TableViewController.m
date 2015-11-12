@@ -73,12 +73,6 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     // Dispose of any resources that can be recreated.
 }
 
--(void)viewWillLayoutSubviews
-{
-    [self.bookcasesFetchedResultsController performFetch:nil];
-    DBLG
-    DDLogInfo(@"FRC Fetched Objects: %@", self.bookcasesFetchedResultsController.fetchedObjects);
-}
 
 #pragma mark - = Private Method here =
 
@@ -175,6 +169,11 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 
 
 #pragma mark - === UITableView Delegate methods ===
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    DDLogVerbose(@"didSelectRowAtIndexPath: %@\nrow: %lu\nsection: %lu", indexPath, indexPath.row, indexPath.section);
+}
 
     //Hides unselected libraries, by setting the unselected rows to 0 or close to it.
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -375,11 +374,19 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
         DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
-    DDLogDebug(@"frc.fetchedObjects = %@ (count: %lu)", frc.fetchedObjects, frc.fetchedObjects.count);
+//    DDLogDebug(@"frc.fetchedObjects = %@ (count: %lu)", frc.fetchedObjects, frc.fetchedObjects.count);
+    DDLogDebug(@"frc.fetchedObjects.count = %lu", frc.fetchedObjects.count);
+    
     
     NSArray *bookcasesMaybe = [frc.managedObjectContext executeFetchRequest:request error:nil];
     
-    DDLogInfo(@"bookcases via direct fetchRequest: %@", bookcasesMaybe);
+    if (bookcasesMaybe.count == 0) {
+        [dataManager generateBookcasesForLibrary:dataManager.currentLibrary withDimensions:@{@3 : @7,
+                                                                                             @5 : @5,
+                                                                                             @2 : @20
+                                                                                             }];
+        [frc performFetch:nil];
+    }
     
     return frc;
 }

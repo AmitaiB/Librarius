@@ -353,18 +353,7 @@ static NSString * const kUnknown = @"kUnknown";
 {
     (!self.currentLibrary) ? [self generateDefaultLibraryIfNeeded] : nil;
     
-//    if (!self.currentLibrary) {
-//        [self generateDefaultLibraryIfNeeded];
-//    }
-    
     self.currentBookcase = [self.currentLibrary.bookcases firstObject] ? [self.currentLibrary.bookcases firstObject] : nil;
-    
-//    if ([self.currentLibrary.bookcases firstObject])
-//    {
-//        self.currentBookcase = [self.currentLibrary.bookcases firstObject];
-//    };
-    
-        //FIXME: This shouldn't be necessary...
     
         //First, check "if needed":
     BOOL currentLibraryHasAtLeastOneBookcase;
@@ -372,7 +361,7 @@ static NSString * const kUnknown = @"kUnknown";
     NSFetchRequest *bookcaseRequest = [NSFetchRequest fetchRequestWithEntityName:[Bookcase entityName]];
     NSError *error = nil;
     
-    NSString *attributeName = @"library.name";
+    NSString *attributeName  = @"library.name";
     NSString *attributeValue = [NSString stringWithFormat:@"%@", self.currentLibrary.name];
     
     NSPredicate *limitResultsToCurrentLibrary_Predicate = [NSPredicate predicateWithFormat:@"%K like %@", attributeName, attributeValue];
