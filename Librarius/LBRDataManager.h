@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class Bookcase;
 @class Volume;
 @class GTLBooksVolume;
 @class GTLBooksVolumes;
@@ -21,6 +22,7 @@
 @property (nonatomic, strong) NSMutableArray *uniqueCodes;
 @property (nonatomic, strong) NSArray *parsedVolumesToEitherSaveOrDiscard;
 @property (nonatomic, strong) LBRParsedVolume *parsedVolumeFromLastBarcode; //<-- Use this to confirm user's selection, then enter it into Persistent Data.
+
 
 +(instancetype)sharedDataManager;
 

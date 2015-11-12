@@ -348,13 +348,20 @@ static NSString * const kUnknown = @"kUnknown";
 
 -(void)generateDefaultBookcaseIfNeeded
 {
-    if (!self.currentLibrary) {
-        [self generateDefaultLibraryIfNeeded];
-    }
+    (!self.currentLibrary) ? [self generateDefaultLibraryIfNeeded] : nil;
     
-    self.currentLibrary.bookcases
+//    if (!self.currentLibrary) {
+//        [self generateDefaultLibraryIfNeeded];
+//    }
     
+    self.currentBookcase = [self.currentLibrary.bookcases firstObject] ? [self.currentLibrary.bookcases firstObject] : nil;
     
+//    if ([self.currentLibrary.bookcases firstObject])
+//    {
+//        self.currentBookcase = [self.currentLibrary.bookcases firstObject];
+//    };
+    
+        //FIXME: This shouldn't be necessary...
     
         //First, check "if needed":
     BOOL currentLibraryHasAtLeastOneBookcase;

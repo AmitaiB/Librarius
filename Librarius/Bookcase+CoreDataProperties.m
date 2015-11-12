@@ -2,7 +2,7 @@
 //  Bookcase+CoreDataProperties.m
 //  Librarius
 //
-//  Created by Amitai Blickstein on 11/10/15.
+//  Created by Amitai Blickstein on 11/11/15.
 //  Copyright © 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -15,10 +15,10 @@
 
 @dynamic dateCreated;
 @dynamic dateModified;
+@dynamic orderWhenListed;
 @dynamic shelf_height;
 @dynamic shelves;
 @dynamic width;
-@dynamic orderWhenListed;
 @dynamic library;
 @dynamic volumes;
 
