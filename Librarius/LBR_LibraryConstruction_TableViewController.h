@@ -32,6 +32,6 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
-@interface LBR_LibraryConstruction_TableViewController : UITableViewController <UICollectionViewDataSource, UICollectionViewDelegate, NSFetchedResultsControllerDelegate, NSFetchedResultsSectionInfo>
+@interface LBR_LibraryConstruction_TableViewController : UITableViewController <UICollectionViewDataSource, UICollectionViewDelegate, NSFetchedResultsControllerDelegate>
 
 @end

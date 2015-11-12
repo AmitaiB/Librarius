@@ -64,8 +64,6 @@ static NSString * const bookcaseCellReuseID = @"bookcaseCellReuseID";
     ///
     ///Each section is a Library, as per the Fetch request, PLUS the First Section (is a collectionView).
     ///Each section has its bookcases, a row for each, PLUS the last one is the 'add Bookcase' cell.
-
-
 -(NSArray *)tableRowsPerSection
 {
     if (_tableRowsPerSection != nil) {

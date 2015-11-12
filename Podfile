@@ -16,6 +16,9 @@ pod 'AMRatingControl'
 pod 'UIView+FDCollapsibleConstraints', '~> 1.1'
 
 
+pod 'CocoaLumberjack', '~> 2.2'
+
+
 #pod "MMMaterialDesignSpinner"
 #pod 'SDWebImage', '~> 3.7'
 #pod 'SDWebImage-ProgressView', '~> 0.4'
