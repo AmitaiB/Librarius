@@ -17,6 +17,7 @@
 
     //Data
 #import "LBRDataManager.h"
+#import "LBR_LibraryConstruction_CollectionViewCell.h"
 /**
  Abstract: The HeaderView will have a collectionView in it, displaying a cell for each Library.
  
@@ -70,6 +71,10 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+
+#pragma mark - = Private Method here =
 
     ///*Logic encapsulated here.*
     ///
@@ -133,9 +138,10 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     return cell;
 }
 
-
+    //CLEAN: Holdover from collectionView in tableViewCell method
+/*
     ///Really not sure about this one here.
--(void)collectionView:(UICollectionView *)collectionView willDisplayCell:(LBR_LibrarySelection_TableViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
+-(void)collectionView:(UICol lectionView *)collectionView willDisplayCell:(LBR_LibrarySelection_TableViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
     [cell setCollectionViewDataSourceDelegate:self indexPath:indexPath];
     NSInteger index = cell.collectionView.tag;
@@ -143,7 +149,8 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     CGFloat horizontalOffset = [self.contentOffsetDictionary[@(index).stringValue] floatValue];
     [cell.collectionView setContentOffset:CGPointMake(horizontalOffset, 0)];
 }
-
+*/
+ 
 #pragma mark private method
 -(void)addCollectionViewToTableViewCell:(UITableViewCell*)cell
 {
@@ -232,12 +239,14 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     ///CollectionView will display the libraries, so #items = #libraries, which are the sections of the FetchRequest.
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.bookcasesFetchedResultsController.sections.count;
+    if (self.bookcasesFetchedResultsController.sections.count <= 0)
+        DDLogError(@"There are no sections returned from the FRC!");
+    return MAX(1, self.bookcasesFetchedResultsController.sections.count);
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionViewCellReuseID forIndexPath:indexPath];
+    LBR_LibraryConstruction_CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:librariesCollectionViewCellReuseID forIndexPath:indexPath];
     
         //configure cell here
     [self configureCollectionViewCell:cell forItemAtIndexPath:indexPath];
@@ -247,13 +256,14 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 
 
     ///Each collectionViewCell represents a Library.
--(void)configureCollectionViewCell:(UICollectionViewCell*)cell forItemAtIndexPath:(NSIndexPath*)indexPath
+-(void)configureCollectionViewCell:(LBR_LibraryConstruction_CollectionViewCell*)cell forItemAtIndexPath:(NSIndexPath*)indexPath
 {
-    NSArray <id <NSFetchedResultsSectionInfo>> *librariesArray = self.bookcasesFetchedResultsController.sections;
-    UITextView *textView = [[UITextView alloc] initWithFrame:cell.frame];
-    [cell addSubview:textView];
-    textView.textContainer.lineBreakMode = NSLineBreakByWordWrapping;
-    textView.text = [NSString stringWithFormat:@"This cell represents Library \"%@\", at indexPath: %@", librariesArray[indexPath.item].name, indexPath];
+    cell.libraryLabel.text = dataManager.currentLibrary.name;
+//    NSArray <id <NSFetchedResultsSectionInfo>> *librariesArray = self.bookcasesFetchedResultsController.sections;
+//    UITextView *textView = [[UITextView alloc] initWithFrame:cell.frame];
+//    [cell addSubview:textView];
+//    textView.textContainer.lineBreakMode = NSLineBreakByWordWrapping;
+//    textView.text = [NSString stringWithFormat:@"This cell represents Library \"%@\", at indexPath: %@", librariesArray[indexPath.item].name, indexPath];
 }
 
 #pragma mark - === UICollectionViewDelegate ===
@@ -358,11 +368,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
         DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
-    DBLG
-    DDLogDebug(@"frc.fetchedObjects = %@", frc.fetchedObjects);
-    DDLogDebug(@"frc.fetchedObjects.count = %lu", frc.fetchedObjects.count);
-    
-    
+    DDLogDebug(@"frc.fetchedObjects = %@ (count: %lu)", frc.fetchedObjects, frc.fetchedObjects.count);
     return frc;
 }
 

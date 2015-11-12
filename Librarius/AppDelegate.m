@@ -72,7 +72,7 @@
     
     [[DDTTYLogger sharedInstance] setColorsEnabled:YES];
     
-    [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor alizarinColor] backgroundColor:nil forFlag:DDLogFlagError];
+    [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor redColor] backgroundColor:nil forFlag:DDLogFlagError];
     [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor carrotColor] backgroundColor:nil forFlag:DDLogFlagWarning];
     [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor peterRiverColor] backgroundColor:nil forFlag:DDLogFlagInfo];
     [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor wisteriaColor] backgroundColor:nil forFlag:DDLogFlagDebug];
