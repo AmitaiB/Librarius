@@ -299,7 +299,7 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
                     [self presentViewController:confirmationViewController animated:YES completion:nil];
                 }];
             } else {
-//                NSLog(@"Barcode already in list/table.");
+               DDLogVerbose(@"Barcode already in list/table.");
             }
         }
     }];

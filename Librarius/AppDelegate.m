@@ -44,6 +44,11 @@
     [self setupAppearance];
     
     
+        ///CocoaLumberjack Initialization files.
+    [DDLog addLogger:[DDASLLogger sharedInstance]];
+    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+
+    
         //What is this? ↓ Why did I need those references...?
 //    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
 //    MasterViewController *controller = (MasterViewController *)navigationController.topViewController;

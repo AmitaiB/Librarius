@@ -62,7 +62,7 @@ static NSString * const kUnknown = @"kUnknown";
     }
     self.parsedVolumesToEitherSaveOrDiscard = @[];
     [self saveContext];
-        NSLog(@"Context's (new) volumes saved to current library.");
+       DDLogVerbose(@"Context's (new) volumes saved to current library.");
 }
 
     //FIXME: Doesn't work!
@@ -79,7 +79,7 @@ static NSString * const kUnknown = @"kUnknown";
     BOOL isDuplicate = @([self.managedObjectContext countForFetchRequest:duplicatesRequest error:&error]).boolValue;
     if (error) {
             //Handle error
-//            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
             exit(-1); //Fail
     }
     return isDuplicate;
@@ -134,7 +134,7 @@ static NSString * const kUnknown = @"kUnknown";
 -(void)logCurrentLibrary {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Volume"];
     NSArray *results = [self.managedObjectContext executeFetchRequest:request error:nil];
-//    NSLog(@"Fetched volumes from Core Data: %@", [results description]);
+    DDLogVerbose(@"Fetched volumes from Core Data: %@", [results description]);
 }
 
 //#pragma mark - helper methods
@@ -163,7 +163,7 @@ static NSString * const kUnknown = @"kUnknown";
         if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
                 // Replace this implementation with code to handle the error appropriately.
                 // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-//            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         }
     }
@@ -231,7 +231,7 @@ static NSString * const kUnknown = @"kUnknown";
         error                                  = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:9999 userInfo:dict];
             //Replace this with code to handle the error appropriately.
             //abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-//        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
     return _persistentStoreCoordinator;
@@ -283,7 +283,7 @@ static NSString * const kUnknown = @"kUnknown";
     if (![frc performFetch:&error]) {
             // Replace this implementation with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. !!!:You should not use this function in a shipping application, although it may be useful during development.
-//        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
     

@@ -126,7 +126,7 @@ static NSString * const altSearchResultsCellID = @"altSearchResultsCellID";
 //    if (![context save:&error]) {
 //        // Replace this implementation with code to handle the error appropriately.
 //        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-//        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+//        DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
 //        abort();
 //    }
 //}
@@ -377,7 +377,7 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
         numSections = [[self.fetchedResultsController sections] count];
     }
     if (tableView == self.resultsTableViewController.tableView) {
-//        NSLog(@"Results TableView");
+//       DDLogInfo(@"Results TableView");
         numSections = 1;
     }
     
@@ -458,7 +458,7 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
 
             // Replace this implementation with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-//            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+//           DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         }
         

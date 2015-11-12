@@ -17,7 +17,14 @@
     #define offBy1 1
     #define kDefaultBookcaseShelvesCount 5
     #define kDefaultBookcaseWidth_cm 10
-    #define DBLG NSLog(@"<%@:%@:line %d, reporting!>", NSStringFromClass([self class]), NSStringFromSelector(_cmd), __LINE__);
+    #define DBLG DDLogVerbose(@"<%@:%@:line %d, reporting!>", NSStringFromClass([self class]), NSStringFromSelector(_cmd), __LINE__);
+
+    #import "CocoaLumberjack.h"
+#endif
+
+
+#ifdef DEBUG
+    static const int ddLogLevel = DDLogLevelDebug;
 #endif
 
 #define MAS_SHORTHAND

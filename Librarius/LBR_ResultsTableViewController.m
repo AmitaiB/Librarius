@@ -39,7 +39,7 @@ static NSString * const resultsCellReuseID = @"resultsCellReuseID";
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-//    NSLog(@"%@ resigning firstResponder to save memory.", NSStringFromClass([self class]));
+    DDLogDebug(@"%@ resigning firstResponder to save memory.", NSStringFromClass([self class]));
     [self resignFirstResponder];
     
     // Dispose of any resources that can be recreated.

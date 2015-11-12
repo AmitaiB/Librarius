@@ -38,6 +38,11 @@ static NSString * const bookcaseCellReuseID = @"bookcaseCellReuseID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    DDLogError(@"This is an error.");
+    DDLogWarn(@"This is a warning.");
+    DDLogInfo(@"This is just a message.");
+    DDLogVerbose(@"This is a verbose message.");
+    
     
     self.contentOffsetDictionary = [NSMutableDictionary new];
     
@@ -249,7 +254,6 @@ static NSString * const bookcaseCellReuseID = @"bookcaseCellReuseID";
  }
  */
 
-
     ///Selects the current library.
  - (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
      self.selectedLibraryIndexPath = indexPath;
@@ -340,7 +344,7 @@ static NSString * const bookcaseCellReuseID = @"bookcaseCellReuseID";
     if (![frc performFetch:&error]) {
             // Replace this implementation with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. !!!:You should not use this function in a shipping application, although it may be useful during development.
-            //        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
     
@@ -375,7 +379,7 @@ static NSString * const bookcaseCellReuseID = @"bookcaseCellReuseID";
     if (![frc performFetch:&error]) {
             // Replace this implementation with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. !!!:You should not use this function in a shipping application, although it may be useful during development.
-            //        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
 }

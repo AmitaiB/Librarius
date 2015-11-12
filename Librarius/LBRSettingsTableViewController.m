@@ -172,7 +172,7 @@
 
 - (void)didDisconnectWithError:(NSError *)error {
     if (error) {
-//        NSLog(@"Received error %@", error);
+        DDLogError(@"Received error %@", error);
     } else {
             // The user is signed out and disconnected.
             // Clean up user data as specified by the Google+ terms.
