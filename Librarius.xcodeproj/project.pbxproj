@@ -452,6 +452,8 @@
 		380375641B8BB71D004C4ECE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				38103B5D1BD033EC009F22E3 /* Bookcase CollectionView Scene */,
+				386B7D101BF15A73004A1DF8 /* Library Construction Scene */,
 				380375681B8BC89D004C4ECE /* LBRGoogleSignInViewController.h */,
 				380375691B8BC89D004C4ECE /* LBRGoogleSignInViewController.m */,
 				380375391B8AC9A8004C4ECE /* LBRBarcodeScannerViewController.h */,
@@ -468,8 +470,6 @@
 				382A83B91BB3BA94008860CF /* LBRRecommendationsCollectionViewController.m */,
 				38DF00381BE7F9C800D4BCE3 /* LBRAcknowledgements_ViewController.h */,
 				38DF00391BE7F9C800D4BCE3 /* LBRAcknowledgements_ViewController.m */,
-				38103B5D1BD033EC009F22E3 /* Bookcase CollectionView Scene */,
-				386B7D101BF15A73004A1DF8 /* Library Construction Scene */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";

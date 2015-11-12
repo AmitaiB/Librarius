@@ -53,7 +53,7 @@ static NSString * const bookcaseCellReuseID = @"bookcaseCellReuseID";
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+     self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -63,8 +63,8 @@ static NSString * const bookcaseCellReuseID = @"bookcaseCellReuseID";
 
     ///*Logic encapsulated here.*
     ///
-    ///Each section is a Library, as per the Fetch request, PLUS the First Section (is a collectionView).
-    ///Each section has its bookcases, a row for each, PLUS the last one is the 'add Bookcase' cell.
+    ///Each section is a Library, as per the Fetch request, PLUS the HeaderView is a collectionView.
+    ///Each section has its bookcases, a row for each.
 -(NSArray *)tableRowsPerSection
 {
     if (_tableRowsPerSection != nil) {
@@ -176,7 +176,7 @@ static NSString * const bookcaseCellReuseID = @"bookcaseCellReuseID";
 }
 */
 
-/*
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
@@ -186,13 +186,18 @@ static NSString * const bookcaseCellReuseID = @"bookcaseCellReuseID";
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
-*/
 
-/*
+
+
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+//    self.bookcasesFetchedResultsController.fetchedObjects
 }
-*/
+
+-(NSNumber*)orderWhenListedOfBookcaseForIndexPath:(NSIndexPath*)indexPath
+{
+    return @(indexPath.row);
+}
 
 /*
 // Override to support conditional rearranging of the table view.

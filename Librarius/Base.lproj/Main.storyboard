@@ -75,7 +75,7 @@
                                         <exclude reference="yMS-TV-yst"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" ambiguous="YES">
+                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="173" y="72" width="207" height="363"/>
                                     <mask key="constraints">
                                         <include reference="dSQ-kY-5Lf"/>
@@ -90,7 +90,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dOy-7Y-f7Q">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <animations/>
-                                <variation key="widthClass=compact" ambiguous="YES">
+                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="20" y="72" width="134" height="363"/>
                                 </variation>
                             </imageView>
@@ -597,10 +597,10 @@
             </objects>
             <point key="canvasLocation" x="205.5" y="1657"/>
         </scene>
-        <!--Item-->
+        <!--Library Construction-->
         <scene sceneID="jFO-LR-Jy7">
             <objects>
-                <tableViewController id="7I3-a9-Wwl" customClass="LBR_LibraryConstruction_TableViewController" sceneMemberID="viewController">
+                <tableViewController title="Library Construction" id="7I3-a9-Wwl" customClass="LBR_LibraryConstruction_TableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="xp2-NX-Fe7">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -623,11 +623,11 @@
                             <outlet property="delegate" destination="7I3-a9-Wwl" id="sNQ-qy-Y3S"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Item" image="blueprints" id="eMW-R9-tES"/>
+                    <navigationItem key="navigationItem" id="pzh-yr-Hmx"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="txX-iT-D64" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1747.5" y="-638"/>
+            <point key="canvasLocation" x="2665.5" y="-638"/>
         </scene>
         <!--Scan-->
         <scene sceneID="wg7-f3-ORb">
@@ -1129,7 +1129,7 @@
                         <segue destination="Yvy-lH-Qcb" kind="relationship" relationship="viewControllers" id="9MK-7n-nPt"/>
                         <segue destination="BK5-aT-ift" kind="relationship" relationship="viewControllers" id="wTu-ac-h8U"/>
                         <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
-                        <segue destination="7I3-a9-Wwl" kind="relationship" relationship="viewControllers" id="n0e-ra-eij"/>
+                        <segue destination="B0E-2M-Fp6" kind="relationship" relationship="viewControllers" id="n0e-ra-eij"/>
                         <segue destination="a1o-lg-1yo" kind="relationship" relationship="viewControllers" id="kRc-jj-rCf"/>
                     </connections>
                 </tabBarController>
@@ -1216,6 +1216,26 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gJT-xO-Af5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="964.5" y="890"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="eAv-jd-hi3">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="B0E-2M-Fp6" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" image="blueprints" id="eMW-R9-tES"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="QHi-MP-YI5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="7I3-a9-Wwl" kind="relationship" relationship="rootViewController" id="EU1-mK-D97"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fpL-lu-sMv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1747.5" y="-638"/>
         </scene>
     </scenes>
     <resources>
