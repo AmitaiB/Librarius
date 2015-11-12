@@ -17,7 +17,11 @@
 
     //Data
 #import "LBRDataManager.h"
-
+/**
+ Abstract: The HeaderView will have a collectionView in it, displaying a cell for each Library.
+ 
+ 
+ */
 
 @interface LBR_LibraryConstruction_TableViewController ()
 @property (nonatomic, strong) NSFetchedResultsController *bookcasesFetchedResultsController;
@@ -26,6 +30,11 @@
 @property (nonatomic, strong) NSArray *tableRowsPerSection;
 @property (nonatomic, assign) NSIndexPath *selectedLibraryIndexPath;
 
+    //Reboot
+@property (weak, nonatomic) IBOutlet UICollectionView *librariesCollectionView;
+
+
+
 @end
 
 @implementation LBR_LibraryConstruction_TableViewController {
@@ -33,9 +42,8 @@
 }
 
 
-//static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 static NSString * const bookcaseCellReuseID = @"bookcaseCellReuseID";
-//static NSString * const collectionViewCellReuseID = @"collectionViewCellReuseID";
+static NSString * const librariesCollectionViewCellReuseID = @"librariesCollectionViewCellReuseID";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
