@@ -348,6 +348,17 @@ static NSString * const kUnknown = @"kUnknown";
 
 -(void)generateDefaultBookcaseIfNeeded
 {
+    if (!self.currentLibrary) {
+        [self generateDefaultLibraryIfNeeded];
+    }
+    
+    self.currentLibrary.bookcases
+    
+    
+    
+        //First, check "if needed":
+    BOOL currentLibraryHasAtLeastOneBookcase;
+    
     NSFetchRequest *bookcaseRequest = [NSFetchRequest fetchRequestWithEntityName:@"Bookcase"];
     NSError *error = nil;
     
@@ -357,23 +368,26 @@ static NSString * const kUnknown = @"kUnknown";
     NSPredicate *limitResultsToCurrentLibrary_Predicate = [NSPredicate predicateWithFormat:@"%K like %@", attributeName, attributeValue];
     bookcaseRequest.predicate = limitResultsToCurrentLibrary_Predicate;
     
-    BOOL currentLibraryHasAtLeastOneBookcase = [self.managedObjectContext countForFetchRequest:bookcaseRequest error:&error] >= 1;
+    currentLibraryHasAtLeastOneBookcase = [self.managedObjectContext countForFetchRequest:bookcaseRequest error:&error] >= 1;
     
+    
+        //...then, if needed...
     if (currentLibraryHasAtLeastOneBookcase) {
+        
         return;
     }
     else
     {
-        Bookcase *newDefaultBookcase = [NSEntityDescription insertNewObjectForEntityForName:@"Bookcase" inManagedObjectContext:self.managedObjectContext];
-        
+        Bookcase *newDefaultBookcase       = [NSEntityDescription insertNewObjectForEntityForName:@"Bookcase" inManagedObjectContext:self.managedObjectContext];
+
         newDefaultBookcase.orderWhenListed = @1;
-        newDefaultBookcase.dateCreated = [NSDate date];
-        newDefaultBookcase.dateModified = [NSDate date];;
-        newDefaultBookcase.shelves = @(kDefaultBookcaseShelvesCount);
-        newDefaultBookcase.width = @(kDefaultBookcaseWidth_cm);
-        newDefaultBookcase.library = self.currentLibrary;
+        newDefaultBookcase.dateCreated     = [NSDate date];
+        newDefaultBookcase.dateModified    = [NSDate date];;
+        newDefaultBookcase.shelves         = @(kDefaultBookcaseShelvesCount);
+        newDefaultBookcase.width           = @(kDefaultBookcaseWidth_cm);
+        newDefaultBookcase.library         = self.currentLibrary;
 //        newDefaultBookcase.volumes = [NSSet set];
-        
+        self.currentBookcase = newDefaultBookcase;
     }
 }
 

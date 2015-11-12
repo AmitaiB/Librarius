@@ -41,6 +41,7 @@
 @property (nonatomic, strong) NSArray *libraries;
 //FIXME: CoreData: error: Failed to call designated initializer on NSManagedObject class 'Library'
 @property (nonatomic, strong) Library *currentLibrary;
+@property (nonatomic, strong) Bookcase *currentBookcase;
     //http://stackoverflow.com/questions/14671478/coredata-error-failed-to-call-designated-initializer-on-nsmanagedobject-class
 
 -(NSFetchedResultsController*)preconfiguredLBRFetchedResultsController:(UIViewController<NSFetchedResultsControllerDelegate> *)sender;

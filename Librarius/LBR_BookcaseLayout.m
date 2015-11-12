@@ -5,6 +5,7 @@
 //  Created by Amitai Blickstein on 10/15/15.
 //  Copyright © 2015 Amitai Blickstein, LLC. All rights reserved.
 //
+
 #define kDefaulCellDimension 106.0
 #define kDefaultCellSize CGSizeMake(kDefaulCellDimension, kDefaulCellDimension)
 
@@ -19,10 +20,18 @@
 #define kDecorationYadjustment  13.0
 #define kDecorationHeight       25.0
 
+    //Models
 #import "LBR_BookcaseLayout.h"
-#import "LBR_BookcaseCollectionViewController.h"
 #import "LBR_BookcaseModel.h"
+#import "Bookcase.h"
+
+    //Views
 #import "LBRShelf_DecorationView.h"
+
+    //Controllers
+#import "LBR_BookcaseCollectionViewController.h"
+
+    //Data
 #import "LBRDataManager.h"
 
 
@@ -40,6 +49,7 @@
 @property (nonatomic, strong) NSDictionary *layoutInformation;
 @property (nonatomic, assign) UIEdgeInsets insets;
 
+@property (nonatomic, strong) LBRDataManager *dataManager;
 
     //DecorationView
 @property (nonatomic, strong) NSDictionary *rowDecorationRects;
@@ -55,6 +65,8 @@
     //Required for Switching
 @property (nonatomic, assign) LBRLayoutScheme layoutScheme;
 @property (nonatomic, strong) NSFetchedResultsController *localFetchedResultsController;
+
+@property (nonatomic, strong) Bookcase *currentBookcase;
 
 @end
 
@@ -102,6 +114,11 @@
 
 -(void)prepareLayout
 {
+    if (!self.dataManager) {
+        self.dataManager = [LBRDataManager sharedDataManager];
+    }
+    
+    
     NSMutableDictionary *mutableLayoutInformation = [NSMutableDictionary dictionary];
     NSIndexPath *indexPath;
     
@@ -365,6 +382,18 @@
     }
     
     return result;
+}
+
+
+#pragma mark - === DataManager Interface ===
+
+-(Bookcase *)currentBookcase
+{
+    if (self.dataManager.currentBookcase) {
+        return _currentBookcase = self.dataManager.currentBookcase;
+    }
+    
+    
 }
 
 @end

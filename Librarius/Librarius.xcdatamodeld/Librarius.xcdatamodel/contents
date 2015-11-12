@@ -22,7 +22,7 @@
         <attribute name="dateModified" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="orderWhenListed" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <relationship name="bookcases" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bookcase" inverseName="library" inverseEntity="Bookcase" syncable="YES"/>
+        <relationship name="bookcases" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Bookcase" inverseName="library" inverseEntity="Bookcase" syncable="YES"/>
         <relationship name="volumes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Volume" inverseName="library" inverseEntity="Volume" syncable="YES"/>
     </entity>
     <entity name="Volume" representedClassName="Volume" syncable="YES">
@@ -54,7 +54,7 @@
     <elements>
         <element name="Bookcase" positionX="-47" positionY="-27" width="128" height="165"/>
         <element name="CoverArt" positionX="117" positionY="63" width="128" height="118"/>
-        <element name="Library" positionX="-36" positionY="219" width="128" height="135"/>
+        <element name="Library" positionX="52" positionY="234" width="128" height="133"/>
         <element name="Volume" positionX="-216" positionY="-36" width="128" height="405"/>
     </elements>
 </model>
