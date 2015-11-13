@@ -137,6 +137,20 @@ static NSString * const kUnknown = @"kUnknown";
     DDLogVerbose(@"Fetched volumes from Core Data: %@", [results description]);
 }
 
+/**
+ 
+ */
+-(Library *)insertNewLibrary
+{
+    Library *newLibrary = [Library insertNewObjectIntoContext:self.managedObjectContext];
+    newLibrary.dateCreated = [NSDate date];
+    newLibrary.dateModified = [newLibrary.dateCreated copy];
+    [self generateBookcasesForLibrary:newLibrary withDimensions:@{@1:@1}];
+    newLibrary.name = @"New Library";
+
+    return newLibrary;
+}
+
 //#pragma mark - helper methods
 
     // ===================== CoreData additions here
