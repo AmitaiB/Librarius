@@ -26,6 +26,8 @@
 		380DBB9C1BEC53FA003BE27D /* LBR_BookcasePopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 380DBB9B1BEC53FA003BE27D /* LBR_BookcasePopoverViewController.m */; };
 		38103B591BD033AE009F22E3 /* LBR_ShelvedBookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38103B581BD033AE009F22E3 /* LBR_ShelvedBookCell.m */; };
 		38103B5C1BD033E4009F22E3 /* LBR_BookcaseLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 38103B5B1BD033E4009F22E3 /* LBR_BookcaseLayout.m */; };
+		3810614E1BF5966A00951B45 /* RootCollection+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 3810614B1BF5966A00951B45 /* RootCollection+CoreDataProperties.m */; };
+		3810614F1BF5966A00951B45 /* RootCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3810614D1BF5966A00951B45 /* RootCollection.m */; };
 		3810D9F81BD585150093D5C2 /* UITableViewCell+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 3810D9F71BD585150093D5C2 /* UITableViewCell+FlatUI.m */; };
 		3810D9FB1BD585300093D5C2 /* FUICellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3810D9FA1BD585300093D5C2 /* FUICellBackgroundView.m */; };
 		3810D9FE1BD5BDE60093D5C2 /* UIColor-Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = 3810D9FC1BD5BDE60093D5C2 /* UIColor-Expanded.m */; };
@@ -142,6 +144,10 @@
 		38103B581BD033AE009F22E3 /* LBR_ShelvedBookCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBR_ShelvedBookCell.m; sourceTree = "<group>"; };
 		38103B5A1BD033E4009F22E3 /* LBR_BookcaseLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBR_BookcaseLayout.h; sourceTree = "<group>"; };
 		38103B5B1BD033E4009F22E3 /* LBR_BookcaseLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBR_BookcaseLayout.m; sourceTree = "<group>"; };
+		3810614A1BF5966A00951B45 /* RootCollection+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RootCollection+CoreDataProperties.h"; sourceTree = "<group>"; };
+		3810614B1BF5966A00951B45 /* RootCollection+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RootCollection+CoreDataProperties.m"; sourceTree = "<group>"; };
+		3810614C1BF5966A00951B45 /* RootCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootCollection.h; sourceTree = "<group>"; };
+		3810614D1BF5966A00951B45 /* RootCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootCollection.m; sourceTree = "<group>"; };
 		3810D9F61BD585150093D5C2 /* UITableViewCell+FlatUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+FlatUI.h"; sourceTree = "<group>"; };
 		3810D9F71BD585150093D5C2 /* UITableViewCell+FlatUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+FlatUI.m"; sourceTree = "<group>"; };
 		3810D9F91BD585300093D5C2 /* FUICellBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUICellBackgroundView.h; sourceTree = "<group>"; };
@@ -389,6 +395,10 @@
 		380375581B8B9F11004C4ECE /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3810614A1BF5966A00951B45 /* RootCollection+CoreDataProperties.h */,
+				3810614B1BF5966A00951B45 /* RootCollection+CoreDataProperties.m */,
+				3810614C1BF5966A00951B45 /* RootCollection.h */,
+				3810614D1BF5966A00951B45 /* RootCollection.m */,
 				383E18DA1BF256BE0002F9DE /* Bookcase+CoreDataProperties.h */,
 				383E18DB1BF256BE0002F9DE /* Bookcase+CoreDataProperties.m */,
 				383E18DC1BF256BE0002F9DE /* CoverArt+CoreDataProperties.h */,
@@ -926,6 +936,7 @@
 				3837F2CE1BE2F33A00170FF6 /* Volume.m in Sources */,
 				380375621B8BB707004C4ECE /* LBRGoodReadsAPIClient.m in Sources */,
 				38103B591BD033AE009F22E3 /* LBR_ShelvedBookCell.m in Sources */,
+				3810614E1BF5966A00951B45 /* RootCollection+CoreDataProperties.m in Sources */,
 				383A2F961BEEE42A006D115F /* LBR_PopoverBackgroundView.m in Sources */,
 				3837F2C41BE2F1B200170FF6 /* CoverArt.m in Sources */,
 				388DBDF31BA9174A005C5125 /* THNavigationController.m in Sources */,
@@ -937,6 +948,7 @@
 				3810D9FB1BD585300093D5C2 /* FUICellBackgroundView.m in Sources */,
 				38A329071BE3F24F0060E9D5 /* Reachability.m in Sources */,
 				38466D281B94F24400DD252E /* LBRGoogleGTLClient.m in Sources */,
+				3810614F1BF5966A00951B45 /* RootCollection.m in Sources */,
 				3803756A1B8BC89D004C4ECE /* LBRGoogleSignInViewController.m in Sources */,
 				38DA43D01BE66F2B00FEFD16 /* README.md in Sources */,
 				38D6019B1BDAAAC900E3D60F /* LBRShelf_DecorationView.m in Sources */,

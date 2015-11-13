@@ -22,6 +22,7 @@
 #import "CoverArt.h"
 #import "LBRParsedVolume.h"
 #import <GTLBooksVolume.h>
+#import "RootCollection.h"
 
 @implementation LBRDataManager
 
@@ -158,6 +159,8 @@ static NSString * const kUnknown = @"kUnknown";
 #pragma mark - ***** CoreData *****
 #pragma mark  Fetch Data
 
+
+    ///Get the root item, "RootCollections".
 - (void)fetchData
 {
     [self generateDefaultLibraryIfNeeded];
@@ -338,6 +341,41 @@ static NSString * const kUnknown = @"kUnknown";
 }
 
 /**
+ One of three possibilities:
+ 1) The property has the collection object,
+ 2) NSUserDefaults has it, but not our property (yet.)
+ 3) We have not yet saved the ID to user defaults.
+ 
+ RootCollection is the 'master object' that holds a reference to the entire object graph.
+ */
+-(RootCollection *)rootCollection
+{
+//        (1)
+    if (_rootCollection != nil)
+        return _rootCollection;
+
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSURL *uri = [defaults URLForKey:[RootCollection entityName]] ? [defaults URLForKey:[RootCollection entityName]] : nil;
+//        (2)
+    if (uri) {
+        NSManagedObjectID *moID = [self.managedObjectContext.persistentStoreCoordinator managedObjectIDForURIRepresentation:uri];
+        NSError *error = nil;
+        return [self.managedObjectContext existingObjectWithID:moID error:&error];
+    }
+//        (3)
+    else
+    {
+        RootCollection *newRootCollection = [RootCollection insertNewObjectIntoContext:self.managedObjectContext];
+        newRootCollection.libraries = [NSSet setWithArray:self.libraries];
+        [self saveContext];
+        [defaults setURL:newRootCollection.objectID.URIRepresentation forKey:[RootCollection entityName]];
+        
+        return newRootCollection;
+    }
+}
+
+
+/**
  *  Seeds the dataManager's currentLibrary property.
  */
 -(void)generateDefaultLibraryIfNeeded {
@@ -347,7 +385,9 @@ static NSString * const kUnknown = @"kUnknown";
     BOOL datastoreHasAtLeastOneLibrary = [self.managedObjectContext countForFetchRequest:libraryRequest error:&error] >= 1;
     
     if (datastoreHasAtLeastOneLibrary) {
-        self.currentLibrary = [[self.managedObjectContext executeFetchRequest:libraryRequest error:nil] firstObject];
+        self.libraries = [self.managedObjectContext executeFetchRequest:libraryRequest error:nil];
+        self.currentLibrary = self.libraries.firstObject;
+        
     } else {
         Library *newDefaultLibrary = [Library insertNewObjectIntoContext:self.managedObjectContext];
         newDefaultLibrary.name = @"Default Library (set name in options)";

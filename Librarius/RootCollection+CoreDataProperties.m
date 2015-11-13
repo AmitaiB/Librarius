@@ -1,5 +1,5 @@
 //
-//  Bookcase+CoreDataProperties.m
+//  RootCollection+CoreDataProperties.m
 //  Librarius
 //
 //  Created by Amitai Blickstein on 11/12/15.
@@ -9,17 +9,10 @@
 //  to delete and recreate this implementation file for your updated model.
 //
 
-#import "Bookcase+CoreDataProperties.h"
+#import "RootCollection+CoreDataProperties.h"
 
-@implementation Bookcase (CoreDataProperties)
+@implementation RootCollection (CoreDataProperties)
 
-@dynamic dateCreated;
-@dynamic dateModified;
-@dynamic orderWhenListed;
-@dynamic shelf_height;
-@dynamic shelves;
-@dynamic width;
-@dynamic library;
-@dynamic volumes;
+@dynamic libraries;
 
 @end

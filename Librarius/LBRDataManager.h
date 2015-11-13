@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+
 @class Bookcase;
 @class Volume;
 @class GTLBooksVolume;
@@ -16,7 +17,7 @@
 @class LBRParsedVolume;
 //@class LBRGoogleGTLClient;
 @class Library;
-
+@class RootCollection;
 
 @interface LBRDataManager : NSObject <NSFetchedResultsControllerDelegate>
 @property (nonatomic, strong) NSMutableArray *uniqueCodes;
@@ -41,6 +42,7 @@
     //Other properties to store and fetch, e.g., NSArray *messages...
 
 @property (nonatomic, strong) NSArray *libraries;
+@property (nonatomic, strong) RootCollection *rootCollection;
 //FIXME: CoreData: error: Failed to call designated initializer on NSManagedObject class 'Library'
 @property (nonatomic, strong) Library *currentLibrary;
 @property (nonatomic, strong) Bookcase *currentBookcase;
