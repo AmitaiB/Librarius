@@ -185,7 +185,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-//    self.bookcasesFetchedResultsController.fetchedObjects
+//    Make sure it's reflected in Core data
 }
 
 -(NSNumber*)orderWhenListedOfBookcaseForIndexPath:(NSIndexPath*)indexPath

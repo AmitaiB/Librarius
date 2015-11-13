@@ -732,6 +732,15 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+                                        <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zE4-fV-azo">
+                                            <rect key="frame" x="-25" y="-30" width="97" height="30"/>
+                                            <animations/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                            <variation key="widthClass=compact" ambiguous="YES">
+                                                <rect key="frame" x="151" y="8" width="97" height="30"/>
+                                            </variation>
+                                        </textField>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Bookshelf Name (3 shelves of 20cm)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5lT-Hw-1Mp">
                                             <rect key="frame" x="62" y="2" width="281.5" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -762,8 +771,21 @@
                                         </imageView>
                                     </subviews>
                                     <animations/>
+                                    <variation key="default">
+                                        <mask key="subviews">
+                                            <exclude reference="zE4-fV-azo"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="widthClass=compact">
+                                        <mask key="subviews">
+                                            <include reference="zE4-fV-azo"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
                                 <animations/>
+                                <connections>
+                                    <outlet property="editNameField" destination="zE4-fV-azo" id="PIE-Dk-ZJU"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

@@ -3,12 +3,13 @@
     <entity name="Bookcase" representedClassName="Bookcase" syncable="YES">
         <attribute name="dateCreated" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="dateModified" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="orderWhenListed" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="shelf_height" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="shelves" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="width" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="library" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Library" inverseName="bookcases" inverseEntity="Library" syncable="YES"/>
-        <relationship name="volumes" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Volume" inverseName="bookcase" inverseEntity="Volume" syncable="YES"/>
+        <relationship name="volumes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Volume" inverseName="bookcase" inverseEntity="Volume" syncable="YES"/>
     </entity>
     <entity name="CoverArt" representedClassName="CoverArt" syncable="YES">
         <attribute name="coverArtImageDataSizeLarge" optional="YES" attributeType="Binary" syncable="YES"/>
@@ -56,7 +57,7 @@
         <relationship name="library" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Library" inverseName="volumes" inverseEntity="Library" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Bookcase" positionX="-162" positionY="42" width="128" height="165"/>
+        <element name="Bookcase" positionX="-162" positionY="42" width="128" height="178"/>
         <element name="CoverArt" positionX="-162" positionY="234" width="128" height="118"/>
         <element name="Library" positionX="52" positionY="234" width="128" height="148"/>
         <element name="Volume" positionX="-389" positionY="-36" width="128" height="405"/>

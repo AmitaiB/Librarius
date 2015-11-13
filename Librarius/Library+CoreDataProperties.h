@@ -2,7 +2,7 @@
 //  Library+CoreDataProperties.h
 //  Librarius
 //
-//  Created by Amitai Blickstein on 11/12/15.
+//  Created by Amitai Blickstein on 11/13/15.
 //  Copyright © 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSNumber *orderWhenListed;
 @property (nullable, nonatomic, retain) NSOrderedSet<Bookcase *> *bookcases;
 @property (nullable, nonatomic, retain) NSSet<Volume *> *volumes;
-@property (nullable, nonatomic, retain) NSManagedObject *rootCollection;
+@property (nullable, nonatomic, retain) RootCollection *rootCollection;
 
 @end
 

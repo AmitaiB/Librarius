@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class Bookcase;
 @interface LBR_Bookcase_TableViewCell : UITableViewCell
+
+@property (nonatomic, strong) Bookcase *bookcase;
+@property (nonatomic, strong) IBOutlet UITextField *editNameField;
 
 @end
