@@ -344,7 +344,12 @@ static NSString * const kUnknown = @"kUnknown";
         
         [self generateDefaultBookcaseIfNeeded];
         
+            //Saving changes the objectID from temp to permanent.
         [self saveContext];
+        
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setURL:newDefaultLibrary.objectID.URIRepresentation forKey:[NSString stringWithFormat:@"Library-%@", newDefaultLibrary.orderWhenListed]];
     }
 }
 
