@@ -342,7 +342,6 @@ static NSString * const kUnknown = @"kUnknown";
         newDefaultLibrary.dateModified = [NSDate date];
         self.currentLibrary = newDefaultLibrary;
         
-            //Does this work???
         [self generateDefaultBookcaseIfNeeded];
         
         [self saveContext];

@@ -606,26 +606,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <collectionView key="tableHeaderView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="ktl-aI-0oU">
+                        <collectionView key="tableHeaderView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="ktl-aI-0oU">
                             <rect key="frame" x="0.0" y="64" width="600" height="128"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <animations/>
                             <color key="backgroundColor" red="0.1077490499" green="0.94305272470000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="o6B-Td-MJp">
-                                <size key="itemSize" width="166" height="114"/>
+                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="o6B-Td-MJp">
+                                <size key="itemSize" width="106" height="106"/>
                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
                             </collectionViewFlowLayout>
                             <cells>
                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="librariesCollectionViewCellReuseID" id="Qmi-tZ-w0r" customClass="LBR_LibraryConstruction_CollectionViewCell">
                                     <rect key="frame" x="0.0" y="0.0" width="166" height="114"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                        <rect key="frame" x="0.0" y="0.0" width="166" height="114"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="106" height="106"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m5V-c1-6qt">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m5V-c1-6qt">
                                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                 <animations/>
                                                 <color key="backgroundColor" red="1" green="0.85555930989999995" blue="0.4797239472" alpha="1" colorSpace="calibratedRGB"/>
@@ -640,24 +640,24 @@
                                     <animations/>
                                     <color key="backgroundColor" red="0.1215686275" green="0.69411764710000001" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
-                                        <constraint firstItem="m5V-c1-6qt" firstAttribute="leading" secondItem="Qmi-tZ-w0r" secondAttribute="leadingMargin" id="E9D-KO-jEd"/>
-                                        <constraint firstItem="m5V-c1-6qt" firstAttribute="top" secondItem="Qmi-tZ-w0r" secondAttribute="topMargin" id="MDH-v0-d0Y"/>
-                                        <constraint firstItem="m5V-c1-6qt" firstAttribute="centerX" secondItem="Qmi-tZ-w0r" secondAttribute="centerX" id="bNs-cg-Tcn"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="m5V-c1-6qt" secondAttribute="trailing" id="nwM-Ma-qZX"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="m5V-c1-6qt" secondAttribute="bottom" id="rWA-O5-xbx"/>
-                                        <constraint firstItem="m5V-c1-6qt" firstAttribute="centerY" secondItem="Qmi-tZ-w0r" secondAttribute="centerY" id="xCr-sx-BwT"/>
+                                        <constraint firstItem="m5V-c1-6qt" firstAttribute="centerY" secondItem="Qmi-tZ-w0r" secondAttribute="centerY" id="6qc-ym-GGt"/>
+                                        <constraint firstItem="m5V-c1-6qt" firstAttribute="leading" secondItem="Qmi-tZ-w0r" secondAttribute="leadingMargin" id="WGb-JD-nGr"/>
+                                        <constraint firstItem="m5V-c1-6qt" firstAttribute="bottom" secondItem="Qmi-tZ-w0r" secondAttribute="bottomMargin" id="ZdU-Nc-gkj"/>
+                                        <constraint firstItem="m5V-c1-6qt" firstAttribute="trailing" secondItem="Qmi-tZ-w0r" secondAttribute="trailingMargin" id="iSX-DN-dW0"/>
+                                        <constraint firstItem="m5V-c1-6qt" firstAttribute="top" secondItem="Qmi-tZ-w0r" secondAttribute="topMargin" id="pqL-2O-Hgm"/>
+                                        <constraint firstItem="m5V-c1-6qt" firstAttribute="centerX" secondItem="Qmi-tZ-w0r" secondAttribute="centerX" id="uGd-ga-4jR"/>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="subviews">
                                             <exclude reference="m5V-c1-6qt"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <exclude reference="E9D-KO-jEd"/>
-                                            <exclude reference="MDH-v0-d0Y"/>
-                                            <exclude reference="bNs-cg-Tcn"/>
-                                            <exclude reference="nwM-Ma-qZX"/>
-                                            <exclude reference="rWA-O5-xbx"/>
-                                            <exclude reference="xCr-sx-BwT"/>
+                                            <exclude reference="6qc-ym-GGt"/>
+                                            <exclude reference="WGb-JD-nGr"/>
+                                            <exclude reference="ZdU-Nc-gkj"/>
+                                            <exclude reference="iSX-DN-dW0"/>
+                                            <exclude reference="pqL-2O-Hgm"/>
+                                            <exclude reference="uGd-ga-4jR"/>
                                         </mask>
                                     </variation>
                                     <variation key="widthClass=compact">
@@ -665,12 +665,12 @@
                                             <include reference="m5V-c1-6qt"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <include reference="E9D-KO-jEd"/>
-                                            <include reference="MDH-v0-d0Y"/>
-                                            <include reference="bNs-cg-Tcn"/>
-                                            <include reference="nwM-Ma-qZX"/>
-                                            <include reference="rWA-O5-xbx"/>
-                                            <include reference="xCr-sx-BwT"/>
+                                            <include reference="6qc-ym-GGt"/>
+                                            <include reference="WGb-JD-nGr"/>
+                                            <include reference="ZdU-Nc-gkj"/>
+                                            <include reference="iSX-DN-dW0"/>
+                                            <include reference="pqL-2O-Hgm"/>
+                                            <include reference="uGd-ga-4jR"/>
                                         </mask>
                                     </variation>
                                     <connections>
@@ -684,12 +684,41 @@
                             </connections>
                         </collectionView>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="bookcaseCellReuseID" id="Mbu-1M-8sd" customClass="LBR_LibrarySelection_TableViewCell">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="bookcaseCellReuseID" textLabel="5lT-Hw-1Mp" detailTextLabel="pO9-1g-MQn" imageView="8xd-cZ-srs" style="IBUITableViewCellStyleSubtitle" id="Mbu-1M-8sd" customClass="LBR_Bookcase_TableViewCell">
                                 <rect key="frame" x="0.0" y="241.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Mbu-1M-8sd" id="eEX-c0-cU8">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Bookshelf Name (3 shelves of 20cm)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5lT-Hw-1Mp">
+                                            <rect key="frame" x="62" y="2" width="281.5" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <animations/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="widthClass=compact">
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            </variation>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="95% filled : 214 books" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pO9-1g-MQn">
+                                            <rect key="frame" x="62" y="22.5" width="167" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <animations/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="widthClass=compact">
+                                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            </variation>
+                                        </label>
+                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="bookshelf1" id="8xd-cZ-srs">
+                                            <rect key="frame" x="15" y="5" width="32" height="32"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <animations/>
+                                        </imageView>
+                                    </subviews>
                                     <animations/>
                                 </tableViewCellContentView>
                                 <animations/>
@@ -713,7 +742,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="txX-iT-D64" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2665.5" y="-638"/>
+            <point key="canvasLocation" x="2515.5" y="-638"/>
         </scene>
         <!--Scan-->
         <scene sceneID="wg7-f3-ORb">
