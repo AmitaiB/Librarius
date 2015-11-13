@@ -13,7 +13,6 @@
     //Views
 #import "LBR_LibraryConstruction_CollectionViewCell.h"
 #import "LBR_Bookcase_TableViewCell.h"
-#import "ABB_BufferToolbar.h"
 
     //Controllers
 #import "LBR_LibraryConstruction_TableViewController.h"
@@ -36,8 +35,8 @@
 
 @property (weak, nonatomic) IBOutlet UICollectionView *librariesCollectionView;
 - (IBAction)addButtonTapped:(id)sender;
-
-
+@property (weak, nonatomic) IBOutlet UIView *addBookcaseFooterView;
+- (IBAction)addBookcaseButtonTapped:(id)sender;
 
 
 @end
@@ -47,7 +46,8 @@
 }
 
 
-static NSString * const bookcaseCellReuseID = @"bookcaseCellReuseID";
+static NSString * const bookcaseCellReuseID                = @"bookcaseCellReuseID";
+static NSString * const addBookcaseCellReuseID             = @"addBookcaseCellReuseID";
 static NSString * const librariesCollectionViewCellReuseID = @"librariesCollectionViewCellReuseID";
 
 - (void)viewDidLoad {
@@ -71,7 +71,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 
 #pragma mark - === UITableView DataSource ===
 
-    ///Each section is a library.
+    ///Each section is a library's bookcases.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.bookcasesFetchedResultsController.sections.count;
 }
@@ -83,7 +83,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     NSArray *sections = self.bookcasesFetchedResultsController.sections;
     if (sections.count) {
         id <NSFetchedResultsSectionInfo> currentSection = sections[tableSection];
-        return currentSection.numberOfObjects;
+        return currentSection.numberOfObjects + 1;
     }
     else
     {
@@ -96,10 +96,24 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     LBR_Bookcase_TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:bookcaseCellReuseID forIndexPath:indexPath];
     
+    
     // Configure the cell...
 
     return cell;
 }
+
+
+    ///Just needed to fold when not in selected library.
+
+//-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+//{
+//    
+//    NSLayoutConstraint *heightConstraint = [self.addBookcaseFooterView.heightAnchor constraintEqualToConstant:1];
+//    heightConstraint.priority = 1000;
+//    heightConstraint.active = YES;
+//    return self.addBookcaseFooterView;
+//}
+
 
 #pragma mark Header
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -442,5 +456,10 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 
 
 - (IBAction)addButtonTapped:(id)sender {
+    DBLG
+}
+
+- (IBAction)addBookcaseButtonTapped:(id)sender {
+    DBLG
 }
 @end

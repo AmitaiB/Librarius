@@ -683,6 +683,47 @@
                                 <outlet property="delegate" destination="7I3-a9-Wwl" id="eCf-kO-pgZ"/>
                             </connections>
                         </collectionView>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="8L6-u6-UuZ" userLabel="Add Bookcase (FooterView)">
+                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bkV-Kx-ZUd" userLabel="+bookcase button">
+                                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                    <animations/>
+                                    <state key="normal" title="Button" image="add139"/>
+                                    <variation key="widthClass=compact" fixedFrame="YES">
+                                        <rect key="frame" x="16" y="6" width="36" height="32"/>
+                                    </variation>
+                                    <connections>
+                                        <action selector="addBookcaseButtonTapped:" destination="7I3-a9-Wwl" eventType="touchUpInside" id="f1B-2t-kKW"/>
+                                    </connections>
+                                </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add a bookcase..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yIj-2n-iYp">
+                                    <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                    <animations/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                    <variation key="widthClass=compact" fixedFrame="YES">
+                                        <rect key="frame" x="60" y="11" width="137" height="21"/>
+                                    </variation>
+                                </label>
+                            </subviews>
+                            <animations/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <variation key="default">
+                                <mask key="subviews">
+                                    <exclude reference="bkV-Kx-ZUd"/>
+                                    <exclude reference="yIj-2n-iYp"/>
+                                </mask>
+                            </variation>
+                            <variation key="widthClass=compact">
+                                <mask key="subviews">
+                                    <include reference="bkV-Kx-ZUd"/>
+                                    <include reference="yIj-2n-iYp"/>
+                                </mask>
+                            </variation>
+                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="bookcaseCellReuseID" textLabel="5lT-Hw-1Mp" detailTextLabel="pO9-1g-MQn" imageView="8xd-cZ-srs" style="IBUITableViewCellStyleSubtitle" id="Mbu-1M-8sd" customClass="LBR_Bookcase_TableViewCell">
                                 <rect key="frame" x="0.0" y="241.5" width="600" height="44"/>
@@ -717,6 +758,7 @@
                                             <rect key="frame" x="15" y="5" width="32" height="32"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <animations/>
+                                            <gestureRecognizers/>
                                         </imageView>
                                     </subviews>
                                     <animations/>
@@ -737,6 +779,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addBookcaseFooterView" destination="8L6-u6-UuZ" id="ar6-zG-J6X"/>
                         <outlet property="librariesCollectionView" destination="ktl-aI-0oU" id="Ucz-lc-lCy"/>
                     </connections>
                 </tableViewController>
@@ -1357,6 +1400,7 @@
         <image name="BarcodeScanner-Color" width="50" height="50"/>
         <image name="DownloadBooks-Color" width="50" height="50"/>
         <image name="FlashLight-lightning" width="29" height="29"/>
+        <image name="add139" width="32" height="32"/>
         <image name="blueprints" width="32" height="32"/>
         <image name="bookshelf1" width="32" height="32"/>
         <image name="collections" width="29" height="29"/>
