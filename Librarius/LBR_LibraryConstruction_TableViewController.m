@@ -20,6 +20,7 @@
 
     //Data
 #import "LBRDataManager.h"
+#import "RootCollection.h"
 /**
  Abstract: This VC displays the library structure, and allows for adding/removing/editing the libraries and shelves.
  The HeaderView will have a collectionView in it, displaying a cell for each Library.
@@ -198,12 +199,19 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 
 #pragma mark - === UICollectionView DataSource ===
 
-    ///CollectionView will display the libraries, so #items = #libraries, which are the sections of the FetchRequest.
+    ///The CollectionView has only 1 section, each item/cell representing one library (or tableView-section).
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+}
+
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    if (self.bookcasesFetchedResultsController.sections.count <= 0)
-        DDLogError(@"There are no sections returned from the FRC!");
-    return MAX(1, self.bookcasesFetchedResultsController.sections.count);
+    return MAX(1, dataManager.rootCollection.libraries.count);
+    
+//    if (self.bookcasesFetchedResultsController.sections.count <= 0)
+//        DDLogError(@"There are no sections returned from the FRC!");
+//    return MAX(1, self.bookcasesFetchedResultsController.sections.count);
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
