@@ -10,6 +10,7 @@
 //
 
 #import "Library.h"
+#import "RootCollection.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

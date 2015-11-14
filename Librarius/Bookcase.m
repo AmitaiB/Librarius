@@ -23,4 +23,15 @@
     return [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:context];
 }
 
+-(CGFloat)percentFull
+{
+    CGFloat totalShelfSpace = self.width.integerValue * self.shelves.integerValue;
+    __block CGFloat occupiedShelfSpace = 0;
+    [self.volumes enumerateObjectsUsingBlock:^(Volume * _Nonnull volume, BOOL * _Nonnull stop) {
+        occupiedShelfSpace += volume.thickness? volume.thickness.floatValue : 2.5f;
+    }];
+    
+    return occupiedShelfSpace / totalShelfSpace * 100;
+}
+
 @end

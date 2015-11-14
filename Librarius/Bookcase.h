@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 +(NSString *)entityName;
 +(instancetype)insertNewObjectIntoContext:(NSManagedObjectContext *)context;
 
+-(CGFloat)percentFull;
 
 @end
 

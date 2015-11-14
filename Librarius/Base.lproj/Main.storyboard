@@ -738,7 +738,7 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                             <variation key="widthClass=compact" ambiguous="YES">
-                                                <rect key="frame" x="151" y="8" width="97" height="30"/>
+                                                <rect key="frame" x="151" y="7.5" width="97" height="30"/>
                                             </variation>
                                         </textField>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Bookshelf Name (3 shelves of 20cm)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5lT-Hw-1Mp">

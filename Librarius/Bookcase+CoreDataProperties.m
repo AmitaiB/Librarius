@@ -15,11 +15,11 @@
 
 @dynamic dateCreated;
 @dynamic dateModified;
+@dynamic name;
 @dynamic orderWhenListed;
 @dynamic shelf_height;
 @dynamic shelves;
 @dynamic width;
-@dynamic name;
 @dynamic library;
 @dynamic volumes;
 
