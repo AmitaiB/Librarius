@@ -27,11 +27,12 @@
  
  */
 
-@interface LBR_LibraryConstruction_TableViewController ()
+@interface LBR_LibraryConstruction_TableViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (nonatomic, strong) NSFetchedResultsController *bookcasesFetchedResultsController;
 //@property (nonatomic, strong) NSArray *tableRowsPerSection;
 
 @property (nonatomic, assign) NSIndexPath *selectedLibraryIndexPath;
+@property (nonatomic, strong) UIImagePickerController *imagePickerController;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *librariesCollectionView;
 - (IBAction)addButtonTapped:(id)sender;
@@ -60,6 +61,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
+    [self configureImagePickerController];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
 }
@@ -69,6 +71,39 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     // Dispose of any resources that can be recreated.
 }
 
+-(void)configureImagePickerController
+{
+    self.imagePickerController = [UIImagePickerController new];
+    self.imagePickerController.delegate = self;
+    [self.imagePickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
+    self.imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
+    
+    self.imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+}
+
+-(IBAction)bookcaseIconWasTapped:(id)sender
+{
+    [self.navigationController presentViewController:self.imagePickerController animated:YES completion:nil];
+}
+
+#pragma mark - === UIImagePickerController delegate ===
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
+{
+//    NSData profilePhoto = [info objectForKey:UIImagePickerControllerOriginalImage];
+//    
+//    
+//        // Convert to JPEG with 50% quality
+//    NSData* data = UIImageJPEGRepresentation(self.profilePhoto, 0.3f);
+//    
+//    self.pfPhoto = [PFFile fileWithName:@"ProfilePhoto" data:data];
+//    
+//    [self.uploadProfilePhotoButton setTitle:@"Nice Pic!" forState:UIControlStateDisabled];
+//    self.uploadProfilePhotoButton.enabled = NO;
+    
+    [self.imagePickerController dismissViewControllerAnimated:YES completion:nil];
+    
+}
 #pragma mark - === UITableView DataSource ===
 
     ///Each section is a library's bookcases.
