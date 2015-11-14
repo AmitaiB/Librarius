@@ -118,7 +118,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     NSArray *sections = self.bookcasesFetchedResultsController.sections;
     if (sections.count) {
         id <NSFetchedResultsSectionInfo> currentSection = sections[tableSection];
-        return currentSection.numberOfObjects + 1;
+        return currentSection.numberOfObjects;
     }
     else
     {
@@ -133,10 +133,18 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     
     
     // Configure the cell...
-
+    // Set the name (& size)
+    // Volumes and fullness
+    [self configureCell:cell forRowAtIndexPath:indexPath];
+    
+    
     return cell;
 }
 
+-(void)configureCell:(LBR_Bookcase_TableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    cell.bookcase = self.bookcasesFetchedResultsController.fetchedObjects[indexPath.row];
+}
 
     ///Just needed to fold when not in selected library.
 

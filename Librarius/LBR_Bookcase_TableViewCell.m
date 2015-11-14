@@ -31,7 +31,7 @@
     
     [self.imageView setImage:[UIImage imageNamed:@"bookshelf1"]];
     self.textLabel.text = bookcase.name ? bookcase.name : [NSString stringWithFormat:@"Bookcase #%@", bookcase.orderWhenListed];
-    self.detailTextLabel.text = [NSString stringWithFormat:@"x％ filled: %lu books", bookcase.volumes.count];
+    self.detailTextLabel.text = [NSString stringWithFormat:@"%.01f％ filled: %lu books", [self.bookcase percentFull], bookcase.volumes.count];
 }
 
 @end
