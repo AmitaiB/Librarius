@@ -11,8 +11,10 @@
 #import <CoreData/CoreData.h>
 #import <iAd/iAd.h>
 
+@class Bookcase;
 @interface LBR_BookcaseCollectionViewController : UICollectionViewController <NSFetchedResultsControllerDelegate, UIPopoverPresentationControllerDelegate, UIAdaptivePresentationControllerDelegate>
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) Bookcase *bookcaseOnDisplay;
 
 @end

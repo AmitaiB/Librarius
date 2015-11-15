@@ -50,7 +50,6 @@
 @property (nonatomic, strong) UIProgressView *progressView;
 //@property (nonatomic, strong) LBR_BookcasePopoverViewController *adjustBookcaseVC;
 
-@property (nonatomic, strong) Bookcase *bookcaseOnDisplay;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *accessBookcaseAttributesButton;
 - (IBAction)accessBookcaseAttributesButtonTapped:(id)sender;
@@ -100,9 +99,18 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     self.collectionView.directionalLockEnabled = YES;
     self.canDisplayBannerAds = YES;
     
-        //Set custom layout with protocol
-    layout = [LBR_BookcaseLayout new];
-    [self.collectionView setCollectionViewLayout:layout];
+    if (self.bookcaseOnDisplay)
+    {
+        
+    }
+        
+        
+        
+        [self refreshLayout];
+
+    
+        //    layout = [LBR_BookcaseLayout new];
+//    [self.collectionView setCollectionViewLayout:layout];
     
     self.collectionView.backgroundColor = [UIColor cloudsColor];
     self.clearsSelectionOnViewWillAppear = NO;
@@ -112,19 +120,21 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
 }
 
 
--(void)setBookcaseOnDisplay:(Bookcase *)bookcaseOnDisplay
+//-(void)setBookcaseOnDisplay:(Bookcase *)bookcaseOnDisplay
+//{
+//    _bookcaseOnDisplay = bookcaseOnDisplay;
+//    [self refreshLayout];
+//}
+
+-(void)refreshLayout
 {
-    _bookcaseOnDisplay = bookcaseOnDisplay;
-    
     LBR_BookcaseLayout *newLayout = [[LBR_BookcaseLayout alloc]
                                      initWithScheme:LBRLayoutSchemeGenreAuthorDate
-                                     maxShelves:bookcaseOnDisplay.shelves.integerValue
-                                     shelfWidth_cm:bookcaseOnDisplay.width.floatValue];
-        //???:
+                                     maxShelves:self.bookcaseOnDisplay.shelves.integerValue
+                                     shelfWidth_cm:self.bookcaseOnDisplay.width.floatValue];
     layout = newLayout;
     [self.collectionView setCollectionViewLayout:newLayout animated:YES];
 }
-
 
 -(void)setupProgressView
 {
@@ -199,7 +209,7 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
 {
     self.bookcaseOnDisplay.shelves = @(popoverVC.numShelvesStepper.value);
     self.bookcaseOnDisplay.width   = @(popoverVC.shelfWidthStepper.value);
-    self.bookcaseOnDisplay = self.bookcaseOnDisplay;
+    [self refreshLayout];
 
         //CLEAN: Once it works, of course.
 //    LBR_BookcaseLayout *newLayout = [[LBR_BookcaseLayout alloc] initWithScheme:LBRLayoutSchemeGenreAuthorDate maxShelves:popoverVC.numShelvesStepper.value shelfWidth_cm:popoverVC.shelfWidthStepper.value];

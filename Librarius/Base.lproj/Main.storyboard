@@ -75,7 +75,7 @@
                                         <exclude reference="yMS-TV-yst"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" ambiguous="YES">
+                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="173" y="72" width="207" height="363"/>
                                     <mask key="constraints">
                                         <include reference="dSQ-kY-5Lf"/>
@@ -90,7 +90,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dOy-7Y-f7Q">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <animations/>
-                                <variation key="widthClass=compact" ambiguous="YES">
+                                <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="20" y="72" width="134" height="363"/>
                                 </variation>
                             </imageView>
@@ -725,7 +725,7 @@
                             </variation>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="bookcaseCellReuseID" editingAccessoryType="detailButton" textLabel="5lT-Hw-1Mp" detailTextLabel="pO9-1g-MQn" imageView="8xd-cZ-srs" style="IBUITableViewCellStyleSubtitle" id="Mbu-1M-8sd" customClass="LBR_Bookcase_TableViewCell">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="bookcaseCellReuseID" textLabel="5lT-Hw-1Mp" detailTextLabel="pO9-1g-MQn" imageView="8xd-cZ-srs" style="IBUITableViewCellStyleSubtitle" id="Mbu-1M-8sd" customClass="LBR_Bookcase_TableViewCell">
                                 <rect key="frame" x="0.0" y="241.5" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Mbu-1M-8sd" id="eEX-c0-cU8">
@@ -785,6 +785,7 @@
                                 <animations/>
                                 <connections>
                                     <outlet property="editNameField" destination="zE4-fV-azo" id="PIE-Dk-ZJU"/>
+                                    <segue destination="ajh-Xd-CoJ" kind="showDetail" identifier="bookshelfToBookShelveSegueID" action="showViewController:sender:" id="YZg-B7-meX"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -1436,5 +1437,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="hkZ-A2-opz"/>
+        <segue reference="YZg-B7-meX"/>
     </inferredMetricsTieBreakers>
 </document>

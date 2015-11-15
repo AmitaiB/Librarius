@@ -16,6 +16,7 @@
 
     //Controllers
 #import "LBR_LibraryConstruction_TableViewController.h"
+#import "LBR_BookcaseCollectionViewController.h"
 
     //Data
 #import "LBRDataManager.h"
@@ -245,15 +246,18 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"bookshelfToBookShelveSegueID"]) {
+        LBR_BookcaseCollectionViewController *destinationVC = segue.destinationViewController;
+        LBR_Bookcase_TableViewCell *senderCell = (LBR_Bookcase_TableViewCell*)sender;
+        destinationVC.bookcaseOnDisplay = senderCell.bookcase;
+    }
 }
-*/
+
 
 #pragma mark - === UICollectionView DataSource ===
 
