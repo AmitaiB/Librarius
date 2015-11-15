@@ -6,12 +6,15 @@
 //  Copyright © 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 
+    //Models
 #import "LBR_LibraryModel.h"
 #import "LBR_BookcaseModel.h"
 #import "Library.h"
-#import "LBRDataManager.h"
 #import "Bookcase.h"
 #import "Volume.h"
+
+    //Data
+#import "LBRDataManager.h"
 
 @interface LBR_BookcaseModel ()
 @property (nonatomic, strong) NSArray <Volume*> *remainingVolumes;
@@ -24,8 +27,9 @@
 {
     if (!(self = [super init])) return nil;
     
-    _library = library;
+    _library      = library;
     _layoutScheme = &layoutScheme;
+    _isProcessed  = NO;
     
     return self;
 }
@@ -71,6 +75,19 @@
         remainderVolumes = bookcaseModel.unshelvedRemainder;
     }
     self.bookcaseModels = [mutableShelvedBookcaseModels copy];
+    self.isProcessed = YES;
+}
+
+-(NSArray<LBR_BookcaseModel *> *)bookcaseModels
+{
+    if (self.isProcessed) {
+        return _bookcaseModels;
+    }
+    else
+    {
+        DDLogWarn(@"Library model has not processed a library – returning empty array.");
+        return @[[LBR_BookcaseModel new]];
+    }
 }
 
 @end

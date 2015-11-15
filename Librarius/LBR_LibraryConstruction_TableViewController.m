@@ -23,6 +23,7 @@
 #import "RootCollection.h"
 #import "LBR_BookcaseLayout.h"
 #import "LBR_BookcaseModel.h"
+#import "LBR_LibraryModel.h"
 
 /**
  Abstract: This VC displays the library structure, and allows for adding/removing/editing the libraries and shelves.
@@ -42,7 +43,7 @@
 - (IBAction)addBookcaseButtonTapped:(id)sender;
 
 @property (nonatomic, strong) UISegmentedControl *layoutSegmentedControl;
-@property (nonatomic, strong) NSDictionary *bookcaseModelsDictionary;
+@property (nonatomic, strong) NSDictionary <NSIndexPath*, LBR_BookcaseModel*> *bookcaseModelsDictionary;
 
 @end
 
@@ -90,29 +91,26 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
      */
 -(void)precacheBookcaseModels
 {
+        //Selected Library, or default to first library.
     NSMutableDictionary *mutableBookcaseModels = [NSMutableDictionary dictionary];
     NSIndexPath *currentLibraryPath = self.librariesCollectionView.indexPathsForSelectedItems.firstObject;
     NSInteger targetSection = currentLibraryPath ? currentLibraryPath.item : 0;
     
+        //Grab objects
+    LBR_LibraryModel *libraryModel = [[LBR_LibraryModel alloc] initWithLibrary:dataManager.currentLibrary];
+    [libraryModel processLibrary];
     
-    NSFetchedResultsController *volumesInCurrentLibraryFRC = [dataManager preconfiguredLBRFetchedResultsController:self];
-    NSArray *allVolumesInCurrentLibrary = volumesInCurrentLibraryFRC.fetchedObjects;
-    
-    
-    LBR_BookcaseLayout *layout;
-    NSArray <Volume*> *remainderVolumes = nil;
-    NSInteger numBookcasesInCurrentLibrary = dataManager.currentLibrary.bookcases.count;
+        //Grab keys
     NSIndexPath *incrementalIndexPath;
+    NSMutableArray <NSIndexPath*> *mutableKeys = [NSMutableArray new];
     
-    for (NSUInteger idx = 0; idx < numBookcasesInCurrentLibrary; idx++) {
-        layout = [[LBR_BookcaseLayout alloc] initWithScheme:LBRLayoutSchemeDefault maxShelves:kDefaultBookcaseShelvesCount shelfWidth_cm:kDefaultBookcaseWidth_cm forVolumes:remainderVolumes];
-        remainderVolumes = layout.bookcaseModel.unshelvedRemainder;
-        
+    for (NSUInteger idx = 0; idx < libraryModel.library.bookcases.count; idx++) {
         incrementalIndexPath = [NSIndexPath indexPathForRow:idx inSection:targetSection];
-        [mutableBookcaseModels setObject:layout forKey:incrementalIndexPath];
+        [mutableKeys addObject:incrementalIndexPath];
     }
+    NSArray *bookcaseModelKeys = [mutableKeys copy];
     
-    self.bookcaseModelsDictionary = [mutableBookcaseModels copy];
+    self.bookcaseModelsDictionary = [NSDictionary dictionaryWithObjects:libraryModel.bookcaseModels forKeys:bookcaseModelKeys];
 }
 
 #pragma mark - === UIImagePickerController delegate ===

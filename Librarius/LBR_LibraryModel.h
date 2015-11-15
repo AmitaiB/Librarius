@@ -20,9 +20,13 @@
     //Outputs
 @property (nonatomic, strong) NSArray <LBR_BookcaseModel*> *bookcaseModels;
 
+    //State
+@property (nonatomic) BOOL isProcessed;
+
+
 
 -(instancetype)initWithLibrary:(Library*)library layoutScheme:(LBRLayoutScheme)layoutScheme;
 -(instancetype)initWithLibrary:(Library*)library;
-
+-(void)processLibrary;
 
 @end
