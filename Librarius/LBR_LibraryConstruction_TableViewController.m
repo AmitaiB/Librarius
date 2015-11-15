@@ -105,7 +105,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     NSIndexPath *incrementalIndexPath;
     
     for (NSUInteger idx = 0; idx < numBookcasesInCurrentLibrary; idx++) {
-        layout = [[LBR_BookcaseLayout alloc] initWithScheme:LBRLayoutSchemeGenreAuthorDate maxShelves:kDefaultBookcaseShelvesCount shelfWidth_cm:kDefaultBookcaseWidth_cm forVolumes:remainderVolumes];
+        layout = [[LBR_BookcaseLayout alloc] initWithScheme:LBRLayoutSchemeDefault maxShelves:kDefaultBookcaseShelvesCount shelfWidth_cm:kDefaultBookcaseWidth_cm forVolumes:remainderVolumes];
         remainderVolumes = layout.bookcaseModel.unshelvedRemainder;
         
         incrementalIndexPath = [NSIndexPath indexPathForRow:idx inSection:targetSection];

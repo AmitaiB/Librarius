@@ -103,7 +103,7 @@
 
 -(instancetype)init
 {
-    return [self initWithScheme:LBRLayoutSchemeGenreAuthorDate forVolumes:nil];
+    return [self initWithScheme:LBRLayoutSchemeDefault forVolumes:nil];
 }
 
 /**
@@ -381,6 +381,7 @@
     NSString *result = nil;
     
     switch(formatType) {
+//        case LBRLayoutSchemeDefault:
         case LBRLayoutSchemeGenreAuthorDate:
             result = @"LBRLayoutSchemeGenreAuthorDate";
             break;

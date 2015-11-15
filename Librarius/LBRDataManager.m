@@ -264,7 +264,7 @@ static NSString * const kUnknown = @"kUnknown";
 
 #pragma mark - NSFetchedResultsController configurator
 
-- (NSFetchedResultsController *)preconfiguredLBRFetchedResultsController:(UIViewController<NSFetchedResultsControllerDelegate> *)sender
+- (NSFetchedResultsController *)preconfiguredLBRFetchedResultsController
 {
     /**
      *  1) The set of all books (TODO: Uniquify the collection, so you cannot add multiple entries accidentally - UPDATE: Trickier than it looks)...
@@ -273,11 +273,12 @@ static NSString * const kUnknown = @"kUnknown";
      *  4) ...then author,
      *  5) ...then year.
      */
+    
     NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
     NSFetchRequest *volumesRequest = [NSFetchRequest fetchRequestWithEntityName:[Volume entityName]]; //(1)
     
         // Set the batch size to a suitable number.
-    [volumesRequest setFetchBatchSize:20];
+    [volumesRequest setFetchBatchSize:200];
     
         // Edit the sort key as appropriate.
     NSSortDescriptor *categorySorter = [NSSortDescriptor sortDescriptorWithKey:@"mainCategory" ascending:YES];
@@ -293,9 +294,7 @@ static NSString * const kUnknown = @"kUnknown";
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
     NSFetchedResultsController *frc = [[NSFetchedResultsController alloc] initWithFetchRequest:volumesRequest managedObjectContext:managedObjectContext sectionNameKeyPath:@"mainCategory" cacheName:@"LBRLayoutSchemeGenreAuthorDate"];
-    
-    frc.delegate = sender;
-    
+
     NSError *error = nil;
     if (![frc performFetch:&error]) {
             // Replace this implementation with code to handle the error appropriately.
@@ -307,6 +306,13 @@ static NSString * const kUnknown = @"kUnknown";
     return frc;
 }    
 
+- (NSFetchedResultsController *)preconfiguredLBRFetchedResultsController:(UIViewController<NSFetchedResultsControllerDelegate> *)sender
+{
+    NSFetchedResultsController *frc = [self preconfiguredLBRFetchedResultsController];
+    frc.delegate = sender;
+    
+    return frc;
+}
 
 #pragma mark - Generate Data
 - (void)generateTestDataIfNeeded

@@ -48,6 +48,7 @@
 @property (nonatomic, strong) Bookcase *currentBookcase;
     //http://stackoverflow.com/questions/14671478/coredata-error-failed-to-call-designated-initializer-on-nsmanagedobject-class
 
+-(NSFetchedResultsController*)preconfiguredLBRFetchedResultsController;
 -(NSFetchedResultsController*)preconfiguredLBRFetchedResultsController:(UIViewController<NSFetchedResultsControllerDelegate> *)sender;
 -(void) saveContext;
 -(void) generateTestDataIfNeeded;

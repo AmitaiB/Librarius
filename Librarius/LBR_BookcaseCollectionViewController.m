@@ -129,9 +129,9 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
 -(void)refreshLayout
 {
     LBR_BookcaseLayout *newLayout = [[LBR_BookcaseLayout alloc]
-                                     initWithScheme:LBRLayoutSchemeGenreAuthorDate
+                                     initWithScheme:LBRLayoutSchemeDefault
                                      maxShelves:self.bookcaseOnDisplay.shelves.integerValue
-                                     shelfWidth_cm:self.bookcaseOnDisplay.width.floatValue];
+                                     shelfWidth_cm:self.bookcaseOnDisplay.width.floatValue forVolumes:nil];
     layout = newLayout;
     [self.collectionView setCollectionViewLayout:newLayout animated:YES];
 }

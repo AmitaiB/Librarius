@@ -18,10 +18,11 @@
 //@end
 
 typedef NS_ENUM(NSUInteger, LBRLayoutScheme) {
-    LBRLayoutSchemeGenreAuthorDate, //default
+    LBRLayoutSchemeDefault,
+    LBRLayoutSchemeGenreAuthorDate = 0, //default
     LBRLayoutSchemeAuthorDate
-//    ,LBRLayoutSchemeLOC  not implemented yet
-//    ,LBRLayoutSchemeDDS
+        ///    ,LBRLayoutSchemeLOC  not implemented yet
+        ///    ,LBRLayoutSchemeDDS
 };
 
 @interface LBR_BookcaseLayout : UICollectionViewLayout
