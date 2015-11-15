@@ -34,7 +34,7 @@ typedef NS_ENUM(NSUInteger, LBRLayoutScheme) {
 
 //@property (nonatomic, weak) id <LBRBookLayoutDataSource> dataSource;
 
-- (instancetype)initWithScheme:(LBRLayoutScheme)layoutScheme maxShelves:(NSUInteger)maxShelves shelfWidth_cm:(CGFloat)width_cm;
-- (instancetype)initWithScheme:(LBRLayoutScheme)layoutScheme;
--(NSString*)formatTypeToString:(LBRLayoutScheme)formatType;
+- (instancetype)initWithScheme:(LBRLayoutScheme)layoutScheme maxShelves:(NSUInteger)maxShelves shelfWidth_cm:(CGFloat)width_cm forVolumes:(NSArray <Volume *> *)volumes;
+- (instancetype)initWithScheme:(LBRLayoutScheme)layoutScheme forVolumes:(NSArray <Volume *> *)volumes;
+- (NSString*)formatTypeToString:(LBRLayoutScheme)formatType;
 @end

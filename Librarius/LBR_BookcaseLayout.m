@@ -68,13 +68,15 @@
 
 @property (nonatomic, strong) Bookcase *currentBookcase;
 
+@property (nonatomic, strong) NSArray <Volume *> *overrideVolumesToLayout;
+
 @end
 
 @implementation LBR_BookcaseLayout
 
 #pragma mark - == Lifecycle ==
 
--(instancetype)initWithScheme:(LBRLayoutScheme)layoutScheme maxShelves:(NSUInteger)maxShelves shelfWidth_cm:(CGFloat)width_cm
+-(instancetype)initWithScheme:(LBRLayoutScheme)layoutScheme maxShelves:(NSUInteger)maxShelves shelfWidth_cm:(CGFloat)width_cm forVolumes:(NSArray<Volume *> *)volumes
 {
     if (!(self = [super init])) return nil;
     
@@ -87,20 +89,21 @@
     _interItemSpacing   = 3.0;
     _interShelfSpacing  = 30.0;
     _cellCountForLongestRow = 0;
+    _overrideVolumesToLayout = volumes;
     
     [super registerClass:[LBRShelf_DecorationView class] forDecorationViewOfKind:[LBRShelf_DecorationView kind]];
     
     return self;
 }
 
--(instancetype)initWithScheme:(LBRLayoutScheme)layoutScheme
+-(instancetype)initWithScheme:(LBRLayoutScheme)layoutScheme forVolumes:(NSArray<Volume *> *)volumes
 {
-    return [self initWithScheme:layoutScheme maxShelves:kDefaultBookcaseShelvesCount shelfWidth_cm:kDefaultBookcaseWidth_cm];
+    return [self initWithScheme:layoutScheme maxShelves:kDefaultBookcaseShelvesCount shelfWidth_cm:kDefaultBookcaseWidth_cm forVolumes:volumes];
 }
 
 -(instancetype)init
 {
-    return [self initWithScheme:LBRLayoutSchemeGenreAuthorDate];
+    return [self initWithScheme:LBRLayoutSchemeGenreAuthorDate forVolumes:nil];
 }
 
 /**
@@ -226,7 +229,14 @@
 -(LBR_BookcaseModel *)configuredBookcaseModel
 {
     LBR_BookcaseModel *bookcaseModel = [[LBR_BookcaseModel alloc] initWithWidth:self.shelfWidth_cm shelvesCount:self.maxShelvesCount];
-    [bookcaseModel shelveBooks:self.localFetchedResultsController.fetchedObjects];
+    
+    NSArray <Volume *> *volumesToLayout;
+    if (self.overrideVolumesToLayout)
+        volumesToLayout = self.overrideVolumesToLayout;
+    else
+        volumesToLayout = self.localFetchedResultsController.fetchedObjects;
+
+    [bookcaseModel shelveBooks:volumesToLayout];
 
     return bookcaseModel;
 }

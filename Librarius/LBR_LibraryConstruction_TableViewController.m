@@ -21,6 +21,8 @@
     //Data
 #import "LBRDataManager.h"
 #import "RootCollection.h"
+#import "LBR_BookcaseLayout.h"
+#import "LBR_BookcaseModel.h"
 
 /**
  Abstract: This VC displays the library structure, and allows for adding/removing/editing the libraries and shelves.
@@ -39,6 +41,8 @@
 @property (weak, nonatomic) IBOutlet UIView *addBookcaseFooterView;
 - (IBAction)addBookcaseButtonTapped:(id)sender;
 
+@property (nonatomic, strong) UISegmentedControl *layoutSegmentedControl;
+@property (nonatomic, strong) NSDictionary *bookcaseModelsDictionary;
 
 @end
 
@@ -53,6 +57,9 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.layoutSegmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"layout 1", @"layout 2"]];
+    self.navigationItem.titleView = self.layoutSegmentedControl;
     
     self.bookcasesFetchedResultsController.delegate = self;
 
@@ -72,20 +79,40 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 }
 
 
--(void)configureImagePickerController
+    /**
+     Result: a dictionary with keys of indexPaths, objects are layouts, so each bookcase is ready to go.
+     
+     1) Make MutableDictionary.
+     2) To get proper Row indexPaths, get library's indexPath. libraryPath.item == bookcasePath.section
+     3) FRC for allVolumes (in that library).
+     4) Run it through the bookcaseModel. Grab that info, and the remainderVolumes.
+     5) rinse and repeat for all remainderVolumes.
+     */
+-(void)precacheBookcaseModels
 {
-    self.imagePickerController = [UIImagePickerController new];
-    self.imagePickerController.delegate = self;
-    [self.imagePickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
-    self.imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
+    NSMutableDictionary *mutableBookcaseModels = [NSMutableDictionary dictionary];
+    NSIndexPath *currentLibraryPath = self.librariesCollectionView.indexPathsForSelectedItems.firstObject;
+    NSInteger targetSection = currentLibraryPath ? currentLibraryPath.item : 0;
+
     
-    self.imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceFront;
-}
-
-
--(IBAction)bookcaseIconWasTapped:(id)sender
-{
-    [self.navigationController presentViewController:self.imagePickerController animated:YES completion:nil];
+    
+    NSFetchedResultsController *volumesInCurrentLibraryFRC = [dataManager preconfiguredLBRFetchedResultsController:self];
+    NSArray *allVolumesInCurrentLibrary = volumesInCurrentLibraryFRC.fetchedObjects;
+    
+    LBR_BookcaseLayout *layout;
+    
+    NSInteger numBookcasesInCurrentLibrary = dataManager.currentLibrary.bookcases.count;
+    for (NSUInteger i = 0; i < numBookcasesInCurrentLibrary; i++) {
+//        layout = [[LBR_BookcaseLayout alloc] initWithScheme:LBRLayoutSchemeGenreAuthorDate maxShelves:kDefaultBookcaseShelvesCount shelfWidth_cm:kDefaultBookcaseWidth_cm];
+        layout = [LBR_BookcaseLayout new];
+        
+    }
+    
+    
+    
+    
+    
+    self.bookcaseModelsDictionary = [mutableBookcaseModels copy];
 }
 
 #pragma mark - === UIImagePickerController delegate ===
@@ -106,6 +133,23 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     [self.imagePickerController dismissViewControllerAnimated:YES completion:nil];
     
 }
+
+-(void)configureImagePickerController
+{
+    self.imagePickerController = [UIImagePickerController new];
+    self.imagePickerController.delegate = self;
+    [self.imagePickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
+    self.imagePickerController.modalPresentationStyle = UIModalPresentationCurrentContext;
+    
+    self.imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceFront;
+}
+
+
+-(IBAction)bookcaseIconWasTapped:(id)sender
+{
+    [self.navigationController presentViewController:self.imagePickerController animated:YES completion:nil];
+}
+
 #pragma mark - === UITableView DataSource ===
 
     ///Each section is a library's bookcases.
@@ -149,15 +193,6 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 }
 
     ///Just needed to fold when not in selected library.
-
-//-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-//{
-//    
-//    NSLayoutConstraint *heightConstraint = [self.addBookcaseFooterView.heightAnchor constraintEqualToConstant:1];
-//    heightConstraint.priority = 1000;
-//    heightConstraint.active = YES;
-//    return self.addBookcaseFooterView;
-//}
 
 
 #pragma mark Header
