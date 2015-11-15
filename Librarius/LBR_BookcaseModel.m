@@ -76,6 +76,7 @@
             
             [self.mutableShelves addObject:thisShelf];
 
+                ///!!!:Is this broken if we have run out of books, but it does this anyway...?
                 //If there are more shelves, then this book becomes the first on the next shelf.
             BOOL nextShelfExistsAndIsEmpty = self.mutableShelves.count < self.shelvesCount;
             if (nextShelfExistsAndIsEmpty)

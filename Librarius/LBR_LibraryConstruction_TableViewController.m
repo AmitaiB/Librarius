@@ -93,24 +93,24 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     NSMutableDictionary *mutableBookcaseModels = [NSMutableDictionary dictionary];
     NSIndexPath *currentLibraryPath = self.librariesCollectionView.indexPathsForSelectedItems.firstObject;
     NSInteger targetSection = currentLibraryPath ? currentLibraryPath.item : 0;
-
     
     
     NSFetchedResultsController *volumesInCurrentLibraryFRC = [dataManager preconfiguredLBRFetchedResultsController:self];
     NSArray *allVolumesInCurrentLibrary = volumesInCurrentLibraryFRC.fetchedObjects;
     
+    
     LBR_BookcaseLayout *layout;
-    
+    NSArray <Volume*> *remainderVolumes = nil;
     NSInteger numBookcasesInCurrentLibrary = dataManager.currentLibrary.bookcases.count;
-    for (NSUInteger i = 0; i < numBookcasesInCurrentLibrary; i++) {
-//        layout = [[LBR_BookcaseLayout alloc] initWithScheme:LBRLayoutSchemeGenreAuthorDate maxShelves:kDefaultBookcaseShelvesCount shelfWidth_cm:kDefaultBookcaseWidth_cm];
-        layout = [LBR_BookcaseLayout new];
+    NSIndexPath *incrementalIndexPath;
+    
+    for (NSUInteger idx = 0; idx < numBookcasesInCurrentLibrary; idx++) {
+        layout = [[LBR_BookcaseLayout alloc] initWithScheme:LBRLayoutSchemeGenreAuthorDate maxShelves:kDefaultBookcaseShelvesCount shelfWidth_cm:kDefaultBookcaseWidth_cm forVolumes:remainderVolumes];
+        remainderVolumes = layout.bookcaseModel.unshelvedRemainder;
         
+        incrementalIndexPath = [NSIndexPath indexPathForRow:idx inSection:targetSection];
+        [mutableBookcaseModels setObject:layout forKey:incrementalIndexPath];
     }
-    
-    
-    
-    
     
     self.bookcaseModelsDictionary = [mutableBookcaseModels copy];
 }
