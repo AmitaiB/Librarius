@@ -68,6 +68,9 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
+    [self precacheBookcaseModels];
+    
+    
     [self configureImagePickerController];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -89,7 +92,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
      4) Run it through the bookcaseModel. Grab that info, and the remainderVolumes.
      5) rinse and repeat for all remainderVolumes.
      */
--(void)precacheBookcaseModels
+- (void)precacheBookcaseModels
 {
         //Selected Library, or default to first library.
     NSMutableDictionary *mutableBookcaseModels = [NSMutableDictionary dictionary];
@@ -188,6 +191,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 -(void)configureCell:(LBR_Bookcase_TableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     cell.bookcase = self.bookcasesFetchedResultsController.fetchedObjects[indexPath.row];
+    self.bookcaseModelsDictionary;
 }
 
     ///Just needed to fold when not in selected library.
