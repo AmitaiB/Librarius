@@ -15,7 +15,7 @@
 #import "LBR_BookcaseCollectionViewController.h"
 #import "LBRDataManager.h"
 #import "LBR_BookcaseLayout.h"
-#import "LBR_EmptyFlowLayout.h"
+//#import "LBR_EmptyFlowLayout.h"
 //#import "LBR_ProgrammaticPopoverViewController.h"
 #import "LBR_BookcasePopoverViewController.h"
 
@@ -28,6 +28,7 @@
     //Models
 #import "Volume.h"
 #import "LBR_BookcaseModel.h"
+#import "Bookcase.h"
 #import "CoverArt.h"
 
     //Categories
@@ -48,6 +49,8 @@
 @property (nonatomic, strong) LBRDataManager *dataManager;
 @property (nonatomic, strong) UIProgressView *progressView;
 //@property (nonatomic, strong) LBR_BookcasePopoverViewController *adjustBookcaseVC;
+
+@property (nonatomic, strong) Bookcase *bookcaseOnDisplay;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *accessBookcaseAttributesButton;
 - (IBAction)accessBookcaseAttributesButtonTapped:(id)sender;
@@ -93,7 +96,6 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     [self layoutChangeSetup];
     
     self.title = @"Bookshelves";
-        //Rope in the singleton dataManger
     self.dataManager = [LBRDataManager sharedDataManager];
     self.collectionView.directionalLockEnabled = YES;
     self.canDisplayBannerAds = YES;
@@ -104,14 +106,23 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     
     self.collectionView.backgroundColor = [UIColor cloudsColor];
     self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Cell classes prototyped in storyboard.
 
     volumesArray = self.fetchedResultsController.fetchedObjects;
         ///    [self precacheImages];
-    
 }
 
+-(void)setBookcaseOnDisplay:(Bookcase *)bookcaseOnDisplay
+{
+    _bookcaseOnDisplay = bookcaseOnDisplay;
+    
+    LBR_BookcaseLayout *newLayout = [[LBR_BookcaseLayout alloc]
+                                     initWithScheme:LBRLayoutSchemeGenreAuthorDate
+                                     maxShelves:bookcaseOnDisplay.shelves.integerValue
+                                     shelfWidth_cm:bookcaseOnDisplay.width.floatValue];
+        //???:
+    layout = newLayout;
+    [self.collectionView setCollectionViewLayout:newLayout animated:YES];
+}
 
 -(void)setupProgressView
 {
@@ -135,16 +146,13 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
 {
     [super viewDidLayoutSubviews];
     
-    [self cellTest];
+//    [self cellTest];
 }
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 #pragma mark - === Navigation (UIPopoverPresentationController) ===
 
@@ -154,7 +162,7 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     if ([segue.identifier isEqualToString:@"bookcasePopoverSegueID"])
     {
         popoverVC = segue.destinationViewController;
-        popoverVC.popoverPresentationController.delegate = self; //Needed for adaptivePres...None, below.
+        popoverVC.popoverPresentationController.delegate = self; //Needed for 'adaptivePres...None', below.
         [popoverVC.popoverPresentationController setPopoverBackgroundViewClass:[LBR_PopoverBackgroundView class]];
         
             //Necessary to get the view to initialize the properties we want to reference.
@@ -176,9 +184,9 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     }
 }
 
-
 #pragma mark - === UIPopoverPresentationController Delegate ===
 
+    //CLEAN: Unused code(?)
 -(void)prepareForPopoverPresentation:(UIPopoverPresentationController *)popoverPresentationController
 {
     
@@ -186,10 +194,14 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
 
 -(void)popoverPresentationControllerDidDismissPopover:(UIPopoverPresentationController *)popoverPresentationController
 {
-    LBR_BookcaseLayout *newLayout = [[LBR_BookcaseLayout alloc] initWithScheme:LBRLayoutSchemeGenreAuthorDate maxShelves:popoverVC.numShelvesStepper.value shelfWidth_cm:popoverVC.shelfWidthStepper.value];
-        //???:
-    layout = newLayout;
-    [self.collectionView setCollectionViewLayout:newLayout animated:YES];
+    self.bookcaseOnDisplay.shelves = @(popoverVC.numShelvesStepper.value);
+    self.bookcaseOnDisplay.width   = @(popoverVC.shelfWidthStepper.value);
+    self.bookcaseOnDisplay = self.bookcaseOnDisplay;
+    
+//    LBR_BookcaseLayout *newLayout = [[LBR_BookcaseLayout alloc] initWithScheme:LBRLayoutSchemeGenreAuthorDate maxShelves:popoverVC.numShelvesStepper.value shelfWidth_cm:popoverVC.shelfWidthStepper.value];
+//        //???:
+//    layout = newLayout;
+//    [self.collectionView setCollectionViewLayout:newLayout animated:YES];
 }
 
     //Read-only property, can only be set via this delegate method. `..None` stops it from being a full-screen view.

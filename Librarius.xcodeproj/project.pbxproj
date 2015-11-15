@@ -64,7 +64,6 @@
 		386C23751BD934520065B46F /* LBRRecommendations_CollectionViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 386C23741BD934520065B46F /* LBRRecommendations_CollectionViewHeader.m */; };
 		386C23781BD968920065B46F /* LBRRecommendedBook_CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 386C23771BD968920065B46F /* LBRRecommendedBook_CollectionViewCell.m */; };
 		387039B81B9D23C900381007 /* SelectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 387039B71B9D23C900381007 /* SelectionView.xib */; };
-		388266801BDEC70F004B757F /* LBR_EmptyFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3882667F1BDEC70F004B757F /* LBR_EmptyFlowLayout.m */; };
 		388DBDF31BA9174A005C5125 /* THNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 388DBDF21BA9174A005C5125 /* THNavigationController.m */; };
 		388DBE301BAA0F60005C5125 /* LBRCustomLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 388DBE2F1BAA0F60005C5125 /* LBRCustomLayout.m */; };
 		388DBE331BAA54C8005C5125 /* UIImage+imageScaledToHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = 388DBE321BAA54C8005C5125 /* UIImage+imageScaledToHeight.m */; };
@@ -221,8 +220,6 @@
 		386C23761BD968920065B46F /* LBRRecommendedBook_CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRRecommendedBook_CollectionViewCell.h; sourceTree = "<group>"; };
 		386C23771BD968920065B46F /* LBRRecommendedBook_CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRRecommendedBook_CollectionViewCell.m; sourceTree = "<group>"; };
 		387039B71B9D23C900381007 /* SelectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SelectionView.xib; sourceTree = "<group>"; };
-		3882667E1BDEC70F004B757F /* LBR_EmptyFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBR_EmptyFlowLayout.h; sourceTree = "<group>"; };
-		3882667F1BDEC70F004B757F /* LBR_EmptyFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBR_EmptyFlowLayout.m; sourceTree = "<group>"; };
 		388DBDF11BA9174A005C5125 /* THNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THNavigationController.h; sourceTree = "<group>"; };
 		388DBDF21BA9174A005C5125 /* THNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THNavigationController.m; sourceTree = "<group>"; };
 		388DBE2E1BAA0F60005C5125 /* LBRCustomLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRCustomLayout.h; sourceTree = "<group>"; };
@@ -492,8 +489,6 @@
 				383A2F971BEEE58B006D115F /* Popover */,
 				381FC2931BD13A09003A3C52 /* LBR_BookcaseCollectionViewController.h */,
 				381FC2941BD13A09003A3C52 /* LBR_BookcaseCollectionViewController.m */,
-				3882667E1BDEC70F004B757F /* LBR_EmptyFlowLayout.h */,
-				3882667F1BDEC70F004B757F /* LBR_EmptyFlowLayout.m */,
 				38103B5A1BD033E4009F22E3 /* LBR_BookcaseLayout.h */,
 				38103B5B1BD033E4009F22E3 /* LBR_BookcaseLayout.m */,
 				38DA43D11BE66FD200FEFD16 /* LBR_BookcaseLayout_AuthorOnly.h */,
@@ -917,7 +912,6 @@
 				38F57BB91BB0707200CC2EE8 /* UITabBar+FlatUI.m in Sources */,
 				38F57BBA1BB0707200CC2EE8 /* UIStepper+FlatUI.m in Sources */,
 				380375321B8AC9A8004C4ECE /* main.m in Sources */,
-				388266801BDEC70F004B757F /* LBR_EmptyFlowLayout.m in Sources */,
 				384E0CC01B97D24B007E7290 /* NSString+dateValue.m in Sources */,
 				3810DA141BD5E0A90093D5C2 /* SettingsCell1.m in Sources */,
 				380DBB9C1BEC53FA003BE27D /* LBR_BookcasePopoverViewController.m in Sources */,
