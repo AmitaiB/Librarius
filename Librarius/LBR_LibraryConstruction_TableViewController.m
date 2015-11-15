@@ -20,11 +20,10 @@
     //Data
 #import "LBRDataManager.h"
 #import "RootCollection.h"
+
 /**
  Abstract: This VC displays the library structure, and allows for adding/removing/editing the libraries and shelves.
  The HeaderView will have a collectionView in it, displaying a cell for each Library.
- 
- 
  */
 
 @interface LBR_LibraryConstruction_TableViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
@@ -54,7 +53,6 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
     self.bookcasesFetchedResultsController.delegate = self;
 
     dataManager = [LBRDataManager sharedDataManager];
@@ -66,10 +64,12 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     // self.clearsSelectionOnViewWillAppear = NO;
 }
 
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 -(void)configureImagePickerController
 {
@@ -80,6 +80,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     
     self.imagePickerController.cameraDevice = UIImagePickerControllerCameraDeviceFront;
 }
+
 
 -(IBAction)bookcaseIconWasTapped:(id)sender
 {
@@ -197,7 +198,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 //    if (tableViewIndexPath.section == 0)
 //        return 106.0;
     if (tableViewIndexPath.section == selectedOrDefaultLibraryIndexPath.item) {
-        DDLogDebug(@"tableViewIndexPath.section = %lu\nselectedOrDefaultLibraryIndexPath.item = %lu", tableViewIndexPath.section,selectedOrDefaultLibraryIndexPath.item);
+        DDLogDebug(@"section = %lu -- item = %lu", tableViewIndexPath.section,selectedOrDefaultLibraryIndexPath.item);
         return 44;
     }
     else

@@ -473,10 +473,6 @@
 				380375691B8BC89D004C4ECE /* LBRGoogleSignInViewController.m */,
 				380375391B8AC9A8004C4ECE /* LBRBarcodeScannerViewController.h */,
 				3803753A1B8AC9A8004C4ECE /* LBRBarcodeScannerViewController.m */,
-				381EBC031BA0FF63000D2FA4 /* LBRShelves_CollectionViewController.h */,
-				381EBC041BA0FF63000D2FA4 /* LBRShelves_CollectionViewController.m */,
-				382A83B81BB3BA94008860CF /* LBRRecommendationsCollectionViewController.h */,
-				382A83B91BB3BA94008860CF /* LBRRecommendationsCollectionViewController.m */,
 				38DF00381BE7F9C800D4BCE3 /* LBRAcknowledgements_ViewController.h */,
 				38DF00391BE7F9C800D4BCE3 /* LBRAcknowledgements_ViewController.m */,
 			);
@@ -562,6 +558,10 @@
 		38466D5C1B94FDDF00DD252E /* Cutting Floor */ = {
 			isa = PBXGroup;
 			children = (
+				381EBC031BA0FF63000D2FA4 /* LBRShelves_CollectionViewController.h */,
+				381EBC041BA0FF63000D2FA4 /* LBRShelves_CollectionViewController.m */,
+				382A83B81BB3BA94008860CF /* LBRRecommendationsCollectionViewController.h */,
+				382A83B91BB3BA94008860CF /* LBRRecommendationsCollectionViewController.m */,
 			);
 			name = "Cutting Floor";
 			sourceTree = "<group>";

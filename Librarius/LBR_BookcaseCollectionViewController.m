@@ -111,6 +111,7 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
         ///    [self precacheImages];
 }
 
+
 -(void)setBookcaseOnDisplay:(Bookcase *)bookcaseOnDisplay
 {
     _bookcaseOnDisplay = bookcaseOnDisplay;
@@ -123,6 +124,7 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     layout = newLayout;
     [self.collectionView setCollectionViewLayout:newLayout animated:YES];
 }
+
 
 -(void)setupProgressView
 {
@@ -139,6 +141,7 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
 //    [progressView setProgress: (float)count/15 animated:YES];
     self.progressView = progressView;
 }
+
 
 
     //Debug override
@@ -197,7 +200,8 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     self.bookcaseOnDisplay.shelves = @(popoverVC.numShelvesStepper.value);
     self.bookcaseOnDisplay.width   = @(popoverVC.shelfWidthStepper.value);
     self.bookcaseOnDisplay = self.bookcaseOnDisplay;
-    
+
+        //CLEAN: Once it works, of course.
 //    LBR_BookcaseLayout *newLayout = [[LBR_BookcaseLayout alloc] initWithScheme:LBRLayoutSchemeGenreAuthorDate maxShelves:popoverVC.numShelvesStepper.value shelfWidth_cm:popoverVC.shelfWidthStepper.value];
 //        //???:
 //    layout = newLayout;
