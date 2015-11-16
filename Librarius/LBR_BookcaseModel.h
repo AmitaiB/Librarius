@@ -14,9 +14,10 @@
  */
 
 #import <Foundation/Foundation.h>
+#import "Volume.h"
 
 @class Bookcase;
-@class Volume;
+
 @interface LBR_BookcaseModel : NSObject
 
 @property (nonatomic, assign, readonly) CGFloat width_cm;
@@ -26,6 +27,7 @@
 @property (nonatomic) BOOL isFull;
 @property (nonatomic, assign) CGFloat percentFull;
 @property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSArray <Volume *> *booksArray;
 
 
 -(instancetype)initWithWidth:(CGFloat)width shelvesCount:(NSUInteger)shelvesCount;

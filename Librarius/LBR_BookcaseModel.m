@@ -9,11 +9,9 @@
 #define kDefaultBookThickness 2.50f
 
 #import "LBR_BookcaseModel.h"
-#import "Volume.h"
 #import "Bookcase.h"
 
 @interface LBR_BookcaseModel ()
-@property (nonatomic, strong) NSArray <Volume *> *booksArray;
 @property (nonatomic, strong) NSMutableArray <NSArray*> *mutableShelves;
 @end
 
