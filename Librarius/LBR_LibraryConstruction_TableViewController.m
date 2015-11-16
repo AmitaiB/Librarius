@@ -190,8 +190,15 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 
 -(void)configureCell:(LBR_Bookcase_TableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    cell.bookcase = self.bookcasesFetchedResultsController.fetchedObjects[indexPath.row];
-    self.bookcaseModelsDictionary;
+    Bookcase *bookcase = self.bookcasesFetchedResultsController.fetchedObjects[indexPath.row];
+    LBR_BookcaseModel *bookcaseModel = self.bookcaseModelsDictionary[indexPath];
+    
+    [self.imageView setImage:[UIImage imageNamed:@"bookshelf1"]];
+    self.textLabel.text = bookcase.name ? bookcase.name : [NSString stringWithFormat:@"Bookcase #%@ (%@ x %@ cm)", bookcase.orderWhenListed, bookcase.shelves, bookcase.width];
+    self.detailTextLabel.text = [NSString stringWithFormat:@"%.01f％ filled: %lu books", [self.bookcase percentFull], bookcase.volumes.count];
+
+    
+    
 }
 
     ///Just needed to fold when not in selected library.

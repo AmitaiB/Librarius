@@ -25,7 +25,7 @@
 
 -(CGFloat)percentFull
 {
-    CGFloat totalShelfSpace = self.width.integerValue * self.shelves.integerValue;
+    CGFloat totalShelfSpace = self.width.floatValue * self.shelves.floatValue;
     __block CGFloat occupiedShelfSpace = 0;
     [self.volumes enumerateObjectsUsingBlock:^(Volume * _Nonnull volume, BOOL * _Nonnull stop) {
         occupiedShelfSpace += volume.thickness? volume.thickness.floatValue : 2.5f;

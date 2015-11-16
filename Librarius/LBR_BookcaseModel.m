@@ -10,23 +10,41 @@
 
 #import "LBR_BookcaseModel.h"
 #import "Volume.h"
+#import "Bookcase.h"
 
 @interface LBR_BookcaseModel ()
-
+@property (nonatomic, strong) NSArray <Volume *> *booksArray;
 @property (nonatomic, strong) NSMutableArray <NSArray*> *mutableShelves;
 @end
 
 
 @implementation LBR_BookcaseModel
 
--(instancetype)initWithWidth:(CGFloat)width shelvesCount:(NSUInteger)shelvesCount {
+-(instancetype)initWithBookcaseObject:(Bookcase *)bookcaseObject
+{
     if (!(self = [super init])) return nil;
     
-    _shelvesCount = shelvesCount;
-    _width_cm     = width;
-    _isFull       = NO;
+    _shelvesCount = bookcaseObject.shelves.integerValue;
+    _width_cm = bookcaseObject.width.floatValue;
+    _isFull = NO;
+    _name = bookcaseObject.name;
     
     return self;
+}
+
+
+-(instancetype)initWithWidth:(CGFloat)width shelvesCount:(NSUInteger)shelvesCount {
+//    if (!(self = [super init])) return nil;
+//    
+//    _shelvesCount = shelvesCount;
+//    _width_cm     = width;
+//    _isFull       = NO;
+    
+    Bookcase *dummyBookcase = [Bookcase new];
+    dummyBookcase.shelves   = @(shelvesCount);
+    dummyBookcase.width     = @(width);
+    dummyBookcase.name      = @"Nameless, aimless";
+    return [self initWithBookcaseObject:dummyBookcase];
 }
 
 -(instancetype)init {
@@ -34,6 +52,7 @@
     
     return [self initWithWidth:kDefaultBookcaseWidth_cm shelvesCount:kDefaultBookcaseShelvesCount];
 }
+
 
 -(void)shelveBooks:(NSArray<Volume *> *)booksArray {
 /**
@@ -45,6 +64,16 @@
  current book's thickness, and <continue>.
     else (no more shelf space) substring the rest to unshelvedRemainder, and break/stop.
  */
+    if (booksArray == nil && self.booksArray != nil) {
+        booksArray = self.booksArray;
+        DDLogWarn(@"shelveBooks was passed in a nil booksArray, replaced with self.booksArray.");
+    }
+    if (booksArray != nil && self.booksArray == nil) {
+        self.booksArray = booksArray;
+        DDLogInfo(@"self.booksArray set from shelveBooks parameter.");
+    }
+    
+    
     self.mutableShelves              = [NSMutableArray new];
     CGFloat    currentXPosition_cm   = 0.0f;
     NSUInteger idxOfFirstBookOnShelf = 0;
@@ -120,6 +149,16 @@
     return finalString;
 }
 
+-(CGFloat)percentFull
+{
+    CGFloat totalShelfSpace = self.width_cm * (CGFloat)self.shelvesCount;
+    __block CGFloat occupiedShelfSpace = 0;
+    [self.booksArray enumerateObjectsUsingBlock:^(Volume * _Nonnull volume, NSUInteger idx, BOOL * _Nonnull stop) {
+        occupiedShelfSpace += volume.thickness? volume.thickness.floatValue : 2.5f;
+    }];
+    
+    return occupiedShelfSpace / totalShelfSpace * 100;
+}
 
 
 @end

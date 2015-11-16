@@ -173,7 +173,7 @@ static NSString * const LBRShelvedBookCollectionViewCellKind = @"coverArtCell";
     CGFloat shelvesCount            = self.shelvesPerBookcase;
     CGFloat bottomMostSectionHeight = kSectionHeight;
     
-    CGFloat initialMax_Y = (fullHeightPerShelf * shelvesCount) + bottomMostSectionHeight;
+    CGFloat initialMax_Y = (fullHeightPerShelf * (CGFloat)shelvesCount) + bottomMostSectionHeight;
     CGFloat initialMax_X = self.insets.left + kCellHeight * (1 + self.bookcaseWidth_cm) + self.insets.right;
     return CGSizeMake(initialMax_X, initialMax_Y);
 }
