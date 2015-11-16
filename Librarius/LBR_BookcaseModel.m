@@ -32,17 +32,13 @@
 
 
 -(instancetype)initWithWidth:(CGFloat)width shelvesCount:(NSUInteger)shelvesCount {
-//    if (!(self = [super init])) return nil;
-//    
-//    _shelvesCount = shelvesCount;
-//    _width_cm     = width;
-//    _isFull       = NO;
+    if (!(self = [super init])) return nil;
     
-    Bookcase *dummyBookcase = [Bookcase new];
-    dummyBookcase.shelves   = @(shelvesCount);
-    dummyBookcase.width     = @(width);
-    dummyBookcase.name      = @"Nameless, aimless";
-    return [self initWithBookcaseObject:dummyBookcase];
+    _shelvesCount = shelvesCount;
+    _width_cm     = width;
+    _isFull       = NO;
+    _name         = @"Nameless, aimless";
+    return self;
 }
 
 -(instancetype)init {

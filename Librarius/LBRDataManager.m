@@ -348,9 +348,9 @@ static NSString * const kUnknown = @"kUnknown";
 
 /**
  One of three possibilities:
- 1) The property has the collection object,
- 2) NSUserDefaults has it, but not our property (yet.)
- 3) We have not yet saved the ID to user defaults.
+ 1) rootCollection already is Ready (exists and points to the right object).
+ 2) NSUserDefaults has the object, we just need rootCollection to point to it.
+ 3) We have not yet saved the ID to user defaults in the first place!
  
  RootCollection is the 'master object' that holds a reference to the entire object graph.
  */
@@ -360,14 +360,15 @@ static NSString * const kUnknown = @"kUnknown";
     if (_rootCollection != nil)
         return _rootCollection;
 
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSURL *uri = [defaults URLForKey:[RootCollection entityName]] ? [defaults URLForKey:[RootCollection entityName]] : nil;
 //        (2)
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSURL *uri = [defaults URLForKey:[RootCollection entityName]];
     if (uri) {
         NSManagedObjectID *moID = [self.managedObjectContext.persistentStoreCoordinator managedObjectIDForURIRepresentation:uri];
         NSError *error = nil;
         return [self.managedObjectContext existingObjectWithID:moID error:&error];
     }
+    
 //        (3)
     else
     {

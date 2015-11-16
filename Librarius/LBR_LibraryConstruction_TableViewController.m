@@ -94,10 +94,11 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
      */
 - (void)precacheBookcaseModels
 {
-        //Selected Library, or default to first library.
     NSMutableDictionary *mutableBookcaseModels = [NSMutableDictionary dictionary];
-    NSIndexPath *currentLibraryPath = self.librariesCollectionView.indexPathsForSelectedItems.firstObject;
-    NSInteger targetSection = currentLibraryPath ? currentLibraryPath.item : 0;
+
+        //Selected Library, or default to first library.
+    NSIndexPath *currentLibraryCollectionViewPath = self.librariesCollectionView.indexPathsForSelectedItems.firstObject;
+    NSInteger currentLibraryTableViewSection = currentLibraryCollectionViewPath ? currentLibraryCollectionViewPath.item : 0;
     
         //Grab objects
     LBR_LibraryModel *libraryModel = [[LBR_LibraryModel alloc] initWithLibrary:dataManager.currentLibrary];
@@ -108,12 +109,15 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     NSMutableArray <NSIndexPath*> *mutableKeys = [NSMutableArray new];
     
     for (NSUInteger idx = 0; idx < libraryModel.library.bookcases.count; idx++) {
-        incrementalIndexPath = [NSIndexPath indexPathForRow:idx inSection:targetSection];
+        incrementalIndexPath = [NSIndexPath indexPathForRow:idx inSection:currentLibraryTableViewSection];
         [mutableKeys addObject:incrementalIndexPath];
     }
     NSArray *bookcaseModelKeys = [mutableKeys copy];
     
     self.bookcaseModelsDictionary = [NSDictionary dictionaryWithObjects:libraryModel.bookcaseModels forKeys:bookcaseModelKeys];
+    
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:currentLibraryTableViewSection] withRowAnimation:UITableViewRowAnimationNone];
+    
 }
 
 #pragma mark - === UIImagePickerController delegate ===

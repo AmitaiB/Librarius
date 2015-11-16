@@ -21,6 +21,7 @@
     <entity name="Library" representedClassName="Library" syncable="YES">
         <attribute name="dateCreated" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="dateModified" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="libraryPhoto" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="orderWhenListed" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="bookcases" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Bookcase" inverseName="library" inverseEntity="Bookcase" syncable="YES"/>
@@ -59,7 +60,7 @@
     <elements>
         <element name="Bookcase" positionX="-162" positionY="42" width="128" height="178"/>
         <element name="CoverArt" positionX="-162" positionY="234" width="128" height="118"/>
-        <element name="Library" positionX="52" positionY="234" width="128" height="150"/>
+        <element name="Library" positionX="52" positionY="234" width="128" height="165"/>
         <element name="RootCollection" positionX="234" positionY="270" width="128" height="60"/>
         <element name="Volume" positionX="-389" positionY="-36" width="128" height="405"/>
     </elements>
