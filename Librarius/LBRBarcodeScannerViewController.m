@@ -65,11 +65,6 @@
 @property (nonatomic) BOOL isScanning;
 
 
-    //TODO: Implement this.
-@property (weak, nonatomic) IBOutlet LBRBatchScanScrollView *unsavedVolumesScrollView;
-
-
-
 
 @end
 
@@ -99,8 +94,6 @@ static NSString * const volumeNib          = @"volumePresentationView";
     self.uniqueCodes     = [NSMutableArray  new];
     self.volumeToConfirm = [LBRParsedVolume new];
     [self initializeScannerView];
-    [self configureUnsavedVolumesScrollView];
-//    [self initializeSpinner];
     
         // Hidden Things
     self.lightToggleButton.hidden = YES;
@@ -114,9 +107,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
     self.saveScannedBooksToCoreDataButton.layer.cornerRadius = 5.0f;
     self.saveScannedBooksToCoreDataButton.clipsToBounds      = YES;
     self.saveScannedBooksToCoreDataButton.backgroundColor    = [UIColor wetAsphaltColor];
-    
-    [self.mainContentView bringSubviewToFront:self.unsavedVolumesScrollView];
-    
+        
     [self anchorBackgroundImage];
     
         // So we don't repeat ourselves.
@@ -133,16 +124,6 @@ static NSString * const volumeNib          = @"volumePresentationView";
     [imageView.bottomAnchor constraintEqualToAnchor:superView.bottomAnchor constant:0].active = YES;
     [imageView.leadingAnchor constraintEqualToAnchor:superView.leadingAnchor constant:0].active         = YES;
     [imageView.trailingAnchor constraintEqualToAnchor:superView.trailingAnchor constant:0].active       = YES;
-}
-
--(void)configureUnsavedVolumesScrollView
-{
-    self.unsavedVolumesScrollView.delegate                     = self;
-    self.unsavedVolumesScrollView.pagingEnabled                = NO;
-    self.unsavedVolumesScrollView.alwaysBounceVertical         = YES;
-    self.unsavedVolumesScrollView.alwaysBounceHorizontal       = NO;
-    self.unsavedVolumesScrollView.showsVerticalScrollIndicator = NO;
-    self.unsavedVolumesScrollView.contentInset                 = UIEdgeInsetsMake(500, 0, 0, 0);
 }
 
 

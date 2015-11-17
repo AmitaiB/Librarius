@@ -23,6 +23,20 @@
     return [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:context];
 }
 
++(instancetype)insertNewObjectIntoContext:(NSManagedObjectContext *)context withDefaultValues:(BOOL)defaultValueChoice
+{
+    Bookcase *bookcase = [Bookcase insertNewObjectIntoContext:context];
+    
+    if (defaultValueChoice) {
+        bookcase.orderWhenListed = @0;
+        bookcase.dateCreated     = [NSDate date];
+        bookcase.dateModified    = [bookcase.dateCreated copy];
+        bookcase.shelves         = @(kDefaultBookcaseShelvesCount);
+        bookcase.width           = @(kDefaultBookcaseWidth_cm);
+    }
+    return bookcase;
+}
+
 -(CGFloat)percentFull
 {
     CGFloat totalShelfSpace = self.width.floatValue * self.shelves.floatValue;

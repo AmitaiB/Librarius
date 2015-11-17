@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 // Insert code here to declare functionality of your managed object subclass
 +(NSString *)entityName;
 +(instancetype)insertNewObjectIntoContext:(NSManagedObjectContext *)context;
++(instancetype)insertNewObjectIntoContext:(NSManagedObjectContext *)context withDefaultValues:(BOOL)defaultValueChoice;
+
 
 -(CGFloat)percentFull;
 

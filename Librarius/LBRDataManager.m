@@ -424,15 +424,10 @@ static NSString * const kUnknown = @"kUnknown";
     }
     else
     {
-        Bookcase *newDefaultBookcase       = [Bookcase insertNewObjectIntoContext:self.managedObjectContext];
-        newDefaultBookcase.orderWhenListed = @0;
-        newDefaultBookcase.dateCreated     = [NSDate date];
-        newDefaultBookcase.dateModified    = [newDefaultBookcase.dateCreated copy];
-        newDefaultBookcase.shelves         = @(kDefaultBookcaseShelvesCount);
-        newDefaultBookcase.width           = @(kDefaultBookcaseWidth_cm);
+        Bookcase *newDefaultBookcase       = [Bookcase insertNewObjectIntoContext:self.managedObjectContext withDefaultValues:YES];
+        newDefaultBookcase.orderWhenListed = @(self.currentLibrary.bookcases.count);//This works. Think about it.
         newDefaultBookcase.library         = self.currentLibrary;
-//        newDefaultBookcase.volumes = [NSSet set];
-        self.currentBookcase = newDefaultBookcase;
+        self.currentBookcase               = newDefaultBookcase;
     }
 }
 
@@ -447,13 +442,13 @@ static NSString * const kUnknown = @"kUnknown";
         
         Bookcase *bookcase = [Bookcase insertNewObjectIntoContext:self.managedObjectContext];
 
-        idx = @(idx.integerValue +1);
+        idx                      = @(idx.integerValue +1);
         bookcase.orderWhenListed = idx;
-        bookcase.shelves = numShelves;
-        bookcase.width   = shelfWidth;
-        bookcase.library = library;
-        bookcase.dateCreated = [NSDate date];
-        bookcase.dateModified = [bookcase.dateCreated copy];
+        bookcase.shelves         = numShelves;
+        bookcase.width           = shelfWidth;
+        bookcase.library         = library;
+        bookcase.dateCreated     = [NSDate date];
+        bookcase.dateModified    = [bookcase.dateCreated copy];
     }];
 }
 

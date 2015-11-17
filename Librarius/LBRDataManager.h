@@ -27,9 +27,10 @@
 
 +(instancetype)sharedDataManager;
 
-    //FIXME: Transient or Parsed? Decide, and be consistent.
+
 //-(void)updateWithNewTransientVolume:(LBRParsedVolume*)volumeToAdd;
--(void)saveParsedVolumesToEitherSaveOrDiscardToPersistentStore;
+//-(void)saveParsedVolumesToEitherSaveOrDiscardToPersistentStore;
+
     //CLEAN: debug only
 -(void)logCurrentLibrary;
 

@@ -155,7 +155,7 @@ static NSString * const altSearchResultsCellID = @"altSearchResultsCellID";
 //    [UICollectionViewCell appearance].backgroundColor = [UIColor clearColor];
     
     [self.tableView setClipsToBounds:YES];
-    self.fetchedResultsController = [[LBRDataManager sharedDataManager] preconfiguredLBRFetchedResultsController:self];
+    self.fetchedResultsController = [[LBRDataManager sharedDataManager] currentLibraryVolumesFetchedResultsController:self];
 }
 
 -(void)viewWillLayoutSubviews
@@ -552,7 +552,7 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
         return _fetchedResultsController;
     }
     return [[LBRDataManager sharedDataManager]
-            preconfiguredLBRFetchedResultsController:self];
+            currentLibraryVolumesFetchedResultsController:self];
 }
 
 #pragma mark - === Fetched Results Controller Delegate methods ===
