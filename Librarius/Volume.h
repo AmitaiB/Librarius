@@ -24,6 +24,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)updateCoverArtModelIfNeeded;
 
+
+    //LBRParsedVolume had:
+//-(instancetype)initWithGoogleVolume:(GTLBooksVolume*)volumeToParse;
+
 @end
 
 NS_ASSUME_NONNULL_END

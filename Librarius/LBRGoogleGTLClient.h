@@ -11,7 +11,6 @@
 
 @class Volume;
 @class LBRDataManager;
-@class LBRParsedVolume;
 @interface LBRGoogleGTLClient : NSObject
 
 @property (nonatomic, strong) LBRDataManager *dataManager;

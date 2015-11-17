@@ -399,6 +399,7 @@
 		380375581B8B9F11004C4ECE /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				38C454B81BFB6B1D00A35391 /* Models to cut */,
 				381061531BF660BD00951B45 /* CoverArt+CoreDataProperties.h */,
 				381061541BF660BD00951B45 /* CoverArt+CoreDataProperties.m */,
 				381061551BF660BD00951B45 /* Volume+CoreDataProperties.h */,
@@ -419,8 +420,6 @@
 				3837F2CD1BE2F33A00170FF6 /* Bookcase.m */,
 				3837F2BB1BE2F1B200170FF6 /* CoverArt.h */,
 				3837F2BC1BE2F1B200170FF6 /* CoverArt.m */,
-				38565D6E1B9A20B800349498 /* LBRParsedVolume.h */,
-				38565D6F1B9A20B800349498 /* LBRParsedVolume.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -474,8 +473,7 @@
 				386B7D101BF15A73004A1DF8 /* Library Construction Scene */,
 				380375681B8BC89D004C4ECE /* LBRGoogleSignInViewController.h */,
 				380375691B8BC89D004C4ECE /* LBRGoogleSignInViewController.m */,
-				380375391B8AC9A8004C4ECE /* LBRBarcodeScannerViewController.h */,
-				3803753A1B8AC9A8004C4ECE /* LBRBarcodeScannerViewController.m */,
+				38C454B91BFB75C600A35391 /* Barcode Scanner Scene */,
 				38DF00381BE7F9C800D4BCE3 /* LBRAcknowledgements_ViewController.h */,
 				38DF00391BE7F9C800D4BCE3 /* LBRAcknowledgements_ViewController.m */,
 			);
@@ -492,8 +490,6 @@
 				38103B5B1BD033E4009F22E3 /* LBR_BookcaseLayout.m */,
 				38DA43D11BE66FD200FEFD16 /* LBR_BookcaseLayout_AuthorOnly.h */,
 				38DA43D21BE66FD200FEFD16 /* LBR_BookcaseLayout_AuthorOnly.m */,
-				381FC2B91BD15D45003A3C52 /* LBR_BookcaseModel.h */,
-				381FC2BA1BD15D45003A3C52 /* LBR_BookcaseModel.m */,
 				38E71DAD1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.h */,
 				38E71DAE1BA337BB00DE1C61 /* LBRShelvedBook_CollectionViewCell.m */,
 			);
@@ -602,8 +598,6 @@
 				38A92ABD1BF536FF00406393 /* LBR_Bookcase_TableViewCell.m */,
 				381461D31BF7FB8E00A94D21 /* LBR_CoverFlowLayout.h */,
 				381461D41BF7FB8E00A94D21 /* LBR_CoverFlowLayout.m */,
-				381461D61BF8D5AC00A94D21 /* LBR_LibraryModel.h */,
-				381461D71BF8D5AC00A94D21 /* LBR_LibraryModel.m */,
 			);
 			name = "Library Construction Scene";
 			sourceTree = "<group>";
@@ -628,6 +622,28 @@
 				380375F61B8D4E90004C4ECE /* BookDetailViewController.m */,
 			);
 			name = "Book-Collection TableView Scene";
+			sourceTree = "<group>";
+		};
+		38C454B81BFB6B1D00A35391 /* Models to cut */ = {
+			isa = PBXGroup;
+			children = (
+				381FC2B91BD15D45003A3C52 /* LBR_BookcaseModel.h */,
+				381FC2BA1BD15D45003A3C52 /* LBR_BookcaseModel.m */,
+				38565D6E1B9A20B800349498 /* LBRParsedVolume.h */,
+				38565D6F1B9A20B800349498 /* LBRParsedVolume.m */,
+				381461D61BF8D5AC00A94D21 /* LBR_LibraryModel.h */,
+				381461D71BF8D5AC00A94D21 /* LBR_LibraryModel.m */,
+			);
+			name = "Models to cut";
+			sourceTree = "<group>";
+		};
+		38C454B91BFB75C600A35391 /* Barcode Scanner Scene */ = {
+			isa = PBXGroup;
+			children = (
+				380375391B8AC9A8004C4ECE /* LBRBarcodeScannerViewController.h */,
+				3803753A1B8AC9A8004C4ECE /* LBRBarcodeScannerViewController.m */,
+			);
+			name = "Barcode Scanner Scene";
 			sourceTree = "<group>";
 		};
 		38CF73FD1BAF51130070134E /* FlatUIKit Categories */ = {

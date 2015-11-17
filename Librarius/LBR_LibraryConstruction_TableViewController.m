@@ -195,7 +195,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     //Doesn't have a bookcase, so it crashes the collectionView.
 -(void)configureCell:(LBR_Bookcase_TableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    Bookcase *bookcase = self.bookcasesFetchedResultsController.fetchedObjects[indexPath.row];
+    Bookcase *bookcase = self.bookcasesFetchedResultsController.fetchedObjects[indexPath.row];
     LBR_BookcaseModel *bookcaseModel = self.bookcaseModelsDictionary[indexPath];
     
     [cell.imageView setImage:[UIImage imageNamed:@"bookshelf1"]];

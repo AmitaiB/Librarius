@@ -8,7 +8,6 @@
 
 #import "LBRBarcodeScannerViewController.h"
 #import "LBRGoogleGTLClient.h"
-#import "LBRParsedVolume.h"
 #import "LBRDataManager.h"
 #import "LBRConstants.h"
 

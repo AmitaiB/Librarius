@@ -36,9 +36,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *subtitle;
 @property (nullable, nonatomic, retain) NSNumber *thickness;
 @property (nullable, nonatomic, retain) NSString *title;
+
 @property (nullable, nonatomic, retain) Bookcase *bookcase;
 @property (nullable, nonatomic, retain) CoverArt *correspondingImageData;
 @property (nullable, nonatomic, retain) Library *library;
+
+    //LBRParsedVolume had `NSArray * categories`...?
+
 
 @end
 
