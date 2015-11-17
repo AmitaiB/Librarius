@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface LBR_LibraryConstruction_CollectionViewCell : UICollectionViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *librarySelectionCellImageView;
 @property (weak, nonatomic) IBOutlet UILabel *libraryLabel;
 
 @end

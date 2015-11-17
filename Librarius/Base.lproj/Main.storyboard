@@ -642,16 +642,16 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                     <animations/>
-                                    <color key="backgroundColor" red="0.1215686275" green="0.69411764710000001" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstItem="m5V-c1-6qt" firstAttribute="bottom" secondItem="Qmi-tZ-w0r" secondAttribute="bottomMargin" id="AUS-Db-W7Q"/>
-                                        <constraint firstItem="m5V-c1-6qt" firstAttribute="centerX" secondItem="PmW-Qm-zf9" secondAttribute="centerX" id="S6W-Ep-9A0"/>
+                                        <constraint firstItem="m5V-c1-6qt" firstAttribute="width" secondItem="PmW-Qm-zf9" secondAttribute="width" multiplier="0.9" id="1ml-3v-t0P"/>
+                                        <constraint firstItem="m5V-c1-6qt" firstAttribute="bottom" secondItem="Qmi-tZ-w0r" secondAttribute="bottomMargin" id="JVq-Lz-bGV"/>
+                                        <constraint firstItem="m5V-c1-6qt" firstAttribute="centerX" secondItem="PmW-Qm-zf9" secondAttribute="centerX" id="Rnc-Pb-DVh"/>
                                         <constraint firstItem="PmW-Qm-zf9" firstAttribute="centerY" secondItem="Qmi-tZ-w0r" secondAttribute="centerY" id="TQ9-GP-I1v"/>
-                                        <constraint firstItem="PmW-Qm-zf9" firstAttribute="height" secondItem="Qmi-tZ-w0r" secondAttribute="height" id="U8d-yq-b7m"/>
-                                        <constraint firstItem="m5V-c1-6qt" firstAttribute="top" secondItem="Qmi-tZ-w0r" secondAttribute="topMargin" constant="70" id="V0s-HS-Mua"/>
-                                        <constraint firstItem="m5V-c1-6qt" firstAttribute="leading" secondItem="Qmi-tZ-w0r" secondAttribute="leadingMargin" id="XwJ-fc-UIM"/>
+                                        <constraint firstItem="PmW-Qm-zf9" firstAttribute="height" secondItem="Qmi-tZ-w0r" secondAttribute="height" multiplier="0.9" id="U8d-yq-b7m"/>
                                         <constraint firstItem="PmW-Qm-zf9" firstAttribute="centerX" secondItem="Qmi-tZ-w0r" secondAttribute="centerX" id="brC-DZ-11D"/>
-                                        <constraint firstItem="PmW-Qm-zf9" firstAttribute="width" secondItem="Qmi-tZ-w0r" secondAttribute="width" id="zIS-F2-eFm"/>
+                                        <constraint firstItem="m5V-c1-6qt" firstAttribute="top" secondItem="Qmi-tZ-w0r" secondAttribute="topMargin" constant="70" id="ySd-lH-o8i"/>
+                                        <constraint firstItem="PmW-Qm-zf9" firstAttribute="width" secondItem="Qmi-tZ-w0r" secondAttribute="width" multiplier="0.9" id="zIS-F2-eFm"/>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="subviews">
@@ -663,10 +663,10 @@
                                             <exclude reference="U8d-yq-b7m"/>
                                             <exclude reference="brC-DZ-11D"/>
                                             <exclude reference="zIS-F2-eFm"/>
-                                            <exclude reference="AUS-Db-W7Q"/>
-                                            <exclude reference="S6W-Ep-9A0"/>
-                                            <exclude reference="V0s-HS-Mua"/>
-                                            <exclude reference="XwJ-fc-UIM"/>
+                                            <exclude reference="1ml-3v-t0P"/>
+                                            <exclude reference="JVq-Lz-bGV"/>
+                                            <exclude reference="Rnc-Pb-DVh"/>
+                                            <exclude reference="ySd-lH-o8i"/>
                                         </mask>
                                     </variation>
                                     <variation key="widthClass=compact">
@@ -679,14 +679,15 @@
                                             <include reference="U8d-yq-b7m"/>
                                             <include reference="brC-DZ-11D"/>
                                             <include reference="zIS-F2-eFm"/>
-                                            <include reference="AUS-Db-W7Q"/>
-                                            <include reference="S6W-Ep-9A0"/>
-                                            <include reference="V0s-HS-Mua"/>
-                                            <include reference="XwJ-fc-UIM"/>
+                                            <include reference="1ml-3v-t0P"/>
+                                            <include reference="JVq-Lz-bGV"/>
+                                            <include reference="Rnc-Pb-DVh"/>
+                                            <include reference="ySd-lH-o8i"/>
                                         </mask>
                                     </variation>
                                     <connections>
                                         <outlet property="libraryLabel" destination="m5V-c1-6qt" id="qbF-9d-t30"/>
+                                        <outlet property="librarySelectionCellImageView" destination="PmW-Qm-zf9" id="dF5-YI-I7X"/>
                                     </connections>
                                 </collectionViewCell>
                             </cells>

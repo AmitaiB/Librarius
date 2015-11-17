@@ -336,6 +336,8 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 -(void)configureCollectionViewCell:(LBR_LibraryConstruction_CollectionViewCell*)cell forItemAtIndexPath:(NSIndexPath*)indexPath
 {
     cell.libraryLabel.text = dataManager.currentLibrary.name;
+    [cell.librarySelectionCellImageView setImage:[UIImage imageNamed:@"home-library1"]];
+    cell.libraryLabel.layer.cornerRadius = 10;
 }
 
 #pragma mark - === UICollectionViewDelegate ===
@@ -351,7 +353,10 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     self.selectedLibraryIndexPath = indexPath;
-    dataManager.currentLibrary;
+    NSArray *orderedLibraries = [dataManager.rootCollection.libraries sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"orderWhenListed" ascending:YES]]];
+    dataManager.currentLibrary = orderedLibraries[indexPath.item];
+    
+    DDLogVerbose(@"dataManager.currentLibrary now = %@", dataManager.currentLibrary.name);
 }
  
 
