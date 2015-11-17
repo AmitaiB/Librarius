@@ -14,21 +14,21 @@
 @class Volume;
 @class GTLBooksVolume;
 @class GTLBooksVolumes;
-@class LBRParsedVolume;
 //@class LBRGoogleGTLClient;
 @class Library;
 @class RootCollection;
 
 @interface LBRDataManager : NSObject <NSFetchedResultsControllerDelegate>
 @property (nonatomic, strong) NSMutableArray *uniqueCodes;
-@property (nonatomic, strong) NSArray *parsedVolumesToEitherSaveOrDiscard;
-@property (nonatomic, strong) LBRParsedVolume *parsedVolumeFromLastBarcode; //<-- Use this to confirm user's selection, then enter it into Persistent Data.
-
+//@property (nonatomic, strong) NSArray *parsedVolumesToEitherSaveOrDiscard;
+//@property (nonatomic, strong) LBRParsedVolume *parsedVolumeFromLastBarcode; //<-- Use this to confirm user's selection, then enter it into Persistent Data.
+@property (nonatomic, strong) Volume *volumeFromLastBarcode; //CLEAN: Probably not actually needed.
+@property (nonatomic, strong) NSMutableArray <Volume*> *volumesRecentlyAddedToContext;
 
 +(instancetype)sharedDataManager;
 
     //FIXME: Transient or Parsed? Decide, and be consistent.
--(void)updateWithNewTransientVolume:(LBRParsedVolume*)volumeToAdd;
+//-(void)updateWithNewTransientVolume:(LBRParsedVolume*)volumeToAdd;
 -(void)saveParsedVolumesToEitherSaveOrDiscardToPersistentStore;
     //CLEAN: debug only
 -(void)logCurrentLibrary;
@@ -42,23 +42,27 @@
     //Other properties to store and fetch, e.g., NSArray *messages...
 
 @property (nonatomic, strong) NSArray *libraries;
-@property (nonatomic, strong) RootCollection *rootCollection;
-//FIXME: CoreData: error: Failed to call designated initializer on NSManagedObject class 'Library'
+@property (nonatomic, strong) RootCollection *userRootCollection;
 @property (nonatomic, strong) Library *currentLibrary;
 @property (nonatomic, strong) Bookcase *currentBookcase;
     //http://stackoverflow.com/questions/14671478/coredata-error-failed-to-call-designated-initializer-on-nsmanagedobject-class
 
--(NSFetchedResultsController*)preconfiguredLBRFetchedResultsController;
--(NSFetchedResultsController*)preconfiguredLBRFetchedResultsController:(UIViewController<NSFetchedResultsControllerDelegate> *)sender;
+-(NSFetchedResultsController*)currentLibraryVolumesFetchedResultsController;
+-(NSFetchedResultsController*)currentLibraryVolumesFetchedResultsController:(UIViewController<NSFetchedResultsControllerDelegate> *)sender;
+
+-(void) fetchData;
 -(void) saveContext;
+
+-(void) generateUserRootCollectionIfNeeded; ///Should only be needed first use.
+
+// =================== Should not be needed, except for generating test data.
 -(void) generateTestDataIfNeeded;
 -(void) generateDefaultLibraryIfNeeded;
 -(void) generateDefaultBookcaseIfNeeded;
+
 -(void) generateBookcasesForLibrary:(Library *)library withDimensions:(NSDictionary <NSNumber*, NSNumber*> *)dimensions;
--(void) fetchData;
 
-
-    //=============== migration related
+//    =============== migration related
 -(void)giveCurrentLibraryADateIfNeeded;
 -(void)giveVolumeADateIfNeeded:(Volume*)volume;
 

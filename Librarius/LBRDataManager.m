@@ -20,7 +20,6 @@
 #import "Bookcase.h"
 #import "Volume.h"
 #import "CoverArt.h"
-#import "LBRParsedVolume.h"
 #import <GTLBooksVolume.h>
 #import "RootCollection.h"
 
@@ -41,9 +40,9 @@ static NSString * const kUnknown = @"kUnknown";
     if (!(self = [super init])) return nil;
     
     _uniqueCodes = [NSMutableArray new];
-//FIXME:    _googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
-    _parsedVolumesToEitherSaveOrDiscard = [NSMutableArray new];
-    _parsedVolumeFromLastBarcode = [LBRParsedVolume new];
+    _volumesRecentlyAddedToContext = [NSMutableArray new];
+//    _parsedVolumesToEitherSaveOrDiscard = [NSMutableArray new];
+//    _parsedVolumeFromLastBarcode = [LBRParsedVolume new];
     _libraries = @[];
     
     return self;
@@ -264,55 +263,59 @@ static NSString * const kUnknown = @"kUnknown";
 
 #pragma mark - NSFetchedResultsController configurator
 
-- (NSFetchedResultsController *)preconfiguredLBRFetchedResultsController
+/**
+ *  1) The set of all books...      (fetch request entity)
+ *  2) ...in the current library,   (predicate)
+ *  3) ...arranged by mainCategory, (sectionKeyPath & sort descriptor)
+ *  4) ...then author,              (sortDescriptor)
+ *  5) ...then year.                (sortDescriptor)
+ */
+-(NSFetchedResultsController *)currentLibraryVolumesFetchedResultsController
 {
-    /**
-     *  1) The set of all books (TODO: Uniquify the collection, so you cannot add multiple entries accidentally - UPDATE: Trickier than it looks)...
-     *  2) ...in the current library,
-     *  3) ...arranged by mainCategory,
-     *  4) ...then author,
-     *  5) ...then year.
-     */
-    
-    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
-    NSFetchRequest *volumesRequest = [NSFetchRequest fetchRequestWithEntityName:[Volume entityName]]; //(1)
-    
-        // Set the batch size to a suitable number.
-    [volumesRequest setFetchBatchSize:200];
-    
-        // Edit the sort key as appropriate.
-    NSSortDescriptor *categorySorter = [NSSortDescriptor sortDescriptorWithKey:@"mainCategory" ascending:YES];
-    NSSortDescriptor *authorSorter   = [NSSortDescriptor sortDescriptorWithKey:@"authorSurname" ascending:YES];
-    
+        ///!!!: Ugly! Get rid of it!
     [self generateDefaultLibraryIfNeeded];
-        //TODO: Might need @"library.name = datamanager.currentLibrary.name"
-    NSPredicate *libraryPredicate = [NSPredicate predicateWithFormat:@"library = %@", self.currentLibrary];
     
-    volumesRequest.sortDescriptors = @[categorySorter, authorSorter];
-    volumesRequest.predicate = libraryPredicate;
-    
-        // Edit the section name key path and cache name if appropriate.
-        // nil for section name key path means "no sections".
-    NSFetchedResultsController *frc = [[NSFetchedResultsController alloc] initWithFetchRequest:volumesRequest managedObjectContext:managedObjectContext sectionNameKeyPath:@"mainCategory" cacheName:@"LBRLayoutSchemeGenreAuthorDate"];
+        //Section Key Path (nil == "no sections")
+    NSString *sectionNameKeyPath = @"mainCategory";
 
+        //Managed Object Context
+    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
+    
+        //Fetch Request
+    NSFetchRequest *volumesRequest    = [NSFetchRequest fetchRequestWithEntityName:[Volume entityName]];//(1)
+    NSSortDescriptor *categorySorter  = [NSSortDescriptor sortDescriptorWithKey:sectionNameKeyPath ascending:YES];
+    NSSortDescriptor *authorSorter    = [NSSortDescriptor sortDescriptorWithKey:@"authorSurname" ascending:YES];
+    NSPredicate *libraryPredicate     = [NSPredicate predicateWithFormat:@"%K = %@", @"library.name", self.currentLibrary.name];
+    volumesRequest.sortDescriptors    = @[categorySorter, authorSorter];
+    volumesRequest.predicate          = libraryPredicate;
+    volumesRequest.fetchBatchSize     = 200;
+    
+        //Unique cache name
+    NSString *currentLibraryCacheName = [NSString stringWithFormat:@"%@-volumes", self.currentLibrary.name];
+    
+    
+    NSFetchedResultsController *frc  = [[NSFetchedResultsController alloc]
+                                        initWithFetchRequest:volumesRequest
+                                        managedObjectContext:managedObjectContext
+                                        sectionNameKeyPath:sectionNameKeyPath
+                                        cacheName:currentLibraryCacheName];
+
+        //Magic happens here.
     NSError *error = nil;
     if (![frc performFetch:&error]) {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. !!!:You should not use this function in a shipping application, although it may be useful during development.
         DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
+//        abort();
     }
-    
     return frc;
 }    
 
-- (NSFetchedResultsController *)preconfiguredLBRFetchedResultsController:(UIViewController<NSFetchedResultsControllerDelegate> *)sender
-{
-    NSFetchedResultsController *frc = [self preconfiguredLBRFetchedResultsController];
-    frc.delegate = sender;
-    
-    return frc;
-}
+//-(NSFetchedResultsController *)currentLibraryVolumesFetchedResultsController:(UIViewController<NSFetchedResultsControllerDelegate> *)sender
+//{
+//    NSFetchedResultsController *frc = [self currentLibraryVolumesFetchedResultsController];
+//    frc.delegate = sender;
+//    
+//    return frc;
+//}
 
 #pragma mark - Generate Data
 - (void)generateTestDataIfNeeded
