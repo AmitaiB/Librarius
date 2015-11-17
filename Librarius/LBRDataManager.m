@@ -323,9 +323,8 @@ static NSString * const kUnknown = @"kUnknown";
     LBRGoogleGTLClient *googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
     [self generateDefaultLibraryIfNeeded];
 
-//            Only if the library is non-empty, we're not "needed".
-    BOOL libraryAlreadyHasBooks = @(self.currentLibrary.volumes.count).boolValue;
-    if (libraryAlreadyHasBooks)
+    BOOL libraryIsNotEmpty = @(self.currentLibrary.volumes.count).boolValue;
+    if (libraryIsNotEmpty)
         return;
     
     /**
@@ -340,6 +339,7 @@ static NSString * const kUnknown = @"kUnknown";
     
     for (NSString *ISBN in listOfISBNs) {
         [googleClient queryForVolumeWithString:ISBN withCallback:^(GTLBooksVolume *responseVolume) {
+            
             LBRParsedVolume *newParsedVolume = [[LBRParsedVolume alloc] initWithGoogleVolume:responseVolume];
             self.parsedVolumesToEitherSaveOrDiscard = [self.parsedVolumesToEitherSaveOrDiscard arrayByAddingObject:newParsedVolume];
         }];

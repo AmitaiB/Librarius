@@ -2,7 +2,7 @@
 //  RootCollection+CoreDataProperties.h
 //  Librarius
 //
-//  Created by Amitai Blickstein on 11/16/15.
+//  Created by Amitai Blickstein on 11/17/15.
 //  Copyright © 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu

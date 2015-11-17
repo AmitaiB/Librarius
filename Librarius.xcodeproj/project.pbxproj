@@ -237,6 +237,7 @@
 		38AAD6EF1B901175003062C1 /* Librarius.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Librarius.xcdatamodel; sourceTree = "<group>"; };
 		38AAD7241B90A1AC003062C1 /* Librarius.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Librarius.entitlements; sourceTree = "<group>"; };
 		38BE31E11B961F7000C46001 /* volumePresentationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = volumePresentationView.xib; sourceTree = "<group>"; };
+		38C454BA1BFBC0D600A35391 /* Librarius 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Librarius 5.xcdatamodel"; sourceTree = "<group>"; };
 		38CD5FD01B9DE78400963D2F /* VolumeDetailsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VolumeDetailsCell.xib; sourceTree = "<group>"; };
 		38CF74301BAF51AF0070134E /* FlatUI+Categories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FlatUI+Categories.h"; sourceTree = "<group>"; };
 		38D601971BDA95B100E3D60F /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
@@ -1229,11 +1230,12 @@
 		38AAD6EE1B901175003062C1 /* Librarius.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				38C454BA1BFBC0D600A35391 /* Librarius 5.xcdatamodel */,
 				381061621BF661D200951B45 /* Librarius 4.xcdatamodel */,
 				38A965261BF273FC009F1B5D /* Librarius 3.xcdatamodel */,
 				38AAD6EF1B901175003062C1 /* Librarius.xcdatamodel */,
 			);
-			currentVersion = 381061621BF661D200951B45 /* Librarius 4.xcdatamodel */;
+			currentVersion = 38C454BA1BFBC0D600A35391 /* Librarius 5.xcdatamodel */;
 			path = Librarius.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

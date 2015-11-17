@@ -2,7 +2,7 @@
 //  Volume+CoreDataProperties.h
 //  Librarius
 //
-//  Created by Amitai Blickstein on 11/16/15.
+//  Created by Amitai Blickstein on 11/17/15.
 //  Copyright © 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -36,13 +36,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *subtitle;
 @property (nullable, nonatomic, retain) NSNumber *thickness;
 @property (nullable, nonatomic, retain) NSString *title;
-
+@property (nullable, nonatomic, retain) NSString *secondaryCategory;
+@property (nullable, nonatomic, retain) NSString *tertiaryCategory;
 @property (nullable, nonatomic, retain) Bookcase *bookcase;
 @property (nullable, nonatomic, retain) CoverArt *correspondingImageData;
 @property (nullable, nonatomic, retain) Library *library;
-
-    //LBRParsedVolume had `NSArray * categories`...?
-
 
 @end
 

@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import <GTLBooks.h>
 
 @class Bookcase, CoverArt, Library;
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,11 +20,13 @@ NS_ASSUME_NONNULL_BEGIN
 // Insert code here to declare functionality of your managed object subclass
 + (NSString *)entityName;
 + (instancetype)insertNewObjectIntoContext:(NSManagedObjectContext *)context;
++ (instancetype)insertNewObjectIntoContext:(NSManagedObjectContext *)context initializedFromGoogleBooksObject:(GTLBooksVolume*)googleBooksObject withCovertArt:(BOOL)insertCoverArtObject;
 
 
 -(NSString*)isbn;
 
 -(void)updateCoverArtModelIfNeeded;
+
 
 
     //LBRParsedVolume had:
