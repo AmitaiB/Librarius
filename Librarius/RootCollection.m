@@ -22,4 +22,13 @@
     return [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:context];
 }
 
+-(Library *)firstLibrary
+{
+    NSSet *libraryOfOne = [self.libraries objectsPassingTest:^BOOL(Library * _Nonnull obj, BOOL * _Nonnull stop) {
+        return obj.orderWhenListed.integerValue == 0;
+//        return obj.orderWhenListed.integerValue == 1;
+    }];
+    return [libraryOfOne allObjects][0];
+}
+
 @end

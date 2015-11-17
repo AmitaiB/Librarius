@@ -38,6 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *title;
 @property (nullable, nonatomic, retain) NSString *secondaryCategory;
 @property (nullable, nonatomic, retain) NSString *tertiaryCategory;
+
 @property (nullable, nonatomic, retain) Bookcase *bookcase;
 @property (nullable, nonatomic, retain) CoverArt *correspondingImageData;
 @property (nullable, nonatomic, retain) Library *library;

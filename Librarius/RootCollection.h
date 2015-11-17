@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 +(NSString *)entityName;
 +(instancetype)insertNewObjectIntoContext:(NSManagedObjectContext *)context;
 
+-(Library*)firstLibrary;
+
 @end
 
 NS_ASSUME_NONNULL_END

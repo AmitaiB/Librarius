@@ -339,9 +339,8 @@ static NSString * const kUnknown = @"kUnknown";
     
     for (NSString *ISBN in listOfISBNs) {
         [googleClient queryForVolumeWithString:ISBN withCallback:^(GTLBooksVolume *responseVolume) {
-            
-            LBRParsedVolume *newParsedVolume = [[LBRParsedVolume alloc] initWithGoogleVolume:responseVolume];
-            self.parsedVolumesToEitherSaveOrDiscard = [self.parsedVolumesToEitherSaveOrDiscard arrayByAddingObject:newParsedVolume];
+            Volume *volume = [Volume insertNewObjectIntoContext:self.managedObjectContext initializedFromGoogleBooksObject:responseVolume withCovertArt:YES];
+            [volume.correspondingImageData downloadImagesIfNeeded];
         }];
     }
     
@@ -357,7 +356,7 @@ static NSString * const kUnknown = @"kUnknown";
  
  RootCollection is the 'master object' that holds a reference to the entire object graph.
  */
--(RootCollection *)rootCollection
+-(RootCollection *)userRootCollection
 {
 //        (1)
     if (_rootCollection != nil)
@@ -386,25 +385,23 @@ static NSString * const kUnknown = @"kUnknown";
 
 
 /**
- *  Seeds the dataManager's currentLibrary property.
+ *  Seeds the dataManager's currentLibrary property. 
+ *  Should only necessary for generating test data.
  */
 -(void)generateDefaultLibraryIfNeeded {
-    NSFetchRequest *libraryRequest = [NSFetchRequest fetchRequestWithEntityName:[Library entityName]];
-    NSError *error = nil;
     
-    BOOL datastoreHasAtLeastOneLibrary = [self.managedObjectContext countForFetchRequest:libraryRequest error:&error] >= 1;
-    
-    if (datastoreHasAtLeastOneLibrary) {
-        self.libraries = [self.managedObjectContext executeFetchRequest:libraryRequest error:nil];
-        self.currentLibrary = self.libraries.firstObject;
-        
-    } else {
+    if (self.userRootCollection.libraries.count)
+    {
+        self.currentLibrary = [self.userRootCollection firstLibrary];
+    }
+    else
+    {
         Library *newDefaultLibrary = [Library insertNewObjectIntoContext:self.managedObjectContext];
-        newDefaultLibrary.name = @"Default Library (set name in options)";
-        newDefaultLibrary.orderWhenListed = @1;
-        newDefaultLibrary.dateCreated = [NSDate date];
-        newDefaultLibrary.dateModified = [NSDate date];
-        self.currentLibrary = newDefaultLibrary;
+        newDefaultLibrary.name            = @"Default Library";
+        newDefaultLibrary.orderWhenListed = @0;
+        newDefaultLibrary.dateCreated     = [NSDate date];
+        newDefaultLibrary.dateModified    = [NSDate date];
+        self.currentLibrary               = newDefaultLibrary;
         
         [self generateDefaultBookcaseIfNeeded];
         
@@ -419,34 +416,16 @@ static NSString * const kUnknown = @"kUnknown";
 
 -(void)generateDefaultBookcaseIfNeeded
 {
-    (!self.currentLibrary) ? [self generateDefaultLibraryIfNeeded] : nil;
+    (self.currentLibrary)? :[self generateDefaultLibraryIfNeeded];
     
-    self.currentBookcase = [self.currentLibrary.bookcases firstObject] ? [self.currentLibrary.bookcases firstObject] : nil;
-    
-        //First, check "if needed":
-    BOOL currentLibraryHasAtLeastOneBookcase;
-    
-    NSFetchRequest *bookcaseRequest = [NSFetchRequest fetchRequestWithEntityName:[Bookcase entityName]];
-    NSError *error = nil;
-    
-    NSString *attributeName  = @"library.name";
-    NSString *attributeValue = [NSString stringWithFormat:@"%@", self.currentLibrary.name];
-    
-    NSPredicate *limitResultsToCurrentLibrary_Predicate = [NSPredicate predicateWithFormat:@"%K like %@", attributeName, attributeValue];
-    bookcaseRequest.predicate = limitResultsToCurrentLibrary_Predicate;
-    
-    currentLibraryHasAtLeastOneBookcase = [self.managedObjectContext countForFetchRequest:bookcaseRequest error:&error] >= 1;
-    
-    
-        //...then, if needed...
-    if (currentLibraryHasAtLeastOneBookcase) {
-        
+    if (self.currentLibrary.bookcases.count) {
+        self.currentBookcase = [self.currentLibrary.bookcases firstObject];
         return;
     }
     else
     {
         Bookcase *newDefaultBookcase       = [Bookcase insertNewObjectIntoContext:self.managedObjectContext];
-        newDefaultBookcase.orderWhenListed = @1;
+        newDefaultBookcase.orderWhenListed = @0;
         newDefaultBookcase.dateCreated     = [NSDate date];
         newDefaultBookcase.dateModified    = [newDefaultBookcase.dateCreated copy];
         newDefaultBookcase.shelves         = @(kDefaultBookcaseShelvesCount);
