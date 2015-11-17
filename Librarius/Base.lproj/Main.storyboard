@@ -659,14 +659,14 @@
                                             <exclude reference="m5V-c1-6qt"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <exclude reference="TQ9-GP-I1v"/>
-                                            <exclude reference="U8d-yq-b7m"/>
-                                            <exclude reference="brC-DZ-11D"/>
-                                            <exclude reference="zIS-F2-eFm"/>
                                             <exclude reference="1ml-3v-t0P"/>
                                             <exclude reference="JVq-Lz-bGV"/>
                                             <exclude reference="Rnc-Pb-DVh"/>
                                             <exclude reference="ySd-lH-o8i"/>
+                                            <exclude reference="TQ9-GP-I1v"/>
+                                            <exclude reference="U8d-yq-b7m"/>
+                                            <exclude reference="brC-DZ-11D"/>
+                                            <exclude reference="zIS-F2-eFm"/>
                                         </mask>
                                     </variation>
                                     <variation key="widthClass=compact">
@@ -675,14 +675,14 @@
                                             <include reference="m5V-c1-6qt"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <include reference="TQ9-GP-I1v"/>
-                                            <include reference="U8d-yq-b7m"/>
-                                            <include reference="brC-DZ-11D"/>
-                                            <include reference="zIS-F2-eFm"/>
                                             <include reference="1ml-3v-t0P"/>
                                             <include reference="JVq-Lz-bGV"/>
                                             <include reference="Rnc-Pb-DVh"/>
                                             <include reference="ySd-lH-o8i"/>
+                                            <include reference="TQ9-GP-I1v"/>
+                                            <include reference="U8d-yq-b7m"/>
+                                            <include reference="brC-DZ-11D"/>
+                                            <include reference="zIS-F2-eFm"/>
                                         </mask>
                                     </variation>
                                     <connections>
@@ -798,7 +798,7 @@
                                 <animations/>
                                 <connections>
                                     <outlet property="editNameField" destination="zE4-fV-azo" id="PIE-Dk-ZJU"/>
-                                    <segue destination="ajh-Xd-CoJ" kind="showDetail" identifier="bookshelfToBookShelveSegueID" action="showViewController:sender:" id="YZg-B7-meX"/>
+                                    <segue destination="ajh-Xd-CoJ" kind="showDetail" identifier="bookcaseTableViewToBookshelfCollectionViewSegueID" action="showViewController:sender:" id="YZg-B7-meX"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -1449,7 +1449,7 @@
         <image name="woodpanel04110095" width="624" height="452"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hkZ-A2-opz"/>
         <segue reference="YZg-B7-meX"/>
+        <segue reference="hkZ-A2-opz"/>
     </inferredMetricsTieBreakers>
 </document>

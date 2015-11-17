@@ -192,6 +192,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     return cell;
 }
 
+    //Doesn't have a bookcase, so it crashes the collectionView.
 -(void)configureCell:(LBR_Bookcase_TableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
 //    Bookcase *bookcase = self.bookcasesFetchedResultsController.fetchedObjects[indexPath.row];
@@ -296,7 +297,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"bookshelfToBookShelveSegueID"]) {
+    if ([segue.identifier isEqualToString:@"bookcaseTableViewToBookshelfCollectionViewSegueID"]) {
         LBR_BookcaseCollectionViewController *destinationVC = segue.destinationViewController;
         LBR_Bookcase_TableViewCell *senderCell = (LBR_Bookcase_TableViewCell*)sender;
         destinationVC.bookcaseOnDisplay = senderCell.bookcase;
