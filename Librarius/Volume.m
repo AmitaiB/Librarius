@@ -10,6 +10,7 @@
 #import "Bookcase.h"
 #import "CoverArt.h"
 #import "Library.h"
+#import "NSString+dateValue.h"
 
 #define CALIPER [@"436" floatValue] //In pages per inch, ppi.
 /**
@@ -35,10 +36,19 @@
     return [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:context];
 }
 
-+ (instancetype)insertNewObjectIntoContext:(NSManagedObjectContext *)context initializedFromGoogleBooksObject:(GTLBooksVolume*)googleBooksObject withCovertArt:(BOOL)insertCoverArtObject
++ (instancetype)insertNewObjectIntoContext:(NSManagedObjectContext *)context initializedFromGoogleBooksObject:(GTLBooksVolume*)googleBooksObject withCovertArt:(BOOL)insertWithAssociateCoverArtObject
 {
+        //Two brief things, and one loooong thing:
+//    (1)
     Volume *volume = [Volume insertNewObjectIntoContext:context];
+
+//    (2)
+    if (insertWithAssociateCoverArtObject) {
+        CoverArt *associatedCoverArt = [CoverArt insertNewObjectIntoContext:context];
+        associatedCoverArt.correspondingVolume = volume;
+    }
     
+//    (3)
     /**
      *  ISBN
      */
@@ -132,16 +142,16 @@
     BOOL hasArrayOfCategories    = googleBooksObject.volumeInfo.categories.count;
         // If there's no mainCategory, take it from categories.
     if (hasArrayOfCategories) {
-        volume.categories = googleBooksObject.volumeInfo.categories;
-        volume.mainCategory = volume.categories[0];
+        volume.mainCategory      = googleBooksObject.volumeInfo.mainCategory;
+        volume.secondaryCategory = googleBooksObject.volumeInfo.categories[1];
+        volume.tertiaryCategory  = googleBooksObject.volumeInfo.categories[2];
     }
-        // If there's no categories (count == 0), take it from mainCategory.
-    if (hasEntryForMainCategory) {
+    else if (hasEntryForMainCategory)
+    { // If there's no categories (count == 0), take it from mainCategory.
         volume.mainCategory = googleBooksObject.volumeInfo.mainCategory;
-        volume.categories = [volume.categories arrayByAddingObject:volume.mainCategory];
+        volume.secondaryCategory = volume.mainCategory;
+        volume.tertiaryCategory  = volume.mainCategory;
     }
-    
-    
     
     /**
      *  Date of publication & publisher.
@@ -176,6 +186,9 @@
      */
     
     volume.google_id = googleBooksObject.identifier;
+    
+    
+    return volume;
 }
 
 -(NSString *)isbn {
