@@ -53,6 +53,7 @@
 @property (weak, nonatomic) IBOutlet UIView *scannerView;
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
 @property (weak, nonatomic) IBOutlet UIButton *toggleScanningButton;
+
 @property (nonatomic, strong) NSMutableArray *unsavedVolumes;
 @property (nonatomic, strong) MTBBarcodeScanner *scanner;
 @property (nonatomic, strong) LBRGoogleGTLClient *googleClient;
@@ -64,7 +65,8 @@
 
 @property (nonatomic) BOOL isScanning;
 
-
+    //Optional: Overlay Views
+@property (nonatomic, strong) NSMutableDictionary *overlayViews;
 
 @end
 
@@ -85,8 +87,19 @@ static NSString * const volumeNib          = @"volumePresentationView";
         [self configureProgrammaticProperties];}
     
     self.canDisplayBannerAds = YES;
-    
 }
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    [self stopScanningOps];
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+    [self stopScanningOps];
+    [super viewWillDisappear:animated];
+}
+
+#pragma mark Private LifeCycle methods
 
 -(void)configureProgrammaticProperties {
         // Initializations
@@ -107,7 +120,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
     self.saveScannedBooksToCoreDataButton.layer.cornerRadius = 5.0f;
     self.saveScannedBooksToCoreDataButton.clipsToBounds      = YES;
     self.saveScannedBooksToCoreDataButton.backgroundColor    = [UIColor wetAsphaltColor];
-        
+    
     [self anchorBackgroundImage];
     
         // So we don't repeat ourselves.
@@ -135,18 +148,8 @@ static NSString * const volumeNib          = @"volumePresentationView";
     self.scannerView.layer.cornerRadius = 5.0f;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    [self stopScanningOps];
-}
 
--(void)viewWillDisappear:(BOOL)animated {
-    [self stopScanningOps];
-    [super viewWillDisappear:animated];
-}
-
-
-#pragma mark - buttons
+#pragma mark - === Buttons IBActions & helpers ===
 
 - (IBAction)toggleScanningButtonTapped:(id)sender {
     if (self.isScanning) {
@@ -157,16 +160,6 @@ static NSString * const volumeNib          = @"volumePresentationView";
         else
             [self alertUserNoInternetConnection];
     }
-}
-
--(void)alertUserNoInternetConnection
-{
-    UIAlertController *noInternetAlertController = [UIAlertController alertControllerWithTitle:@"No Internet Detected" message:@"An internet connection is required to look up book data and images." preferredStyle:UIAlertControllerStyleAlert];
-    [self presentViewController:noInternetAlertController animated:YES completion:^{
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self dismissViewControllerAnimated:YES completion:nil];
-        });
-    }];
 }
 
 - (IBAction)lightToggleButtonTapped:(id)sender {
@@ -206,7 +199,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
         return _fetchedResultsController;
     }
     return [[LBRDataManager sharedDataManager]
-            preconfiguredLBRFetchedResultsController:self];
+            currentLibraryVolumesFetchedResultsController:self];
 }
 
 #pragma mark - === Network Connectivity ===
@@ -232,6 +225,17 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
     }
 }
 
+-(void)alertUserNoInternetConnection
+{
+    UIAlertController *noInternetAlertController = [UIAlertController alertControllerWithTitle:@"No Internet Detected" message:@"An internet connection is required to look up book data and images." preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:noInternetAlertController animated:YES completion:^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self dismissViewControllerAnimated:YES completion:nil];
+        });
+    }];
+}
+
+
 #pragma mark - === Scanning ===
 /**
  *  Stop scanning, flip the button.
@@ -242,6 +246,11 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
     [self.scanner stopScanning];
     self.saveScannedBooksToCoreDataButton.hidden = NO;
     self.lightToggleButton.hidden                = YES;
+    
+    for (NSString *code in self.overlayViews.allKeys) {
+        [self.overlayViews[code] removeFromSuperview];
+    }
+
 }
 
 /**
@@ -253,36 +262,47 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
     self.saveScannedBooksToCoreDataButton.hidden = YES;
     self.lightToggleButton.hidden                = NO;
     
-// ???: Consider embedding the scanning in this: [MTBBarcodeScanner requestCameraPermissionWithSuccess:^(BOOL success)...?
-    [self.scannerView bringSubviewToFront:self.lightToggleButton.imageView];
-    [self.scanner startScanningWithResultBlock:^(NSArray *codes) {
-    // -------------------------------------------------------------------------------
-    //	Scanning Success Block: We have a barcode!
-    // -------------------------------------------------------------------------------
-        for (AVMetadataMachineReadableCodeObject *code in codes) {
-                // If it's a new barcode, add it to the array.
-            if ([self.uniqueCodes indexOfObject:code.stringValue] == NSNotFound) {
-                [self.uniqueCodes addObject:code.stringValue];
-                
-                    //1st APPROACH: NYAlertViewController sub-class. Should have worked, but didn't.
-                    //✅ 2nd APPROACH: NYAlertViewController (like #1), but in this controller. Works.
-//                NYAlertViewController *confirmSelectionViewController = [self confirmSelectionViewController];
-//                [self presentViewController:confirmSelectionViewController animated:YES completion:^{ DBLG }];
+//    Optionally set a rectangle of interest to scan codes. Only codes within this rect will be scanned.
+//    self.scanner.scanRect = self.viewOfInterest.frame;
+    
+    /**
+     The success block will return YES if the user granted permission, has granted permission in 
+     the past, or if the device is running iOS 7. The success block will return NO if the user 
+     denied permission, is restricted from the camera, or if there is no camera present.
+     */
+    [MTBBarcodeScanner requestCameraPermissionWithSuccess:^(BOOL success) {
+        if (!success) return;
 
-                
-                [self.googleClient queryForVolumeWithString:code.stringValue withCallback:^(GTLBooksVolume *responseVolume) {
-        // -------------------------------------------------------------------------------
-        //	Scanning Block : Google Success Block
-        // -------------------------------------------------------------------------------
+        [self.scanner startScanningWithResultBlock:^(NSArray *codes) {
+            [self drawOverlaysOnCodes:codes];
+                // -------------------------------------------------------------------------------
+                //	Scanning Success Block: We have a barcode!
+                // -------------------------------------------------------------------------------
+            for (AVMetadataMachineReadableCodeObject *code in codes) {
+                    // If it's a new barcode, add it to the array.
+                if ([self.uniqueCodes indexOfObject:code.stringValue] == NSNotFound) {
+                    [self.uniqueCodes addObject:code.stringValue];
                     
-                    self.volumeToConfirm = [[LBRParsedVolume alloc] initWithGoogleVolume:responseVolume];
-                    NYAlertViewController *confirmationViewController = [self confirmSelectionViewController];
-                    [self presentViewController:confirmationViewController animated:YES completion:nil];
-                }];
-            } else {
-               DDLogVerbose(@"Barcode already in list/table.");
+                        //1st APPROACH: NYAlertViewController sub-class. Should have worked, but didn't.
+                        //✅ 2nd APPROACH: NYAlertViewController (like #1), but in this controller. Works.
+                        //                NYAlertViewController *confirmSelectionViewController = [self confirmSelectionViewController];
+                        //                [self presentViewController:confirmSelectionViewController animated:YES completion:^{ DBLG }];
+                    
+                    
+                    [self.googleClient queryForVolumeWithString:code.stringValue withCallback:^(GTLBooksVolume *responseVolume) {
+                            // -------------------------------------------------------------------------------
+                            //	Scanning Block : Google Success Block
+                            // -------------------------------------------------------------------------------
+                        
+                        self.volumeToConfirm = [[LBRParsedVolume alloc] initWithGoogleVolume:responseVolume];
+                        NYAlertViewController *confirmationViewController = [self confirmSelectionViewController];
+                        [self presentViewController:confirmationViewController animated:YES completion:nil];
+                    }];
+                } else {
+                    DDLogVerbose(@"Barcode already in list/table.");
+                }
             }
-        }
+        }];
     }];
 }
 
@@ -318,6 +338,95 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
     return [@(yearComponent) stringValue];
 }
 
+#pragma mark - Overlay Views
+
+- (NSMutableDictionary *)overlayViews {
+    if (!_overlayViews) {
+        _overlayViews = [[NSMutableDictionary alloc] init];
+    }
+    return _overlayViews;
+}
+
+#pragma mark - Scanning
+
+- (void)drawOverlaysOnCodes:(NSArray *)codes {
+        // Get all of the captured code strings
+    NSMutableArray *codeStrings = [[NSMutableArray alloc] init];
+    for (AVMetadataMachineReadableCodeObject *code in codes) {
+        if (code.stringValue) {
+            [codeStrings addObject:code.stringValue];
+        }
+    }
+    
+        // Remove any code overlays no longer on the screen
+    for (NSString *code in self.overlayViews.allKeys) {
+        if ([codeStrings indexOfObject:code] == NSNotFound) {
+                // A code that was on the screen is no longer
+                // in the list of captured codes, remove its overlay
+            [self.overlayViews[code] removeFromSuperview];
+            [self.overlayViews removeObjectForKey:code];
+        }
+    }
+    
+    for (AVMetadataMachineReadableCodeObject *code in codes) {
+        UIView *view = nil;
+        NSString *codeString = code.stringValue;
+        
+        if (codeString) {
+            if (self.overlayViews[codeString]) {
+                    // The overlay is already on the screen
+                view = self.overlayViews[codeString];
+                
+                    // Move it to the new location
+                view.frame = code.bounds;
+                
+            } else {
+                    // First time seeing this code
+                BOOL isValidCode = [self isValidCodeString:codeString];
+                
+                    // Create an overlay
+                UIView *overlayView = [self overlayForCodeString:codeString
+                                                          bounds:code.bounds
+                                                           valid:isValidCode];
+                self.overlayViews[codeString] = overlayView;
+                
+                    // Add the overlay to the preview view
+                [self.scannerView addSubview:overlayView];
+                
+            }
+        }
+    }
+}
+
+- (BOOL)isValidCodeString:(NSString *)codeString {
+    BOOL stringIsValid = ([codeString rangeOfString:@"Valid"].location != NSNotFound);
+    return stringIsValid;
+}
+
+- (UIView *)overlayForCodeString:(NSString *)codeString bounds:(CGRect)bounds valid:(BOOL)valid {
+    UIColor *viewColor = valid ? [UIColor greenColor] : [UIColor redColor];
+    UIView *view = [[UIView alloc] initWithFrame:bounds];
+    UILabel *label = [[UILabel alloc] initWithFrame:view.bounds];
+    
+        // Configure the view
+    view.layer.borderWidth = 5.0;
+    view.backgroundColor = [viewColor colorWithAlphaComponent:0.75];
+    view.layer.borderColor = viewColor.CGColor;
+    
+        // Configure the label
+    label.font = [UIFont boldSystemFontOfSize:12];
+    label.text = codeString;
+    label.textColor = [UIColor blackColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.numberOfLines = 0;
+    
+        // Add constraints to label to improve text size?
+    
+        // Add the label to the view
+    [view addSubview:label];
+    
+    return view;
+}
 
 #pragma mark - == Confirmation Alert Controller (w/ Confirm/Cancel blocks) ==
 
