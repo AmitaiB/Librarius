@@ -466,12 +466,12 @@
 		380375641B8BB71D004C4ECE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				38C454B91BFB75C600A35391 /* Barcode Scanner Scene */,
 				38A92ABF1BF5399900406393 /* Book-Collection TableView Scene */,
-				38103B5D1BD033EC009F22E3 /* Bookcase CollectionView Scene */,
 				386B7D101BF15A73004A1DF8 /* Library Construction Scene */,
+				38103B5D1BD033EC009F22E3 /* Bookcase CollectionView Scene */,
 				380375681B8BC89D004C4ECE /* LBRGoogleSignInViewController.h */,
 				380375691B8BC89D004C4ECE /* LBRGoogleSignInViewController.m */,
-				38C454B91BFB75C600A35391 /* Barcode Scanner Scene */,
 				38DF00381BE7F9C800D4BCE3 /* LBRAcknowledgements_ViewController.h */,
 				38DF00391BE7F9C800D4BCE3 /* LBRAcknowledgements_ViewController.m */,
 			);

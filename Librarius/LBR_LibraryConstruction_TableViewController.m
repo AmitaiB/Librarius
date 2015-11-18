@@ -7,8 +7,10 @@
 //
 
     //Models
+#import "RootCollection.h"
 #import "Library.h"
 #import "Bookcase.h"
+#import "Volume.h"
 
     //Views
 #import "LBR_LibraryConstruction_CollectionViewCell.h"
@@ -16,14 +18,14 @@
 
     //Controllers
 #import "LBR_LibraryConstruction_TableViewController.h"
-#import "LBR_BookcaseCollectionViewController.h"
+#import "LBR_BookcaseCollectionViewController.h" //For segue.
 
     //Data
 #import "LBRDataManager.h"
-#import "RootCollection.h"
 #import "LBR_BookcaseLayout.h"
-#import "LBR_BookcaseModel.h"
-#import "LBR_LibraryModel.h"
+
+//#import "LBR_BookcaseModel.h"
+//#import "LBR_LibraryModel.h"
 
 /**
  Abstract: This VC displays the library structure, and allows for adding/removing/editing the libraries and shelves.
@@ -31,19 +33,25 @@
  */
 
 @interface LBR_LibraryConstruction_TableViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+
 @property (nonatomic, strong) NSFetchedResultsController *bookcasesFetchedResultsController;
-//@property (nonatomic, strong) NSArray *tableRowsPerSection;
 
-@property (nonatomic, assign) NSIndexPath *selectedLibraryIndexPath;
-@property (nonatomic, strong) UIImagePickerController *imagePickerController;
 
+    //Library Selection (CollectionView)
 @property (weak, nonatomic) IBOutlet UICollectionView *librariesCollectionView;
-- (IBAction)addButtonTapped:(id)sender;
-@property (weak, nonatomic) IBOutlet UIView *addBookcaseFooterView;
+@property (nonatomic, assign) NSIndexPath *selectedLibraryIndexPath;
+- (IBAction)addButtonTapped:(id)sender; //Add Library button...
+
+    //Bookcase Selection (TableView)
+@property (nonatomic, strong) NSDictionary <NSIndexPath*, LBR_BookcaseModel*> *bookcaseModelsDictionary;
 - (IBAction)addBookcaseButtonTapped:(id)sender;
 
+    //Layout Selection (Segmented Control)
 @property (nonatomic, strong) UISegmentedControl *layoutSegmentedControl;
-@property (nonatomic, strong) NSDictionary <NSIndexPath*, LBR_BookcaseModel*> *bookcaseModelsDictionary;
+
+    //Not Yet Implemented
+@property (nonatomic, strong) UIImagePickerController *imagePickerController;
+@property (weak, nonatomic) IBOutlet UIView *addBookcaseFooterView; //For "Add Bookcase" tableViewCell - if I want to do it that way.
 
 @end
 
@@ -59,10 +67,12 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.bookcasesFetchedResultsController.delegate = self;
+    
+        //Layout
     self.layoutSegmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"layout 1", @"layout 2"]];
     self.navigationItem.titleView = self.layoutSegmentedControl;
     
-    self.bookcasesFetchedResultsController.delegate = self;
 
     dataManager = [LBRDataManager sharedDataManager];
 

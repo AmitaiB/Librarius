@@ -23,6 +23,10 @@
 #import <GTLBooksVolume.h>
 #import "RootCollection.h"
 
+@interface LBRDataManager ()
+@property (nonatomic, strong) NSDictionary *sortDesriptors;
+@end
+
 @implementation LBRDataManager
 
 static NSString * const kUnknown = @"kUnknown";
@@ -36,15 +40,20 @@ static NSString * const kUnknown = @"kUnknown";
     return _sharedDataManager;
 }
 
+
 -(instancetype)init {
     if (!(self = [super init])) return nil;
     
     _uniqueCodes = [NSMutableArray new];
-    _volumesRecentlyAddedToContext = [NSMutableArray new];
+//    _volumesRecentlyAddedToContext = [NSMutableArray new];
 //    _parsedVolumesToEitherSaveOrDiscard = [NSMutableArray new];
 //    _parsedVolumeFromLastBarcode = [LBRParsedVolume new];
-    _libraries = @[];
-    
+//    _libraries = @[];
+    _sortDesriptors = @{@"orderSorter"      : [NSSortDescriptor sortDescriptorWithKey:@"orderWhenListed" ascending:YES],
+                        @"categorySorter"   : [NSSortDescriptor sortDescriptorWithKey:@"mainCategory" ascending:YES],
+                        @"authorSorter"     : [NSSortDescriptor sortDescriptorWithKey:@"authorSurname" ascending:YES],
+                        @"dateCreatedSorter": [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]
+                        };
     return self;
 }
 
@@ -233,6 +242,59 @@ static NSString * const kUnknown = @"kUnknown";
     
     return frc;
 }
+
+-(NSFetchedResultsController *)currentLibraryBookcasesFetchedResultsController
+{
+    NSFetchedResultsController *frc;
+    /**
+     *  1) The set of all [Entity Name]
+     *  2) ...arranged by userOrder,
+     *  3) ...then date created.
+     */
+        //Ugly! get rid of it.
+    [self generateDefaultLibraryIfNeeded];
+    
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[Bookcase entityName]]; //(1)
+    
+        // Edit the sort key as appropriate.
+    NSSortDescriptor *orderSorter       = [NSSortDescriptor sortDescriptorWithKey:@"orderWhenListed" ascending:YES];
+    NSSortDescriptor *dateCreatedSorter = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES];
+    
+    request.fetchBatchSize = 200;
+    request.sortDescriptors = @[orderSorter, dateCreatedSorter];
+    request.returnsObjectsAsFaults = NO;
+    
+        // Edit the section name key path and cache name if appropriate.
+        // nil for section name key path means "no sections".
+    frc = [[NSFetchedResultsController alloc] initWithFetchRequest:request
+                                              managedObjectContext:managedObjectContext
+                                                sectionNameKeyPath:@"library.name"
+                                                         cacheName:@"LBR_Bookcase_CacheName"];
+    
+    NSError *error = nil;
+    if (![frc performFetch:&error]) {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. !!!:You should not use this function in a shipping application, although it may be useful during development.
+        DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+        //    DDLogDebug(@"frc.fetchedObjects = %@ (count: %lu)", frc.fetchedObjects, frc.fetchedObjects.count);
+    DDLogDebug(@"frc.fetchedObjects.count = %lu", frc.fetchedObjects.count);
+    
+    
+    NSArray *bookcasesMaybe = [frc.managedObjectContext executeFetchRequest:request error:nil];
+    
+    if (bookcasesMaybe.count == 0) {
+        [dataManager generateBookcasesForLibrary:dataManager.currentLibrary withDimensions:@{@3 : @7,
+                                                                                             @5 : @5,
+                                                                                             @2 : @20
+                                                                                             }];
+        [frc performFetch:nil];
+    }
+    
+    return frc;
+}
+
 
 #pragma mark - Generate Data
 - (void)generateTestDataIfNeeded

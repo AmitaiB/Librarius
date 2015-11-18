@@ -50,6 +50,10 @@
 
 -(NSFetchedResultsController*)currentLibraryVolumesFetchedResultsController;
 -(NSFetchedResultsController*)currentLibraryVolumesFetchedResultsController:(UIViewController<NSFetchedResultsControllerDelegate> *)sender;
+-(NSFetchedResultsController*)currentLibraryBookcasesFetchedResultsController;
+-(NSFetchedResultsController*)currentLibraryBookcasesFetchedResultsController:(UIViewController<NSFetchedResultsControllerDelegate> *)sender;
+
+
 
 -(void) fetchData;
 -(void) saveContext;
