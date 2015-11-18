@@ -55,7 +55,6 @@
 		3837F2D01BE2F33A00170FF6 /* Bookcase.m in Sources */ = {isa = PBXBuildFile; fileRef = 3837F2CD1BE2F33A00170FF6 /* Bookcase.m */; };
 		383A2F961BEEE42A006D115F /* LBR_PopoverBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 383A2F951BEEE42A006D115F /* LBR_PopoverBackgroundView.m */; };
 		38466D281B94F24400DD252E /* LBRGoogleGTLClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 38466D271B94F24400DD252E /* LBRGoogleGTLClient.m */; };
-		3846AABF1BFD22A700327D43 /* LBR_ShelvesModelTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3846AABE1BFD22A700327D43 /* LBR_ShelvesModelTransformer.m */; };
 		384E0CC01B97D24B007E7290 /* NSString+dateValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 384E0CBF1B97D24B007E7290 /* NSString+dateValue.m */; };
 		3851DBFD1B8E2E5A00E90B9F /* LBRDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3851DBFC1B8E2E5A00E90B9F /* LBRDataManager.m */; };
 		3855E26F1BB0DBD4004C5D11 /* LBRAlertContent_TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3855E26E1BB0DBD4004C5D11 /* LBRAlertContent_TableViewCell.m */; };
@@ -205,8 +204,6 @@
 		38466D261B94F24400DD252E /* LBRGoogleGTLClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRGoogleGTLClient.h; sourceTree = "<group>"; };
 		38466D271B94F24400DD252E /* LBRGoogleGTLClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRGoogleGTLClient.m; sourceTree = "<group>"; };
 		3846AABC1BFD214100327D43 /* Librarius 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Librarius 6.xcdatamodel"; sourceTree = "<group>"; };
-		3846AABD1BFD22A700327D43 /* LBR_ShelvesModelTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBR_ShelvesModelTransformer.h; sourceTree = "<group>"; };
-		3846AABE1BFD22A700327D43 /* LBR_ShelvesModelTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBR_ShelvesModelTransformer.m; sourceTree = "<group>"; };
 		384E0CBE1B97D24B007E7290 /* NSString+dateValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+dateValue.h"; sourceTree = "<group>"; };
 		384E0CBF1B97D24B007E7290 /* NSString+dateValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+dateValue.m"; sourceTree = "<group>"; };
 		3851DBFB1B8E2E5A00E90B9F /* LBRDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRDataManager.h; sourceTree = "<group>"; };
@@ -429,8 +426,6 @@
 		3803755F1B8BB6C3004C4ECE /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				3846AABD1BFD22A700327D43 /* LBR_ShelvesModelTransformer.h */,
-				3846AABE1BFD22A700327D43 /* LBR_ShelvesModelTransformer.m */,
 				38466D261B94F24400DD252E /* LBRGoogleGTLClient.h */,
 				38466D271B94F24400DD252E /* LBRGoogleGTLClient.m */,
 				3851DBFB1B8E2E5A00E90B9F /* LBRDataManager.h */,
@@ -924,7 +919,6 @@
 				3810DA101BD5E0980093D5C2 /* Utils.m in Sources */,
 				3810DA111BD5E0980093D5C2 /* FlatTheme.m in Sources */,
 				380375F81B8D4E90004C4ECE /* BookDetailViewController.m in Sources */,
-				3846AABF1BFD22A700327D43 /* LBR_ShelvesModelTransformer.m in Sources */,
 				3810615F1BF660BD00951B45 /* Library+CoreDataProperties.m in Sources */,
 				38DA43DB1BE7056900FEFD16 /* LBRSettingsCell.m in Sources */,
 				38AAD6F01B901175003062C1 /* Librarius.xcdatamodeld in Sources */,
