@@ -37,6 +37,7 @@
 #import "LBRBarcodeScannerViewController.h"
 #import "LBRAlertContent_TableViewController.h"
 #import <NYAlertViewController.h>
+#import "NSString+dateValue.h"
 
 
 
@@ -54,7 +55,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
 @property (weak, nonatomic) IBOutlet UIButton *toggleScanningButton;
 
-@property (nonatomic, strong) NSMutableArray *unsavedVolumes;
 @property (nonatomic, strong) MTBBarcodeScanner *scanner;
 @property (nonatomic, strong) LBRGoogleGTLClient *googleClient;
 
@@ -287,12 +287,13 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
                 //	Scanning Success Block: We have a barcode!
                 // -------------------------------------------------------------------------------
             for (AVMetadataMachineReadableCodeObject *code in codes) {
-                    // If it's a new barcode, add it to the array.
 
-                if (![self.uniqueCodes containsObject:code.stringValue]) {
 //                if ([self.uniqueCodes indexOfObject:code.stringValue] == NSNotFound) {
+                    // If it's a new barcode, add it to the array for duplicate prevention.
+                if (![self.uniqueCodes containsObject:code.stringValue]) {
                     [self.uniqueCodes addObject:code.stringValue];
 
+                        //Use the string to query Google.
                     [self.googleClient queryForVolumeWithString:code.stringValue withCallback:^(GTLBooksVolume *responseVolume) {
                             // -------------------------------------------------------------------------------
                             //	Scanning Block : Google Success Block
@@ -300,7 +301,7 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
                         Volume *volume = [Volume insertNewObjectIntoContext:dataManager.managedObjectContext initializedFromGoogleBooksObject:responseVolume withCovertArt:YES];
                         self.volumeToConfirm = volume;
 
-                            //TODO: Alternative to confirmation, hmmm...?
+                            ///TODO: Alternative to confirmation, hmmm...? Perhaps put the view up in the scanning reticule...?
                         NYAlertViewController *confirmationViewController = [self confirmSelectionViewController];
                         [self presentViewController:confirmationViewController animated:YES completion:nil];
                     }];
@@ -334,16 +335,8 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
 }
 
 
--(NSString*)yearFromDate:(NSDate*)date {
-    NSCalendar *calendar    = [NSCalendar currentCalendar];
-    NSInteger yearComponent = [calendar component:NSCalendarUnitYear fromDate:date];
-    return [@(yearComponent) stringValue];
-}
-
-
-
 #pragma mark - Scanning Code Overlays
-    ///Thank you to Mike Buss!
+    ///Credit goes to Mike Buss of MTBScanner - code borrowed from his example project.
 - (NSMutableDictionary *)overlayViews {
     if (!_overlayViews) {
         _overlayViews = [[NSMutableDictionary alloc] init];
@@ -432,6 +425,10 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
 
 #pragma mark - == Confirmation Alert Controller (w/ Confirm/Cancel blocks) ==
 
+/**
+ I have kept this ill-understood (by me) pod because the standard options do not easily allow for an image,
+ and I got this to work. Once "Make It Work" gives way to "Make It Right," this will be the first to go.
+ */
 -(NYAlertViewController*)confirmSelectionViewController {
     NYAlertViewController *alertViewController = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
     
@@ -512,16 +509,20 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
     }
 }
 
+    ///TODO: This whole section is Not Yet Implemented.
+    ///The intention is to have a tableView displaying the inserted (not saved) book choices.
 #pragma mark - === UITableViewDataSource methods ===
 
+    //The only tableView WILL BE the unsaved volumes one.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-        return self.unsavedVolumes.count;
+        return dataManager.managedObjectContext.insertedObjects.count;
 }
+
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:barcodeCellReuseID forIndexPath:indexPath];
-    cell = self.unsavedVolumes[indexPath.row];
+    Volume *volume = [dataManager.managedObjectContext.insertedObjects sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES]]][indexPath.row];
     return cell;
 }
 

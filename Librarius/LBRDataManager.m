@@ -47,88 +47,6 @@ static NSString * const kUnknown = @"kUnknown";
     
     return self;
 }
-/*
-    //User-facing ✅
--(void)saveParsedVolumesToEitherSaveOrDiscardToPersistentStore {
-        // 1. LBRParsedVolume → NSManagedObject
-        // 2. Repeat for all volumes.
-        // 3. Save context.
-        // 4. Test.
-    for (LBRParsedVolume *transientVolumeToSave in self.parsedVolumesToEitherSaveOrDiscard) {
-
-            //CLEAN: We check before, in the ScannerViewController.
-        [self checkStoreForDuplicates:transientVolumeToSave];
-        [self insertVolumeToContextFromTransientVolume:transientVolumeToSave];
-    }
-    self.parsedVolumesToEitherSaveOrDiscard = @[];
-    [self saveContext];
-       DDLogVerbose(@"Context's (new) volumes saved to current library.");
-}
-
-    //FIXME: Doesn't work!
--(BOOL)checkStoreForDuplicates:(LBRParsedVolume *)volume {
-//    http://www.theappcodeblog.com/?p=176#more-176
-        //search to see if the entity already exists
-    
-        //We use an NSPredicate combined with the fetchedResultsCntroller to perform
-        //the search.
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isbn13 CONTAINS[cd] %@", volume.isbn];
-    NSFetchRequest *duplicatesRequest = [NSFetchRequest fetchRequestWithEntityName:[Volume entityName]];
-    duplicatesRequest.predicate = predicate;
-    NSError *error = nil;
-    BOOL isDuplicate = @([self.managedObjectContext countForFetchRequest:duplicatesRequest error:&error]).boolValue;
-    if (error) {
-            //Handle error
-        DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
-            exit(-1); //Fail
-    }
-    return isDuplicate;
-}
-
--(void)updateWithNewTransientVolume:(LBRParsedVolume*)volumeToAdd {
-        // Logic
-    self.parsedVolumesToEitherSaveOrDiscard = [self.parsedVolumesToEitherSaveOrDiscard arrayByAddingObject:volumeToAdd];
-}
-
--(NSArray *)parsedVolumesToEitherSaveOrDiscard
-{
-    if (_parsedVolumesToEitherSaveOrDiscard == nil)
-        _parsedVolumesToEitherSaveOrDiscard = @[];
-    
-    return _parsedVolumesToEitherSaveOrDiscard;
-}
-
-
--(void)insertVolumeToContextFromTransientVolume:(LBRParsedVolume*)volumeToInsert {
-    Volume *persistentVolume = [Volume insertNewObjectIntoContext:self.managedObjectContext];
-    persistentVolume.isbn10          = volumeToInsert.isbn10;
-    persistentVolume.isbn13          = volumeToInsert.isbn13;
-    persistentVolume.title           = volumeToInsert.title;
-    persistentVolume.thickness       = volumeToInsert.thickness;
-    persistentVolume.height          = volumeToInsert.height;
-    persistentVolume.pageCount       = volumeToInsert.pageCount;
-    persistentVolume.cover_art_large = volumeToInsert.cover_art_large;
-    persistentVolume.cover_art       = volumeToInsert.cover_art;
-    persistentVolume.author          = volumeToInsert.author;
-    persistentVolume.authorSurname   = volumeToInsert.authorSurname;
-    persistentVolume.mainCategory    = volumeToInsert.mainCategory;
-    persistentVolume.published       = volumeToInsert.published;
-    persistentVolume.rating          = volumeToInsert.rating;
-    persistentVolume.google_id       = volumeToInsert.google_id;
-
-    persistentVolume.publDescription = volumeToInsert.publDescription;
-    persistentVolume.subtitle        = volumeToInsert.subtitle;
-    persistentVolume.avgRating       = volumeToInsert.avgRating;
-    persistentVolume.ratingsCount    = volumeToInsert.ratingsCount;
-
-    persistentVolume.library         = self.currentLibrary;
-    persistentVolume.dateCreated     = [NSDate date];
-    persistentVolume.dateModified    = [NSDate date];
-    
-    CoverArt *associatedCoverArt = [CoverArt insertNewObjectIntoContext:self.managedObjectContext];
-    [associatedCoverArt downloadImagesForCorrespondingVolume:persistentVolume];
-}
-*/
 
     //debug-related
 -(void)logCurrentLibrary {
@@ -389,7 +307,7 @@ static NSString * const kUnknown = @"kUnknown";
  */
 -(void)generateDefaultLibraryIfNeeded {
     
-    if (self.userRootCollection.libraries.count)
+    if (self.userRootCollection.libraries.count >= 1)
     {
         self.currentLibrary = [self.userRootCollection firstLibrary];
     }
@@ -471,3 +389,87 @@ static NSString * const kUnknown = @"kUnknown";
 }
 
 @end
+
+
+/*
+ //User-facing ✅
+ -(void)saveParsedVolumesToEitherSaveOrDiscardToPersistentStore {
+ // 1. LBRParsedVolume → NSManagedObject
+ // 2. Repeat for all volumes.
+ // 3. Save context.
+ // 4. Test.
+ for (LBRParsedVolume *transientVolumeToSave in self.parsedVolumesToEitherSaveOrDiscard) {
+ 
+ //CLEAN: We check before, in the ScannerViewController.
+ [self checkStoreForDuplicates:transientVolumeToSave];
+ [self insertVolumeToContextFromTransientVolume:transientVolumeToSave];
+ }
+ self.parsedVolumesToEitherSaveOrDiscard = @[];
+ [self saveContext];
+ DDLogVerbose(@"Context's (new) volumes saved to current library.");
+ }
+ 
+ //FIXME: Doesn't work!
+ -(BOOL)checkStoreForDuplicates:(LBRParsedVolume *)volume {
+ //    http://www.theappcodeblog.com/?p=176#more-176
+ //search to see if the entity already exists
+ 
+ //We use an NSPredicate combined with the fetchedResultsCntroller to perform
+ //the search.
+ NSPredicate *predicate = [NSPredicate predicateWithFormat:@"isbn13 CONTAINS[cd] %@", volume.isbn];
+ NSFetchRequest *duplicatesRequest = [NSFetchRequest fetchRequestWithEntityName:[Volume entityName]];
+ duplicatesRequest.predicate = predicate;
+ NSError *error = nil;
+ BOOL isDuplicate = @([self.managedObjectContext countForFetchRequest:duplicatesRequest error:&error]).boolValue;
+ if (error) {
+ //Handle error
+ DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
+ exit(-1); //Fail
+ }
+ return isDuplicate;
+ }
+ 
+ -(void)updateWithNewTransientVolume:(LBRParsedVolume*)volumeToAdd {
+ // Logic
+ self.parsedVolumesToEitherSaveOrDiscard = [self.parsedVolumesToEitherSaveOrDiscard arrayByAddingObject:volumeToAdd];
+ }
+ 
+ -(NSArray *)parsedVolumesToEitherSaveOrDiscard
+ {
+ if (_parsedVolumesToEitherSaveOrDiscard == nil)
+ _parsedVolumesToEitherSaveOrDiscard = @[];
+ 
+ return _parsedVolumesToEitherSaveOrDiscard;
+ }
+ 
+ 
+ -(void)insertVolumeToContextFromTransientVolume:(LBRParsedVolume*)volumeToInsert {
+ Volume *persistentVolume = [Volume insertNewObjectIntoContext:self.managedObjectContext];
+ persistentVolume.isbn10          = volumeToInsert.isbn10;
+ persistentVolume.isbn13          = volumeToInsert.isbn13;
+ persistentVolume.title           = volumeToInsert.title;
+ persistentVolume.thickness       = volumeToInsert.thickness;
+ persistentVolume.height          = volumeToInsert.height;
+ persistentVolume.pageCount       = volumeToInsert.pageCount;
+ persistentVolume.cover_art_large = volumeToInsert.cover_art_large;
+ persistentVolume.cover_art       = volumeToInsert.cover_art;
+ persistentVolume.author          = volumeToInsert.author;
+ persistentVolume.authorSurname   = volumeToInsert.authorSurname;
+ persistentVolume.mainCategory    = volumeToInsert.mainCategory;
+ persistentVolume.published       = volumeToInsert.published;
+ persistentVolume.rating          = volumeToInsert.rating;
+ persistentVolume.google_id       = volumeToInsert.google_id;
+ 
+ persistentVolume.publDescription = volumeToInsert.publDescription;
+ persistentVolume.subtitle        = volumeToInsert.subtitle;
+ persistentVolume.avgRating       = volumeToInsert.avgRating;
+ persistentVolume.ratingsCount    = volumeToInsert.ratingsCount;
+ 
+ persistentVolume.library         = self.currentLibrary;
+ persistentVolume.dateCreated     = [NSDate date];
+ persistentVolume.dateModified    = [NSDate date];
+ 
+ CoverArt *associatedCoverArt = [CoverArt insertNewObjectIntoContext:self.managedObjectContext];
+ [associatedCoverArt downloadImagesForCorrespondingVolume:persistentVolume];
+ }
+ */
