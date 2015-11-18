@@ -12,7 +12,7 @@
 @class LBRParsedVolume;
 @interface LBRBarcodeScannerViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, NSFetchedResultsControllerDelegate>
 
-@property (nonatomic, strong) NSMutableArray *uniqueCodes;
+@property (nonatomic, strong) NSMutableArray <NSString*> *uniqueCodes;
 @property (nonatomic, strong) LBRParsedVolume *volumeToConfirm;
 
 @end

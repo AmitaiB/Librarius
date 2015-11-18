@@ -23,7 +23,7 @@
     //Models
 #import "Library.h"
 #import "Volume.h"
-#import "LBRParsedVolume.h"
+//#import "LBRParsedVolume.h"
 #import <LARSTorch.h>
 
     //Views
@@ -65,13 +65,19 @@
 
 @property (nonatomic) BOOL isScanning;
 
+@property (nonatomic, strong) Volume *volumeToConfirm;
+
     //Optional: Overlay Views
 @property (nonatomic, strong) NSMutableDictionary *overlayViews;
+
+
 
 @end
 
 
-@implementation LBRBarcodeScannerViewController
+@implementation LBRBarcodeScannerViewController {
+    LBRDataManager *dataManager;
+}
 
 
 static NSString * const barcodeCellReuseID = @"barcodeCellReuseID";
@@ -81,11 +87,11 @@ static NSString * const volumeNib          = @"volumePresentationView";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self generateTestDataIfNeeded];
 
     if (!self.isConfigured) {
         [self configureProgrammaticProperties];}
     
+    [dataManager generateTestDataIfNeeded];
     self.canDisplayBannerAds = YES;
 }
 
@@ -104,8 +110,8 @@ static NSString * const volumeNib          = @"volumePresentationView";
 -(void)configureProgrammaticProperties {
         // Initializations
     self.googleClient    = [LBRGoogleGTLClient sharedGoogleGTLClient];
+    dataManager          = [LBRDataManager sharedDataManager];
     self.uniqueCodes     = [NSMutableArray  new];
-    self.volumeToConfirm = [LBRParsedVolume new];
     [self initializeScannerView];
     
         // Hidden Things
@@ -174,24 +180,23 @@ static NSString * const volumeNib          = @"volumePresentationView";
 
 - (IBAction)saveScannedBooksToCoreDataButtonTapped:(id)sender
 {
-    LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
-    [dataManager saveParsedVolumesToEitherSaveOrDiscardToPersistentStore];
+    [dataManager saveContext];
     [dataManager logCurrentLibrary];
 }
 
-    //Supposed to check the DataStore to see if this volume exists in storage yet, or not.
-    //FIXME: Doesn't work.
--(BOOL)isNewUniqueObject:(LBRParsedVolume *)volumeToCheck
-{
-    NSArray *booksArray = self.fetchedResultsController.fetchedObjects;
-    
-    NSUInteger indexOfMatchingISBN = [booksArray indexOfObjectPassingTest:^BOOL(Volume *book, NSUInteger idx, BOOL * _Nonnull stop) {
-        return ([book.isbn isEqualToString:volumeToCheck.isbn]);
-    }];
-    BOOL isUniqueISBN = (indexOfMatchingISBN == NSNotFound);
-    
-    return isUniqueISBN;
-}
+    //FIXME: Supposed to check the DataStore to see if this volume exists in storage yet, or not.
+    //???: Shouldn't be needed, now that we rely only on CoreData objects.
+//-(BOOL)isNewUniqueObject:(LBRParsedVolume *)volumeToCheck
+//{
+//    NSArray *booksArray = self.fetchedResultsController.fetchedObjects;
+//    
+//    NSUInteger indexOfMatchingISBN = [booksArray indexOfObjectPassingTest:^BOOL(Volume *book, NSUInteger idx, BOOL * _Nonnull stop) {
+//        return ([book.isbn isEqualToString:volumeToCheck.isbn]);
+//    }];
+//    BOOL isUniqueISBN = (indexOfMatchingISBN == NSNotFound);
+//    
+//    return isUniqueISBN;
+//}
 
 - (NSFetchedResultsController *)fetchedResultsController
 {
@@ -240,6 +245,7 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
 /**
  *  Stop scanning, flip the button.
  */
+    //It's first because it's shorter.
 -(void)stopScanningOps {
     self.isScanning = NO;
     [self flipScanButtonAppearance];
@@ -247,6 +253,7 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
     self.saveScannedBooksToCoreDataButton.hidden = NO;
     self.lightToggleButton.hidden                = YES;
     
+        //New! Overlay Views
     for (NSString *code in self.overlayViews.allKeys) {
         [self.overlayViews[code] removeFromSuperview];
     }
@@ -262,6 +269,7 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
     self.saveScannedBooksToCoreDataButton.hidden = YES;
     self.lightToggleButton.hidden                = NO;
     
+        //New! Overlay Views
 //    Optionally set a rectangle of interest to scan codes. Only codes within this rect will be scanned.
 //    self.scanner.scanRect = self.viewOfInterest.frame;
     
@@ -274,27 +282,26 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
         if (!success) return;
 
         [self.scanner startScanningWithResultBlock:^(NSArray *codes) {
+//            New! Overlay Views
             [self drawOverlaysOnCodes:codes];
                 // -------------------------------------------------------------------------------
                 //	Scanning Success Block: We have a barcode!
                 // -------------------------------------------------------------------------------
             for (AVMetadataMachineReadableCodeObject *code in codes) {
                     // If it's a new barcode, add it to the array.
-                if ([self.uniqueCodes indexOfObject:code.stringValue] == NSNotFound) {
+
+                if (![self.uniqueCodes containsObject:code.stringValue]) {
+//                if ([self.uniqueCodes indexOfObject:code.stringValue] == NSNotFound) {
                     [self.uniqueCodes addObject:code.stringValue];
-                    
-                        //1st APPROACH: NYAlertViewController sub-class. Should have worked, but didn't.
-                        //✅ 2nd APPROACH: NYAlertViewController (like #1), but in this controller. Works.
-                        //                NYAlertViewController *confirmSelectionViewController = [self confirmSelectionViewController];
-                        //                [self presentViewController:confirmSelectionViewController animated:YES completion:^{ DBLG }];
-                    
-                    
+
                     [self.googleClient queryForVolumeWithString:code.stringValue withCallback:^(GTLBooksVolume *responseVolume) {
                             // -------------------------------------------------------------------------------
                             //	Scanning Block : Google Success Block
                             // -------------------------------------------------------------------------------
-                        
-                        self.volumeToConfirm = [[LBRParsedVolume alloc] initWithGoogleVolume:responseVolume];
+                        Volume *volume = [Volume insertNewObjectIntoContext:dataManager.managedObjectContext initializedFromGoogleBooksObject:responseVolume withCovertArt:YES];
+                        self.volumeToConfirm = volume;
+
+                            //TODO: Alternative to confirmation, hmmm...?
                         NYAlertViewController *confirmationViewController = [self confirmSelectionViewController];
                         [self presentViewController:confirmationViewController animated:YES completion:nil];
                     }];
@@ -306,16 +313,12 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
     }];
 }
 
-    ///TODO: Check isbn validity.
--(BOOL)checkISBNValidity:(NSString*)testString {
-    NSPredicate *isbn10Predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES '\\\\d{10}|\\\\d{9}[Xx]'"];
-    NSArray *isbn10Array = [@[testString] filteredArrayUsingPredicate:isbn10Predicate];
-//    NSArray *isbn13Array = [@[testString] filteredArrayUsingPredicate:isbn13Predicate];
-    
-//    return (isbn10Array || isbn13Array);
-//    return isbn10Array;
-    return 0;
-}
+    ///TODO: Implement: Check isbn validity.
+//-(BOOL)checkISBNValidity:(NSString*)testString {
+//    NSPredicate *isbn10Predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES '\\\\d{10}|\\\\d{9}[Xx]'"];
+//    NSArray *isbn10Array = [@[testString] filteredArrayUsingPredicate:isbn10Predicate];
+//    return 0;
+//}
 
 -(void)flipScanButtonAppearance {
     if (self.isScanning) {
@@ -338,16 +341,16 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
     return [@(yearComponent) stringValue];
 }
 
-#pragma mark - Overlay Views
 
+
+#pragma mark - Scanning Code Overlays
+    ///Thank you to Mike Buss!
 - (NSMutableDictionary *)overlayViews {
     if (!_overlayViews) {
         _overlayViews = [[NSMutableDictionary alloc] init];
     }
     return _overlayViews;
 }
-
-#pragma mark - Scanning
 
 - (void)drawOverlaysOnCodes:(NSArray *)codes {
         // Get all of the captured code strings
@@ -442,7 +445,6 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
                                                           handler:^(NYAlertAction *action) {
                                                               [self dismissViewControllerAnimated:YES completion:^{
                                                                       //Add to TableView and its datasource.
-                                                                   [self updateDataManagerWithNewTransientVolume:self.volumeToConfirm];
                                                                }];
                                                            }];
     
@@ -450,6 +452,7 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
                                                             style:UIAlertActionStyleDestructive
                                                           handler:^(NYAlertAction *action) {
                                                               [self dismissViewControllerAnimated:YES completion:nil];
+                                                                  ///TODO: rollback is too drastic. Just set this volume =
                                                           }];
     
     [alertViewController addAction: confirmAction];
@@ -529,19 +532,6 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
 
 #pragma mark - Data Manager interface
 
--(void)generateTestDataIfNeeded {
-    LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
-    [dataManager generateTestDataIfNeeded];
-}
-
--(void)updateDataManagerWithNewTransientVolume:(LBRParsedVolume*)volumeToAdd {
-        // Preliminaries
-    LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
-    if ([self isNewUniqueObject:volumeToAdd])
-    {
-        [dataManager updateWithNewTransientVolume:volumeToAdd];
-    }
-}
 
 - (void)showMapViewAlertView {
 DBLG
