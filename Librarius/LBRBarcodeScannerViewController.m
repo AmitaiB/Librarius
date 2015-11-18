@@ -65,7 +65,6 @@
 
 @property (nonatomic) BOOL isScanning;
 
-@property (nonatomic, strong) Volume *volumeToConfirm;
 
     //Optional: Overlay Views
 @property (nonatomic, strong) NSMutableDictionary *overlayViews;

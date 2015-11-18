@@ -27,6 +27,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)updateCoverArtModelIfNeeded;
 
+-(NSString*)fullTitle;
+-(NSString*)byline;
+
+
 
 
     //LBRParsedVolume had:

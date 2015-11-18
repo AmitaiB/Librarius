@@ -236,7 +236,7 @@ static NSString * const decorationViewIdentifier = @"decorationViewIdentifier";
         return _fetchedResultsController;
     }
     
-    return [[LBRDataManager sharedDataManager] preconfiguredLBRFetchedResultsController:self];
+    return [[LBRDataManager sharedDataManager] currentLibraryVolumesFetchedResultsController:self];
 }
 
 #pragma mark - === FetchedResultsController Delegate methods ===

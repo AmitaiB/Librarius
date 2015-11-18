@@ -25,5 +25,11 @@
     return detectedDate;
 }
 
++(NSString*)yearFromDate:(NSDate*)date {
+    NSCalendar *calendar    = [NSCalendar currentCalendar];
+    NSInteger yearComponent = [calendar component:NSCalendarUnitYear fromDate:date];
+    return [@(yearComponent) stringValue];
+}
+
 
 @end

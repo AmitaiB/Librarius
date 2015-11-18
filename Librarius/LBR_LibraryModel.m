@@ -51,7 +51,7 @@
 //    NSInteger targetSection = currentLibraryPath ? currentLibraryPath.item : 0;
 
     LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
-    NSFetchedResultsController *volumesInCurrentLibraryFRC = [dataManager preconfiguredLBRFetchedResultsController];
+    NSFetchedResultsController *volumesInCurrentLibraryFRC = [dataManager currentLibraryVolumesFetchedResultsController];
     NSArray *allVolumesInCurrentLibrary = volumesInCurrentLibraryFRC.fetchedObjects;
     
         //Prepare for for-loop

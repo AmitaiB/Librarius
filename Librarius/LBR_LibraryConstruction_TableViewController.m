@@ -315,7 +315,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return MAX(1, dataManager.rootCollection.libraries.count);
+    return MAX(1, dataManager.userRootCollection.libraries.count);
     
 //    if (self.bookcasesFetchedResultsController.sections.count <= 0)
 //        DDLogError(@"There are no sections returned from the FRC!");
@@ -354,7 +354,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     self.selectedLibraryIndexPath = indexPath;
-    NSArray *orderedLibraries = [dataManager.rootCollection.libraries sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"orderWhenListed" ascending:YES]]];
+    NSArray *orderedLibraries = [dataManager.userRootCollection.libraries sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"orderWhenListed" ascending:YES]]];
     dataManager.currentLibrary = orderedLibraries[indexPath.item];
     
     DDLogVerbose(@"dataManager.currentLibrary now = %@", dataManager.currentLibrary.name);

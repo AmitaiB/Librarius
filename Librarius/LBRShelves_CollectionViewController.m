@@ -188,7 +188,7 @@ static NSString * const reuseIdentifier = @"bookCellID";
         return _fetchedResultsController;
     }
     return [[LBRDataManager sharedDataManager]
-            preconfiguredLBRFetchedResultsController:self];
+            currentLibraryVolumesFetchedResultsController:self];
 }
 
 #pragma mark - Fetched Results Controller Delegate methods

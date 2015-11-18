@@ -372,7 +372,7 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     if (_fetchedResultsController != nil)
         return _fetchedResultsController;
     
-    return [self.dataManager preconfiguredLBRFetchedResultsController:self];
+    return [self.dataManager currentLibraryVolumesFetchedResultsController:self];
 }
 
 #pragma mark - === FetchedResultsControllerDelegate ===

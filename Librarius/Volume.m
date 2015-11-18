@@ -6,10 +6,12 @@
 //  Copyright © 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 
+    //Models
 #import "Volume.h"
 #import "Bookcase.h"
 #import "CoverArt.h"
 #import "Library.h"
+
 #import "NSString+dateValue.h"
 
 #define CALIPER [@"436" floatValue] //In pages per inch, ppi.
@@ -200,6 +202,20 @@
 {
     if (self.correspondingImageData)
         [self.correspondingImageData downloadImagesIfNeeded];
+}
+
+-(NSString *)fullTitle
+{
+    NSString *fullTitle = self.title;
+    if (self.subtitle.length)
+        fullTitle = [NSString stringWithFormat:@"%@: %@", self.title, self.subtitle];
+    return fullTitle;
+}
+
+-(NSString *)byline
+{
+    NSString *byline = [NSString stringWithFormat:@"\nby %@ (%@: %@)", self.author, [NSString yearFromDate:self.published], self.publisher];
+    return byline;
 }
 
 

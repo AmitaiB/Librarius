@@ -12,4 +12,6 @@
 
 -(NSDate*)dateValue;
 
++(NSString*)yearFromDate:(NSDate*)date;
+
 @end

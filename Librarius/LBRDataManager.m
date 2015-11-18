@@ -47,7 +47,7 @@ static NSString * const kUnknown = @"kUnknown";
     
     return self;
 }
-
+/*
     //User-facing ✅
 -(void)saveParsedVolumesToEitherSaveOrDiscardToPersistentStore {
         // 1. LBRParsedVolume → NSManagedObject
@@ -128,7 +128,7 @@ static NSString * const kUnknown = @"kUnknown";
     CoverArt *associatedCoverArt = [CoverArt insertNewObjectIntoContext:self.managedObjectContext];
     [associatedCoverArt downloadImagesForCorrespondingVolume:persistentVolume];
 }
-
+*/
 
     //debug-related
 -(void)logCurrentLibrary {
@@ -358,8 +358,8 @@ static NSString * const kUnknown = @"kUnknown";
 -(RootCollection *)userRootCollection
 {
 //        (1)
-    if (_rootCollection != nil)
-        return _rootCollection;
+    if (_userRootCollection != nil)
+        return _userRootCollection;
 
 //        (2)
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
