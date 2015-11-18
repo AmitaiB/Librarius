@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="15B42" minimumToolsVersion="Xcode 4.3">
+    <entity name="Bookcase" representedClassName="Bookcase" syncable="YES">
+        <attribute name="dateCreated" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="dateModified" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="isFull" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="orderWhenListed" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="shelf_height" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="shelves" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="shelvesArray" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="width" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="library" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Library" inverseName="bookcases" inverseEntity="Library" syncable="YES"/>
+        <relationship name="volumes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Volume" inverseName="bookcase" inverseEntity="Volume" syncable="YES"/>
+    </entity>
+    <entity name="CoverArt" representedClassName="CoverArt" syncable="YES">
+        <attribute name="coverArtImageDataSizeLarge" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="coverArtImageDataSizeSmall" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="coverArtURLSizeLarge" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="coverArtURLSizeSmall" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="correspondingVolume" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Volume" inverseName="correspondingImageData" inverseEntity="Volume" syncable="YES"/>
+    </entity>
+    <entity name="Library" representedClassName="Library" syncable="YES">
+        <attribute name="dateCreated" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="dateModified" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="libraryPhoto" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="orderWhenListed" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="bookcases" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Bookcase" inverseName="library" inverseEntity="Bookcase" syncable="YES"/>
+        <relationship name="rootCollection" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RootCollection" inverseName="libraries" inverseEntity="RootCollection" syncable="YES"/>
+        <relationship name="volumes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Volume" inverseName="library" inverseEntity="Volume" syncable="YES"/>
+    </entity>
+    <entity name="RootCollection" representedClassName="RootCollection" syncable="YES">
+        <relationship name="libraries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Library" inverseName="rootCollection" inverseEntity="Library" syncable="YES"/>
+    </entity>
+    <entity name="Volume" representedClassName="Volume" syncable="YES">
+        <attribute name="author" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="authorSurname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="avgRating" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="cover_art" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cover_art_large" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dateCreated" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="dateModified" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="google_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="height" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="isbn10" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isbn13" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mainCategory" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pageCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="publDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="published" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="publisher" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="rating" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="ratingsCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="secondaryCategory" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="subtitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tertiaryCategory" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="thickness" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="bookcase" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bookcase" inverseName="volumes" inverseEntity="Bookcase" syncable="YES"/>
+        <relationship name="correspondingImageData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoverArt" inverseName="correspondingVolume" inverseEntity="CoverArt" syncable="YES"/>
+        <relationship name="library" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Library" inverseName="volumes" inverseEntity="Library" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Bookcase" positionX="-162" positionY="42" width="128" height="210"/>
+        <element name="CoverArt" positionX="-162" positionY="234" width="128" height="118"/>
+        <element name="Library" positionX="52" positionY="234" width="128" height="165"/>
+        <element name="RootCollection" positionX="234" positionY="270" width="128" height="60"/>
+        <element name="Volume" positionX="-389" positionY="-36" width="128" height="435"/>
+    </elements>
+</model>

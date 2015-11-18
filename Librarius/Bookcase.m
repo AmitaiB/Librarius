@@ -53,6 +53,8 @@
     ///@property (nonatomic, strong) NSArray<Volume  *> *unshelvedRemainder;
 -(NSDictionary *)shelvedAndRemainingBooks:(NSArray<Volume *> *)booksArray
 {
+    NSArray<Volume  *> *unshelvedRemainder;
+    NSArray<NSArray *> *shelves;
     /**
      For each book, add its thickness to the x-position. If that takes us over
      the shelf width, then we have a complete shelf: so add the appropriate substring
