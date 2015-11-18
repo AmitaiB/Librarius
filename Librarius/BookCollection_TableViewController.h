@@ -12,7 +12,7 @@
 
 @interface BookCollection_TableViewController : UITableViewController <NSFetchedResultsControllerDelegate, UIScrollViewDelegate, UISearchResultsUpdating>
 
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (strong, nonatomic) NSFetchedResultsController *volumesFetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end

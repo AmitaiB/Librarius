@@ -226,13 +226,13 @@ static NSString * const kUnknown = @"kUnknown";
     return frc;
 }    
 
-//-(NSFetchedResultsController *)currentLibraryVolumesFetchedResultsController:(UIViewController<NSFetchedResultsControllerDelegate> *)sender
-//{
-//    NSFetchedResultsController *frc = [self currentLibraryVolumesFetchedResultsController];
-//    frc.delegate = sender;
-//    
-//    return frc;
-//}
+-(NSFetchedResultsController *)currentLibraryVolumesFetchedResultsController:(UIViewController<NSFetchedResultsControllerDelegate> *)sender
+{
+    NSFetchedResultsController *frc = [self currentLibraryVolumesFetchedResultsController];
+    frc.delegate = sender;
+    
+    return frc;
+}
 
 #pragma mark - Generate Data
 - (void)generateTestDataIfNeeded

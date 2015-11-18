@@ -1,15 +1,17 @@
 //
-//  BookCollectionViewController.m
+//  BookCollection_TableViewController.m
 //  Librarius
 //
 //  Created by Amitai Blickstein on 8/25/15.
 //  Copyright (c) 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 
+    //Data
+#import "LBRDataManager.h"
+
     //Controllers
 #import "BookCollection_TableViewController.h"
 #import "BookDetailViewController.h"
-#import "LBRDataManager.h"
 
     //Models
 #import "Library.h"
@@ -31,7 +33,6 @@
 @interface BookCollection_TableViewController () <UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating>
 
 @property (nonatomic, setter=setPreferIndexHidden:) BOOL preferIndexHidden;
-
 @property (strong, nonatomic) UISearchController *searchController;
 //@property (nonatomic, strong) UIToolbar *bufferToolbar;
 
@@ -70,11 +71,13 @@ static NSString * const altSearchResultsCellID = @"altSearchResultsCellID";
 //    self.navigationItem.leftBarButtonItem = self.editButtonItem;
     [self flattenUI];
 
-//    [self performMigrationRelatedTasks];
+///    [self performMigrationRelatedTasks];
     
-        //Uncomment when ready to add and debug searchBar
-//    [self configureSearchControllers];
+///TODO: Uncomment when ready to add and debug searchBar
+///    [self configureSearchControllers];
     self.canDisplayBannerAds = YES;
+
+        ///TODO: set to NO when ready to impl the index.
     self.preferIndexHidden = YES;
 /**
  *  TODO: Change the method called here to "Manual Volume Entry", details below.
@@ -113,8 +116,8 @@ static NSString * const altSearchResultsCellID = @"altSearchResultsCellID";
  *  TODO: Change this method to "Manual Volume Entry" and fill in all the fields to add a new Volume to the Library, and save.
  */
 //- (void)insertNewObject:(id)sender {
-//    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-//    NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
+//    NSManagedObjectContext *context = [self.volumesFetchedResultsController managedObjectContext];
+//    NSEntityDescription *entity = [[self.volumesFetchedResultsController fetchRequest] entity];
 //    NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
 //        
 //    // If appropriate, configure the new managed object.
@@ -155,7 +158,7 @@ static NSString * const altSearchResultsCellID = @"altSearchResultsCellID";
 //    [UICollectionViewCell appearance].backgroundColor = [UIColor clearColor];
     
     [self.tableView setClipsToBounds:YES];
-    self.fetchedResultsController = [[LBRDataManager sharedDataManager] currentLibraryVolumesFetchedResultsController:self];
+    self.volumesFetchedResultsController = [[LBRDataManager sharedDataManager] currentLibraryVolumesFetchedResultsController:self];
 }
 
 -(void)viewWillLayoutSubviews
@@ -251,7 +254,7 @@ ALSO
         // Break up the search terms (seperated by spaces)
     NSArray *searchItems = (searchText.length > 0) ? [searchText componentsSeparatedByString:@" "] : nil;
     
-    NSMutableArray *mutableSearchResults = [self.fetchedResultsController.fetchedObjects mutableCopy];
+    NSMutableArray *mutableSearchResults = [self.volumesFetchedResultsController.fetchedObjects mutableCopy];
     
     
         // Build all the "AND" expressions for each value in the searchString
@@ -361,7 +364,7 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
     BookDetailViewController *destinationVC = segue.destinationViewController;
     
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-    destinationVC.displayVolume = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+    destinationVC.displayVolume = [[self volumesFetchedResultsController] objectAtIndexPath:indexPath];
 }
 
 -(IBAction)prepareForUnwind:(UIStoryboardSegue *)segue
@@ -369,12 +372,13 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
     
 }
 
+    //Handles both the main tableView and the search results tableView.
 #pragma mark - === TableView DataSource ===
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     NSInteger numSections = -1; //Crash if
     if (tableView == self.tableView) {
-        numSections = [[self.fetchedResultsController sections] count];
+        numSections = [[self.volumesFetchedResultsController sections] count];
     }
     if (tableView == self.resultsTableViewController.tableView) {
 //       DDLogInfo(@"Results TableView");
@@ -385,7 +389,7 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSArray *sections = [self.fetchedResultsController sections];
+    NSArray *sections = [self.volumesFetchedResultsController sections];
     if (sections.count) {
         id <NSFetchedResultsSectionInfo> currentSection = sections[section];
         return currentSection.numberOfObjects;
@@ -402,7 +406,7 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    NSArray *sections = self.fetchedResultsController.sections;
+    NSArray *sections = self.volumesFetchedResultsController.sections;
     id<NSFetchedResultsSectionInfo> currentSection = (sections.count)? sections[section] : nil;
     return (currentSection)? [currentSection name] : @"Empty Library. Me Sad.";
 }
@@ -415,7 +419,7 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
     
     
     __block NSMutableArray <NSString *> *indexTitles = [NSMutableArray array];
-    [self.fetchedResultsController.sections enumerateObjectsUsingBlock:^(id<NSFetchedResultsSectionInfo>  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.volumesFetchedResultsController.sections enumerateObjectsUsingBlock:^(id<NSFetchedResultsSectionInfo>  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSString *abbreviatedGenreTitle = [obj.name stringByReplacingCharactersInRange:NSMakeRange(5, obj.name.length - 5) withString:@".."];
         [indexTitles addObject:abbreviatedGenreTitle];
     }];
@@ -449,8 +453,8 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-        [context deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
+        NSManagedObjectContext *context = [self.volumesFetchedResultsController managedObjectContext];
+        [context deleteObject:[self.volumesFetchedResultsController objectAtIndexPath:indexPath]];
         
         NSError *error = nil;
         if (![context save:&error]) {
@@ -481,15 +485,20 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
 
 - (void)configureCell:(UITableViewCell *)cell forIndexPath:(NSIndexPath *)indexPath {
         //Grabbing the text and context.
-    BOOL arrayIsEmptyOrNil = !@(self.fetchedResultsController.fetchedObjects.count).boolValue;
-    NSManagedObject *object = (arrayIsEmptyOrNil)? nil : [self.fetchedResultsController objectAtIndexPath:indexPath];
-    NSString *title         = [object valueForKey:@"title"];
-    NSString *subtitle      = [object valueForKey:@"subtitle"];
-    [self makeTitleCase:title];
-    [self makeTitleCase:subtitle];
-    NSString *formattedSubtitle = [@": " stringByAppendingString:subtitle ? subtitle : @""];
+    BOOL frcFetchedObjectsExist = @(self.volumesFetchedResultsController.fetchedObjects.count).boolValue;
+    Volume *volume = (frcFetchedObjectsExist)? [self.volumesFetchedResultsController objectAtIndexPath:indexPath]: nil;
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%@%@", title, subtitle ?  formattedSubtitle : @""];
+    if (!volume)
+        return;
+    cell.textLabel.text = [volume fullTitle];
+    
+//    NSString *title         = [object valueForKey:@"title"];
+//    NSString *subtitle      = [object valueForKey:@"subtitle"];
+//    [self makeTitleCase:title];
+//    [self makeTitleCase:subtitle];
+//    NSString *formattedSubtitle = [@": " stringByAppendingString:subtitle ? subtitle : @""];
+//    
+//    cell.textLabel.text = [NSString stringWithFormat:@"%@%@", title, subtitle ?  formattedSubtitle : @""];
     
         // Rounding the upper and lower corners of the cells in each group.
     NSUInteger lastRowInSection = [self tableView:self.tableView numberOfRowsInSection:indexPath.section] - 1;
@@ -504,15 +513,13 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
     if (lastRowInSection == 0) {
         cornersToRound = UIRectCornerAllCorners;
     }
-
-    /*
+    
+    /**
      casalColor; //Dark Green
      wellReadColor; //Red
      tulipTreeColor; //Yellow
      charcoalColor; //Grey
      */
-
-    
         ///AHA!
     [cell configureFlatCellWithColor:[UIColor casalColor] selectedColor:[UIColor tulipTreeColor] roundingCorners:cornersToRound];
 //    [cell configureFlatCellWithColor:[UIColor shirazColor] selectedColor:[UIColor mySinColor] roundingCorners:cornersToRound];
@@ -526,12 +533,8 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
     }
 }
 
-    //CLEAN:
-//-(void)configureCell:(UITableViewCell *)cell forVolume:(Volume *)volume
-//{
-//    
-//}
-
+    //CLEAN: Uneccesary???
+/*
 - (void)makeTitleCase:(NSString*)string {
     NSArray *words = [string componentsSeparatedByString:@" "];
     for (NSString __strong *word in words) {
@@ -543,13 +546,14 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
     }
     string = [words componentsJoinedByString:@" "];
 }
+*/
 
 #pragma mark - Fetched Results Controller configuration
 
-- (NSFetchedResultsController *)fetchedResultsController
+-(NSFetchedResultsController *)volumesFetchedResultsController
 {
-    if (_fetchedResultsController != nil) {
-        return _fetchedResultsController;
+    if (_volumesFetchedResultsController != nil) {
+        return _volumesFetchedResultsController;
     }
     return [[LBRDataManager sharedDataManager]
             currentLibraryVolumesFetchedResultsController:self];
@@ -640,7 +644,7 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
     //2015-11-10 12:04pm
 -(void)performMigrationRelatedTasks
 {
-    for (Volume *volume in self.fetchedResultsController.fetchedObjects) {
+    for (Volume *volume in self.volumesFetchedResultsController.fetchedObjects) {
         [[LBRDataManager sharedDataManager] giveVolumeADateIfNeeded:volume];
     }
     

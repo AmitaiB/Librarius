@@ -215,5 +215,19 @@
     return byline;
 }
 
+    //CLEAN: If this does not work for buggy reasons, by all means, DELETE it.
+#pragma mark - private Helper methods
+
+- (void)makeTitleCase:(NSString*)string {
+    NSArray *words = [string componentsSeparatedByString:@" "];
+    for (NSString __strong *word in words) {
+        if ([@[@"the", @"and", @"a", @"of"] containsObject:word]) {
+                // Don't capitalize = do nothing.
+        } else {
+            word = word.capitalizedString;
+        }
+    }
+    string = [words componentsJoinedByString:@" "];
+}
 
 @end
