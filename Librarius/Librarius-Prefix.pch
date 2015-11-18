@@ -15,6 +15,7 @@
     #import <Foundation/Foundation.h>
     #define MR_SHORTHAND
     #define offBy1 1
+    #define kDefaultBookThickness 2.50f
     #define kDefaultBookcaseShelvesCount 5
     #define kDefaultBookcaseWidth_cm 10
     #define DBLG DDLogDebug(@"<%@:%@:line %d, reporting!>", NSStringFromClass([self class]), NSStringFromSelector(_cmd), __LINE__);

@@ -203,6 +203,7 @@
 		383A2F951BEEE42A006D115F /* LBR_PopoverBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBR_PopoverBackgroundView.m; sourceTree = "<group>"; };
 		38466D261B94F24400DD252E /* LBRGoogleGTLClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRGoogleGTLClient.h; sourceTree = "<group>"; };
 		38466D271B94F24400DD252E /* LBRGoogleGTLClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRGoogleGTLClient.m; sourceTree = "<group>"; };
+		3846AABC1BFD214100327D43 /* Librarius 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Librarius 6.xcdatamodel"; sourceTree = "<group>"; };
 		384E0CBE1B97D24B007E7290 /* NSString+dateValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+dateValue.h"; sourceTree = "<group>"; };
 		384E0CBF1B97D24B007E7290 /* NSString+dateValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+dateValue.m"; sourceTree = "<group>"; };
 		3851DBFB1B8E2E5A00E90B9F /* LBRDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRDataManager.h; sourceTree = "<group>"; };
@@ -1228,12 +1229,13 @@
 		38AAD6EE1B901175003062C1 /* Librarius.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				3846AABC1BFD214100327D43 /* Librarius 6.xcdatamodel */,
 				38C454BA1BFBC0D600A35391 /* Librarius 5.xcdatamodel */,
 				381061621BF661D200951B45 /* Librarius 4.xcdatamodel */,
 				38A965261BF273FC009F1B5D /* Librarius 3.xcdatamodel */,
 				38AAD6EF1B901175003062C1 /* Librarius.xcdatamodel */,
 			);
-			currentVersion = 38C454BA1BFBC0D600A35391 /* Librarius 5.xcdatamodel */;
+			currentVersion = 3846AABC1BFD214100327D43 /* Librarius 6.xcdatamodel */;
 			path = Librarius.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

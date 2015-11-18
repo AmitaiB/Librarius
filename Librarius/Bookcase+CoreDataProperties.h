@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSNumber *width;
 @property (nullable, nonatomic, retain) Library *library;
 @property (nullable, nonatomic, retain) NSSet<Volume *> *volumes;
+@property (nonatomic) BOOL isFull;
+
 
 @end
 

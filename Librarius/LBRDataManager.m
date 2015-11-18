@@ -11,6 +11,11 @@
  */
 
 #define kLightweightMigration TRUE
+#define kOrderSorter       @"orderSorter"
+#define kCategorySorter    @"categorySorter"
+#define kAuthorSorter      @"authorSorter"
+#define kDateCreatedSorter @"dateCreatedSorter"
+
 
 #import "LBRDataManager.h"
 #import "LBRGoogleGTLClient.h"
@@ -24,7 +29,7 @@
 #import "RootCollection.h"
 
 @interface LBRDataManager ()
-@property (nonatomic, strong) NSDictionary *sortDesriptors;
+@property (nonatomic, strong) NSDictionary *sortDescriptors;
 @end
 
 @implementation LBRDataManager
@@ -45,14 +50,10 @@ static NSString * const kUnknown = @"kUnknown";
     if (!(self = [super init])) return nil;
     
     _uniqueCodes = [NSMutableArray new];
-//    _volumesRecentlyAddedToContext = [NSMutableArray new];
-//    _parsedVolumesToEitherSaveOrDiscard = [NSMutableArray new];
-//    _parsedVolumeFromLastBarcode = [LBRParsedVolume new];
-//    _libraries = @[];
-    _sortDesriptors = @{@"orderSorter"      : [NSSortDescriptor sortDescriptorWithKey:@"orderWhenListed" ascending:YES],
-                        @"categorySorter"   : [NSSortDescriptor sortDescriptorWithKey:@"mainCategory" ascending:YES],
-                        @"authorSorter"     : [NSSortDescriptor sortDescriptorWithKey:@"authorSurname" ascending:YES],
-                        @"dateCreatedSorter": [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]
+    _sortDescriptors = @{kOrderSorter      : [NSSortDescriptor sortDescriptorWithKey:@"orderWhenListed" ascending:YES],
+                         kCategorySorter   : [NSSortDescriptor sortDescriptorWithKey:@"mainCategory" ascending:YES],
+                         kAuthorSorter     : [NSSortDescriptor sortDescriptorWithKey:@"authorSurname" ascending:YES],
+                         kDateCreatedSorter: [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES]
                         };
     return self;
 }
@@ -91,8 +92,7 @@ static NSString * const kUnknown = @"kUnknown";
 {
     [self generateDefaultLibraryIfNeeded];
     NSFetchRequest *librariesFetchRequest = [NSFetchRequest fetchRequestWithEntityName:[Library entityName]];
-    NSSortDescriptor *orderSorter = [NSSortDescriptor sortDescriptorWithKey:@"orderWhenListed" ascending:YES];
-    librariesFetchRequest.sortDescriptors = @[orderSorter];
+    librariesFetchRequest.sortDescriptors = @[self.sortDescriptors[kOrderSorter]];
     NSError *error = nil;
     self.libraries = [self.managedObjectContext executeFetchRequest:librariesFetchRequest error:&error];
     self.currentLibrary = self.libraries[0];
@@ -209,10 +209,10 @@ static NSString * const kUnknown = @"kUnknown";
     
         //Fetch Request
     NSFetchRequest *volumesRequest    = [NSFetchRequest fetchRequestWithEntityName:[Volume entityName]];//(1)
-    NSSortDescriptor *categorySorter  = [NSSortDescriptor sortDescriptorWithKey:sectionNameKeyPath ascending:YES];
-    NSSortDescriptor *authorSorter    = [NSSortDescriptor sortDescriptorWithKey:@"authorSurname" ascending:YES];
+//    NSSortDescriptor *categorySorter  = [NSSortDescriptor sortDescriptorWithKey:sectionNameKeyPath ascending:YES];
+//    NSSortDescriptor *authorSorter    = [NSSortDescriptor sortDescriptorWithKey:@"authorSurname" ascending:YES];
     NSPredicate *libraryPredicate     = [NSPredicate predicateWithFormat:@"%K = %@", @"library.name", self.currentLibrary.name];
-    volumesRequest.sortDescriptors    = @[categorySorter, authorSorter];
+    volumesRequest.sortDescriptors    = @[self.sortDescriptors[kCategorySorter], self.sortDescriptors[kAuthorSorter]];
     volumesRequest.predicate          = libraryPredicate;
     volumesRequest.fetchBatchSize     = 200;
     
@@ -256,18 +256,14 @@ static NSString * const kUnknown = @"kUnknown";
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[Bookcase entityName]]; //(1)
     
-        // Edit the sort key as appropriate.
-    NSSortDescriptor *orderSorter       = [NSSortDescriptor sortDescriptorWithKey:@"orderWhenListed" ascending:YES];
-    NSSortDescriptor *dateCreatedSorter = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES];
-    
     request.fetchBatchSize = 200;
-    request.sortDescriptors = @[orderSorter, dateCreatedSorter];
+    request.sortDescriptors = @[self.sortDescriptors[kOrderSorter], self.sortDescriptors[kDateCreatedSorter]];
     request.returnsObjectsAsFaults = NO;
     
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
     frc = [[NSFetchedResultsController alloc] initWithFetchRequest:request
-                                              managedObjectContext:managedObjectContext
+                                              managedObjectContext:self.managedObjectContext
                                                 sectionNameKeyPath:@"library.name"
                                                          cacheName:@"LBR_Bookcase_CacheName"];
     
@@ -284,17 +280,24 @@ static NSString * const kUnknown = @"kUnknown";
     
     NSArray *bookcasesMaybe = [frc.managedObjectContext executeFetchRequest:request error:nil];
     
+        ///???: Defaults needed?
     if (bookcasesMaybe.count == 0) {
-        [dataManager generateBookcasesForLibrary:dataManager.currentLibrary withDimensions:@{@3 : @7,
-                                                                                             @5 : @5,
-                                                                                             @2 : @20
-                                                                                             }];
+        [self generateBookcasesForLibrary:self.currentLibrary withDimensions:@{@3 : @7,
+                                                                               @5 : @5,
+                                                                               @2 : @20
+                                                                               }];
         [frc performFetch:nil];
     }
     
     return frc;
 }
 
+-(NSFetchedResultsController *)currentLibraryBookcasesFetchedResultsController:(UIViewController<NSFetchedResultsControllerDelegate> *)sender
+{
+    NSFetchedResultsController *frc = [self currentLibraryBookcasesFetchedResultsController];
+    frc.delegate = sender;
+    return frc;
+}
 
 #pragma mark - Generate Data
 - (void)generateTestDataIfNeeded

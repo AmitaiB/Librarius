@@ -19,12 +19,20 @@ NS_ASSUME_NONNULL_BEGIN
 +(NSString *)entityName;
 +(instancetype)insertNewObjectIntoContext:(NSManagedObjectContext *)context;
 +(instancetype)insertNewObjectIntoContext:(NSManagedObjectContext *)context withDefaultValues:(BOOL)defaultValueChoice;
++(instancetype)insertNewObjectIntoContext:(NSManagedObjectContext *)context withNumberOfShelves:(NSNumber*)numShelves width:(NSNumber*)width_cm;
+
 
 
 -(CGFloat)percentFull;
+    ///This needs to return a dictionary to replace these two properties...OR, make a Value Transformer.
+    ///@property (nonatomic, strong) NSArray<NSArray *> *shelves;
+    ///@property (nonatomic, strong) NSArray<Volume  *> *unshelvedRemainder;
+-(NSDictionary*)shelvedAndRemainingBooks:(NSArray <Volume *> *)booksArray;
 
 @end
 
 NS_ASSUME_NONNULL_END
 
 #import "Bookcase+CoreDataProperties.h"
+
+

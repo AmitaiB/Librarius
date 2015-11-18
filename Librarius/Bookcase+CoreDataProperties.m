@@ -22,5 +22,6 @@
 @dynamic width;
 @dynamic library;
 @dynamic volumes;
+@dynamic isFull;
 
 @end

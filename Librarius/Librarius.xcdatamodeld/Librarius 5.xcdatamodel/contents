@@ -60,7 +60,7 @@
         <relationship name="library" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Library" inverseName="volumes" inverseEntity="Library" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Bookcase" positionX="-162" positionY="42" width="128" height="178"/>
+        <element name="Bookcase" positionX="-162" positionY="42" width="128" height="180"/>
         <element name="CoverArt" positionX="-162" positionY="234" width="128" height="118"/>
         <element name="Library" positionX="52" positionY="234" width="128" height="165"/>
         <element name="RootCollection" positionX="234" positionY="270" width="128" height="60"/>
