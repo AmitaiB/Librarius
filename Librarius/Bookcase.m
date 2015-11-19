@@ -84,6 +84,7 @@
         
             //"Continue" = 'Shelve' the current book, then pick up the next book and repeat.
             ///!!!: Need more conditions: 1) No more books, 2) no more room on this shelf 2b) No more room on any shelf 3) Perfect fit...
+            ///UPDATE: Initializing
         if (thereAreMoreBooksToShelve && currentShelfHasRoomForBook)
         {
             continue; //continue to the next book, and shelve it where it belongs.
@@ -96,7 +97,6 @@
             NSArray *thisShelf           = [booksArray subarrayWithRange:rangeForCurrentShelf];
             
             [mutableShelves addObject:thisShelf];
-            DDLogDebug(@"Nest(0): After addObject:thisShelf - mutableShelves.count = %lu", mutableShelves.count);
                 ///!!!:Is this broken if we have run out of books, but it does this anyway...?
                 //If there are more shelves, then this book becomes the first on the next shelf.
             BOOL nextShelfExistsAndIsEmpty = mutableShelves.count < self.shelves.integerValue;
@@ -117,16 +117,9 @@
     }
     shelvesArray = [NSArray arrayWithArray:mutableShelves];
     
-    NSLog(@"Nest(3b) - shelvesArray.count = %lu", shelvesArray.count);
-    NSLog(@"Nest(3b) - shelvesArray.count = %lu", unshelvedRemainder.count);
-    
-    DDLogInfo(@"%@", shelvesArray);
-    DDLogInfo(@"%@", unshelvedRemainder);
-    
-    NSDictionary *temp = @{@"shelvesArray" : shelvesArray,
-                           @"unshelvedRemainder" : unshelvedRemainder
+    NSDictionary *temp = @{kShelvesArray : shelvesArray,
+                           kUnshelvedRemainder : unshelvedRemainder //.count? unshelvedRemainder : @"All books shelved."
                            };
-//    [NSDictionary dictionaryWithObjects:@[shelvesArray, unshelvedRemainder] forKeys:@[@"shelvesArray", @"unshelvedRemainder"]];
     
     return temp;
 }
