@@ -1,4 +1,5 @@
-//
+    ///FIRST FIX THE ORIGINAL LAYOUT, THEN COPY IT FOR THIS ONE.
+//    
 //  LBR_BookcaseLayout_AuthorOnly.m
 //  Librarius
 //
@@ -49,7 +50,7 @@
 
 @property (nonatomic, assign) NSUInteger currentShelfIndex;
 @property (nonatomic, assign) NSUInteger bookOnShelfCounter;
-@property (nonatomic, strong) LBR_BookcaseModel *bookcaseModel;
+//@property (nonatomic, strong) LBR_BookcaseModel *bookcaseModel;
 @end
 
 @implementation LBR_BookcaseLayout_AuthorOnly
@@ -91,7 +92,7 @@
     
     self.currentShelfIndex  = 0;
     self.bookOnShelfCounter = 0;
-    self.bookcaseModel      = [self configuredBookcaseModel];
+//    self.bookcaseModel      = [self configuredBookcaseModel];
     
     NSInteger numSections = [self.collectionView numberOfSections];
     
@@ -170,7 +171,9 @@
         /// InsetL-[cell#1]-#1-[cell#2]-#2-[cell#3]-InsetR
         /// , so we subtract one inter_spacing.
     CGFloat xMax = INSET_LEFT + (kDefaulCellDimension + self.interItemSpacing) *cellCountForLongestRow - self.interItemSpacing + INSET_RIGHT;
+//    CGFloat yMax = INSET_TOP + (kDefaulCellDimension + self.interShelfSpacing) * self.bookcaseModel.shelves.count - self.interShelfSpacing + INSET_BOTTOM;
     CGFloat yMax = INSET_TOP + (kDefaulCellDimension + self.interShelfSpacing) * self.bookcaseModel.shelves.count - self.interShelfSpacing + INSET_BOTTOM;
+
     
     return CGSizeMake(xMax, yMax);
 }

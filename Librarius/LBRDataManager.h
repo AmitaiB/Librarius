@@ -49,6 +49,10 @@
 @property (nonatomic, strong) Bookcase *currentBookcase;
     //http://stackoverflow.com/questions/14671478/coredata-error-failed-to-call-designated-initializer-on-nsmanagedobject-class
 
+
+
+    //====== New Core-Data-Only methods/properties
+@property (nonatomic, strong) NSMutableDictionary *transientLibraryLayoutInformation;
 @property (nonatomic, strong) NSFetchRequest *volumesRequest;
 @property (nonatomic, strong) NSFetchRequest *bookcasesRequest;
 -(NSFetchedResultsController*)currentLibraryVolumesFetchedResultsController;

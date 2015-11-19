@@ -70,6 +70,27 @@ static NSString * const kUnknown = @"kUnknown";
 
 //#pragma mark - helper methods
 
+#pragma mark - === "data closet" methods ===
+
+    ///Dict:Dict:Array:Array
+/**
+ Top Layer: Libraries
+ 2nd Layer: Bookcases
+ 3rd Layer: Shelves-space of the bookcase
+ 4th Layer: Shelfspace of the particular shelf
+ 
+ This is a (kludgey, true) workaround the inability to store NSArrays or
+ other collections in core data.
+ */
+-(NSMutableDictionary *)transientLibraryLayoutInformation
+{
+    if (_transientLibraryLayoutInformation == nil)
+        _transientLibraryLayoutInformation = [NSMutableDictionary new];
+        
+    return _transientLibraryLayoutInformation;
+}
+
+
     // ===================== CoreData additions here
 
 #pragma mark - ***** CoreData *****

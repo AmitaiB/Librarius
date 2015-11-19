@@ -591,10 +591,10 @@
 			children = (
 				386B7D0D1BF154AD004A1DF8 /* LBR_LibraryConstruction_TableViewController.h */,
 				386B7D0E1BF154AD004A1DF8 /* LBR_LibraryConstruction_TableViewController.m */,
-				3860A2D81BF4F9E000DAFD46 /* LBR_LibraryConstruction_CollectionViewCell.h */,
-				3860A2D91BF4F9E000DAFD46 /* LBR_LibraryConstruction_CollectionViewCell.m */,
 				38A92ABC1BF536FF00406393 /* LBR_Bookcase_TableViewCell.h */,
 				38A92ABD1BF536FF00406393 /* LBR_Bookcase_TableViewCell.m */,
+				3860A2D81BF4F9E000DAFD46 /* LBR_LibraryConstruction_CollectionViewCell.h */,
+				3860A2D91BF4F9E000DAFD46 /* LBR_LibraryConstruction_CollectionViewCell.m */,
 				381461D31BF7FB8E00A94D21 /* LBR_CoverFlowLayout.h */,
 				381461D41BF7FB8E00A94D21 /* LBR_CoverFlowLayout.m */,
 			);

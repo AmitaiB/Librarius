@@ -144,10 +144,10 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     [[progressView layer]setCornerRadius:10.0f];
     [[progressView layer]setBorderWidth:2.0f];
     [[progressView layer]setMasksToBounds:TRUE];
-    progressView.clipsToBounds = YES;
-    progressView.layer.frame = CGRectMake(30, 295, 260, 25);
+    progressView.clipsToBounds     = YES;
+    progressView.layer.frame       = CGRectMake(30, 295, 260, 25);
     progressView.layer.borderColor = (__bridge CGColorRef _Nullable)([UIColor whiteColor]);
-    progressView.trackTintColor = [UIColor clearColor];
+    progressView.trackTintColor    = [UIColor clearColor];
 //    [progressView setProgress: (float)count/15 animated:YES];
     self.progressView = progressView;
 }

@@ -22,7 +22,6 @@
 
     //Models
 #import "LBR_BookcaseLayout.h"
-#import "LBR_BookcaseModel.h"
 #import "Bookcase.h"
 
     //Views
@@ -60,7 +59,7 @@
 
 @property (nonatomic, assign) NSUInteger currentShelfIndex;
 @property (nonatomic, assign) NSUInteger bookOnShelfCounter;
-@property (nonatomic, strong, readwrite) LBR_BookcaseModel *bookcaseModel;
+//@property (nonatomic, strong, readwrite) LBR_BookcaseModel *bookcaseModel;
 
     //Required for Switching
 @property (nonatomic, assign) LBRLayoutScheme layoutScheme;
@@ -109,19 +108,32 @@
 /**
  *** The Critical Business Logic ***
  +Iterate over every cell,
- -produce a layouts attribute object for each one
- --This is where we encapsulate and bury the confusing logic**
- -and then cache the info in the layoutInformation dictionary by indexPath.
+ -produce a layout-attributes object for each cell
+ --This is where we **encapsulate the messy logic**
+      and then cache the info in the layoutInformation
+      dictionary by indexPath.
  */
 #pragma mark - === Overridden Methods ===
+-(LBRDataManager *)dataManager
+{
+    if (!_dataManager)
+        _dataManager = [LBRDataManager sharedDataManager];
+    return _dataManager;
+}
 
+
+/**
+ The key property of the BookcaseModel object (deprecated) was the Array of Arrays.
+ The primary array was the vertical representation of the shelf, and the secondary arrays
+ were each a shelf with volume objects...
+ 
+ Now we produce the array of arrays in the Library `process` method.
+ 
+ Solution: DataManager store it in a nested mutable dictionary.
+ Key: LibraryName - Key: BookcaseName (Array of Arrays)
+ */
 -(void)prepareLayout
 {
-    if (!self.dataManager) {
-        self.dataManager = [LBRDataManager sharedDataManager];
-    }
-    
-    
     NSMutableDictionary *mutableLayoutInformation = [NSMutableDictionary dictionary];
     NSIndexPath *indexPath;
     
