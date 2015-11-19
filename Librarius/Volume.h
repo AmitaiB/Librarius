@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 -(NSString*)isbn;
+-(NSString*)coverArtPreferLarge;
+
 
 -(void)updateCoverArtModelIfNeeded;
 

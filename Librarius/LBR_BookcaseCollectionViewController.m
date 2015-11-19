@@ -27,7 +27,7 @@
 
     //Models
 #import "Volume.h"
-#import "LBR_BookcaseModel.h"
+//#import "LBR_BookcaseModel.h"
 #import "Bookcase.h"
 #import "CoverArt.h"
 
@@ -259,13 +259,11 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     cell.backgroundColor = [UIColor clearColor];
     
 
-    Volume *volumeModel = [self.volumesFetchedResultsController objectAtIndexPath:indexPath];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", volumeModel.cover_art_large]];
+    Volume *volume = [self.volumesFetchedResultsController objectAtIndexPath:indexPath];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", volume.cover_art_large]];
     [cell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder"]];
-    cell.coverArtURLString = volumeModel.cover_art_large ? volumeModel.cover_art_large : volumeModel.cover_art ? volumeModel.cover_art: nil;
-    
-    
-    cell.thickness = [volumeModel.thickness floatValue];
+    cell.coverArtURLString = [volume coverArtPreferLarge];
+    cell.thickness = [volume.thickness floatValue];
 
     /*
      //Debug

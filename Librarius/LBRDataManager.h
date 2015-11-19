@@ -79,4 +79,7 @@
 -(void)giveVolumeADateIfNeeded:(Volume*)volume;
 -(void)giveBookcaseANameAndFullIfNeeded:(Bookcase*)bookcase;
 
+//    =============== Debug Related
+-(void)resetLibrary:(Library*)library;
+
 @end

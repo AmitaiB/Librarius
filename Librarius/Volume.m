@@ -201,6 +201,11 @@
         [self.correspondingImageData downloadImagesIfNeeded];
 }
 
+-(NSString *)coverArtPreferLarge
+{
+    return self.cover_art_large ? self.cover_art_large : self.cover_art ? self.cover_art: nil;
+}
+
 -(NSString *)fullTitle
 {
     NSString *fullTitle = self.title;

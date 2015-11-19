@@ -106,15 +106,8 @@
     return [self initWithScheme:LBRLayoutSchemeDefault forVolumes:nil];
 }
 
-/**
- *** The Critical Business Logic ***
- +Iterate over every cell,
- -produce a layout-attributes object for each cell
- --This is where we **encapsulate the messy logic**
-      and then cache the info in the layoutInformation
-      dictionary by indexPath.
- */
 #pragma mark - === Overridden Methods ===
+
 -(LBRDataManager *)dataManager
 {
     if (!_dataManager)
@@ -122,16 +115,22 @@
     return _dataManager;
 }
 
+/*
+-(NSArray *)shelves
+{
+    if (!_shelves)
+        _shelves = self.dataManager.transientLibraryLayoutInformation;
+        
+    return _shelves;
+}
+*/
 
 /**
- The key property of the BookcaseModel object (deprecated) was the Array of Arrays.
- The primary array was the vertical representation of the shelf, and the secondary arrays
- were each a shelf with volume objects...
- 
+ The key property of the BookcaseModel object (deprecated) was the Array of Arrays. The primary array was the
+ vertical representation of the shelf, and the secondary arrays were each a shelf with volume objects...
  Now we produce the array of arrays in the Library `process` method.
- 
- Solution: DataManager store it in a nested mutable dictionary.
- Key: LibraryName - Key: BookcaseName (Array of Arrays)
+     Solution: DataManager store it in a nested mutable dictionary.
+     Key: LibraryName - Key: BookcaseName (Array of Arrays)
  */
 -(void)prepareLayout
 {
@@ -140,20 +139,19 @@
     
     self.currentShelfIndex  = 0;
     self.bookOnShelfCounter = 0;
-//    self.bookcaseModel      = [self configuredBookcaseModel];
     
+        //Loop over each item in each section.
     NSInteger numSections = [self.collectionView numberOfSections];
-    
     for (NSUInteger section = 0; section < numSections; section++) {
         NSUInteger numItems = [self.collectionView numberOfItemsInSection:section];
-        
-        for (NSUInteger item = 0; item < numItems; item++) {
-                //Many things need to happen here:
-                ///First, create an attributes object for each cell (keyed to indexPath, provided by the collectionView's dataSource.
+        for (NSUInteger item = 0; item < numItems; item++)
+        {
+                ///Many things need to happen here:
+                //First, create a standard attributes object for each cell.
             indexPath = [NSIndexPath indexPathForItem:item inSection:section];
             UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
             
-                ///Next, set the origin and size for each cell.
+                //Next, set the origin and size for each cell.
             CGPoint origin = [self originPointForBook:self.bookOnShelfCounter onShelf:self.currentShelfIndex];
             attributes.frame = CGRectMake(origin.x, origin.y, kDefaulCellDimension, kDefaulCellDimension);
             [self incrementBookcaseModelByOneBook];
@@ -167,8 +165,7 @@
     [self prepareLayoutOfDecorationViews];
 }
 
--(CGSize)collectionViewContentSize
-{
+-(CGSize)collectionViewContentSize {
     return self.contentSize;
 }
 
@@ -200,9 +197,7 @@
         }
     }];
     
-    
     return [attributeObjectsToReturn arrayByAddingObjectsFromArray:decorationLayoutElements];
-//    return [attributeObjectsToReturn copy];
 }
 
 -(UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -227,38 +222,18 @@
 
 -(NSUInteger)extrapolatedCellCountForLongestRow
 {
-//    if (self.cellCountForLongestRow == 0) {
-        for (NSArray *shelf in self.shelves) {
-            self.cellCountForLongestRow = MAX(self.cellCountForLongestRow, shelf.count);
-        }
-//    }
+    for (NSArray *shelf in self.shelves)
+        self.cellCountForLongestRow = MAX(self.cellCountForLongestRow, shelf.count);
     
     return self.cellCountForLongestRow;
 }
 
-    /**
-     This value changes depending on the scheme, which alters the fetchedResultsController's fetchRequest to match it.
-     */
--(LBR_BookcaseModel *)configuredBookcaseModel
-{
-    LBR_BookcaseModel *bookcaseModel = [[LBR_BookcaseModel alloc] initWithWidth:self.shelfWidth_cm shelvesCount:self.maxShelvesCount];
-    
-    NSArray <Volume *> *volumesToLayout;
-    if (self.overrideVolumesToLayout)
-        volumesToLayout = self.overrideVolumesToLayout;
-    else
-        volumesToLayout = self.localFetchedResultsController.fetchedObjects;
-
-    [bookcaseModel shelveBooks:volumesToLayout];
-
-    return bookcaseModel;
-}
 
 -(void)setBookcase:(Bookcase *)bookcase
 {
     _bookcase = bookcase;
     
-    NSString *thisLibraryKEY = [NSString stringWithFormat:@"%@-%@", [Library entityName], self.bookcase.library.name];
+    NSString *thisLibraryKEY  = [NSString stringWithFormat:@"%@-%@", [Library entityName], self.bookcase.library.name];
     NSString *thisBookcaseKEY = [NSString stringWithFormat:@"%@-%@", [Bookcase entityName], self.bookcase.name];
     self.shelves = self.dataManager.transientLibraryLayoutInformation[thisLibraryKEY][thisBookcaseKEY];
 }
@@ -266,16 +241,15 @@
 -(void)incrementBookcaseModelByOneBook {
     NSArray *currentShelf = self.shelves[self.currentShelfIndex];
 
-        //If more books fit on this shelf, according to the model.
-    if (self.bookOnShelfCounter < currentShelf.count)
-    {
+        //If more books are supposed to be on this shelf, then simply increment the book, and repeat.
+    if (self.bookOnShelfCounter < currentShelf.count) {
         self.bookOnShelfCounter++;
         return;
     }
 
-        //If this book was the last book (or over?) on the current shelf,
-        //AND there are more empty shelves, then we know to make our book
-        //the first book on the next shelf (instead of the 'over-last' one on this shelf).
+        //If this book was the last book on the current shelf,
+        //AND there are more empty shelves, then we know to shelve our NEXT book
+        //on the next shelf (as the first one).
     if (self.bookOnShelfCounter >= currentShelf.count &&
         self.currentShelfIndex + offBy1 < self.maxShelvesCount)
     {
@@ -283,8 +257,9 @@
         self.bookOnShelfCounter = 0;
         return;
     }
-        //If all shelves are full - no more shelves.
-    if (self.currentShelfIndex + offBy1 >= self.maxShelvesCount)
+        //If our shelf is full AND no more shelves.
+    if (self.bookOnShelfCounter >= currentShelf.count &&
+        self.currentShelfIndex + offBy1 >= self.maxShelvesCount)
         return;
 }
 
@@ -305,7 +280,7 @@
 //    NSInteger cellsPerRow = floorf((availableWidth + self.minimumInteritemSpacing) /
 //                                   (self.itemSize.width + self.minimumInteritemSpacing));
 
-    NSUInteger cellCountForLongestRow = [self extrapolatedCellCountForLongestRow];
+//    NSUInteger cellCountForLongestRow = [self extrapolatedCellCountForLongestRow];
     
     NSMutableDictionary *rowDecorationWork = [NSMutableDictionary dictionary];
     
@@ -358,12 +333,12 @@
             //The default.
         if (self.layoutScheme == LBRLayoutSchemeGenreAuthorDate)
         {
-            _localFetchedResultsController = collectionViewController.fetchedResultsController;
+            _localFetchedResultsController = collectionViewController.volumesFetchedResultsController;
         }
         
             //Built with extensibility in mind, for future layout customizations.
         else {
-            NSFetchedResultsController *globalFRC = collectionViewController.fetchedResultsController;
+            NSFetchedResultsController *globalFRC = collectionViewController.volumesFetchedResultsController;
             
                 //            LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
             
