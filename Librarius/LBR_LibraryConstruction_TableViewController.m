@@ -195,16 +195,13 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    LBR_Bookcase_TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:bookcaseCellReuseID forIndexPath:indexPath];
-    
-    
-    // Configure the cell...
     // Set the name (& size)
     // Volumes and fullness
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    LBR_Bookcase_TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:bookcaseCellReuseID forIndexPath:indexPath];
     [self configureCell:cell forRowAtIndexPath:indexPath];
-    
-    
+
     return cell;
 }
 
@@ -212,13 +209,6 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 -(void)configureCell:(LBR_Bookcase_TableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Bookcase *bookcase = self.bookcasesFetchedResultsController.fetchedObjects[indexPath.row];
-//    LBR_BookcaseModel *bookcaseModel = self.bookcaseModelsDictionary[indexPath];
-//    
-//    [cell.imageView setImage:[UIImage imageNamed:@"bookshelf1"]];
-//    cell.textLabel.text = bookcaseModel.name ? bookcaseModel.name : [NSString stringWithFormat:@"Bookcase #%lu (%lu x %.1f cm)", indexPath.row, bookcaseModel.shelvesCount, bookcaseModel.width_cm];
-//    cell.detailTextLabel.text = [NSString stringWithFormat:@"%.01f％ filled: %@ books", bookcaseModel.percentFull, bookcaseModel.booksArray];
-
-    
     [cell.imageView setImage:[UIImage imageNamed:@"bookshelf1"]];
     cell.textLabel.text = bookcase.name ? bookcase.name : [NSString stringWithFormat:@"Bookcase #%@ (%@ x %.1f cm)", bookcase.orderWhenListed, bookcase.shelves, bookcase.width.floatValue];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%.01f％ filled: %lu books", [bookcase percentFull], bookcase.volumes.count];
@@ -266,7 +256,6 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 //    if (tableViewIndexPath.section == 0)
 //        return 106.0;
     if (tableViewIndexPath.section == selectedOrDefaultLibraryIndexPath.item) {
-        DDLogDebug(@"section = %lu -- item = %lu", tableViewIndexPath.section,selectedOrDefaultLibraryIndexPath.item);
         return 44;
     }
     else
@@ -366,17 +355,24 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 
 
  // Uncomment this method to specify if the specified item should be highlighted during tracking
- - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
+ - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath
+{
 	return YES;
- }
+}
 
 
     ///Selects the current library.
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+        //If tapped currently selected cell, then change nothing.
+    if (self.selectedLibraryIndexPath == indexPath)
+        return;
+    
+    
     self.selectedLibraryIndexPath = indexPath;
-    NSArray *orderedLibraries = [dataManager.userRootCollection.libraries sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"orderWhenListed" ascending:YES]]];
+    NSArray *orderedLibraries = [dataManager.userRootCollection.libraries sortedArrayUsingDescriptors:@[dataManager.sortDescriptors[kOrderSorter]]];
     dataManager.currentLibrary = orderedLibraries[indexPath.item];
+    [dataManager.currentLibrary shelveVolumesOnBookcases];
     
     DDLogVerbose(@"dataManager.currentLibrary now = %@", dataManager.currentLibrary.name);
 }

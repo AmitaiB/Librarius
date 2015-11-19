@@ -112,6 +112,8 @@
                 unshelvedRemainder = [booksArray subarrayWithRange:NSMakeRange(idx, numBooksRemaining)];
             }
         }
+            //Either way, this book has been added to the shelf.
+        book.bookcase = self;
     }
     
     shelvesArray = [mutableShelves copy];

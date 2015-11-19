@@ -36,8 +36,6 @@
     NSArray *bookcasesInListOrder = [self.bookcases sortedArrayUsingDescriptors:@[dataManager.sortDescriptors[kOrderSorter]]];
     
     NSArray <Volume*> *remainderVolumes = allVolumesInCurrentLibrary; //This is just the initial value.
-//    LBR_BookcaseModel *bookcaseModel;
-    NSMutableArray <Bookcase*> *mutableShelvedBookcaseObjects = [NSMutableArray array];
     NSDictionary *shelvedAndRemainingBooks;
     /**
      1 -
@@ -46,11 +44,10 @@
      4 - Reset the remaining volumes for the next cycle of the loop.
      */
     for (Bookcase *bookcase in bookcasesInListOrder) {
+        bookcase.library = self;
         shelvedAndRemainingBooks = [bookcase shelvedAndRemainingBooks:remainderVolumes];
-        [mutableShelvedBookcaseObjects addObject:shelvedAndRemainingBooks[kShelvesArray]];
         remainderVolumes = shelvedAndRemainingBooks[kUnshelvedRemainder];
     }
-    self.bookcaseModels = [mutableShelvedBookcaseObjects copy];
 }
 
 @end
