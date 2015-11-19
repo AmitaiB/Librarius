@@ -5,6 +5,9 @@
 //  Created by Amitai Blickstein on 10/29/15.
 //  Copyright © 2015 Amitai Blickstein, LLC. All rights reserved.
 //
+#define kShelvesArray @"shelvesArray"
+#define kUnshelvedRemainder @"unshelvedRemainder"
+
 
 #import "Bookcase.h"
 #import "Library.h"
@@ -54,7 +57,7 @@
 -(NSDictionary *)shelvedAndRemainingBooks:(NSArray<Volume *> *)booksArray
 {
     NSArray<Volume  *> *unshelvedRemainder;
-    NSArray<NSArray *> *shelves;
+    NSArray<NSArray *> *shelvesArray;
     /**
      For each book, add its thickness to the x-position. If that takes us over
      the shelf width, then we have a complete shelf: so add the appropriate substring
@@ -63,16 +66,7 @@
      shelf: reset the index to the current book's index, reset the x-position to the
      current book's thickness, and <continue>.
      else (no more shelf space) substring the rest to unshelvedRemainder, and break/stop.
-     */
-//    if (booksArray == nil && self.booksArray != nil) {
-//        booksArray = self.booksArray;
-//        DDLogWarn(@"shelveBooks was passed in a nil booksArray, replaced with self.booksArray.");
-//    }
-//    if (booksArray != nil && self.booksArray == nil) {
-//        self.booksArray = booksArray;
-//        DDLogInfo(@"self.booksArray set from shelveBooks parameter.");
-//    }
-    
+     */    
     NSMutableArray *mutableShelves   = [NSMutableArray new];
     CGFloat    currentXPosition_cm   = 0.0f;
     NSUInteger idxOfFirstBookOnShelf = 0;
@@ -117,12 +111,18 @@
             {
                 self.isFull = YES;
                 NSUInteger numBooksRemaining = booksArray.count - (idx + offBy1); //+1 b/c it's the nth book
-                self.unshelvedRemainder = [booksArray subarrayWithRange:NSMakeRange(idx, numBooksRemaining)];
+                unshelvedRemainder = [booksArray subarrayWithRange:NSMakeRange(idx, numBooksRemaining)];
             }
         }
     }
     
-    self.shelves = [self.mutableShelves copy];
+    shelvesArray = [mutableShelves copy];
+    
+    self.shelvesArray = shelvesArray;
+    
+    return @{kShelvesArray : shelvesArray,
+             kUnshelvedRemainder : unshelvedRemainder
+             };
 }
 
 
