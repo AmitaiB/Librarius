@@ -67,31 +67,24 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.bookcasesFetchedResultsController.delegate = self;
+    dataManager = [LBRDataManager sharedDataManager];
+    self.bookcasesFetchedResultsController = [dataManager currentLibraryBookcasesFetchedResultsController:self];
     
         //Layout
     self.layoutSegmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"layout 1", @"layout 2"]];
+    self.layoutSegmentedControl.selectedSegmentIndex = 0;
     self.navigationItem.titleView = self.layoutSegmentedControl;
     
-
-    dataManager = [LBRDataManager sharedDataManager];
-
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
-//    [self precacheBookcaseModels];
+        //For the initial loading.
+    [self respondToLibraryItemSelectionAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
     
-    
-    [self configureImagePickerController];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
+    
+//    [self configureImagePickerController];
 }
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 
 /**
  There should be no need to precache the bookcasemodels now that there are no more bookcasemodels, and
@@ -369,15 +362,19 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     if (self.selectedLibraryIndexPath == indexPath)
         return;
     
-    
+    [self respondToLibraryItemSelectionAtIndexPath:indexPath];
+}
+
+-(void)respondToLibraryItemSelectionAtIndexPath:(NSIndexPath*)indexPath
+{
     self.selectedLibraryIndexPath = indexPath;
     NSArray *orderedLibraries = [dataManager.userRootCollection.libraries sortedArrayUsingDescriptors:@[dataManager.sortDescriptors[kOrderSorter]]];
     dataManager.currentLibrary = orderedLibraries[indexPath.item];
     [dataManager.currentLibrary shelveVolumesOnBookcasesAccordingToLayoutScheme:LBRLayoutSchemeDefault];
     
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
     DDLogVerbose(@"dataManager.currentLibrary now = %@", dataManager.currentLibrary.name);
 }
- 
 
 /*
  // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
@@ -411,6 +408,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 //    return frc;
 //}
 
+/*
 -(NSFetchedResultsController *)bookcasesFetchedResultsController
 {
     if (_bookcasesFetchedResultsController != nil) {
@@ -422,7 +420,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
      *  1) The set of all [Entity Name]
      *  2) ...arranged by userOrder,
      *  3) ...then date created.
-     */
+     * /
     dataManager = dataManager ? dataManager : [LBRDataManager sharedDataManager];
     NSManagedObjectContext *managedObjectContext = dataManager.managedObjectContext;
     [dataManager generateDefaultLibraryIfNeeded];
@@ -464,7 +462,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     
     return frc;
 }
-
+*/
 #pragma mark - === Fetched Results Controller Delegate methods ===
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller

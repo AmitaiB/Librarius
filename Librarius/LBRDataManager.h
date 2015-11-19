@@ -77,5 +77,6 @@
 //    =============== migration related
 -(void)giveCurrentLibraryADateIfNeeded;
 -(void)giveVolumeADateIfNeeded:(Volume*)volume;
+-(void)giveBookcaseANameAndFullIfNeeded:(Bookcase*)bookcase;
 
 @end
