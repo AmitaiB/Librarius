@@ -14,7 +14,7 @@
 @class Bookcase;
 @interface LBR_BookcaseCollectionViewController : UICollectionViewController <NSFetchedResultsControllerDelegate, UIPopoverPresentationControllerDelegate, UIAdaptivePresentationControllerDelegate>
 
-@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) NSFetchedResultsController *volumesFetchedResultsController;
 @property (nonatomic, strong) Bookcase *bookcaseOnDisplay;
 
 @end

@@ -77,7 +77,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
-        //For the initial loading.
+        //For the initial loading.git
     [self respondToLibraryItemSelectionAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
     
     // Uncomment the following line to preserve selection between presentations.

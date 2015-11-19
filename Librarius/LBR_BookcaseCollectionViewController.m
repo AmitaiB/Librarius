@@ -74,16 +74,17 @@
         ///THIS MIGHT WORK with a Dictionary instead of an array:
     NSDictionary <NSIndexPath*,  NSData*> *precachedImageData;
     
-    
     LBR_BookcasePopoverViewController *popoverVC;
-//    LBR_ProgrammaticPopoverViewController *programmaticPopVC;
 }
+
+
 
 static NSString * const reuseIdentifier          = @"bookCellID";
 static NSString * const customSectionHeaderID    = @"customSectionHeaderID";
 static NSString * const decorationViewIdentifier = @"decorationViewIdentifier";
 
     //Layout Scheme strings
+    //TODO: We now have a typedef!
 static NSString * const GenreAuthorDateLayoutSchemeID = @"By Genre-Author";
 static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
 
@@ -101,13 +102,11 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     
     if (self.bookcaseOnDisplay)
     {
-        
+            ///???: Huh?
     }
         
-        
-        
-        [self refreshLayout];
-
+    [self refreshLayout];
+    
     
         //    layout = [LBR_BookcaseLayout new];
 //    [self.collectionView setCollectionViewLayout:layout];
@@ -115,7 +114,7 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     self.collectionView.backgroundColor = [UIColor cloudsColor];
     self.clearsSelectionOnViewWillAppear = NO;
 
-    volumesArray = self.fetchedResultsController.fetchedObjects;
+    volumesArray = self.volumesFetchedResultsController.fetchedObjects;
         ///    [self precacheImages];
 }
 
@@ -242,13 +241,13 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return self.fetchedResultsController.sections.count;
+    return self.volumesFetchedResultsController.sections.count;
 }
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    NSArray *sections = [self.fetchedResultsController sections];
+    NSArray *sections = [self.volumesFetchedResultsController sections];
     id <NSFetchedResultsSectionInfo> currentSection = sections[section];
     return currentSection.numberOfObjects;
 }
@@ -260,7 +259,7 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     cell.backgroundColor = [UIColor clearColor];
     
 
-    Volume *volumeModel = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    Volume *volumeModel = [self.volumesFetchedResultsController objectAtIndexPath:indexPath];
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", volumeModel.cover_art_large]];
     [cell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder"]];
     cell.coverArtURLString = volumeModel.cover_art_large ? volumeModel.cover_art_large : volumeModel.cover_art ? volumeModel.cover_art: nil;
@@ -368,11 +367,12 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
 
 #pragma mark - Fetched Results Controller configuration
 
-- (NSFetchedResultsController *)fetchedResultsController {
-    if (_fetchedResultsController != nil)
-        return _fetchedResultsController;
+-(NSFetchedResultsController *)volumesFetchedResultsController
+{
+    if (_volumesFetchedResultsController != nil)
+        return _volumesFetchedResultsController;
     
-    return [self.dataManager currentLibraryVolumesFetchedResultsController:self];
+    return [self.dataManager currentLibraryBookcasesFetchedResultsController:self];
 }
 
 #pragma mark - === FetchedResultsControllerDelegate ===
