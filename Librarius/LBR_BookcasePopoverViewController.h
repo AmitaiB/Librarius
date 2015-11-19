@@ -11,13 +11,13 @@
 @interface LBR_BookcasePopoverViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
+
+    //# of Shelves
 @property (nonatomic, weak) IBOutlet UIStepper *numShelvesStepper;
+@property (nonatomic, assign)        NSUInteger popoverNumShelves;
+
+    //Width of shelves
 @property (nonatomic, weak) IBOutlet UIStepper *shelfWidthStepper;
-
-//@property (nonatomic, strong) NSString *numFieldText;
-//@property (nonatomic, strong) NSString *widthFieldText;
-
-@property (nonatomic, assign) NSUInteger popoverNumShelves;
-@property (nonatomic, assign) CGFloat popoverShelfWidth;
+@property (nonatomic, assign)        CGFloat    popoverShelfWidth;
 
 @end

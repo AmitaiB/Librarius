@@ -30,12 +30,6 @@ NS_ASSUME_NONNULL_BEGIN
 -(NSString*)fullTitle;
 -(NSString*)byline;
 
-
-
-
-    //LBRParsedVolume had:
-//-(instancetype)initWithGoogleVolume:(GTLBooksVolume*)volumeToParse;
-
 @end
 
 NS_ASSUME_NONNULL_END

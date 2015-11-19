@@ -181,11 +181,11 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
             //Necessary to get the view to initialize the properties we want to reference.
         [popoverVC view];
         
-        popoverVC.popoverNumShelves       = [@(layout.bookcaseModel.shelvesCount) integerValue];
-        popoverVC.numShelvesStepper.value = [@(layout.bookcaseModel.shelvesCount) integerValue];
+        popoverVC.popoverNumShelves       = [layout.bookcase.shelves integerValue];
+        popoverVC.numShelvesStepper.value = [layout.bookcase.shelves integerValue];
         
-        popoverVC.popoverShelfWidth       = [@(layout.bookcaseModel.width_cm) floatValue];
-        popoverVC.shelfWidthStepper.value = [@(layout.bookcaseModel.width_cm) floatValue];
+        popoverVC.popoverShelfWidth       = [layout.bookcase.width floatValue];
+        popoverVC.shelfWidthStepper.value = [layout.bookcase.width floatValue];
         
         
         [popoverVC.numShelvesStepper addTarget:self action:@selector(numShelvesStepperValueDidChange) forControlEvents:UIControlEventValueChanged];

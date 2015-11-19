@@ -27,11 +27,18 @@
 
 @end
 
+
+
+
+
+
+
+
 @implementation ShelvesArray
 
 +(Class)transformedValueClass
 {
-    return [NSArray class];
+    return [NSData class];
 }
 
 +(BOOL)allowsReverseTransformation
