@@ -26,12 +26,16 @@
 
 
     //TODO: This logic is flawed in SO many edge cases. Needs major overhauling.
--(void)shelveVolumesOnBookcases
+-(void)shelveVolumesOnBookcasesAccordingToLayoutScheme:(LBRLayoutScheme)layoutScheme
 {
     LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
-    NSFetchedResultsController *volumesInCurrentLibraryFRC = [dataManager currentLibraryVolumesFetchedResultsController];
-    NSArray *allVolumesInCurrentLibrary = volumesInCurrentLibraryFRC.fetchedObjects;
-    
+//    NSFetchedResultsController *volumesInCurrentLibraryFRC = [dataManager currentLibraryVolumesFetchedResultsController];
+//    NSArray *allVolumesInCurrentLibrary = volumesInCurrentLibraryFRC.fetchedObjects;
+    NSArray *allVolumesInCurrentLibrary = [self.volumes
+                                           sortedArrayUsingDescriptors:@[dataManager.sortDescriptors[kCategorySorter],
+                                                                         dataManager.sortDescriptors[kAuthorSorter],
+                                                                         dataManager.sortDescriptors[kDateCreatedSorter]]];
+
         //Prepare for for-loop
     NSArray *bookcasesInListOrder = [self.bookcases sortedArrayUsingDescriptors:@[dataManager.sortDescriptors[kOrderSorter]]];
     
@@ -45,11 +49,15 @@
      */
     NSArray <Volume*> *remainderVolumes = allVolumesInCurrentLibrary; //This is just the initial value.
     NSDictionary *shelvedAndRemainingBooks;
+    
     for (Bookcase *bookcase in bookcasesInListOrder) {
-        bookcase.library = self;
         shelvedAndRemainingBooks = [bookcase shelvedAndRemainingBooks:remainderVolumes];
         remainderVolumes = shelvedAndRemainingBooks[kUnshelvedRemainder];
+
+            ///???: How do I store and persist this?
+        shelvedAndRemainingBooks[kShelvesArray];
     }
 }
+
 
 @end

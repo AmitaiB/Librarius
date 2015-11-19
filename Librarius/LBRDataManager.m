@@ -185,6 +185,23 @@ static NSString * const kUnknown = @"kUnknown";
  *  4) ...then author,              (sortDescriptor)
  *  5) ...then year.                (sortDescriptor)
  */
+
+-(NSFetchRequest *)volumesRequest
+{
+    if (_volumesRequest != nil)
+        return _volumesRequest;
+    
+    NSFetchRequest *volumesRequest    = [NSFetchRequest fetchRequestWithEntityName:[Volume entityName]];//(1)
+                                                                                                            
+    NSPredicate *libraryPredicate     = [NSPredicate predicateWithFormat:@"%K = %@", @"library.name", self.currentLibrary.name];
+    volumesRequest.sortDescriptors    = @[self.sortDescriptors[kCategorySorter], self.sortDescriptors[kAuthorSorter]];
+    volumesRequest.predicate          = libraryPredicate;
+    volumesRequest.fetchBatchSize     = 200;
+    
+    return volumesRequest;
+}
+
+
 -(NSFetchedResultsController *)currentLibraryVolumesFetchedResultsController
 {
         ///!!!: Ugly! Get rid of it!
@@ -196,21 +213,12 @@ static NSString * const kUnknown = @"kUnknown";
         //Managed Object Context
     NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
     
-        //Fetch Request
-    NSFetchRequest *volumesRequest    = [NSFetchRequest fetchRequestWithEntityName:[Volume entityName]];//(1)
-//    NSSortDescriptor *categorySorter  = [NSSortDescriptor sortDescriptorWithKey:sectionNameKeyPath ascending:YES];
-//    NSSortDescriptor *authorSorter    = [NSSortDescriptor sortDescriptorWithKey:@"authorSurname" ascending:YES];
-    NSPredicate *libraryPredicate     = [NSPredicate predicateWithFormat:@"%K = %@", @"library.name", self.currentLibrary.name];
-    volumesRequest.sortDescriptors    = @[self.sortDescriptors[kCategorySorter], self.sortDescriptors[kAuthorSorter]];
-    volumesRequest.predicate          = libraryPredicate;
-    volumesRequest.fetchBatchSize     = 200;
-    
         //Unique cache name
     NSString *currentLibraryCacheName = [NSString stringWithFormat:@"%@-volumes", self.currentLibrary.name];
     
     
     NSFetchedResultsController *frc  = [[NSFetchedResultsController alloc]
-                                        initWithFetchRequest:volumesRequest
+                                        initWithFetchRequest:self.volumesRequest
                                         managedObjectContext:managedObjectContext
                                         sectionNameKeyPath:sectionNameKeyPath
                                         cacheName:currentLibraryCacheName];
@@ -232,6 +240,20 @@ static NSString * const kUnknown = @"kUnknown";
     return frc;
 }
 
+-(NSFetchRequest *)bookcasesRequest
+{
+    if (_bookcasesRequest != nil)
+        return _bookcasesRequest;
+    
+    NSFetchRequest *bookcasesRequest = [NSFetchRequest fetchRequestWithEntityName:[Bookcase entityName]];
+    
+    bookcasesRequest.fetchBatchSize = 200;
+    bookcasesRequest.sortDescriptors = @[self.sortDescriptors[kOrderSorter], self.sortDescriptors[kDateCreatedSorter]];
+    bookcasesRequest.returnsObjectsAsFaults = NO;
+
+    return bookcasesRequest;
+}
+
 -(NSFetchedResultsController *)currentLibraryBookcasesFetchedResultsController
 {
     NSFetchedResultsController *frc;
@@ -243,15 +265,10 @@ static NSString * const kUnknown = @"kUnknown";
         //Ugly! get rid of it.
     [self generateDefaultLibraryIfNeeded];
     
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[Bookcase entityName]]; //(1)
-    
-    request.fetchBatchSize = 200;
-    request.sortDescriptors = @[self.sortDescriptors[kOrderSorter], self.sortDescriptors[kDateCreatedSorter]];
-    request.returnsObjectsAsFaults = NO;
     
         // Edit the section name key path and cache name if appropriate.
         // nil for section name key path means "no sections".
-    frc = [[NSFetchedResultsController alloc] initWithFetchRequest:request
+    frc = [[NSFetchedResultsController alloc] initWithFetchRequest:self.bookcasesRequest
                                               managedObjectContext:self.managedObjectContext
                                                 sectionNameKeyPath:@"library.name"
                                                          cacheName:@"LBR_Bookcase_CacheName"];
@@ -264,7 +281,7 @@ static NSString * const kUnknown = @"kUnknown";
         abort();
     }
     
-    NSArray *bookcases = [frc.managedObjectContext executeFetchRequest:request error:nil];
+    NSArray *bookcases = [frc.managedObjectContext executeFetchRequest:self.bookcasesRequest error:nil];
     
         ///???: Defaults needed?
     if (bookcases.count == 0) {
