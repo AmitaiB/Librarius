@@ -16,10 +16,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Library : NSManagedObject
 
+@property (nonatomic, strong) NSArray *bookcaseModels;
+
 // Insert code here to declare functionality of your managed object subclass
 +(NSString *)entityName;
 +(instancetype)insertNewObjectIntoContext:(NSManagedObjectContext *)context;
 
+-(void)shelveVolumesOnBookcases;
 
 @end
 

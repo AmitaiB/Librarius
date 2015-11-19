@@ -9,6 +9,7 @@
 #import "Library.h"
 #import "Bookcase.h"
 #import "Volume.h"
+#import "LBRDataManager.h"
 
 @implementation Library
 
@@ -21,6 +22,35 @@
 +(instancetype)insertNewObjectIntoContext:(NSManagedObjectContext *)context
 {
     return [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:context];
+}
+
+
+    //TODO: This logic is flawed in SO many edge cases. Needs major overhauling.
+-(void)shelveVolumesOnBookcases
+{
+    LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
+    NSFetchedResultsController *volumesInCurrentLibraryFRC = [dataManager currentLibraryVolumesFetchedResultsController];
+    NSArray *allVolumesInCurrentLibrary = volumesInCurrentLibraryFRC.fetchedObjects;
+    
+        //Prepare for for-loop
+    NSArray *bookcasesInListOrder = [self.bookcases sortedArrayUsingDescriptors:@[dataManager.sortDescriptors[kOrderSorter]]];
+    
+    NSArray <Volume*> *remainderVolumes = allVolumesInCurrentLibrary; //This is just the initial value.
+//    LBR_BookcaseModel *bookcaseModel;
+    NSMutableArray <Bookcase*> *mutableShelvedBookcaseObjects = [NSMutableArray array];
+    NSDictionary *shelvedAndRemainingBooks;
+    /**
+     1 -
+     2 - Shelve the remaining books.
+     3 - Add the shelved bookcase to our Library model's array.
+     4 - Reset the remaining volumes for the next cycle of the loop.
+     */
+    for (Bookcase *bookcase in bookcasesInListOrder) {
+        shelvedAndRemainingBooks = [bookcase shelvedAndRemainingBooks:remainderVolumes];
+        [mutableShelvedBookcaseObjects addObject:shelvedAndRemainingBooks[kShelvesArray]];
+        remainderVolumes = shelvedAndRemainingBooks[kUnshelvedRemainder];
+    }
+    self.bookcaseModels = [mutableShelvedBookcaseObjects copy];
 }
 
 @end

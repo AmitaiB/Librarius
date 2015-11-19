@@ -21,6 +21,26 @@
     #define DBLG DDLogDebug(@"<%@:%@:line %d, reporting!>", NSStringFromClass([self class]), NSStringFromSelector(_cmd), __LINE__);
 
     #import "CocoaLumberjack.h"
+
+    typedef NS_ENUM(NSUInteger, LBRLayoutScheme) {
+        LBRLayoutSchemeDefault,
+        LBRLayoutSchemeGenreAuthorDate = 0, //default
+        LBRLayoutSchemeAuthorDate
+        ///    ,LBRLayoutSchemeLOC  not implemented yet
+        ///    ,LBRLayoutSchemeDDS
+    };
+
+    #define kLightweightMigration TRUE
+    #define kOrderSorter       @"orderSorter"
+    #define kCategorySorter    @"categorySorter"
+    #define kAuthorSorter      @"authorSorter"
+    #define kDateCreatedSorter @"dateCreatedSorter"
+
+
+    #define kShelvesArray @"shelvesArray"
+    #define kUnshelvedRemainder @"unshelvedRemainder"
+
+
 #endif
 
 #ifdef DEBUG

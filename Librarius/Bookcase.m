@@ -5,8 +5,6 @@
 //  Created by Amitai Blickstein on 10/29/15.
 //  Copyright © 2015 Amitai Blickstein, LLC. All rights reserved.
 //
-#define kShelvesArray @"shelvesArray"
-#define kUnshelvedRemainder @"unshelvedRemainder"
 
 
 #import "Bookcase.h"

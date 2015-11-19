@@ -10,13 +10,6 @@
  and any other matters of persistence that may come up.
  */
 
-#define kLightweightMigration TRUE
-#define kOrderSorter       @"orderSorter"
-#define kCategorySorter    @"categorySorter"
-#define kAuthorSorter      @"authorSorter"
-#define kDateCreatedSorter @"dateCreatedSorter"
-
-
 #import "LBRDataManager.h"
 #import "LBRGoogleGTLClient.h"
 
@@ -27,10 +20,6 @@
 #import "CoverArt.h"
 #import <GTLBooksVolume.h>
 #import "RootCollection.h"
-
-@interface LBRDataManager ()
-@property (nonatomic, strong) NSDictionary *sortDescriptors;
-@end
 
 @implementation LBRDataManager
 

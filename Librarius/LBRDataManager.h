@@ -24,6 +24,7 @@
 //@property (nonatomic, strong) LBRParsedVolume *parsedVolumeFromLastBarcode; //<-- Use this to confirm user's selection, then enter it into Persistent Data.
 @property (nonatomic, strong) Volume *volumeFromLastBarcode; //CLEAN: Probably not actually needed.
 @property (nonatomic, strong) NSMutableArray <Volume*> *volumesRecentlyAddedToContext;
+@property (nonatomic, strong) NSDictionary *sortDescriptors;
 
 +(instancetype)sharedDataManager;
 
