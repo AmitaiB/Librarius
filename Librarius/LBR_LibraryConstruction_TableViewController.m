@@ -205,7 +205,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     return cell;
 }
 
-    //Doesn't have a bookcase, so it crashes the collectionView.
+    //Doesn't have a bookcase, so it crashes the collectionView(?).
 -(void)configureCell:(LBR_Bookcase_TableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Bookcase *bookcase = self.bookcasesFetchedResultsController.fetchedObjects[indexPath.row];

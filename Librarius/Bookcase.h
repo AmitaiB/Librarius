@@ -21,12 +21,14 @@ NS_ASSUME_NONNULL_BEGIN
 +(instancetype)insertNewObjectIntoContext:(NSManagedObjectContext *)context withDefaultValues:(BOOL)defaultValueChoice;
 +(instancetype)insertNewObjectIntoContext:(NSManagedObjectContext *)context withNumberOfShelves:(NSNumber*)numShelves width:(NSNumber*)width_cm;
 
-
-
 -(CGFloat)percentFull;
-    ///This needs to return a dictionary to replace these two properties...OR, make a Value Transformer.
-    ///@property (nonatomic, strong) NSArray<NSArray *> *shelves;
-    ///@property (nonatomic, strong) NSArray<Volume  *> *unshelvedRemainder;
+
+/**
+    This returns a dictionary to replace these two properties.
+    (I also made a Value Transformer, but haven't tested nor relied on it).
+     @property (nonatomic, strong) NSArray<NSArray *> *shelves;
+     @property (nonatomic, strong) NSArray<Volume  *> *unshelvedRemainder;
+*/
 -(NSDictionary*)shelvedAndRemainingBooks:(NSArray <Volume *> *)booksArray;
 
 @end

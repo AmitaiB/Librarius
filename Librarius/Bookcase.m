@@ -10,6 +10,7 @@
 #import "Bookcase.h"
 #import "Library.h"
 #import "Volume.h"
+#import "NSObject+ABBNumberUtils.h"
 
 @implementation Bookcase
 
@@ -34,6 +35,8 @@
         bookcase.dateModified    = [bookcase.dateCreated copy];
         bookcase.shelves         = @(kDefaultBookcaseShelvesCount);
         bookcase.width           = @(kDefaultBookcaseWidth_cm);
+        bookcase.name            = [NSString stringWithFormat:@"BookcaseID #%f", [NSObject randomFloatBetweenNumber:10000 andNumber:99999]];
+        bookcase.isFull          = NO;
     }
     return bookcase;
 }

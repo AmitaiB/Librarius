@@ -97,6 +97,7 @@
 		38F57BC21BB0707200CC2EE8 /* UIBarButtonItem+FlatUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F57BB31BB0707200CC2EE8 /* UIBarButtonItem+FlatUI.m */; };
 		38F57BC31BB0707200CC2EE8 /* NSString+Icons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F57BB51BB0707200CC2EE8 /* NSString+Icons.m */; };
 		38FABE881BD49AE4009479E9 /* UIColor+ABBColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FABE871BD49AE4009479E9 /* UIColor+ABBColors.m */; };
+		38FEA8831BFE69CB00529451 /* NSObject+ABBNumberUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FEA8821BFE69CB00529451 /* NSObject+ABBNumberUtils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -291,6 +292,8 @@
 		38F57BD21BB0740300CC2EE8 /* flat-ui-icons-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "flat-ui-icons-regular.ttf"; path = "../../../../libraries/FlatUIKit/Resources/flat-ui-icons-regular.ttf"; sourceTree = "<group>"; };
 		38FABE861BD49AE4009479E9 /* UIColor+ABBColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+ABBColors.h"; path = "../UIColor+ABBColors.h"; sourceTree = "<group>"; };
 		38FABE871BD49AE4009479E9 /* UIColor+ABBColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+ABBColors.m"; path = "../UIColor+ABBColors.m"; sourceTree = "<group>"; };
+		38FEA8811BFE69CB00529451 /* NSObject+ABBNumberUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+ABBNumberUtils.h"; sourceTree = "<group>"; };
+		38FEA8821BFE69CB00529451 /* NSObject+ABBNumberUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+ABBNumberUtils.m"; sourceTree = "<group>"; };
 		8D3D33401D5A34E1C9A90BE0 /* Pods-Librarius.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Librarius.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Librarius/Pods-Librarius.debug.xcconfig"; sourceTree = "<group>"; };
 		9B10AB83782954202B2FDC18 /* Pods-Librarius.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Librarius.release.xcconfig"; path = "Pods/Target Support Files/Pods-Librarius/Pods-Librarius.release.xcconfig"; sourceTree = "<group>"; };
 		EBADCB9C83FA635A577697F9 /* libPods-Librarius.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Librarius.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -582,6 +585,8 @@
 				384E0CBF1B97D24B007E7290 /* NSString+dateValue.m */,
 				388DBE311BAA54C8005C5125 /* UIImage+imageScaledToHeight.h */,
 				388DBE321BAA54C8005C5125 /* UIImage+imageScaledToHeight.m */,
+				38FEA8811BFE69CB00529451 /* NSObject+ABBNumberUtils.h */,
+				38FEA8821BFE69CB00529451 /* NSObject+ABBNumberUtils.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -986,6 +991,7 @@
 				381FC2BB1BD15D45003A3C52 /* LBR_BookcaseModel.m in Sources */,
 				388DBE331BAA54C8005C5125 /* UIImage+imageScaledToHeight.m in Sources */,
 				38DF003D1BE7FFE900D4BCE3 /* NSString+ArrayWriter.m in Sources */,
+				38FEA8831BFE69CB00529451 /* NSObject+ABBNumberUtils.m in Sources */,
 				38565D701B9A20B800349498 /* LBRParsedVolume.m in Sources */,
 				38F57BC01BB0707200CC2EE8 /* UIFont+FlatUI.m in Sources */,
 				3837F2CF1BE2F33A00170FF6 /* Library.m in Sources */,
