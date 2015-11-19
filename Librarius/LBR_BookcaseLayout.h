@@ -26,6 +26,7 @@
 @property (nonatomic, strong) NSArray<NSArray*>  *transientBookcaseLayoutModel;
 @property (nonatomic, assign, readonly) NSUInteger widestShelfWidth;
 
+@property (nonatomic, strong) NSArray *shelves;
 
 //@property (nonatomic, weak) id <LBRBookLayoutDataSource> dataSource;
 
