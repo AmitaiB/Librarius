@@ -35,14 +35,16 @@
         //Prepare for for-loop
     NSArray *bookcasesInListOrder = [self.bookcases sortedArrayUsingDescriptors:@[dataManager.sortDescriptors[kOrderSorter]]];
     
-    NSArray <Volume*> *remainderVolumes = allVolumesInCurrentLibrary; //This is just the initial value.
-    NSDictionary *shelvedAndRemainingBooks;
+    DDLogInfo(@"bookcasesInListOrder = %@", bookcasesInListOrder);
+    
     /**
      1 -
      2 - Shelve the remaining books.
      3 - Add the shelved bookcase to our Library model's array.
      4 - Reset the remaining volumes for the next cycle of the loop.
      */
+    NSArray <Volume*> *remainderVolumes = allVolumesInCurrentLibrary; //This is just the initial value.
+    NSDictionary *shelvedAndRemainingBooks;
     for (Bookcase *bookcase in bookcasesInListOrder) {
         bookcase.library = self;
         shelvedAndRemainingBooks = [bookcase shelvedAndRemainingBooks:remainderVolumes];

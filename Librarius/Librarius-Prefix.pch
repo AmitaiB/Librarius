@@ -36,8 +36,7 @@
     #define kAuthorSorter      @"authorSorter"
     #define kDateCreatedSorter @"dateCreatedSorter"
 
-
-    #define kShelvesArray @"shelvesArray"
+    #define kShelvesArray       @"shelvesArray"
     #define kUnshelvedRemainder @"unshelvedRemainder"
 
 

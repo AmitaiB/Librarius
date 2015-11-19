@@ -54,8 +54,8 @@
     ///@property (nonatomic, strong) NSArray<Volume  *> *unshelvedRemainder;
 -(NSDictionary *)shelvedAndRemainingBooks:(NSArray<Volume *> *)booksArray
 {
-    NSArray<Volume  *> *unshelvedRemainder;
-    NSArray<NSArray *> *shelvesArray;
+    NSArray<Volume  *> *unshelvedRemainder = [NSArray array];
+    NSArray<NSArray *> *shelvesArray       = [NSArray array];
     /**
      For each book, add its thickness to the x-position. If that takes us over
      the shelf width, then we have a complete shelf: so add the appropriate substring
@@ -64,7 +64,7 @@
      shelf: reset the index to the current book's index, reset the x-position to the
      current book's thickness, and <continue>.
      else (no more shelf space) substring the rest to unshelvedRemainder, and break/stop.
-     */    
+     */
     NSMutableArray *mutableShelves   = [NSMutableArray new];
     CGFloat    currentXPosition_cm   = 0.0f;
     NSUInteger idxOfFirstBookOnShelf = 0;
@@ -96,7 +96,7 @@
             NSArray *thisShelf           = [booksArray subarrayWithRange:rangeForCurrentShelf];
             
             [mutableShelves addObject:thisShelf];
-            
+            DDLogDebug(@"Nest(0): After addObject:thisShelf - mutableShelves.count = %lu", mutableShelves.count);
                 ///!!!:Is this broken if we have run out of books, but it does this anyway...?
                 //If there are more shelves, then this book becomes the first on the next shelf.
             BOOL nextShelfExistsAndIsEmpty = mutableShelves.count < self.shelves.integerValue;
@@ -115,14 +115,20 @@
             //Either way, this book has been added to the shelf.
         book.bookcase = self;
     }
+    shelvesArray = [NSArray arrayWithArray:mutableShelves];
     
-    shelvesArray = [mutableShelves copy];
+    NSLog(@"Nest(3b) - shelvesArray.count = %lu", shelvesArray.count);
+    NSLog(@"Nest(3b) - shelvesArray.count = %lu", unshelvedRemainder.count);
     
-    self.shelvesArray = shelvesArray;
+    DDLogInfo(@"%@", shelvesArray);
+    DDLogInfo(@"%@", unshelvedRemainder);
     
-    return @{kShelvesArray : shelvesArray,
-             kUnshelvedRemainder : unshelvedRemainder
-             };
+    NSDictionary *temp = @{@"shelvesArray" : shelvesArray,
+                           @"unshelvedRemainder" : unshelvedRemainder
+                           };
+//    [NSDictionary dictionaryWithObjects:@[shelvesArray, unshelvedRemainder] forKeys:@[@"shelvesArray", @"unshelvedRemainder"]];
+    
+    return temp;
 }
 
 
