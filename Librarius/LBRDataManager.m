@@ -263,14 +263,11 @@ static NSString * const kUnknown = @"kUnknown";
         DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
-        //    DDLogDebug(@"frc.fetchedObjects = %@ (count: %lu)", frc.fetchedObjects, frc.fetchedObjects.count);
-    DDLogDebug(@"frc.fetchedObjects.count = %lu", frc.fetchedObjects.count);
     
-    
-    NSArray *bookcasesMaybe = [frc.managedObjectContext executeFetchRequest:request error:nil];
+    NSArray *bookcases = [frc.managedObjectContext executeFetchRequest:request error:nil];
     
         ///???: Defaults needed?
-    if (bookcasesMaybe.count == 0) {
+    if (bookcases.count == 0) {
         [self generateBookcasesForLibrary:self.currentLibrary withDimensions:@{@3 : @7,
                                                                                @5 : @5,
                                                                                @2 : @20

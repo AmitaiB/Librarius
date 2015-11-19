@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nullable, nonatomic, retain) NSDate *dateCreated;
 @property (nullable, nonatomic, retain) NSDate *dateModified;
-@property (nonnull, nonatomic) BOOL isFull;
+@property (nonatomic) BOOL isFull;
 @property (nullable, nonatomic, retain) NSString *name;
 @property (nullable, nonatomic, retain) NSNumber *orderWhenListed;
 @property (nullable, nonatomic, retain) NSNumber *shelf_height;

@@ -78,7 +78,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
-    [self precacheBookcaseModels];
+//    [self precacheBookcaseModels];
     
     
     [self configureImagePickerController];
@@ -93,6 +93,11 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 }
 
 
+/**
+ There should be no need to precache the bookcasemodels now that there are no more bookcasemodels, and
+ bookcases are accesible from the Library managed object.
+ */
+/*
     /**
      Result: a dictionary with keys of indexPaths, objects are layouts, so each bookcase is ready to go.
      
@@ -101,7 +106,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
      3) FRC for allVolumes (in that library).
      4) Run it through the bookcaseModel. Grab that info, and the remainderVolumes.
      5) rinse and repeat for all remainderVolumes.
-     */
+     * /
 - (void)precacheBookcaseModels
 {
     NSMutableDictionary *mutableBookcaseModels = [NSMutableDictionary dictionary];
@@ -129,6 +134,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:currentLibraryTableViewSection] withRowAnimation:UITableViewRowAnimationNone];
     
 }
+*/
 
 #pragma mark - === UIImagePickerController delegate ===
 
@@ -206,11 +212,16 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 -(void)configureCell:(LBR_Bookcase_TableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Bookcase *bookcase = self.bookcasesFetchedResultsController.fetchedObjects[indexPath.row];
-    LBR_BookcaseModel *bookcaseModel = self.bookcaseModelsDictionary[indexPath];
+//    LBR_BookcaseModel *bookcaseModel = self.bookcaseModelsDictionary[indexPath];
+//    
+//    [cell.imageView setImage:[UIImage imageNamed:@"bookshelf1"]];
+//    cell.textLabel.text = bookcaseModel.name ? bookcaseModel.name : [NSString stringWithFormat:@"Bookcase #%lu (%lu x %.1f cm)", indexPath.row, bookcaseModel.shelvesCount, bookcaseModel.width_cm];
+//    cell.detailTextLabel.text = [NSString stringWithFormat:@"%.01f％ filled: %@ books", bookcaseModel.percentFull, bookcaseModel.booksArray];
+
     
     [cell.imageView setImage:[UIImage imageNamed:@"bookshelf1"]];
-    cell.textLabel.text = bookcaseModel.name ? bookcaseModel.name : [NSString stringWithFormat:@"Bookcase #%lu (%lu x %.1f cm)", indexPath.row, bookcaseModel.shelvesCount, bookcaseModel.width_cm];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%.01f％ filled: %@ books", bookcaseModel.percentFull, bookcaseModel.booksArray];
+    cell.textLabel.text = bookcase.name ? bookcase.name : [NSString stringWithFormat:@"Bookcase #%@ (%@ x %.1f cm)", bookcase.orderWhenListed, bookcase.shelves, bookcase.width.floatValue];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%.01f％ filled: %lu books", [bookcase percentFull], bookcase.volumes.count];
 }
 
     ///Just needed to fold when not in selected library.
@@ -443,9 +454,6 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
         DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
-//    DDLogDebug(@"frc.fetchedObjects = %@ (count: %lu)", frc.fetchedObjects, frc.fetchedObjects.count);
-    DDLogDebug(@"frc.fetchedObjects.count = %lu", frc.fetchedObjects.count);
-    
     
     NSArray *bookcasesMaybe = [frc.managedObjectContext executeFetchRequest:request error:nil];
     
@@ -459,43 +467,6 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     
     return frc;
 }
-
-
-    //What was this for again??
-/*
--(void)configureFetchedResultsController:(NSFetchedResultsController*)frc ForEntityName:(NSString*)entityName
-{
-    /**
-     *  1) The set of all [Entity Name]
-     *  2) ...arranged by userOrder,
-     *  3) ...then date created.
-     * /
-    dataManager = dataManager ? dataManager : [LBRDataManager sharedDataManager];
-    NSManagedObjectContext *managedObjectContext = dataManager.managedObjectContext;
-    [dataManager generateDefaultLibraryIfNeeded];
-    
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:entityName]; //(1)
-    
-        // Edit the sort key as appropriate.
-    NSSortDescriptor *orderSorter       = [NSSortDescriptor sortDescriptorWithKey:@"orderWhenListed" ascending:YES];
-    NSSortDescriptor *dateCreatedSorter = [NSSortDescriptor sortDescriptorWithKey:@"dateCreated" ascending:YES];
-    
-    request.fetchBatchSize = 20;
-    request.sortDescriptors = @[orderSorter, dateCreatedSorter];
-    
-        // Edit the section name key path and cache name if appropriate.
-        // nil for section name key path means "no sections".
-    frc = [[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:[NSString stringWithFormat:@"LBR_LibrarySelection-%@-CacheName", entityName]];
-    
-    NSError *error = nil;
-    if (![frc performFetch:&error]) {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. !!!:You should not use this function in a shipping application, although it may be useful during development.
-        DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
-}
-*/
 
 #pragma mark - === Fetched Results Controller Delegate methods ===
 
