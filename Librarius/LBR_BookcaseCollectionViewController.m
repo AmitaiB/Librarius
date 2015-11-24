@@ -116,8 +116,10 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     volumesArray = self.volumesFetchedResultsController.fetchedObjects;
         ///    [self precacheImages];
 //    [self.dataManager.currentLibrary shelveVolumesOnBookcasesAccordingToLayoutScheme:LBRLayoutSchemeDefault];
-    self.layout.shelvesNestedArray = [NSArray array];
-    self.layout.shelvesNestedArray = self.dataManager.transientLibraryLayoutInformation[kShelvesArray];
+
+        ///This is done in prepare for segue.
+        //    self.layout.shelvesNestedArray = [NSArray array];
+        //    self.layout.shelvesNestedArray = self.dataManager.transientLibraryLayoutInformation[kShelvesArray];
     [self refreshLayout];
     [self.collectionView.collectionViewLayout invalidateLayout];
 }

@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 +(NSString *)entityName;
 +(instancetype)insertNewObjectIntoContext:(NSManagedObjectContext *)context;
 
--(void)shelveVolumesOnBookcasesAccordingToLayoutScheme:(LBRLayoutScheme)layoutScheme;
+-(NSDictionary*)shelveVolumesOnBookcasesAccordingToLayoutScheme:(LBRLayoutScheme)layoutScheme;
 
 @end
 

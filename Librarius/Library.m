@@ -32,7 +32,7 @@
  4 - Reset the remaining volumes for the next cycle of the loop.
  */
     //TODO: This logic is flawed in SO many edge cases. Needs major overhauling.
--(void)shelveVolumesOnBookcasesAccordingToLayoutScheme:(LBRLayoutScheme)layoutScheme
+-(NSDictionary*)shelveVolumesOnBookcasesAccordingToLayoutScheme:(LBRLayoutScheme)layoutScheme
 {
     LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
     
@@ -57,6 +57,8 @@
     }
         //Add this library's layout plan to the public transient data.
     [dataManager.transientLibraryLayoutInformation setObject:libraryLayoutDict forKey:[NSString stringWithFormat:@"%@-%@", [Library entityName], self.name]];
+    
+    return libraryLayoutDict;
 }
 
 

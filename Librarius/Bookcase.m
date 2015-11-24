@@ -78,6 +78,7 @@
     BOOL currentShelfHasRoomForBook;
     BOOL thereAreMoreBooksToShelve;
     
+    if (booksArray != [NSNull null])
     for (NSUInteger idx = 0; idx < booksArray.count; idx++) {
         
         book                 = booksArray[idx];

@@ -19,4 +19,6 @@
 @property (nonatomic, strong) Bookcase *bookcaseOnDisplay;
 @property (nonatomic, strong) LBR_BookcaseLayout *layout;
 
+@property (nonatomic, strong) NSArray<NSArray*> *layoutArray;
+
 @end
