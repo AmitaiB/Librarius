@@ -24,8 +24,10 @@
 @property (nonatomic, assign) CGFloat interShelfSpacing;
 @property (nonatomic, strong, readonly) Bookcase *bookcase;
 @property (nonatomic, assign, readonly) NSUInteger widestShelfWidth;
+@property (nonatomic, assign, readonly) LBRLayoutScheme layoutScheme;
 
-@property (nonatomic, strong) NSArray *shelves;
+
+@property (nonatomic, strong) NSArray *shelvesNestedArray;
 
 
 @property (nonatomic, strong) NSArray<NSArray*>  *transientBookcaseLayoutModel;

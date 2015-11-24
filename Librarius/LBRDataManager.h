@@ -80,6 +80,6 @@
 -(void)giveBookcaseANameAndFullIfNeeded:(Bookcase*)bookcase;
 
 //    =============== Debug Related
--(void)resetLibrary:(Library*)library;
+-(void)refreshLibrary:(Library*)library;
 
 @end

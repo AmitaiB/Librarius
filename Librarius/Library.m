@@ -48,6 +48,9 @@
     
     for (Bookcase *bookcase in bookcasesInListOrder)
     {
+        if (!bookcase.name) bookcase.name = [NSString stringWithFormat:@"#%@", bookcase.orderWhenListed.stringValue];
+        
+        
         processedBooks        = [bookcase shelvedAndRemainingBooks:asYetUnshelvedVolumes]; //The magic happens here.
         asYetUnshelvedVolumes = processedBooks[kUnshelvedRemainder]; //sets up for the next loop iteration.
         [libraryLayoutDict setObject:processedBooks[kShelvesArray] forKey:[NSString stringWithFormat:@"%@-%@", [Bookcase entityName], bookcase.name]];

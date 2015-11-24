@@ -12,9 +12,11 @@
 #import <iAd/iAd.h>
 
 @class Bookcase;
+@class LBR_BookcaseLayout;
 @interface LBR_BookcaseCollectionViewController : UICollectionViewController <NSFetchedResultsControllerDelegate, UIPopoverPresentationControllerDelegate, UIAdaptivePresentationControllerDelegate>
 
 @property (nonatomic, strong) NSFetchedResultsController *volumesFetchedResultsController;
 @property (nonatomic, strong) Bookcase *bookcaseOnDisplay;
+@property (nonatomic, strong) LBR_BookcaseLayout *layout;
 
 @end

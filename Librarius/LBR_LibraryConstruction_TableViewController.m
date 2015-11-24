@@ -305,6 +305,9 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
         LBR_Bookcase_TableViewCell *senderCell = (LBR_Bookcase_TableViewCell*)sender;
         destinationVC.bookcaseOnDisplay        = senderCell.bookcase;
         dataManager.currentBookcase            = senderCell.bookcase;
+        [dataManager.currentLibrary shelveVolumesOnBookcasesAccordingToLayoutScheme:LBRLayoutSchemeDefault];
+        destinationVC.layout.shelvesNestedArray = dataManager.transientLibraryLayoutInformation[kShelvesArray];
+
     }
 }
 

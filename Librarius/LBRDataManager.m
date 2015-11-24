@@ -107,6 +107,9 @@ static NSString * const kUnknown = @"kUnknown";
     NSError *error = nil;
     self.libraries = [self.managedObjectContext executeFetchRequest:librariesFetchRequest error:&error];
     self.currentLibrary = self.libraries[0];
+    
+        //For DEBUG:
+//    [self refreshLibrary:self.currentLibrary];
 }
 
 - (void)saveContext
@@ -477,6 +480,97 @@ static NSString * const kUnknown = @"kUnknown";
         volume.dateModified = [volume.dateCreated copy];
     }
 }
+
+
+#pragma mark - == debug related ==
+
+    //Make a new Library object, copy all properties.
+    //Make new Volume objects from the old ones, copying all properties.
+    //Relate the new Volume objects to the new Library.
+    //Relate the new Library to the userRootCollection.
+    //Delete the old objects.
+    //New Library -> shelve the books.
+
+-(void)refreshLibrary:(Library *)oldLibrary
+{
+        //Managed Object Context
+    LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
+    NSManagedObjectContext *moc = dataManager.managedObjectContext;
+    [moc deleteObject:oldLibrary];
+    
+        //New Library
+    Library *newLibrary = [Library insertNewObjectIntoContext:moc];
+    newLibrary.dateCreated = [oldLibrary.dateCreated copy];
+    newLibrary.dateModified = [NSDate date];
+    newLibrary.libraryPhoto = [oldLibrary.libraryPhoto copy];
+    newLibrary.name = [oldLibrary.name copy];
+    newLibrary.orderWhenListed = [oldLibrary.orderWhenListed copy];
+    newLibrary.rootCollection = oldLibrary.rootCollection;
+    
+        //New Bookcases
+    [oldLibrary.bookcases enumerateObjectsUsingBlock:^(Bookcase * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [moc deleteObject:obj];
+        Bookcase *bookcase = [Bookcase insertNewObjectIntoContext:moc];
+        bookcase.library = newLibrary;
+        
+        bookcase.dateCreated = [obj.dateCreated copy];
+        bookcase.dateModified = [NSDate date];
+        bookcase.name = obj.name;
+        bookcase.orderWhenListed = obj.orderWhenListed;
+        bookcase.shelf_height = [obj.shelf_height copy];
+        bookcase.shelves = [obj.shelves copy];
+        bookcase.width = [obj.width copy];
+        
+        bookcase.shelvesArray = [obj.shelvesArray copy];
+    }];
+    
+        //New Volumes/Books
+    [oldLibrary.volumes enumerateObjectsUsingBlock:^(Volume * _Nonnull obj, BOOL * _Nonnull stop)
+    {
+        [moc deleteObject:obj];
+        Volume *volume           = [Volume insertNewObjectIntoContext:moc];
+        volume.library           = newLibrary;
+        
+        volume.author            = [obj.author copy];
+        volume.authorSurname     = [obj.authorSurname copy];
+        volume.avgRating         = [obj.avgRating copy];
+        volume.cover_art         = [obj.cover_art copy];
+        volume.cover_art_large   = [obj.cover_art_large copy];
+        volume.dateCreated       = [obj.dateCreated copy];
+        volume.dateModified      = [NSDate date];
+        volume.google_id         = [obj.google_id copy];
+        volume.height            = [obj.height copy];
+        volume.isbn10            = [obj.isbn10 copy];
+        volume.isbn13            = [obj.isbn13 copy];
+        volume.mainCategory      = [obj.mainCategory copy];
+        volume.pageCount         = [obj.pageCount copy];
+        volume.publDescription   = [obj.publDescription copy];
+        volume.published         = [obj.published copy];
+        volume.publisher         = [obj.publisher copy];
+        volume.rating            = [obj.rating copy];
+        volume.ratingsCount      = [obj.ratingsCount copy];
+        volume.subtitle          = [obj.subtitle copy];
+        volume.thickness         = [obj.thickness copy];
+        volume.title             = [obj.title copy];
+        volume.secondaryCategory = [obj.secondaryCategory copy];
+        volume.tertiaryCategory  = [obj.tertiaryCategory copy];
+        
+        [volume updateCoverArtModelIfNeeded];
+    }];
+    [dataManager saveContext];
+    dataManager.currentLibrary = newLibrary;
+}
+
+    //TODO: Find a place for this or delete it.
+/**
+ *** The Critical Business Logic ***
+ +Iterate over every cell,
+ -produce a layout-attributes object for each cell
+ --This is where we **encapsulate the messy logic**
+ and then cache the info in the layoutInformation
+ dictionary by indexPath.
+ */
+
 
 
 @end

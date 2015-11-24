@@ -91,6 +91,11 @@
     _cellCountForLongestRow = 0;
     _overrideVolumesToLayout = volumes;
     
+    
+    NSString *thisLibraryKEY  = [NSString stringWithFormat:@"%@-%@", [Library entityName], self.bookcase.library.name];
+    NSString *thisBookcaseKEY = [NSString stringWithFormat:@"%@-%@", [Bookcase entityName], self.bookcase.name];
+    _shelvesNestedArray = self.dataManager.transientLibraryLayoutInformation[thisLibraryKEY][thisBookcaseKEY];
+    
     [super registerClass:[LBRShelf_DecorationView class] forDecorationViewOfKind:[LBRShelf_DecorationView kind]];
     
     return self;
@@ -116,15 +121,17 @@
 }
 
 /*
--(NSArray *)shelves
+-(NSArray *)shelvesNestedArray
 {
-    if (!_shelves)
-        _shelves = self.dataManager.transientLibraryLayoutInformation;
-        
-    return _shelves;
+    if (_shelvesNestedArray == nil) {
+        NSString *thisLibraryKEY  = [NSString stringWithFormat:@"%@-%@", [Library entityName], self.bookcase.library.name];
+        NSString *thisBookcaseKEY = [NSString stringWithFormat:@"%@-%@", [Bookcase entityName], self.bookcase.name];
+        _shelvesNestedArray = self.dataManager.transientLibraryLayoutInformation[thisLibraryKEY][thisBookcaseKEY];
+    }
+    
+    return _shelvesNestedArray;
 }
 */
-
 /**
  The key property of the BookcaseModel object (deprecated) was the Array of Arrays. The primary array was the
  vertical representation of the shelf, and the secondary arrays were each a shelf with volume objects...
@@ -215,31 +222,22 @@
         /// InsetL-[cell#1]-#1-[cell#2]-#2-[cell#3]-InsetR
         /// , so we subtract one inter_spacing.
     CGFloat xMax = INSET_LEFT + (kDefaulCellDimension + self.interItemSpacing) * cellCountForLongestRow - self.interItemSpacing + INSET_RIGHT; // - (self.collectionView.contentInset.left + self.collectionView.contentInset.right);
-    CGFloat yMax = INSET_TOP + (kDefaulCellDimension + self.interShelfSpacing) * self.shelves.count - self.interShelfSpacing + INSET_BOTTOM;
+    CGFloat yMax = INSET_TOP + (kDefaulCellDimension + self.interShelfSpacing) * self.shelvesNestedArray.count - self.interShelfSpacing + INSET_BOTTOM;
     
     return CGSizeMake(xMax, yMax);
 }
 
 -(NSUInteger)extrapolatedCellCountForLongestRow
 {
-    for (NSArray *shelf in self.shelves)
+    for (NSArray *shelf in self.shelvesNestedArray)
         self.cellCountForLongestRow = MAX(self.cellCountForLongestRow, shelf.count);
     
     return self.cellCountForLongestRow;
 }
 
 
--(void)setBookcase:(Bookcase *)bookcase
-{
-    _bookcase = bookcase;
-    
-    NSString *thisLibraryKEY  = [NSString stringWithFormat:@"%@-%@", [Library entityName], self.bookcase.library.name];
-    NSString *thisBookcaseKEY = [NSString stringWithFormat:@"%@-%@", [Bookcase entityName], self.bookcase.name];
-    self.shelves = self.dataManager.transientLibraryLayoutInformation[thisLibraryKEY][thisBookcaseKEY];
-}
-
 -(void)incrementBookcaseModelByOneBook {
-    NSArray *currentShelf = self.shelves[self.currentShelfIndex];
+    NSArray *currentShelf = self.shelvesNestedArray[self.currentShelfIndex];
 
         //If more books are supposed to be on this shelf, then simply increment the book, and repeat.
     if (self.bookOnShelfCounter < currentShelf.count) {
@@ -294,7 +292,7 @@
 //        NSUInteger cellCount = [self.collectionView numberOfItemsInSection:sectionIndex];
         
 //        NSUInteger rows = ceilf(cellCount/(CGFloat)cellsPerRow);
-        NSUInteger rows = self.shelves.count;
+        NSUInteger rows = self.shelvesNestedArray.count;
         
         for (NSInteger row = 0; row < rows; row++) {
             yPosition += kDefaulCellDimension;

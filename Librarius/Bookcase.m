@@ -41,6 +41,7 @@
     return bookcase;
 }
 
+
 -(CGFloat)percentFull
 {
     CGFloat totalShelfSpace = self.width.floatValue * self.shelves.floatValue;
@@ -51,6 +52,7 @@
     
     return occupiedShelfSpace / totalShelfSpace * 100;
 }
+
 
     ///This needs to return a dictionary to replace these two properties...OR, make a Value Transformer.
     ///@property (nonatomic, strong) NSArray<NSArray *> *shelves;
@@ -120,9 +122,13 @@
     }
     shelvesArray = [NSArray arrayWithArray:mutableShelves];
     
-    NSDictionary *temp = @{kShelvesArray : shelvesArray,
-                           kUnshelvedRemainder : unshelvedRemainder //.count? unshelvedRemainder : @"All books shelved."
-                           };
+        //Try adding copies, rather than pointers to objects that will go out of scope?
+    NSMutableDictionary *temp = [NSMutableDictionary dictionary];
+//  @{kShelvesArray : [shelvesArray copy],
+//                           kUnshelvedRemainder : [unshelvedRemainder copy] //.count? unshelvedRemainder : @"All books shelved."
+//                           };
+    temp[kShelvesArray] = [shelvesArray copy];
+    temp[kUnshelvedRemainder] = unshelvedRemainder.count? [unshelvedRemainder copy] : [NSNull null];
     
     return temp;
 }

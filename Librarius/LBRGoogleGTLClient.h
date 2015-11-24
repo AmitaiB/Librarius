@@ -9,6 +9,10 @@
 #import <Foundation/Foundation.h>
 #import <GTLBooks.h>
 
+/**
+ http://isbndb.com/api/v2/docs/books HAS DDN (Dewey decimal number) AND LOC (Library of Congress) INFORMATION!
+ */
+
 @class Volume;
 @class LBRDataManager;
 @interface LBRGoogleGTLClient : NSObject

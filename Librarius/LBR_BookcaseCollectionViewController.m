@@ -37,6 +37,7 @@
 #import "UIView+ConfigureForAutoLayout.h"
 #import "UIStepper+FlatUI.h"
 #import "UIView+ABB_Categories.h"
+#import "Library.h"
 
 
 @interface LBR_BookcaseCollectionViewController ()
@@ -68,7 +69,6 @@
     UISegmentedControl *layoutChangesSegmentedControl;
     
     UICollectionViewFlowLayout *standardFlowLayout;
-    LBR_BookcaseLayout *layout;
     NSArray <Volume*> *volumesArray;
     
         ///THIS MIGHT WORK with a Dictionary instead of an array:
@@ -105,7 +105,6 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
             ///???: Huh?
     }
         
-    [self refreshLayout];
     
     
         //    layout = [LBR_BookcaseLayout new];
@@ -116,6 +115,11 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
 
     volumesArray = self.volumesFetchedResultsController.fetchedObjects;
         ///    [self precacheImages];
+//    [self.dataManager.currentLibrary shelveVolumesOnBookcasesAccordingToLayoutScheme:LBRLayoutSchemeDefault];
+    self.layout.shelvesNestedArray = [NSArray array];
+    self.layout.shelvesNestedArray = self.dataManager.transientLibraryLayoutInformation[kShelvesArray];
+    [self refreshLayout];
+    [self.collectionView.collectionViewLayout invalidateLayout];
 }
 
 
@@ -131,7 +135,7 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
                                      initWithScheme:LBRLayoutSchemeDefault
                                      maxShelves:self.bookcaseOnDisplay.shelves.integerValue
                                      shelfWidth_cm:self.bookcaseOnDisplay.width.floatValue forVolumes:nil];
-    layout = newLayout;
+    self.layout = newLayout;
     [self.collectionView setCollectionViewLayout:newLayout animated:YES];
 }
 
@@ -180,11 +184,11 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
             //Necessary to get the view to initialize the properties we want to reference.
         [popoverVC view];
         
-        popoverVC.popoverNumShelves       = [layout.bookcase.shelves integerValue];
-        popoverVC.numShelvesStepper.value = [layout.bookcase.shelves integerValue];
+        popoverVC.popoverNumShelves       = [self.layout.bookcase.shelves integerValue];
+        popoverVC.numShelvesStepper.value = [self.layout.bookcase.shelves integerValue];
         
-        popoverVC.popoverShelfWidth       = [layout.bookcase.width floatValue];
-        popoverVC.shelfWidthStepper.value = [layout.bookcase.width floatValue];
+        popoverVC.popoverShelfWidth       = [self.layout.bookcase.width floatValue];
+        popoverVC.shelfWidthStepper.value = [self.layout.bookcase.width floatValue];
         
         
         [popoverVC.numShelvesStepper addTarget:self action:@selector(numShelvesStepperValueDidChange) forControlEvents:UIControlEventValueChanged];
@@ -497,7 +501,7 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     NSString *selectedLayout = [layoutChangesSegmentedControl titleForSegmentAtIndex:layoutChangesSegmentedControl.selectedSegmentIndex];
     
     if ([selectedLayout isEqualToString:GenreAuthorDateLayoutSchemeID]) {
-        [self.collectionView setCollectionViewLayout:layout animated:YES];
+        [self.collectionView setCollectionViewLayout:self.layout animated:YES];
     }
     
     
