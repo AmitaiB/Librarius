@@ -868,12 +868,6 @@
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                         <animations/>
                                     </imageView>
-                                    <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Px-hT-9Zr" userLabel="Scanner View (new)">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                        <animations/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jhT-Rf-xbA">
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                         <animations/>
@@ -883,10 +877,25 @@
                                             <color key="titleColor" red="1" green="0.85555930989999995" blue="0.4797239472" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <variation key="widthClass=compact" fixedFrame="YES">
-                                            <rect key="frame" x="20" y="25" width="61" height="30"/>
+                                            <rect key="frame" x="20" y="25" width="83" height="30"/>
                                         </variation>
                                         <connections>
                                             <action selector="resetButtonTapped:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="ZzL-ma-4Wc"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MsB-ts-rhf">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <animations/>
+                                        <color key="backgroundColor" red="0.1215686275" green="0.69411764710000001" blue="0.54117647059999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="15"/>
+                                        <state key="normal" title="Log Books">
+                                            <color key="titleColor" red="0.73602955400000003" green="0.32217112879999998" blue="0.79607843140000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <variation key="widthClass=compact" fixedFrame="YES">
+                                            <rect key="frame" x="20" y="63" width="83" height="30"/>
+                                        </variation>
+                                        <connections>
+                                            <action selector="logBooksButtonTapped:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="pma-n8-dQv"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcH-IU-Ezd" userLabel="Flashlight Toggle Button">
@@ -900,6 +909,12 @@
                                             <action selector="lightToggleButtonTapped:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="BQI-I4-0Xp"/>
                                         </connections>
                                     </button>
+                                    <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Px-hT-9Zr" userLabel="Scanner View (new)">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                        <animations/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </view>
                                 </subviews>
                                 <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -921,9 +936,10 @@
                                 <variation key="default">
                                     <mask key="subviews">
                                         <exclude reference="Iy8-FC-gUc"/>
-                                        <exclude reference="3Px-hT-9Zr"/>
                                         <exclude reference="jhT-Rf-xbA"/>
+                                        <exclude reference="MsB-ts-rhf"/>
                                         <exclude reference="dcH-IU-Ezd"/>
+                                        <exclude reference="3Px-hT-9Zr"/>
                                     </mask>
                                     <mask key="constraints">
                                         <exclude reference="1gq-3B-vA1"/>
@@ -941,9 +957,10 @@
                                 <variation key="widthClass=compact">
                                     <mask key="subviews">
                                         <include reference="Iy8-FC-gUc"/>
-                                        <include reference="3Px-hT-9Zr"/>
                                         <include reference="jhT-Rf-xbA"/>
+                                        <include reference="MsB-ts-rhf"/>
                                         <include reference="dcH-IU-Ezd"/>
+                                        <include reference="3Px-hT-9Zr"/>
                                     </mask>
                                     <mask key="constraints">
                                         <include reference="1gq-3B-vA1"/>

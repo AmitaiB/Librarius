@@ -54,6 +54,20 @@ static NSString * const kUnknown = @"kUnknown";
     DDLogVerbose(@"Fetched volumes from Core Data: %@", [results description]);
 }
 
+-(void)logCurrentLibraryTitles
+{
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[Volume entityName]];
+    NSArray <Volume*> *results = [self.managedObjectContext executeRequest:request error:nil];
+    __block NSMutableArray <NSString*> *prettyResults = [NSMutableArray array];
+    [results enumerateObjectsUsingBlock:^(Volume * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [prettyResults addObject:[obj fullTitle]];
+    }];
+    DDLogVerbose(@"Titles of fetched volumes from Core Data:");
+    for (NSString *title in prettyResults) {
+        DDLogVerbose(@"\n%@", title);
+    }
+    DDLogVerbose(@"=== END ===");
+}
 
 /**
  

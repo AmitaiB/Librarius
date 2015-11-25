@@ -34,6 +34,7 @@
 
     //CLEAN: debug only
 -(void)logCurrentLibrary;
+-(void)logCurrentLibraryTitles;
 
 
 //============== CoreData @interface

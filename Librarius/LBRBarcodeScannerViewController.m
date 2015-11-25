@@ -71,7 +71,7 @@
 
     //DEBUG:
 - (IBAction)resetButtonTapped:(id)sender;
-
+- (IBAction)logBooksButtonTapped:(id)sender;
 
 
 @end
@@ -577,5 +577,14 @@ DBLG
     dataManger.userRootCollection = nil;
     dataManger.currentLibrary = nil;
     [dataManger.managedObjectContext reset];
+    [dataManger saveContext];
+    [dataManger logCurrentLibrary];
 }
+
+- (IBAction)logBooksButtonTapped:(id)sender
+{
+    [dataManager logCurrentLibraryTitles];
+}
+
+
 @end
