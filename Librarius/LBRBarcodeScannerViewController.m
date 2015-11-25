@@ -182,7 +182,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
 
 - (IBAction)saveScannedBooksToCoreDataButtonTapped:(id)sender
 {
-    [dataManager saveContextAndCheckForDuplicateVolumes:YES];
+    [dataManager saveContext];
     [dataManager logCurrentLibrary];
 }
 

@@ -137,12 +137,12 @@ static NSString * const kUnknown = @"kUnknown";
 }
 
 
-- (void)saveContextAndCheckForDuplicateVolumes:(BOOL)permissionToCheckForDuplicates
+- (void)saveContext
 {
     NSError *error = nil;
     if (self.managedObjectContext != nil) {
-        if (permissionToCheckForDuplicates) [self preSaveCheckForDuplicateVolumes];
-        
+        [self preSaveCheckForDuplicateVolumes];
+    
         if ([self.managedObjectContext hasChanges] && ![self.managedObjectContext save:&error]) {
                 // Replace this implementation with code to handle the error appropriately.
                 // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
@@ -161,7 +161,7 @@ static NSString * const kUnknown = @"kUnknown";
     NSPredicate *isbn10Predicate;
     NSPredicate *isbn13Predicate;
     NSCompoundPredicate *isbnCompoundPredicate;
-    NSSet<Volume*> *newVolumesToCheck = [self.managedObjectContext insertedObjects];
+    NSSet<Volume*> *newVolumesToCheck = [self.managedObjectContext.insertedObjects filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"self isMemberOfClass: %@", [Volume class]]] ;
     
     for (Volume *volume in newVolumesToCheck) {
         isbn = [volume isbn];
@@ -405,7 +405,7 @@ static NSString * const kUnknown = @"kUnknown";
         }];
     }
     
-    [self saveContextAndCheckForDuplicateVolumes:YES];
+    [self saveContext];
     [self fetchData];
 }
 
@@ -437,7 +437,7 @@ static NSString * const kUnknown = @"kUnknown";
     {
         RootCollection *newRootCollection = [RootCollection insertNewObjectIntoContext:self.managedObjectContext];
         newRootCollection.libraries = [NSSet setWithArray:self.libraries];
-        [self saveContextAndCheckForDuplicateVolumes:NO];
+        [self saveContext];
         [defaults setURL:newRootCollection.objectID.URIRepresentation forKey:[RootCollection entityName]];
         
         return newRootCollection;
@@ -466,7 +466,7 @@ static NSString * const kUnknown = @"kUnknown";
             [self generateDefaultBookcaseIfNeeded];
             
                 //Saving changes the objectID from temp to permanent.
-            [self saveContextAndCheckForDuplicateVolumes:NO];
+            [self saveContext];
             
                 ///???: Why do I need this?
             [[NSUserDefaults standardUserDefaults] setURL:newDefaultLibrary.objectID.URIRepresentation forKey:[NSString stringWithFormat:@"Library-%@", newDefaultLibrary.orderWhenListed]];
@@ -502,7 +502,7 @@ static NSString * const kUnknown = @"kUnknown";
         [self generateDefaultBookcaseIfNeeded];
         
             //Saving changes the objectID from temp to permanent.
-        [self saveContextAndCheckForDuplicateVolumes:NO];
+        [self saveContext];
         
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -643,7 +643,7 @@ static NSString * const kUnknown = @"kUnknown";
         
         [volume updateCoverArtModelIfNeeded];
     }];
-    [dataManager saveContextAndCheckForDuplicateVolumes:YES];
+    [dataManager saveContext];
     dataManager.currentLibrary = newLibrary;
 }
 

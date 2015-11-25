@@ -69,7 +69,7 @@
 
 -(void) fetchData;
 - (void) saveContext;
-- (void)saveContextAndCheckForDuplicateVolumes:(BOOL)permissionToCheckForDuplicates;
+//- (void)saveContextAndCheckForDuplicateVolumes:(BOOL)permissionToCheckForDuplicates;
 
 
 -(void) generateUserRootCollectionIfNeeded; ///Should only be needed first use.

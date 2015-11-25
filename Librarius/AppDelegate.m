@@ -132,7 +132,7 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 //    [MagicalRecord cleanUp];
     LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
-    [dataManager saveContextAndCheckForDuplicateVolumes:YES];
+    [dataManager saveContext];
 }
 
 
