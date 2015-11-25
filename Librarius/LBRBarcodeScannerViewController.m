@@ -58,7 +58,8 @@
 @property (nonatomic, strong) LBRGoogleGTLClient *googleClient;
 
 @property (nonatomic, strong) NSArray *booksArray;
-@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) NSFetchedResultsController *volumesFetchedResultsController;
+
 
 @property (nonatomic) BOOL isConfigured;
 
@@ -186,24 +187,25 @@ static NSString * const volumeNib          = @"volumePresentationView";
     [dataManager logCurrentLibrary];
 }
 
-    //FIXME: Supposed to check the DataStore to see if this volume exists in storage yet, or not.
-    //???: Shouldn't be needed, now that we rely only on CoreData objects.
-//-(BOOL)isNewUniqueObject:(LBRParsedVolume *)volumeToCheck
-//{
-//    NSArray *booksArray = self.fetchedResultsController.fetchedObjects;
-//    
-//    NSUInteger indexOfMatchingISBN = [booksArray indexOfObjectPassingTest:^BOOL(Volume *book, NSUInteger idx, BOOL * _Nonnull stop) {
-//        return ([book.isbn isEqualToString:volumeToCheck.isbn]);
-//    }];
-//    BOOL isUniqueISBN = (indexOfMatchingISBN == NSNotFound);
-//    
-//    return isUniqueISBN;
-//}
-
-- (NSFetchedResultsController *)fetchedResultsController
+  /**
+   FIXME: Needs to check DataStore for duplicates - same book could be two different NSManagedObjects (diff. ID#s).
+*/
+-(BOOL)isNewUniqueObject:(Volume *)volumeToCheck
 {
-    if (_fetchedResultsController != nil) {
-        return _fetchedResultsController;
+    NSArray *booksArray = self.volumesFetchedResultsController.fetchedObjects;
+    
+    NSUInteger indexOfMatchingISBN = [booksArray indexOfObjectPassingTest:^BOOL(Volume *book, NSUInteger idx, BOOL * _Nonnull stop) {
+        return ([book.isbn isEqualToString:volumeToCheck.isbn]);
+    }];
+    BOOL isUniqueISBN = (indexOfMatchingISBN == NSNotFound);
+    
+    return isUniqueISBN;
+}
+
+-(NSFetchedResultsController *)volumesFetchedResultsController
+{
+    if (_volumesFetchedResultsController != nil) {
+        return _volumesFetchedResultsController;
     }
     return [[LBRDataManager sharedDataManager]
             currentLibraryVolumesFetchedResultsController:self];
