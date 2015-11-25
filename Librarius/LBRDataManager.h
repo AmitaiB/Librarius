@@ -35,6 +35,7 @@
     //CLEAN: debug only
 -(void)logCurrentLibrary;
 -(void)logCurrentLibraryTitles;
+-(void)deleteAllObjectsOfEntityName:(NSString*)entityName;
 
 
 //============== CoreData @interface
@@ -67,7 +68,9 @@
 
 
 -(void) fetchData;
--(void) saveContext;
+- (void) saveContext;
+- (void)saveContextAndCheckForDuplicateVolumes:(BOOL)permissionToCheckForDuplicates;
+
 
 -(void) generateUserRootCollectionIfNeeded; ///Should only be needed first use.
 

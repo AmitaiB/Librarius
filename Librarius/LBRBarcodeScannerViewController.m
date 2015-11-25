@@ -182,7 +182,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
 
 - (IBAction)saveScannedBooksToCoreDataButtonTapped:(id)sender
 {
-    [dataManager saveContext];
+    [dataManager saveContextAndCheckForDuplicateVolumes:YES];
     [dataManager logCurrentLibrary];
 }
 
@@ -576,9 +576,13 @@ DBLG
     LBRDataManager *dataManger = [LBRDataManager sharedDataManager];
     dataManger.userRootCollection = nil;
     dataManger.currentLibrary = nil;
-    [dataManger.managedObjectContext reset];
-    [dataManger saveContext];
-    [dataManger logCurrentLibrary];
+    [dataManger deleteAllObjectsOfEntityName:[Volume entityName]];
+    [dataManger deleteAllObjectsOfEntityName:@"Bookcase"];
+    [dataManger deleteAllObjectsOfEntityName:[Library entityName]];
+    [dataManger deleteAllObjectsOfEntityName:[RootCollection entityName]];
+//    [dataManger.managedObjectContext reset];
+//    [dataManger saveContext];
+//    [dataManger logCurrentLibrary];
 }
 
 - (IBAction)logBooksButtonTapped:(id)sender

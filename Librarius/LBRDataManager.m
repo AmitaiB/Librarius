@@ -57,17 +57,26 @@ static NSString * const kUnknown = @"kUnknown";
 -(void)logCurrentLibraryTitles
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[Volume entityName]];
-    NSArray <Volume*> *results = [self.managedObjectContext executeRequest:request error:nil];
+    NSArray <Volume*> *results = [self.managedObjectContext executeFetchRequest:request error:nil];
     __block NSMutableArray <NSString*> *prettyResults = [NSMutableArray array];
     [results enumerateObjectsUsingBlock:^(Volume * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [prettyResults addObject:[obj fullTitle]];
     }];
     DDLogVerbose(@"Titles of fetched volumes from Core Data:");
     for (NSString *title in prettyResults) {
-        DDLogVerbose(@"\n%@", title);
+        DDLogVerbose(@"\t%@", title);
     }
     DDLogVerbose(@"=== END ===");
 }
+
+-(void)deleteAllObjectsOfEntityName:(NSString*)entityName
+{
+    NSFetchRequest *deleteRequest = [[NSFetchRequest alloc] initWithEntityName:entityName];
+    NSBatchDeleteRequest *batchDeleteRequest = [[NSBatchDeleteRequest alloc] initWithFetchRequest:deleteRequest];
+    NSError *deleteError = nil;
+    [self.persistentStoreCoordinator executeRequest:batchDeleteRequest withContext:self.managedObjectContext error:&deleteError];
+}
+
 
 /**
  
@@ -116,7 +125,7 @@ static NSString * const kUnknown = @"kUnknown";
     ///Get the root item, "RootCollections".
 - (void)fetchData
 {
-    [self generateDefaultLibraryIfNeeded];
+//    [self generateDefaultLibraryIfNeeded];
     NSFetchRequest *librariesFetchRequest = [NSFetchRequest fetchRequestWithEntityName:[Library entityName]];
     librariesFetchRequest.sortDescriptors = @[self.sortDescriptors[kOrderSorter]];
     NSError *error = nil;
@@ -127,10 +136,13 @@ static NSString * const kUnknown = @"kUnknown";
 //    [self refreshLibrary:self.currentLibrary];
 }
 
-- (void)saveContext
+
+- (void)saveContextAndCheckForDuplicateVolumes:(BOOL)permissionToCheckForDuplicates
 {
     NSError *error = nil;
     if (self.managedObjectContext != nil) {
+        if (permissionToCheckForDuplicates) [self preSaveCheckForDuplicateVolumes];
+        
         if ([self.managedObjectContext hasChanges] && ![self.managedObjectContext save:&error]) {
                 // Replace this implementation with code to handle the error appropriately.
                 // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
@@ -140,6 +152,29 @@ static NSString * const kUnknown = @"kUnknown";
     }
 }
 
+
+- (void)preSaveCheckForDuplicateVolumes
+{
+    NSError *error;
+    NSString *isbn;
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[Volume entityName]];
+    NSPredicate *isbn10Predicate;
+    NSPredicate *isbn13Predicate;
+    NSCompoundPredicate *isbnCompoundPredicate;
+    NSSet<Volume*> *newVolumesToCheck = [self.managedObjectContext insertedObjects];
+    
+    for (Volume *volume in newVolumesToCheck) {
+        isbn = [volume isbn];
+        isbn10Predicate = [NSPredicate predicateWithFormat:@"%K == %@", @"isbn10", isbn];
+        isbn13Predicate = [NSPredicate predicateWithFormat:@"%K == %@", @"isbn13", isbn];
+        isbnCompoundPredicate = [NSCompoundPredicate orPredicateWithSubpredicates:@[isbn10Predicate, isbn13Predicate]];
+        
+        request.predicate = isbnCompoundPredicate;
+        BOOL matches = [self.managedObjectContext countForFetchRequest:request error:&error];
+        
+        if (matches) [self.managedObjectContext deleteObject:volume];
+    }
+}
 
 #pragma mark - *Core Data stack*
 #pragma mark NSManagedObjectContext
@@ -245,7 +280,7 @@ static NSString * const kUnknown = @"kUnknown";
 -(NSFetchedResultsController *)currentLibraryVolumesFetchedResultsController
 {
         ///!!!: Ugly! Get rid of it!
-    [self generateDefaultLibraryIfNeeded];
+//    [self generateDefaultLibraryIfNeeded];
     
         //Section Key Path (nil == "no sections")
     NSString *sectionNameKeyPath = @"mainCategory";
@@ -303,7 +338,7 @@ static NSString * const kUnknown = @"kUnknown";
      *  3) ...then date created.
      */
         //Ugly! get rid of it.
-    [self generateDefaultLibraryIfNeeded];
+//        [self generateDefaultLibraryIfNeeded];
     
     
         // Edit the section name key path and cache name if appropriate.
@@ -366,10 +401,11 @@ static NSString * const kUnknown = @"kUnknown";
         [googleClient queryForVolumeWithString:ISBN withCallback:^(GTLBooksVolume *responseVolume) {
             Volume *volume = [Volume insertNewObjectIntoContext:self.managedObjectContext initializedFromGoogleBooksObject:responseVolume withCovertArt:YES];
             [volume.correspondingImageData downloadImagesIfNeeded];
+            volume.library = self.currentLibrary;
         }];
     }
     
-    [self saveContext];
+    [self saveContextAndCheckForDuplicateVolumes:YES];
     [self fetchData];
 }
 
@@ -401,7 +437,7 @@ static NSString * const kUnknown = @"kUnknown";
     {
         RootCollection *newRootCollection = [RootCollection insertNewObjectIntoContext:self.managedObjectContext];
         newRootCollection.libraries = [NSSet setWithArray:self.libraries];
-        [self saveContext];
+        [self saveContextAndCheckForDuplicateVolumes:NO];
         [defaults setURL:newRootCollection.objectID.URIRepresentation forKey:[RootCollection entityName]];
         
         return newRootCollection;
@@ -430,7 +466,7 @@ static NSString * const kUnknown = @"kUnknown";
             [self generateDefaultBookcaseIfNeeded];
             
                 //Saving changes the objectID from temp to permanent.
-            [self saveContext];
+            [self saveContextAndCheckForDuplicateVolumes:NO];
             
                 ///???: Why do I need this?
             [[NSUserDefaults standardUserDefaults] setURL:newDefaultLibrary.objectID.URIRepresentation forKey:[NSString stringWithFormat:@"Library-%@", newDefaultLibrary.orderWhenListed]];
@@ -466,7 +502,7 @@ static NSString * const kUnknown = @"kUnknown";
         [self generateDefaultBookcaseIfNeeded];
         
             //Saving changes the objectID from temp to permanent.
-        [self saveContext];
+        [self saveContextAndCheckForDuplicateVolumes:NO];
         
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -476,7 +512,7 @@ static NSString * const kUnknown = @"kUnknown";
 
 -(void)generateDefaultBookcaseIfNeeded
 {
-    (self.currentLibrary)? :[self generateDefaultLibraryIfNeeded];
+//    (self.currentLibrary)? :[self generateDefaultLibraryIfNeeded];
     
     if (self.currentLibrary.bookcases.count) {
         self.currentBookcase = [self.currentLibrary.bookcases firstObject];
@@ -607,7 +643,7 @@ static NSString * const kUnknown = @"kUnknown";
         
         [volume updateCoverArtModelIfNeeded];
     }];
-    [dataManager saveContext];
+    [dataManager saveContextAndCheckForDuplicateVolumes:YES];
     dataManager.currentLibrary = newLibrary;
 }
 
