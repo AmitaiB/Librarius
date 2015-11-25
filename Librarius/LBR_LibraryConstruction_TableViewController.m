@@ -77,8 +77,8 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
-        //For the initial loading.git
-    [self respondToLibraryItemSelectionAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
+        ///For the initial loading.git UPDATE: NO!
+//    [self respondToLibraryItemSelectionAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -307,7 +307,8 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
         dataManager.currentBookcase            = senderCell.bookcase;
         NSDictionary *shelveResultsDict = [dataManager.currentLibrary shelveVolumesOnBookcasesAccordingToLayoutScheme:LBRLayoutSchemeDefault];
         destinationVC.layoutArray = shelveResultsDict[kShelvesArray];
-        destinationVC.layout.shelvesNestedArray = dataManager.transientLibraryLayoutInformation[kShelvesArray];
+            ///CLEAN: Destroy me!
+            //        destinationVC.layout.shelvesNestedArray = dataManager.transientLibraryLayoutInformation[kShelvesArray];
 
     }
 }

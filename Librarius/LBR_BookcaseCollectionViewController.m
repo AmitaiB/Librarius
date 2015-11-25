@@ -100,27 +100,12 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     self.collectionView.directionalLockEnabled = YES;
     self.canDisplayBannerAds = YES;
     
-    if (self.bookcaseOnDisplay)
-    {
-            ///???: Huh?
-    }
-        
-    
-    
-        //    layout = [LBR_BookcaseLayout new];
-//    [self.collectionView setCollectionViewLayout:layout];
-    
     self.collectionView.backgroundColor = [UIColor cloudsColor];
     self.clearsSelectionOnViewWillAppear = NO;
 
     volumesArray = self.volumesFetchedResultsController.fetchedObjects;
-        ///    [self precacheImages];
-//    [self.dataManager.currentLibrary shelveVolumesOnBookcasesAccordingToLayoutScheme:LBRLayoutSchemeDefault];
 
-        ///This is done in prepare for segue.
-        //    self.layout.shelvesNestedArray = [NSArray array];
-        //    self.layout.shelvesNestedArray = self.dataManager.transientLibraryLayoutInformation[kShelvesArray];
-    [self refreshLayout];
+    [self refreshLayoutWithBookcaseSize:CGSizeMake(self.bookcaseOnDisplay.width.floatValue, self.bookcaseOnDisplay.shelves.floatValue)];
     [self.collectionView.collectionViewLayout invalidateLayout];
 }
 
@@ -131,12 +116,13 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
 //    [self refreshLayout];
 //}
 
--(void)refreshLayout
+-(void)refreshLayoutWithBookcaseSize:(CGSize)bookcaseSize
 {
     LBR_BookcaseLayout *newLayout = [[LBR_BookcaseLayout alloc]
                                      initWithScheme:LBRLayoutSchemeDefault
-                                     maxShelves:self.bookcaseOnDisplay.shelves.integerValue
-                                     shelfWidth_cm:self.bookcaseOnDisplay.width.floatValue forVolumes:nil];
+                                     maxShelves:bookcaseSize.height
+                                     shelfWidth_cm:bookcaseSize.width
+                                     forVolumes:nil];
     self.layout = newLayout;
     [self.collectionView setCollectionViewLayout:newLayout animated:YES];
 }
@@ -205,25 +191,20 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
 #pragma mark - === UIPopoverPresentationController Delegate ===
 
     //CLEAN: Unused code(?)
--(void)prepareForPopoverPresentation:(UIPopoverPresentationController *)popoverPresentationController
-{
-    
+/*
+-(void)prepareForPopoverPresentation:(UIPopoverPresentationController *)popoverPresentationController {
 }
+*/
 
 -(void)popoverPresentationControllerDidDismissPopover:(UIPopoverPresentationController *)popoverPresentationController
 {
     self.bookcaseOnDisplay.shelves = @(popoverVC.numShelvesStepper.value);
     self.bookcaseOnDisplay.width   = @(popoverVC.shelfWidthStepper.value);
-    [self refreshLayout];
-
-        //CLEAN: Once it works, of course.
-//    LBR_BookcaseLayout *newLayout = [[LBR_BookcaseLayout alloc] initWithScheme:LBRLayoutSchemeGenreAuthorDate maxShelves:popoverVC.numShelvesStepper.value shelfWidth_cm:popoverVC.shelfWidthStepper.value];
-//        //???:
-//    layout = newLayout;
-//    [self.collectionView setCollectionViewLayout:newLayout animated:YES];
+    CGSize bookcaseSize = CGSizeMake(self.bookcaseOnDisplay.width.floatValue, self.bookcaseOnDisplay.shelves.floatValue);
+    [self refreshLayoutWithBookcaseSize:bookcaseSize];
 }
 
-    //Read-only property, can only be set via this delegate method. `..None` stops it from being a full-screen view.
+    ///Read-only property, can only be set via this delegate method. `..None` stops it from being a full-screen view.
 -(UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller
 {
     return UIModalPresentationNone;

@@ -55,8 +55,9 @@
         asYetUnshelvedVolumes = processedBooks[kUnshelvedRemainder]; //sets up for the next loop iteration.
         [libraryLayoutDict setObject:processedBooks[kShelvesArray] forKey:[NSString stringWithFormat:@"%@-%@", [Bookcase entityName], bookcase.name]];
     }
-        //Add this library's layout plan to the public transient data.
-    [dataManager.transientLibraryLayoutInformation setObject:libraryLayoutDict forKey:[NSString stringWithFormat:@"%@-%@", [Library entityName], self.name]];
+        ///Add this library's layout plan to the public transient data.
+        ///CLEAN: Destroy me!
+//    [dataManager.transientLibraryLayoutInformation setObject:libraryLayoutDict forKey:[NSString stringWithFormat:@"%@-%@", [Library entityName], self.name]];
     
     return libraryLayoutDict;
 }

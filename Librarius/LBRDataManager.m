@@ -79,17 +79,18 @@ static NSString * const kUnknown = @"kUnknown";
  2nd Layer: Bookcases
  3rd Layer: Shelves-space of the bookcase
  4th Layer: Shelfspace of the particular shelf
- 
- This is a (kludgey, true) workaround the inability to store NSArrays or
- other collections in core data.
- */
--(NSMutableDictionary *)transientLibraryLayoutInformation
-{
-    if (_transientLibraryLayoutInformation == nil)
-        _transientLibraryLayoutInformation = [NSMutableDictionary new];
-        
-    return _transientLibraryLayoutInformation;
-}
+
+ ///CLEAN: Destroy me!
+// This is a (kludgey, true) workaround the inability to store NSArrays or
+// other collections in core data.
+// */
+//-(NSMutableDictionary *)transientLibraryLayoutInformation
+//{
+//    if (_transientLibraryLayoutInformation == nil)
+//        _transientLibraryLayoutInformation = [NSMutableDictionary new];
+//        
+//    return _transientLibraryLayoutInformation;
+//}
 
 
     // ===================== CoreData additions here
@@ -393,11 +394,45 @@ static NSString * const kUnknown = @"kUnknown";
     }
 }
 
+-(Library *)currentLibrary
+{
+    if (_currentLibrary != nil) {
+        return _currentLibrary;
+    }
+    else
+    {
+        if (self.userRootCollection.libraries.count >= 1)
+        {
+             return _currentLibrary = [self.userRootCollection firstLibrary];
+        }
+        else
+        {
+            Library *newDefaultLibrary = [Library insertNewObjectIntoContext:self.managedObjectContext];
+            newDefaultLibrary.name            = @"Default Library";
+            newDefaultLibrary.orderWhenListed = @0;
+            newDefaultLibrary.dateCreated     = [NSDate date];
+            newDefaultLibrary.dateModified    = [newDefaultLibrary.dateCreated copy];
+            
+            [self generateDefaultBookcaseIfNeeded];
+            
+                //Saving changes the objectID from temp to permanent.
+            [self saveContext];
+            
+                ///???: Why do I need this?
+            [[NSUserDefaults standardUserDefaults] setURL:newDefaultLibrary.objectID.URIRepresentation forKey:[NSString stringWithFormat:@"Library-%@", newDefaultLibrary.orderWhenListed]];
+            
+            return _currentLibrary = newDefaultLibrary;
+        }
+    }
+}
+
 
 /**
  *  Seeds the dataManager's currentLibrary property. 
  *  Should only necessary for generating test data.
  */
+
+    ///Should be able to remove.
 -(void)generateDefaultLibraryIfNeeded {
     
     if (self.userRootCollection.libraries.count >= 1)

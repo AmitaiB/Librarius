@@ -32,7 +32,7 @@
 
 @property (nonatomic, strong) NSArray<NSArray*>  *transientBookcaseLayoutModel;
 
-- (instancetype)initWithScheme:(LBRLayoutScheme)layoutScheme maxShelves:(NSUInteger)maxShelves shelfWidth_cm:(CGFloat)width_cm forVolumes:(NSArray <Volume *> *)volumes;
+- (instancetype)initWithScheme:(LBRLayoutScheme)layoutScheme maxShelves:(NSUInteger)maxShelves shelfWidth_cm:(CGFloat)width_cm withVolumesOverride:(NSArray<Volume *> *)volumes;
 - (instancetype)initWithScheme:(LBRLayoutScheme)layoutScheme forVolumes:(NSArray <Volume *> *)volumes;
 - (NSString*)formatTypeToString:(LBRLayoutScheme)formatType;
 @end

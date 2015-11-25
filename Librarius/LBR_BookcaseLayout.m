@@ -68,7 +68,7 @@
 
 @property (nonatomic, strong) Bookcase *currentBookcase;
 
-@property (nonatomic, strong) NSArray <Volume *> *overrideVolumesToLayout;
+@property (nonatomic, strong) NSArray <Volume *> *volumesToOverrideCurrentLibraryVolumesForLayout;
 
 @end
 
@@ -76,7 +76,7 @@
 
 #pragma mark - == Lifecycle ==
 
--(instancetype)initWithScheme:(LBRLayoutScheme)layoutScheme maxShelves:(NSUInteger)maxShelves shelfWidth_cm:(CGFloat)width_cm forVolumes:(NSArray<Volume *> *)volumes
+-(instancetype)initWithScheme:(LBRLayoutScheme)layoutScheme maxShelves:(NSUInteger)maxShelves shelfWidth_cm:(CGFloat)width_cm withVolumesOverride:(NSArray<Volume *> *)volumes
 {
     if (!(self = [super init])) return nil;
     
@@ -89,12 +89,13 @@
     _interItemSpacing   = 3.0;
     _interShelfSpacing  = 30.0;
     _cellCountForLongestRow = 0;
-    _overrideVolumesToLayout = volumes;
+    _volumesToOverrideCurrentLibraryVolumesForLayout = volumes;
     
-    
-    NSString *thisLibraryKEY  = [NSString stringWithFormat:@"%@-%@", [Library entityName], self.bookcase.library.name];
-    NSString *thisBookcaseKEY = [NSString stringWithFormat:@"%@-%@", [Bookcase entityName], self.bookcase.name];
-    _shelvesNestedArray = self.dataManager.transientLibraryLayoutInformation[thisLibraryKEY][thisBookcaseKEY];
+
+        ///CLEAN: Destroy me!
+//    NSString *thisLibraryKEY  = [NSString stringWithFormat:@"%@-%@", [Library entityName], self.bookcase.library.name];
+//    NSString *thisBookcaseKEY = [NSString stringWithFormat:@"%@-%@", [Bookcase entityName], self.bookcase.name];
+//    _shelvesNestedArray = self.dataManager.transientLibraryLayoutInformation[thisLibraryKEY][thisBookcaseKEY];
     
     [super registerClass:[LBRShelf_DecorationView class] forDecorationViewOfKind:[LBRShelf_DecorationView kind]];
     
@@ -103,7 +104,7 @@
 
 -(instancetype)initWithScheme:(LBRLayoutScheme)layoutScheme forVolumes:(NSArray<Volume *> *)volumes
 {
-    return [self initWithScheme:layoutScheme maxShelves:kDefaultBookcaseShelvesCount shelfWidth_cm:kDefaultBookcaseWidth_cm forVolumes:volumes];
+    return [self initWithScheme:layoutScheme maxShelves:kDefaultBookcaseShelvesCount shelfWidth_cm:kDefaultBookcaseWidth_cm withVolumesOverride:volumes];
 }
 
 -(instancetype)init
