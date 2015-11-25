@@ -446,6 +446,7 @@ static NSString * const kUnknown = @"kUnknown";
         newDefaultLibrary.orderWhenListed = @0;
         newDefaultLibrary.dateCreated     = [NSDate date];
         newDefaultLibrary.dateModified    = [NSDate date];
+        newDefaultLibrary.rootCollection  = self.userRootCollection;
         self.currentLibrary               = newDefaultLibrary;
         
         [self generateDefaultBookcaseIfNeeded];

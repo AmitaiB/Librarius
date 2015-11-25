@@ -69,6 +69,10 @@
 @property (nonatomic, strong) NSMutableDictionary *overlayViews;
 
 
+    //DEBUG:
+- (IBAction)resetButtonTapped:(id)sender;
+
+
 
 @end
 
@@ -564,8 +568,14 @@ DBLG
 }
 
 
-#pragma mark - === UIScrollViewDelegate ===
+//#pragma mark - === UIScrollViewDelegate ===
 
 
 
+- (IBAction)resetButtonTapped:(id)sender {
+    LBRDataManager *dataManger = [LBRDataManager sharedDataManager];
+    dataManger.userRootCollection = nil;
+    dataManger.currentLibrary = nil;
+    [dataManger.managedObjectContext reset];
+}
 @end

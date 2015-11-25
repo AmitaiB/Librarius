@@ -22,7 +22,7 @@
 
     //Models
 #import "LBR_BookcaseLayout.h"
-#import "Bookcase.h"
+//#import "Bookcase.h"
 
     //Views
 #import "LBRShelf_DecorationView.h"
@@ -31,8 +31,7 @@
 #import "LBR_BookcaseCollectionViewController.h"
 
     //Data
-#import "LBRDataManager.h"
-#import "Library.h"
+//#import "Library.h"
 
 
 @interface LBR_BookcaseLayout ()
@@ -48,8 +47,6 @@
 
 @property (nonatomic, strong) NSDictionary *layoutInformation;
 @property (nonatomic, assign) UIEdgeInsets insets;
-
-@property (nonatomic, strong) LBRDataManager *dataManager;
 
     //DecorationView
 @property (nonatomic, strong) NSDictionary *rowDecorationRects;
@@ -114,12 +111,6 @@
 
 #pragma mark - === Overridden Methods ===
 
--(LBRDataManager *)dataManager
-{
-    if (!_dataManager)
-        _dataManager = [LBRDataManager sharedDataManager];
-    return _dataManager;
-}
 
 /*
 -(NSArray *)shelvesNestedArray
@@ -339,8 +330,6 @@
         else {
             NSFetchedResultsController *globalFRC = collectionViewController.volumesFetchedResultsController;
             
-                //            LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
-            
                 //The default predicate is for "current library". In most forseeable cases, that shouldn't need to change.
             NSFetchRequest *localRequestByScheme = globalFRC.fetchRequest;
             NSString *localCacheNameByScheme;
@@ -390,6 +379,8 @@
 
 #pragma mark - === DataManager Interface ===
 
+    //CLEAN: Not needed, and global-ly!
+/*
 -(Bookcase *)currentBookcase
 {
     if (self.dataManager.currentBookcase) {
@@ -406,5 +397,6 @@
     DDLogWarn(@"No default Bookcase detected.");
     return nil;
 }
+*/
 
 @end

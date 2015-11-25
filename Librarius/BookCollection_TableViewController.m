@@ -66,7 +66,7 @@ static NSString * const altSearchResultsCellID = @"altSearchResultsCellID";
 #pragma mark - === LifeCycle ===
 
 - (void)viewDidLoad {
-
+    [[LBRDataManager sharedDataManager] logCurrentLibrary];
     [super viewDidLoad];
 //    self.navigationItem.leftBarButtonItem = self.editButtonItem;
     [self flattenUI];

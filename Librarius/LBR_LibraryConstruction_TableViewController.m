@@ -24,15 +24,12 @@
 #import "LBRDataManager.h"
 #import "LBR_BookcaseLayout.h"
 
-//#import "LBR_BookcaseModel.h"
-//#import "LBR_LibraryModel.h"
-
 /**
  Abstract: This VC displays the library structure, and allows for adding/removing/editing the libraries and shelves.
  The HeaderView will have a collectionView in it, displaying a cell for each Library.
  */
 
-@interface LBR_LibraryConstruction_TableViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface LBR_LibraryConstruction_TableViewController ()
 
 @property (nonatomic, strong) NSFetchedResultsController *bookcasesFetchedResultsController;
 
@@ -42,14 +39,14 @@
 @property (nonatomic, assign) NSIndexPath *selectedLibraryIndexPath;
 - (IBAction)addButtonTapped:(id)sender; //Add Library button...
 
-    //Bookcase Selection (TableView)
-@property (nonatomic, strong) NSDictionary <NSIndexPath*, LBR_BookcaseModel*> *bookcaseModelsDictionary;
-- (IBAction)addBookcaseButtonTapped:(id)sender;
+    //Bookcase Selection (TableView) - NOT YET IMPL
+//@property (nonatomic, strong) NSDictionary <NSIndexPath*, LBR_BookcaseModel*> *bookcaseModelsDictionary;
 
-    //Layout Selection (Segmented Control)
-@property (nonatomic, strong) UISegmentedControl *layoutSegmentedControl;
+    //Layout Selection (Segmented Control) - NOT YET IMPL
 
     //Not Yet Implemented
+- (IBAction)addBookcaseButtonTapped:(id)sender;
+@property (nonatomic, strong) UISegmentedControl *layoutSegmentedControl;
 @property (nonatomic, strong) UIImagePickerController *imagePickerController;
 @property (weak, nonatomic) IBOutlet UIView *addBookcaseFooterView; //For "Add Bookcase" tableViewCell - if I want to do it that way.
 
@@ -77,70 +74,24 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
-        ///For the initial loading.git UPDATE: NO!
-//    [self respondToLibraryItemSelectionAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
-    
-//    [self configureImagePickerController];
 }
 
-/**
- There should be no need to precache the bookcasemodels now that there are no more bookcasemodels, and
- bookcases are accesible from the Library managed object.
- */
-/*
-    /**
-     Result: a dictionary with keys of indexPaths, objects are layouts, so each bookcase is ready to go.
-     
-     1) Make MutableDictionary.
-     2) To get proper Row indexPaths, get library's indexPath. libraryPath.item == bookcasePath.section
-     3) FRC for allVolumes (in that library).
-     4) Run it through the bookcaseModel. Grab that info, and the remainderVolumes.
-     5) rinse and repeat for all remainderVolumes.
-     * /
-- (void)precacheBookcaseModels
-{
-    NSMutableDictionary *mutableBookcaseModels = [NSMutableDictionary dictionary];
-
-        //Selected Library, or default to first library.
-    NSIndexPath *currentLibraryCollectionViewPath = self.librariesCollectionView.indexPathsForSelectedItems.firstObject;
-    NSInteger currentLibraryTableViewSection = currentLibraryCollectionViewPath ? currentLibraryCollectionViewPath.item : 0;
-    
-        //Grab objects
-    LBR_LibraryModel *libraryModel = [[LBR_LibraryModel alloc] initWithLibrary:dataManager.currentLibrary];
-    [libraryModel processLibrary];
-    
-        //Grab keys
-    NSIndexPath *incrementalIndexPath;
-    NSMutableArray <NSIndexPath*> *mutableKeys = [NSMutableArray new];
-    
-    for (NSUInteger idx = 0; idx < libraryModel.library.bookcases.count; idx++) {
-        incrementalIndexPath = [NSIndexPath indexPathForRow:idx inSection:currentLibraryTableViewSection];
-        [mutableKeys addObject:incrementalIndexPath];
-    }
-    NSArray *bookcaseModelKeys = [mutableKeys copy];
-    
-    self.bookcaseModelsDictionary = [NSDictionary dictionaryWithObjects:libraryModel.bookcaseModels forKeys:bookcaseModelKeys];
-    
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:currentLibraryTableViewSection] withRowAnimation:UITableViewRowAnimationNone];
-    
-}
-*/
 
 #pragma mark - === UIImagePickerController delegate ===
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
 //    NSData profilePhoto = [info objectForKey:UIImagePickerControllerOriginalImage];
-//    
-//    
+//
+//
 //        // Convert to JPEG with 50% quality
 //    NSData* data = UIImageJPEGRepresentation(self.profilePhoto, 0.3f);
-//    
+//
 //    self.pfPhoto = [PFFile fileWithName:@"ProfilePhoto" data:data];
-//    
+//
 //    [self.uploadProfilePhotoButton setTitle:@"Nice Pic!" forState:UIControlStateDisabled];
 //    self.uploadProfilePhotoButton.enabled = NO;
     
@@ -148,6 +99,8 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     
 }
 
+/*
+    //    [self configureImagePickerController];
 -(void)configureImagePickerController
 {
     self.imagePickerController = [UIImagePickerController new];
@@ -163,6 +116,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 {
     [self.navigationController presentViewController:self.imagePickerController animated:YES completion:nil];
 }
+*/
 
 #pragma mark - === UITableView DataSource ===
 
@@ -198,7 +152,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     return cell;
 }
 
-    //Doesn't have a bookcase, so it crashes the collectionView(?).
+    //Note: If there's no bookcase, it crashes the collectionView.
 -(void)configureCell:(LBR_Bookcase_TableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Bookcase *bookcase = self.bookcasesFetchedResultsController.fetchedObjects[indexPath.row];

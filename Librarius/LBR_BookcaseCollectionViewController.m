@@ -122,7 +122,7 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
                                      initWithScheme:LBRLayoutSchemeDefault
                                      maxShelves:bookcaseSize.height
                                      shelfWidth_cm:bookcaseSize.width
-                                     forVolumes:nil];
+                                     withVolumesOverride:nil];
     self.layout = newLayout;
     [self.collectionView setCollectionViewLayout:newLayout animated:YES];
 }
