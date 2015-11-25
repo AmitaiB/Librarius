@@ -377,7 +377,8 @@ static NSString * const kUnknown = @"kUnknown";
     return frc;
 }
 
-#pragma mark - Generate Data
+//#pragma mark - Generate Data
+///Not called. Soon, CLEAN:
 - (void)generateTestDataIfNeeded
 {
     LBRGoogleGTLClient *googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
@@ -426,7 +427,7 @@ static NSString * const kUnknown = @"kUnknown";
 //        (2)
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSURL *uri = [defaults URLForKey:[RootCollection entityName]];
-    if (uri) {
+    if (uri != nil) {
         NSManagedObjectID *moID = [self.managedObjectContext.persistentStoreCoordinator managedObjectIDForURIRepresentation:uri];
         NSError *error = nil;
         return [self.managedObjectContext existingObjectWithID:moID error:&error];
@@ -463,7 +464,7 @@ static NSString * const kUnknown = @"kUnknown";
             newDefaultLibrary.dateCreated     = [NSDate date];
             newDefaultLibrary.dateModified    = [newDefaultLibrary.dateCreated copy];
             
-            [self generateDefaultBookcaseIfNeeded];
+//            [self generateDefaultBookcaseIfNeeded];
             
                 //Saving changes the objectID from temp to permanent.
             [self saveContext];
@@ -499,7 +500,7 @@ static NSString * const kUnknown = @"kUnknown";
         newDefaultLibrary.rootCollection  = self.userRootCollection;
         self.currentLibrary               = newDefaultLibrary;
         
-        [self generateDefaultBookcaseIfNeeded];
+//        [self generateDefaultBookcaseIfNeeded];
         
             //Saving changes the objectID from temp to permanent.
         [self saveContext];

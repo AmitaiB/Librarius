@@ -75,9 +75,11 @@
 -(void) generateUserRootCollectionIfNeeded; ///Should only be needed first use.
 
 // =================== Should not be needed, except for generating test data.
+/*
 -(void) generateTestDataIfNeeded;
 -(void) generateDefaultLibraryIfNeeded;
 -(void) generateDefaultBookcaseIfNeeded;
+*/
 
 -(void) generateBookcasesForLibrary:(Library *)library withDimensions:(NSDictionary <NSNumber*, NSNumber*> *)dimensions;
 

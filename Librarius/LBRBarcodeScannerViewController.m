@@ -93,7 +93,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
     if (!self.isConfigured) {
         [self configureProgrammaticProperties];}
     
-    [dataManager generateTestDataIfNeeded];
+//    [dataManager generateTestDataIfNeeded];
     self.canDisplayBannerAds = YES;
 }
 

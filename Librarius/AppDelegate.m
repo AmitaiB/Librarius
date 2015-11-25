@@ -86,7 +86,7 @@
      DDLogVerbose(@"Verbose");
      */
     
-    [[LBRDataManager sharedDataManager] generateDefaultLibraryIfNeeded];
+//    [[LBRDataManager sharedDataManager] generateDefaultLibraryIfNeeded];
 }
 
 - (void)setupAppearance {
