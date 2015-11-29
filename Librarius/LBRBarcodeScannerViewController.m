@@ -284,18 +284,20 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
      */
     [MTBBarcodeScanner requestCameraPermissionWithSuccess:^(BOOL success) {
         if (!success) return;
-
+    // -------------------------------------------------------------------------------
+    //	*Scanning* Success Block: We have a barcode!
+    // -------------------------------------------------------------------------------
         [self.scanner startScanningWithResultBlock:^(NSArray *codes) {
-//            New! Overlay Views
+                //New! Overlay Views
             [self drawOverlaysOnCodes:codes];
-                // -------------------------------------------------------------------------------
-                //	Scanning Success Block: We have a barcode!
-                // -------------------------------------------------------------------------------
+            
             for (AVMetadataMachineReadableCodeObject *code in codes) {
 
 //                if ([self.uniqueCodes indexOfObject:code.stringValue] == NSNotFound) {
                     // If it's a new barcode, add it to the array for duplicate prevention.
-                if (![self.uniqueCodes containsObject:code.stringValue]) {
+                BOOL barcodeIsNew = ![self.uniqueCodes containsObject:code.stringValue];
+                if (barcodeIsNew) {
+                        //Add barcode to the record of other unique barcodes.
                     [self.uniqueCodes addObject:code.stringValue];
 
                         //Use the string to query Google.
@@ -304,10 +306,9 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
                             //	Scanning Block : Google Success Block
                             // -------------------------------------------------------------------------------
                         Volume *volume = [Volume insertNewObjectIntoContext:dataManager.managedObjectContext initializedFromGoogleBooksObject:responseVolume withCovertArt:YES];
-                        self.volumeToConfirm = volume;
-
+                
                             ///TODO: Alternative to confirmation, hmmm...? Perhaps put the view up in the scanning reticule...?
-                        NYAlertViewController *confirmationViewController = [self confirmSelectionViewController];
+                        NYAlertViewController *confirmationViewController = [self confirmSelectionViewController:volume];
                         [self presentViewController:confirmationViewController animated:YES completion:nil];
                     }];
                 } else {
@@ -434,7 +435,7 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
  I have kept this ill-understood (by me) pod because the standard options do not easily allow for an image,
  and I got this to work. Once "Make It Work" gives way to "Make It Right," this will be the first to go.
  */
--(NYAlertViewController*)confirmSelectionViewController {
+-(NYAlertViewController*)confirmSelectionViewController:(Volume*)volumeToConfirm {
     NYAlertViewController *alertViewController = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
     
         // Set a title and message
@@ -445,7 +446,7 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
                                                             style:UIAlertActionStyleDefault
                                                           handler:^(NYAlertAction *action) {
                                                               [self dismissViewControllerAnimated:YES completion:^{
-                                                                      //Add to TableView and its datasource.
+                                                                      //TODO: Add to a TableView.
                                                                }];
                                                            }];
     
@@ -465,12 +466,12 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
         ///Working on this now...
     UITableViewCell *confirmationCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@""];
     [confirmationCell configureForAutolayout];
-    NSURL *url = [NSURL URLWithString:self.volumeToConfirm.cover_art_large];
+    NSURL *url = [NSURL URLWithString:volumeToConfirm.cover_art_large];
     [confirmationCell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder"]];
     confirmationCell.textLabel.text = @"";
     confirmationCell.detailTextLabel.text = @"";
-    confirmationCell.textLabel.text = self.volumeToConfirm.title;
-    confirmationCell.detailTextLabel.text = [NSString stringWithFormat:@"by %@", self.volumeToConfirm.author];
+    confirmationCell.textLabel.text = volumeToConfirm.title;
+    confirmationCell.detailTextLabel.text = [NSString stringWithFormat:@"by %@", volumeToConfirm.author];
     
     
     UIView *contentView = [[UIView alloc] init];
@@ -537,7 +538,8 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
 
 #pragma mark - Data Manager interface
 
-
+    //CLEAN: Not used.
+/*
 - (void)showMapViewAlertView {
 DBLG
     NYAlertViewController *alertViewController = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
@@ -568,7 +570,7 @@ DBLG
 
     [self presentViewController:alertViewController animated:YES completion:nil];
 }
-
+*/
 
 //#pragma mark - === UIScrollViewDelegate ===
 
