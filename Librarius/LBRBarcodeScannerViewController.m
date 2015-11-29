@@ -291,6 +291,7 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
                 //New! Overlay Views
             [self drawOverlaysOnCodes:codes];
             
+            NSMutableArray<NSString*> *reportedBarcodes = [NSMutableArray new];
             for (AVMetadataMachineReadableCodeObject *code in codes) {
 
 //                if ([self.uniqueCodes indexOfObject:code.stringValue] == NSNotFound) {
@@ -312,7 +313,10 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
                         [self presentViewController:confirmationViewController animated:YES completion:nil];
                     }];
                 } else {
-                    DDLogVerbose(@"Barcode already in list/table.");
+                    if (![reportedBarcodes containsObject:code.stringValue]) {
+                        DDLogVerbose(@"Barcode already in list/table.");
+                        [reportedBarcodes addObject:code.stringValue];
+                    }
                 }
             }
         }];
@@ -405,21 +409,21 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
 }
 
 - (UIView *)overlayForCodeString:(NSString *)codeString bounds:(CGRect)bounds valid:(BOOL)valid {
-    UIColor *viewColor = valid ? [UIColor greenColor] : [UIColor redColor];
-    UIView *view = [[UIView alloc] initWithFrame:bounds];
-    UILabel *label = [[UILabel alloc] initWithFrame:view.bounds];
-    
+    UIColor *viewColor     = valid ? [UIColor greenColor] : [UIColor redColor];
+    UIView *view           = [[UIView alloc] initWithFrame:bounds];
+    UILabel *label         = [[UILabel alloc] initWithFrame:view.bounds];
+
         // Configure the view
     view.layer.borderWidth = 5.0;
-    view.backgroundColor = [viewColor colorWithAlphaComponent:0.75];
+    view.backgroundColor   = [viewColor colorWithAlphaComponent:0.75];
     view.layer.borderColor = viewColor.CGColor;
-    
+
         // Configure the label
-    label.font = [UIFont boldSystemFontOfSize:12];
-    label.text = codeString;
-    label.textColor = [UIColor blackColor];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.numberOfLines = 0;
+    label.font             = [UIFont boldSystemFontOfSize:12];
+    label.text             = codeString;
+    label.textColor        = [UIColor blackColor];
+    label.textAlignment    = NSTextAlignmentCenter;
+    label.numberOfLines    = 0;
     
         // Add constraints to label to improve text size?
     
@@ -445,7 +449,9 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
     NYAlertAction *confirmAction = [NYAlertAction actionWithTitle:NSLocalizedString(@"Confirm", nil)
                                                             style:UIAlertActionStyleDefault
                                                           handler:^(NYAlertAction *action) {
+                                                              DDLogInfo(@"Confirm tapped.");
                                                               [self dismissViewControllerAnimated:YES completion:^{
+                                                                  [dataManager saveContext];
                                                                       //TODO: Add to a TableView.
                                                                }];
                                                            }];
@@ -453,8 +459,9 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
      NYAlertAction *cancelAction = [NYAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil)
                                                             style:UIAlertActionStyleDestructive
                                                           handler:^(NYAlertAction *action) {
+                                                              DDLogInfo(@"Cancel tapped.");
+                                                              [volumeToConfirm.managedObjectContext deleteObject:volumeToConfirm];
                                                               [self dismissViewControllerAnimated:YES completion:nil];
-                                                                  ///TODO: rollback is too drastic. Just set this volume =
                                                           }];
     
     [alertViewController addAction: confirmAction];
@@ -464,17 +471,17 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
     
         // The content view that will contain our custom view.
         ///Working on this now...
-    UITableViewCell *confirmationCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@""];
+    UITableViewCell *confirmationCell        = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@""];
     [confirmationCell configureForAutolayout];
-    NSURL *url = [NSURL URLWithString:volumeToConfirm.cover_art_large];
+    NSURL *url                               = [NSURL URLWithString:volumeToConfirm.cover_art_large];
     [confirmationCell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder"]];
-    confirmationCell.textLabel.text = @"";
-    confirmationCell.detailTextLabel.text = @"";
-    confirmationCell.textLabel.text = volumeToConfirm.title;
-    confirmationCell.detailTextLabel.text = [NSString stringWithFormat:@"by %@", volumeToConfirm.author];
-    
-    
-    UIView *contentView = [[UIView alloc] init];
+    confirmationCell.textLabel.text          = @"";
+    confirmationCell.detailTextLabel.text    = @"";
+    confirmationCell.textLabel.text          = volumeToConfirm.title;
+    confirmationCell.detailTextLabel.text    = [NSString stringWithFormat:@"by %@", volumeToConfirm.author];
+
+
+    UIView *contentView                      = [[UIView alloc] init];
     alertViewController.alertViewContentView = contentView;
     
     [contentView addSubview:confirmationCell];
@@ -584,6 +591,7 @@ DBLG
     [dataManger deleteAllObjectsOfEntityName:@"Bookcase"];
     [dataManger deleteAllObjectsOfEntityName:[Library entityName]];
     [dataManger deleteAllObjectsOfEntityName:[RootCollection entityName]];
+    [self.uniqueCodes removeAllObjects];
 //    [dataManger.managedObjectContext reset];
 //    [dataManger saveContext];
 //    [dataManger logCurrentLibrary];

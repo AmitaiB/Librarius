@@ -13,6 +13,7 @@
 #import "Library.h"
 
 #import "NSString+dateValue.h"
+#import "LBRDataManager.h"
 
 #define CALIPER [@"436" floatValue] //In pages per inch, ppi.
 /**
@@ -40,7 +41,7 @@
 
 + (instancetype)insertNewObjectIntoContext:(NSManagedObjectContext *)context initializedFromGoogleBooksObject:(GTLBooksVolume*)googleBooksObject withCovertArt:(BOOL)insertWithAssociateCoverArtObject
 {
-        //Two brief things, and one loooong thing:
+        //Two brief things, and one looong thing:
 //    (1)
     Volume *volume = [Volume insertNewObjectIntoContext:context];
 
@@ -50,6 +51,7 @@
         associatedCoverArt.correspondingVolume = volume;
     }
     
+        //Long bit follows:
 //    (3)
     /**
      *  ISBN
@@ -154,7 +156,7 @@
     }
     
     /**
-     *  Ratings! Yours...Google doesn't tell us, X-number of others' avg. rating.
+     *  Others' Ratings! X-number of others' avg. rating.
      */
     if (googleBooksObject.volumeInfo.averageRating) {
         volume.avgRating = googleBooksObject.volumeInfo.averageRating;
@@ -177,19 +179,26 @@
     
     volume.google_id = googleBooksObject.identifier;
     
+    LBRDataManager *dataManger = [LBRDataManager sharedDataManager];
+NSUInteger count = [dataManger.managedObjectContext countForFetchRequest:[NSFetchRequest fetchRequestWithEntityName:[Volume entityName]] error:nil];
+    DDLogDebug(@"CoreData has %lu volumes.", count);
+    [dataManger saveContext];
     
     return volume;
 }
 
--(NSString *)isbn {
-    return self.isbn13? self.isbn13 : self.isbn10? self.isbn10 : nil;
-}
 
     ///Not sure if this is neccesary to trigger the loading of images in the CoverArt setter.
 -(void)updateCoverArtModelIfNeeded
 {
     if (self.correspondingImageData)
         [self.correspondingImageData downloadImagesIfNeeded];
+}
+
+
+#pragma mark - === Access Helper methods ===
+-(NSString *)isbn {
+    return self.isbn13? self.isbn13 : self.isbn10? self.isbn10 : nil;
 }
 
 -(NSString *)coverArtPreferLarge
@@ -210,9 +219,6 @@
     NSString *byline = [NSString stringWithFormat:@"\nby %@ (%@: %@)", self.author, [NSString yearFromDate:self.published], self.publisher];
     return byline;
 }
-
-    //CLEAN: If this does not work for buggy reasons, by all means, DELETE it.
-#pragma mark - private Helper methods
 
 - (void)makeTitleCase:(NSString*)string {
     NSArray *words = [string componentsSeparatedByString:@" "];
