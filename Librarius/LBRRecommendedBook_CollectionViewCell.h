@@ -1,18 +1,18 @@
+////
+////  LBRRecommendedBook_CollectionViewCell.h
+////  Librarius
+////
+////  Created by Amitai Blickstein on 10/22/15.
+////  Copyright © 2015 Amitai Blickstein, LLC. All rights reserved.
+////
 //
-//  LBRRecommendedBook_CollectionViewCell.h
-//  Librarius
+//#import "LBRShelvedBook_CollectionViewCell.h"
+//@class LBRParsedVolume;
+//@interface LBRRecommendedBook_CollectionViewCell : LBRShelvedBook_CollectionViewCell
 //
-//  Created by Amitai Blickstein on 10/22/15.
-//  Copyright © 2015 Amitai Blickstein, LLC. All rights reserved.
+//@property (nonatomic, strong) NSArray <LBRParsedVolume *> *recommendationsArray;
+//@property (nonatomic, assign) NSString *selectedVolumeIdentifier;
 //
-
-#import "LBRShelvedBook_CollectionViewCell.h"
-@class LBRParsedVolume;
-@interface LBRRecommendedBook_CollectionViewCell : LBRShelvedBook_CollectionViewCell
-
-@property (nonatomic, strong) NSArray <LBRParsedVolume *> *recommendationsArray;
-@property (nonatomic, assign) NSString *selectedVolumeIdentifier;
-
--(void)displayRandomRecommendation;
-
-@end
+//-(void)displayRandomRecommendation;
+//
+//@end

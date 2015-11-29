@@ -141,16 +141,7 @@
      *  Categories - just in case -- for now we will only pass over the mainCategory to Volume(s).
      */
     volume.mainCategory = googleBooksObject.volumeInfo.mainCategory.length? googleBooksObject.volumeInfo.mainCategory : googleBooksObject.volumeInfo.categories.count? googleBooksObject.volumeInfo.categories[0] : @"No Category";
-//    
-//    
-//    BOOL hasEntryForMainCategory = googleBooksObject.volumeInfo.mainCategory.length;
-//    BOOL hasArrayOfCategories    = googleBooksObject.volumeInfo.categories.count;
-//        // If there's no mainCategory, take it from categories.
-//    if (hasArrayOfCategories) {
-//        volume.mainCategory      = googleBooksObject.volumeInfo.categories[0];
-//        volume.secondaryCategory = googleBooksObject.volumeInfo.categories[1];
-//        volume.tertiaryCategory  = googleBooksObject.volumeInfo.categories[2];
-//    }
+
     
     /**
      *  Date of publication & publisher.

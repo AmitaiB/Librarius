@@ -20,17 +20,11 @@
 
 @interface LBRDataManager : NSObject <NSFetchedResultsControllerDelegate>
 @property (nonatomic, strong) NSMutableArray *uniqueCodes;
-//@property (nonatomic, strong) NSArray *parsedVolumesToEitherSaveOrDiscard;
-//@property (nonatomic, strong) LBRParsedVolume *parsedVolumeFromLastBarcode; //<-- Use this to confirm user's selection, then enter it into Persistent Data.
 @property (nonatomic, strong) Volume *volumeFromLastBarcode; //CLEAN: Probably not actually needed.
 @property (nonatomic, strong) NSMutableArray <Volume*> *volumesRecentlyAddedToContext;
 @property (nonatomic, strong) NSDictionary *sortDescriptors;
 
 +(instancetype)sharedDataManager;
-
-
-//-(void)updateWithNewTransientVolume:(LBRParsedVolume*)volumeToAdd;
-//-(void)saveParsedVolumesToEitherSaveOrDiscardToPersistentStore;
 
     //CLEAN: debug only
 -(void)logCurrentLibrary;
