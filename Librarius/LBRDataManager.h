@@ -61,8 +61,9 @@
 
 
 
--(void) fetchData;
+- (void) fetchData;
 - (void) saveContext;
+
 //- (void)saveContextAndCheckForDuplicateVolumes:(BOOL)permissionToCheckForDuplicates;
 
 

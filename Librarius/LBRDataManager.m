@@ -54,6 +54,9 @@ static NSString * const kUnknown = @"kUnknown";
     DDLogVerbose(@"Fetched volumes from Core Data: %@", [results description]);
 }
 
+/**
+ FIXME: Where does this filter by "current library"?!? 
+ */
 -(void)logCurrentLibraryTitles
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[Volume entityName]];

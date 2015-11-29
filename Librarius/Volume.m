@@ -41,18 +41,12 @@
 
 + (instancetype)insertNewObjectIntoContext:(NSManagedObjectContext *)context initializedFromGoogleBooksObject:(GTLBooksVolume*)googleBooksObject withCovertArt:(BOOL)insertWithAssociateCoverArtObject
 {
-        //Two brief things, and one looong thing:
+        //One brief thing, one looong thing(s), one last brief thing:
 //    (1)
     Volume *volume = [Volume insertNewObjectIntoContext:context];
-
-//    (2)
-    if (insertWithAssociateCoverArtObject) {
-        CoverArt *associatedCoverArt = [CoverArt insertNewObjectIntoContext:context];
-        associatedCoverArt.correspondingVolume = volume;
-    }
     
         //Long bit follows:
-//    (3)
+//    (2)
     /**
      *  ISBN
      */
@@ -179,10 +173,16 @@
     
     volume.google_id = googleBooksObject.identifier;
     
-    LBRDataManager *dataManger = [LBRDataManager sharedDataManager];
-NSUInteger count = [dataManger.managedObjectContext countForFetchRequest:[NSFetchRequest fetchRequestWithEntityName:[Volume entityName]] error:nil];
-    DDLogDebug(@"CoreData has %lu volumes.", count);
-    [dataManger saveContext];
+        //DEBUG: (checks whether this object is in core data -- it is!)
+    [[LBRDataManager sharedDataManager] logCurrentLibraryTitles];
+
+        //Final brief bit:
+        //    (3)
+    if (insertWithAssociateCoverArtObject) {
+        CoverArt *associatedCoverArt = [CoverArt insertNewObjectIntoContext:context];
+        associatedCoverArt.correspondingVolume = volume;
+        [associatedCoverArt downloadImagesIfNeeded];
+    }
     
     return volume;
 }

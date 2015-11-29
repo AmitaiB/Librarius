@@ -306,8 +306,12 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
                             // -------------------------------------------------------------------------------
                             //	Scanning Block : Google Success Block
                             // -------------------------------------------------------------------------------
-                        Volume *volume = [Volume insertNewObjectIntoContext:dataManager.managedObjectContext initializedFromGoogleBooksObject:responseVolume withCovertArt:YES];
+                        Volume *volume = [Volume insertNewObjectIntoContext:dataManager.managedObjectContext
+                                           initializedFromGoogleBooksObject:responseVolume
+                                                              withCovertArt:YES];
                 
+                        [[LBRDataManager sharedDataManager] logCurrentLibraryTitles];
+                        
                             ///TODO: Alternative to confirmation, hmmm...? Perhaps put the view up in the scanning reticule...?
                         NYAlertViewController *confirmationViewController = [self confirmSelectionViewController:volume];
                         [self presentViewController:confirmationViewController animated:YES completion:nil];
@@ -475,10 +479,10 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
     [confirmationCell configureForAutolayout];
     NSURL *url                               = [NSURL URLWithString:volumeToConfirm.cover_art_large];
     [confirmationCell.imageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder"]];
-    confirmationCell.textLabel.text          = @"";
-    confirmationCell.detailTextLabel.text    = @"";
+//    confirmationCell.textLabel.text          = @"";
+//    confirmationCell.detailTextLabel.text    = @"";
     confirmationCell.textLabel.text          = volumeToConfirm.title;
-    confirmationCell.detailTextLabel.text    = [NSString stringWithFormat:@"by %@", volumeToConfirm.author];
+    confirmationCell.detailTextLabel.text    = volumeToConfirm.byline; //    = [NSString stringWithFormat:@"by %@", volumeToConfirm.author];
 
 
     UIView *contentView                      = [[UIView alloc] init];
@@ -487,7 +491,7 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
     [contentView addSubview:confirmationCell];
     
     [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[confirmationCell(60)]-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(confirmationCell)]];
-    [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[confirmationCell]-|"options:0 metrics:nil views:NSDictionaryOfVariableBindings(confirmationCell)]];
+    [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[confirmationCell]-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(confirmationCell)]];
     [self configureAlertController:alertViewController andInvertColors:YES];
     
     return alertViewController;
@@ -498,9 +502,9 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
     alertViewController.buttonCornerRadius = 20.0f;
     alertViewController.view.tintColor = self.view.tintColor;
     
-    alertViewController.titleFont             = [UIFont fontWithName:@"AvenirNext-Bold" size:19.0f];
-    alertViewController.messageFont           = [UIFont fontWithName:@"AvenirNext-Medium" size:16.0f];
-    alertViewController.cancelButtonTitleFont = [UIFont fontWithName:@"AvenirNext-Medium" size:alertViewController.cancelButtonTitleFont.pointSize];
+    alertViewController.titleFont             = [UIFont fontWithName:@"AvenirNext-Bold"    size:19.0f];
+    alertViewController.messageFont           = [UIFont fontWithName:@"AvenirNext-Medium"  size:16.0f];
+    alertViewController.cancelButtonTitleFont = [UIFont fontWithName:@"AvenirNext-Medium"  size:alertViewController.cancelButtonTitleFont.pointSize];
     alertViewController.buttonTitleFont       = [UIFont fontWithName:@"AvenirNext-Regular" size:alertViewController.buttonTitleFont.pointSize];
     
     
@@ -509,16 +513,16 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
     
     if (invertColors) {
         alertViewController.alertViewBackgroundColor = [UIColor colorWithWhite:0.19f alpha:1.0f];
-        alertViewController.alertViewCornerRadius = 10.0f;
-        
-        alertViewController.titleColor = [UIColor colorWithRed:0.42f green:0.78 blue:0.32f alpha:1.0f];
-        alertViewController.messageColor = [UIColor colorWithWhite:0.92f alpha:1.0f];
-        
-        alertViewController.buttonColor = [UIColor colorWithRed:0.42f green:0.78 blue:0.32f alpha:1.0f];
-        alertViewController.buttonTitleColor = [UIColor colorWithWhite:0.19f alpha:1.0f];
-        
-        alertViewController.cancelButtonColor = [UIColor colorWithRed:0.42f green:0.78 blue:0.32f alpha:1.0f];
-        alertViewController.cancelButtonTitleColor = [UIColor colorWithWhite:0.19f alpha:1.0f];
+        alertViewController.alertViewCornerRadius    = 10.0f;
+
+        alertViewController.titleColor               = [UIColor colorWithRed:0.42f green:0.78 blue:0.32f alpha:1.0f];
+        alertViewController.messageColor             = [UIColor colorWithWhite:0.92f alpha:1.0f];
+
+        alertViewController.buttonColor              = [UIColor colorWithRed:0.42f green:0.78 blue:0.32f alpha:1.0f];
+        alertViewController.buttonTitleColor         = [UIColor colorWithWhite:0.19f alpha:1.0f];
+
+        alertViewController.cancelButtonColor        = [UIColor colorWithRed:0.42f green:0.78 blue:0.32f alpha:1.0f];
+        alertViewController.cancelButtonTitleColor   = [UIColor colorWithWhite:0.19f alpha:1.0f];
     }
 }
 
@@ -535,7 +539,7 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:barcodeCellReuseID forIndexPath:indexPath];
-    Volume *volume = [dataManager.managedObjectContext.insertedObjects sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES]]][indexPath.row];
+//    Volume *volume = [dataManager.managedObjectContext.insertedObjects sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES]]][indexPath.row];
     return cell;
 }
 
@@ -543,48 +547,9 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
     
 }
 
-#pragma mark - Data Manager interface
-
-    //CLEAN: Not used.
-/*
-- (void)showMapViewAlertView {
-DBLG
-    NYAlertViewController *alertViewController = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
-    
-    [alertViewController addAction:[NYAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDestructive handler:^(NYAlertAction *action) {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }]];
-    
-    [alertViewController addAction:[NYAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(NYAlertAction *action) {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }]];
-
-    alertViewController.title = @"Content View";
-    alertViewController.message = @"YOUR AD HERE";
-    
-    UIView *contentView = [[UIView alloc] init];
-    
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@""];
-    [contentView addSubview:cell];
-    [cell.imageView setImage:[UIImage imageNamed:@"placeholder"]];
-    cell.textLabel.text = (self.volumeToConfirm)? self.volumeToConfirm.title : @"Title Here";
-    cell.detailTextLabel.text = @"byline here";
-
-    alertViewController.alertViewContentView = contentView;
-    
-    [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[cell(160)]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(cell)]];
-    [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[cell]-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(cell)]];
-
-    [self presentViewController:alertViewController animated:YES completion:nil];
-}
-*/
-
-//#pragma mark - === UIScrollViewDelegate ===
-
-
-
 - (IBAction)resetButtonTapped:(id)sender {
     LBRDataManager *dataManger = [LBRDataManager sharedDataManager];
+    [dataManger logCurrentLibraryTitles];
     dataManger.userRootCollection = nil;
     dataManger.currentLibrary = nil;
     [dataManger deleteAllObjectsOfEntityName:[Volume entityName]];
@@ -592,6 +557,7 @@ DBLG
     [dataManger deleteAllObjectsOfEntityName:[Library entityName]];
     [dataManger deleteAllObjectsOfEntityName:[RootCollection entityName]];
     [self.uniqueCodes removeAllObjects];
+    [dataManger logCurrentLibraryTitles];
 //    [dataManger.managedObjectContext reset];
 //    [dataManger saveContext];
 //    [dataManger logCurrentLibrary];
