@@ -45,9 +45,9 @@
 
 - (IBAction)toggleScanningButtonTapped:(id)sender;
 - (IBAction)lightToggleButtonTapped:(id)sender;
-- (IBAction)saveScannedBooksToCoreDataButtonTapped:(id)sender;
+//- (IBAction)saveScannedBooksToCoreDataButtonTapped:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *lightToggleButton;
-@property (weak, nonatomic) IBOutlet UIButton *saveScannedBooksToCoreDataButton;
+//@property (weak, nonatomic) IBOutlet UIButton *saveScannedBooksToCoreDataButton;
 
 @property (weak, nonatomic) IBOutlet UIView *mainContentView;
 @property (weak, nonatomic) IBOutlet UIView *scannerView;
@@ -126,9 +126,9 @@ static NSString * const volumeNib          = @"volumePresentationView";
     self.toggleScanningButton.backgroundColor                = [UIColor belizeHoleColor];
     self.toggleScanningButton.tintColor                      = [UIColor turquoiseColor];
     self.toggleScanningButton.layer.cornerRadius             = 5.0f;
-    self.saveScannedBooksToCoreDataButton.layer.cornerRadius = 5.0f;
-    self.saveScannedBooksToCoreDataButton.clipsToBounds      = YES;
-    self.saveScannedBooksToCoreDataButton.backgroundColor    = [UIColor wetAsphaltColor];
+//    self.saveScannedBooksToCoreDataButton.layer.cornerRadius = 5.0f;
+//    self.saveScannedBooksToCoreDataButton.clipsToBounds      = YES;
+//    self.saveScannedBooksToCoreDataButton.backgroundColor    = [UIColor wetAsphaltColor];
     
     [self anchorBackgroundImage];
     
@@ -254,7 +254,7 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
     self.isScanning = NO;
     [self flipScanButtonAppearance];
     [self.scanner stopScanning];
-    self.saveScannedBooksToCoreDataButton.hidden = NO;
+//    self.saveScannedBooksToCoreDataButton.hidden = NO;
     self.lightToggleButton.hidden                = YES;
     
         //New! Overlay Views
@@ -270,7 +270,7 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
 -(void)startScanningOps {
     self.isScanning = YES;
     [self flipScanButtonAppearance];
-    self.saveScannedBooksToCoreDataButton.hidden = YES;
+//    self.saveScannedBooksToCoreDataButton.hidden = YES;
     self.lightToggleButton.hidden                = NO;
     
         //New! Overlay Views
@@ -455,7 +455,9 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
                                                           handler:^(NYAlertAction *action) {
                                                               DDLogInfo(@"Confirm tapped.");
                                                               [self dismissViewControllerAnimated:YES completion:^{
+                                                                  [dataManager logCurrentLibraryTitles];
                                                                   [dataManager saveContext];
+                                                                  [dataManager logCurrentLibraryTitles];
                                                                       //TODO: Add to a TableView.
                                                                }];
                                                            }];
