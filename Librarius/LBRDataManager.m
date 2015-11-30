@@ -176,7 +176,7 @@ static NSString * const kUnknown = @"kUnknown";
         isbnCompoundPredicate = [NSCompoundPredicate orPredicateWithSubpredicates:@[isbn10Predicate, isbn13Predicate]];
         
         request.predicate = isbnCompoundPredicate;
-        BOOL matches = [self.managedObjectContext countForFetchRequest:request error:&error];
+        BOOL matches = [self.managedObjectContext countForFetchRequest:request error:&error] - 1; //subtract 1 for the Volume we just inserted!
         
         if (matches) [self.managedObjectContext deleteObject:volume];
     }
