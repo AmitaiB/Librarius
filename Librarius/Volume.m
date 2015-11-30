@@ -174,7 +174,7 @@
     volume.google_id = googleBooksObject.identifier;
     
         //DEBUG: (checks whether this object is in core data -- it is!)
-    [[LBRDataManager sharedDataManager] logCurrentLibraryTitles:@"[insertNewObjectIntoContext:initializedFromGoogleBooksObject]"];
+//    [[LBRDataManager sharedDataManager] logCurrentLibraryTitles:@"[insertNewObjectIntoContext:initializedFromGoogleBooksObject]"];
 
         //Final brief bit:
         //    (3)

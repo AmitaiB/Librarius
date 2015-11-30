@@ -142,11 +142,11 @@ static NSString * const kUnknown = @"kUnknown";
 
 - (void)saveContext
 {
-    [self logCurrentLibraryTitles:@"[TOP of saveContext]"];
+//    [self logCurrentLibraryTitles:@"[TOP of saveContext]"];
     NSError *error = nil;
     if (self.managedObjectContext != nil) {
         [self preSaveCheckForDuplicateVolumes];
-        [self logCurrentLibraryTitles:@"[MIDDLE of saveContext]"];
+//        [self logCurrentLibraryTitles:@"[MIDDLE of saveContext]"];
         if ([self.managedObjectContext hasChanges] && ![self.managedObjectContext save:&error]) {
                 // Replace this implementation with code to handle the error appropriately.
                 // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
@@ -154,7 +154,7 @@ static NSString * const kUnknown = @"kUnknown";
 //            abort();
             [self logCurrentLibraryTitles:@"[ERROR of saveContext]"];
         }
-        [self logCurrentLibraryTitles:@"[BOTTOM of saveContext]"];
+//        [self logCurrentLibraryTitles:@"[BOTTOM of saveContext]"];
     }
 }
 
@@ -274,9 +274,8 @@ static NSString * const kUnknown = @"kUnknown";
     
     NSFetchRequest *volumesRequest    = [NSFetchRequest fetchRequestWithEntityName:[Volume entityName]];//(1)
                                                                                                             
-    NSPredicate *libraryPredicate     = [NSPredicate predicateWithFormat:@"%K = %@", @"library.name", self.currentLibrary.name];
+//    volumesRequest.predicate          = [NSPredicate predicateWithFormat:@"%K = %@", @"library.name", self.currentLibrary.name];
     volumesRequest.sortDescriptors    = @[self.sortDescriptors[kCategorySorter], self.sortDescriptors[kAuthorSorter]];
-    volumesRequest.predicate          = libraryPredicate;
     volumesRequest.fetchBatchSize     = 200;
     
     return volumesRequest;
@@ -304,6 +303,8 @@ static NSString * const kUnknown = @"kUnknown";
                                         managedObjectContext:managedObjectContext
                                         sectionNameKeyPath:sectionNameKeyPath
                                         cacheName:currentLibraryCacheName];
+//                                        cacheName:nil];
+    
 
         //Magic happens here.
     NSError *error = nil;

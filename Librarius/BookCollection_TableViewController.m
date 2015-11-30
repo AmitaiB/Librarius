@@ -378,8 +378,8 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
             NSFetchRequest *volumesRequest = [NSFetchRequest fetchRequestWithEntityName:[Volume entityName]];
     LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
-//    NSArray *volumes = [dataManager.managedObjectContext executeFetchRequest:self.volumesFetchedResultsController.fetchRequest error:nil];
-    NSArray *volumes = [dataManager.managedObjectContext executeFetchRequest:volumesRequest error:nil];
+    NSArray *volumes = [dataManager.managedObjectContext executeFetchRequest:self.volumesFetchedResultsController.fetchRequest error:nil];
+//    NSArray *volumes = [dataManager.managedObjectContext executeFetchRequest:volumesRequest error:nil];
     DDLogDebug(@"In numberSections, volumes fetch request: %@", volumes);
     
     NSInteger numSections = -1; //Crash if
