@@ -28,7 +28,7 @@
 
     //CLEAN: debug only
 -(void)logCurrentLibrary;
--(void)logCurrentLibraryTitles;
+-(void)logCurrentLibraryTitles:(NSString*)debugString;
 -(void)deleteAllObjectsOfEntityName:(NSString*)entityName;
 
 

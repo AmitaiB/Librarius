@@ -51,13 +51,13 @@ static NSString * const kUnknown = @"kUnknown";
 -(void)logCurrentLibrary {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[Volume entityName]];
     NSArray *results = [self.managedObjectContext executeFetchRequest:request error:nil];
-    DDLogVerbose(@"Fetched volumes from Core Data: %@", [results description]);
+    DDLogVerbose(@"(logCurrentLibrary, ln. 54) Fetched volumes from Core Data: %@", [results description]);
 }
 
 /**
  FIXME: Where does this filter by "current library"?!? 
  */
--(void)logCurrentLibraryTitles
+-(void)logCurrentLibraryTitles:(NSString*)debugString
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[Volume entityName]];
     NSArray <Volume*> *results = [self.managedObjectContext executeFetchRequest:request error:nil];
@@ -65,11 +65,11 @@ static NSString * const kUnknown = @"kUnknown";
     [results enumerateObjectsUsingBlock:^(Volume * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [prettyResults addObject:[obj fullTitle]];
     }];
-    DDLogVerbose(@"Titles of fetched volumes from Core Data:");
+    DDLogInfo(@"(logCurrentLibraryTitles, ln. 68) === Called by %@ === \nTitles of fetched volumes from Core Data:", debugString);
     for (NSString *title in prettyResults) {
         DDLogVerbose(@"\t%@", title);
     }
-    DDLogVerbose(@"=== END ===");
+    DDLogVerbose(@"=== END ===\n");
 }
 
 -(void)deleteAllObjectsOfEntityName:(NSString*)entityName
@@ -142,16 +142,19 @@ static NSString * const kUnknown = @"kUnknown";
 
 - (void)saveContext
 {
+    [self logCurrentLibraryTitles:@"[TOP of saveContext]"];
     NSError *error = nil;
     if (self.managedObjectContext != nil) {
-        [self preSaveCheckForDuplicateVolumes];
-    
+//        [self preSaveCheckForDuplicateVolumes];
+        [self logCurrentLibraryTitles:@"[MIDDLE of saveContext]"];
         if ([self.managedObjectContext hasChanges] && ![self.managedObjectContext save:&error]) {
                 // Replace this implementation with code to handle the error appropriately.
                 // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
 //            abort();
+            [self logCurrentLibraryTitles:@"[ERROR of saveContext]"];
         }
+        [self logCurrentLibraryTitles:@"[BOTTOM of saveContext]"];
     }
 }
 

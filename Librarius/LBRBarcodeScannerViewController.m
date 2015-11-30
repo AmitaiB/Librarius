@@ -310,7 +310,7 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
                                            initializedFromGoogleBooksObject:responseVolume
                                                               withCovertArt:YES];
                 
-                        [[LBRDataManager sharedDataManager] logCurrentLibraryTitles];
+                        [[LBRDataManager sharedDataManager] logCurrentLibraryTitles:@"[Google Success Block]"];
                         
                             ///TODO: Alternative to confirmation, hmmm...? Perhaps put the view up in the scanning reticule...?
                         NYAlertViewController *confirmationViewController = [self confirmSelectionViewController:volume];
@@ -455,9 +455,9 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
                                                           handler:^(NYAlertAction *action) {
                                                               DDLogInfo(@"Confirm tapped.");
                                                               [self dismissViewControllerAnimated:YES completion:^{
-                                                                  [dataManager logCurrentLibraryTitles];
+                                                                  [dataManager logCurrentLibraryTitles:@"[BEFORE confirm action tapped]"];
                                                                   [dataManager saveContext];
-                                                                  [dataManager logCurrentLibraryTitles];
+                                                                  [dataManager logCurrentLibraryTitles:@"[AFTER confirm action tapped]"];
                                                                       //TODO: Add to a TableView.
                                                                }];
                                                            }];
@@ -551,7 +551,7 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
 
 - (IBAction)resetButtonTapped:(id)sender {
     LBRDataManager *dataManger = [LBRDataManager sharedDataManager];
-    [dataManger logCurrentLibraryTitles];
+    [dataManger logCurrentLibraryTitles:@"[TOP of resetButtonTapped]"];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults removeObjectForKey:[RootCollection entityName]];
     dataManger.userRootCollection = nil;
@@ -561,7 +561,7 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
     [dataManger deleteAllObjectsOfEntityName:[Library entityName]];
     [dataManger deleteAllObjectsOfEntityName:[RootCollection entityName]];
     [self.uniqueCodes removeAllObjects];
-    [dataManger logCurrentLibraryTitles];
+    [dataManger logCurrentLibraryTitles:@"[BOTTOM of resetButtonTapped]"];
 //    [dataManger.managedObjectContext reset];
 //    [dataManger saveContext];
 //    [dataManger logCurrentLibrary];
@@ -569,7 +569,7 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
 
 - (IBAction)logBooksButtonTapped:(id)sender
 {
-    [dataManager logCurrentLibraryTitles];
+    [dataManager logCurrentLibraryTitles:@"[logBooksButtonTapped]"];
 }
 
 
