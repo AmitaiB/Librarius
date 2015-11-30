@@ -450,11 +450,17 @@ static NSString * const kUnknown = @"kUnknown";
 
 -(Library *)currentLibrary
 {
+        //Normal case, but we check that rootCollection is set.
+        //If rootCollection = nil, things will fail silently.
     if (_currentLibrary != nil) {
+        if (_currentLibrary.rootCollection == nil) {
+            _currentLibrary.rootCollection = self.userRootCollection;
+        }
         return _currentLibrary;
     }
-    else
+    else //If currentLibrary = nil, create a new one.
     {
+            //First attempt to retrieve an existing library from the object graph...
         if (self.userRootCollection.libraries.count >= 1)
         {
              return _currentLibrary = [self.userRootCollection firstLibrary];
@@ -466,14 +472,15 @@ static NSString * const kUnknown = @"kUnknown";
             newDefaultLibrary.orderWhenListed = @0;
             newDefaultLibrary.dateCreated     = [NSDate date];
             newDefaultLibrary.dateModified    = [newDefaultLibrary.dateCreated copy];
-            
+            newDefaultLibrary.rootCollection  = self.userRootCollection;
 //            [self generateDefaultBookcaseIfNeeded];
             
                 //Saving changes the objectID from temp to permanent.
             [self saveContext];
-            
-                ///???: Why do I need this?
-            [[NSUserDefaults standardUserDefaults] setURL:newDefaultLibrary.objectID.URIRepresentation forKey:[NSString stringWithFormat:@"Library-%@", newDefaultLibrary.orderWhenListed]];
+
+//            CLEAN: This should only be used for the rootcollection! Using it for other things is swiss-cheesy!
+//                ///???: Why do I need this?
+//            [[NSUserDefaults standardUserDefaults] setURL:newDefaultLibrary.objectID.URIRepresentation forKey:[NSString stringWithFormat:@"Library-%@", newDefaultLibrary.orderWhenListed]];
             
             return _currentLibrary = newDefaultLibrary;
         }
