@@ -63,7 +63,7 @@ static NSString * const kUnknown = @"kUnknown";
     NSArray <Volume*> *results = [self.managedObjectContext executeFetchRequest:request error:nil];
     __block NSMutableArray <NSString*> *prettyResults = [NSMutableArray array];
     [results enumerateObjectsUsingBlock:^(Volume * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [prettyResults addObject:[obj fullTitle]];
+        [prettyResults addObject:[obj fullTitle]? [obj fullTitle] : @"Nully"];
     }];
     DDLogInfo(@"(logCurrentLibraryTitles, ln. 68) === Called by %@ === \nTitles of fetched volumes from Core Data:", debugString);
     for (NSString *title in prettyResults) {
@@ -273,8 +273,9 @@ static NSString * const kUnknown = @"kUnknown";
         return _volumesRequest;
     
     NSFetchRequest *volumesRequest    = [NSFetchRequest fetchRequestWithEntityName:[Volume entityName]];//(1)
-                                                                                                            
-//    volumesRequest.predicate          = [NSPredicate predicateWithFormat:@"%K = %@", @"library.name", self.currentLibrary.name];
+    
+        ///FIXME: THIS IS A CORE FEATURE. #1 FIX PRIORITY
+//    volumesRequest.predicate          = [NSPredicate predicateWithFormat:@"%K LIKE %@", @"library.name", self.currentLibrary.name];
     volumesRequest.sortDescriptors    = @[self.sortDescriptors[kCategorySorter], self.sortDescriptors[kAuthorSorter]];
     volumesRequest.fetchBatchSize     = 200;
     
@@ -289,9 +290,6 @@ static NSString * const kUnknown = @"kUnknown";
     
         //Section Key Path (nil == "no sections")
     NSString *sectionNameKeyPath = @"mainCategory";
-
-        //Managed Object Context
-    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
     
         //Unique cache name
     NSString *currentLibraryCacheName = [NSString stringWithFormat:@"%@Cache-volumes", self.currentLibrary.name];
@@ -299,8 +297,8 @@ static NSString * const kUnknown = @"kUnknown";
 //    currentLibraryCacheName = nil;
     
     NSFetchedResultsController *frc  = [[NSFetchedResultsController alloc]
-                                        initWithFetchRequest:self.volumesRequest
-                                        managedObjectContext:managedObjectContext
+                                        initWithFetchRequest:[self volumesRequest]
+                                        managedObjectContext:[self managedObjectContext]
                                         sectionNameKeyPath:sectionNameKeyPath
                                         cacheName:currentLibraryCacheName];
 //                                        cacheName:nil];
