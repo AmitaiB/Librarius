@@ -552,6 +552,8 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
 - (IBAction)resetButtonTapped:(id)sender {
     LBRDataManager *dataManger = [LBRDataManager sharedDataManager];
     [dataManger logCurrentLibraryTitles];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults removeObjectForKey:[RootCollection entityName]];
     dataManger.userRootCollection = nil;
     dataManger.currentLibrary = nil;
     [dataManger deleteAllObjectsOfEntityName:[Volume entityName]];
