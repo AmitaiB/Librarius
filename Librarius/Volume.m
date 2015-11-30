@@ -225,7 +225,11 @@
     for (NSString __strong *word in words) {
         if ([@[@"the", @"and", @"a", @"of"] containsObject:word]) {
                 // Don't capitalize = do nothing.
-        } else {
+        }
+        else if ([@[@"ios"] containsObject:word.lowercaseString]) {
+            word = @"iOS";
+        }
+        else {
             word = word.capitalizedString;
         }
     }
