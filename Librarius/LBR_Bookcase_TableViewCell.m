@@ -14,11 +14,15 @@
 
 -(void)setBookcase:(Bookcase *)bookcase
 {
+        // Property
     _bookcase = bookcase;
 
-    UIImage *bookcaseCellIcon = [UIImage imageNamed:bookcase.volumes.count? @"bookshelf1" : @"empty-shelves"];
     
+        // Image/Icon
+    UIImage *bookcaseCellIcon = [UIImage imageNamed:bookcase.volumes.count? @"bookshelf1" : @"empty-shelves"];
     [self.imageView setImage:bookcaseCellIcon];
+    
+        // TextLabels
     self.textLabel.text = bookcase.name ? bookcase.name : [NSString stringWithFormat:@"Bookcase #%@ (%@ x %@ cm)", bookcase.orderWhenListed, bookcase.shelves, bookcase.width];
     self.detailTextLabel.text = [NSString stringWithFormat:@"%.01f％ filled: %@ books", [self.bookcase percentFull], bookcase.volumes.count? @(bookcase.volumes.count) : @(-1)];
 }
