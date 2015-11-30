@@ -145,7 +145,7 @@ static NSString * const kUnknown = @"kUnknown";
     [self logCurrentLibraryTitles:@"[TOP of saveContext]"];
     NSError *error = nil;
     if (self.managedObjectContext != nil) {
-//        [self preSaveCheckForDuplicateVolumes];
+        [self preSaveCheckForDuplicateVolumes];
         [self logCurrentLibraryTitles:@"[MIDDLE of saveContext]"];
         if ([self.managedObjectContext hasChanges] && ![self.managedObjectContext save:&error]) {
                 // Replace this implementation with code to handle the error appropriately.
