@@ -376,6 +376,12 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
 #pragma mark - === TableView DataSource ===
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+            NSFetchRequest *volumesRequest = [NSFetchRequest fetchRequestWithEntityName:[Volume entityName]];
+    LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
+//    NSArray *volumes = [dataManager.managedObjectContext executeFetchRequest:self.volumesFetchedResultsController.fetchRequest error:nil];
+    NSArray *volumes = [dataManager.managedObjectContext executeFetchRequest:volumesRequest error:nil];
+    DDLogDebug(@"In numberSections, volumes fetch request: %@", volumes);
+    
     NSInteger numSections = -1; //Crash if
     if (tableView == self.tableView) {
         numSections = [[self.volumesFetchedResultsController sections] count];
@@ -389,6 +395,7 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
     NSArray *sections = [self.volumesFetchedResultsController sections];
     if (sections.count) {
         id <NSFetchedResultsSectionInfo> currentSection = sections[section];

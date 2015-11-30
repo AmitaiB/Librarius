@@ -144,7 +144,7 @@ static NSString * const kUnknown = @"kUnknown";
 {
     NSError *error = nil;
     if (self.managedObjectContext != nil) {
-//        [self preSaveCheckForDuplicateVolumes];
+        [self preSaveCheckForDuplicateVolumes];
     
         if ([self.managedObjectContext hasChanges] && ![self.managedObjectContext save:&error]) {
                 // Replace this implementation with code to handle the error appropriately.
@@ -292,8 +292,9 @@ static NSString * const kUnknown = @"kUnknown";
     NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
     
         //Unique cache name
-    NSString *currentLibraryCacheName = [NSString stringWithFormat:@"%@-volumes", self.currentLibrary.name];
-    
+    NSString *currentLibraryCacheName = [NSString stringWithFormat:@"%@Cache-volumes", self.currentLibrary.name];
+//        ///DEBUG purposes only
+//    currentLibraryCacheName = nil;
     
     NSFetchedResultsController *frc  = [[NSFetchedResultsController alloc]
                                         initWithFetchRequest:self.volumesRequest
