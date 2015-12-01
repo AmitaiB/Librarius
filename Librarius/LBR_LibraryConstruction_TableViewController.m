@@ -23,6 +23,7 @@
     //Data
 #import "LBRDataManager.h"
 #import "LBR_BookcaseLayout.h"
+#import "NSObject+ABBNumberUtils.h"
 
 /**
  Abstract: This VC displays the library structure, and allows for adding/removing/editing the libraries and shelves.
@@ -124,7 +125,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 
 #pragma mark - === UITableView DataSource ===
 
-    ///Each section is a library's bookcases.
+    ///The bookcases' sections are the libraries.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.bookcasesFetchedResultsController.sections.count;
 }
@@ -168,7 +169,8 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
         cell.textLabel.text = @"Add new bookcase to current library";
         cell.textLabel.font = [UIFont fontWithName:@"AvenirNextCondensed-Regular" size:17];
         cell.detailTextLabel.text = @"";
-        cell.accessoryView = nil;
+        cell.accessoryType  = UITableViewCellAccessoryNone;
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
 }
@@ -204,7 +206,12 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DDLogVerbose(@"didSelectRowAtIndexPath: %@\nrow: %lu\nsection: %lu", indexPath, indexPath.row, indexPath.section);
+    if (indexPath.row == self.rowNumOfAddBookcaseButton) {
+//        DDLogVerbose(@"Here is where you add a new bookcase");
+        [self addBookcaseCellTapped];
+        [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
+    } else
+        DDLogVerbose(@"didSelectRowAtIndexPath: %@\nrow: %lu\nsection: %lu", indexPath, indexPath.row, indexPath.section);
 }
 
     ///Hides unselected libraries, by setting the height for rows of inactive Libraries (sections) to 0 or close to it.
@@ -244,7 +251,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
         [dataManager saveContext];
 
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        //UPDATE: Adding bookcases is done via the AddBookcaseCell
     }   
 }
 
@@ -256,19 +263,43 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 }
 */
 
+
+/*
+ // Override to support conditional rearranging of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the item to be re-orderable.
+ return YES;
+ }
+ */
+
+#pragma mark private methods
+
     ///???:
 -(NSNumber*)orderWhenListedOfBookcaseForIndexPath:(NSIndexPath*)indexPath
 {
     return @(indexPath.row);
 }
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+-(void)addBookcaseCellTapped
+{
+    Bookcase *newBookcase = [Bookcase insertNewObjectIntoContext:dataManager.managedObjectContext];
+
+        //Standard
+    newBookcase.dateCreated     = [NSDate date];
+    newBookcase.dateModified    = [newBookcase.dateCreated copy];
+    newBookcase.shelves         = @(kDefaultBookcaseShelvesCount);
+    newBookcase.width           = @(kDefaultBookcaseWidth_cm);
+    newBookcase.name            = [NSString stringWithFormat:@"BookcaseID #%.01f", [NSObject randomFloatBetweenNumber:10000 andNumber:99999]];
+    newBookcase.isFull          = NO;
+    
+        //Specific to this object
+    newBookcase.orderWhenListed = @(++self.rowNumOfAddBookcaseButton);
+    newBookcase.library         = dataManager.currentLibrary;
+    
+    [dataManager saveContext];
+        ///How do we shelve it? Automatically when you add it?
 }
-*/
+
 
 
 #pragma mark - Navigation
