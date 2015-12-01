@@ -160,7 +160,15 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 -(void)configureCell:(LBR_Bookcase_TableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row != self.rowNumOfAddBookcaseButton) {
-        Bookcase *bookcase = self.bookcasesFetchedResultsController.fetchedObjects[indexPath.row];
+        cell.bookcase = self.bookcasesFetchedResultsController.fetchedObjects[indexPath.row];
+    }
+    else // Make this last cell the addBookcaseButton
+    {
+        [cell.imageView setImage:[UIImage imageNamed:@"add-row"]];
+        cell.textLabel.text = @"Add new bookcase to current library";
+        cell.textLabel.font = [UIFont fontWithName:@"AvenirNextCondensed-Regular" size:17];
+        cell.detailTextLabel.text = @"";
+        cell.accessoryView = nil;
     }
     
 }

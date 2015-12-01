@@ -90,9 +90,9 @@
 }
 
 - (void)setupAppearance {
-    UINavigationBar *navigationbarAppearance = [UINavigationBar appearance];
-    navigationbarAppearance.barTintColor = [UIColor colorWithRed:77.0/255.0 green:164.0/255.0 blue:191.0/255.0 alpha:1.0f];
-    navigationbarAppearance.tintColor = [UIColor whiteColor];
+    UINavigationBar *navigationbarAppearance    = [UINavigationBar appearance];
+    navigationbarAppearance.barTintColor        = [UIColor colorWithRed:77.0/255.0 green:164.0/255.0 blue:191.0/255.0 alpha:1.0f];
+    navigationbarAppearance.tintColor           = [UIColor whiteColor];
     navigationbarAppearance.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
 }
 
