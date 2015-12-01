@@ -286,23 +286,19 @@ static NSString * const kUnknown = @"kUnknown";
 -(NSFetchedResultsController *)currentLibraryVolumesFetchedResultsController
 {
         ///!!!: Ugly! Get rid of it!
-//    [self generateDefaultLibraryIfNeeded];
+        //    [self generateDefaultLibraryIfNeeded];
     
         //Section Key Path (nil == "no sections")
     NSString *sectionNameKeyPath = @"mainCategory";
     
         //Unique cache name
     NSString *currentLibraryCacheName = [NSString stringWithFormat:@"%@Cache-volumes", self.currentLibrary.name];
-//        ///DEBUG purposes only
-//    currentLibraryCacheName = nil;
     
     NSFetchedResultsController *frc  = [[NSFetchedResultsController alloc]
                                         initWithFetchRequest:[self volumesRequest]
                                         managedObjectContext:[self managedObjectContext]
                                         sectionNameKeyPath:sectionNameKeyPath
                                         cacheName:currentLibraryCacheName];
-//                                        cacheName:nil];
-    
 
         //Magic happens here.
     NSError *error = nil;

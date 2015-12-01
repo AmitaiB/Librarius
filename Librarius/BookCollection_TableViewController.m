@@ -379,7 +379,6 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
             NSFetchRequest *volumesRequest = [NSFetchRequest fetchRequestWithEntityName:[Volume entityName]];
     LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
     NSArray *volumes = [dataManager.managedObjectContext executeFetchRequest:self.volumesFetchedResultsController.fetchRequest error:nil];
-//    NSArray *volumes = [dataManager.managedObjectContext executeFetchRequest:volumesRequest error:nil];
     DDLogDebug(@"In numberSections, volumes fetch request: %@", volumes);
     
     NSInteger numSections = -1; //Crash if
@@ -387,7 +386,6 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
         numSections = [[self.volumesFetchedResultsController sections] count];
     }
     if (tableView == self.resultsTableViewController.tableView) {
-//       DDLogInfo(@"Results TableView");
         numSections = 1;
     }
     
@@ -485,6 +483,15 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
     headerView.textLabel.backgroundColor      = [UIColor clearColor];
     headerView.textLabel.textColor            = [UIColor wellReadColor];
     headerView.textLabel.font                 = [UIFont fontWithName:@"Avenir-HeavyOblique" size:16];
+    
+    
+//    CGRect separatorRect = CGRectMake(0, tableView.sectionHeaderHeight, [UIScreen mainScreen].bounds.size.width, 1);
+    CGRect separatorRect = CGRectMake(0, -1, [UIScreen mainScreen].bounds.size.width, tableView.sectionHeaderHeight + 1);
+    UIView *separatorObscurationView = [[UIView alloc] initWithFrame:separatorRect];
+    separatorObscurationView.opaque = YES;
+    separatorObscurationView.backgroundColor = [UIColor greenColor];
+
+    [headerView.contentView addSubview:separatorObscurationView];
 }
 
 

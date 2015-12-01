@@ -156,6 +156,28 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 -(void)configureCell:(LBR_Bookcase_TableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Bookcase *bookcase = self.bookcasesFetchedResultsController.fetchedObjects[indexPath.row];
+    /**
+     NOTE TO SELF: The Bookcase object returned looks like this:
+     <Bookcase: 0x13d778610> (entity: Bookcase; id: 0x13d7420f0 <x-coredata:///Bookcase/t79B3F5CF-FF14-43FF-83C8-86C466A3AEED2> ; data: {
+     dateCreated =  "2015-11-30 22:36:24 +0000";
+     dateModified = "2015-11-30 22:36:24 +0000";
+~>   isFull = nil;
+     library = "0xd0000000000c0004 <x-coredata://1D20F91E-CA9F-4AC9-B8D2-28E1D61416AF/Library/p3>";
+~>   name = nil;
+     orderWhenListed = 1;
+     "shelf_height" = 0;
+     shelves = 3;
+~>   shelvesArray = nil;
+~>   volumes =     (
+     );
+     width = 7;
+     })
+NOTE THE UNINITIALIZED VALUES. Go do your thing, Freeblade!
+     
+     */
+    
+    
+    
    /*
     [cell.imageView setImage:[UIImage imageNamed:@"bookshelf1"]];
     cell.textLabel.text = bookcase.name ? bookcase.name : [NSString stringWithFormat:@"Bookcase #%@ (%@ x %.1f cm)", bookcase.orderWhenListed, bookcase.shelves, bookcase.width.floatValue];
