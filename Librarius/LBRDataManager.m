@@ -358,9 +358,10 @@ static NSString * const kUnknown = @"kUnknown";
         abort();
     }
     
-    NSArray *bookcases = [frc.managedObjectContext executeFetchRequest:self.bookcasesRequest error:nil];
+        // CLEAN: Default bookcases should not be needed.
+     
+     NSArray *bookcases = [frc.managedObjectContext executeFetchRequest:self.bookcasesRequest error:nil];
     
-        ///???: Defaults needed?
     if (bookcases.count == 0) {
         [self generateBookcasesForLibrary:self.currentLibrary withDimensions:@{@3 : @7,
                                                                                @5 : @5,
@@ -368,6 +369,7 @@ static NSString * const kUnknown = @"kUnknown";
                                                                                }];
         [frc performFetch:nil];
     }
+    
     
     return frc;
 }
