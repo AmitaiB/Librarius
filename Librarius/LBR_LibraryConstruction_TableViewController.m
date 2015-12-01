@@ -27,6 +27,7 @@
 /**
  Abstract: This VC displays the library structure, and allows for adding/removing/editing the libraries and shelves.
  The HeaderView will have a collectionView in it, displaying a cell for each Library.
+ To add a bookcase, we will try to implement a dedicated TableViewCell.
  */
 
 @interface LBR_LibraryConstruction_TableViewController ()
@@ -50,6 +51,8 @@
 @property (nonatomic, strong) UIImagePickerController *imagePickerController;
 @property (weak, nonatomic) IBOutlet UIView *addBookcaseFooterView; //For "Add Bookcase" tableViewCell - if I want to do it that way.
 
+@property (nonatomic, assign) NSInteger rowNumOfAddBookcaseButton;
+
 @end
 
 @implementation LBR_LibraryConstruction_TableViewController {
@@ -66,6 +69,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     
     dataManager = [LBRDataManager sharedDataManager];
     self.bookcasesFetchedResultsController = [dataManager currentLibraryBookcasesFetchedResultsController:self];
+    self.rowNumOfAddBookcaseButton = self.bookcasesFetchedResultsController.fetchedObjects.count;
     
         //Layout
     self.layoutSegmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"layout 1", @"layout 2"]];
@@ -132,7 +136,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     NSArray *sections = self.bookcasesFetchedResultsController.sections;
     if (sections.count) {
         id <NSFetchedResultsSectionInfo> currentSection = sections[tableSection];
-        return currentSection.numberOfObjects;
+        return currentSection.numberOfObjects +1;
     }
     else
     {
@@ -155,34 +159,10 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     //Note: If there's no bookcase, it crashes the collectionView.
 -(void)configureCell:(LBR_Bookcase_TableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Bookcase *bookcase = self.bookcasesFetchedResultsController.fetchedObjects[indexPath.row];
-    /**
-     NOTE TO SELF: The Bookcase object returned looks like this:
-     <Bookcase: 0x13d778610> (entity: Bookcase; id: 0x13d7420f0 <x-coredata:///Bookcase/t79B3F5CF-FF14-43FF-83C8-86C466A3AEED2> ; data: {
-     dateCreated =  "2015-11-30 22:36:24 +0000";
-     dateModified = "2015-11-30 22:36:24 +0000";
-~>   isFull = nil;
-     library = "0xd0000000000c0004 <x-coredata://1D20F91E-CA9F-4AC9-B8D2-28E1D61416AF/Library/p3>";
-~>   name = nil;
-     orderWhenListed = 1;
-     "shelf_height" = 0;
-     shelves = 3;
-~>   shelvesArray = nil;
-~>   volumes =     (
-     );
-     width = 7;
-     })
-NOTE THE UNINITIALIZED VALUES. Go do your thing, Freeblade!
-     
-     */
+    if (indexPath.row != self.rowNumOfAddBookcaseButton) {
+        Bookcase *bookcase = self.bookcasesFetchedResultsController.fetchedObjects[indexPath.row];
+    }
     
-    
-    
-   /*
-    [cell.imageView setImage:[UIImage imageNamed:@"bookshelf1"]];
-    cell.textLabel.text = bookcase.name ? bookcase.name : [NSString stringWithFormat:@"Bookcase #%@ (%@ x %.1f cm)", bookcase.orderWhenListed, bookcase.shelves, bookcase.width.floatValue];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%.01f％ filled: %lu books", [bookcase percentFull], bookcase.volumes.count];
-    */
 }
 
     ///Just needed to fold when not in selected library.
@@ -212,6 +192,8 @@ NOTE THE UNINITIALIZED VALUES. Go do your thing, Freeblade!
 
 #pragma mark - === UITableView Delegate methods ===
 
+
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DDLogVerbose(@"didSelectRowAtIndexPath: %@\nrow: %lu\nsection: %lu", indexPath, indexPath.row, indexPath.section);
@@ -237,6 +219,9 @@ NOTE THE UNINITIALIZED VALUES. Go do your thing, Freeblade!
 
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == self.rowNumOfAddBookcaseButton) {
+        return NO;
+    }
     return YES;
 }
 
@@ -256,12 +241,14 @@ NOTE THE UNINITIALIZED VALUES. Go do your thing, Freeblade!
 }
 
 
-
+/*
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
 //    Make sure it's reflected in Core data
 }
+*/
 
+    ///???:
 -(NSNumber*)orderWhenListedOfBookcaseForIndexPath:(NSIndexPath*)indexPath
 {
     return @(indexPath.row);
@@ -277,6 +264,17 @@ NOTE THE UNINITIALIZED VALUES. Go do your thing, Freeblade!
 
 
 #pragma mark - Navigation
+
+-(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+    if ([identifier isEqualToString:@"bookcaseTableViewToBookshelfCollectionViewSegueID"])
+    {
+        LBR_Bookcase_TableViewCell *cell = sender;
+        if (cell.bookcase == nil) return NO;
+    }
+    
+    return YES;
+}
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
