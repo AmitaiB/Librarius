@@ -141,8 +141,6 @@ static NSString * const altSearchResultsCellID = @"altSearchResultsCellID";
     [UITableView appearance].backgroundView = nil;
 //    [UITableView appearance].backgroundColor = [UIColor wellReadColor];
     [[UITableView appearance] setSeparatorColor :[UIColor wellReadColor]];
-    [[UITableView appearance] setSeparatorStyle:UITableViewCellSeparatorStyleSingleLineEtched];
-    
     [[UITableView appearance] setBackgroundColor:[UIColor casalColor]];
     
     [[UITableViewCell appearance] setBackgroundColor:[UIColor cloudsColor]];
@@ -483,20 +481,13 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
     headerView.textLabel.backgroundColor      = [UIColor clearColor];
     headerView.textLabel.textColor            = [UIColor wellReadColor];
     headerView.textLabel.font                 = [UIFont fontWithName:@"Avenir-HeavyOblique" size:16];
-    
-    
-//    CGRect separatorRect = CGRectMake(0, tableView.sectionHeaderHeight, [UIScreen mainScreen].bounds.size.width, 1);
-    CGRect separatorRect = CGRectMake(0, -1, [UIScreen mainScreen].bounds.size.width, tableView.sectionHeaderHeight + 1);
-    UIView *separatorObscurationView = [[UIView alloc] initWithFrame:separatorRect];
-    separatorObscurationView.opaque = YES;
-    separatorObscurationView.backgroundColor = [UIColor greenColor];
-
-    [headerView.contentView addSubview:separatorObscurationView];
 }
 
 
 #pragma mark private delegate helpers
 
+    ///TODO: First and Last cell in section should not have separators
+    ///start here: http://stackoverflow.com/questions/1374990/how-to-customize-tableview-separator-in-iphone
 - (void)configureCell:(UITableViewCell *)cell forIndexPath:(NSIndexPath *)indexPath {
         //Grabbing the text and context.
     BOOL frcFetchedObjectsExist = @(self.volumesFetchedResultsController.fetchedObjects.count).boolValue;
