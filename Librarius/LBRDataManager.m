@@ -363,10 +363,7 @@ static NSString * const kUnknown = @"kUnknown";
      NSArray *bookcases = [frc.managedObjectContext executeFetchRequest:self.bookcasesRequest error:nil];
     
     if (bookcases.count == 0) {
-        [self generateBookcasesForLibrary:self.currentLibrary withDimensions:@{@3 : @7,
-                                                                               @5 : @5,
-                                                                               @2 : @20
-                                                                               }];
+        [self generateBookcasesForLibrary:self.currentLibrary withDimensions:@{@3 : @7}];
         [frc performFetch:nil];
     }
     
@@ -545,18 +542,21 @@ static NSString * const kUnknown = @"kUnknown";
      */
 - (void)generateBookcasesForLibrary:(Library *)library withDimensions:(NSDictionary <NSNumber*, NSNumber*> *)dimensions
 {
-   __block NSNumber *idx = @(library.bookcases.count);
+//   __block NSNumber *idx = @(library.bookcases.count);
     [dimensions enumerateKeysAndObjectsUsingBlock:^(NSNumber * _Nonnull numShelves, NSNumber * _Nonnull shelfWidth, BOOL * _Nonnull stop) {
         
         Bookcase *bookcase = [Bookcase insertNewObjectIntoContext:self.managedObjectContext];
 
-        idx                      = @(idx.integerValue +1);
-        bookcase.orderWhenListed = idx;
-        bookcase.shelves         = numShelves;
-        bookcase.width           = shelfWidth;
+//        idx                      = @(idx.integerValue +1);
+//        bookcase.orderWhenListed = idx;
+        bookcase.orderWhenListed = @(library.bookcases.count);
         bookcase.library         = library;
+
         bookcase.dateCreated     = [NSDate date];
         bookcase.dateModified    = [bookcase.dateCreated copy];
+        bookcase.shelves         = numShelves;
+        bookcase.width           = shelfWidth;
+        bookcase.isFull          = NO;
     }];
 }
 

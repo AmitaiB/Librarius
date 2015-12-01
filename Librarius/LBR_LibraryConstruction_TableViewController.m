@@ -156,21 +156,22 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 
     return cell;
 }
-
+    //UPDATE: --> Note still relevant???:
     //Note: If there's no bookcase, it crashes the collectionView.
 -(void)configureCell:(LBR_Bookcase_TableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row != self.rowNumOfAddBookcaseButton) {
         cell.bookcase = self.bookcasesFetchedResultsController.fetchedObjects[indexPath.row];
     }
-    else // Make this last cell the addBookcaseButton
+    else
     {
+            // Makes the last cell the addBookcaseButton
         [cell.imageView setImage:[UIImage imageNamed:@"add-row"]];
-        cell.textLabel.text = @"Add new bookcase to current library";
-        cell.textLabel.font = [UIFont fontWithName:@"AvenirNextCondensed-Regular" size:17];
+        cell.textLabel.text       = @"Add new bookcase to current library";
+        cell.textLabel.font       = [UIFont fontWithName:@"AvenirNextCondensed-Regular" size:17];
         cell.detailTextLabel.text = @"";
-        cell.accessoryType  = UITableViewCellAccessoryNone;
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.accessoryType        = UITableViewCellAccessoryNone;
+        cell.selectionStyle       = UITableViewCellSelectionStyleNone;
     }
     
 }
@@ -178,7 +179,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     ///Just needed to fold when not in selected library.
 
 
-#pragma mark Header
+#pragma mark Headers/Footers
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     if (section == self.selectedLibraryIndexPath.section) {
@@ -199,6 +200,18 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
         return self.tableView.sectionHeaderHeight;
 }
 */
+
+    ///The footer should display the remaining unshelved books
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    return nil;
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+{
+    return @"X?X?X";
+}
+
 
 #pragma mark - === UITableView Delegate methods ===
 
@@ -249,6 +262,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
         id object = [self.bookcasesFetchedResultsController objectAtIndexPath:indexPath];
         [dataManager.managedObjectContext deleteObject:object];
         [dataManager saveContext];
+        self.rowNumOfAddBookcaseButton--;
 
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         //UPDATE: Adding bookcases is done via the AddBookcaseCell
