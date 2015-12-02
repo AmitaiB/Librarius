@@ -79,7 +79,9 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
     [self initRefreshControl];
-
+    
+[self.tableView setContentOffset:CGPointMake(0, self.topLayoutGuide.length -self.refreshControl.frame.size.height) animated:YES];
+    
 //    NSIndexPath *firstItemIndexPath = [NSIndexPath indexPathForRow: 0 inSection:0];
 //    [self.tableView scrollToRowAtIndexPath:firstItemIndexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
 
