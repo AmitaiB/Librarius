@@ -39,18 +39,19 @@
     //Library Selection (CollectionView)
 @property (weak, nonatomic) IBOutlet UICollectionView *librariesCollectionView;
 @property (nonatomic, assign) NSIndexPath *selectedLibraryIndexPath;
-- (IBAction)addButtonTapped:(id)sender; //Add Library button...
+- (IBAction)addLibraryButtonTapped:(id)sender; //Add Library button...
 
-    //Bookcase Selection (TableView) - NOT YET IMPL
+    //Bookcase Selection (TableView)
+@property (nonatomic, assign) NSInteger rowNumOfAddBookcaseButton;
+
+
     //Layout Selection (Segmented Control) - NOT YET IMPL
 
     //Not Yet Implemented
-- (IBAction)addBookcaseButtonTapped:(id)sender;
 @property (nonatomic, strong) UISegmentedControl *layoutSegmentedControl;
 @property (nonatomic, strong) UIImagePickerController *imagePickerController;
 //@property (weak, nonatomic) IBOutlet UIView *addBookcaseFooterView; //For "Add Bookcase" tableViewCell - if I want to do it that way.
 
-@property (nonatomic, assign) NSInteger rowNumOfAddBookcaseButton;
 
 @end
 
@@ -77,11 +78,26 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
+    [self initRefreshControl];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
 }
 
+-(void)initRefreshControl
+{
+    self.refreshControl                 = [UIRefreshControl new];
+    self.refreshControl.backgroundColor = [UIColor purpleColor];
+    self.refreshControl.tintColor       = [UIColor whiteColor];
+    self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Reshelving books..."];
+   [self.refreshControl addTarget:self action:@selector(reshelveBookcasesInCurrentLibrary) forControlEvents:UIControlEventValueChanged];
+}
+
+-(void)reshelveBookcasesInCurrentLibrary
+{
+    DDLogVerbose(@"reshelveBookcasesInCurrentLibrary should be implemented here.");
+    [self.refreshControl endRefreshing];
+}
 
 #pragma mark - === UIImagePickerController delegate ===
 
@@ -564,11 +580,8 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
  */
 
 
-- (IBAction)addButtonTapped:(id)sender {
+- (IBAction)addLibraryButtonTapped:(id)sender {
     DBLG
 }
 
-- (IBAction)addBookcaseButtonTapped:(id)sender {
-    DBLG
-}
 @end
