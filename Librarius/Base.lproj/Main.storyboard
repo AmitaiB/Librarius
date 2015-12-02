@@ -832,7 +832,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="addBookcaseFooterView" destination="8L6-u6-UuZ" id="ar6-zG-J6X"/>
                         <outlet property="librariesCollectionView" destination="ktl-aI-0oU" id="Ucz-lc-lCy"/>
                     </connections>
                 </tableViewController>

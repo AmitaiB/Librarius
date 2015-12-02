@@ -42,15 +42,13 @@
 - (IBAction)addButtonTapped:(id)sender; //Add Library button...
 
     //Bookcase Selection (TableView) - NOT YET IMPL
-//@property (nonatomic, strong) NSDictionary <NSIndexPath*, LBR_BookcaseModel*> *bookcaseModelsDictionary;
-
     //Layout Selection (Segmented Control) - NOT YET IMPL
 
     //Not Yet Implemented
 - (IBAction)addBookcaseButtonTapped:(id)sender;
 @property (nonatomic, strong) UISegmentedControl *layoutSegmentedControl;
 @property (nonatomic, strong) UIImagePickerController *imagePickerController;
-@property (weak, nonatomic) IBOutlet UIView *addBookcaseFooterView; //For "Add Bookcase" tableViewCell - if I want to do it that way.
+//@property (weak, nonatomic) IBOutlet UIView *addBookcaseFooterView; //For "Add Bookcase" tableViewCell - if I want to do it that way.
 
 @property (nonatomic, assign) NSInteger rowNumOfAddBookcaseButton;
 
