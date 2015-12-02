@@ -79,31 +79,13 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
     [self initRefreshControl];
-    
-[self.tableView setContentOffset:CGPointMake(0, self.topLayoutGuide.length -self.refreshControl.frame.size.height) animated:YES];
-    
-//    NSIndexPath *firstItemIndexPath = [NSIndexPath indexPathForRow: 0 inSection:0];
-//    [self.tableView scrollToRowAtIndexPath:firstItemIndexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
-
+        //Prevents the refreshControl from being visible upon loading.
+    [self.tableView setContentOffset:CGPointMake(0, self.topLayoutGuide.length -self.refreshControl.frame.size.height) animated:YES];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
 }
 
-//-(void)scrollToFirstCell
-//{
-//    BOOL section0hasAtLeastOneRow = [self.tableView numberOfRowsInSection:0];
-//    
-//        //Scroll to the first section
-//    if ([self.tableView numberOfSections] > 0) {
-//        if (section0hasAtLeastOneRow) {
-//        }
-//        else
-//        {  ///Apple Docs: "NSNotFound is a valid row index for scrolling to a section with zero rows."
-//            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:NSNotFound inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
-//        }
-//    }
-//}
 
 -(void)initRefreshControl
 {
@@ -124,7 +106,8 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 -(void)reshelveBookcasesInCurrentLibrary
 {
     DDLogVerbose(@"reshelveBookcasesInCurrentLibrary should be implemented here."); //0
-    NSArray<Volume*> *unshelvedBooksRemaining = [dataManager.currentLibrary shelveVolumesOnBookcasesAccordingToLayoutScheme:LBRLayoutSchemeDefault];    //1
+//    NSArray<Volume*> *unshelvedBooksRemaining =
+    [dataManager.currentLibrary shelveVolumesOnBookcasesAccordingToLayoutScheme:LBRLayoutSchemeDefault];    //1
     [self.tableView reloadData];                                                    //3
     if ([self.refreshControl isRefreshing]) [self.refreshControl endRefreshing];
 }
@@ -235,24 +218,8 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
         return nil;
 }
 
-    //TODO: Why is this the wrong height?
-/*
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    if (section == 0) {
-        return self.tableView.tableHeaderView.intrinsicContentSize.height;
-    }
-    else
-        return self.tableView.sectionHeaderHeight;
-}
-*/
 
     ///The footer should display the remaining unshelved books
-//-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-//{
-//    return nil;
-//}
-
 -(NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
     NSSet *setOfUnshelvedBooksRemaining = [dataManager.currentLibrary.volumes filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"%K == nil", @"bookcase"]];
