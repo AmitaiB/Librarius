@@ -19,12 +19,19 @@
 
     
         // Image/Icon
-    UIImage *bookcaseCellIcon = [UIImage imageNamed:bookcase.volumes.count? @"bookshelf1" : @"empty-shelves"];
+//    UIImage *bookcaseCellIcon = [UIImage imageNamed:bookcase.volumes.count? @"bookshelf1" : @"empty-shelves"];
+    NSArray *bookcaseShelvesArray = bookcase.shelvesArray;
+    UIImage *bookcaseCellIcon;
+    if (bookcase.isFull) {
+        bookcaseCellIcon = [UIImage imageNamed:@"bookshelf1"];
+    } else {
+        bookcaseCellIcon = [UIImage imageNamed:bookcaseShelvesArray.count? @"half-filled-shelf1" : @"empty-shelves"];
+    }
     [self.imageView setImage:bookcaseCellIcon];
     
         // TextLabels
     self.textLabel.text = bookcase.name ? bookcase.name : [NSString stringWithFormat:@"Bookcase #%@ (%@ x %@ cm)", bookcase.orderWhenListed, bookcase.shelves, bookcase.width];
-    self.detailTextLabel.text = [NSString stringWithFormat:@"%.01f％ filled: %@ books", [self.bookcase percentFull], bookcase.volumes.count? @(bookcase.volumes.count) : @(-1)];
+    self.detailTextLabel.text = [NSString stringWithFormat:@"%.01f％ filled: %@ books", [self.bookcase percentFull], bookcase.volumes.count? @(bookcase.volumes.count) : @(0.0)];
 }
 
 -(void)prepareForReuse

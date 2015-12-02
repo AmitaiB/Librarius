@@ -94,21 +94,25 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 }
 
     /**
-     1) Have the library object shelve itself. 
+     ✅1) Have the library object shelve itself.
      -> Now the Bookcase objects should have shelvesArrays (and the Volumes should be related to the Bookcase), and we should capture the unshelvedRemainderBooks.
-     2) Make sure the tableViewCells can read the relevant info from the Bookcase object.
-     3) Reload the data in the current Library's section.
+     ✅2) Make sure the tableViewCells can read the relevant info from the Bookcase object.
+     ✅3) Reload the data [in the current Library's section?].
      4) Send the unshelved books data to the FooterView somehow.
      5) Delcare Victory and Go Home
      */
 -(void)reshelveBookcasesInCurrentLibrary
 {
-    DDLogVerbose(@"reshelveBookcasesInCurrentLibrary should be implemented here.");
-    NSArray<Volume*> *unshelvedBooksRemaining = [dataManager.currentLibrary shelveVolumesOnBookcasesAccordingToLayoutScheme:LBRLayoutSchemeDefault];
+    DDLogVerbose(@"reshelveBookcasesInCurrentLibrary should be implemented here."); //0
+    NSArray<Volume*> *unshelvedBooksRemaining = [dataManager.currentLibrary shelveVolumesOnBookcasesAccordingToLayoutScheme:LBRLayoutSchemeDefault];    //1
+    [self.tableView reloadData];                                                    //3
+    [self sendFooterViewUnshelvedBooksData:unshelvedBooksRemaining];                //4
+    if ([self.refreshControl isRefreshing]) [self.refreshControl endRefreshing];
+}
+
+-(void)sendFooterViewUnshelvedBooksData:(NSArray*)unshelvedBooksArray
+{
     
-    
-    
-    [self.refreshControl endRefreshing];
 }
 
 #pragma mark - === UIImagePickerController delegate ===
@@ -228,14 +232,20 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 */
 
     ///The footer should display the remaining unshelved books
--(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-{
-    return nil;
-}
+//-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+//{
+//    return nil;
+//}
 
 -(NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
-    return @"X?X?X";
+    NSSet *setOfUnshelvedBooksRemaining = [dataManager.currentLibrary.volumes filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"%K == nil", @"bookcase"]];
+    
+    CGFloat totalVolumesCount = (CGFloat)dataManager.currentLibrary.volumes.count;
+    CGFloat unshelvedVolumesCount = (CGFloat)setOfUnshelvedBooksRemaining.count;
+    CGFloat percentShelved = (totalVolumesCount - unshelvedVolumesCount)/totalVolumesCount;
+    NSString *unshelvedBooksReport = [NSString stringWithFormat:@"%.0f total volumes, %.01f%%﹪ (%.0f volumes) remain unshelved", totalVolumesCount, percentShelved, unshelvedVolumesCount];
+    return unshelvedBooksReport;
 }
 
 
