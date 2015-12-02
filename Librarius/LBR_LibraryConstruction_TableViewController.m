@@ -93,9 +93,21 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
    [self.refreshControl addTarget:self action:@selector(reshelveBookcasesInCurrentLibrary) forControlEvents:UIControlEventValueChanged];
 }
 
+    /**
+     1) Have the library object shelve itself. 
+     -> Now the Bookcase objects should have shelvesArrays (and the Volumes should be related to the Bookcase), and we should capture the unshelvedRemainderBooks.
+     2) Make sure the tableViewCells can read the relevant info from the Bookcase object.
+     3) Reload the data in the current Library's section.
+     4) Send the unshelved books data to the FooterView somehow.
+     5) Delcare Victory and Go Home
+     */
 -(void)reshelveBookcasesInCurrentLibrary
 {
     DDLogVerbose(@"reshelveBookcasesInCurrentLibrary should be implemented here.");
+    
+    
+    
+    
     [self.refreshControl endRefreshing];
 }
 
@@ -343,6 +355,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     return YES;
 }
 
+    //FIXME: Problem anticipated here.
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"bookcaseTableViewToBookshelfCollectionViewSegueID"]) {
@@ -420,9 +433,10 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     self.selectedLibraryIndexPath = indexPath;
     NSArray *orderedLibraries = [dataManager.userRootCollection.libraries sortedArrayUsingDescriptors:@[dataManager.sortDescriptors[kOrderSorter]]];
     dataManager.currentLibrary = orderedLibraries[indexPath.item];
-    [dataManager.currentLibrary shelveVolumesOnBookcasesAccordingToLayoutScheme:LBRLayoutSchemeDefault];
+    [self.refreshControl beginRefreshing];
     
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
+//    [dataManager.currentLibrary shelveVolumesOnBookcasesAccordingToLayoutScheme:LBRLayoutSchemeDefault];
+//    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
     DDLogVerbose(@"dataManager.currentLibrary now = %@", dataManager.currentLibrary.name);
 }
 
