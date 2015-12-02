@@ -716,30 +716,8 @@
                         <view key="tableFooterView" hidden="YES" contentMode="scaleToFill" id="8L6-u6-UuZ" userLabel="Add Bookcase (FooterView)">
                             <rect key="frame" x="0.0" y="303.5" width="600" height="128"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add a bookcase..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yIj-2n-iYp">
-                                    <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                    <animations/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                    <nil key="highlightedColor"/>
-                                    <variation key="widthClass=compact" fixedFrame="YES">
-                                        <rect key="frame" x="60" y="11" width="137" height="21"/>
-                                    </variation>
-                                </label>
-                            </subviews>
                             <animations/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <variation key="default">
-                                <mask key="subviews">
-                                    <exclude reference="yIj-2n-iYp"/>
-                                </mask>
-                            </variation>
-                            <variation key="widthClass=compact">
-                                <mask key="subviews">
-                                    <include reference="yIj-2n-iYp"/>
-                                </mask>
-                            </variation>
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="bookcaseCellReuseID" textLabel="5lT-Hw-1Mp" detailTextLabel="pO9-1g-MQn" imageView="8xd-cZ-srs" style="IBUITableViewCellStyleSubtitle" id="Mbu-1M-8sd" customClass="LBR_Bookcase_TableViewCell">

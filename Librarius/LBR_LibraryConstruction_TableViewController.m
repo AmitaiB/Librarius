@@ -104,7 +104,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 -(void)reshelveBookcasesInCurrentLibrary
 {
     DDLogVerbose(@"reshelveBookcasesInCurrentLibrary should be implemented here.");
-    
+    NSArray<Volume*> *unshelvedBooksRemaining = [dataManager.currentLibrary shelveVolumesOnBookcasesAccordingToLayoutScheme:LBRLayoutSchemeDefault];
     
     
     
