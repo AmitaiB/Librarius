@@ -19,41 +19,36 @@
 @dynamic name;
 @dynamic orderWhenListed;
 @dynamic shelf_height;
-@dynamic shelves;
 @dynamic width;
 @dynamic shelvesArray;
 @dynamic library;
 @dynamic volumes;
 
+@dynamic shelves;
 @end
 
 
 
-
-
-
-
-
-@implementation ShelvesArray
-
-+(Class)transformedValueClass
-{
-    return [NSData class];
-}
-
-+(BOOL)allowsReverseTransformation
-{
-    return YES;
-}
-
--(id)transformedValue:(id)value
-{
-    return [NSKeyedArchiver archivedDataWithRootObject:value];
-}
-
--(id)reverseTransformedValue:(id)value
-{
-    return [NSKeyedUnarchiver unarchiveObjectWithData:value];
-}
-
-@end
+//@implementation ShelvesArray
+//
+//+(Class)transformedValueClass
+//{
+//    return [NSData class];
+//}
+//
+//+(BOOL)allowsReverseTransformation
+//{
+//    return YES;
+//}
+//
+//-(id)transformedValue:(id)value
+//{
+//    return [NSKeyedArchiver archivedDataWithRootObject:value];
+//}
+//
+//-(id)reverseTransformedValue:(id)value
+//{
+//    return [NSKeyedUnarchiver unarchiveObjectWithData:value];
+//}
+//
+//@end

@@ -9,7 +9,10 @@
 #import "LBR_Bookcase_TableViewCell.h"
 #import "Bookcase.h"
 
-
+/**
+ Why is bookcase.shelvesArray == nil??
+ 
+ */
 @implementation LBR_Bookcase_TableViewCell
 
 -(void)setBookcase:(Bookcase *)bookcase

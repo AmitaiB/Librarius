@@ -23,10 +23,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSNumber *shelf_height;
 @property (nullable, nonatomic, retain) NSNumber *shelves;
 @property (nullable, nonatomic, retain) NSNumber *width;
-@property (nullable, nonatomic, retain) id shelvesArray;
 @property (nullable, nonatomic, retain) Library *library;
 @property (nullable, nonatomic, retain) NSSet<Volume *> *volumes;
 
+    //Trusting the default NSValueTransformer
+@property (nullable, nonatomic, retain) NSArray *shelvesArray;
 @end
 
 @interface Bookcase (CoreDataGeneratedAccessors)
@@ -40,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
-@interface ShelvesArray : NSValueTransformer
-
-@end
+//@interface ShelvesArray : NSValueTransformer
+//
+//@end
 

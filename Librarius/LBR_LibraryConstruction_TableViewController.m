@@ -357,11 +357,8 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
         LBR_Bookcase_TableViewCell *senderCell = (LBR_Bookcase_TableViewCell*)sender;
         destinationVC.bookcaseOnDisplay        = senderCell.bookcase;
         dataManager.currentBookcase            = senderCell.bookcase;
-        NSDictionary *shelveResultsDict = [dataManager.currentLibrary shelveVolumesOnBookcasesAccordingToLayoutScheme:LBRLayoutSchemeDefault];
-        destinationVC.layoutArray = shelveResultsDict[kShelvesArray];
-            ///CLEAN: Destroy me!
-            //        destinationVC.layout.shelvesNestedArray = dataManager.transientLibraryLayoutInformation[kShelvesArray];
-
+    } else {
+        DDLogWarn(@"prepareForSegue shouldn't have triggered this.");
     }
 }
 
