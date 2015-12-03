@@ -195,6 +195,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     if (indexPath.row != self.rowNumOfAddBookcaseButton) {
             ///Possibly change this, make the array model transient.
         cell.bookcase = self.bookcasesFetchedResultsController.fetchedObjects[indexPath.row];
+        cell.bookcase = self.shelvedBookcaseObjectsForSegue[indexPath.row];
     }
     else
     {

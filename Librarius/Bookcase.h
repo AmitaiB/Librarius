@@ -29,7 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
      @property (nonatomic, strong) NSArray<NSArray *> *shelves;
      @property (nonatomic, strong) NSArray<Volume  *> *unshelvedRemainder;
 */
--(NSDictionary*)shelvedAndRemainingBooks:(NSArray <Volume *> *)booksArray;
+//-(NSDictionary*)fillShelvesWithBooks:(NSArray <Volume *> *)booksArray;
+-(NSArray*)fillShelvesWithBooks:(NSArray <Volume *> *)booksArray;
 
 @end
 

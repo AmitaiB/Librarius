@@ -47,16 +47,16 @@
     
     NSDictionary *shelvedAndRemainingBooksDict;
     
-    NSMutableDictionary *libraryLayoutDict = [NSMutableDictionary new];
-    
     for (Bookcase *bookcase in bookcasesInOrder)
     {
         if (!bookcase.name) bookcase.name = [NSString stringWithFormat:@"#%@", bookcase.orderWhenListed.stringValue];
         
         
-        shelvedAndRemainingBooksDict  = [bookcase shelvedAndRemainingBooks:remainingUnshelvedVolumes]; //The magic happens here.
+        shelvedAndRemainingBooksDict  = [bookcase fillShelvesWithBooks:remainingUnshelvedVolumes]; //The magic happens here.
+        
         remainingUnshelvedVolumes = shelvedAndRemainingBooksDict[kUnshelvedRemainder]; //sets up for the next loop iteration.
         bookcase.shelvesArray = shelvedAndRemainingBooksDict[kShelvesArray];
+        bookcase.laidOutShelvesModel = shelvedAndRemainingBooksDict[kShelvesArray];
     }
     
     return remainingUnshelvedVolumes;

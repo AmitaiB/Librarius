@@ -57,7 +57,7 @@
     ///This needs to return a dictionary to replace these two properties...OR, make a Value Transformer.
     ///@property (nonatomic, strong) NSArray<NSArray *> *shelves;
     ///@property (nonatomic, strong) NSArray<Volume  *> *unshelvedRemainder;
--(NSDictionary *)shelvedAndRemainingBooks:(NSArray<Volume *> *)booksArray
+-(NSArray *)fillShelvesWithBooks:(NSArray<Volume *> *)booksArray
 {
     NSArray<Volume  *> *unshelvedRemainder = [NSArray array];
     NSArray<NSArray *> *shelvesArray       = [NSArray array];
@@ -78,60 +78,61 @@
     BOOL currentShelfHasRoomForBook;
     BOOL thereAreMoreBooksToShelve;
     
-    if (booksArray != [NSNull null])
-    for (NSUInteger idx = 0; idx < booksArray.count; idx++) {
-        
-        book                 = booksArray[idx];
-        thickness            = book.thickness.floatValue? book.thickness.floatValue : kDefaultBookThickness;
-        currentXPosition_cm  += thickness;
-        currentShelfHasRoomForBook = currentXPosition_cm < self.width.floatValue;
-        thereAreMoreBooksToShelve  = idx < booksArray.count - 1;
-        
-        
-            //"Continue" = 'Shelve' the current book, then pick up the next book and repeat.
-            ///!!!: Need more conditions: 1) No more books, 2) no more room on this shelf 2b) No more room on any shelf 3) Perfect fit...
-            ///UPDATE: Initializing
-        if (thereAreMoreBooksToShelve && currentShelfHasRoomForBook)
-        {
-            continue; //continue to the next book, and shelve it where it belongs.
-        }
-        else
-        {
-                //Include all the books up *until* this one --> a shelf.
-                //It's 'idx' NOT 'idx + 1', because the current book does not fit on this shelf.
-            NSRange rangeForCurrentShelf = NSMakeRange(idxOfFirstBookOnShelf, idx - idxOfFirstBookOnShelf);
-            NSArray *thisShelf           = [booksArray subarrayWithRange:rangeForCurrentShelf];
+    if (booksArray)
+        for (NSUInteger idx = 0; idx < booksArray.count; idx++) {
+            book                 = booksArray[idx];
+            thickness            = book.thickness.floatValue? book.thickness.floatValue : kDefaultBookThickness;
+            currentXPosition_cm  += thickness;
+            currentShelfHasRoomForBook = currentXPosition_cm < self.width.floatValue;
+            thereAreMoreBooksToShelve  = idx < booksArray.count - 1;
             
-            [mutableShelves addObject:thisShelf];
-                ///!!!:Is this broken if we have run out of books, but it does this anyway...?
-                //If there are more shelves, then this book becomes the first on the next shelf.
-            BOOL nextShelfExistsAndIsEmpty = mutableShelves.count < self.shelves.integerValue;
-            if (nextShelfExistsAndIsEmpty)
+            
+                //"Continue" = 'Shelve' the current book, then pick up the next book and repeat.
+                ///!!!: Need more conditions: 1) No more books, 2) no more room on this shelf 2b) No more room on any shelf 3) Perfect fit...
+                ///UPDATE: Initializing
+            if (thereAreMoreBooksToShelve && currentShelfHasRoomForBook)
             {
-                currentXPosition_cm   = thickness;
-                idxOfFirstBookOnShelf = idx;
+                continue; //continue to the next book, and shelve it where it belongs.
             }
-            else //No more empty shelves. Add all remaining books to the unshelved.
+            else
             {
-                self.isFull = YES;
-                NSUInteger numBooksRemaining = booksArray.count - (idx + offBy1); //+1 b/c it's the nth book
-                unshelvedRemainder = [booksArray subarrayWithRange:NSMakeRange(idx, numBooksRemaining)];
+                    //Include all the books up *until* this one --> a shelf.
+                    //It's 'idx' NOT 'idx + 1', because the current book does not fit on this shelf.
+                NSRange rangeForCurrentShelf = NSMakeRange(idxOfFirstBookOnShelf, idx - idxOfFirstBookOnShelf);
+                NSArray *thisShelf           = [booksArray subarrayWithRange:rangeForCurrentShelf];
+                
+                [mutableShelves addObject:thisShelf];
+                    ///!!!:Is this broken if we have run out of books, but it does this anyway...?
+                    //If there are more shelves, then this book becomes the first on the next shelf.
+                BOOL nextShelfExistsAndIsEmpty = mutableShelves.count < self.shelves.integerValue;
+                if (nextShelfExistsAndIsEmpty)
+                {
+                    currentXPosition_cm   = thickness;
+                    idxOfFirstBookOnShelf = idx;
+                }
+                else //No more empty shelves. Add all remaining books to the unshelved.
+                {
+                    self.isFull = YES;
+                    NSUInteger numBooksRemaining = booksArray.count - (idx + offBy1); //+1 b/c it's the nth book
+                    unshelvedRemainder = [booksArray subarrayWithRange:NSMakeRange(idx, numBooksRemaining)];
+                }
             }
+                //Either way, this book has been added to the shelf.
+            book.bookcase = self;
         }
-            //Either way, this book has been added to the shelf.
-        book.bookcase = self;
-    }
     shelvesArray = [NSArray arrayWithArray:mutableShelves];
     
+        //CLEAN: If this works, then delete the old way represented here:
         //Try adding copies, rather than pointers to objects that will go out of scope?
-    NSMutableDictionary *temp = [NSMutableDictionary dictionary];
-//  @{kShelvesArray : [shelvesArray copy],
-//                           kUnshelvedRemainder : [unshelvedRemainder copy] //.count? unshelvedRemainder : @"All books shelved."
-//                           };
-    temp[kShelvesArray] = [shelvesArray copy];
-    temp[kUnshelvedRemainder] = unshelvedRemainder.count? [unshelvedRemainder copy] : [NSNull null];
+//    NSMutableDictionary *temp = [NSMutableDictionary dictionary];
+        //  @{kShelvesArray : [shelvesArray copy],
+        //                           kUnshelvedRemainder : [unshelvedRemainder copy] //.count? unshelvedRemainder : @"All books shelved."
+        //                           };
+//    temp[kShelvesArray] = [shelvesArray copy];
+//    temp[kUnshelvedRemainder] = unshelvedRemainder.count? [unshelvedRemainder copy] : [NSNull null];
     
-    return temp;
+    self.laidOutShelvesModel = [shelvesArray copy];
+    return unshelvedRemainder.count? [unshelvedRemainder copy] : [NSNull null];
 }
 
 
