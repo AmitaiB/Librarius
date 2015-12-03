@@ -2,7 +2,7 @@
 //  Bookcase+CoreDataProperties.m
 //  Librarius
 //
-//  Created by Amitai Blickstein on 11/18/15.
+//  Created by Amitai Blickstein on 12/3/15.
 //  Copyright © 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -19,36 +19,11 @@
 @dynamic name;
 @dynamic orderWhenListed;
 @dynamic shelf_height;
-@dynamic width;
+@dynamic shelves;
 @dynamic shelvesArray;
+@dynamic width;
+@dynamic laidOutShelvesModel;
 @dynamic library;
 @dynamic volumes;
 
-@dynamic shelves;
 @end
-
-
-
-//@implementation ShelvesArray
-//
-//+(Class)transformedValueClass
-//{
-//    return [NSData class];
-//}
-//
-//+(BOOL)allowsReverseTransformation
-//{
-//    return YES;
-//}
-//
-//-(id)transformedValue:(id)value
-//{
-//    return [NSKeyedArchiver archivedDataWithRootObject:value];
-//}
-//
-//-(id)reverseTransformedValue:(id)value
-//{
-//    return [NSKeyedUnarchiver unarchiveObjectWithData:value];
-//}
-//
-//@end

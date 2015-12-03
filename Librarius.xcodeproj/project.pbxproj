@@ -239,6 +239,7 @@
 		38D6019A1BDAAAC900E3D60F /* LBRShelf_DecorationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRShelf_DecorationView.m; sourceTree = "<group>"; };
 		38D6019C1BDAAEDE00E3D60F /* LBRRecommendations_FlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRRecommendations_FlowLayout.h; sourceTree = "<group>"; };
 		38D6019D1BDAAEDE00E3D60F /* LBRRecommendations_FlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBRRecommendations_FlowLayout.m; sourceTree = "<group>"; };
+		38D9180C1C10CBC500AA784B /* Librarius 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Librarius 7.xcdatamodel"; sourceTree = "<group>"; };
 		38DA43D11BE66FD200FEFD16 /* LBR_BookcaseLayout_AuthorOnly.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBR_BookcaseLayout_AuthorOnly.h; sourceTree = "<group>"; };
 		38DA43D21BE66FD200FEFD16 /* LBR_BookcaseLayout_AuthorOnly.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBR_BookcaseLayout_AuthorOnly.m; sourceTree = "<group>"; };
 		38DA43D91BE7056900FEFD16 /* LBRSettingsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBRSettingsCell.h; sourceTree = "<group>"; };
@@ -1217,13 +1218,14 @@
 		38AAD6EE1B901175003062C1 /* Librarius.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				38D9180C1C10CBC500AA784B /* Librarius 7.xcdatamodel */,
 				3846AABC1BFD214100327D43 /* Librarius 6.xcdatamodel */,
 				38C454BA1BFBC0D600A35391 /* Librarius 5.xcdatamodel */,
 				381061621BF661D200951B45 /* Librarius 4.xcdatamodel */,
 				38A965261BF273FC009F1B5D /* Librarius 3.xcdatamodel */,
 				38AAD6EF1B901175003062C1 /* Librarius.xcdatamodel */,
 			);
-			currentVersion = 3846AABC1BFD214100327D43 /* Librarius 6.xcdatamodel */;
+			currentVersion = 38D9180C1C10CBC500AA784B /* Librarius 7.xcdatamodel */;
 			path = Librarius.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

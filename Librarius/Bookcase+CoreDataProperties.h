@@ -2,7 +2,7 @@
 //  Bookcase+CoreDataProperties.h
 //  Librarius
 //
-//  Created by Amitai Blickstein on 11/18/15.
+//  Created by Amitai Blickstein on 12/3/15.
 //  Copyright © 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nullable, nonatomic, retain) NSDate *dateCreated;
 @property (nullable, nonatomic, retain) NSDate *dateModified;
-@property (nonatomic) BOOL isFull;
+@property (nullable, nonatomic) BOOL *isFull;
 @property (nullable, nonatomic, retain) NSString *name;
 @property (nullable, nonatomic, retain) NSNumber *orderWhenListed;
 @property (nullable, nonatomic, retain) NSNumber *shelf_height;
@@ -26,8 +26,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) Library *library;
 @property (nullable, nonatomic, retain) NSSet<Volume *> *volumes;
 
-    //Trusting the default NSValueTransformer
+
+    //The old - thought it would be auto-transformed.
 @property (nullable, nonatomic, retain) NSArray *shelvesArray;
+    //The new: a transient property.
+@property (nullable, nonatomic, retain) NSArray *laidOutShelvesModel;
 @end
 
 @interface Bookcase (CoreDataGeneratedAccessors)
@@ -40,8 +43,3 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
-
-//@interface ShelvesArray : NSValueTransformer
-//
-//@end
-
