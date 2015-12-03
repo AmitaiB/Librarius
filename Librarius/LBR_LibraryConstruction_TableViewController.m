@@ -44,6 +44,9 @@
     //Bookcase Selection (TableView)
 @property (nonatomic, assign) NSInteger rowNumOfAddBookcaseButton;
 
+    //Shelving Support
+@property (nonatomic, strong) NSArray<Bookcase*> *shelvedBookcaseObjectsForSegue;
+
 
     //Layout Selection (Segmented Control) - NOT YET IMPL
 
@@ -190,6 +193,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 -(void)configureCell:(LBR_Bookcase_TableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row != self.rowNumOfAddBookcaseButton) {
+            ///Possibly change this, make the array model transient.
         cell.bookcase = self.bookcasesFetchedResultsController.fetchedObjects[indexPath.row];
     }
     else
@@ -244,7 +248,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
         [self addBookcaseCellTapped];
         [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
     } else
-        DDLogVerbose(@"didSelectRowAtIndexPath: %@\nrow: %lu\nsection: %lu", indexPath, indexPath.row, indexPath.section);
+        DDLogVerbose(@"didSelectRowAtIndexPath: %@\nrow: %lu\nsection: %lu\n(TODO: Implement a PrepareForSegue for the CollectionView", indexPath, indexPath.row, indexPath.section);
 }
 
     ///Hides unselected libraries, by setting the height for rows of inactive Libraries (sections) to 0 or close to it.
@@ -348,17 +352,15 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     
     return YES;
 }
-
-    //FIXME: Problem anticipated here.
-// In a storyboard-based application, you will often want to do a little preparation before navigation
+    ///Needs to send a Bookcase object. Does send bookcase object.
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"bookcaseTableViewToBookshelfCollectionViewSegueID"]) {
         LBR_BookcaseCollectionViewController *destinationVC = segue.destinationViewController;
         LBR_Bookcase_TableViewCell *senderCell = (LBR_Bookcase_TableViewCell*)sender;
-        destinationVC.bookcaseOnDisplay        = senderCell.bookcase;
+        destinationVC.bookcaseOnDisplay        = senderCell.bookcase; /// <~
         dataManager.currentBookcase            = senderCell.bookcase;
     } else {
-        DDLogWarn(@"prepareForSegue shouldn't have triggered this.");
+        DDLogWarn(@"WARNING: prepareForSegue shouldn't have triggered this.");
     }
 }
 

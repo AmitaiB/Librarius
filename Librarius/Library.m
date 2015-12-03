@@ -57,11 +57,7 @@
         shelvedAndRemainingBooksDict  = [bookcase shelvedAndRemainingBooks:remainingUnshelvedVolumes]; //The magic happens here.
         remainingUnshelvedVolumes = shelvedAndRemainingBooksDict[kUnshelvedRemainder]; //sets up for the next loop iteration.
         bookcase.shelvesArray = shelvedAndRemainingBooksDict[kShelvesArray];
-//        [libraryLayoutDict setObject:shelvedAndRemainingBooksDict[kShelvesArray] forKey:[NSString stringWithFormat:@"%@-%@", [Bookcase entityName], bookcase.name]];
     }
-        ///Add this library's layout plan to the public transient data.
-        ///CLEAN: Destroy me!
-        //    [dataManager.transientLibraryLayoutInformation setObject:libraryLayoutDict forKey:[NSString stringWithFormat:@"%@-%@", [Library entityName], self.name]];
     
     return remainingUnshelvedVolumes;
 }
