@@ -27,7 +27,6 @@
 
     //Models
 #import "Volume.h"
-//#import "LBR_BookcaseModel.h"
 #import "Bookcase.h"
 #import "CoverArt.h"
 
@@ -52,8 +51,8 @@
 //@property (nonatomic, strong) LBR_BookcasePopoverViewController *adjustBookcaseVC;
 
 
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *accessBookcaseAttributesButton;
-- (IBAction)accessBookcaseAttributesButtonTapped:(id)sender;
+//@property (weak, nonatomic) IBOutlet UIBarButtonItem *accessBookcaseAttributesButton;
+//- (IBAction)accessBookcaseAttributesButtonTapped:(id)sender;
 
 
     //Debug
@@ -93,28 +92,19 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self layoutChangeSetup];
-    
-    self.title = @"Bookshelves";
-    self.dataManager = [LBRDataManager sharedDataManager];
+    self.canDisplayBannerAds                   = YES;
+    self.title                                 = @"Bookshelves";
+    self.collectionView.backgroundColor        = [UIColor cloudsColor];
     self.collectionView.directionalLockEnabled = YES;
-    self.canDisplayBannerAds = YES;
+    self.clearsSelectionOnViewWillAppear       = NO;
     
-    self.collectionView.backgroundColor = [UIColor cloudsColor];
-    self.clearsSelectionOnViewWillAppear = NO;
-
-    volumesArray = self.volumesFetchedResultsController.fetchedObjects;
+    [self layoutChangeSetup];
+    self.dataManager = [LBRDataManager sharedDataManager];
+    volumesArray     = self.volumesFetchedResultsController.fetchedObjects;
 
     [self refreshLayoutWithBookcaseSize:CGSizeMake(self.bookcaseOnDisplay.width.floatValue, self.bookcaseOnDisplay.shelves.floatValue)];
     [self.collectionView.collectionViewLayout invalidateLayout];
 }
-
-
-//-(void)setBookcaseOnDisplay:(Bookcase *)bookcaseOnDisplay
-//{
-//    _bookcaseOnDisplay = bookcaseOnDisplay;
-//    [self refreshLayout];
-//}
 
 -(void)refreshLayoutWithBookcaseSize:(CGSize)bookcaseSize
 {
@@ -145,7 +135,7 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
 
 
 
-    //Debug override
+    //Debug override point. Uncomment cellTest if you like, here.
 -(void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
@@ -153,14 +143,8 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
 //    [self cellTest];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark - === Navigation (UIPopoverPresentationController) ===
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"bookcasePopoverSegueID"])
