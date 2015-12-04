@@ -23,13 +23,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(CGFloat)percentFull;
 
-/**
-    This returns a dictionary to replace these two properties.
-    (I also made a Value Transformer, but haven't tested nor relied on it).
-     @property (nonatomic, strong) NSArray<NSArray *> *shelves;
-     @property (nonatomic, strong) NSArray<Volume  *> *unshelvedRemainder;
-*/
+// /**
+//    This returns a dictionary to replace these two properties.
+//    (I also made a Value Transformer, but haven't tested nor relied on it).
+//     @property (nonatomic, strong) NSArray<NSArray *> *shelves;
+//     @property (nonatomic, strong) NSArray<Volume  *> *unshelvedRemainder;
+//*/
 //-(NSDictionary*)fillShelvesWithBooks:(NSArray <Volume *> *)booksArray;
+
+    ///This sets the laidOut.. transient property, and returns the unshelved books.
 -(NSArray*)fillShelvesWithBooks:(NSArray <Volume *> *)booksArray;
 
 @end

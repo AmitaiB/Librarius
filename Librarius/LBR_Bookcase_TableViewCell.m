@@ -25,7 +25,13 @@
 //    UIImage *bookcaseCellIcon = [UIImage imageNamed:bookcase.volumes.count? @"bookshelf1" : @"empty-shelves"];
     NSArray *bookcaseShelvesArray = bookcase.shelvesArray;
     UIImage *bookcaseCellIcon;
-    if (bookcase.isFull) {
+
+    
+    
+        //!!!: Why doesn't this work? ```if (bookcase.isFull) {```
+    
+//    if ([bookcase percentFull] > 90.0f) {
+        if (bookcase.isFull) {
         bookcaseCellIcon = [UIImage imageNamed:@"bookshelf1"];
     } else {
         bookcaseCellIcon = [UIImage imageNamed:bookcaseShelvesArray.count? @"half-filled-shelf1" : @"empty-shelves"];
