@@ -27,10 +27,6 @@
     UIImage *bookcaseCellIcon;
 
     
-    
-        //!!!: Why doesn't this work? ```if (bookcase.isFull) {```
-    
-//    if ([bookcase percentFull] > 90.0f) {
         if (bookcase.isFull.boolValue) {
         bookcaseCellIcon = [UIImage imageNamed:@"bookshelf1"];
     } else {

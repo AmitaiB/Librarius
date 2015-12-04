@@ -89,6 +89,18 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     // self.clearsSelectionOnViewWillAppear = NO;
 }
 
+-(void)attachAllVolumesToCurrentLibraryIfNeeded
+{
+    NSFetchRequest *volumesRequest = [NSFetchRequest fetchRequestWithEntityName:[Volume entityName]];
+    NSArray *allVolumes = [dataManager.managedObjectContext executeFetchRequest:volumesRequest error:nil];
+//    NSFetchedResultsController *allVolumesFRC = [dataManager currentLibraryVolumesFetchedResultsController];
+//    NSArray *allVolumes = allVolumesFRC.fetchedObjects;
+    for (Volume *volume in allVolumes) {
+        if (!volume.library) {
+            volume.library = dataManager.currentLibrary;
+        }
+    }
+}
 
 -(void)initRefreshControl
 {
@@ -108,6 +120,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
      */
 -(void)reshelveBookcasesInCurrentLibrary
 {
+    [self attachAllVolumesToCurrentLibraryIfNeeded];
     DDLogVerbose(@"reshelveBookcasesInCurrentLibrary should be implemented here."); //0
 //    NSArray<Volume*> *unshelvedBooksRemaining =
     [dataManager.currentLibrary shelveVolumesOnBookcasesAccordingToLayoutScheme:LBRLayoutSchemeDefault];    //1
@@ -196,6 +209,12 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
             ///Possibly change this, make the array model transient.
         cell.bookcase = self.bookcasesFetchedResultsController.fetchedObjects[indexPath.row];
         cell.bookcase = self.shelvedBookcaseObjectsForSegue[indexPath.row];
+        
+            ///Cannot delete the last bookcase in a library (workaround the problem of the disappearing Section).
+        if (indexPath.row == self.rowNumOfAddBookcaseButton -1) {
+            cell.accessoryType        = UITableViewCellAccessoryNone;
+            cell.selectionStyle       = UITableViewCellSelectionStyleNone;
+        }
     }
     else
     {
