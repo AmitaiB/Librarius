@@ -97,9 +97,12 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 //    NSArray *allVolumes = allVolumesFRC.fetchedObjects;
     for (Volume *volume in allVolumes) {
         if (!volume.library) {
+            DDLogDebug(@"In attachAllVolumesToCurrentLibraryIfNeeded.\nVolume \"%@\"\nBEFORE: library = %@", volume.title, volume.library.name);
             volume.library = dataManager.currentLibrary;
+            DDLogDebug(@"\nAFTER: library = %@", volume.library.name);
         }
     }
+    [dataManager saveContext];
 }
 
 -(void)initRefreshControl
