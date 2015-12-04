@@ -59,6 +59,10 @@
     ///@property (nonatomic, strong) NSArray<Volume  *> *unshelvedRemainder;
 -(NSArray *)fillShelvesWithBooks:(NSArray<Volume *> *)booksArray
 {
+    if ([booksArray isEqual:[NSNull null]]) {
+        return @[];
+    }
+    
     NSArray<Volume  *> *unshelvedRemainder = [NSArray array];
     NSArray<NSArray *> *shelvesArray       = [NSArray array];
     /**
@@ -78,8 +82,10 @@
     BOOL currentShelfHasRoomForBook;
     BOOL thereAreMoreBooksToShelve;
     
-    if (booksArray)
-        for (NSUInteger idx = 0; idx < booksArray.count; idx++) {
+    DDLogInfo(@"booksArray.count does %@ exist", booksArray.count? @"" : @"NOT");
+    
+//    if (booksArray) 
+        for (NSInteger idx = 0; idx < booksArray.count; idx++) {
             book                 = booksArray[idx];
             thickness            = book.thickness.floatValue? book.thickness.floatValue : kDefaultBookThickness;
             currentXPosition_cm  += thickness;
