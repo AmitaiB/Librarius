@@ -272,6 +272,10 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == [tableView numberOfRowsInSection:indexPath.section]) {
+        return NO;
+    }
+    
     if (indexPath.row == self.rowNumOfAddBookcaseButton) {
         return NO;
     }
@@ -329,7 +333,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     newBookcase.shelves         = @(kDefaultBookcaseShelvesCount);
     newBookcase.width           = @(kDefaultBookcaseWidth_cm);
     newBookcase.name            = [NSString stringWithFormat:@"BookcaseID #%.01f", [NSObject randomFloatBetweenNumber:10000 andNumber:99999]];
-    newBookcase.isFull          = NO;
+    newBookcase.isFull          = @NO;
     
         //Specific to this object
     newBookcase.orderWhenListed = @(++self.rowNumOfAddBookcaseButton);

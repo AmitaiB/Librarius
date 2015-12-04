@@ -36,7 +36,7 @@
         bookcase.shelves         = @(kDefaultBookcaseShelvesCount);
         bookcase.width           = @(kDefaultBookcaseWidth_cm);
         bookcase.name            = [NSString stringWithFormat:@"BookcaseID #%f", [NSObject randomFloatBetweenNumber:10000 andNumber:99999]];
-        bookcase.isFull          = NO;
+        bookcase.isFull          = @NO;
     }
     return bookcase;
 }
@@ -112,7 +112,7 @@
                 }
                 else //No more empty shelves. Add all remaining books to the unshelved.
                 {
-                    self.isFull = YES;
+                    self.isFull = @YES;
                     NSUInteger numBooksRemaining = booksArray.count - (idx + offBy1); //+1 b/c it's the nth book
                     unshelvedRemainder = [booksArray subarrayWithRange:NSMakeRange(idx, numBooksRemaining)];
                 }

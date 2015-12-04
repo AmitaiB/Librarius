@@ -556,7 +556,7 @@ static NSString * const kUnknown = @"kUnknown";
         bookcase.dateModified    = [bookcase.dateCreated copy];
         bookcase.shelves         = numShelves;
         bookcase.width           = shelfWidth;
-        bookcase.isFull          = NO;
+        bookcase.isFull          = @NO;
     }];
 }
 
