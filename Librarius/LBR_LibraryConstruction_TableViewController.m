@@ -328,17 +328,22 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
             cell.bookcase.orderWhenListed = @(row);
         }
     [dataManager saveContext];
+    [tableView reloadSections:[NSIndexSet indexSetWithIndex:fromIndexPath.section] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 
 
-/*
+
  // Override to support conditional rearranging of the table view.
  - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the item to be re-orderable.
+     if (indexPath.row >= self.rowNumOfAddBookcaseButton -1) {
+         return NO;
+     }
+     
+     
  return YES;
  }
- */
+
 
 #pragma mark private methods
 
