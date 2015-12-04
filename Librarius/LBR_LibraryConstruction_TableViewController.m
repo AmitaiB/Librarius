@@ -253,9 +253,11 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     
     CGFloat totalVolumesCount = (CGFloat)dataManager.currentLibrary.volumes.count;
     CGFloat unshelvedVolumesCount = (CGFloat)setOfUnshelvedBooksRemaining.count;
-    CGFloat percentShelved = (totalVolumesCount - unshelvedVolumesCount)/totalVolumesCount;
+    CGFloat shelvedVolumesCount = totalVolumesCount - unshelvedVolumesCount;
+    CGFloat percentShelved = (totalVolumesCount - unshelvedVolumesCount)/totalVolumesCount * 100;
+    CGFloat percentUnshelved = 100.0 - percentShelved;
     if (totalVolumesCount == 0) percentShelved = 0; //Cannot divide by 0
-    NSString *unshelvedBooksReport = [NSString stringWithFormat:@"%.0f total volumes\n%.01f%% (%.0f volumes) remain unshelved", totalVolumesCount, percentShelved, unshelvedVolumesCount];
+    NSString *unshelvedBooksReport = [NSString stringWithFormat:@"%.0f total volumes\n%.0f%% (%.0f volumes) shelved\n%.0f%% (%.0f volumes) remain unshelved", totalVolumesCount, percentShelved, shelvedVolumesCount, percentUnshelved, unshelvedVolumesCount];
     return unshelvedBooksReport;
 }
 
