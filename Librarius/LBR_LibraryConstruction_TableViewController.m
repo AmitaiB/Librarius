@@ -319,12 +319,17 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 }
 
 
-/*
-// Override to support rearranging the table view.
+
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
 //    Make sure it's reflected in Core data
+
+        for (NSInteger row = 0; row < [tableView numberOfRowsInSection:fromIndexPath.section]; row++) {
+            LBR_Bookcase_TableViewCell *cell = [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:fromIndexPath.section]];
+            cell.bookcase.orderWhenListed = @(row);
+        }
+    [dataManager saveContext];
 }
-*/
+
 
 
 /*
