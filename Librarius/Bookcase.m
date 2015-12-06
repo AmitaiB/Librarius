@@ -63,8 +63,8 @@
         return @[];
     }
     
-    NSArray<Volume  *> *unshelvedRemainder = [NSArray array];
-    NSArray<NSArray *> *shelvesArray       = [NSArray array];
+    NSArray<Volume  *> *unshelvedRemainder   = [NSArray array];
+    NSArray<NSArray *> *internalShelvesArray = [NSArray array];
     /**
      For each book, add its thickness to the x-position. If that takes us over
      the shelf width, then we have a complete shelf: so add the appropriate substring
@@ -126,7 +126,7 @@
                 //Either way, this book has been added to the shelf.
             book.bookcase = self;
         }
-    shelvesArray = [NSArray arrayWithArray:mutableShelves];
+    internalShelvesArray = [NSArray arrayWithArray:mutableShelves];
     
         //CLEAN: If this works, then delete the old way represented here:
         //Try adding copies, rather than pointers to objects that will go out of scope?
@@ -137,7 +137,7 @@
 //    temp[kShelvesArray] = [shelvesArray copy];
 //    temp[kUnshelvedRemainder] = unshelvedRemainder.count? [unshelvedRemainder copy] : [NSNull null];
     
-    self.laidOutShelvesModel = [shelvesArray copy];
+    self.laidOutShelvesModel = [internalShelvesArray copy];
     return unshelvedRemainder.count? [unshelvedRemainder copy] : [NSNull null];
 }
 

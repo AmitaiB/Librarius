@@ -46,6 +46,10 @@ The Library shelves itself here, by progressively asking each related bookcase t
         /// 1 - Prepare for for-loop
     NSArray *allVolumesInThisLibrary = [self.volumes   sortedArrayUsingDescriptors:dataManager.volumesRequest.sortDescriptors];
     NSArray *bookcasesInOrder        = [self.bookcases sortedArrayUsingDescriptors:dataManager.bookcasesRequest.sortDescriptors];
+    [bookcasesInOrder enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        Bookcase *unshelvedBookcase = (Bookcase*)obj;
+        unshelvedBookcase.isFull = @NO; //by-definition!
+    }];
     NSArray <Volume*> *remainingUnshelvedVolumes = allVolumesInThisLibrary;//Initially, all volumes are unshelved.
     
         /// 2 - The magic happens here.

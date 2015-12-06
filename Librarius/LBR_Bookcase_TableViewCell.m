@@ -9,10 +9,6 @@
 #import "LBR_Bookcase_TableViewCell.h"
 #import "Bookcase.h"
 
-/**
- Why is bookcase.shelvesArray == nil??
- 
- */
 @implementation LBR_Bookcase_TableViewCell
 
 -(void)setBookcase:(Bookcase *)bookcase
@@ -23,11 +19,13 @@
     
         // Image/Icon
 //    UIImage *bookcaseCellIcon = [UIImage imageNamed:bookcase.volumes.count? @"bookshelf1" : @"empty-shelves"];
-    NSArray *bookcaseShelvesArray = bookcase.shelvesArray;
-    UIImage *bookcaseCellIcon;
-
     
-        if (bookcase.isFull.boolValue) {
+//    NSArray *bookcaseShelvesArray = bookcase.shelvesArray;
+    NSArray *bookcaseShelvesArray = bookcase.laidOutShelvesModel;
+    UIImage *bookcaseCellIcon;
+    
+    
+    if (bookcase.isFull.boolValue) {
         bookcaseCellIcon = [UIImage imageNamed:@"bookshelf1"];
     } else {
         bookcaseCellIcon = [UIImage imageNamed:bookcaseShelvesArray.count? @"half-filled-shelf1" : @"empty-shelves"];

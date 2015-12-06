@@ -589,6 +589,7 @@ static NSString * const kUnknown = @"kUnknown";
     //Delete the old objects.
     //New Library -> shelve the books.
 
+    ///CLEAN: Never called! This was DEBUG ONLY anyway, right?
 -(void)refreshLibrary:(Library *)oldLibrary
 {
         //Managed Object Context
@@ -609,17 +610,17 @@ static NSString * const kUnknown = @"kUnknown";
     [oldLibrary.bookcases enumerateObjectsUsingBlock:^(Bookcase * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [moc deleteObject:obj];
         Bookcase *bookcase = [Bookcase insertNewObjectIntoContext:moc];
-        bookcase.library = newLibrary;
+        bookcase.library   = newLibrary;
         
-        bookcase.dateCreated = [obj.dateCreated copy];
-        bookcase.dateModified = [NSDate date];
-        bookcase.name = obj.name;
+        bookcase.dateCreated     = [obj.dateCreated copy];
+        bookcase.dateModified    = [NSDate date];
+        bookcase.name            = obj.name;
         bookcase.orderWhenListed = obj.orderWhenListed;
-        bookcase.shelf_height = [obj.shelf_height copy];
-        bookcase.shelves = [obj.shelves copy];
-        bookcase.width = [obj.width copy];
-        
-        bookcase.shelvesArray = [obj.shelvesArray copy];
+        bookcase.shelf_height    = [obj.shelf_height copy];
+        bookcase.shelves         = [obj.shelves copy];
+        bookcase.width           = [obj.width copy];
+
+        bookcase.shelvesArray    = [obj.shelvesArray copy]; ///  <~ Not used anymore.
     }];
     
         //New Volumes/Books

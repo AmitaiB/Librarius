@@ -89,6 +89,8 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
+    
+    [self reshelveBookcasesInCurrentLibrary];
 }
 
 -(void)attachAllVolumesToCurrentLibraryIfNeeded
@@ -206,14 +208,22 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 
     return cell;
 }
+
     //UPDATE: --> Note still relevant???:
     //Note: If there's no bookcase, it crashes the collectionView.
 -(void)configureCell:(LBR_Bookcase_TableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row != self.rowNumOfAddBookcaseButton) {
-            ///Possibly change this, make the array model transient.
+        
+        NSArray *bookcasesInOrder = [dataManager.currentLibrary.bookcases sortedArrayUsingDescriptors:dataManager.bookcasesRequest.sortDescriptors];
+        cell.bookcase = bookcasesInOrder[indexPath.row];
+        
+        /* DON'T DELETE - WARNING TO FUTURE TAMPERING -- the cells rely on a transient attribute, which
+         is lost when the object is fetched from the persistent store.
+         ///This won't have laidOutModel!
         cell.bookcase = self.bookcasesFetchedResultsController.fetchedObjects[indexPath.row];
         cell.bookcase = self.shelvedBookcaseObjectsForSegue[indexPath.row];
+        */
         
             ///Cannot delete the last bookcase in a library (workaround the problem of the disappearing Section).
         if (indexPath.row == self.rowNumOfAddBookcaseButton -1) {
@@ -304,7 +314,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     return YES;
 }
 
-
+    ///TODO: Add check if it's the last section. If so, don't delete, just hide.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
