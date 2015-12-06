@@ -305,8 +305,6 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 }
 
 
-
-// Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
@@ -321,7 +319,8 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 }
 
 
-
+ // Uncomment and debug to support rearranging the table view.
+/*
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
         //Bypass the fetchedResultsController delegates temporarily
     userChangingBookcaseOrder = YES;
@@ -353,7 +352,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
             DDLogDebug(@"Row %lu has a Bookcase of order: %@", row, cell.bookcase.orderWhenListed);
         }
      
-     */
+     /* /
     
         //Save the managed object context
     [dataManager saveContext];
@@ -366,9 +365,6 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 }
 
 
-
-
-
  // Override to support conditional rearranging of the table view.
  - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
      if (indexPath.row >= self.rowNumOfAddBookcaseButton -1) {
@@ -378,7 +374,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
      
  return YES;
  }
-
+*/
 
 #pragma mark private methods
 
