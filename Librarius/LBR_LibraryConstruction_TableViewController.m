@@ -322,14 +322,17 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
 //    Make sure it's reflected in Core data
-
-        for (NSInteger row = 0; row < [tableView numberOfRowsInSection:fromIndexPath.section]; row++) {
-            LBR_Bookcase_TableViewCell *cell = [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:fromIndexPath.section]];
+    NSInteger section = fromIndexPath.section;
+    
+        for (NSInteger row = 0; row < [tableView numberOfRowsInSection:section]; row++) {
+            LBR_Bookcase_TableViewCell *cell = [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:section]];
             cell.bookcase.orderWhenListed = @(row);
+            DDLogDebug(@"Row %lu has a Bookcase of order: %@", row, cell.bookcase.orderWhenListed);
         }
     [dataManager saveContext];
-    [tableView reloadSections:[NSIndexSet indexSetWithIndex:fromIndexPath.section] withRowAnimation:UITableViewRowAnimationNone];
+    [tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationNone];
 }
+
 
 
 
