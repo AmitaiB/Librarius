@@ -31,7 +31,9 @@
  To add a bookcase, we will try to implement a dedicated TableViewCell.
  */
 
-@interface LBR_LibraryConstruction_TableViewController ()
+@interface LBR_LibraryConstruction_TableViewController () {
+        BOOL userChangingBookcaseOrder;
+}
 
 @property (nonatomic, strong) NSFetchedResultsController *bookcasesFetchedResultsController;
 
@@ -321,15 +323,45 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-//    Make sure it's reflected in Core data
+        //Bypass the fetchedResultsController delegates temporarily
+    userChangingBookcaseOrder = YES;
+    
+        //Get a handle to the bookcases we're moving
+    NSMutableArray *sortedBookcases = [NSMutableArray arrayWithArray:self.bookcasesFetchedResultsController.fetchedObjects];
+    
+        //Get a handle to the call we're moving
+    Bookcase *bookcaseWeAreMoving = sortedBookcases[fromIndexPath.row];
+    
+        //Remove the call from its current position
+    [sortedBookcases removeObjectAtIndex:fromIndexPath.row];
+    
+        //Insert it at its new position
+    [sortedBookcases insertObject:bookcaseWeAreMoving atIndex:toIndexPath.row];
+    
+        //Update the order of the objects, each according to its index in the mutable array
+    [sortedBookcases enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        Bookcase *myBookcase = (Bookcase*)obj;
+        myBookcase.orderWhenListed = @(idx);
+    }];
+
     NSInteger section = fromIndexPath.section;
+    /*
     
         for (NSInteger row = 0; row < [tableView numberOfRowsInSection:section]; row++) {
             LBR_Bookcase_TableViewCell *cell = [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:section]];
             cell.bookcase.orderWhenListed = @(row);
             DDLogDebug(@"Row %lu has a Bookcase of order: %@", row, cell.bookcase.orderWhenListed);
         }
+     
+     */
+    
+        //Save the managed object context
     [dataManager saveContext];
+    
+        //Allow the delegates to work once more
+    userChangingBookcaseOrder = NO;
+    
+        //reload the altered section
     [tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationNone];
 }
 
@@ -562,6 +594,8 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
+    if (userChangingBookcaseOrder) return;
+    
     [self.tableView beginUpdates];
 }
 
@@ -586,6 +620,8 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
        atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath
 {
+    if (userChangingBookcaseOrder) return;
+    
     UITableView *tableView = self.tableView;
     
         //Note to self: changed UITableViewRowAnimationFade to UI..Automatic. Does it look good?
