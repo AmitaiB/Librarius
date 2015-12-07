@@ -7,8 +7,7 @@
 //
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-
-#import "LBR_BookcaseModel.h"
+#import "Bookcase.h"
 
 //@protocol LBRBookLayoutDataSource <NSObject>
 //
@@ -17,7 +16,6 @@
 //
 //@end
 
-@class Bookcase;
 @interface LBR_BookcaseLayout : UICollectionViewLayout
 
 @property (nonatomic, assign) CGFloat interItemSpacing;

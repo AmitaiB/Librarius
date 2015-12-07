@@ -22,7 +22,6 @@
 
     //Models
 #import "LBR_BookcaseLayout.h"
-#import "Bookcase.h"
 
     //Views
 #import "LBRShelf_DecorationView.h"
@@ -57,7 +56,7 @@
 
 @property (nonatomic, assign) NSUInteger currentShelfIndex;
 @property (nonatomic, assign) NSUInteger bookOnShelfCounter;
-//@property (nonatomic, strong, readwrite) LBR_BookcaseModel *bookcaseModel;
+
 
     //Required for Switching
 @property (nonatomic, assign) LBRLayoutScheme layoutScheme;
@@ -88,12 +87,6 @@
     _cellCountForLongestRow = 0;
     _volumesToOverrideCurrentLibraryVolumesForLayout = volumes;
     
-
-        ///CLEAN: Destroy me!
-//    NSString *thisLibraryKEY  = [NSString stringWithFormat:@"%@-%@", [Library entityName], self.bookcase.library.name];
-//    NSString *thisBookcaseKEY = [NSString stringWithFormat:@"%@-%@", [Bookcase entityName], self.bookcase.name];
-//    _shelvesNestedArray = self.dataManager.transientLibraryLayoutInformation[thisLibraryKEY][thisBookcaseKEY];
-    
     [super registerClass:[LBRShelf_DecorationView class] forDecorationViewOfKind:[LBRShelf_DecorationView kind]];
     
     return self;
@@ -111,19 +104,6 @@
 
 #pragma mark - === Overridden Methods ===
 
-
-/*
--(NSArray *)shelvesNestedArray
-{
-    if (_shelvesNestedArray == nil) {
-        NSString *thisLibraryKEY  = [NSString stringWithFormat:@"%@-%@", [Library entityName], self.bookcase.library.name];
-        NSString *thisBookcaseKEY = [NSString stringWithFormat:@"%@-%@", [Bookcase entityName], self.bookcase.name];
-        _shelvesNestedArray = self.dataManager.transientLibraryLayoutInformation[thisLibraryKEY][thisBookcaseKEY];
-    }
-    
-    return _shelvesNestedArray;
-}
-*/
 /**
  The key property of the BookcaseModel object (deprecated) was the Array of Arrays. The primary array was the
  vertical representation of the shelf, and the secondary arrays were each a shelf with volume objects...
@@ -379,24 +359,5 @@
 
 #pragma mark - === DataManager Interface ===
 
-    //CLEAN: Not needed, and global-ly!
-/*
--(Bookcase *)currentBookcase
-{
-    if (self.dataManager.currentBookcase) {
-        return _currentBookcase = self.dataManager.currentBookcase;
-    }
-    else
-    {
-        [self.dataManager generateDefaultBookcaseIfNeeded];
-        if (self.dataManager.currentBookcase) {
-            return _currentBookcase = self.dataManager.currentBookcase;
-        }
-    }
-    
-    DDLogWarn(@"No default Bookcase detected.");
-    return nil;
-}
-*/
 
 @end
