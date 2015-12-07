@@ -102,16 +102,18 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     self.dataManager = [LBRDataManager sharedDataManager];
     volumesArray     = self.volumesFetchedResultsController.fetchedObjects;
 
-    [self refreshLayoutWithBookcaseSize:CGSizeMake(self.bookcaseOnDisplay.width.floatValue, self.bookcaseOnDisplay.shelves.floatValue)];
+        //TODO: Very hacky, using CGSize this way. Make it Right.
+    [self refreshLayoutWithBookcaseWidth:self.bookcaseOnDisplay.width.floatValue numberOfShelves:self.bookcaseOnDisplay.shelves.floatValue];
     [self.collectionView.collectionViewLayout invalidateLayout];
 }
 
--(void)refreshLayoutWithBookcaseSize:(CGSize)bookcaseSize
+//-(void)refreshLayoutWithBookcaseSize:(CGSize)bookcaseSize
+-(void)refreshLayoutWithBookcaseWidth:(CGFloat)width numberOfShelves:(CGFloat)numShelves
 {
     LBR_BookcaseLayout *newLayout = [[LBR_BookcaseLayout alloc]
                                      initWithScheme:LBRLayoutSchemeDefault
-                                     maxShelves:bookcaseSize.height
-                                     shelfWidth_cm:bookcaseSize.width
+                                     maxShelves:numShelves
+                                     shelfWidth_cm:width
                                      withVolumesOverride:nil];
     self.layout = newLayout;
     [self.collectionView setCollectionViewLayout:newLayout animated:YES];
@@ -184,8 +186,7 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
 {
     self.bookcaseOnDisplay.shelves = @(popoverVC.numShelvesStepper.value);
     self.bookcaseOnDisplay.width   = @(popoverVC.shelfWidthStepper.value);
-    CGSize bookcaseSize = CGSizeMake(self.bookcaseOnDisplay.width.floatValue, self.bookcaseOnDisplay.shelves.floatValue);
-    [self refreshLayoutWithBookcaseSize:bookcaseSize];
+    [self refreshLayoutWithBookcaseWidth:self.bookcaseOnDisplay.width.floatValue numberOfShelves:self.bookcaseOnDisplay.shelves.floatValue];
 }
 
     ///Read-only property, can only be set via this delegate method. `..None` stops it from being a full-screen view.

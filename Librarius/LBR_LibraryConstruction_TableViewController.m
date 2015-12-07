@@ -224,13 +224,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
         cell.bookcase = self.bookcasesFetchedResultsController.fetchedObjects[indexPath.row];
         cell.bookcase = self.shelvedBookcaseObjectsForSegue[indexPath.row];
         */
-        
-            ///Cannot delete the last bookcase in a library (workaround the problem of the disappearing Section).
-//        if (indexPath.row == self.rowNumOfAddBookcaseButton -1) {
-//            cell.accessoryType        = UITableViewCellAccessoryNone;
-//            cell.selectionStyle       = UITableViewCellSelectionStyleNone;
-//        }
-    }
+}
     else
     {
             // Makes the last cell the addBookcaseButton
@@ -434,7 +428,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
         LBR_BookcaseCollectionViewController *destinationVC = segue.destinationViewController;
         LBR_Bookcase_TableViewCell *senderCell = (LBR_Bookcase_TableViewCell*)sender;
         destinationVC.bookcaseOnDisplay        = senderCell.bookcase; /// <~
-        dataManager.currentBookcase            = senderCell.bookcase;
+//        dataManager.currentBookcase            = senderCell.bookcase; //CLEAN: Global variable!!
     } else {
         DDLogWarn(@"WARNING: prepareForSegue shouldn't have triggered this.");
     }

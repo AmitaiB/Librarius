@@ -516,9 +516,11 @@ static NSString * const kUnknown = @"kUnknown";
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults setURL:newDefaultLibrary.objectID.URIRepresentation forKey:[NSString stringWithFormat:@"Library-%@", newDefaultLibrary.orderWhenListed]];
+        [defaults synchronize];
     }
 }
 
+/* CLEAN: if comments don't break anything, sweep this up!
 -(void)generateDefaultBookcaseIfNeeded
 {
 //    (self.currentLibrary)? :[self generateDefaultLibraryIfNeeded];
@@ -535,7 +537,7 @@ static NSString * const kUnknown = @"kUnknown";
         self.currentBookcase               = newDefaultBookcase;
     }
 }
-
+*/
 
     /**
      The keys are # of shelves, the objects are the widths.

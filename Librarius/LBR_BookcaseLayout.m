@@ -63,7 +63,7 @@
 @property (nonatomic, assign) LBRLayoutScheme layoutScheme;
 @property (nonatomic, strong) NSFetchedResultsController *localFetchedResultsController;
 
-@property (nonatomic, strong) Bookcase *currentBookcase;
+//@property (nonatomic, strong) Bookcase *currentBookcase;
 
 @property (nonatomic, strong) NSArray <Volume *> *volumesToOverrideCurrentLibraryVolumesForLayout;
 

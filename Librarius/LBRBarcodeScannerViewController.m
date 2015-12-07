@@ -554,6 +554,7 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
 //    [dataManger logCurrentLibraryTitles:@"[TOP of resetButtonTapped]"];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults removeObjectForKey:[RootCollection entityName]];
+    [defaults synchronize];
     dataManger.userRootCollection = nil;
     dataManger.currentLibrary = nil;
     [dataManger deleteAllObjectsOfEntityName:[Volume entityName]];
