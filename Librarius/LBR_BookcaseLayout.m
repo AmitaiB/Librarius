@@ -22,7 +22,7 @@
 
     //Models
 #import "LBR_BookcaseLayout.h"
-//#import "Bookcase.h"
+#import "Bookcase.h"
 
     //Views
 #import "LBRShelf_DecorationView.h"
@@ -73,7 +73,7 @@
 
 #pragma mark - == Lifecycle ==
 
--(instancetype)initWithScheme:(LBRLayoutScheme)layoutScheme maxShelves:(NSUInteger)maxShelves shelfWidth_cm:(CGFloat)width_cm withVolumesOverride:(NSArray<Volume *> *)volumes
+-(instancetype)initWithScheme:(LBRLayoutScheme)layoutScheme maxShelves:(CGFloat)maxShelves shelfWidth_cm:(CGFloat)width_cm withVolumesOverride:(NSArray<Volume *> *)volumes
 {
     if (!(self = [super init])) return nil;
     

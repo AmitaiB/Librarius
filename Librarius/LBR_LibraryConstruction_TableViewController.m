@@ -97,8 +97,6 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 {
     NSFetchRequest *volumesRequest = [NSFetchRequest fetchRequestWithEntityName:[Volume entityName]];
     NSArray *allVolumes = [dataManager.managedObjectContext executeFetchRequest:volumesRequest error:nil];
-//    NSFetchedResultsController *allVolumesFRC = [dataManager currentLibraryVolumesFetchedResultsController];
-//    NSArray *allVolumes = allVolumesFRC.fetchedObjects;
     for (Volume *volume in allVolumes) {
         if (!volume.library) {
             DDLogDebug(@"In attachAllVolumesToCurrentLibraryIfNeeded.\nVolume \"%@\"\nBEFORE: library = %@", volume.title, volume.library.name);
@@ -135,28 +133,28 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     if ([self.refreshControl isRefreshing]) [self.refreshControl endRefreshing];
 }
 
+    //Uncomment for imagePicker implementation
+/*
+ #pragma mark - === UIImagePickerController delegate ===
 
-
-#pragma mark - === UIImagePickerController delegate ===
-
--(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
+ -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
-//    NSData profilePhoto = [info objectForKey:UIImagePickerControllerOriginalImage];
-//
-//
-//        // Convert to JPEG with 50% quality
-//    NSData* data = UIImageJPEGRepresentation(self.profilePhoto, 0.3f);
-//
-//    self.pfPhoto = [PFFile fileWithName:@"ProfilePhoto" data:data];
-//
-//    [self.uploadProfilePhotoButton setTitle:@"Nice Pic!" forState:UIControlStateDisabled];
-//    self.uploadProfilePhotoButton.enabled = NO;
+    NSData profilePhoto = [info objectForKey:UIImagePickerControllerOriginalImage];
+
+
+        // Convert to JPEG with 50% quality
+    NSData* data = UIImageJPEGRepresentation(self.profilePhoto, 0.3f);
+
+    self.pfPhoto = [PFFile fileWithName:@"ProfilePhoto" data:data];
+
+    [self.uploadProfilePhotoButton setTitle:@"Nice Pic!" forState:UIControlStateDisabled];
+    self.uploadProfilePhotoButton.enabled = NO;
     
     [self.imagePickerController dismissViewControllerAnimated:YES completion:nil];
     
 }
 
-/*
+
     //    [self configureImagePickerController];
 -(void)configureImagePickerController
 {
@@ -173,6 +171,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 {
     [self.navigationController presentViewController:self.imagePickerController animated:YES completion:nil];
 }
+
 */
 
 #pragma mark - === UITableView DataSource ===
@@ -213,18 +212,19 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     //Note: If there's no bookcase, it crashes the collectionView.
 -(void)configureCell:(LBR_Bookcase_TableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row != self.rowNumOfAddBookcaseButton) {
-        
+    if (indexPath.row != self.rowNumOfAddBookcaseButton)
+    {
         NSArray *bookcasesInOrder = [dataManager.currentLibrary.bookcases sortedArrayUsingDescriptors:dataManager.bookcasesRequest.sortDescriptors];
         cell.bookcase = bookcasesInOrder[indexPath.row];
-        
-        /* DON'T DELETE - WARNING TO FUTURE TAMPERING -- the cells rely on a transient attribute, which
-         is lost when the object is fetched from the persistent store.
-         ///This won't have laidOutModel!
+    }
+        /* DON'T DELETE - Leave as a WARNING VS. FUTURE TAMPERING -- the cells rely on a transient attribute
+         (probably not the best idea), which is nil'ed when the object is in/fetched from the persistent store.
+         You will need to reshelve the model, which negates the whole point. 
+         
         cell.bookcase = self.bookcasesFetchedResultsController.fetchedObjects[indexPath.row];
         cell.bookcase = self.shelvedBookcaseObjectsForSegue[indexPath.row];
-        */
-}
+    }
+         */
     else
     {
             // Makes the last cell the addBookcaseButton
@@ -428,7 +428,6 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
         LBR_BookcaseCollectionViewController *destinationVC = segue.destinationViewController;
         LBR_Bookcase_TableViewCell *senderCell = (LBR_Bookcase_TableViewCell*)sender;
         destinationVC.bookcaseOnDisplay        = senderCell.bookcase; /// <~
-//        dataManager.currentBookcase            = senderCell.bookcase; //CLEAN: Global variable!!
     } else {
         DDLogWarn(@"WARNING: prepareForSegue shouldn't have triggered this.");
     }
@@ -445,11 +444,8 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
+        //!!!:This may return an error from the FRC, if it's truly hooked up to the collectionView
     return MAX(1, dataManager.userRootCollection.libraries.count);
-    
-//    if (self.bookcasesFetchedResultsController.sections.count <= 0)
-//        DDLogError(@"There are no sections returned from the FRC!");
-//    return MAX(1, self.bookcasesFetchedResultsController.sections.count);
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath

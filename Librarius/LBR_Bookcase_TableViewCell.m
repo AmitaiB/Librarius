@@ -18,9 +18,6 @@
 
     
         // Image/Icon
-//    UIImage *bookcaseCellIcon = [UIImage imageNamed:bookcase.volumes.count? @"bookshelf1" : @"empty-shelves"];
-    
-//    NSArray *bookcaseShelvesArray = bookcase.shelvesArray;
     NSArray *bookcaseShelvesArray = bookcase.laidOutShelvesModel;
     UIImage *bookcaseCellIcon;
     
