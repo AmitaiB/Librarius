@@ -226,10 +226,10 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
         */
         
             ///Cannot delete the last bookcase in a library (workaround the problem of the disappearing Section).
-        if (indexPath.row == self.rowNumOfAddBookcaseButton -1) {
-            cell.accessoryType        = UITableViewCellAccessoryNone;
-            cell.selectionStyle       = UITableViewCellSelectionStyleNone;
-        }
+//        if (indexPath.row == self.rowNumOfAddBookcaseButton -1) {
+//            cell.accessoryType        = UITableViewCellAccessoryNone;
+//            cell.selectionStyle       = UITableViewCellSelectionStyleNone;
+//        }
     }
     else
     {
