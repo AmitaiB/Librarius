@@ -26,17 +26,17 @@
 #import "LBR_PopoverBackgroundView.h"
 
     //Models
-#import "Volume.h"
+#import "Library.h"
 #import "Bookcase.h"
+#import "Volume.h"
 #import "CoverArt.h"
 
     //Categories
-#import "UIColor+FlatUI.h"
 #import <UIImageView+AFNetworking.h>
 #import "UIView+ConfigureForAutoLayout.h"
-#import "UIStepper+FlatUI.h"
 #import "UIView+ABB_Categories.h"
-#import "Library.h"
+#import "UIStepper+FlatUI.h"
+#import "UIColor+FlatUI.h"
 
 
 @interface LBR_BookcaseCollectionViewController ()
@@ -81,6 +81,7 @@
 static NSString * const reuseIdentifier          = @"bookCellID";
 static NSString * const customSectionHeaderID    = @"customSectionHeaderID";
 static NSString * const decorationViewIdentifier = @"decorationViewIdentifier";
+static NSString * const bookcasePopoverSegueID   = @"bookcasePopoverSegueID";
 
     //Layout Scheme strings
     //TODO: We now have a typedef!
@@ -154,7 +155,7 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"bookcasePopoverSegueID"])
+    if ([segue.identifier isEqualToString:bookcasePopoverSegueID])
     {
         popoverVC = segue.destinationViewController;
         popoverVC.popoverPresentationController.delegate = self; //Needed for 'adaptivePres...None', below.
@@ -162,13 +163,20 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
         
             //Necessary to get the view to initialize the properties we want to reference.
         [popoverVC view];
+    
+        popoverVC.popoverNumShelves       = [self.bookcaseOnDisplay.shelves integerValue];
+        popoverVC.numShelvesStepper.value = [self.bookcaseOnDisplay.shelves integerValue];
         
+        popoverVC.popoverShelfWidth       = [self.bookcaseOnDisplay.width floatValue];
+        popoverVC.shelfWidthStepper.value = [self.bookcaseOnDisplay.width floatValue];
+
+/*
         popoverVC.popoverNumShelves       = [self.layout.bookcase.shelves integerValue];
         popoverVC.numShelvesStepper.value = [self.layout.bookcase.shelves integerValue];
         
         popoverVC.popoverShelfWidth       = [self.layout.bookcase.width floatValue];
         popoverVC.shelfWidthStepper.value = [self.layout.bookcase.width floatValue];
-        
+  */
         
         [popoverVC.numShelvesStepper addTarget:self action:@selector(numShelvesStepperValueDidChange) forControlEvents:UIControlEventValueChanged];
         [popoverVC.shelfWidthStepper addTarget:self action:@selector(shelfWidthStepperValueDidChange) forControlEvents:UIControlEventValueChanged];
