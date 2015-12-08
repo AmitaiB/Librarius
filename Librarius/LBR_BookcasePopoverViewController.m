@@ -88,7 +88,7 @@ if (popoverNumShelves == 1)
 
         // Autolayout
     [self.editBookcaseNameTxField configureForAutolayout];
-    [self.editBookcaseNameTxField.bottomAnchor constraintEqualToAnchor:self.contentView.bottomAnchor constant:-8].active = YES;
+    [self.editBookcaseNameTxField.bottomAnchor constraintEqualToAnchor:self.contentView.bottomAnchor constant:-4].active = YES;
     [self.editBookcaseNameTxField.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor].active = YES;
     [self.editBookcaseNameTxField.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor].active = YES;
     [self.editBookcaseNameTxField.heightAnchor constraintEqualToConstant:self.editBookcaseNameTxField.intrinsicContentSize.height].active = YES;
