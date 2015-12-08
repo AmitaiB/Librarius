@@ -9,6 +9,8 @@
 #import "LBR_BookcasePopoverViewController.h"
 #import "UIView+ABB_Categories.h"
 #import "UIView+ConfigureForAutoLayout.h"
+#import "LBR_BookcaseCollectionViewController.h"
+#import "Bookcase.h"
 
 @interface LBR_BookcasePopoverViewController ()
 /**
@@ -16,7 +18,6 @@
  nil everything in the apply...Button, then add a subview txtField to 
  change the Bookcase
  */
-@property (nonatomic, strong) UITextField *editBookcaseNameTxField;
 
 
 
@@ -39,8 +40,8 @@
     self.contentView.layer.cornerRadius = 5;
     self.contentView.clipsToBounds = YES;
     
-    
-    [self zombifyButton:self.applyUndoChangesButton];
+    [self zombifyButton];
+    [self frankensteinTextField];
 }
 
 -(void)setPopoverNumShelves:(NSUInteger)popoverNumShelves
@@ -70,11 +71,36 @@ if (popoverNumShelves == 1)
 }
 
 
--(void)zombifyButton:(UIButton*)victim
+
+-(void)zombifyButton
 {
-    [victim setTitle:nil forState:UIControlStateNormal];
-    victim.tintColor = [UIColor clearColor];
+    [self.applyUndoChangesButton removeFromSuperview];
+    [self.applyUndoChangesButton setTitle:nil forState:UIControlStateNormal];
+    self.applyUndoChangesButton.tintColor    = [UIColor clearColor];
+    [self.applyUndoChangesButton configureForAutolayout];
 }
 
+-(void)frankensteinTextField
+{
+        // Init and add the view
+    self.editBookcaseNameTxField             = [UITextField new];
+    [self.contentView addSubview:self.editBookcaseNameTxField];
+
+        // Autolayout
+    [self.editBookcaseNameTxField configureForAutolayout];
+    [self.editBookcaseNameTxField.bottomAnchor constraintEqualToAnchor:self.contentView.bottomAnchor constant:-8].active = YES;
+    [self.editBookcaseNameTxField.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor].active = YES;
+    [self.editBookcaseNameTxField.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor].active = YES;
+    [self.editBookcaseNameTxField.heightAnchor constraintEqualToConstant:self.editBookcaseNameTxField.intrinsicContentSize.height].active = YES;
+    
+    
+    self.editBookcaseNameTxField.placeholder = @"Edit Bookcase name";
+    self.editBookcaseNameTxField.borderStyle = UITextBorderStyleRoundedRect;
+    [self.contentView bringSubviewToFront:self.editBookcaseNameTxField];
+    LBR_BookcaseCollectionViewController *collectionViewController = (LBR_BookcaseCollectionViewController *)self.presentingViewController;
+    self.editBookcaseNameTxField.text                              = collectionViewController.bookcaseOnDisplay.name;
+        //    self.editBookcaseNameTxField.delegate = collectionViewController;
+    
+}
 
 @end

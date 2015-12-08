@@ -198,6 +198,7 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
 {
     self.bookcaseOnDisplay.shelves = @(popoverVC.numShelvesStepper.value);
     self.bookcaseOnDisplay.width   = @(popoverVC.shelfWidthStepper.value);
+    self.bookcaseOnDisplay.name    = popoverVC.editBookcaseNameTxField.text;
     [self refreshLayoutWithBookcaseWidth:self.bookcaseOnDisplay.width.floatValue numberOfShelves:self.bookcaseOnDisplay.shelves.floatValue];
     [self.dataManager saveContext];
 }
@@ -543,6 +544,9 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     return viewController;
 }
 */
+
+//#pragma mark - === UITextFieldDelegate ===
+
 
 
 @end

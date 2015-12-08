@@ -20,4 +20,6 @@
 @property (nonatomic, weak) IBOutlet UIStepper *shelfWidthStepper;
 @property (nonatomic, assign)        CGFloat    popoverShelfWidth;
 
+@property (nonatomic, strong) UITextField *editBookcaseNameTxField;
+
 @end
