@@ -115,6 +115,11 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
                                      maxShelves:numShelves
                                      shelfWidth_cm:width
                                      withVolumesOverride:nil];
+        ///Experimental
+    newLayout.shelvesNestedArray = self.bookcaseOnDisplay.laidOutShelvesModel;
+    
+    
+    
     self.layout = newLayout;
     [self.collectionView setCollectionViewLayout:newLayout animated:YES];
 }
@@ -342,7 +347,7 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     if (_volumesFetchedResultsController != nil)
         return _volumesFetchedResultsController;
     
-    return [self.dataManager currentLibraryBookcasesFetchedResultsController:self];
+    return [self.dataManager currentLibraryVolumesFetchedResultsController:self];
 }
 
 #pragma mark - === FetchedResultsControllerDelegate ===

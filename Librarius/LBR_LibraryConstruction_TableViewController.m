@@ -126,14 +126,12 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 -(void)reshelveBookcasesInCurrentLibrary
 {
     [self attachAllVolumesToCurrentLibraryIfNeeded];
-    DDLogVerbose(@"reshelveBookcasesInCurrentLibrary should be implemented here."); //0
-//    NSArray<Volume*> *unshelvedBooksRemaining =
     [dataManager.currentLibrary shelveVolumesOnBookcasesAccordingToLayoutScheme:LBRLayoutSchemeDefault];    //1
     [self.tableView reloadData];                                                    //3
     if ([self.refreshControl isRefreshing]) [self.refreshControl endRefreshing];
 }
 
-    //Uncomment for imagePicker implementation
+    ///Uncomment for imagePicker implementation
 /*
  #pragma mark - === UIImagePickerController delegate ===
 

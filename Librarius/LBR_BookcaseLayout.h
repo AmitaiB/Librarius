@@ -24,9 +24,7 @@
 @property (nonatomic, assign, readonly) CGFloat widestShelfWidth;
 @property (nonatomic, assign, readonly) LBRLayoutScheme layoutScheme;
 
-
 @property (nonatomic, strong) NSArray *shelvesNestedArray;
-
 
 @property (nonatomic, strong) NSArray<NSArray*>  *transientBookcaseLayoutModel;
 

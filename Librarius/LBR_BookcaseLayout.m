@@ -111,6 +111,7 @@
      Solution: DataManager store it in a nested mutable dictionary.
      Key: LibraryName - Key: BookcaseName (Array of Arrays)
  */
+
 -(void)prepareLayout
 {
     NSMutableDictionary *mutableLayoutInformation = [NSMutableDictionary dictionary];
@@ -121,7 +122,8 @@
     
         //Loop over each item in each section.
     NSInteger numSections = [self.collectionView numberOfSections];
-    for (NSUInteger section = 0; section < numSections; section++) {
+    for (NSUInteger section = 0; section < numSections; section++)
+    {
         NSUInteger numItems = [self.collectionView numberOfItemsInSection:section];
         for (NSUInteger item = 0; item < numItems; item++)
         {
@@ -134,7 +136,8 @@
             CGPoint origin = [self originPointForBook:self.bookOnShelfCounter onShelf:self.currentShelfIndex];
             attributes.frame = CGRectMake(origin.x, origin.y, kDefaulCellDimension, kDefaulCellDimension);
             [self incrementBookcaseModelByOneBook];
-            
+    
+                //Finally, key that attributes object to the indexPath (in a dictionary).
             [mutableLayoutInformation setObject:attributes forKey:indexPath];
         }
     }
@@ -182,7 +185,6 @@
 -(UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
     return self.layoutInformation[indexPath];
 }
-
 
 #pragma mark - Helper methods
     /// Essentially, this depends on how many cells are being shown, plus the spaces at the ends
@@ -330,13 +332,6 @@
     return _localFetchedResultsController;
 }
 
-//-(void)setLayoutScheme:(LBRLayoutScheme)layoutScheme
-//{
-//    _layoutScheme = layoutScheme;
-//    
-//    [self.bookcaseModel shelveBooks:self.localFetchedResultsController.fetchedObjects];
-//}
-
 
 - (NSString*)formatTypeToString:(LBRLayoutScheme)formatType {
     NSString *result = nil;
@@ -357,7 +352,7 @@
 }
 
 
-#pragma mark - === DataManager Interface ===
+//#pragma mark - === DataManager Interface ===
 
 
 @end

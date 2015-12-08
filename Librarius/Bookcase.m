@@ -82,8 +82,6 @@
     BOOL currentShelfHasRoomForBook;
     BOOL thereAreMoreBooksToShelve;
     
-    DDLogInfo(@"booksArray.count does %@ exist", booksArray.count? @"" : @"NOT");
-    
 //    if (booksArray) 
         for (NSInteger idx = 0; idx < booksArray.count; idx++) {
             book                 = booksArray[idx];
