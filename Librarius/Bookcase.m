@@ -41,6 +41,7 @@
     return bookcase;
 }
 
+/*
 -(void)setOrderWhenListed:(NSNumber *)orderWhenListed
 {
     self.orderWhenListed = orderWhenListed;
@@ -55,7 +56,7 @@
     }
     
 }
-
+*/
 
 -(CGFloat)percentFull
 {

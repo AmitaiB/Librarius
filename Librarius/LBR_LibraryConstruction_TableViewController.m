@@ -73,6 +73,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     [super viewDidLoad];
     dataManager = [LBRDataManager sharedDataManager];
     self.bookcasesFetchedResultsController = [dataManager currentLibraryBookcasesFetchedResultsController:self];
+        //CLEAN:??
     self.rowNumOfAddBookcaseButton = self.bookcasesFetchedResultsController.fetchedObjects.count;
     
 //    [self deleteAllOtherLibraries];
@@ -292,10 +293,10 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-NSInteger rowNumOfAddBookcaseButton = [tableView numberOfRowsInSection:indexPath.section];
+NSInteger rowNumOfAddBookcaseButton = [tableView numberOfRowsInSection:indexPath.section] - offBy1;
 //    if (indexPath.row == self.rowNumOfAddBookcaseButton) {
     if (indexPath.row == rowNumOfAddBookcaseButton) {
-        [self addBookcaseCellTapped];
+        [self addBookcaseCellTapped:indexPath];
         [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
     } else
         DDLogVerbose(@"didSelectRowAtIndexPath: %@\nrow: %lu\nsection: %lu", indexPath, indexPath.row, indexPath.section);
@@ -407,7 +408,7 @@ NSInteger rowNumOfAddBookcaseButton = [tableView numberOfRowsInSection:indexPath
     return @(indexPath.row);
 }
 
--(void)addBookcaseCellTapped
+-(void)addBookcaseCellTapped:(NSIndexPath*)bookcaseCellPath
 {
     Bookcase *newBookcase = [Bookcase insertNewObjectIntoContext:dataManager.managedObjectContext];
 
@@ -421,7 +422,9 @@ NSInteger rowNumOfAddBookcaseButton = [tableView numberOfRowsInSection:indexPath
     
         //Specific to this object
     
-    newBookcase.orderWhenListed = @([self.tableView indexPathForSelectedRow].row); //The new bookcase will take the place (row) of the addBookcaseCell (whose row will auto++).
+    newBookcase.orderWhenListed = @(bookcaseCellPath.row);
+    
+//    newBookcase.orderWhenListed = @([self.tableView indexPathForSelectedRow].row); //The new bookcase will take the place (row) of the addBookcaseCell (whose row will auto++).
 
         //    NSInteger activeSection = MAX(0, [self.librariesCollectionView indexPathsForSelectedItems].firstObject.item); //'item', since each Library (item) corresponds to a section of Rows.
         //    newBookcase.orderWhenListed = @([self.tableView numberOfRowsInSection:activeSection]);
