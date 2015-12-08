@@ -539,9 +539,12 @@ static NSString * const kUnknown = @"kUnknown";
 }
 */
 
-    /**
-     The keys are # of shelves, the objects are the widths.
-     */
+/**
+ *  Inserts new Bookcase objects into the current library's managed object context,
+ *  with a relationship to the entered library.
+ *  @param library    The library that will be related to the Bookcases
+ *  @param dimensions The keys are # of shelves, the objects are the widths.
+ */
 - (void)generateBookcasesForLibrary:(Library *)library withDimensions:(NSDictionary <NSNumber*, NSNumber*> *)dimensions
 {
 //   __block NSNumber *idx = @(library.bookcases.count);

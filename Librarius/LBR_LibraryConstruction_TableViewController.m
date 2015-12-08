@@ -408,6 +408,8 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 
 
 
+
+
 #pragma mark - Navigation
 
 -(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
@@ -657,6 +659,24 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 
 - (IBAction)addLibraryButtonTapped:(id)sender {
     DBLG
+        ///Cut and pasted from Bookcase code - make a new library!
+    
+    Library *newLibrary = [Library insertNewObjectIntoContext:dataManager.managedObjectContext];
+    
+        //Standard
+    newLibrary.dateCreated     = [NSDate date];
+    newLibrary.dateModified    = [newLibrary.dateCreated copy];
+    newLibrary.rootCollection = dataManager.currentLibrary.rootCollection;
+    newLibrary.orderWhenListed = @(dataManager.currentLibrary.rootCollection.libraries.count - offBy1);
+    newLibrary.name = [NSString stringWithFormat:@"New Library #%lu", newLibrary.orderWhenListed.integerValue + offBy1];
+    [dataManager generateBookcasesForLibrary:newLibrary withDimensions:@{@5:@10}];
+    
+    newLibrary.libraryPhoto = UIImageJPEGRepresentation([UIImage imageNamed:@"home-library1"], 0.7f);
+    
+    [dataManager saveContext];
+    
+    [self.librariesCollectionView reloadData];
+        ///How do we shelve it? Automatically when you add it?
 }
 
 @end
