@@ -11,6 +11,14 @@
 #import "UIView+ConfigureForAutoLayout.h"
 
 @interface LBR_BookcasePopoverViewController ()
+/**
+ Workaround the storyboard bug:
+ nil everything in the apply...Button, then add a subview txtField to 
+ change the Bookcase
+ */
+@property (nonatomic, strong) UITextField *editBookcaseNameTxField;
+
+
 
 @property (nonatomic, weak) IBOutlet UITextField *numShelvesTxField;
 @property (nonatomic, weak) IBOutlet UITextField *shelfWidth_cmTxField;
@@ -30,6 +38,9 @@
     
     self.contentView.layer.cornerRadius = 5;
     self.contentView.clipsToBounds = YES;
+    
+    
+    [self zombifyButton:self.applyUndoChangesButton];
 }
 
 -(void)setPopoverNumShelves:(NSUInteger)popoverNumShelves
@@ -57,4 +68,13 @@ if (popoverNumShelves == 1)
 
 - (IBAction)applyUndoChangesButtonTapped:(id)sender {
 }
+
+
+-(void)zombifyButton:(UIButton*)victim
+{
+    [victim setTitle:nil forState:UIControlStateNormal];
+    victim.tintColor = [UIColor clearColor];
+}
+
+
 @end
