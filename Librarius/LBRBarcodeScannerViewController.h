@@ -10,7 +10,7 @@
 #import <CoreData/CoreData.h>
 
 @class Volume;
-@interface LBRBarcodeScannerViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, NSFetchedResultsControllerDelegate>
+@interface LBRBarcodeScannerViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, NSFetchedResultsControllerDelegate, UISearchBarDelegate>
 
 @property (nonatomic, strong) NSMutableArray <NSString*> *uniqueCodes;
 //@property (nonatomic, strong) Volume *volumeToConfirm;

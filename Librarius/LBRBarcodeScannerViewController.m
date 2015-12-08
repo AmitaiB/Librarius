@@ -53,6 +53,7 @@
 @property (weak, nonatomic) IBOutlet UIView *scannerView;
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
 @property (weak, nonatomic) IBOutlet UIButton *toggleScanningButton;
+@property (nonatomic, weak) IBOutlet UISearchBar *manualEntrySearchBar;
 
 @property (nonatomic, strong) MTBBarcodeScanner *scanner;
 @property (nonatomic, strong) LBRGoogleGTLClient *googleClient;
@@ -126,11 +127,15 @@ static NSString * const volumeNib          = @"volumePresentationView";
     self.toggleScanningButton.backgroundColor                = [UIColor belizeHoleColor];
     self.toggleScanningButton.tintColor                      = [UIColor turquoiseColor];
     self.toggleScanningButton.layer.cornerRadius             = 5.0f;
-//    self.saveScannedBooksToCoreDataButton.layer.cornerRadius = 5.0f;
-//    self.saveScannedBooksToCoreDataButton.clipsToBounds      = YES;
-//    self.saveScannedBooksToCoreDataButton.backgroundColor    = [UIColor wetAsphaltColor];
     
     [self anchorBackgroundImage];
+    
+        // Manual Entry SearchBar
+    self.manualEntrySearchBar.barTintColor = self.navigationController.navigationBar.tintColor;
+    self.manualEntrySearchBar.delegate     = self;
+    UITextField *searchBarTxField = [self.manualEntrySearchBar valueForKey:@"_searchField"];
+    searchBarTxField.clearsOnBeginEditing = YES;
+    searchBarTxField.clearsOnInsertion = YES;
     
         // So we don't repeat ourselves.
     self.isConfigured = YES;
@@ -257,6 +262,8 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
 //    self.saveScannedBooksToCoreDataButton.hidden = NO;
     self.lightToggleButton.hidden                = YES;
     
+    self.manualEntrySearchBar.hidden = NO;
+    
         //New! Overlay Views
     for (NSString *code in self.overlayViews.allKeys) {
         [self.overlayViews[code] removeFromSuperview];
@@ -272,6 +279,7 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
     [self flipScanButtonAppearance];
 //    self.saveScannedBooksToCoreDataButton.hidden = YES;
     self.lightToggleButton.hidden                = NO;
+    self.manualEntrySearchBar.hidden = YES;
     
         //New! Overlay Views
 //    Optionally set a rectangle of interest to scan codes. Only codes within this rect will be scanned.
@@ -302,20 +310,8 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
                     [self.uniqueCodes addObject:code.stringValue];
 
                         //Use the string to query Google.
-                    [self.googleClient queryForVolumeWithString:code.stringValue withCallback:^(GTLBooksVolume *responseVolume) {
-                            // -------------------------------------------------------------------------------
-                            //	Scanning Block : Google Success Block
-                            // -------------------------------------------------------------------------------
-                        Volume *volume = [Volume insertNewObjectIntoContext:dataManager.managedObjectContext
-                                           initializedFromGoogleBooksObject:responseVolume
-                                                              withCovertArt:YES];
-                
-//                        [[LBRDataManager sharedDataManager] logCurrentLibraryTitles:@"[Google Success Block]"];
-                        
-                            ///TODO: Alternative to confirmation, hmmm...? Perhaps put the view up in the scanning reticule...?
-                        NYAlertViewController *confirmationViewController = [self confirmSelectionViewController:volume];
-                        [self presentViewController:confirmationViewController animated:YES completion:nil];
-                    }];
+                    [self queryGoogleBooksClientForString:code.stringValue];
+
                 } else {
                     if (![reportedBarcodes containsObject:code.stringValue]) {
                         DDLogVerbose(@"Barcode already in list/table.");
@@ -324,6 +320,29 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
                 }
             }
         }];
+    }];
+}
+
+-(void)queryGoogleBooksClientForString:(NSString*)q
+{
+    if (!q || [q stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].length == 0) {
+        return;
+    }
+    
+    
+    [self.googleClient queryForVolumeWithString:q withCallback:^(GTLBooksVolume *responseVolume) {
+            // -------------------------------------------------------------------------------
+            //	Scanning Block : Google Success Block
+            // -------------------------------------------------------------------------------
+        Volume *volume = [Volume insertNewObjectIntoContext:dataManager.managedObjectContext
+                           initializedFromGoogleBooksObject:responseVolume
+                                              withCovertArt:YES];
+        
+            //                        [[LBRDataManager sharedDataManager] logCurrentLibraryTitles:@"[Google Success Block]"];
+        
+            ///TODO: Alternative to confirmation, hmmm...? Perhaps put the view up in the scanning reticule...?
+        NYAlertViewController *confirmationViewController = [self confirmSelectionViewController:volume];
+        [self presentViewController:confirmationViewController animated:YES completion:nil];
     }];
 }
 
@@ -456,6 +475,7 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
                                                               DDLogInfo(@"Confirm tapped.");
                                                               [self dismissViewControllerAnimated:YES completion:^{
 //                                                                  [dataManager logCurrentLibraryTitles:@"[BEFORE confirm action tapped]"];
+//                                                                  self.manualEntrySearchBar.text = @""; COUPLING EXAMPLE
                                                                   [dataManager saveContext];
 //                                                                  [dataManager logCurrentLibraryTitles:@"[AFTER confirm action tapped]"];
                                                                       //TODO: Add to a TableView.
@@ -571,6 +591,20 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
 - (IBAction)logBooksButtonTapped:(id)sender
 {
     [dataManager logCurrentLibraryTitles:@"[logBooksButtonTapped]"];
+}
+
+#pragma mark - === UISearchBar Delegate ===
+
+-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    searchBar.text = @"";
+    [searchBar resignFirstResponder];
+}
+
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
+    [self queryGoogleBooksClientForString:searchBar.text];
 }
 
 
