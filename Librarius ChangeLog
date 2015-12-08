@@ -5,3 +5,6 @@ Librarius ChangeLog
 v1.2
 
 -Adds a "Add New Bookcase" button.
+
+-Fixes bug where shelves would not load.
+-Fixes bug where bookcase dimensions could not be adjusted.

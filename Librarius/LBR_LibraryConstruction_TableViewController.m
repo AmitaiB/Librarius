@@ -277,7 +277,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
         [self addBookcaseCellTapped];
         [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
     } else
-        DDLogVerbose(@"didSelectRowAtIndexPath: %@\nrow: %lu\nsection: %lu\n(TODO: Implement a PrepareForSegue for the CollectionView", indexPath, indexPath.row, indexPath.section);
+        DDLogVerbose(@"didSelectRowAtIndexPath: %@\nrow: %lu\nsection: %lu", indexPath, indexPath.row, indexPath.section);
 }
 
     ///Hides unselected libraries, by setting the height for rows of inactive Libraries (sections) to 0 or close to it.
