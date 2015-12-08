@@ -41,6 +41,21 @@
     return bookcase;
 }
 
+-(void)setOrderWhenListed:(NSNumber *)orderWhenListed
+{
+    self.orderWhenListed = orderWhenListed;
+    
+        //This is called less frequently, and saves performance.
+    NSString *trimmedName = [self.name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    if (!self.name || [trimmedName isEqualToString:@""])
+    {
+        self.name = [NSString stringWithFormat:@"Bookcase #%@", orderWhenListed];
+//         = [NSString stringWithFormat:@"Bookcase #%@ (%@ x %@ cm)", bookcase.orderWhenListed, bookcase.shelves, bookcase.width];
+
+    }
+    
+}
+
 
 -(CGFloat)percentFull
 {

@@ -30,7 +30,11 @@
     [self.imageView setImage:bookcaseCellIcon];
     
         // TextLabels
-    self.textLabel.text = bookcase.name ? bookcase.name : [NSString stringWithFormat:@"Bookcase #%@ (%@ x %@ cm)", bookcase.orderWhenListed, bookcase.shelves, bookcase.width];
+//    NSString *trimmedBookcaseName = [bookcase.name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+//    if (!bookcase.name || [trimmedBookcaseName isEqualToString:@""])
+//    {
+        self.textLabel.text = [NSString stringWithFormat:@"Bookcase #%@ (%@ x %@ cm)", bookcase.orderWhenListed, bookcase.shelves, bookcase.width];
+//    }
     self.detailTextLabel.text = [NSString stringWithFormat:@"%.01f％ filled: %@ books", [self.bookcase percentFull], bookcase.volumes.count? @(bookcase.volumes.count) : @(0.0)];
 }
 
