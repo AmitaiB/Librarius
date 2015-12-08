@@ -71,10 +71,11 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     dataManager = [LBRDataManager sharedDataManager];
     self.bookcasesFetchedResultsController = [dataManager currentLibraryBookcasesFetchedResultsController:self];
     self.rowNumOfAddBookcaseButton = self.bookcasesFetchedResultsController.fetchedObjects.count;
+    
+//    [self deleteAllOtherLibraries];
     
         //Layout
     self.layoutSegmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"layout 1", @"layout 2"]];
@@ -105,6 +106,24 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
         }
     }
     [dataManager saveContext];
+}
+
+/**
+ *  DEBUG ONLY
+ */
+-(void)deleteAllOtherLibraries
+{
+    [dataManager.userRootCollection.libraries enumerateObjectsUsingBlock:^(Library * _Nonnull library, BOOL * _Nonnull stop) {
+        if (![library.orderWhenListed isEqual:@0])
+        {
+            [library.volumes enumerateObjectsUsingBlock:^(Volume * _Nonnull volume, BOOL * _Nonnull stop) {
+                volume.library = nil;
+            }];
+            [dataManager.managedObjectContext deleteObject:library];
+        }
+    }];
+    [dataManager saveContext];
+    [self attachAllVolumesToCurrentLibraryIfNeeded];
 }
 
 -(void)initRefreshControl
