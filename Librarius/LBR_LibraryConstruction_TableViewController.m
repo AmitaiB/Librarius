@@ -210,9 +210,10 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     //Note: If there's no bookcase, it crashes the collectionView.
 -(void)configureCell:(LBR_Bookcase_TableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row != self.rowNumOfAddBookcaseButton)
+    NSArray *bookcasesInOrder = [dataManager.currentLibrary.bookcases sortedArrayUsingDescriptors:dataManager.bookcasesRequest.sortDescriptors];
+    if (indexPath.row != bookcasesInOrder.count)
+//    if (indexPath.row != self.rowNumOfAddBookcaseButton)
     {
-        NSArray *bookcasesInOrder = [dataManager.currentLibrary.bookcases sortedArrayUsingDescriptors:dataManager.bookcasesRequest.sortDescriptors];
         cell.bookcase = bookcasesInOrder[indexPath.row];
     }
         /* DON'T DELETE - Leave as a WARNING VS. FUTURE TAMPERING -- the cells rely on a transient attribute
@@ -272,8 +273,9 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == self.rowNumOfAddBookcaseButton) {
-//        DDLogVerbose(@"Here is where you add a new bookcase");
+NSInteger rowNumOfAddBookcaseButton = [tableView numberOfRowsInSection:indexPath.section];
+//    if (indexPath.row == self.rowNumOfAddBookcaseButton) {
+    if (indexPath.row == rowNumOfAddBookcaseButton) {
         [self addBookcaseCellTapped];
         [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
     } else
@@ -313,7 +315,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
         id object = [self.bookcasesFetchedResultsController objectAtIndexPath:indexPath];
         [dataManager.managedObjectContext deleteObject:object];
         [dataManager saveContext];
-        self.rowNumOfAddBookcaseButton--;
+//        self.rowNumOfAddBookcaseButton--;
 
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         //UPDATE: Adding bookcases is done via the AddBookcaseCell
@@ -399,7 +401,13 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     newBookcase.isFull          = @NO;
     
         //Specific to this object
-    newBookcase.orderWhenListed = @(++self.rowNumOfAddBookcaseButton);
+    
+    newBookcase.orderWhenListed = @([self.tableView indexPathForSelectedRow].row); //The new bookcase will take the place (row) of the addBookcaseCell (whose row will auto++).
+
+        //    NSInteger activeSection = MAX(0, [self.librariesCollectionView indexPathsForSelectedItems].firstObject.item); //'item', since each Library (item) corresponds to a section of Rows.
+        //    newBookcase.orderWhenListed = @([self.tableView numberOfRowsInSection:activeSection]);
+    
+        //    newBookcase.orderWhenListed = @(++self.rowNumOfAddBookcaseButton);
     newBookcase.library         = dataManager.currentLibrary;
     
     [dataManager saveContext];
