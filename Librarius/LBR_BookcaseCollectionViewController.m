@@ -189,7 +189,6 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
 
 #pragma mark - === UIPopoverPresentationController Delegate ===
 
-    //CLEAN: Unused code(?)
 /*
 -(void)prepareForPopoverPresentation:(UIPopoverPresentationController *)popoverPresentationController {
 }
@@ -200,6 +199,7 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
     self.bookcaseOnDisplay.shelves = @(popoverVC.numShelvesStepper.value);
     self.bookcaseOnDisplay.width   = @(popoverVC.shelfWidthStepper.value);
     [self refreshLayoutWithBookcaseWidth:self.bookcaseOnDisplay.width.floatValue numberOfShelves:self.bookcaseOnDisplay.shelves.floatValue];
+    [self.dataManager saveContext];
 }
 
     ///Read-only property, can only be set via this delegate method. `..None` stops it from being a full-screen view.
