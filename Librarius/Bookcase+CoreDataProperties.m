@@ -20,7 +20,7 @@
 @dynamic orderWhenListed;
 @dynamic shelf_height;
 @dynamic shelves;
-@dynamic shelvesArray;
+//@dynamic shelvesArray;
 @dynamic width;
 @dynamic laidOutShelvesModel;
 @dynamic library;

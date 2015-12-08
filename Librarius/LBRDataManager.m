@@ -622,7 +622,7 @@ static NSString * const kUnknown = @"kUnknown";
         bookcase.shelves         = [obj.shelves copy];
         bookcase.width           = [obj.width copy];
 
-        bookcase.shelvesArray    = [obj.shelvesArray copy]; ///  <~ Not used anymore.
+//        bookcase.shelvesArray    = [obj.shelvesArray copy]; ///  <~ Not used anymore.
     }];
     
         //New Volumes/Books

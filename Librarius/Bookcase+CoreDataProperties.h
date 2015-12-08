@@ -28,7 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 
     //The old - thought it would be auto-transformed.
-@property (nullable, nonatomic, retain) NSArray *shelvesArray;
+//@property (nullable, nonatomic, retain) NSArray *shelvesArray;
+
     //The new: a transient property.
 @property (nullable, nonatomic, retain) NSArray *laidOutShelvesModel;
 @end

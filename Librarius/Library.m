@@ -88,8 +88,6 @@ The Library shelves itself here, by progressively asking each related bookcase t
 //        [libraryLayoutDict setObject:processedBooks[kShelvesArray] forKey:[NSString stringWithFormat:@"%@-%@", [Bookcase entityName], bookcase.name]];
 //    }
 //        ///Add this library's layout plan to the public transient data.
-//        ///CLEAN: Destroy me!
-////    [dataManager.transientLibraryLayoutInformation setObject:libraryLayoutDict forKey:[NSString stringWithFormat:@"%@-%@", [Library entityName], self.name]];
 //    
 //    return libraryLayoutDict;
 //}
