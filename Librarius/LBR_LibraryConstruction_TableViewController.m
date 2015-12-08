@@ -95,6 +95,13 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     [self reshelveBookcasesInCurrentLibrary];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self.tableView reloadData];
+}
+
 -(void)attachAllVolumesToCurrentLibraryIfNeeded
 {
     NSFetchRequest *volumesRequest = [NSFetchRequest fetchRequestWithEntityName:[Volume entityName]];
