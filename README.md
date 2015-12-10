@@ -1,7 +1,7 @@
 # Librarius (App)
 A home-library inventory and shelving utility app
 
-[![ScreenShot](https://raw.github.com/GabLeRoux/WebMole/master/ressources/WebMole_Youtube_Video.png)](http://youtu.be/vt5fpE0bzSY)
+[![ScreenShot](Librarius-YouTube-ScreenShot.png)](https://youtu.be/hmJhyd2zpnE)
 
 
 ##Features/Technologies Used
