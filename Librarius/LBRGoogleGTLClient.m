@@ -50,13 +50,13 @@
     [self.service executeQuery:booksQuery completionHandler:^(GTLServiceTicket *ticket, id object, NSError *error) {
             // callback
         if (error) {
-           DDLogError(@"Error in booksQueryWithISBN: %@", error.localizedDescription);
+           //DDLogError(@"Error in booksQueryWithISBN: %@", error.localizedDescription);
         } else {
                 // id  GTLBooksVolume dance:
             GTLBooksVolumes *responceObject = object;
             GTLBooksVolume *mostLikelyObject = [responceObject.items firstObject];
             block(mostLikelyObject); //<--Passes it back.
-            DDLogVerbose(@"mostLikelyObject: %@", mostLikelyObject.volumeInfo.title);
+            //DDLogVerbose(@"mostLikelyObject: %@", mostLikelyObject.volumeInfo.title);
         }
     }];
 }
@@ -66,7 +66,7 @@
  
     [self.service executeQuery:booksRecommendationQuery completionHandler:^(GTLServiceTicket *ticket, id object, NSError *error) {
         if (error) {
-            DDLogError(@"Error in booksRecommendationQuery: %@", error.localizedDescription);
+            //DDLogError(@"Error in booksRecommendationQuery: %@", error.localizedDescription);
         }
         else
         {
@@ -80,7 +80,7 @@
 
 -(GTLQueryBooks*)booksQueryForString:(NSString*)queryString {
         //CLEAN: not for shipping...
-    DDLogDebug(@"%lu", (unsigned long)self.debugCounter++);
+    //DDLogDebug(@"%lu", (unsigned long)self.debugCounter++);
     GTLQueryBooks *booksQuery = [GTLQueryBooks queryForVolumesListWithQ:queryString];
     
         // The Books API currently requires that search queries not have an

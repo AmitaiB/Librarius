@@ -18,7 +18,7 @@
     #define kDefaultBookThickness 2.50f
     #define kDefaultBookcaseShelvesCount 5
     #define kDefaultBookcaseWidth_cm 10
-    #define DBLG DDLogDebug(@"<%@:%@:line %d, reporting!>", NSStringFromClass([self class]), NSStringFromSelector(_cmd), __LINE__);
+    #define DBLG //DDLogDebug(@"<%@:%@:line %d, reporting!>", NSStringFromClass([self class]), NSStringFromSelector(_cmd), __LINE__);
 
     #import "CocoaLumberjack.h"
 
@@ -43,9 +43,9 @@
 #endif
 
 #ifdef DEBUG
-    static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
+    static const //DDLogLevel //DDLogLevel = //DDLogLevelVerbose;
 //#else
-//    static const DDLogLevel ddLogLevel = DDLogLevelWarn;
+//    static const //DDLogLevel //DDLogLevel = //DDLogLevelWarn;
 #endif
 
 #define MAS_SHORTHAND

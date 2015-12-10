@@ -108,9 +108,9 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     NSArray *allVolumes = [dataManager.managedObjectContext executeFetchRequest:volumesRequest error:nil];
     for (Volume *volume in allVolumes) {
         if (!volume.library) {
-//            DDLogDebug(@"In attachAllVolumesToCurrentLibraryIfNeeded.\nVolume \"%@\"\nBEFORE: library = %@", volume.title, volume.library.name);
+//            //DDLogDebug(@"In attachAllVolumesToCurrentLibraryIfNeeded.\nVolume \"%@\"\nBEFORE: library = %@", volume.title, volume.library.name);
             volume.library = dataManager.currentLibrary;
-//            DDLogDebug(@"\nAFTER: library = %@", volume.library.name);
+//            //DDLogDebug(@"\nAFTER: library = %@", volume.library.name);
         }
     }
     [dataManager saveContext];
@@ -217,7 +217,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     }
     else
     {
-//        DDLogWarn(@"Section %lu has no rows.", tableSection);
+//        //DDLogWarn(@"Section %lu has no rows.", tableSection);
         return 0;
     }
 }
@@ -307,7 +307,7 @@ NSInteger rowNumOfAddBookcaseButton = [tableView numberOfRowsInSection:indexPath
         [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 //    else
-//        DDLogVerbose(@"didSelectRowAtIndexPath: %@\nrow: %lu\nsection: %lu", indexPath, indexPath.row, indexPath.section);
+//        //DDLogVerbose(@"didSelectRowAtIndexPath: %@\nrow: %lu\nsection: %lu", indexPath, indexPath.row, indexPath.section);
 }
 
     ///Hides unselected libraries, by setting the height for rows of inactive Libraries (sections) to 0 or close to it.
@@ -381,7 +381,7 @@ NSInteger rowNumOfAddBookcaseButton = [tableView numberOfRowsInSection:indexPath
         for (NSInteger row = 0; row < [tableView numberOfRowsInSection:section]; row++) {
             LBR_Bookcase_TableViewCell *cell = [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:section]];
             cell.bookcase.orderWhenListed = @(row);
-            DDLogDebug(@"Row %lu has a Bookcase of order: %@", row, cell.bookcase.orderWhenListed);
+            //DDLogDebug(@"Row %lu has a Bookcase of order: %@", row, cell.bookcase.orderWhenListed);
         }
      
      /* /
@@ -467,7 +467,7 @@ NSInteger rowNumOfAddBookcaseButton = [tableView numberOfRowsInSection:indexPath
         LBR_Bookcase_TableViewCell *senderCell = (LBR_Bookcase_TableViewCell*)sender;
         destinationVC.bookcaseOnDisplay        = senderCell.bookcase; /// <~
     } else {
-//        DDLogWarn(@"WARNING: prepareForSegue shouldn't have triggered this.");
+//        //DDLogWarn(@"WARNING: prepareForSegue shouldn't have triggered this.");
     }
 }
 
@@ -534,7 +534,7 @@ NSInteger rowNumOfAddBookcaseButton = [tableView numberOfRowsInSection:indexPath
     
 //    [dataManager.currentLibrary shelveVolumesOnBookcasesAccordingToLayoutScheme:LBRLayoutSchemeDefault];
 //    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
-//    DDLogVerbose(@"dataManager.currentLibrary now = %@", dataManager.currentLibrary.name);
+//    //DDLogVerbose(@"dataManager.currentLibrary now = %@", dataManager.currentLibrary.name);
 }
 
 /*
@@ -607,7 +607,7 @@ NSInteger rowNumOfAddBookcaseButton = [tableView numberOfRowsInSection:indexPath
     if (![frc performFetch:&error]) {
             // Replace this implementation with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. !!!:You should not use this function in a shipping application, although it may be useful during development.
-        DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
+        //DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
     

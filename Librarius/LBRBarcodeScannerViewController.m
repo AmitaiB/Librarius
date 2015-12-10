@@ -314,7 +314,7 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
 
                 } else {
                     if (![reportedBarcodes containsObject:code.stringValue]) {
-                        DDLogVerbose(@"Barcode already in list/table.");
+                        //DDLogVerbose(@"Barcode already in list/table.");
                         [reportedBarcodes addObject:code.stringValue];
                     }
                 }
@@ -472,7 +472,7 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
     NYAlertAction *confirmAction = [NYAlertAction actionWithTitle:NSLocalizedString(@"Confirm", nil)
                                                             style:UIAlertActionStyleDefault
                                                           handler:^(NYAlertAction *action) {
-                                                              DDLogInfo(@"Confirm tapped.");
+                                                              //DDLogInfo(@"Confirm tapped.");
                                                               [self dismissViewControllerAnimated:YES completion:^{
 //                                                                  [dataManager logCurrentLibraryTitles:@"[BEFORE confirm action tapped]"];
 //                                                                  self.manualEntrySearchBar.text = @""; COUPLING EXAMPLE
@@ -485,7 +485,7 @@ id internetReachability = [Reachability reachabilityForInternetConnection];
      NYAlertAction *cancelAction = [NYAlertAction actionWithTitle:NSLocalizedString(@"Cancel", nil)
                                                             style:UIAlertActionStyleDestructive
                                                           handler:^(NYAlertAction *action) {
-                                                              DDLogInfo(@"Cancel tapped.");
+                                                              //DDLogInfo(@"Cancel tapped.");
                                                               [volumeToConfirm.managedObjectContext deleteObject:volumeToConfirm];
                                                               [self dismissViewControllerAnimated:YES completion:nil];
                                                           }];

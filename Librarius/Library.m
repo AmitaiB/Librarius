@@ -73,7 +73,7 @@ The Library shelves itself here, by progressively asking each related bookcase t
 //    NSArray *bookcasesInOrder        = [self.bookcases sortedArrayUsingDescriptors:dataManager.bookcasesRequest.sortDescriptors];
 //    NSArray <Volume*> *asYetUnshelvedVolumes = allVolumesInThisLibrary;//Initially, all volumes are unshelved.
 //   
-//    DDLogInfo(@"bookcasesInListOrder.count = %lu", bookcasesInOrder.count);
+//    //DDLogInfo(@"bookcasesInListOrder.count = %lu", bookcasesInOrder.count);
 //    NSDictionary *processedBooks;
 //    
 //    NSMutableDictionary *libraryLayoutDict = [NSMutableDictionary new];

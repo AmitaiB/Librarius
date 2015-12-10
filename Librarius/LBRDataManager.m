@@ -51,7 +51,7 @@ static NSString * const kUnknown = @"kUnknown";
 -(void)logCurrentLibrary {
 //    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[Volume entityName]];
 //    NSArray *results = [self.managedObjectContext executeFetchRequest:request error:nil];
-//    DDLogVerbose(@"(logCurrentLibrary, ln. 54) Fetched volumes from Core Data: %@", [results description]);
+//    //DDLogVerbose(@"(logCurrentLibrary, ln. 54) Fetched volumes from Core Data: %@", [results description]);
 }
 
 /**
@@ -65,11 +65,11 @@ static NSString * const kUnknown = @"kUnknown";
     [results enumerateObjectsUsingBlock:^(Volume * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [prettyResults addObject:[obj fullTitle]? [obj fullTitle] : @"Nully"];
     }];
-    DDLogInfo(@"(logCurrentLibraryTitles, ln. 68) === Called by %@ === \nTitles of fetched volumes from Core Data:", debugString);
+    //DDLogInfo(@"(logCurrentLibraryTitles, ln. 68) === Called by %@ === \nTitles of fetched volumes from Core Data:", debugString);
     for (NSString *title in prettyResults) {
-        DDLogVerbose(@"\t%@", title);
+        //DDLogVerbose(@"\t%@", title);
     }
-    DDLogVerbose(@"=== END ===\n");
+    //DDLogVerbose(@"=== END ===\n");
 }
 
 -(void)deleteAllObjectsOfEntityName:(NSString*)entityName
@@ -150,7 +150,7 @@ static NSString * const kUnknown = @"kUnknown";
         if ([self.managedObjectContext hasChanges] && ![self.managedObjectContext save:&error]) {
                 // Replace this implementation with code to handle the error appropriately.
                 // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
+            //DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
 //            abort();
             [self logCurrentLibraryTitles:@"[ERROR of saveContext]"];
         }
@@ -243,7 +243,7 @@ static NSString * const kUnknown = @"kUnknown";
         error                                  = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:9999 userInfo:dict];
             //Replace this with code to handle the error appropriately.
             //abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
+        //DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
     return _persistentStoreCoordinator;
@@ -303,7 +303,7 @@ static NSString * const kUnknown = @"kUnknown";
         //Magic happens here.
     NSError *error = nil;
     if (![frc performFetch:&error]) {
-        DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
+        //DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
 //        abort();
     }
     return frc;
@@ -354,7 +354,7 @@ static NSString * const kUnknown = @"kUnknown";
     if (![frc performFetch:&error]) {
             // Replace this implementation with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. !!!:You should not use this function in a shipping application, although it may be useful during development.
-        DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
+        //DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
     

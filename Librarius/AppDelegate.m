@@ -39,10 +39,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
         // Override point for customization after application launch.
-    [self awakeFromNap];
+//    [self awakeFromNap];
     
     [self setupAppearance];
-    [self setupCocoaLumberjack];
+//    [self setupCocoaLumberjack];
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
     
     
@@ -63,12 +63,12 @@
 }
 
 #pragma mark - === private setup methods ===
-
+/*
 - (void)setupCocoaLumberjack
 {
         ///CocoaLumberjack Initialization files.
-    [DDLog addLogger:[DDASLLogger sharedInstance]];
-    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+    [DDLog aDDLogger:[DDASLLogger sharedInstance]];
+    [DDLog aDDLogger:[DDTTYLogger sharedInstance]];
     
     [[DDTTYLogger sharedInstance] setColorsEnabled:YES];
     
@@ -84,10 +84,11 @@
      DDLogInfo(@"Info");
      DDLogDebug(@"Debug");
      DDLogVerbose(@"Verbose");
-     */
+     * /
     
 //    [[LBRDataManager sharedDataManager] generateDefaultLibraryIfNeeded];
 }
+*/
 
 - (void)setupAppearance {
     UINavigationBar *navigationbarAppearance    = [UINavigationBar appearance];

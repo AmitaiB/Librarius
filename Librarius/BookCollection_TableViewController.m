@@ -129,7 +129,7 @@ static NSString * const altSearchResultsCellID = @"altSearchResultsCellID";
 //    if (![context save:&error]) {
 //        // Replace this implementation with code to handle the error appropriately.
 //        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-//        DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
+//        //DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
 //        abort();
 //    }
 //}
@@ -377,7 +377,7 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
             NSFetchRequest *volumesRequest = [NSFetchRequest fetchRequestWithEntityName:[Volume entityName]];
     LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
     NSArray *volumes = [dataManager.managedObjectContext executeFetchRequest:self.volumesFetchedResultsController.fetchRequest error:nil];
-//    DDLogDebug(@"In numberSections, volumes fetch request: %@", volumes);
+//    //DDLogDebug(@"In numberSections, volumes fetch request: %@", volumes);
     
     NSInteger numSections = -1; //Crash if
     if (tableView == self.tableView) {
@@ -465,7 +465,7 @@ NSString * const SearchBarIsFirstResponderKey = @"SearchBarIsFirstResponderKey";
 
             // Replace this implementation with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-//           DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
+//           //DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         }
         

@@ -38,7 +38,7 @@
         
         /** Should not be necessary, since we got the libraries FROM the rootCollection in the first place.
         if (!([moreThanOneLibrary allObjects].count > 0)) {
-            DDLogWarn(@"RootCollection cannot retrieve firstLibrary - no Libraries attached.");
+            //DDLogWarn(@"RootCollection cannot retrieve firstLibrary - no Libraries attached.");
         }
          */
         
@@ -48,7 +48,7 @@
     }
     
     if (!self.libraries.count) {
-        DDLogWarn(@"User root collection is nil!");
+        //DDLogWarn(@"User root collection is nil!");
         DBLG
     }
     return nil;

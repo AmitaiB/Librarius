@@ -48,11 +48,11 @@ static NSString * const signInToTabBarSegueID = @"signInToTabBarSegueID";
     [self.view addSubview:self.signInButton];
     
     
-    DDLogDebug(@"BEFORE signInSilently, does%@ have Authentication stored in Keychain.", [[GIDSignIn sharedInstance] hasAuthInKeychain]? @"" : @" NOT");
+    //DDLogDebug(@"BEFORE signInSilently, does%@ have Authentication stored in Keychain.", [[GIDSignIn sharedInstance] hasAuthInKeychain]? @"" : @" NOT");
         // Uncomment to automatically sign in the user.
         //    !!!: Uncomment before shipping
     [signInManager signInSilently];
-    DDLogDebug(@"AFTER signInSilently, does%@ have Authentication stored in Keychain.", [[GIDSignIn sharedInstance] hasAuthInKeychain]? @"" : @" NOT");
+    //DDLogDebug(@"AFTER signInSilently, does%@ have Authentication stored in Keychain.", [[GIDSignIn sharedInstance] hasAuthInKeychain]? @"" : @" NOT");
     
     
 }
@@ -72,7 +72,7 @@ static NSString * const signInToTabBarSegueID = @"signInToTabBarSegueID";
 //        // ...
 //        [self performSegueWithIdentifier:signInToTabBarSegueID sender:nil];
 //    } else {
-//    DDLogError(@"Error in signIn: %@", error.localizedDescription);
+//    //DDLogError(@"Error in signIn: %@", error.localizedDescription);
 //    }
 }
 
