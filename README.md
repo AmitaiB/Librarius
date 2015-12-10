@@ -1,5 +1,8 @@
-# Librarius (working title)
+# Librarius (App)
 A home-library inventory and shelving utility app
+
+[![ScreenShot](https://raw.github.com/GabLeRoux/WebMole/master/ressources/WebMole_Youtube_Video.png)](http://youtu.be/vt5fpE0bzSY)
+
 
 ##Features/Technologies Used
 1. UITabView (UIKit)
@@ -13,7 +16,6 @@ A home-library inventory and shelving utility app
   * Use my newfound Sketch skills to import a cool UI template.
   * Ideally, get it to look like a bookcase.
 
-#Librarius (App)
 ##FixMe/ToDo
 
 
@@ -53,4 +55,5 @@ A home-library inventory and shelving utility app
 * Drag and Drop functionality.
 
 
-##Version 2.0
+##Version 1.2
+WORKS!
