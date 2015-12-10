@@ -80,7 +80,7 @@ typedef NS_ENUM (NSUInteger, ABCoverArtImageSize) {
                                   }
                               }
                               failure:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nonnull response, NSError * _Nonnull error) {
-                                 DDLogError(@"Error in %@: %@", NSStringFromSelector(_cmd), error.localizedDescription);
+//                                 DDLogError(@"Error in %@: %@", NSStringFromSelector(_cmd), error.localizedDescription);
                               }];
 }
 

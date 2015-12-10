@@ -49,9 +49,9 @@ static NSString * const kUnknown = @"kUnknown";
 
     //debug-related
 -(void)logCurrentLibrary {
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[Volume entityName]];
-    NSArray *results = [self.managedObjectContext executeFetchRequest:request error:nil];
-    DDLogVerbose(@"(logCurrentLibrary, ln. 54) Fetched volumes from Core Data: %@", [results description]);
+//    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[Volume entityName]];
+//    NSArray *results = [self.managedObjectContext executeFetchRequest:request error:nil];
+//    DDLogVerbose(@"(logCurrentLibrary, ln. 54) Fetched volumes from Core Data: %@", [results description]);
 }
 
 /**

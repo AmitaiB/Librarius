@@ -76,12 +76,12 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
         //CLEAN:??
     self.rowNumOfAddBookcaseButton = self.bookcasesFetchedResultsController.fetchedObjects.count;
     
-//    [self deleteAllOtherLibraries];
+    [self deleteAllOtherLibraries];
     
         //Layout
     self.layoutSegmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"layout 1", @"layout 2"]];
     self.layoutSegmentedControl.selectedSegmentIndex = 0;
-    self.navigationItem.titleView = self.layoutSegmentedControl;
+//    self.navigationItem.titleView = self.layoutSegmentedControl;
     
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
@@ -108,9 +108,9 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     NSArray *allVolumes = [dataManager.managedObjectContext executeFetchRequest:volumesRequest error:nil];
     for (Volume *volume in allVolumes) {
         if (!volume.library) {
-            DDLogDebug(@"In attachAllVolumesToCurrentLibraryIfNeeded.\nVolume \"%@\"\nBEFORE: library = %@", volume.title, volume.library.name);
+//            DDLogDebug(@"In attachAllVolumesToCurrentLibraryIfNeeded.\nVolume \"%@\"\nBEFORE: library = %@", volume.title, volume.library.name);
             volume.library = dataManager.currentLibrary;
-            DDLogDebug(@"\nAFTER: library = %@", volume.library.name);
+//            DDLogDebug(@"\nAFTER: library = %@", volume.library.name);
         }
     }
     [dataManager saveContext];
@@ -217,7 +217,7 @@ static NSString * const librariesCollectionViewCellReuseID = @"librariesCollecti
     }
     else
     {
-        DDLogWarn(@"Section %lu has no rows.", tableSection);
+//        DDLogWarn(@"Section %lu has no rows.", tableSection);
         return 0;
     }
 }
@@ -305,8 +305,9 @@ NSInteger rowNumOfAddBookcaseButton = [tableView numberOfRowsInSection:indexPath
     if (indexPath.row == rowNumOfAddBookcaseButton) {
         [self addBookcaseCellTapped:indexPath];
         [tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
-    } else
-        DDLogVerbose(@"didSelectRowAtIndexPath: %@\nrow: %lu\nsection: %lu", indexPath, indexPath.row, indexPath.section);
+    }
+//    else
+//        DDLogVerbose(@"didSelectRowAtIndexPath: %@\nrow: %lu\nsection: %lu", indexPath, indexPath.row, indexPath.section);
 }
 
     ///Hides unselected libraries, by setting the height for rows of inactive Libraries (sections) to 0 or close to it.
@@ -466,7 +467,7 @@ NSInteger rowNumOfAddBookcaseButton = [tableView numberOfRowsInSection:indexPath
         LBR_Bookcase_TableViewCell *senderCell = (LBR_Bookcase_TableViewCell*)sender;
         destinationVC.bookcaseOnDisplay        = senderCell.bookcase; /// <~
     } else {
-        DDLogWarn(@"WARNING: prepareForSegue shouldn't have triggered this.");
+//        DDLogWarn(@"WARNING: prepareForSegue shouldn't have triggered this.");
     }
 }
 
@@ -533,7 +534,7 @@ NSInteger rowNumOfAddBookcaseButton = [tableView numberOfRowsInSection:indexPath
     
 //    [dataManager.currentLibrary shelveVolumesOnBookcasesAccordingToLayoutScheme:LBRLayoutSchemeDefault];
 //    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
-    DDLogVerbose(@"dataManager.currentLibrary now = %@", dataManager.currentLibrary.name);
+//    DDLogVerbose(@"dataManager.currentLibrary now = %@", dataManager.currentLibrary.name);
 }
 
 /*
@@ -695,7 +696,6 @@ NSInteger rowNumOfAddBookcaseButton = [tableView numberOfRowsInSection:indexPath
 
 
 - (IBAction)addLibraryButtonTapped:(id)sender {
-    DBLG
         ///Cut and pasted from Bookcase code - make a new library!
     
     Library *newLibrary = [Library insertNewObjectIntoContext:dataManager.managedObjectContext];
