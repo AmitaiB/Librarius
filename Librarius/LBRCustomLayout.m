@@ -255,7 +255,7 @@ static NSString * const LBRShelvedBookCollectionViewCellKind = @"coverArtCell";
         self.shelfPosition++;
     }
     if (self.shelfPosition > self.shelvesPerBookcase) {
-        DDLogError(@"Error: ran out of space on bookshelf!");
+//        DDLogError(@"Error: ran out of space on bookshelf!");
     }
 
     return @(self.shelfPosition);

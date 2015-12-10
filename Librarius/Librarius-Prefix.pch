@@ -44,8 +44,8 @@
 
 #ifdef DEBUG
     static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
-#else
-    static const DDLogLevel ddLogLevel = DDLogLevelWarn;
+//#else
+//    static const DDLogLevel ddLogLevel = DDLogLevelWarn;
 #endif
 
 #define MAS_SHORTHAND
