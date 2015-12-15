@@ -57,3 +57,7 @@ A home-library inventory and shelving utility app
 
 ##Version 1.2
 WORKS!
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/AmitaiB/librarius/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
