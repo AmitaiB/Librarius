@@ -27,8 +27,7 @@ pod 'CocoaLumberjack', '~> 2.2'
 end
 
 target 'LibrariusTests' do
-    
-
-
+    pod 'Specta', '~> 1.0'
+    pod 'Expecta', '~> 1.0'
 end
 

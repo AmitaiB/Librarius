@@ -94,6 +94,7 @@
 		38F57BC31BB0707200CC2EE8 /* NSString+Icons.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F57BB51BB0707200CC2EE8 /* NSString+Icons.m */; };
 		38FABE881BD49AE4009479E9 /* UIColor+ABBColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FABE871BD49AE4009479E9 /* UIColor+ABBColors.m */; };
 		38FEA8831BFE69CB00529451 /* NSObject+ABBNumberUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 38FEA8821BFE69CB00529451 /* NSObject+ABBNumberUtils.m */; };
+		DAF87E390A7FE5F516F0E6C3 /* libPods-LibrariusTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F9AC9BF1C7D544B23B528D06 /* libPods-LibrariusTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +108,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		369FB5D45E2C6197A955347A /* Pods-LibrariusTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LibrariusTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LibrariusTests/Pods-LibrariusTests.release.xcconfig"; sourceTree = "<group>"; };
 		3803752C1B8AC9A8004C4ECE /* Librarius.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Librarius.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		380375301B8AC9A8004C4ECE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		380375311B8AC9A8004C4ECE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -284,9 +286,11 @@
 		38FABE871BD49AE4009479E9 /* UIColor+ABBColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+ABBColors.m"; path = "../UIColor+ABBColors.m"; sourceTree = "<group>"; };
 		38FEA8811BFE69CB00529451 /* NSObject+ABBNumberUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+ABBNumberUtils.h"; sourceTree = "<group>"; };
 		38FEA8821BFE69CB00529451 /* NSObject+ABBNumberUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+ABBNumberUtils.m"; sourceTree = "<group>"; };
+		66D4C8420E79C2BE117BEA69 /* Pods-LibrariusTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LibrariusTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LibrariusTests/Pods-LibrariusTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8D3D33401D5A34E1C9A90BE0 /* Pods-Librarius.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Librarius.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Librarius/Pods-Librarius.debug.xcconfig"; sourceTree = "<group>"; };
 		9B10AB83782954202B2FDC18 /* Pods-Librarius.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Librarius.release.xcconfig"; path = "Pods/Target Support Files/Pods-Librarius/Pods-Librarius.release.xcconfig"; sourceTree = "<group>"; };
 		EBADCB9C83FA635A577697F9 /* libPods-Librarius.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Librarius.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9AC9BF1C7D544B23B528D06 /* libPods-LibrariusTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LibrariusTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -303,6 +307,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAF87E390A7FE5F516F0E6C3 /* libPods-LibrariusTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,6 +319,8 @@
 			children = (
 				8D3D33401D5A34E1C9A90BE0 /* Pods-Librarius.debug.xcconfig */,
 				9B10AB83782954202B2FDC18 /* Pods-Librarius.release.xcconfig */,
+				66D4C8420E79C2BE117BEA69 /* Pods-LibrariusTests.debug.xcconfig */,
+				369FB5D45E2C6197A955347A /* Pods-LibrariusTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -718,6 +725,7 @@
 			children = (
 				38D601971BDA95B100E3D60F /* iAd.framework */,
 				EBADCB9C83FA635A577697F9 /* libPods-Librarius.a */,
+				F9AC9BF1C7D544B23B528D06 /* libPods-LibrariusTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -750,9 +758,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 380375551B8AC9A8004C4ECE /* Build configuration list for PBXNativeTarget "LibrariusTests" */;
 			buildPhases = (
+				FF3D7F5BF875D45112C2F646 /* Check Pods Manifest.lock */,
 				380375441B8AC9A8004C4ECE /* Sources */,
 				380375451B8AC9A8004C4ECE /* Frameworks */,
 				380375461B8AC9A8004C4ECE /* Resources */,
+				BC20AD1CC8D10BB5975AFA62 /* Embed Pods Frameworks */,
+				105E98ED55A9C9640B566E53 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -835,6 +846,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		105E98ED55A9C9640B566E53 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LibrariusTests/Pods-LibrariusTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		381EBBFF1BA0833A000D2FA4 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -878,6 +904,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Librarius/Pods-Librarius-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		BC20AD1CC8D10BB5975AFA62 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LibrariusTests/Pods-LibrariusTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		CFA5D81F792834EBE39AF74C /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -891,6 +932,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Librarius/Pods-Librarius-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FF3D7F5BF875D45112C2F646 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1143,6 +1199,7 @@
 		};
 		380375561B8AC9A8004C4ECE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 66D4C8420E79C2BE117BEA69 /* Pods-LibrariusTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1163,6 +1220,7 @@
 		};
 		380375571B8AC9A8004C4ECE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 369FB5D45E2C6197A955347A /* Pods-LibrariusTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
