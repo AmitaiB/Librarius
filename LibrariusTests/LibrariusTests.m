@@ -6,8 +6,25 @@
 //  Copyright (c) 2015 Amitai Blickstein, LLC. All rights reserved.
 //
 
+#import <Specta.h>
+#import <Expecta.h>
+#import "LBRAlertContent_TableViewController.h"
+
+SpecBegin(LBRAlertContent_TableViewController)
+describe(@"LBRAlertContent_TableViewController", ^{
+   it(@"should initialize, not be nil", ^{
+       LBRAlertContent_TableViewController *testController = [[LBRAlertContent_TableViewController alloc] initWithStyle:UITableViewStylePlain];
+       
+       expect(testController).toNot.equal(nil);
+   });
+});
+
+SpecEnd
+ 
+/*
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
+#import "LBRAlertContent_TableViewController.h"
 
 @interface LibrariusTests : XCTestCase
 
@@ -38,3 +55,4 @@
 }
 
 @end
+*/
