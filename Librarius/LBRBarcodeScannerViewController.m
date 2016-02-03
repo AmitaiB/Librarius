@@ -87,6 +87,7 @@
 static NSString * const barcodeCellReuseID = @"barcodeCellReuseID";
 static NSString * const volumeNib          = @"volumePresentationView";
 
+
 #pragma mark - === Lifecycle ===
 
 - (void)viewDidLoad {
@@ -115,7 +116,7 @@ static NSString * const volumeNib          = @"volumePresentationView";
         // Initializations
     self.googleClient    = [LBRGoogleGTLClient sharedGoogleGTLClient];
     dataManager          = [LBRDataManager sharedDataManager];
-    self.uniqueCodes     = [NSMutableArray  new];
+    self.uniqueCodes     = [NSMutableArray new];
     [self initializeScannerView];
     
         // Hidden Things
@@ -153,12 +154,13 @@ static NSString * const volumeNib          = @"volumePresentationView";
     [imageView.trailingAnchor constraintEqualToAnchor:superView.trailingAnchor constant:0].active       = YES;
 }
 
-
+/**
+ *  Alternative, "catch-all" barcode types:
+ *  `self.scanner = [[MTBBarcodeScanner alloc] initWithPreviewView:self.scannerView];`
+ */
 -(void)initializeScannerView
 {
     self.scanner         = [[MTBBarcodeScanner alloc] initWithMetadataObjectTypes:@[AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeEAN13Code] previewView:self.scannerView];
-        ///Alternative: self.scanner = [[MTBBarcodeScanner alloc] initWithPreviewView:self.scannerView];
-
     self.scannerView.layer.cornerRadius = 5.0f;
 }
 
@@ -193,8 +195,20 @@ static NSString * const volumeNib          = @"volumePresentationView";
 }
 
   /**
-   FIXME: Needs to check DataStore for duplicates - same book could be two different NSManagedObjects (diff. ID#s).
+   
 */
+/**
+ *  FIXME: Needs to check DataStore for duplicates - same book could
+ *   be two different NSManagedObjects (diff. ID#s).
+ *  TODO: Perhaps I could tie the managedObject ID# to the ISBN# (
+ *   which is our standard of uniqunesss.
+ *
+ *  @param volumeToCheck The Volume object to check for uniqueness in
+ the before saving to the persistent store.
+ *
+ *  @return returns a BOOL indicating whether or not the Volume in question
+ is in fact unique (i.e., already saved to the persistent store).
+ */
 -(BOOL)isNewUniqueObject:(Volume *)volumeToCheck
 {
     NSArray *booksArray = self.volumesFetchedResultsController.fetchedObjects;
