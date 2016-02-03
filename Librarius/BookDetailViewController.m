@@ -88,24 +88,6 @@ static NSString * const bookDetailsCellID = @"bookDetailsCellID";
 }
 
 
-#pragma mark - == Constraints ==
-    //CLEAN: Not called! Not finished!!
--(void)autolayoutSubviews
-{
-    [UIView configureViewsForAutolayout:@[self.imageView, self.detailsTableView, self.descriptionTextView]];
-    
-        //ImageView
-    [self.imageView.topAnchor constraintEqualToAnchor:self.topLayoutGuide.bottomAnchor constant:8].active = YES;
-    
-        //DetailsTableView
-        //[...]
-    
-        //DescriptionTextView
-        //[...]
-}
-
-
-
 #pragma mark - === UITableView DataSource ===
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

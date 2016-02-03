@@ -486,67 +486,11 @@ static NSString * const AuthorOnlyLayoutSchemeID      = @"By Author";
         [self.collectionView setCollectionViewLayout:self.layout animated:YES];
     }
     
-    
-    
-        //CLEAN: delete when "flow (delete)" is removed.
+        //CLEAN: delete when "flow (delete)" is removed. UPDATE: ???
     else if ([selectedLayout isEqualToString:@"Flow (delete)"]) {
         [self.collectionView setCollectionViewLayout:standardFlowLayout animated:YES];
     }
 }
-
-
-//CLEAN:
-/*
--(UIViewController *)buildAttributesAdjustmentPopoverController
-{
-        ///FIXME:
-    
-    UIViewController *viewController = [UIViewController new];
-    
-    UIView *contentView = viewController.view;
-    UITextField *numShelvesTxField = [UITextField new];
-    numShelvesTxField.placeholder     = @"# of Shelves";
-    UITextField *shelfWidth_cmTxField = [UITextField new];
-    shelfWidth_cmTxField.placeholder  = @"width (cm)";
-    UIStepper *numShelvesStepper = [UIStepper new];
-    UIStepper *shelfWidthStepper = [UIStepper new];
-    
-        //For both View Heirarchy and AutoLayout constraints
-    NSDictionary <NSString *, UIView*> *subViews = @{@"numField"    : numShelvesTxField,
-                                                     @"numStepper"  : numShelvesStepper,
-                                                     @"widthField"  : shelfWidth_cmTxField,
-                                                     @"widthStepper": shelfWidthStepper
-                                                     };
-    
-        //UIView Categories
-    [contentView addSubviews:[NSSet setWithArray:[subViews allValues]]];
-    [UIView configureViewsForAutolayout:[subViews allValues]];
-    
-    [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[numField]-[numStepper]-16-[widthField]-[widthStepper]-|"
-                                                                        options:0
-                                                                        metrics:nil
-                                                                          views:subViews]];
-    
-    [subViews enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, UIView * _Nonnull obj, BOOL * _Nonnull stop) {
-        NSString *constraintString = [NSString stringWithFormat:@"V:|-[%@]-|", key];
-        [contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:constraintString
-                                                                            options:0
-                                                                            metrics:nil
-                                                                              views:@{key : obj}]];
-    }];
-    
-    [contentView sizeToFit];
-    
-    viewController.modalPresentationStyle = UIModalPresentationPopover;
-    viewController.popoverPresentationController.barButtonItem = self.navigationItem.rightBarButtonItem;
-    viewController.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionAny;
-    viewController.popoverPresentationController.delegate = self;
-    return viewController;
-}
-*/
-
-//#pragma mark - === UITextFieldDelegate ===
-
 
 
 @end

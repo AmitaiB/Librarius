@@ -20,7 +20,6 @@
 
 @interface LBRDataManager : NSObject <NSFetchedResultsControllerDelegate>
 @property (nonatomic, strong) NSMutableArray *uniqueCodes;
-@property (nonatomic, strong) Volume *volumeFromLastBarcode; //CLEAN: Probably not actually needed.
 @property (nonatomic, strong) NSMutableArray <Volume*> *volumesRecentlyAddedToContext;
 @property (nonatomic, strong) NSDictionary *sortDescriptors;
 

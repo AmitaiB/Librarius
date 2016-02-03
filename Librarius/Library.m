@@ -56,41 +56,10 @@ The Library shelves itself here, by progressively asking each related bookcase t
     for (Bookcase *bookcase in bookcasesInOrder)
     {
         remainingUnshelvedVolumes = [bookcase fillShelvesWithBooks:remainingUnshelvedVolumes];
-            //???:        if (!remainingUnshelvedVolumes.count) break;
     }
     
     return remainingUnshelvedVolumes;
 }
-
-    //BACKUP COPY--> CLEAN: Delete once this works.
-    //TODO: This logic is flawed in SO many edge cases. Needs major overhauling.
-//-(NSDictionary*)shelveVolumesOnBookcasesAccordingToLayoutScheme:(LBRLayoutScheme)layoutScheme
-//{
-//    LBRDataManager *dataManager = [LBRDataManager sharedDataManager];
-//    
-//        //Prepare for for-loop
-//    NSArray *allVolumesInThisLibrary = [self.volumes   sortedArrayUsingDescriptors:dataManager.volumesRequest.sortDescriptors];
-//    NSArray *bookcasesInOrder        = [self.bookcases sortedArrayUsingDescriptors:dataManager.bookcasesRequest.sortDescriptors];
-//    NSArray <Volume*> *asYetUnshelvedVolumes = allVolumesInThisLibrary;//Initially, all volumes are unshelved.
-//   
-//    DDLogInfo(@"bookcasesInListOrder.count = %lu", bookcasesInOrder.count);
-//    NSDictionary *processedBooks;
-//    
-//    NSMutableDictionary *libraryLayoutDict = [NSMutableDictionary new];
-//    
-//    for (Bookcase *bookcase in bookcasesInOrder)
-//    {
-//        if (!bookcase.name) bookcase.name = [NSString stringWithFormat:@"#%@", bookcase.orderWhenListed.stringValue];
-//        
-//        
-//        processedBooks        = [bookcase shelvedAndRemainingBooks:asYetUnshelvedVolumes]; //The magic happens here.
-//        asYetUnshelvedVolumes = processedBooks[kUnshelvedRemainder]; //sets up for the next loop iteration.
-//        [libraryLayoutDict setObject:processedBooks[kShelvesArray] forKey:[NSString stringWithFormat:@"%@-%@", [Bookcase entityName], bookcase.name]];
-//    }
-//        ///Add this library's layout plan to the public transient data.
-//    
-//    return libraryLayoutDict;
-//}
 
 
 @end

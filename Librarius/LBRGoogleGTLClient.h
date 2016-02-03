@@ -10,7 +10,8 @@
 #import <GTLBooks.h>
 
 /**
- http://isbndb.com/api/v2/docs/books HAS DDN (Dewey decimal number) AND LOC (Library of Congress) INFORMATION!
+ TODO: Use http://isbndb.com/api/v2/docs/books which has DDN
+ (Dewey decimal number) AND LOC (Library of Congress) INFORMATION!
  */
 
 @class Volume;
@@ -20,8 +21,6 @@
 @property (nonatomic, strong) LBRDataManager *dataManager;
 @property (nonatomic, strong) GTLServiceBooks *service;
 @property (nonatomic, strong) GTLBooksVolumes *responseObject;
-
-@property (nonatomic) NSUInteger debugCounter;
 
 
 +(instancetype)sharedGoogleGTLClient;

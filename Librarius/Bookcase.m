@@ -142,15 +142,6 @@
         }
     internalShelvesArray = [NSArray arrayWithArray:mutableShelves];
     
-        //CLEAN: If this works, then delete the old way represented here:
-        //Try adding copies, rather than pointers to objects that will go out of scope?
-//    NSMutableDictionary *temp = [NSMutableDictionary dictionary];
-        //  @{kShelvesArray : [shelvesArray copy],
-        //                           kUnshelvedRemainder : [unshelvedRemainder copy] //.count? unshelvedRemainder : @"All books shelved."
-        //                           };
-//    temp[kShelvesArray] = [shelvesArray copy];
-//    temp[kUnshelvedRemainder] = unshelvedRemainder.count? [unshelvedRemainder copy] : [NSNull null];
-    
     self.laidOutShelvesModel = [internalShelvesArray copy];
     return unshelvedRemainder.count? [unshelvedRemainder copy] : [NSNull null];
 }

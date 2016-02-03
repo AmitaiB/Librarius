@@ -13,7 +13,6 @@
 @interface LBRBarcodeScannerViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, NSFetchedResultsControllerDelegate, UISearchBarDelegate>
 
 @property (nonatomic, strong) NSMutableArray <NSString*> *uniqueCodes;
-//@property (nonatomic, strong) Volume *volumeToConfirm;
 
 @end
 

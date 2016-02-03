@@ -37,7 +37,6 @@
         _service.retryEnabled = YES;
         
         _dataManager = [LBRDataManager sharedDataManager];
-        _debugCounter = 0;
     }
     return self;
 }
@@ -79,8 +78,6 @@
 #pragma mark - Helper methods
 
 -(GTLQueryBooks*)booksQueryForString:(NSString*)queryString {
-        //CLEAN: not for shipping...
-    DDLogDebug(@"%lu", (unsigned long)self.debugCounter++);
     GTLQueryBooks *booksQuery = [GTLQueryBooks queryForVolumesListWithQ:queryString];
     
         // The Books API currently requires that search queries not have an

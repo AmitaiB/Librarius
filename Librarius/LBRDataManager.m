@@ -81,9 +81,6 @@ static NSString * const kUnknown = @"kUnknown";
 }
 
 
-/**
- 
- */
 -(Library *)insertNewLibrary
 {
     Library *newLibrary = [Library insertNewObjectIntoContext:self.managedObjectContext];
@@ -95,169 +92,8 @@ static NSString * const kUnknown = @"kUnknown";
     return newLibrary;
 }
 
-//#pragma mark - helper methods
-
+    ///???:What is this "data closet" pattern??
 #pragma mark - === "data closet" methods ===
-
-    ///Dict:Dict:Array:Array
-/**
- Top Layer: Libraries
- 2nd Layer: Bookcases
- 3rd Layer: Shelves-space of the bookcase
- 4th Layer: Shelfspace of the particular shelf
-
- ///CLEAN: Destroy me!
-// This is a (kludgey, true) workaround the inability to store NSArrays or
-// other collections in core data.
-// */
-//-(NSMutableDictionary *)transientLibraryLayoutInformation
-//{
-//    if (_transientLibraryLayoutInformation == nil)
-//        _transientLibraryLayoutInformation = [NSMutableDictionary new];
-//        
-//    return _transientLibraryLayoutInformation;
-//}
-
-
-    // ===================== CoreData additions here
-
-#pragma mark - ***** CoreData *****
-#pragma mark  Fetch Data
-
-
-    ///Get the root item, "RootCollections".
-- (void)fetchData
-{
-//    [self generateDefaultLibraryIfNeeded];
-    NSFetchRequest *librariesFetchRequest = [NSFetchRequest fetchRequestWithEntityName:[Library entityName]];
-    librariesFetchRequest.sortDescriptors = @[self.sortDescriptors[kOrderSorter]];
-    NSError *error = nil;
-    self.libraries = [self.managedObjectContext executeFetchRequest:librariesFetchRequest error:&error];
-    self.currentLibrary = self.libraries[0];
-    
-        //For DEBUG:
-//    [self refreshLibrary:self.currentLibrary];
-}
-
-
-- (void)saveContext
-{
-//    [self logCurrentLibraryTitles:@"[TOP of saveContext]"];
-    NSError *error = nil;
-    if (self.managedObjectContext != nil) {
-        [self preSaveCheckForDuplicateVolumes];
-//        [self logCurrentLibraryTitles:@"[MIDDLE of saveContext]"];
-        if ([self.managedObjectContext hasChanges] && ![self.managedObjectContext save:&error]) {
-                // Replace this implementation with code to handle the error appropriately.
-                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
-//            abort();
-            [self logCurrentLibraryTitles:@"[ERROR of saveContext]"];
-        }
-//        [self logCurrentLibraryTitles:@"[BOTTOM of saveContext]"];
-    }
-}
-
-
-- (void)preSaveCheckForDuplicateVolumes
-{
-    NSError *error;
-    NSString *isbn;
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:[Volume entityName]];
-    NSPredicate *isbn10Predicate;
-    NSPredicate *isbn13Predicate;
-    NSCompoundPredicate *isbnCompoundPredicate;
-    NSSet<Volume*> *newVolumesToCheck = [self.managedObjectContext.insertedObjects filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"self isMemberOfClass: %@", [Volume class]]] ;
-    
-    for (Volume *volume in newVolumesToCheck) {
-        isbn = [volume isbn];
-        isbn10Predicate = [NSPredicate predicateWithFormat:@"%K == %@", @"isbn10", isbn];
-        isbn13Predicate = [NSPredicate predicateWithFormat:@"%K == %@", @"isbn13", isbn];
-        isbnCompoundPredicate = [NSCompoundPredicate orPredicateWithSubpredicates:@[isbn10Predicate, isbn13Predicate]];
-        
-        request.predicate = isbnCompoundPredicate;
-        BOOL matches = [self.managedObjectContext countForFetchRequest:request error:&error] - 1; //subtract 1 for the Volume we just inserted!
-        
-        if (matches) [self.managedObjectContext deleteObject:volume];
-    }
-}
-
-#pragma mark - *Core Data stack*
-#pragma mark NSManagedObjectContext
-
-    // Returns the managed object context for the application.
-    // If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
-- (NSManagedObjectContext *)managedObjectContext
-{
-    if (_managedObjectContext != nil) {
-        return _managedObjectContext;}
-    
-    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    if (!coordinator) {
-        return nil;}
-    
-        //alt: initWithConcurrencyType:NSMainQueueConcurrencyType
-    _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    [_managedObjectContext setPersistentStoreCoordinator:coordinator];
-    return _managedObjectContext;
-}
-
-#pragma mark - NSManagedObjectModel
-
--(NSManagedObjectModel *)managedObjectModel {
-    if (_managedObjectModel != nil) {
-        return _managedObjectModel;}
-    
-    NSURL *modelURL     = [[NSBundle mainBundle] URLForResource:@"Librarius" withExtension:@"momd"];
-    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
-    return _managedObjectModel;
-}
-
-#pragma mark - NSPersistentStoreCoordinator
-
--(NSPersistentStoreCoordinator *)persistentStoreCoordinator {
-        // The persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it.
-    if (_persistentStoreCoordinator != nil) {
-        return _persistentStoreCoordinator;
-    }
-    
-        // Create the coordinator and store (if there was none before)
-    
-    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    NSURL *storeURL             = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Librarius.sqlite"];
-    NSError *error              = nil;
-    NSString *failureReason     = @"There was an error creating or loading the application's saved data.";
-    
-    NSDictionary *lightweightMigrationOptions = nil;
-    if (kLightweightMigration) lightweightMigrationOptions = @{NSMigratePersistentStoresAutomaticallyOption : @(YES),
-                                                               NSInferMappingModelAutomaticallyOption       : @(YES)
-                                                               };
-    
-        //This error reporting is not strictly necessary.
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:lightweightMigrationOptions error:&error]) {
-            // Report any error we got.
-        NSMutableDictionary *dict              = [NSMutableDictionary dictionary];
-        dict[NSLocalizedDescriptionKey]        = @"Failed to initialize the application's saved data";
-        dict[NSLocalizedFailureReasonErrorKey] = failureReason;
-        dict[NSUnderlyingErrorKey]             = error;
-        error                                  = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:9999 userInfo:dict];
-            //Replace this with code to handle the error appropriately.
-            //abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
-    return _persistentStoreCoordinator;
-}
-
-#pragma mark - Application's Documents directory
-
-    // Returns the URL to the application's Documents directory.
-- (NSURL *)applicationDocumentsDirectory
-{
-    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-}
-
-#pragma mark - NSFetchedResultsController configurator
 
 /**
  *  1) The set of all books...      (fetch request entity)
@@ -379,7 +215,8 @@ static NSString * const kUnknown = @"kUnknown";
 }
 
 //#pragma mark - Generate Data
-///Not called. Soon, CLEAN:
+///Not called. If you can demonstrate that this method will not BE needed, CLEAN:
+/**
 - (void)generateTestDataIfNeeded
 {
     LBRGoogleGTLClient *googleClient = [LBRGoogleGTLClient sharedGoogleGTLClient];
@@ -391,7 +228,7 @@ static NSString * const kUnknown = @"kUnknown";
     
     /**
      *  Given an array of ISBNs, populate the DB.
-     */
+     * /
     NSArray *listOfISBNs = @[@"978-1-60309-050-6",
                              @"978-1-60309-266-1",
                              @"978-1-60309-025-4",
@@ -410,6 +247,8 @@ static NSString * const kUnknown = @"kUnknown";
     [self saveContext];
     [self fetchData];
 }
+*/
+
 
 /**
  One of three possibilities:
@@ -475,10 +314,6 @@ static NSString * const kUnknown = @"kUnknown";
             
                 //Saving changes the objectID from temp to permanent.
             [self saveContext];
-
-//            CLEAN: This should only be used for the rootcollection! Using it for other things is swiss-cheesy!
-//                ///???: Why do I need this?
-//            [[NSUserDefaults standardUserDefaults] setURL:newDefaultLibrary.objectID.URIRepresentation forKey:[NSString stringWithFormat:@"Library-%@", newDefaultLibrary.orderWhenListed]];
             
             return _currentLibrary = newDefaultLibrary;
         }
@@ -519,25 +354,6 @@ static NSString * const kUnknown = @"kUnknown";
         [defaults synchronize];
     }
 }
-
-/* CLEAN: if comments don't break anything, sweep this up!
--(void)generateDefaultBookcaseIfNeeded
-{
-//    (self.currentLibrary)? :[self generateDefaultLibraryIfNeeded];
-    
-    if (self.currentLibrary.bookcases.count) {
-        self.currentBookcase = [self.currentLibrary.bookcases firstObject];
-        return;
-    }
-    else
-    {
-        Bookcase *newDefaultBookcase       = [Bookcase insertNewObjectIntoContext:self.managedObjectContext withDefaultValues:YES];
-        newDefaultBookcase.orderWhenListed = @(self.currentLibrary.bookcases.count);//This works. Think about it.
-        newDefaultBookcase.library         = self.currentLibrary;
-        self.currentBookcase               = newDefaultBookcase;
-    }
-}
-*/
 
 /**
  *  Inserts new Bookcase objects into the current library's managed object context,
@@ -594,7 +410,9 @@ static NSString * const kUnknown = @"kUnknown";
     //Delete the old objects.
     //New Library -> shelve the books.
 
-    ///CLEAN: Never called! This was DEBUG ONLY anyway, right?
+    ///CLEAN: Never called! This was DEBUG ONLY anyway, right? UPDATE: May come in handy
+    ///when I debug the library methods.
+/**
 -(void)refreshLibrary:(Library *)oldLibrary
 {
         //Managed Object Context
@@ -664,16 +482,7 @@ static NSString * const kUnknown = @"kUnknown";
     [dataManager saveContext];
     dataManager.currentLibrary = newLibrary;
 }
-
-    //TODO: Find a place for this or delete it.
-/**
- *** The Critical Business Logic ***
- +Iterate over every cell,
- -produce a layout-attributes object for each cell
- --This is where we **encapsulate the messy logic**
- and then cache the info in the layoutInformation
- dictionary by indexPath.
- */
+*/
 
 
 
