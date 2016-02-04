@@ -180,12 +180,9 @@ static NSString * const volumeNib          = @"volumePresentationView";
 
 - (IBAction)lightToggleButtonTapped:(id)sender {
     LARSTorch *torch = [LARSTorch sharedTorch];
-    if ([torch isTorchOn]) {
-        [torch setTorchState:LARSTorchStateOff];
-    } else {
-        [torch setTorchState:LARSTorchStateOn];
-    }
-        DBLG
+    
+    if ([torch isTorchOn]) { [torch setTorchState:LARSTorchStateOff]; }
+    else { [torch setTorchState:LARSTorchStateOn]; }
 }
 
 - (IBAction)saveScannedBooksToCoreDataButtonTapped:(id)sender
@@ -194,12 +191,9 @@ static NSString * const volumeNib          = @"volumePresentationView";
     [dataManager logCurrentLibrary];
 }
 
-  /**
-   
-*/
 /**
  *  FIXME: Needs to check DataStore for duplicates - same book could
- *   be two different NSManagedObjects (diff. ID#s).
+ *   be two different NSManagedObjects (diff. ID#s). But see the todo...
  *  TODO: Perhaps I could tie the managedObject ID# to the ISBN# (
  *   which is our standard of uniqunesss.
  *

@@ -105,8 +105,10 @@
 #pragma mark - === Overridden Methods ===
 
 /**
- The key property of the BookcaseModel object (deprecated) was the Array of Arrays. The primary array was the
- vertical representation of the shelf, and the secondary arrays were each a shelf with volume objects...
+ The key property of the BookcaseModel object (deprecated) was the Array of Arrays.
+ The primary array was the vertical representation of the shelf, and the secondary
+ arrays were each a shelf with volume objects...
+ 
  Now we produce the array of arrays in the Library `process` method.
      Solution: DataManager store it in a nested mutable dictionary.
      Key: LibraryName - Key: BookcaseName (Array of Arrays)

@@ -9,13 +9,6 @@
 #import <CoreData/CoreData.h>
 #import "Bookcase.h"
 
-//@protocol LBRBookLayoutDataSource <NSObject>
-//
-//    ///An array (bookcase model) of arrays (shelf models) of Volume objects.
-//@property (nonatomic, strong)  NSArray <NSArray <Volume *> *> *filledBookcaseModel;
-//
-//@end
-
 @interface LBR_BookcaseLayout : UICollectionViewLayout
 
 @property (nonatomic, assign) CGFloat interItemSpacing;
